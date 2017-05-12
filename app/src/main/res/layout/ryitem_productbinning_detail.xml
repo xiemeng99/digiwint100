@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:paddingLeft="@dimen/layout_10dp">
+
+    <CheckBox
+        android:id="@+id/cb_ischoose"
+        android:layout_width="@dimen/layout_30dp"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:button="@drawable/child_checkbox" />
+
+    <LinearLayout
+        android:id="@+id/llview"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@id/cb_ischoose"
+        android:orientation="vertical">
+
+        <LinearLayout
+            style="@style/itemstyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                style="@style/app_text_inwhite"
+                android:layout_width="@dimen/layout_70dp"
+                android:layout_height="wrap_content"
+                android:text="@string/item_seq" />
+
+            <TextView
+                android:id="@+id/tv_item_seq"
+                style="@style/ser_text_indetail"
+                android:layout_width="@dimen/layout_0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1" />
+
+            <TextView
+                style="@style/app_text_inwhite"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/layout_10dp"
+                android:layout_marginRight="@dimen/layout_20dp"
+                android:text="@string/num" />
+
+            <TextView
+                android:id="@+id/tv_number"
+                android:layout_width="@dimen/layout_0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                style="@style/ser_num_indetail"/>
+
+        </LinearLayout>
+
+        <View style="@style/ry_line_style" />
+
+        <LinearLayout
+            style="@style/itemstyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                style="@style/app_text_inwhite"
+                android:layout_width="@dimen/layout_70dp"
+                android:layout_height="wrap_content"
+                android:text="@string/product_number" />
+
+            <TextView
+                android:id="@+id/tv_product_number"
+                style="@style/ser_text_indetail"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+        </LinearLayout>
+
+        <View style="@style/ry_line_style" />
+
+        <LinearLayout
+            style="@style/itemstyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                style="@style/app_text_inwhite"
+                android:layout_width="@dimen/layout_70dp"
+                android:layout_height="wrap_content"
+                android:text="@string/item_name" />
+
+            <TextView
+                android:id="@+id/tv_item_name"
+                style="@style/ser_text_indetail"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+        </LinearLayout>
+
+        <View style="@style/ry_line_style" />
+
+        <LinearLayout
+            style="@style/itemstyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                style="@style/app_text_inwhite"
+                android:layout_width="@dimen/layout_70dp"
+                android:layout_height="wrap_content"
+                android:text="@string/item_no" />
+
+            <TextView
+                android:id="@+id/tv_item_no"
+                style="@style/ser_text_indetail"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+        </LinearLayout>
+    </LinearLayout>
+
+</RelativeLayout>

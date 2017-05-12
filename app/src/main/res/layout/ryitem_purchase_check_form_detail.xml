@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/item_ll"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <LinearLayout
+        style="@style/itemstyle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <LinearLayout
+            style="@style/itemstyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/tv_item_seq"
+                android:layout_width="@dimen/layout_0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:textColor="@color/check_detail_form_text"
+                android:textSize="@dimen/textSize_14sp" />
+
+            <TextView
+                android:id="@+id/tv_check_item"
+                android:layout_width="@dimen/layout_0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:textColor="@color/check_detail_form_text"
+                android:textSize="@dimen/textSize_14sp" />
+
+            <TextView
+                android:id="@+id/tv_aql"
+                android:layout_width="@dimen/layout_0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:textColor="@color/check_detail_form_text"
+                android:textSize="@dimen/textSize_14sp" />
+
+            <TextView
+                android:id="@+id/tv_select_check_num"
+                android:layout_width="@dimen/layout_0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:textColor="@color/check_detail_form_text"
+                android:textSize="@dimen/textSize_14sp" />
+
+            <TextView
+                android:id="@+id/tv_ac"
+                android:layout_width="@dimen/layout_0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:textColor="@color/check_detail_form_text"
+                android:textSize="@dimen/textSize_14sp" />
+
+            <TextView
+                android:id="@+id/tv_re"
+                android:layout_width="@dimen/layout_0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:textColor="@color/check_detail_form_text"
+                android:textSize="@dimen/textSize_14sp" />
+
+            <TextView
+                android:id="@+id/tv_project_check"
+                android:layout_width="@dimen/layout_0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:textColor="@color/check_detail_form_text"
+                android:textSize="@dimen/textSize_14sp" />
+
+            <EditText
+                android:id="@+id/et_defect_num"
+                android:layout_width="@dimen/layout_0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@null"
+                android:layout_marginLeft="@dimen/layout_10dp"
+                android:textCursorDrawable="@color/yellow_text"
+                android:textColor="@color/check_detail_form_text"
+                android:textSize="@dimen/textSize_14sp" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/layout_0.5dp"
+        android:background="@color/bg_main" />
+
+</LinearLayout>

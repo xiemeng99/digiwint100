@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<digiwin.pulltorefreshlibrary.recyclerview.ScrollViewForRecycler
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:paddingBottom="@dimen/layout_60dp">
+
+        <android.support.v7.widget.RecyclerView
+            android:background="@drawable/fifo_bg"
+            android:layout_marginTop="@dimen/layout_10dp"
+            android:layout_marginRight="@dimen/layout_10dp"
+            android:layout_marginLeft="@dimen/layout_10dp"
+            android:id="@+id/ry_list"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+    </LinearLayout>
+</digiwin.pulltorefreshlibrary.recyclerview.ScrollViewForRecycler>

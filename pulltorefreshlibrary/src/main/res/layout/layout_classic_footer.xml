@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<digiwin.pulltorefreshlibrary.headerandfooter.ClassicLoadMoreFooterView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/DEFAULT">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/load_more_footer_height_classic">
+
+        <ProgressBar
+            android:id="@+id/progressbar"
+            android:indeterminateDrawable="@drawable/progressbar"
+            android:layout_width="@dimen/layout_20dp"
+            android:layout_height="@dimen/layout_20dp"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="@dimen/layout_8dp"
+            android:layout_toLeftOf="@+id/tvLoadMore" />
+
+        <ImageView
+            android:id="@+id/ivSuccess"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="@dimen/layout_8dp"
+            android:layout_toLeftOf="@+id/tvLoadMore"
+            android:background="@mipmap/success" />
+
+        <TextView
+            android:id="@+id/tvLoadMore"
+            android:layout_width="@dimen/layout_150dp"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:gravity="center"
+            android:text="LoadMore"
+            android:textColor="?attr/colorPrimary" />
+    </RelativeLayout>
+</digiwin.pulltorefreshlibrary.headerandfooter.ClassicLoadMoreFooterView>

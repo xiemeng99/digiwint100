@@ -1,0 +1,82 @@
+<resources>
+    <string name="package_name">digiwin.smartdepot</string>
+    <string name="app_name">dgwlibrary</string>
+    <string name="label_exit_activity_sure">是否确定退出当前界面?</string>
+    <string name="label_sure">确定</string>
+    <string name="label_cancel">取消</string>
+    <string name="label_clear">清除</string>
+    <string name="message_net_wifi">正在使用无线网络</string>
+    <string name="message_net_local">正在使用本地流量</string>
+    <string name="message_net_none">没有可用的网络 请检查网络设置</string>
+    <string name="scan_text">将二维码放入框内, 即可自动扫描</string>
+    <string name="label_loader">正在处理中...</string>
+    <string name="yes">确定</string>
+    <string name="exit">退出</string>
+    <string name="user_exit">确定要退出吗</string>
+    <string name="label_delete_date_sure">是否删除本次未提交数据?</string>
+    <string name="start_date">开始日期</string>
+    <string name="end_date">结束日期</string>
+    <string name="voicer_male">男声</string>
+    <string name="voicer_female">女声</string>
+    <string name="voicer_not">不提醒</string>
+    <string name="is_sure_commit">是否确定提交?</string>
+    <string name="barcodescan">二维码扫描</string>
+    <string name="update_failed">上传失败</string>
+    <string name="add">添加</string>
+    <string name="user_words">{
+    "userword":
+    [
+    { "name" : "default" , "words" : [ "收货检验", "快速收货" ] },
+    { "name" : "快速收货", "words": [ "快速收货","快速收货"] },
+    { "name" : "收货检验", "words": [ "收货检验","收货检验"] },
+    { "name" : "快速入库", "words": [ "快速入库","快速入库"] },
+    { "name" : "扫码收货", "words": [ "扫码收货","扫码收货"] },
+    { "name" : "扫码入库", "words": [ "扫码入库","扫码入库"] },
+    { "name" : "仓库退料", "words": [ "仓库退料","仓库退料"] },
+
+    { "name" : "依成品入库", "words": [ "依成品入库","依成品入库"] },
+    { "name" : "配货复核", "words": [ "配货复核","配货复核"] },
+    { "name" : "依成品发料", "words": [ "依成品发料","依成品发料"] },
+    { "name" : "生产配货", "words": [ "生产配货","生产配货"] },
+    { "name" : "领料过账", "words": [ "领料过账","领料过账"] },
+    { "name" : "入库上架", "words": [ "入库上架","入库上架"] },
+    { "name" : "依退料补料", "words": [ "依退料补料","依退料补料"] },
+    { "name" : "退料过账", "words": [ "退料过账","退料过账"] },
+    { "name" : "工单发料", "words": [ "工单发料","工单发料"] },
+    { "name" : "快速完工", "words": [ "快速完工","快速完工"] },
+    { "name" : "完工入库", "words": [ "完工入库","完工入库"] },
+    { "name" : "装箱打印", "words": [ "装箱打印","装箱打印"] },
+    { "name" : "工单退料", "words": [ "工单退料","工单退料"] },
+    { "name" : "生产超领", "words": [ "生产超领","生产超领"] },
+    { "name" : "装箱入库", "words": [ "装箱入库","装箱入库"] },
+    { "name" : "依成品调拨", "words": [ "依成品调拨","依成品调拨"] },
+    { "name" : "线边发料", "words": [ "线边发料","线边发料"] },
+
+    { "name" : "无来源调拨", "words": [ "无来源调拨","无来源调拨"] },
+    { "name" : "杂项收料", "words": [ "杂项收料","杂项收料"] },
+    { "name" : "杂项发料", "words": [ "杂项发料","杂项发料"] },
+    { "name" : "库存查询", "words": [ "库存查询","库存查询"] },
+    { "name" : "标签补打", "words": [ "标签补打","标签补打"] },
+    { "name" : "条码移库", "words": [ "条码移库","条码移库"] },
+    { "name" : "库存交易锁定", "words": [ "库存交易锁定","库存交易锁定"] },
+    { "name" : "库存交易解锁", "words": [ "库存交易解锁","库存交易解锁"] },
+    { "name" : "产品装箱", "words": [ "产品装箱","产品装箱"] },
+    { "name" : "产品出箱", "words": [ "产品出箱","产品出箱"] },
+    { "name" : "库存盘点", "words": [ "库存盘点","库存盘点"] },
+    { "name" : "调拨过账", "words": [ "调拨过账","调拨过账"] },
+
+    { "name" : "通知出货", "words": [ "通知出货","通知出货"] },
+    { "name" : "出货过账", "words": [ "出货过账","出货过账"] },
+    { "name" : "销售退货", "words": [ "销售退货","销售退货"] },
+    { "name" : "扫箱码出货", "words": [ "扫箱码出货","扫箱码出货"] },
+    { "name" : "门店要货", "words": [ "门店要货","门店要货"] },
+    { "name" : "成品质量追溯", "words": [ "成品质量追溯","成品质量追溯"] },
+
+    { "name" : "工序报工", "words": [ "工序报工","工序报工"] },
+    { "name" : "开工扫描", "words": [ "开工扫描","开工扫描"] },
+    { "name" : "完工扫描", "words": [ "完工扫描","完工扫描"] },
+    { "name" : "扫入扫描", "words": [ "扫入扫描","扫入扫描"] },
+    { "name" : "扫出扫描", "words": [ "扫出扫描","扫出扫描"] },
+    ]
+    }</string>
+</resources>

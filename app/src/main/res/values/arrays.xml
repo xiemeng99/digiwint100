@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="voicerstring">
+        <item>@string/voicer_male</item>
+        <item>@string/voicer_female</item>
+        <item>@string/voicer_not</item>
+    </string-array>
+</resources>

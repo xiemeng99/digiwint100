@@ -1,0 +1,73 @@
+复制项目注意事项：
+	修改project名称
+	1.关闭Android Studio 
+	2.修改project所在路径的文件夹名字为[NewName]，执行2后3，4，5可以忽略
+	3.打开Android Stuido，import新的[NewName]路径工程(很重要,重新import工程，Android Studio会自动修改部分相关的project名字引用)
+	4.修改根目录下的.iml文件名为[NewName].iml，及该文件中的external.linked.project.id=[NewName]
+	5.修改.idea/modules.xml里面的
+	<module fileurl="file://$PROJECT_DIR$/[NewName].iml" filepath="$PROJECT_DIR$/[NewName].iml" />
+			
+	6.修改app的build中applicationId为自己项目的名称
+	修改清单文件和MainLogic中的隐式跳转名，原格式android.intent.action.digiwin.xxxActivity
+	替换为android.intent.action.客户简称.xxxActivity统一查找替换即可
+	清单文件中TODO地方统一修改为客户简称
+
+1.okhttp网络请求示例:
+          HashMap<String, String> loginMap = new HashMap<String, String>();
+                loginMap.put("employee_no", "tiptop");
+                loginMap.put("password", "tiptop");
+                FieldXmlReq req=new FieldXmlReq(SystemConstants.GETLOGINCHECKREQ,loginMap);
+        //      CreateParaXmlReqIm req =CreateParaXmlReqIm.getInstance(SystemConstants.GETLOGINCHECKREQ,loginMap);
+                String payload = req.toXml();
+                OkhttpRequest.getInstance(context).post(payload, new IRequestCallbackImp() {
+                    @Override
+                    public void onResponse(String string) {
+                        LogUtils.d("sunchanguan",string);
+                        LogUtils.d("thread",Thread.currentThread());
+                        ParseXmlResp resp=new ParseXmlResp(SystemConstants.GETLOGINCHECKRESP);
+                        ParseXmlResp response = resp.fromXml(string);
+                        if(SystemConstants.RSP_CODE_SUCCESS.equals(response.getCode())){
+                            ToastUtils.getInstance(MainActivity.this).showToastByString("onSuccess");
+                        }else{
+                            ToastUtils.getInstance(MainActivity.this).showToastByString("onFail="+response.getDescription());
+                        }
+                    }
+                });
+
+2.okhttp文件下载
+            String url="http://180.167.0.43:8009/app/ERPSystem.apk";
+            String absolutePath = Environment.getExternalStorageDirectory().getAbsolutePath();
+
+            LogUtils.e(TAG,"--------------"+absolutePath);
+
+            OkhttpRequest.getInstance(context).downLoad(url, absolutePath, "updateDigiwin.apk", new IDownLoadCallBackImp() {
+                @Override
+                public void onProgressCallBack(long progress, long total) {
+                    LogUtils.e(TAG,"total---"+total+",progress---"+progress);
+                }
+
+                @Override
+                public void onResponse(File file) {
+                    LogUtils.e(TAG,"file---ok");
+                }
+            });
+
+// add by mengyuTang 2017/02/03
+3.语音模块工具类：VoiceUtils，两个方法
+    （1）public void speakText（String text）{ }  传入一个字符串，调用该方法将该文本识别成语音读出来
+
+    （2）public Stirng voiceToText(){ } 调用该方法，将语音识别成文本并以字符串形式返回
+4.震动提醒工具类：VibratorUtil 两个方法
+    （1）public static void Vibrate(final Context context, long milliseconds){ }
+
+    （2）public static void Vibrate(final Context context, long[] pattern,boolean isRepeat){ }
+
+
+5.输入调用接口时使用handler调用，调用前先remove该message
+6.保存按钮，展示区域和提交按钮使用include方式写入布局
+7.布局样式style引入
+8.无来源未完事项通用NoComeUnComActivity，二次提交通用CommonTwoCommitActivity，
+  界面一般不一致，使用不同的Adapter。CommonTwoCommitActivity已用TODO方式标记
+9.扫描明细页面一般通用CommonDetailActivity，针对不同样式使用不同adapter
+  代码中updateUI方法已经标记需要修改，注意该adapter要集成BaseDetailRecyclerAdapter
+  方便使用全选和修改功能

@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginLeft="@dimen/layout_0.5dp"
+    android:layout_marginRight="@dimen/layout_0.5dp"
+    android:background="@color/white"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/tv_item_no"
+            style="@style/ser_text_inhitem"
+            android:layout_width="@dimen/layout_0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/layout_7dp"
+            android:layout_weight="1"
+            android:text="@string/item_no" />
+
+        <View style="@style/ry_ve_line_style" />
+
+        <TextView
+            android:id="@+id/tv_item_name_unit_no"
+            style="@style/ser_text_inhitem"
+            android:layout_width="@dimen/layout_0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/layout_7dp"
+            android:layout_weight="2"
+            android:text="@string/item_name_unit_no" />
+
+        <View style="@style/ry_ve_line_style" />
+
+        <TextView
+            android:id="@+id/tv_item_spec"
+            style="@style/ser_text_inhitem"
+            android:layout_width="@dimen/layout_0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/layout_7dp"
+            android:layout_weight="2"
+            android:text="@string/model" />
+
+        <View style="@style/ry_ve_line_style" />
+
+        <TextView
+            android:id="@+id/tv_store_locator"
+            style="@style/ser_text_inhitem"
+            android:layout_width="@dimen/layout_0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/layout_7dp"
+            android:layout_weight="2"
+            android:text="@string/store_locator" />
+
+        <View style="@style/ry_ve_line_style" />
+
+        <TextView
+            android:id="@+id/tv_num"
+            style="@style/ser_text_inhitem"
+            android:layout_width="@dimen/layout_0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/layout_7dp"
+            android:layout_weight="1"
+            android:text="@string/num" />
+    </LinearLayout>
+
+    <View style="@style/ry_line_style" />
+</LinearLayout>

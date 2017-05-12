@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/green_scandetail_bg"
+    android:orientation="vertical"
+    tools:context="digiwin.smartdepott100.module.activity.produce.finishstorage.FinishedStorageActivity">
+
+    <include layout="@layout/activity_title_toolbar_bar"></include>
+
+    <com.yanzhenjie.recyclerview.swipe.SwipeMenuRecyclerView
+        android:id="@+id/rv_swipemenu"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/layout_10dp"
+        android:background="@drawable/green_scandetail_bg"
+        android:padding="@dimen/layout_5dp"
+        android:visibility="gone" />
+</LinearLayout>

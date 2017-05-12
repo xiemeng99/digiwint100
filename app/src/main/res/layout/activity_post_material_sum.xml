@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_distribute"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical"
+    tools:context="digiwin.smartdepott100.module.activity.produce.distribute.DistributeActivity">
+
+    <include layout="@layout/activity_title_toolbar_bar"></include>
+
+    <ScrollView
+        android:id="@+id/scrollview"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/toolbar_title"
+        android:visibility="visible">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:id="@+id/ll_post_order"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/layout_6dp"
+                android:layout_marginLeft="@dimen/layout_10dp"
+                android:layout_marginRight="@dimen/layout_10dp"
+                android:layout_marginTop="@dimen/layout_6dp"
+                android:background="@drawable/accordingmaterialtop_pink_sharp"
+                android:focusable="true"
+                android:orientation="vertical"
+                android:padding="@dimen/layout_5dp">
+
+                <LinearLayout
+                    style="@style/itemstyle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_vertical"
+                        android:text="@string/post_material_order"
+                        style="@style/app_text_ingreen" />
+
+                    <TextView
+                        android:id="@+id/tv_head_post_order"
+                        android:layout_width="@dimen/layout_0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/layout_5dp"
+                        android:layout_weight="3"
+                        style="@style/ser_text_ingreen"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/layout_5dp"
+                        android:gravity="center_vertical"
+                        android:text="@string/data"
+                        style="@style/app_text_ingreen"  />
+
+                    <TextView
+                        android:id="@+id/tv_head_plan_date"
+                        android:layout_width="@dimen/layout_0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/layout_5dp"
+                        android:layout_weight="2"
+                        style="@style/ser_text_ingreen"/>
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <include layout="@layout/ryitem_common" />
+        </LinearLayout>
+
+    </ScrollView>
+
+    <include layout="@layout/inclu_commit" />
+</RelativeLayout>

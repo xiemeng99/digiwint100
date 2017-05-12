@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/setup_dialog_bg"
+    android:orientation="vertical"
+    android:padding="@dimen/layout_10dp">
+
+    <LinearLayout
+        android:id="@+id/setup_formal_linear"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/layout_10dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <RadioButton
+            android:id="@+id/setup_formal_rb"
+            android:layout_width="@dimen/layout_16dp"
+            android:layout_height="@dimen/layout_16dp"
+            android:button="@drawable/setup_radiobutton_bg"
+            android:checked="true"
+            android:clickable="false"></RadioButton>
+
+        <TextView
+            android:id="@+id/setup_formal_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/layout_5dp"
+            android:text="@string/formal"
+            android:textColor="@color/Text_color"
+            android:textSize="@dimen/layout_16dp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <EditText
+                android:id="@+id/setup_formal_et"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@null"
+                android:hint="@string/server_address"
+                android:singleLine="true"
+                android:textCursorDrawable="@drawable/et_cursor_color"
+                android:textSize="@dimen/textSize_15sp" />
+
+            <View
+                android:id="@+id/setup_formal_view"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/layout_0.5dp"
+                android:background="@color/red50"></View>
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/setup_test_linear"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/layout_10dp"
+        android:layout_marginTop="@dimen/layout_10dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <RadioButton
+            android:id="@+id/setup_test_rb"
+            android:layout_width="@dimen/layout_16dp"
+            android:layout_height="@dimen/layout_16dp"
+            android:button="@drawable/setup_radiobutton_bg"
+            android:clickable="false"
+            android:textColor="@color/Base_color"
+            android:textSize="@dimen/textSize_16sp"></RadioButton>
+
+        <TextView
+            android:id="@+id/setup_test_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/layout_5dp"
+            android:text="@string/test"
+            android:textColor="@color/Text_color"
+            android:textSize="@dimen/layout_16dp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <EditText
+                android:id="@+id/setup_test_et"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@null"
+                android:hint="@string/server_address"
+                android:singleLine="true"
+                android:textCursorDrawable="@drawable/et_cursor_color"
+                android:textSize="@dimen/textSize_15sp" />
+
+            <View
+                android:id="@+id/setup_test_view"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/layout_0.5dp"
+                android:background="@color/red50"></View>
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/layout_10dp"
+        android:layout_marginTop="@dimen/layout_15dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="@dimen/layout_5dp"
+            android:text="@string/language"
+            android:textColor="@color/Text_color"
+            android:textSize="@dimen/textSize_16sp" />
+
+        <RadioGroup
+            android:id="@+id/setup_rg"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/layout_5dp"
+            android:layout_marginRight="@dimen/layout_5dp"
+            android:background="@drawable/setup_dialog_language_bg"
+            android:orientation="horizontal">
+
+            <RadioButton
+                android:id="@+id/setup_easyChinese_rb"
+                android:layout_width="@dimen/layout_0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@drawable/setup_dialog_rb_bg"
+                android:button="@null"
+                android:gravity="center"
+                android:padding="@dimen/layout_6dp"
+                android:text="@string/easy_chinese"
+                android:textColor="@color/tv_color_bg"
+                android:textSize="@dimen/textSize_13sp" />
+
+            <RadioButton
+                android:id="@+id/setup_traditionalChinese_rb"
+                android:layout_width="@dimen/layout_0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@drawable/setup_dialog_rb_bg"
+                android:button="@null"
+                android:gravity="center"
+                android:padding="@dimen/layout_6dp"
+                android:text="@string/traditional_chinese"
+                android:textColor="@color/tv_color_bg"
+                android:textSize="@dimen/textSize_13sp" />
+
+            <RadioButton
+                android:id="@+id/setup_english_rb"
+                android:layout_width="@dimen/layout_0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@drawable/setup_dialog_rb_bg"
+                android:button="@null"
+                android:gravity="center"
+                android:padding="@dimen/layout_6dp"
+                android:text="@string/english"
+                android:textColor="@color/tv_color_bg"
+                android:textSize="@dimen/textSize_13sp" />
+        </RadioGroup>
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/setup_yes_tv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/layout_10dp"
+        android:layout_marginTop="@dimen/layout_15dp"
+        android:background="@drawable/setup_dialog_button_bg"
+        android:gravity="center"
+        android:padding="@dimen/layout_10dp"
+        android:text="@string/yes"
+        android:textColor="@color/red50"
+        android:textSize="@dimen/textSize_16sp" />
+</LinearLayout>

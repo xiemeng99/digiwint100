@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white">
+
+    <LinearLayout
+        android:id="@+id/ll_head"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/layout_10dp"
+        android:layout_marginRight="@dimen/layout_10dp"
+        android:layout_marginTop="@dimen/layout_6dp"
+        android:background="@drawable/accordingmaterialtop_pink_sharp"
+        android:orientation="vertical"
+        android:padding="@dimen/layout_5dp">
+
+        <LinearLayout
+            android:id="@+id/ll_scan_inlocator"
+            style="@style/itemstyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/tv_moveinlocator"
+                android:layout_width="@dimen/layout_60dp"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:text="@string/move_instore"
+                style="@style/app_text_ingreen"  />
+
+            <EditText
+                android:id="@+id/et_scan_moveinlocator"
+                android:layout_width="@dimen/layout_0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@null"
+                android:singleLine="true"
+                android:textColor="@color/materialText_color"
+                android:textCursorDrawable="@drawable/et_cursor_yellow"
+                android:textSize="@dimen/textSize_14sp" />
+
+        </LinearLayout>
+
+        <View style="@style/act_line_style"></View>
+
+        <LinearLayout
+            style="@style/itemstyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:layout_width="@dimen/layout_60dp"
+                android:layout_height="wrap_content"
+                android:text="@string/label_storage"
+                style="@style/app_text_ingreen"  />
+
+            <TextView
+                android:id="@+id/tv_storage"
+                android:layout_width="@dimen/layout_0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/layout_5dp"
+                android:layout_weight="1"
+                style="@style/ser_text_ingreen"/>
+
+            <TextView
+                android:layout_width="@dimen/layout_30dp"
+                android:layout_height="wrap_content"
+                android:text="@string/locator"
+                style="@style/app_text_ingreen"  />
+
+            <TextView
+                android:id="@+id/tv_locator"
+                android:layout_width="@dimen/layout_0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/layout_5dp"
+                android:layout_weight="1"
+                style="@style/ser_text_ingreen" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <include layout="@layout/inclu_commit" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/ll_head"
+        android:layout_marginTop="@dimen/layout_6dp">
+
+        <include layout="@layout/ryitem_common" />
+    </LinearLayout>
+</RelativeLayout>

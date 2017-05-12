@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:paddingLeft="@dimen/layout_10dp"
+    android:paddingRight="@dimen/layout_10dp"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:id="@+id/ll_child"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <CheckBox
+            android:id="@+id/cb_child"
+            android:visibility="gone"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            />
+
+        <TextView
+            android:id="@+id/tv_barcode"
+            android:layout_width="@dimen/layout_0dp"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/layout_10dp"
+            android:layout_weight="3"
+            android:singleLine="true"
+            android:layout_centerVertical="true"
+            android:gravity="center"
+            android:textColor="@color/black_32"
+            android:textSize="@dimen/textSize_14sp"/>
+
+        <EditText
+            android:id="@+id/et_num"
+            android:layout_width="@dimen/layout_0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:padding="@dimen/layout_10dp"
+            android:gravity="center"
+            android:background="@null"
+            android:singleLine="true"
+            android:textCursorDrawable="@drawable/et_cursor_yellow"
+            android:textColor="@color/black_32"
+            android:textSize="@dimen/textSize_14sp"/>
+    </LinearLayout>
+
+</LinearLayout>

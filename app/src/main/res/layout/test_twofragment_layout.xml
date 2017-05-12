@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white">
+
+    <digiwin.pulltorefreshlibrary.recyclerview.ScrollViewForRecycler
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:orientation="vertical"
+            android:paddingBottom="@dimen/layout_60dp"
+            android:layout_height="match_parent">
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/ZX_recyclerView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"/>
+        </LinearLayout>
+    </digiwin.pulltorefreshlibrary.recyclerview.ScrollViewForRecycler>
+
+    <ImageView
+        android:id="@+id/iv_commit"
+        android:layout_alignParentBottom="true"
+        android:layout_marginLeft="@dimen/layout_10dp"
+        android:layout_marginRight="@dimen/layout_10dp"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/layout_60dp" />
+</RelativeLayout>

@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <include layout="@layout/activity_title_toolbar_bar"></include>
+
+    <LinearLayout
+        android:layout_below="@id/toolbar_title"
+        android:id="@+id/ll_order_head"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/layout_5dp"
+        android:background="@drawable/accordingmaterialtop_pink_sharp"
+        android:orientation="vertical">
+        <LinearLayout
+            style="@style/itemstyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                android:layout_width="@dimen/layout_0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                style="@style/app_text_ingreen"
+                android:text="@string/check_item"/>
+            <TextView
+                android:layout_width="@dimen/layout_0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                style="@style/app_text_ingreen"
+                android:text="@string/string"/>
+            <TextView
+                android:layout_width="@dimen/layout_0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                style="@style/app_text_ingreen"
+                android:text="@string/check_type"/>
+            <TextView
+                android:layout_width="@dimen/layout_0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                style="@style/app_text_ingreen"
+                android:text="@string/check_num"/>
+
+        </LinearLayout>
+
+        <View  style="@style/act_line_style"/>
+
+        <LinearLayout
+            style="@style/itemstyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                android:id="@+id/tv_check_item"
+                android:layout_width="@dimen/layout_0dp"
+                android:layout_weight="1"
+                style="@style/ser_text_ingreen_yellow"
+                android:layout_height="wrap_content"
+                android:gravity="center"/>
+            <TextView
+                android:id="@+id/tv_string"
+                android:layout_width="@dimen/layout_0dp"
+                style="@style/ser_text_ingreen_yellow"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:gravity="center"/>
+            <TextView
+                android:id="@+id/tv_check_type"
+                android:layout_width="@dimen/layout_0dp"
+                style="@style/ser_text_ingreen_yellow"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:gravity="center"/>
+            <TextView
+                android:id="@+id/tv_check_num"
+                android:layout_width="@dimen/layout_0dp"
+                style="@style/ser_text_ingreen_yellow"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:gravity="center"/>
+        </LinearLayout>
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_below="@id/ll_order_head"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/layout_60dp"
+        android:layout_marginLeft="@dimen/layout_5dp"
+        android:layout_marginRight="@dimen/layout_5dp"
+        android:background="@drawable/zx_scandetail_bg"
+        android:orientation="vertical">
+        <LinearLayout
+            style="@style/itemstyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/form_head_back"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="@dimen/layout_0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="@string/item_seq"
+                style="@style/app_text_inred" />
+
+            <TextView
+                android:layout_width="@dimen/layout_0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="@string/up_value"
+                style="@style/app_text_inred" />
+
+            <TextView
+                android:layout_width="@dimen/layout_0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="@string/down_value"
+                style="@style/app_text_inred" />
+
+            <TextView
+                android:layout_width="@dimen/layout_0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="@string/check_value"
+                style="@style/app_text_inred" />
+            <ImageView
+                android:id="@+id/iv_add"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="@dimen/layout_5dp"
+                android:src="@drawable/add"/>
+
+        </LinearLayout>
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/ry_list"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"></android.support.v7.widget.RecyclerView>
+    </LinearLayout>
+
+    <include layout="@layout/inclu_save"></include>
+
+</RelativeLayout>

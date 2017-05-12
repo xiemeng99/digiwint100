@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical">
+
+    <include layout="@layout/activity_title_toolbar_bar"></include>
+
+    <LinearLayout
+        style="@style/itemstyle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="@dimen/layout_0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/delivery_date"
+            style="@style/app_text_inwhite"/>
+
+        <TextView
+            android:layout_width="@dimen/layout_0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/item_no"
+            style="@style/app_text_inwhite"/>
+
+        <TextView
+            android:layout_width="@dimen/layout_0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/item_name"
+            style="@style/app_text_inwhite"/>
+
+        <TextView
+            android:layout_width="@dimen/layout_0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/supplier"
+            style="@style/app_text_inwhite"/>
+
+        <TextView
+            android:layout_width="@dimen/layout_0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/waithour"
+            style="@style/app_text_inwhite"/>
+
+        <TextView
+            android:layout_width="@dimen/layout_0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/statu"
+            style="@style/app_text_inwhite"/>
+    </LinearLayout>
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/ryboard"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/layout_0dp"
+        android:layout_marginTop="@dimen/layout_10dp"
+        android:layout_weight="1" />
+</LinearLayout>

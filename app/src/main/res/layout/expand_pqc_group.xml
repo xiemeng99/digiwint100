@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_centerVertical="true"
+    android:id="@+id/ll_group"
+    android:gravity="center"
+    android:layout_height="match_parent">
+    <LinearLayout
+        android:layout_margin="@dimen/layout_10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <CheckBox
+            android:id="@+id/cb_group"
+            android:layout_width="@dimen/layout_30dp"
+            android:visibility="gone"
+            android:button="@drawable/all_checkbox"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:id="@+id/tv_seq"
+            android:layout_width="@dimen/layout_0dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:layout_height="wrap_content"
+            style="@style/app_text_inwhite" />
+
+        <TextView
+            android:id="@+id/tv_item_name"
+            android:layout_width="@dimen/layout_0dp"
+            android:layout_weight="2"
+            android:gravity="center"
+            android:layout_height="wrap_content"
+            style="@style/app_text_inwhite" />
+
+        <TextView
+            android:id="@+id/tv_item_spec"
+            android:layout_width="@dimen/layout_0dp"
+            android:layout_weight="2"
+            android:gravity="center"
+            android:layout_height="wrap_content"
+            style="@style/app_text_inwhite" />
+        <TextView
+            android:id="@+id/tv_drawing_no"
+            android:layout_width="@dimen/layout_0dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:layout_height="wrap_content"
+            style="@style/app_text_inwhite" />
+        <TextView
+            android:id="@+id/tv_sendCheck_num"
+            android:layout_width="@dimen/layout_0dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:layout_height="wrap_content"
+            style="@style/app_text_inwhite" />
+        <EditText
+            android:id="@+id/et_OK_num"
+            android:layout_width="@dimen/layout_0dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:inputType="number"
+            android:background="@null"
+            android:layout_height="wrap_content"
+            style="@style/app_text_inwhite" />
+        <TextView
+            android:id="@+id/tv_state"
+            android:layout_width="@dimen/layout_0dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:layout_height="wrap_content"
+            style="@style/app_text_inwhite" />
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/ll_child_top"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/layout_10dp"
+        android:layout_marginLeft="@dimen/layout_10dp"
+        android:layout_marginRight="@dimen/layout_10dp"
+        android:background="@drawable/expand_child_top"
+        android:orientation="horizontal">
+        <TextView
+            android:padding="@dimen/layout_10dp"
+            android:layout_width="@dimen/layout_0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="@string/item_seq"
+            style="@style/app_text_inwhite" />
+        <TextView
+            android:padding="@dimen/layout_10dp"
+            android:layout_width="@dimen/layout_0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="@string/check_item"
+            style="@style/app_text_inwhite" />
+        <TextView
+            android:padding="@dimen/layout_10dp"
+            android:layout_width="@dimen/layout_0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="@string/aql"
+            style="@style/app_text_inwhite" />
+        <TextView
+            android:padding="@dimen/layout_10dp"
+            android:layout_width="@dimen/layout_0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="@string/select_check_num"
+            style="@style/app_text_inwhite" />
+        <TextView
+            android:padding="@dimen/layout_10dp"
+            android:layout_width="@dimen/layout_0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="@string/ac"
+            style="@style/app_text_inwhite" />
+        <TextView
+            android:padding="@dimen/layout_10dp"
+            android:layout_width="@dimen/layout_0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="@string/re"
+            style="@style/app_text_inwhite" />
+
+        <TextView
+            android:padding="@dimen/layout_10dp"
+            android:layout_width="@dimen/layout_0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="@string/project_check"
+            style="@style/app_text_inwhite" />
+
+        <TextView
+            android:padding="@dimen/layout_10dp"
+            android:layout_width="@dimen/layout_0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="@string/defect_num"
+            style="@style/app_text_inwhite" />
+    </LinearLayout>
+</LinearLayout>

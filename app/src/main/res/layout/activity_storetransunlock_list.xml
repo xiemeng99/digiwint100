@@ -1,0 +1,270 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical">
+
+    <include layout="@layout/activity_title_toolbar_bar"></include>
+
+    <LinearLayout
+        android:id="@+id/input_top"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/layout_0dp"
+        android:layout_weight="1"
+        android:orientation="vertical">
+        <LinearLayout
+            android:id="@+id/ll_search_input"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/layout_6dp"
+            android:layout_marginLeft="@dimen/layout_10dp"
+            android:layout_marginRight="@dimen/layout_10dp"
+            android:background="@drawable/yellow_scandetail_bg"
+            android:orientation="vertical"
+            android:padding="@dimen/layout_5dp">
+
+            <LinearLayout
+                android:id="@+id/ll_storage"
+                style="@style/itemstyle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/tv_storage"
+                    android:layout_width="@dimen/layout_70dp"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:text="@string/label_storage"
+                    style="@style/app_text_inwhite" />
+
+                <EditText
+                    android:id="@+id/et_storage"
+                    android:layout_width="@dimen/layout_0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/layout_10dp"
+                    android:layout_weight="1"
+                    android:background="@null"
+                    android:singleLine="true"
+                    android:textColor="@color/black_32"
+                    android:textCursorDrawable="@drawable/et_cursor_yellow"
+                    android:textSize="@dimen/textSize_14sp" />
+            </LinearLayout>
+
+            <View style="@style/fg_line_style" />
+            <LinearLayout
+                android:id="@+id/ll_lock_no"
+                style="@style/itemstyle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/tv_lock_no"
+                    android:layout_width="@dimen/layout_70dp"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:text="@string/store_lock_no"
+                    style="@style/app_text_inwhite"/>
+
+                <EditText
+                    android:id="@+id/et_lock_no"
+                    android:layout_width="@dimen/layout_0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/layout_10dp"
+                    android:layout_weight="1"
+                    android:background="@null"
+                    android:singleLine="true"
+                    android:textColor="@color/black_32"
+                    android:textCursorDrawable="@drawable/et_cursor_yellow"
+                    android:textSize="@dimen/textSize_14sp" />
+            </LinearLayout>
+
+            <View style="@style/fg_line_style" />
+
+            <LinearLayout
+                android:id="@+id/ll_item_no"
+                style="@style/itemstyle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/tv_item_no"
+                    android:layout_width="@dimen/layout_70dp"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:text="@string/item_no"
+                    style="@style/app_text_inwhite"/>
+
+                <EditText
+                    android:id="@+id/et_item_no"
+                    android:layout_width="@dimen/layout_0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/layout_10dp"
+                    android:layout_weight="1"
+                    android:background="@null"
+                    android:singleLine="true"
+                    android:textColor="@color/black_32"
+                    android:textCursorDrawable="@drawable/et_cursor_yellow"
+                    android:textSize="@dimen/textSize_14sp" />
+            </LinearLayout>
+
+            <View style="@style/fg_line_style" />
+
+            <LinearLayout
+                android:id="@+id/ll_batch_no"
+                style="@style/itemstyle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/tv_batch_no"
+                    android:layout_width="@dimen/layout_70dp"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:text="@string/batch_no"
+                    style="@style/app_text_inwhite"/>
+
+                <EditText
+                    android:id="@+id/et_batch_no"
+                    android:layout_width="@dimen/layout_0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/layout_10dp"
+                    android:layout_weight="1"
+                    android:background="@null"
+                    android:singleLine="true"
+                    android:textColor="@color/black_32"
+                    android:textCursorDrawable="@drawable/et_cursor_yellow"
+                    android:textSize="@dimen/textSize_14sp" />
+            </LinearLayout>
+
+            <View style="@style/fg_line_style" />
+
+            <LinearLayout
+                android:id="@+id/ll_locator"
+                style="@style/itemstyle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/tv_locator"
+                    android:layout_width="@dimen/layout_70dp"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:text="@string/locator"
+                    style="@style/app_text_inwhite"/>
+
+                <EditText
+                    android:id="@+id/et_locator"
+                    android:layout_width="@dimen/layout_0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/layout_10dp"
+                    android:layout_weight="1"
+                    android:background="@null"
+                    android:singleLine="true"
+                    android:textColor="@color/black_32"
+                    android:textCursorDrawable="@drawable/et_cursor_yellow"
+                    android:textSize="@dimen/textSize_14sp" />
+            </LinearLayout>
+
+
+            <View style="@style/fg_line_style" />
+
+            <LinearLayout
+                android:id="@+id/ll_lock_people"
+                style="@style/itemstyle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/tv_lock_people"
+                    android:layout_width="@dimen/layout_70dp"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:text="@string/store_lock_people"
+                    style="@style/app_text_inwhite"/>
+
+                <EditText
+                    android:id="@+id/et_lock_people"
+                    android:layout_width="@dimen/layout_0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/layout_10dp"
+                    android:layout_weight="1"
+                    android:background="@null"
+                    android:singleLine="true"
+                    android:textColor="@color/black_32"
+                    android:textCursorDrawable="@drawable/et_cursor_yellow"
+                    android:textSize="@dimen/textSize_14sp" />
+            </LinearLayout>
+
+            <View style="@style/fg_line_style" />
+
+            <LinearLayout
+                android:id="@+id/ll_lock_date"
+                style="@style/itemstyle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/tv_lock_date"
+                    android:layout_width="@dimen/layout_70dp"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:text="@string/store_lock_date"
+                    style="@style/app_text_inwhite" />
+
+                <EditText
+                    android:id="@+id/et_lock_date"
+                    android:layout_width="@dimen/layout_0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/layout_10dp"
+                    android:layout_weight="1"
+                    android:background="@null"
+                    android:singleLine="true"
+                    android:textColor="@color/black_32"
+                    android:textCursorDrawable="@drawable/et_cursor_yellow"
+                    android:textSize="@dimen/textSize_14sp" />
+                <ImageView
+                    android:id="@+id/lock_date"
+                    android:src="@drawable/time"
+                    android:layout_width="wrap_content"
+                    android:layout_height="@dimen/layout_20dp" />
+            </LinearLayout>
+
+            <View style="@style/fg_line_style" />
+
+            <Button
+                android:id="@+id/btn_search_sure"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/layout_40dp"
+                android:text="@string/label_sure"
+                android:textColor="@color/WHITE"
+                android:textSize="@dimen/textSize_18sp"
+                android:layout_margin="@dimen/layout_10dp"
+                android:background="@drawable/accordingmaterialtop_sharp"/>
+
+        </LinearLayout>
+    </LinearLayout>
+
+    <android.support.v7.widget.RecyclerView
+        android:visibility="gone"
+        android:layout_marginTop="@dimen/layout_6dp"
+        android:id="@+id/ry_list"
+        android:layout_width="match_parent"
+        android:layout_weight="1"
+        android:layout_height="@dimen/layout_0dp" />
+
+    <Button xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/unlock"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/layout_60dp"
+        android:paddingTop="@dimen/layout_15dp"
+        android:layout_alignParentBottom="true"
+        android:layout_marginLeft="@dimen/layout_10dp"
+        android:layout_marginRight="@dimen/layout_10dp"
+        android:gravity="center"
+        android:background="@mipmap/savecommit"
+        android:text="@string/unlock"
+        android:textColor="@color/white"
+        android:textSize="@dimen/textSize_16sp" />
+
+</LinearLayout>

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="@dimen/layout_10dp"
+    >
+    <ImageView
+        android:layout_alignParentLeft="true"
+        android:layout_centerInParent="true"
+        android:layout_marginRight="@dimen/layout_10dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@mipmap/printer"
+        android:id="@+id/bluetooth_icon" />
+    <TextView
+        android:id="@+id/tv_bluename"
+        android:layout_width="wrap_content"
+        android:layout_marginRight="@dimen/layout_10dp"
+        android:text="@string/app_name"
+        android:textSize="@dimen/textSize_14sp"
+        android:textColor="@color/black_32"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/bluetooth_icon"
+        android:layout_toEndOf="@+id/bluetooth_icon" />
+
+    <ImageView
+        android:layout_marginLeft="@dimen/layout_10dp"
+        android:layout_alignParentRight="true"
+        android:layout_centerInParent="true"
+        android:layout_marginRight="@dimen/layout_10dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/ischoose" />
+
+</RelativeLayout>

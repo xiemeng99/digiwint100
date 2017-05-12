@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white_ff">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/toolbar_title"
+        android:fillViewport="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:id="@+id/item_ll"
+                android:layout_marginLeft="@dimen/layout_10dp"
+                android:layout_marginRight="@dimen/layout_10dp"
+                android:layout_marginBottom="@dimen/layout_6dp"
+                android:layout_marginTop="@dimen/layout_6dp"
+                android:background="@drawable/accordingmaterialtop_pink_sharp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="@dimen/layout_5dp">
+
+                <LinearLayout
+                    style="@style/itemstyle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="@dimen/layout_60dp"
+                        android:layout_height="wrap_content"
+                        android:text="@string/material_returning_number"
+                        style="@style/app_text_ingreen"/>
+
+                    <TextView
+                        android:id="@+id/tv_material_return_number"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        style="@style/ser_text_ingreen" />
+                </LinearLayout>
+
+                <View style="@style/ry_line_style" />
+
+                <LinearLayout
+                    style="@style/itemstyle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="@dimen/layout_60dp"
+                        android:layout_height="wrap_content"
+                        android:text="@string/data"
+                        style="@style/app_text_ingreen"/>
+
+                    <TextView
+                        android:id="@+id/tv_item_date"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        style="@style/ser_text_ingreen"/>
+                </LinearLayout>
+
+                <View style="@style/ry_line_style" />
+
+                <LinearLayout
+                    style="@style/itemstyle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="@dimen/layout_60dp"
+                        android:layout_height="wrap_content"
+                        android:text="@string/department"
+                        style="@style/app_text_ingreen"/>
+
+                    <TextView
+                        android:id="@+id/tv_depart"
+                        android:layout_width="@dimen/layout_0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        style="@style/ser_text_ingreen" />
+
+                    <TextView
+                        android:layout_width="@dimen/layout_60dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="@dimen/layout_10dp"
+                        android:text="@string/applicant"
+                        style="@style/app_text_ingreen" />
+
+                    <TextView
+                        android:id="@+id/tv_applicant"
+                        android:layout_width="@dimen/layout_0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        style="@style/ser_text_ingreen"/>
+                </LinearLayout>
+            </LinearLayout>
+
+            <include layout="@layout/ryitem_common" />
+        </LinearLayout>
+    </ScrollView>
+
+    <include layout="@layout/inclu_commit"></include>
+</RelativeLayout>

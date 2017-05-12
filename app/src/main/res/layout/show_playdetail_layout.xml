@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/rl_zx_detail"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_below="@id/ll_zx_input"
+    android:layout_marginLeft="@dimen/layout_10dp"
+    android:layout_marginRight="@dimen/layout_10dp"
+    android:layout_marginTop="@dimen/layout_10dp"
+    android:background="@drawable/green_scandetail_bg"
+    android:padding="@dimen/layout_5dp">
+
+    <TextView
+        android:layout_marginLeft="@dimen/layout_7dp"
+        android:id="@+id/tv_detail_show"
+        android:textColor="@color/black_32"
+        android:textSize="@dimen/textSize_14sp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:lineSpacingExtra="@dimen/layout_8dp" />
+</RelativeLayout>

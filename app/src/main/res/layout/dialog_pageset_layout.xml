@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="@dimen/layout_20dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/layout_40dp"
+        android:layout_marginBottom="@dimen/layout_30dp"
+        android:layout_marginTop="@dimen/layout_10dp"
+        android:background="@drawable/pagesetting_rectangle_bg"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:id="@+id/iv_pageSetting_minus"
+            android:layout_width="@dimen/layout_38dp"
+            android:layout_height="@dimen/layout_38dp"
+            android:layout_marginLeft="@dimen/layout_0.5dp"
+            android:background="@drawable/image_click_bg"
+            android:clickable="true"
+            android:padding="@dimen/layout_10dp"
+            android:src="@mipmap/minus" />
+
+        <View
+            android:layout_width="@dimen/layout_0.5dp"
+            android:layout_height="match_parent"
+            android:background="@color/black_32"></View>
+
+        <EditText
+            android:id="@+id/et_pageSetting"
+            android:layout_width="@dimen/layout_0dp"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="@dimen/layout_5dp"
+            android:layout_marginRight="@dimen/layout_5dp"
+            android:layout_weight="1"
+            android:background="@null"
+            android:gravity="center"
+            android:inputType="number"
+            android:textCursorDrawable="@drawable/et_cursor_yellow" />
+
+        <View
+            android:layout_width="@dimen/layout_0.5dp"
+            android:layout_height="match_parent"
+            android:background="@color/black_32"></View>
+
+        <ImageView
+            android:id="@+id/iv_pageSetting_add"
+            android:layout_width="@dimen/layout_38dp"
+            android:layout_height="@dimen/layout_38dp"
+            android:layout_marginRight="@dimen/layout_0.5dp"
+            android:background="@drawable/image_click_bg"
+            android:clickable="true"
+            android:padding="@dimen/layout_10dp"
+            android:src="@mipmap/add" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/tv_pageSetting_yes"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/setup_dialog_button_bg"
+        android:gravity="center"
+        android:padding="@dimen/layout_10dp"
+        android:text="@string/yes"
+        android:textColor="@color/red50"
+        android:textSize="@dimen/textSize_14sp" />
+</LinearLayout>

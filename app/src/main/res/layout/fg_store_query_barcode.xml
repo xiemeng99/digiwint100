@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/layout_10dp"
+        android:layout_marginRight="@dimen/layout_10dp"
+        android:layout_marginBottom="@dimen/layout_10dp"
+        android:background="@drawable/green_scandetail_bg"
+        android:orientation="vertical"
+        android:paddingBottom="@dimen/layout_10dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/form_head_back"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="@dimen/layout_0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/layout_7dp"
+                android:layout_weight="1"
+                android:singleLine="true"
+                android:text="@string/item_no"
+                android:textColor="@color/white"
+                android:textSize="@dimen/textSize_14sp" />
+
+            <View style="@style/ry_ve_line_style" />
+
+            <TextView
+                android:layout_width="@dimen/layout_0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/layout_7dp"
+                android:layout_weight="2"
+                android:singleLine="true"
+                android:text="@string/item_name_unit_no"
+                android:textColor="@color/white"
+                android:textSize="@dimen/textSize_14sp" />
+
+            <View style="@style/ry_ve_line_style" />
+
+            <TextView
+                android:layout_width="@dimen/layout_0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/layout_7dp"
+                android:layout_weight="2"
+                android:singleLine="true"
+                android:text="@string/model"
+                android:textColor="@color/white"
+                android:textSize="@dimen/textSize_14sp" />
+
+            <View style="@style/ry_ve_line_style" />
+
+            <TextView
+                android:layout_width="@dimen/layout_0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/layout_7dp"
+                android:layout_weight="2"
+                android:singleLine="true"
+                android:text="@string/barcode_no"
+                android:textColor="@color/white"
+                android:textSize="@dimen/textSize_14sp" />
+
+            <View style="@style/ry_ve_line_style" />
+
+            <TextView
+                android:layout_width="@dimen/layout_0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/layout_7dp"
+                android:layout_weight="2"
+                android:singleLine="true"
+                android:text="@string/store_locator"
+                android:textColor="@color/white"
+                android:textSize="@dimen/textSize_14sp" />
+
+            <View style="@style/ry_ve_line_style" />
+
+            <TextView
+                android:layout_width="@dimen/layout_0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/layout_7dp"
+                android:layout_weight="1"
+                android:singleLine="true"
+                android:text="@string/num"
+                android:textColor="@color/white"
+                android:textSize="@dimen/textSize_14sp" />
+        </LinearLayout>
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/ry_list"
+            android:scrollbars="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+
+</LinearLayout>

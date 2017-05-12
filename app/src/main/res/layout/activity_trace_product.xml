@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:id="@+id/ll_title"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/layout_48dp"
+        android:background="@color/toolBar_color"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:id="@+id/iv_back"
+            android:layout_width="@dimen/layout_30dp"
+            android:layout_height="@dimen/welcome_text_margin"
+            android:paddingBottom="@dimen/layout_14dp"
+            android:paddingTop="@dimen/layout_14dp"
+            android:src="@drawable/white_back" />
+
+        <TextView
+            android:id="@+id/tv_title_name"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical"
+            android:textColor="@color/white"
+            android:textSize="@dimen/textSize_18sp" />
+
+        <LinearLayout
+            android:id="@+id/ll_et_input"
+            android:layout_width="@dimen/layout_0dp"
+            android:layout_height="@dimen/layout_30dp"
+            android:layout_margin="@dimen/layout_10dp"
+            android:layout_weight="1"
+            android:background="@drawable/input_et_back"
+            android:orientation="horizontal">
+
+            <EditText
+                android:id="@+id/et_input"
+                android:layout_width="@dimen/layout_0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@null"
+                android:gravity="center_vertical"
+                android:hint="@string/scan_finished_barcode"
+                android:paddingLeft="@dimen/layout_10dp"
+                android:textColor="@color/yellow_text"
+                android:textColorHint="@color/hint_color"
+                android:textCursorDrawable="@color/yellow_text"
+                android:textSize="@dimen/textSize_14sp" />
+
+            <RelativeLayout
+                android:id="@+id/rl_iv_input_scan"
+                android:layout_width="@dimen/layout_0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="0.1"
+                android:background="@drawable/scan_back"
+                android:gravity="center_vertical|center_horizontal">
+
+                <ImageView
+                    android:id="@+id/iv_input"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/scan" />
+            </RelativeLayout>
+        </LinearLayout>
+
+        <ImageView
+            android:id="@+id/iv_lot_no"
+            android:layout_width="@dimen/layout_23dp"
+            android:layout_height="@dimen/layout_23dp"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="@dimen/layout_10dp"
+            android:layout_marginRight="@dimen/layout_10dp"
+            android:minHeight="@dimen/layout_0dp"
+            android:minWidth="@dimen/layout_0dp"
+            android:src="@mipmap/feeding_lotno"
+            android:visibility="visible" />
+
+        <ImageView
+            android:id="@+id/iv_work_group"
+            android:layout_width="@dimen/welcome_text_margin"
+            android:layout_height="@dimen/welcome_text_margin"
+            android:layout_marginLeft="@dimen/layout_10dp"
+            android:paddingBottom="@dimen/layout_14dp"
+            android:paddingTop="@dimen/layout_14dp"
+            android:src="@mipmap/workgroup"
+            android:visibility="visible" />
+
+        <ImageView
+            android:id="@+id/iv_check_info"
+            android:layout_width="@dimen/welcome_text_margin"
+            android:layout_height="@dimen/welcome_text_margin"
+            android:layout_marginLeft="@dimen/layout_10dp"
+            android:paddingBottom="@dimen/layout_14dp"
+            android:paddingTop="@dimen/layout_14dp"
+            android:src="@mipmap/check_info"
+            android:visibility="visible" />
+
+    </LinearLayout>
+
+    <include layout="@layout/tablayout_layout"></include>
+</LinearLayout>

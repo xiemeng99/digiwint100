@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_distribute"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical"
+    tools:context="digiwin.smartdepott100.module.activity.produce.distribute.DistributeActivity">
+
+    <include  layout="@layout/activity_title_toolbar_bar"/>
+
+    <LinearLayout
+        android:id="@+id/ll_search_dialog"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginTop="@dimen/layout_6dp"
+        android:layout_marginLeft="@dimen/layout_10dp"
+        android:layout_marginRight="@dimen/layout_10dp"
+        android:background="@drawable/yellow_scandetail_bg"
+        style="@style/itemstyle"
+        android:visibility="visible"
+        android:layout_below="@+id/toolbar_title"
+        android:layout_centerHorizontal="true">
+
+        <LinearLayout
+            android:id="@+id/ll_search_input"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/layout_6dp"
+            android:layout_marginRight="@dimen/layout_10dp"
+            android:layout_marginBottom="@dimen/layout_15dp"
+            android:background="@drawable/radiuswhiteback"
+            android:orientation="vertical">
+
+
+            <LinearLayout
+                android:id="@+id/ll_order_number"
+                style="@style/itemstyle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/tv_order_number"
+                    android:layout_width="@dimen/layout_70dp"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:text="@string/order_number"
+                    style="@style/app_text_inwhite" />
+
+                <EditText
+                    android:id="@+id/et_order_number"
+                    android:layout_width="@dimen/layout_0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/layout_10dp"
+                    android:layout_weight="1"
+                    android:background="@null"
+                    android:singleLine="true"
+                    android:selectAllOnFocus="true"
+                    android:textColor="@color/black_32"
+                    android:textCursorDrawable="@drawable/et_cursor_yellow"
+                    android:textSize="@dimen/textSize_14sp" />
+            </LinearLayout>
+
+
+            <View style="@style/fg_line_style" />
+            <LinearLayout
+                android:id="@+id/ll_item_no"
+                style="@style/itemstyle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/tv_item_no"
+                    android:layout_width="@dimen/layout_70dp"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:text="@string/item_no"
+                    style="@style/app_text_inwhite"/>
+
+                <EditText
+                    android:id="@+id/et_item_no"
+                    android:layout_width="@dimen/layout_0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/layout_10dp"
+                    android:layout_weight="1"
+                    android:background="@null"
+                    android:singleLine="true"
+                    android:selectAllOnFocus="true"
+                    android:textColor="@color/black_32"
+                    android:textCursorDrawable="@drawable/et_cursor_yellow"
+                    android:textSize="@dimen/textSize_14sp" />
+            </LinearLayout>
+            <View style="@style/fg_line_style" />
+
+            <LinearLayout
+                android:id="@+id/ll_department"
+                style="@style/itemstyle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/tv_department"
+                    android:layout_width="@dimen/layout_70dp"
+                    android:layout_height="wrap_content"
+                    android:text="@string/department"
+                    style="@style/app_text_inwhite"/>
+
+                <EditText
+                    android:id="@+id/et_department"
+                    android:layout_width="@dimen/layout_0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/layout_10dp"
+                    android:layout_weight="1"
+                    android:background="@null"
+                    android:singleLine="true"
+                    android:selectAllOnFocus="true"
+                    android:textColor="@color/black_32"
+                    android:textCursorDrawable="@drawable/et_cursor_yellow"
+                    android:textSize="@dimen/textSize_14sp" />
+            </LinearLayout>
+
+            <View style="@style/fg_line_style" />
+
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/btn_search_sure"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/layout_40dp"
+            android:text="@string/label_sure"
+            android:textColor="@color/WHITE"
+            android:textSize="@dimen/textSize_18sp"
+            android:layout_marginLeft="@dimen/layout_10dp"
+            android:layout_marginRight="@dimen/layout_10dp"
+            android:layout_marginBottom="@dimen/layout_15dp"
+            android:background="@drawable/accordingmaterialtop_sharp"/>
+
+    </LinearLayout>
+
+    <ScrollView
+        android:id="@+id/scrollview"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone"
+        android:layout_below="@+id/toolbar_title"
+        android:layout_marginTop="@dimen/layout_6dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="true">
+
+        <include layout="@layout/ryitem_common"/>
+
+    </ScrollView>
+</RelativeLayout>

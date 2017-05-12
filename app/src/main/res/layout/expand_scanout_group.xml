@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_centerVertical="true"
+    android:id="@+id/ll_group"
+    android:gravity="center"
+    android:layout_height="match_parent">
+    <LinearLayout
+        android:layout_margin="@dimen/layout_10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <CheckBox
+            android:id="@+id/cb_group"
+            android:layout_width="@dimen/layout_30dp"
+            android:button="@drawable/all_checkbox"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:id="@+id/tv_case_no_string"
+            android:layout_width="@dimen/layout_30dp"
+            android:layout_height="wrap_content"
+            android:text="@string/case_no"
+            android:gravity="center"
+            android:textColor="@color/black_32"
+            android:textSize="@dimen/textSize_14sp" />
+        <TextView
+            android:id="@+id/tv_case_no"
+            android:layout_width="@dimen/layout_0dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:layout_height="wrap_content"
+            android:textColor="@color/Base_color"
+            android:textSize="@dimen/textSize_14sp" />
+        <TextView
+            android:id="@+id/tv_locator_string"
+            android:layout_width="@dimen/layout_30dp"
+            android:layout_height="wrap_content"
+            android:text="@string/locator"
+            android:gravity="center"
+            android:textColor="@color/black_32"
+            android:textSize="@dimen/textSize_14sp" />
+        <TextView
+            android:id="@+id/tv_locator"
+            android:layout_width="@dimen/layout_0dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:layout_height="wrap_content"
+            android:textColor="@color/Base_color"
+            android:textSize="@dimen/textSize_14sp" />
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/ll_child_top"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        android:layout_marginTop="@dimen/layout_10dp"
+        android:layout_marginLeft="@dimen/layout_10dp"
+        android:layout_marginRight="@dimen/layout_10dp"
+        android:background="@drawable/expand_child_top"
+        android:orientation="horizontal">
+        <TextView
+            android:padding="@dimen/layout_10dp"
+            android:layout_width="@dimen/layout_0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="3"
+            android:gravity="center"
+            android:text="@string/barcode_no"
+            android:textColor="@color/black_32"
+            android:textSize="@dimen/textSize_14sp" />
+        <TextView
+            android:padding="@dimen/layout_10dp"
+            android:layout_width="@dimen/layout_0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="@string/num"
+            android:textColor="@color/black_32"
+            android:textSize="@dimen/textSize_14sp" />
+    </LinearLayout>
+</LinearLayout>

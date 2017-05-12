@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+        android:layout_height="fill_parent" >
+
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent" >
+
+        <SurfaceView
+            android:id="@+id/preview_view"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_gravity="center" />
+
+        <digiwin.library.zxing.view.ViewfinderView
+            android:id="@+id/viewfinder_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <include
+            android:id="@+id/include1"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            layout="@layout/zxing_title" />
+        <CheckBox
+            android:id="@+id/cb_flashlight"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:button="@drawable/flashlight"
+            android:layout_marginBottom="@dimen/layout_30dp"
+           />
+    </RelativeLayout>
+
+</FrameLayout>

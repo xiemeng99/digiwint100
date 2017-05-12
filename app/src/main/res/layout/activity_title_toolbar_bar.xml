@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.Toolbar xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/toolbar_title"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/welcome_text_margin"
+    android:background="@color/toolBar_color"
+    android:gravity="center_vertical"
+    app:contentInsetStart="@dimen/layout_0dp"
+    app:popupTheme="@style/ClubToolbar">
+
+    <ImageView
+        android:id="@+id/iv_back"
+        android:layout_width="@dimen/layout_30dp"
+        android:layout_height="@dimen/welcome_text_margin"
+        android:paddingBottom="@dimen/layout_14dp"
+        android:paddingTop="@dimen/layout_14dp"
+        android:src="@drawable/white_back" />
+
+    <ImageView
+        android:id="@+id/iv_title_setting"
+        android:layout_width="@dimen/layout_36dp"
+        android:layout_height="@dimen/welcome_text_margin"
+        android:layout_gravity="right|center_vertical"
+        android:paddingBottom="@dimen/layout_14dp"
+        android:paddingTop="@dimen/layout_14dp"
+        android:src="@mipmap/setting"
+        android:visibility="gone" />
+
+    <ImageView
+        android:id="@+id/un_com"
+        android:layout_width="@dimen/layout_36dp"
+        android:layout_height="@dimen/welcome_text_margin"
+        android:layout_gravity="right|center_vertical"
+        android:paddingBottom="@dimen/layout_14dp"
+        android:paddingTop="@dimen/layout_14dp"
+        android:src="@mipmap/uncom_icon"
+        android:visibility="gone" />
+
+    <TextView
+        android:id="@+id/tv_title_name"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_gravity="center_vertical|left"
+        android:clickable="true"
+        android:gravity="center_vertical"
+        android:textColor="@color/white"
+        android:textSize="@dimen/textSize_18sp" />
+
+    <TextView
+        android:id="@+id/tv_title_operation"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_gravity="right|center_vertical"
+        android:layout_marginRight="@dimen/layout_10dp"
+        android:textColor="@color/white"
+        android:textSize="@dimen/textSize_18sp"
+        android:visibility="gone" />
+
+    <TextView
+        android:id="@+id/tv_title_person_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="right|center_vertical"
+        android:layout_marginRight="@dimen/layout_15dp"
+        android:background="@drawable/title_text_background"
+        android:paddingLeft="@dimen/layout_8dp"
+        android:paddingRight="@dimen/layout_10dp"
+        android:textColor="@color/white"
+        android:textSize="@dimen/textSize_14sp"
+        android:visibility="gone" />
+
+    <ImageView
+        android:id="@+id/iv_scan"
+        android:layout_width="@dimen/layout_36dp"
+        android:layout_height="@dimen/welcome_text_margin"
+        android:layout_gravity="right|center_vertical"
+        android:paddingBottom="@dimen/layout_14dp"
+        android:paddingTop="@dimen/layout_14dp"
+        android:src="@mipmap/scan"
+        android:visibility="gone" />
+
+</android.support.v7.widget.Toolbar>

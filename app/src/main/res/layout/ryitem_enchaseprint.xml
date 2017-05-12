@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <LinearLayout
+        style="@style/itemstyle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/tv_item_seq"
+            android:layout_width="@dimen/layout_0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/item_seq"
+            style="@style/app_text_inred"/>
+
+        <TextView
+            android:id="@+id/tv_item_type"
+            android:layout_width="@dimen/layout_0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/barcode_type"
+            style="@style/app_text_inred"/>
+
+        <TextView
+            android:id="@+id/tv_barcode"
+            android:layout_width="@dimen/layout_0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="3"
+            android:text="@string/barcode_code"
+            style="@style/app_text_inred"/>
+
+        <TextView
+            android:id="@+id/tv_weight"
+            android:layout_width="@dimen/layout_0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/weight"
+            style="@style/app_text_inred" />
+    </LinearLayout>
+
+    <View
+        style="@style/ry_line_style"
+        android:layout_marginLeft="@dimen/layout_10dp"
+        android:layout_marginRight="@dimen/layout_10dp" />
+</LinearLayout>

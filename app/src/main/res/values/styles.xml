@@ -1,0 +1,265 @@
+<resources>
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimaryRed</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryRed</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="windowNoTitle">true</item>
+        <item name="windowActionBar">false</item>
+        <item name="android:windowAnimationStyle">@style/activityAnimation</item>
+    </style>
+
+
+    <style name="AppThemeTWO" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:screenOrientation">portrait</item>
+    </style>
+
+
+    <style name="SplashTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowAnimationStyle">@style/splashActivityAnimation</item>
+    </style>
+
+    <style name="ToolBar" parent="Theme.AppCompat.Light.DarkActionBar">
+        <item name="actionMenuTextColor">@color/white</item>
+    </style>
+
+    <style name="ClubToolbar" parent="Widget.AppCompat.Toolbar">
+        <item name="contentInsetStart">@dimen/layout_0dp</item><!-- 设置该属性解决空白部分-->
+    </style>
+
+    <style name="SettingLinearLayout">
+        <item name="android:paddingRight">@dimen/layout_10dp</item>
+        <item name="android:paddingTop">@dimen/layout_10dp</item>
+        <item name="android:paddingBottom">@dimen/layout_10dp</item>
+        <item name="android:gravity">center_vertical</item>
+    </style>
+    <!--扫描条目使用 -->
+    <style name="itemstyle">
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:paddingTop">@dimen/digiwin_top</item>
+        <item name="android:paddingBottom">@dimen/digiwin_top</item>
+        <item name="android:paddingLeft">@dimen/layout_7dp</item>
+        <item name="android:paddingRight">@dimen/layout_7dp</item>
+    </style>
+    <!--列表中线条样式-->
+    <style name="ry_line_style">
+        <item name="android:layout_height">@dimen/layout_0.5dp</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:background">@color/gray_f0</item>
+    </style>
+    <!--列表中线条样式2-->
+    <style name="ry_line_style2">
+        <item name="android:layout_height">@dimen/layout_1dp</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:background">@color/gray_c2</item>
+    </style>
+    <!--扫描条目线条使用 -->
+    <style name="fg_line_style">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">@dimen/layout_0.5dp</item>
+        <item name="android:layout_marginLeft">@dimen/layout_5dp</item>
+        <item name="android:layout_marginRight">@dimen/layout_5dp</item>
+        <item name="android:background">@color/line_gray_f0</item>
+    </style>
+
+    <style name="ry_style">
+        <item name="android:layout_marginRight">@dimen/layout_10dp</item>
+        <item name="android:layout_marginLeft">@dimen/layout_10dp</item>
+        <item name="android:layout_marginBottom">@dimen/digiwin_top</item>
+        <item name="android:paddingLeft">@dimen/layout_10dp</item>
+        <item name="android:paddingRight">@dimen/layout_10dp</item>
+        <item name="android:background">@drawable/green_scandetail_bg</item>
+    </style>
+
+    <style name="ry_style1">
+        <item name="android:layout_marginRight">@dimen/layout_10dp</item>
+        <item name="android:layout_marginLeft">@dimen/layout_10dp</item>
+        <item name="android:layout_marginBottom">@dimen/digiwin_top</item>
+        <item name="android:paddingLeft">@dimen/layout_10dp</item>
+        <item name="android:paddingRight">@dimen/layout_10dp</item>
+        <item name="android:background">@drawable/item_detail_bg</item>
+    </style>
+
+    <style name="uncom_itemstyle">
+        <item name="android:paddingTop">@dimen/digiwin_top</item>
+        <item name="android:paddingBottom">@dimen/digiwin_top</item>
+        <item name="android:paddingLeft">@dimen/layout_7dp</item>
+        <item name="android:paddingRight">@dimen/layout_7dp</item>
+    </style>
+
+    <!-- 依成品发料 -->
+    <style name="act_line_style">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">@dimen/layout_0.5dp</item>
+        <item name="android:layout_marginLeft">@dimen/layout_5dp</item>
+        <item name="android:layout_marginRight">@dimen/layout_5dp</item>
+        <item name="android:background">@color/materialDivider_color</item>
+    </style>
+
+    <!--FIFO中线条样式-->
+    <style name="fifo_line_style">
+        <item name="android:layout_height">@dimen/layout_0.5dp</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:background">@color/green7d</item>
+    </style>
+
+    <!-- 采购收货checkbox-->
+    <style name="checkbox_selector" parent="@android:style/Widget.CompoundButton.CheckBox">
+        <item name="android:button">@drawable/cb_selector</item>
+    </style>
+    <!--竖线条样式-->
+    <style name="ry_ve_line_style">
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:layout_width">@dimen/layout_0.5dp</item>
+        <item name="android:background">@color/gray_f0</item>
+    </style>
+
+    <!--粉色背景下本地文字样式-->
+    <style name="app_text_ingreen">
+        <item name="android:textSize">@dimen/digiwin_textsize</item>
+        <item name="android:textColor">@color/materialTitle_color</item>
+    </style>
+
+    <!--粉色背景下服务器返回文字样式-->
+    <style name="ser_text_ingreen">
+        <item name="android:textSize">@dimen/digiwin_textsize</item>
+        <item name="android:textColor">@color/materialText_color</item>
+    </style>
+
+    <!-- 绿色背景下服务器返回黄色字体样式 -->
+    <style name="ser_text_ingreen_yellow">
+        <item name="android:textSize">@dimen/digiwin_textsize</item>
+        <item name="android:textColor">@color/yellow_text</item>
+    </style>
+
+    <!--白色背景下本地文字样式-->
+    <style name="app_text_inwhite">
+        <item name="android:textSize">@dimen/digiwin_textsize</item>
+        <item name="android:textColor">@color/black_32</item>
+    </style>
+
+    <!--白色背景下服务器返回文字样式-->
+    <style name="ser_text_inwhite">
+        <item name="android:textSize">@dimen/digiwin_textsize</item>
+        <item name="android:textColor">@color/red50</item>
+    </style>
+    <!--白色背景下服务器返回文字样式，当列表数据颜色随数量变化时使用-->
+    <style name="ry_ser_text_inwhite">
+        <item name="android:textSize">@dimen/digiwin_textsize</item>
+        <item name="android:textColor">@color/black_32</item>
+    </style>
+    <!--明细页面服务器返回字段-->
+    <style name="ser_text_indetail">
+        <item name="android:textSize">@dimen/digiwin_textsize</item>
+        <item name="android:textColor">@color/black_32</item>
+    </style>
+    <!--明细页面服务器返回字段可修改的数字-->
+    <style name="ser_num_indetail">
+        <item name="android:textSize">@dimen/digiwin_textsize</item>
+        <item name="android:textColor">@color/orangeYellow</item>
+    </style>
+    <!--横屏时服务器字体-->
+    <style name="ser_text_inhitem">
+        <item name="android:textSize">@dimen/digiwin_textsize</item>
+        <item name="android:textColor">@color/materialText_color</item>
+    </style>
+
+    <style name="CustomDialog" parent="android:style/Theme.Dialog">
+        <item name="android:background">@android:color/transparent</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:backgroundDimEnabled">true</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowAnimationStyle">@style/DialogAnimation</item>
+    </style>
+
+    <style name="DialogAnimation" parent="@android:style/Animation.Dialog">
+        <item name="android:windowEnterAnimation">@anim/dialog_enter</item>
+        <item name="android:windowExitAnimation">@anim/dialog_exit</item>
+    </style>
+
+    <style name="LoadingDialog" parent="@android:style/Theme.Dialog">
+        <item name="android:windowFrame">@null</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:windowIsFloating">true</item>
+        <item name="android:backgroundDimEnabled">true</item>
+        <item name="android:windowContentOverlay">@null</item>
+    </style>
+
+    <style name="MyDialog" parent="android:style/Theme.Dialog">
+        <!--背景颜色及透明程度-->
+        <item name="android:windowBackground">@drawable/operatingcenter_bg</item>
+        <item name="android:windowFrame">@null</item>
+        <item name="android:windowIsTranslucent">true</item>
+        <!--是否有标题 -->
+        <item name="android:windowNoTitle">true</item>
+        <!--是否浮现在activity之上-->
+        <item name="android:windowIsFloating">true</item>
+        <!--是否模糊-->
+        <item name="android:backgroundDimEnabled">true</item>
+        <item name="android:windowAnimationStyle">@style/DialogAnimation</item> <!-- 显示和消失的动画效果 -->
+    </style>
+
+    <style name="activityAnimation" parent="@android:style/Animation.Activity">
+        <item name="android:activityOpenEnterAnimation">@anim/slide_right_in</item>
+        <item name="android:activityOpenExitAnimation">@anim/slide_left_out</item>
+        <item name="android:activityCloseEnterAnimation">@anim/slide_left_in</item>
+        <item name="android:activityCloseExitAnimation">@anim/slide_right_out</item>
+    </style>
+
+    <style name="progress_dialog" parent="@android:style/Theme.Dialog">
+        <item name="android:windowFrame">@null</item>
+        <item name="android:windowIsFloating">true</item>
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:background">@null</item>
+        <item name="android:windowBackground">@null</item>
+        <item name="android:windowAnimationStyle">@style/DialogAnimation</item> <!-- 显示和消失的动画效果 -->
+        <item name="android:backgroundDimEnabled">false</item>
+    </style>
+
+    <style name="splashActivityAnimation" parent="@android:style/Animation">
+        <item name="android:windowEnterAnimation">@anim/slide_right_in</item>
+        <item name="android:windowExitAnimation">@anim/slide_left_out</item>
+    </style>
+
+
+    <!--AndStyle 2017-5-9-->
+
+    <!--粉色背景下本地文字样式-->
+    <style name="app_text_inpink">
+        <item name="android:textSize">@dimen/digiwin_textsize</item>
+        <item name="android:textColor">@color/materialTitle_color</item>
+    </style>
+
+    <!--红色背景下本地文字样式-->
+    <style name="app_text_inred">
+        <item name="android:textSize">@dimen/digiwin_textsize</item>
+        <item name="android:textColor">@color/white</item>
+    </style>
+
+    <!--列表中 红色线条样式-->
+    <style name="red_line_style">
+        <item name="android:layout_height">@dimen/layout_0.5dp</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:background">@color/red50</item>
+        <item name="android:layout_marginLeft">@dimen/layout_15dp</item>
+        <item name="android:layout_marginRight">@dimen/layout_7dp</item>
+        <item name="android:layout_marginTop">@dimen/layout_5dp</item>
+        <item name="android:layout_marginBottom">@dimen/layout_10dp</item>
+    </style>
+
+    <!-- 数量EditText的样式-->
+    <style name="text_hint_style">
+        <item name="android:textColor">@color/orangeYellow</item>
+        <item name="android:textColorHint">@color/text_hint_color</item>
+    </style>
+
+
+</resources>

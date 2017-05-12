@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/item_ll"
+    style="@style/ry_style"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <LinearLayout
+        style="@style/itemstyle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            style="@style/app_text_inwhite"
+            android:layout_width="@dimen/layout_40dp"
+            android:layout_height="wrap_content"
+            android:text="@string/post_material_order" />
+
+        <TextView
+            android:id="@+id/tv_item_post_material_order"
+            style="@style/ser_text_inwhite"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+
+    <View style="@style/ry_line_style" />
+
+    <LinearLayout
+        style="@style/itemstyle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            style="@style/app_text_inwhite"
+            android:layout_width="@dimen/layout_40dp"
+            android:layout_height="wrap_content"
+            android:text="@string/data" />
+
+        <TextView
+            android:id="@+id/tv_item_plan_date"
+            style="@style/ser_text_inwhite"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+
+</LinearLayout>

@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/item_ll"
+    style="@style/ry_style"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center"
+    android:orientation="horizontal">
+
+    <CheckBox
+        android:id="@+id/cb_ischoose"
+        android:layout_width="@dimen/layout_30dp"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:button="@drawable/child_checkbox" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <LinearLayout
+            style="@style/itemstyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                style="@style/app_text_inwhite"
+                android:layout_width="@dimen/layout_70dp"
+                android:layout_height="wrap_content"
+                android:text="@string/store_lock_no" />
+
+            <TextView
+                android:id="@+id/tv_lock_no"
+                style="@style/ser_text_inwhite"
+                android:layout_width="@dimen/layout_0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1" />
+
+        </LinearLayout>
+
+        <View
+            style="@style/ry_line_style"
+            android:layout_width="wrap_content" />
+
+        <LinearLayout
+            style="@style/itemstyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                style="@style/app_text_inwhite"
+                android:layout_width="@dimen/layout_70dp"
+                android:layout_height="wrap_content"
+                android:text="@string/store_lock_date" />
+
+            <TextView
+                android:id="@+id/tv_lock_date"
+                style="@style/ser_text_inwhite"
+                android:layout_width="@dimen/layout_0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="2" />
+
+            <TextView
+                style="@style/app_text_inwhite"
+                android:layout_width="@dimen/layout_30dp"
+                android:layout_height="wrap_content"
+                android:text="@string/person" />
+
+            <TextView
+                android:id="@+id/tv_lock_people"
+                style="@style/ser_text_inwhite"
+                android:layout_width="@dimen/layout_0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/layout_5dp"
+                android:layout_weight="1" />
+
+        </LinearLayout>
+
+        <View
+            style="@style/ry_line_style"
+            android:layout_width="wrap_content" />
+
+        <LinearLayout
+            style="@style/itemstyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                style="@style/app_text_inwhite"
+                android:layout_width="@dimen/layout_70dp"
+                android:layout_height="wrap_content"
+                android:text="@string/lock_reason" />
+
+            <TextView
+                android:id="@+id/tv_lock_reason"
+                style="@style/ser_text_inwhite"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+
+    </LinearLayout>
+</LinearLayout>

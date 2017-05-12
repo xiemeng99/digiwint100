@@ -1,0 +1,11 @@
+下拉刷新，上拉加载库
+1.布局文件最外层需调用<digiwin.pulltorefreshlibrary.loadrefresh.SwipeToLoadLayout/>
+
+2.自定义的下拉刷新header布局需实现SwipeLoadMoreFooterLayout类，已封装好ClassicLoadMoreFooterView类，
+  只需布局中最外层调用<digiwin.pulltorefreshlibrary.headerandfooter.DgwRefreshHeaderView/>即可
+
+3.自定义的上拉加载更多布局需实现SwipeTrigger, SwipeRefreshTrigger 接口，已封装好DgwRefreshHeaderView类，
+  只需布局最外层调用<digiwin.pulltorefreshlibrary.headerandfooter.ClassicLoadMoreFooterView/>即可
+
+4.activity需实现OnRefreshListener, OnLoadMoreListener接口，重写onRefresh，onLoadMore方法，在其中实现
+  相关逻辑操作即可

@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <include layout="@layout/activity_title_toolbar_bar"></include>
+
+    <!-- <android.support.design.widget.TabLayout
+         android:id="@+id/tb_title"
+         android:layout_width="match_parent"
+         android:layout_height="@dimen/layout_35dp"
+         android:background="#f8f8f8"
+         app:tabIndicatorColor="#ffc400"
+         app:tabSelectedTextColor="#ffc400"
+         />-->
+
+    <android.support.design.widget.TabLayout
+        android:id="@+id/tb_title"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/layout_40dp"
+        android:background="@color/tab_bg_color"
+        app:tabIndicatorColor="@color/transparent"
+        app:tabPaddingBottom="@dimen/layout_0dp" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/layout_0.5dp"
+        android:background="@color/tab_divider_color" />
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/layout_350dp"
+            android:layout_gravity="bottom"
+            android:layout_marginBottom="@dimen/layout_50dp"
+            android:padding="@dimen/layout_40dp" />
+
+
+        <android.support.v4.view.ViewPager
+            android:id="@+id/vp_main"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@android:color/transparent" />
+
+        <ImageView
+            android:id="@+id/voice_guide"
+            android:layout_width="@dimen/layout_50dp"
+            android:layout_height="@dimen/layout_50dp"
+            android:layout_gravity="bottom|center_horizontal"
+            android:layout_marginBottom="@dimen/layout_40dp"
+            android:minHeight="@dimen/layout_0dp"
+            android:minWidth="@dimen/layout_0dp"
+            android:src="@drawable/voiceguide" />
+
+        <LinearLayout
+            android:id="@+id/ll_point"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|center_horizontal"
+            android:layout_marginBottom="@dimen/layout_10dp"
+            android:layout_marginTop="@dimen/layout_20dp"
+            android:baselineAligned="@id/voice_guide"
+            android:orientation="horizontal" />
+    </FrameLayout>
+
+
+</LinearLayout>

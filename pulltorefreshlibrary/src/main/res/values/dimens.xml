@@ -1,0 +1,92 @@
+<resources>
+    <!-- Default screen margins, per the Android Design guidelines. -->
+    <dimen name="activity_horizontal_margin">16dp</dimen>
+    <dimen name="activity_vertical_margin">16dp</dimen>
+    <dimen name="toolbar_elevation">8dp</dimen>
+
+    <dimen name="hero_avatar_size">120dp</dimen>
+    <dimen name="hero_avatar_border">3dp</dimen>
+    <dimen name="viewpager_height">240dp</dimen>
+    <dimen name="indicator_size">6dp</dimen>
+    <dimen name="indicator_margin">6dp</dimen>
+
+    <dimen name="load_more_footer_height_classic">60dp</dimen>
+
+    <dimen name="refresh_header_height_twitter">80dp</dimen>
+    <dimen name="load_more_footer_height_twitter">60dp</dimen>
+
+    <!-- google -->
+    <dimen name="refresh_header_height_google">100dp</dimen>
+    <dimen name="refresh_trigger_offset_google">100dp</dimen>
+    <dimen name="refresh_final_offset_google">150dp</dimen>
+    <dimen name="refresh_drawable_size_google">40dp</dimen>
+
+    <dimen name="load_more_footer_height_google">72dp</dimen>
+    <dimen name="load_more_trigger_offset_google">88dp</dimen>
+    <dimen name="load_more_final_offset_google">120dp</dimen>
+    <dimen name="load_more_drawable_size_google">36dp</dimen>
+
+    <!-- yalantis -->
+    <dimen name="refresh_header_height_yalantis">136dp</dimen>
+
+    <!-- jd -->
+    <dimen name="refresh_header_height_jd">100dp</dimen>
+    <dimen name="layout_0dp">0dp</dimen>
+    <dimen name="layout_1dp">1dp</dimen>
+    <dimen name="layout_5dp">5dp</dimen>
+    <dimen name="layout_8dp">8dp</dimen>
+    <dimen name="layout_15dp">15dp</dimen>
+    <dimen name="layout_60dp">60dp</dimen>
+    <dimen name="layout_50dp">50dp</dimen>
+    <dimen name="layout_54dp">54dp</dimen>
+    <dimen name="layout_150dp">150dp</dimen>
+    <dimen name="layout_48dp">48dp</dimen>
+    <dimen name="layout_35dp">35dp</dimen>
+    <dimen name="layout_20dp">20dp</dimen>
+
+    <dimen name="textSize_12sp">12sp</dimen>
+    <dimen name="textSize_16sp">16sp</dimen>
+    <dimen name="textSize_18sp">18sp</dimen>
+
+    <dimen name="layout_2dp">2dp</dimen>
+    <dimen name="layout_3dp">3dp</dimen>
+    <dimen name="layout_7dp">7dp</dimen>
+    <dimen name="layout_10dp">10dp</dimen>
+    <dimen name="layout_9dp">9dp</dimen>
+    <dimen name="layout_6dp">6dp</dimen>
+    <dimen name="layout_18dp">18dp</dimen>
+    <dimen name="layout_25dp">25dp</dimen>
+    <dimen name="layout_30dp">30dp</dimen>
+    <dimen name="layout_40dp">40dp</dimen>
+    <dimen name="layout_44dp">44dp</dimen>
+    <dimen name="layout_45dp">45dp</dimen>
+    <dimen name="layout_70dp">70dp</dimen>
+    <dimen name="layout_80dp">80dp</dimen>
+    <dimen name="layout_90dp">90dp</dimen>
+    <dimen name="layout_100dp">100dp</dimen>
+    <dimen name="layout_110dp">110dp</dimen>
+    <dimen name="layout_120dp">120dp</dimen>
+    <dimen name="layout_160dp">160dp</dimen>
+    <dimen name="layout_200dp">200dp</dimen>
+    <dimen name="layout_250dp">250dp</dimen>
+
+    <!-- textSize -->
+    <dimen name="textSize_10sp">10sp</dimen>
+    <dimen name="textSize_14sp">14sp</dimen>
+    <dimen name="textSize_15sp">15sp</dimen>
+    <dimen name="textSize_20sp">20sp</dimen>
+    <dimen name="textSize_22sp">22sp</dimen>
+    <dimen name="textSize_24sp">24sp</dimen>
+
+
+    <dimen name="common_text_size">17.0dp</dimen>
+    <dimen name="login_text_size">18.0sp</dimen>
+    <dimen name="remind_pwd_text_size">8.0sp</dimen>
+
+    <dimen name="view_small_padding">1dp</dimen>
+    <dimen name="view_padding">6dp</dimen>
+
+    <dimen name="standard_padding">8dip</dimen>
+    <dimen name="half_padding">4dip</dimen>
+    <dimen name="layout_4dp">4dp</dimen>
+</resources>

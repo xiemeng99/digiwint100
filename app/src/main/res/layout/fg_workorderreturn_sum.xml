@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white">
+
+    <LinearLayout
+        android:id="@+id/ll_workorderreturn_head"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/layout_10dp"
+        android:layout_marginRight="@dimen/layout_10dp"
+        android:layout_marginTop="@dimen/layout_6dp"
+        android:background="@drawable/accordingmaterialtop_pink_sharp"
+        android:orientation="vertical"
+        android:padding="@dimen/layout_5dp">
+
+        <LinearLayout
+            style="@style/itemstyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/textView9"
+                style="@style/app_text_ingreen"
+                android:layout_width="@dimen/layout_70dp"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:text="@string/order_number" />
+
+            <TextView
+                android:id="@+id/tv_head_order"
+                android:layout_width="@dimen/layout_0dp"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="@dimen/layout_10dp"
+                android:layout_weight="1"
+                style="@style/ser_text_ingreen" />
+
+        </LinearLayout>
+
+        <View style="@style/act_line_style"></View>
+
+        <LinearLayout
+            style="@style/itemstyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:layout_width="@dimen/layout_70dp"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:text="@string/depart_supplier"
+                style="@style/app_text_ingreen" />
+
+            <TextView
+                android:id="@+id/tv_depart_supplier"
+                android:layout_width="@dimen/layout_0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/layout_10dp"
+                android:layout_weight="1"
+                style="@style/ser_text_ingreen"/>
+
+            <TextView
+                android:layout_width="@dimen/layout_70dp"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:text="@string/end_product"
+                style="@style/app_text_ingreen"/>
+
+            <TextView
+                android:id="@+id/tv_end_product"
+                android:layout_width="@dimen/layout_0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/layout_10dp"
+                android:layout_weight="1"
+                style="@style/ser_text_ingreen" />
+        </LinearLayout>
+
+        <View style="@style/act_line_style"></View>
+
+        <LinearLayout
+            style="@style/itemstyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:layout_width="@dimen/layout_70dp"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:text="@string/end_productname"
+                style="@style/app_text_ingreen"/>
+
+            <TextView
+                android:id="@+id/tv_end_productname"
+                android:layout_width="@dimen/layout_0dp"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="@dimen/layout_10dp"
+                android:layout_weight="1"
+                style="@style/ser_text_ingreen" />
+
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/ll_workorderreturn_head"
+        android:layout_marginTop="@dimen/layout_10dp">
+
+        <include layout="@layout/ryitem_common" />
+    </LinearLayout>
+
+    <include layout="@layout/inclu_commit" />
+</RelativeLayout>

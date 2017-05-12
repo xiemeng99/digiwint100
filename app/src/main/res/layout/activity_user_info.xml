@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_user_info"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical"
+    tools:context="digiwin.smartdepott100.main.activity.UserInfoActivity">
+
+    <include layout="@layout/activity_title_toolbar_bar"></include>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/layout_0.5dp"
+        android:background="@color/gray_f0"></View>
+
+    <TextView
+        android:id="@+id/tv_userInfo_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/layout_10dp"
+        android:gravity="left"
+        android:textColor="@color/black_32"
+        android:textSize="@dimen/textSize_14sp" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/layout_0.5dp"
+        android:background="@color/gray_f0"></View>
+
+    <TextView
+        android:id="@+id/tv_userInfo_no"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/layout_10dp"
+        android:gravity="left"
+        android:textColor="@color/black_32"
+        android:textSize="@dimen/textSize_14sp" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/layout_0.5dp"
+        android:background="@color/gray_f0"></View>
+
+    <TextView
+        android:id="@+id/tv_userInfo_position"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/layout_10dp"
+        android:gravity="left"
+        android:textColor="@color/black_32"
+        android:textSize="@dimen/textSize_14sp" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/layout_0.5dp"
+        android:background="@color/gray_f0"></View>
+
+    <TextView
+        android:id="@+id/tv_userInfo_exit"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/layout_30dp"
+        android:layout_marginRight="@dimen/layout_30dp"
+        android:layout_marginTop="@dimen/layout_50dp"
+        android:background="@drawable/userinfo_exit_bg"
+        android:gravity="center"
+        android:padding="@dimen/layout_10dp"
+        android:text="@string/exit"
+        android:textColor="@color/red50"
+        android:textSize="@dimen/textSize_16sp" />
+</LinearLayout>

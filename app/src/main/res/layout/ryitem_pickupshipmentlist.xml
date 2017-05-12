@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/item_ll"
+    style="@style/ry_style"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <LinearLayout
+        style="@style/itemstyle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/tv_shipping_order_string"
+            style="@style/app_text_inwhite"
+            android:layout_width="@dimen/layout_70dp"
+            android:layout_height="wrap_content"
+            android:text="@string/shipping_order" />
+
+        <TextView
+            android:id="@+id/tv_shipping_order"
+            style="@style/ser_text_inwhite"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+
+    <View
+        android:id="@+id/line_1"
+        style="@style/ry_line_style" />
+
+    <LinearLayout
+        style="@style/itemstyle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/tv_shipping_date_string"
+            style="@style/app_text_inwhite"
+            android:layout_width="@dimen/layout_70dp"
+            android:layout_height="wrap_content"
+            android:text="@string/shipping_date" />
+
+        <TextView
+            android:id="@+id/tv_shipping_date"
+            style="@style/ser_text_inwhite"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+
+    <View
+        android:id="@+id/line_2"
+        style="@style/ry_line_style" />
+
+    <LinearLayout
+        style="@style/itemstyle"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/tv_custom_string"
+            style="@style/app_text_inwhite"
+            android:layout_width="@dimen/layout_70dp"
+            android:layout_height="wrap_content"
+            android:text="@string/custom" />
+
+        <TextView
+            android:id="@+id/tv_custom"
+            style="@style/ser_text_inwhite"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+
+    <View
+        android:id="@+id/line_3"
+        style="@style/ry_line_style" />
+
+    <LinearLayout
+        style="@style/itemstyle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+
+        <TextView
+            android:id="@+id/tv_apply_branch_string"
+            style="@style/app_text_inwhite"
+            android:layout_width="@dimen/layout_70dp"
+            android:layout_height="wrap_content"
+            android:text="@string/apply_branch" />
+
+        <TextView
+            android:id="@+id/tv_apply_branch"
+            style="@style/ser_text_inwhite"
+            android:layout_width="@dimen/layout_0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" />
+
+        <TextView
+            android:id="@+id/tv_applicant_string"
+            style="@style/app_text_inwhite"
+            android:layout_width="@dimen/layout_60dp"
+            android:layout_height="wrap_content"
+            android:text="@string/applicant" />
+
+        <TextView
+            android:id="@+id/tv_applicant"
+            style="@style/ser_text_inwhite"
+            android:layout_width="@dimen/layout_0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" />
+    </LinearLayout>
+</LinearLayout>

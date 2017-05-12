@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/item_ll"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    style="@style/ry_style"
+    android:orientation="vertical">
+    <LinearLayout
+        style="@style/itemstyle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            style="@style/app_text_inwhite"
+            android:layout_width="@dimen/layout_40dp"
+            android:layout_height="wrap_content"
+            android:text="@string/item_name" />
+
+        <TextView
+            android:id="@+id/tv_item_name"
+            style="@style/ser_text_inwhite"
+            android:layout_width="@dimen/layout_0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" />
+    </LinearLayout>
+
+    <View style="@style/ry_line_style" />
+
+    <LinearLayout
+        style="@style/itemstyle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            style="@style/app_text_inwhite"
+            android:layout_width="@dimen/layout_40dp"
+            android:layout_height="wrap_content"
+            android:text="@string/model" />
+
+        <TextView
+            android:id="@+id/tv_model"
+            style="@style/ser_text_inwhite"
+            android:layout_width="@dimen/layout_0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" />
+    </LinearLayout>
+
+    <View style="@style/ry_line_style" />
+
+    <LinearLayout
+        style="@style/itemstyle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            style="@style/app_text_inwhite"
+            android:layout_width="@dimen/layout_40dp"
+            android:layout_height="wrap_content"
+            android:text="@string/item_no" />
+
+        <TextView
+            android:id="@+id/tv_item_no"
+            style="@style/ser_text_inwhite"
+            android:layout_width="@dimen/layout_0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" />
+    </LinearLayout>
+
+    <View style="@style/ry_line_style" />
+
+    <LinearLayout
+        style="@style/itemstyle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            style="@style/app_text_inwhite"
+            android:layout_width="@dimen/layout_40dp"
+            android:layout_height="wrap_content"
+            android:text="@string/item_lot_no" />
+
+        <TextView
+            android:id="@+id/tv_lot_no"
+            style="@style/ser_text_inwhite"
+            android:layout_width="@dimen/layout_0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" />
+    </LinearLayout>
+
+    <View style="@style/ry_line_style" />
+
+    <LinearLayout
+        style="@style/itemstyle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            style="@style/app_text_inwhite"
+            android:layout_width="@dimen/layout_40dp"
+            android:layout_height="wrap_content"
+            android:text="@string/label_storage" />
+
+        <TextView
+            android:id="@+id/tv_storage"
+            style="@style/ser_text_inwhite"
+            android:layout_width="@dimen/layout_0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" />
+
+        <TextView
+            style="@style/app_text_inwhite"
+            android:layout_width="@dimen/layout_40dp"
+            android:layout_height="wrap_content"
+            android:text="@string/locator" />
+
+        <TextView
+            android:id="@+id/tv_locator"
+            style="@style/ser_text_inwhite"
+            android:layout_width="@dimen/layout_0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" />
+    </LinearLayout>
+
+</LinearLayout>

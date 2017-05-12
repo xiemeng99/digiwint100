@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal"
+    android:paddingTop="@dimen/layout_5dp"
+    android:paddingBottom="@dimen/layout_5dp"
+    android:layout_width="match_parent"
+    android:gravity="center"
+    android:layout_height="wrap_content">
+    <TextView
+        android:id="@+id/item_seq"
+        android:layout_width="@dimen/layout_0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:padding="@dimen/layout_5dp"
+        android:gravity="center"
+        style="@style/app_text_inwhite" />
+
+    <TextView
+        android:id="@+id/up_value"
+        android:padding="@dimen/layout_5dp"
+        android:layout_width="@dimen/layout_0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:gravity="center"
+        style="@style/app_text_inwhite" />
+
+    <TextView
+        android:id="@+id/down_value"
+        android:padding="@dimen/layout_5dp"
+        android:layout_width="@dimen/layout_0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:gravity="center"
+        style="@style/app_text_inwhite" />
+
+    <EditText
+        android:id="@+id/check_value"
+        android:padding="@dimen/layout_5dp"
+        android:layout_width="@dimen/layout_0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:inputType="number"
+        android:background="@null"
+        android:textColor="@color/yellow_text"
+        android:textSize="@dimen/textSize_14sp" />
+    <ImageView
+        android:id="@+id/iv_add"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="invisible"
+        android:layout_marginRight="@dimen/layout_5dp"
+        android:src="@drawable/add"/>
+</LinearLayout>

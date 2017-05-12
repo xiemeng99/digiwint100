@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:padding="@dimen/layout_10dp"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <TextView
+        android:gravity="center"
+        android:layout_margin="@dimen/layout_10dp"
+        android:textSize="@dimen/textSize_18sp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/versions"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+        <TextView
+            android:id="@+id/versions_num_tv"
+            android:gravity="center_vertical|left"
+            android:layout_width="wrap_content"
+            android:textColor="@color/Base_color"
+            android:textSize="@dimen/textSize_15sp"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:gravity="center_vertical|left"
+            android:text="@string/versions_show"
+            android:textSize="@dimen/textSize_14sp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+    <TextView
+        android:id="@+id/versions_dialog_tv"
+        android:layout_width="match_parent"
+        android:gravity="center_vertical"
+        android:lineSpacingExtra="@dimen/layout_7dp"
+        android:layout_margin="@dimen/layout_10dp"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/textSize_14sp"/>
+    <RelativeLayout
+        android:id="@+id/rl_download"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <digiwin.smartdepott100.core.customview.RoundedProgressBar
+            android:id="@+id/myProgressBar"
+            android:layout_margin="@dimen/layout_10dp"
+            android:layout_width="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:id="@+id/tv_download"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:textColor="@color/red50"
+            android:textSize="@dimen/textSize_15sp"
+            android:layout_centerInParent="true"
+            android:text="@string/download"/>
+        </RelativeLayout>
+</LinearLayout>

@@ -1,0 +1,55 @@
+1.警告对话框需凋用AlertDialogUtils类中相关方法，退出界面时弹出对话框也需调用，也可直接调用BaseActivity中的方法
+    showExitActivityDialog()如需实现点击后相关逻辑操作,需实现onAlertDialogClickCallback接口，重写onClick()方法，示例代码：
+    无回调：AlertDialogUtils.getInstance(context).showAlertDialog("孙长权大帅比");
+    有回调： AlertDialogUtils.getInstance(context).showAlertDialog("孙长权大帅比", new AlertDialogUtils.onAlertDialogClickCallback() {
+                                  @Override
+                                  public void onClick() {
+                                      //进行相关逻辑操作
+                                  }
+                              });
+
+2.提交成功，提交失败对话框调用CommitDialogUtils相关方法
+     提交成功需回调：
+         CommitDialogUtils.getInstance(context).showCommitSuccessDialog("sunchangquan", new CommitDialogUtils.OnCommitDialogClickListener() {
+                           @Override
+                           public void onClick() {
+                           //相关逻辑操作
+                            }
+                    });
+      提交成功无需做后续处理（无回调）：
+         CommitDialogUtils.getInstance(context).showCommitSuccessDialog("sunchangquan");
+     提交失败需回调：
+         CommitDialogUtils.getInstance(context).showCommitFailDialog("sunchangquan", new CommitDialogUtils.OnCommitDialogClickListener() {
+                           @Override
+                           public void onClick() {
+                           //相关逻辑操作
+                            }
+                    });
+      提交失败无需做后续处理（无回调）：
+          CommitDialogUtils.getInstance(context).showCommitFailDialog("shibai");
+
+3.等待对话框显示需调用 LoadingDialogUtils类中相关方法
+    等待对话框显示：LoadingDialogUtils.showLoadingDialog();
+    等待对话框消失：LoadingDialogUtils.dismissLoadingDialog();
+
+4.Toast相关工具类ToastUtils,可避免多次重复提示
+     ToastUtils.getInstance(context).showToastByString("sunchangquan");//底部显示String
+     ToastUtils.getInstance(context).showToastByInt(R.string.message_net_wifi);//底部显示资源文件中字符串
+     ToastUtils.getInstance(context).showCenterToastByInt(R.string.message_net_wifi);//局中显示资源文件中字符串
+
+     ToastUtils.getInstance(context).showCenterToastByString("sunchagnquan");//局中显示String
+
+
+xml报文请求说明
+    CreateParaXmlReq使用其构造方法具体使用子类CreateParaXmlReqIm的单例方法实现
+xml格式解析说明
+    ParseXmlResp类
+    fromXml(String respType,String payload)  静态方法获取xml实体类,
+    respType为xml中对应response名称，payload对应xml报文
+    getCode()--------------------------------------------获取返回码
+    getDescription()-------------------------------------获取错误描述
+    getFieldString()-------------------------------------当在parameter中返回单号时使用该方法获取唯一单号
+    getMasterDatas(Class<T> clazz)-----------------------获取RecordSet的master，每个recordset中只能有一个master
+    getDetailDatas(Class<T> clazz)-----------------------获取RecordSet的Detail， 每个recordset中只能有一个Detail
+    getDetailDatas(String detailName, Class<T> clazz) ---获取多个RecordSet的指定的一个Detail集合
+    getParameterDatas(Class<T> clazz) -------------------获取Parameter中集合

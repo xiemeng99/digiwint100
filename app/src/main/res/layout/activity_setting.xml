@@ -1,0 +1,432 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/activity_setting"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:baselineAligned="false"
+    android:orientation="vertical">
+
+    <include layout="@layout/activity_title_toolbar_bar"></include>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/layout_0.5dp"
+        android:background="@color/gray_f0"></View>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:paddingLeft="@dimen/layout_10dp">
+
+
+            <LinearLayout
+                android:id="@+id/ll_userinforseting"
+                style="@style/SettingLinearLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="@dimen/layout_20dp"
+                    android:layout_height="@dimen/layout_20dp"
+                    android:src="@mipmap/account" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/layout_5dp"
+                    android:layout_weight="1"
+                    android:gravity="left"
+                    android:text="@string/userinfo"
+                    android:textColor="@color/black_32"
+                    android:textSize="@dimen/textSize_14sp" />
+
+                <TextView
+                    android:id="@+id/tv_username"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/red50"
+                    android:textSize="@dimen/textSize_14sp" />
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/layout_0.5dp"
+                android:background="@color/gray_f0"></View>
+
+            <LinearLayout
+                android:id="@+id/ll_operatingCenterSetting"
+                style="@style/SettingLinearLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="@dimen/layout_20dp"
+                    android:layout_height="@dimen/layout_20dp"
+                    android:src="@mipmap/center" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/layout_5dp"
+                    android:layout_weight="1"
+                    android:gravity="left"
+                    android:text="@string/operating_center"
+                    android:textColor="@color/black_32"
+                    android:textSize="@dimen/textSize_14sp" />
+
+                <TextView
+                    android:id="@+id/tv_operatingCenterSetting"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/red50"
+                    android:textSize="@dimen/textSize_14sp" />
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/layout_0.5dp"
+                android:background="@color/gray_f0"></View>
+
+            <LinearLayout
+                android:id="@+id/ll_storageSetting"
+                style="@style/SettingLinearLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="@dimen/layout_20dp"
+                    android:layout_height="@dimen/layout_20dp"
+                    android:src="@mipmap/storage" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/layout_5dp"
+                    android:layout_weight="1"
+                    android:gravity="left"
+                    android:text="@string/label_storage"
+                    android:textColor="@color/black_32"
+                    android:textSize="@dimen/textSize_14sp" />
+
+                <TextView
+                    android:id="@+id/tv_storageSetting"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/red50"
+                    android:textSize="@dimen/textSize_14sp" />
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/layout_0.5dp"
+                android:background="@color/gray_f0"></View>
+
+            <LinearLayout
+                android:id="@+id/ll_pageSetting"
+                style="@style/SettingLinearLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="@dimen/layout_20dp"
+                    android:layout_height="@dimen/layout_20dp"
+                    android:src="@mipmap/paging" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/layout_5dp"
+                    android:layout_weight="1"
+                    android:gravity="left"
+                    android:text="@string/page_setting"
+                    android:textColor="@color/black_32"
+                    android:textSize="@dimen/textSize_14sp" />
+
+                <TextView
+                    android:id="@+id/tv_pageSetting"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/red50"
+                    android:textSize="@dimen/textSize_14sp" />
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/layout_0.5dp"
+                android:background="@color/gray_f0"></View>
+
+            <LinearLayout
+                android:id="@+id/ll_repeatSetting"
+                style="@style/SettingLinearLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="@dimen/layout_20dp"
+                    android:layout_height="@dimen/layout_20dp"
+                    android:src="@mipmap/timer" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/layout_5dp"
+                    android:layout_weight="1"
+                    android:gravity="left"
+                    android:text="@string/repeatseting"
+                    android:textColor="@color/black_32"
+                    android:textSize="@dimen/textSize_14sp" />
+
+                <TextView
+                    android:id="@+id/tv_repeat_time"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/red50"
+                    android:textSize="@dimen/textSize_14sp" />
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/layout_0.5dp"
+                android:background="@color/gray_f0"></View>
+
+            <LinearLayout
+                android:id="@+id/ll_voicerSetting"
+                style="@style/SettingLinearLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="@dimen/layout_20dp"
+                    android:layout_height="@dimen/layout_20dp"
+                    android:src="@mipmap/mic" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/layout_5dp"
+                    android:layout_weight="1"
+                    android:gravity="left"
+                    android:text="@string/voicer"
+                    android:textColor="@color/black_32"
+                    android:textSize="@dimen/textSize_14sp" />
+
+                <TextView
+                    android:id="@+id/tv_voicerSetting"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/red50"
+                    android:textSize="@dimen/textSize_14sp" />
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/layout_0.5dp"
+                android:background="@color/gray_f0"></View>
+
+            <LinearLayout
+                android:id="@+id/ll_vibrateSetting"
+                style="@style/SettingLinearLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="@dimen/layout_20dp"
+                    android:layout_height="@dimen/layout_20dp"
+                    android:src="@mipmap/shouji_00" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/layout_5dp"
+                    android:layout_weight="1"
+                    android:gravity="left"
+                    android:text="@string/vibrate"
+                    android:textColor="@color/black_32"
+                    android:textSize="@dimen/textSize_14sp" />
+
+                <TextView
+                    android:id="@+id/tv_vibrateSetting"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/red50"
+                    android:textSize="@dimen/textSize_14sp" />
+
+                <ToggleButton
+                    android:id="@+id/tb_vibrateSetting"
+                    android:layout_width="@dimen/layout_50dp"
+                    android:layout_height="@dimen/layout_20dp"
+                    android:background="@android:color/transparent"
+                    android:button="@drawable/togglebutton_bg"
+                    android:checked="true"
+                    android:text=""
+                    android:textOff=""
+                    android:textOn="" />
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/layout_0.5dp"
+                android:background="@color/gray_f0"></View>
+
+            <LinearLayout
+                android:id="@+id/ll_blueToothSetting"
+                style="@style/SettingLinearLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="@dimen/layout_20dp"
+                    android:layout_height="@dimen/layout_20dp"
+                    android:src="@mipmap/bluetooth" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/layout_5dp"
+                    android:layout_weight="1"
+                    android:gravity="left"
+                    android:text="@string/bluetooth"
+                    android:textColor="@color/black_32"
+                    android:textSize="@dimen/textSize_14sp" />
+
+                <TextView
+                    android:id="@+id/tv_blueToothSetting"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/red50"
+                    android:textSize="@dimen/textSize_14sp" />
+
+                <ToggleButton
+                    android:id="@+id/tb_blueToothSetting"
+                    android:layout_width="@dimen/layout_50dp"
+                    android:layout_height="@dimen/layout_20dp"
+                    android:background="@android:color/transparent"
+                    android:button="@drawable/togglebutton_bg"
+                    android:text=""
+                    android:textOff=""
+                    android:textOn="" />
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/layout_0.5dp"
+                android:background="@color/gray_f0"></View>
+
+            <LinearLayout
+                android:id="@+id/ll_device_unbind"
+                style="@style/SettingLinearLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="@dimen/layout_20dp"
+                    android:layout_height="@dimen/layout_20dp"
+                    android:src="@mipmap/device_unbind" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/layout_5dp"
+                    android:layout_weight="1"
+                    android:gravity="left"
+                    android:text="@string/device_unbind"
+                    android:textColor="@color/black_32"
+                    android:textSize="@dimen/textSize_14sp" />
+
+                <TextView
+                    android:id="@+id/tv_deviceinfo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/red50"
+                    android:textSize="@dimen/textSize_14sp" />
+
+            </LinearLayout>
+
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/layout_0.5dp"
+                android:background="@color/gray_f0"></View>
+
+            <RelativeLayout
+                android:id="@+id/rl_versionsSetting"
+                style="@style/SettingLinearLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:id="@+id/iv_version_icon"
+                    android:layout_width="@dimen/layout_20dp"
+                    android:layout_height="@dimen/layout_20dp"
+                    android:layout_centerVertical="true"
+                    android:src="@mipmap/versions" />
+
+                <TextView
+                    android:id="@+id/tv_versions_no"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="@dimen/layout_5dp"
+                    android:layout_toRightOf="@id/iv_version_icon"
+                    android:gravity="left"
+                    android:text="@string/versions"
+                    android:textColor="@color/black_32"
+                    android:textSize="@dimen/textSize_14sp" />
+
+                <TextView
+                    android:id="@+id/tv_versionsSetting"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="@dimen/layout_10dp"
+                    android:textColor="@color/red50"
+                    android:textSize="@dimen/textSize_14sp" />
+
+                <TextView
+                    android:id="@+id/tv_versions_new"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginLeft="@dimen/layout_3dp"
+                    android:layout_toEndOf="@+id/tv_versions_no"
+                    android:background="@drawable/version_new_bg"
+                    android:gravity="center"
+                    android:paddingLeft="@dimen/layout_1dp"
+                    android:paddingRight="@dimen/layout_1dp"
+                    android:text="@string/version_new"
+                    android:textColor="@color/white_ff"
+                    android:textSize="@dimen/textSize_10sp"
+                    android:visibility="gone" />
+            </RelativeLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/layout_0.5dp"
+                android:background="@color/gray_f0"></View>
+
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>
