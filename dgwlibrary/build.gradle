@@ -42,7 +42,7 @@ dependencies {
     compile 'com.umeng.analytics:analytics:latest.integration'
     compile 'com.android.support:recyclerview-v7:23.1.0'
     compile 'com.android.support:design:23.1.0'
-    compile 'com.alibaba:fastjson:1.2.23'
+    compile 'com.alibaba:fastjson:1.2.32'
     /*极光IM*/
     compile files('libs/jcore-android_v1.1.0.jar')
     compile files('libs/jmessage-android-2.0.0.jar')

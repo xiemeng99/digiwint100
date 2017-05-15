@@ -14,9 +14,10 @@
     <color name="BLACK">#000000</color>
     <color name="BtnBackground">#2b3133</color>
     <color name="BLUELINE">#00789f</color>
-    <color name="BUTTON_BACKGROUND">#2b887d</color>
+   <!-- <color name="BUTTON_BACKGROUND">#2b887d</color>-->
     <color name="BLUETOOTHGROUND">#00789f</color>
 
+    <color name="BUTTON_BACKGROUND">#e50150</color>
 
     <!-- 字体颜色 文本标题 -->
     <color name="DEEPBUlETEXTCOLOR">#232323</color>
@@ -198,7 +199,7 @@
     <color name="colorPrimary">#2b887d</color><!--导航栏颜色-->
     <color name="colorPrimaryDark">#2b887d</color><!--状态栏颜色-->
 
-    <color name="Base_color">#2b887d </color><!--主色调-->
+    <color name="Base_color">#e50150</color><!--主色调-->
     <color name="Assist_color">#ffc400 </color><!--辅助色调-->
     <color name="Text_color">#323232 </color><!--主字体颜色-->
     <color name="Login_line_color">#515252 </color><!--主字体颜色-->
@@ -219,7 +220,7 @@
 
     <color name="back47">#005047</color>
     <color name="green98">#00ac98</color>
-    <color name="green7d">#2b887b</color>
+    <color name="green7d">#e50150</color>
     <color name="colorAccent">#FF4081</color>
     <color name="graybb">#bbbbbb</color>
     <color name="tranblack">#b1000000</color>
@@ -232,4 +233,29 @@
 
     <color name="check_detail_form_text">#5d5d5d</color>
     <color name="deep_yellow">#ffcc00</color>
+
+    <!--AndColor 2017-5-9-->
+    <color name="colorPrimaryRed">#e50150</color>
+    <color name="toolBar_color">#e50150</color>
+    <color name="textfous_yellow">#ef8132</color>
+    <color name="orangeYellow">#ef8132</color>
+    <color name="red50">#e50150</color>
+    <color name="materialTop_color">#ffe4ed</color>
+    <color name="materialTitle_color">#5f0000</color>
+    <color name="materialText_color">#bd0000</color>
+    <color name="materialDivider_color">#ffdce8</color>
+    <color name="tab_title_selected_color">#e50150</color>
+    <color name="tab_title_unselected_color">#8c8c8c</color>
+    <color name="tab_bg_color">#ffffff</color>
+    <color name="tab_divider_color">#fff3f7</color>
+    <color name="text_hint_color">#c0c0c0</color>
+    <color name="green1b">#86b81b</color>
+    <color name="black32">#323232</color>
+    <color name="gray5a">#5a5a5a</color>
+    <color name="dark_gray53">#535353</color>
+    <color name="gray_eb">#ebebeb</color>
+    <color name="line_gray_f0">#f0f0f0</color>
+
+    <color name="login_color_t">#e50150</color>
+
 </resources>
