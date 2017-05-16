@@ -132,9 +132,9 @@ public class ParseXmlResp {
 
 
             xStream.alias("RecordSet", RecordSet.class);
+            xStream.alias("Detail", Detail.class);
             xStream.alias("Record", Record.class);
             xStream.alias("Field", Field.class);
-
             xStream.autodetectAnnotations(true);
 
             String xml = replaceSpecial(payload);
