@@ -40,16 +40,16 @@ public class SiteDialog {
      * 据点集团
      *
      * @param context
-     * @param company
+     * @param siteShow
      * @param list
      */
-    public static void showSiteDialog(final Activity context, final String company, final List<EntSiteBean> list) {
+    public static void showSiteDialog(final Activity context, final String siteShow, final List<EntSiteBean> list) {
         View view = LayoutInflater.from(context).inflate(R.layout.dialog_login_entidcompany, null);
         final DialogUtils mDialog = new DialogUtils(context, view);
         final RecyclerView rv_company = (RecyclerView) view.findViewById(R.id.rv_entid_company);
-        if (!StringUtils.isBlank(company)) {
+        if (!StringUtils.isBlank(siteShow)) {
            for (EntSiteBean entSiteBean :list){
-              if (entSiteBean.getSite_show().equals(company)){
+              if (entSiteBean.getSite_show().equals(siteShow)){
                   list.remove(entSiteBean);
                   list.add(0, entSiteBean);
                   break;
@@ -70,7 +70,7 @@ public class SiteDialog {
             public void onClick(View view, int position) {
                 mDialog.dismissDialog();
                 if (callBack != null) {
-                     callBack.siteCallBack( list.get(position).getSite_show());
+                     callBack.siteCallBack(list.get(position).getSite_show(), list.get(position).getSite_no());
                 } else {
                     LogUtils.i(TAG, "接口回调对象为空");
                 }
@@ -79,9 +79,9 @@ public class SiteDialog {
     }
 
     /**
-     * 营运中心变化回调接口
+     *据点
      */
     public interface SiteCallBack {
-        void siteCallBack(String choosePlant);
+        void siteCallBack(String site_show,String site_no);
     }
 }

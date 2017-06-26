@@ -117,7 +117,7 @@ public class ReturnMaterialSumFg extends BaseFragment {
             @Override
             public void onFailed(String error) {
                 dismissLoadingDialog();
-                showFailedDialog(error);
+                showCommitFailDialog(error);
             }
         });
     }

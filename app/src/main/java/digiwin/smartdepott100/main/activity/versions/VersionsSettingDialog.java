@@ -12,9 +12,10 @@ import android.widget.TextView;
 
 import java.io.File;
 
+import digiwin.library.constant.SharePreKey;
 import digiwin.library.utils.DialogUtils;
 import digiwin.library.utils.LogUtils;
-import digiwin.library.utils.StringUtils;
+import digiwin.library.utils.SharedPreferencesUtils;
 import digiwin.library.utils.ViewUtils;
 import digiwin.smartdepott100.R;
 import digiwin.smartdepott100.core.customview.RoundedProgressBar;
@@ -92,6 +93,9 @@ public class VersionsSettingDialog {
                             intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                             intent.setDataAndType(Uri.fromFile(file),"application/vnd.android.package-archive");
                             context.startActivity(intent);
+                            SharedPreferencesUtils.put(context, SharePreKey.TEST_ADDRESS,AddressContants.TEST_ADDRESS);
+                            SharedPreferencesUtils.put(context, SharePreKey.FORMAL_ADDRESS,AddressContants.FORMAL_ADDRESS);
+                            SharedPreferencesUtils.put(context, SharePreKey.CURRENT_ADDRESS,AddressContants.FORMAL_ADDRESS);
                         }
                         if(pro<=3&&pro>=1){
                             tv_download.setText(3+"%");

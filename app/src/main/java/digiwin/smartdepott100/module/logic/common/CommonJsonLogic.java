@@ -8,6 +8,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import digiwin.library.json.JsonResp;
 import digiwin.library.net.IUpdateCallBack;
 import digiwin.library.utils.LogUtils;
 import digiwin.library.utils.ObjectAndMapUtils;
@@ -17,6 +18,7 @@ import digiwin.library.xml.ParseXmlResp;
 import digiwin.smartdepott100.R;
 import digiwin.smartdepott100.core.appcontants.ModuleCode;
 import digiwin.smartdepott100.core.appcontants.ReqTypeName;
+import digiwin.smartdepott100.core.json.JsonReqForERP;
 import digiwin.smartdepott100.core.net.IRequestCallbackImp;
 import digiwin.smartdepott100.core.net.OkhttpRequest;
 import digiwin.smartdepott100.core.net.OkhttpRequestJson;
@@ -532,55 +534,6 @@ public class CommonJsonLogic {
             }
         }, null);
     }
-
-    /**
-     * 获取FIFO
-     */
-    public interface FIFOGETListener {
-        public void onSuccess(List<FifoCheckBean> fiFoBeanList);
-
-        public void onFailed(String error);
-    }
-
-    /**
-     * 获取FIFO
-     */
-    public void getFifo(final Map<String, String> map, final FIFOGETListener listener) {
-        ThreadPoolManager.getInstance().executeTask(new Runnable() {
-            @Override
-            public void run() {
-                String xml = CreateParaXmlReqIm.getInstance(map, mModule, ReqTypeName.GETFIFO, mTimestamp).toXml();
-                OkhttpRequest.getInstance(mContext).post(xml, new IRequestCallbackImp() {
-                    @Override
-                    public void onResponse(String string) {
-                        ParseXmlResp xmlResp = ParseXmlResp.fromXml(ReqTypeName.GETFIFO, string);
-                        String error = mContext.getString(R.string.unknow_error);
-                        if (null != xmlResp) {
-                            if (ReqTypeName.SUCCCESSCODE.equals(xmlResp.getCode())) {
-                                List<FifoCheckBean> fiFoBeanList = xmlResp.getMasterDatas(FifoCheckBean.class);
-                                if(null != fiFoBeanList && fiFoBeanList.size() > 0){
-                                    for (int i = 0; i < fiFoBeanList.size(); i++) {
-                                        FifoCheckBean fifoBean = fiFoBeanList.get(i);
-                                        fifoBean.setRecommended_qty(StringUtils.deleteZero(fifoBean.getRecommended_qty()));
-                                        fifoBean.setScan_sumqty(StringUtils.deleteZero(fifoBean.getScan_sumqty()));
-                                    }
-                                    listener.onSuccess(fiFoBeanList);
-                                }else{
-                                    List<FifoCheckBean> list = new ArrayList<FifoCheckBean>();
-                                    listener.onSuccess(list);
-                                }
-                                return;
-                            } else {
-                                error = xmlResp.getDescription();
-                            }
-                        }
-                        listener.onFailed(error);
-                    }
-                });
-            }
-        }, null);
-    }
-
     /**
      * 筛选  获取待办事项
      */
@@ -780,7 +733,53 @@ public class CommonJsonLogic {
     }
 
     /**
-     * 领料过账 获取FIFO
+     * 根据料号获取FIFO_标准的
+     */
+    public interface FIFOGETListener {
+        public void onSuccess(List<FifoCheckBean> fiFoBeanList);
+
+        public void onFailed(String error);
+    }
+
+    /**
+     * 根据料号获取FIFO_标准的
+     */
+    public void getFifo(final Map<String, String> map, final FIFOGETListener listener) {
+        ThreadPoolManager.getInstance().executeTask(new Runnable() {
+            @Override
+            public void run() {
+                String json = JsonReqForERP.mapCreateJson(mModule, ReqTypeName.GETFIFO, mTimestamp, map);
+                OkhttpRequest.getInstance(mContext).post(json, new IRequestCallbackImp() {
+                    @Override
+                    public void onResponse(String string) {
+                        String error = mContext.getString(R.string.unknow_error);
+                        if (null != string) {
+                            if (ReqTypeName.SUCCCESSCODE.equals(JsonResp.getCode(string))) {
+                                List<FifoCheckBean> fiFoBeanList =JsonResp.getParaDatas(string,"list_fifo",FifoCheckBean.class);
+                                if(null != fiFoBeanList && fiFoBeanList.size() > 0){
+                                    for (int i = 0; i < fiFoBeanList.size(); i++) {
+                                        FifoCheckBean fifoBean = fiFoBeanList.get(i);
+                                        fifoBean.setRecommended_qty(StringUtils.deleteZero(fifoBean.getRecommended_qty()));
+                                        fifoBean.setScan_sumqty(StringUtils.deleteZero(fifoBean.getScan_sumqty()));
+                                    }
+                                    listener.onSuccess(fiFoBeanList);
+                                }else{
+                                    List<FifoCheckBean> list = new ArrayList<FifoCheckBean>();
+                                    listener.onSuccess(list);
+                                }
+                                return;
+                            } else {
+                                error = JsonResp.getDescription(string);
+                            }
+                        }
+                        listener.onFailed(error);
+                    }
+                });
+            }
+        }, null);
+    }
+    /**
+     * 根据单号获取FIFO
      */
     public interface PostMaterialFIFOListener {
         public void onSuccess(List<FifoCheckBean> fiFoBeanList);
@@ -789,7 +788,7 @@ public class CommonJsonLogic {
     }
 
     /**
-     * 领料过账 获取FIFO
+     * 根据单号获取FIFO
      */
     public void postMaterialFIFO(final Map<String, String> map, final PostMaterialFIFOListener listener) {
         ThreadPoolManager.getInstance().executeTask(new Runnable() {
@@ -829,7 +828,7 @@ public class CommonJsonLogic {
     }
 
     /**
-     * 获取FIFO
+     * 根据料号获取FIFO_NEW(一般用不到)
      */
     public interface FIFOAccordingGETListener {
         public void onSuccess(List<FifoCheckBean> fiFoBeanList);
@@ -838,21 +837,20 @@ public class CommonJsonLogic {
     }
 
     /**
-     * 获取FIFO
+     * 根据料号获取FIFO_NEW(一般用不到)
      */
     public void getFifoAccording(final Map<String, String> map, final FIFOAccordingGETListener listener) {
         ThreadPoolManager.getInstance().executeTask(new Runnable() {
             @Override
             public void run() {
-                String xml = CreateParaXmlReqIm.getInstance(map, mModule, ReqTypeName.GETACCORDINGFIFO, mTimestamp).toXml();
-                OkhttpRequest.getInstance(mContext).post(xml, new IRequestCallbackImp() {
+                String json = JsonReqForERP.mapCreateJson(mModule, ReqTypeName.GETACCORDINGFIFO, mTimestamp,map);
+                OkhttpRequest.getInstance(mContext).post(json, new IRequestCallbackImp() {
                     @Override
                     public void onResponse(String string) {
-                        ParseXmlResp xmlResp = ParseXmlResp.fromXml(ReqTypeName.GETACCORDINGFIFO, string);
                         String error = mContext.getString(R.string.unknow_error);
-                        if (null != xmlResp) {
-                            if (ReqTypeName.SUCCCESSCODE.equals(xmlResp.getCode())) {
-                                List<FifoCheckBean> fiFoBeanList = xmlResp.getMasterDatas(FifoCheckBean.class);
+                        if (null != string) {
+                            if (ReqTypeName.SUCCCESSCODE.equals(JsonResp.getCode(string))) {
+                                List<FifoCheckBean> fiFoBeanList = JsonResp.getParaDatas(string,"list_fifo",FifoCheckBean.class);
                                 if(null != fiFoBeanList && fiFoBeanList.size() >0){
                                     for (int i = 0; i < fiFoBeanList.size(); i++) {
                                         FifoCheckBean fifoBean = fiFoBeanList.get(i);
@@ -866,7 +864,7 @@ public class CommonJsonLogic {
                                 }
                                 return;
                             } else {
-                                error = xmlResp.getDescription();
+                                error = JsonResp.getDescription(string);
                             }
                         }
                         listener.onFailed(error);

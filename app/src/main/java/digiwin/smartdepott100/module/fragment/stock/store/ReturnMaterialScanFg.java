@@ -24,6 +24,7 @@ import digiwin.library.utils.StringUtils;
 import digiwin.smartdepott100.R;
 import digiwin.smartdepott100.core.appcontants.AddressContants;
 import digiwin.smartdepott100.core.base.BaseFragment;
+import digiwin.smartdepott100.core.coreutil.CommonUtils;
 import digiwin.smartdepott100.core.modulecommon.ModuleUtils;
 import digiwin.smartdepott100.module.activity.stock.store.StoreReturnMaterialActivity;
 import digiwin.smartdepott100.module.bean.common.SaveBackBean;
@@ -79,10 +80,11 @@ public class ReturnMaterialScanFg extends BaseFragment {
                     HashMap<String, String> barcodeMap = new HashMap<>();
                     barcodeMap.put(AddressContants.BARCODE_NO, String.valueOf(msg.obj));
                     barcodeMap.put(AddressContants.DOC_NO, rmActivity.getIntent().getExtras().getString(AddressContants.DOC_NO));
+                    barcodeMap.put(AddressContants.STORAGE_SPACES_NO,saveBean.getStorage_spaces_no());
                     commonLogic.scanBarcode(barcodeMap, new CommonLogic.ScanBarcodeListener() {
                         @Override
                         public void onSuccess(ScanBarcodeBackBean barcodeBackBean) {
-                            barcodeShow = barcodeBackBean.getShow();
+                            barcodeShow = barcodeBackBean.getShowing();
                             etInputNum.setText(StringUtils.deleteZero(barcodeBackBean.getBarcode_qty()));
                             tvScanHasScan.setText(barcodeBackBean.getScan_sumqty());
                             barcodeFlag = true;
@@ -92,8 +94,12 @@ public class ReturnMaterialScanFg extends BaseFragment {
                             saveBean.setItem_no(barcodeBackBean.getItem_no());
                             saveBean.setUnit_no(barcodeBackBean.getUnit_no());
                             saveBean.setLot_no(barcodeBackBean.getLot_no());
-
+                            saveBean.setItem_barcode_type(barcodeBackBean.getItem_barcode_type());
                             etInputNum.requestFocus();
+                            if (CommonUtils.isAutoSave(saveBean)){
+                                save();
+                            }
+
 
                         }
 
@@ -115,12 +121,15 @@ public class ReturnMaterialScanFg extends BaseFragment {
                     commonLogic.scanLocator(locatorMap, new CommonLogic.ScanLocatorListener() {
                         @Override
                         public void onSuccess(ScanLocatorBackBean locatorBackBean) {
-                            locatorShow = locatorBackBean.getShow();
+                            locatorShow = locatorBackBean.getShowing();
                             locatorFlag = true;
                             show();
                             saveBean.setStorage_spaces_in_no(locatorBackBean.getStorage_spaces_no());
                             saveBean.setWarehouse_in_no(locatorBackBean.getWarehouse_no());
                             etScanBarocde.requestFocus();
+                            if (CommonUtils.isAutoSave(saveBean)){
+                                save();
+                            }
                         }
 
                         @Override

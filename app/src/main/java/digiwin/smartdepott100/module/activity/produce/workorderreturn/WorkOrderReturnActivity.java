@@ -20,8 +20,7 @@ import digiwin.smartdepott100.module.fragment.produce.workorderreturn.WorkOrderR
 
 /**
  * @des      依工单退料
- * @author  xiemeng
- * @date    2017/3/24
+ * @author  唐孟宇
  */
 
 public class WorkOrderReturnActivity extends BaseFirstModuldeActivity {
@@ -40,7 +39,6 @@ public class WorkOrderReturnActivity extends BaseFirstModuldeActivity {
      */
     @BindView(R.id.module_vp)
     public ViewPager moduleVp;
-
 
     /**
      * Fragment设置

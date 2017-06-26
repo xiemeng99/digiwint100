@@ -9,6 +9,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -31,6 +32,7 @@ import digiwin.smartdepott100.module.bean.common.ClickItemPutBean;
 import digiwin.smartdepott100.module.bean.common.ListSumBean;
 import digiwin.smartdepott100.module.bean.common.SaveBean;
 import digiwin.smartdepott100.module.logic.common.CommonLogic;
+import digiwin.smartdepott100.module.logic.produce.DirectStorageLogic;
 
 /**
  * @author 孙长权
@@ -67,7 +69,7 @@ public class DirectStorageActivity extends BaseFirstModuldeActivity {
      */
     final int WORKORDER = 1002;
 
-    CommonLogic commonLogic;
+    DirectStorageLogic logic;
 
     /**
      * 工单号
@@ -147,7 +149,7 @@ public class DirectStorageActivity extends BaseFirstModuldeActivity {
 
     @Override
     protected void doBusiness() {
-        commonLogic = CommonLogic.getInstance(context, module, mTimestamp.toString());
+        logic = DirectStorageLogic.getInstance(context, module, mTimestamp.toString());
         initData();
         WareHouseDialog.setCallBack(new WareHouseDialog.WareHouseCallBack() {
             @Override
@@ -172,18 +174,20 @@ public class DirectStorageActivity extends BaseFirstModuldeActivity {
             showFailedDialog(R.string.input_num);
             return;
         }
-        saveBean.setWarehouse_no(tvWarehouse.getText().toString());
-        saveBean.setQty(etInputNum.getText().toString().trim());
+        saveBean.setWarehouse_storage(tvWarehouse.getText().toString());
+        saveBean.setReq_qty(etInputNum.getText().toString().trim());
         showLoadingDialog();
-        List<SaveBean> list = new ArrayList<>();
-        list.add(saveBean);
-        List<Map<String, String>> maps = ObjectAndMapUtils.getListMap(list);
-        commonLogic.commitList(maps, new CommonLogic.CommitListListener() {
+        Map<String, String> map = ObjectAndMapUtils.getValueMap(saveBean);
+        logic.directStorageCommit(map, new DirectStorageLogic.DirectStorageCommitListener() {
             @Override
             public void onSuccess(String msg) {
                 dismissLoadingDialog();
-                clear();
-                showCommitSuccessDialog(msg);
+                showCommitSuccessDialog(msg, new OnDialogClickListener() {
+                    @Override
+                    public void onCallback() {
+                        clear();
+                    }
+                });
             }
 
             @Override
@@ -192,7 +196,6 @@ public class DirectStorageActivity extends BaseFirstModuldeActivity {
                 showCommitFailDialog(error);
             }
         });
-
     }
 
     private Handler mHandler = new Handler(new Handler.Callback() {
@@ -200,36 +203,33 @@ public class DirectStorageActivity extends BaseFirstModuldeActivity {
         public boolean handleMessage(Message msg) {
             switch (msg.what) {
                 case WORKORDER:
-                    ClickItemPutBean itemPutBean = new ClickItemPutBean();
-                    itemPutBean.setWo_no(String.valueOf(msg.obj));
-                    commonLogic.getOrderSumData(itemPutBean, new CommonLogic.GetOrderSumListener() {
+            Map<String,String> map = new HashMap<>();
+            saveBean.setWo_no(StringUtils.objToString(msg.obj));
+            map.put(AddressContants.WO_NO,StringUtils.objToString(msg.obj));
+            logic.scanOrder(map, new DirectStorageLogic.ScanOrderListener() {
+                @Override
+                public void onSuccess(ListSumBean sumBean) {
+                    workOrderShow = sumBean.getShowing();
+                    workOrderFlag = true;
+                    show();
+                    tvWarehouse.setText(sumBean.getWarehouse_no());
+                    etInputNum.setText(StringUtils.deleteZero(sumBean.getQty()));
+                    etInputNum.requestFocus();
+                }
 
+                @Override
+                public void onFailed(String error) {
+                    workOrderFlag = false;
+                    showFailedDialog(error, new OnDialogClickListener() {
                         @Override
-                        public void onSuccess(List<ListSumBean> list) {
-                            if (list.size()>0) {
-                                workOrderShow = list.get(0).getShow();
-                                workOrderFlag = true;
-                                show();
-                                saveBean.setWo_no(list.get(0).getWo_no());
-                                saveBean.setItem_no(list.get(0).getItem_no());
-                                tvWarehouse.setText(list.get(0).getWarehouse_no());
-                                etInputNum.setText(StringUtils.deleteZero(list.get(0).getQty()));
-                                etInputNum.requestFocus();
-                            }
-                        }
-                        @Override
-                        public void onFailed(String error) {
-                            workOrderFlag = false;
-                            showFailedDialog(error, new OnDialogClickListener() {
-                                @Override
-                                public void onCallback() {
-                                    etWorkOrder.setText("");
-                                }
-                            });
+                        public void onCallback() {
+                            etWorkOrder.setText("");
                         }
                     });
-                    break;
-            }
+                }
+            });
+            break;
+        }
             return false;
         }
     });

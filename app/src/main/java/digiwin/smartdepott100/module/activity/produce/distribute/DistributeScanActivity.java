@@ -30,9 +30,10 @@ import digiwin.smartdepott100.R;
 import digiwin.smartdepott100.core.appcontants.AddressContants;
 import digiwin.smartdepott100.core.appcontants.ModuleCode;
 import digiwin.smartdepott100.core.base.BaseTitleActivity;
+import digiwin.smartdepott100.core.coreutil.CommonUtils;
 import digiwin.smartdepott100.core.modulecommon.ModuleUtils;
 import digiwin.smartdepott100.login.loginlogic.LoginLogic;
-import digiwin.smartdepott100.module.adapter.produce.AccordingMaterialFiFoAdapter;
+import digiwin.smartdepott100.module.adapter.common.CommonItemNoFiFoAdapter;
 import digiwin.smartdepott100.module.bean.common.FifoCheckBean;
 import digiwin.smartdepott100.module.bean.common.SaveBackBean;
 import digiwin.smartdepott100.module.bean.common.SaveBean;
@@ -172,7 +173,7 @@ public class DistributeScanActivity extends BaseTitleActivity {
      */
     DistributeOrderHeadData headData;
 
-    AccordingMaterialFiFoAdapter adapter;
+    CommonItemNoFiFoAdapter adapter;
 
     List<FifoCheckBean> fiFoList = new ArrayList<FifoCheckBean>();
 
@@ -236,6 +237,7 @@ public class DistributeScanActivity extends BaseTitleActivity {
                 case BARCODEWHAT:
                     HashMap<String, String> barcodeMap = new HashMap<>();
                     barcodeMap.put(AddressContants.BARCODE_NO, String.valueOf(msg.obj));
+                    barcodeMap.put(AddressContants.STORAGE_SPACES_NO,saveBean.getStorage_spaces_out_no());
                     commonLogic.scanBarcode(barcodeMap, new CommonLogic.ScanBarcodeListener() {
                         @Override
                         public void onSuccess(ScanBarcodeBackBean barcodeBackBean) {
@@ -258,7 +260,7 @@ public class DistributeScanActivity extends BaseTitleActivity {
                                     }
                                 }
                             }
-                            barcodeShow = barcodeBackBean.getShow();
+                            barcodeShow = barcodeBackBean.getShowing();
                             if(!StringUtils.isBlank(barcodeBackBean.getBarcode_qty())){
                                 et_input_num.setText(StringUtils.deleteZero(barcodeBackBean.getBarcode_qty()));
                             }
@@ -269,7 +271,11 @@ public class DistributeScanActivity extends BaseTitleActivity {
                             saveBean.setItem_no(barcodeBackBean.getItem_no());
                             saveBean.setUnit_no(barcodeBackBean.getUnit_no());
                             saveBean.setLot_no(barcodeBackBean.getLot_no());
+                            saveBean.setItem_barcode_type(barcodeBackBean.getItem_barcode_type());
                             et_input_num.requestFocus();
+                            if (CommonUtils.isAutoSave(saveBean)){
+                                Save();
+                            }
                         }
 
                         @Override
@@ -303,12 +309,15 @@ public class DistributeScanActivity extends BaseTitleActivity {
                                         return;
                                     }
                                 }
-                            locatorShow = locatorBackBean.getShow();
+                            locatorShow = locatorBackBean.getShowing();
                             locatorFlag = true;
 //                            show();
                             saveBean.setStorage_spaces_out_no(locatorBackBean.getStorage_spaces_no());
                             saveBean.setWarehouse_out_no(locatorBackBean.getWarehouse_no());
                             et_scan_barocde.requestFocus();
+                            if (CommonUtils.isAutoSave(saveBean)){
+                                Save();
+                            }
                         }
 
                         @Override
@@ -345,7 +354,7 @@ public class DistributeScanActivity extends BaseTitleActivity {
                 if(null != fiFoBeanList && fiFoBeanList.size()>0)
                 fiFoList = new ArrayList<FifoCheckBean>();
                 fiFoList = fiFoBeanList;
-                adapter = new AccordingMaterialFiFoAdapter(pactivity,fiFoBeanList);
+                adapter = new CommonItemNoFiFoAdapter(pactivity,fiFoBeanList);
                 ryList.setAdapter(adapter);
             }
 

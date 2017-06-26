@@ -32,6 +32,7 @@ import digiwin.smartdepott100.module.bean.common.FilterResultOrderBean;
 import digiwin.smartdepott100.module.bean.common.ListSumBean;
 import digiwin.smartdepott100.module.bean.common.SumShowBean;
 import digiwin.smartdepott100.module.logic.common.CommonLogic;
+import digiwin.smartdepott100.module.logic.produce.WorkSupplementLogic;
 
 /**
  * @author 赵浩然
@@ -77,7 +78,7 @@ public class WorkSupplementSumFg extends BaseFragment {
     FilterResultOrderBean localData = new FilterResultOrderBean();
 
     WorkSupplementActivity pactivity;
-    CommonLogic commonLogic;
+    WorkSupplementLogic commonLogic;
 
     boolean upDateFlag;
 
@@ -104,10 +105,10 @@ public class WorkSupplementSumFg extends BaseFragment {
             putBean.setDoc_no(localData.getDoc_no());
             putBean.setWarehouse_no(LoginLogic.getUserInfo().getWare());
 
-            commonLogic = CommonLogic.getInstance(pactivity, pactivity.module, pactivity.mTimestamp.toString());
+            commonLogic = WorkSupplementLogic.getInstance(pactivity, pactivity.module, pactivity.mTimestamp.toString());
 
             showLoadingDialog();
-            commonLogic.getOrderSumData(putBean, new CommonLogic.GetOrderSumListener() {
+            commonLogic.getWSSum(putBean, new CommonLogic.GetZSumListener() {
                 @Override
                 public void onSuccess(List<ListSumBean> list) {
                     if(list.size() > 0){

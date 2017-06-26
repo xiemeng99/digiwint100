@@ -20,7 +20,9 @@ import butterknife.BindView;
 import butterknife.BindViews;
 import butterknife.OnClick;
 import butterknife.OnFocusChange;
+import digiwin.smartdepott100.module.logic.produce.productionleader.ProductionLeaderLogic;
 import digiwin.library.datepicker.DatePickerUtils;
+import digiwin.library.dialog.OnDialogClickListener;
 import digiwin.library.utils.ActivityManagerUtils;
 import digiwin.library.utils.StringUtils;
 import digiwin.pulltorefreshlibrary.recyclerviewAdapter.OnItemClickListener;
@@ -33,7 +35,6 @@ import digiwin.smartdepott100.login.loginlogic.LoginLogic;
 import digiwin.smartdepott100.module.adapter.produce.ProductionLeaderListAdapter;
 import digiwin.smartdepott100.module.bean.common.FilterBean;
 import digiwin.smartdepott100.module.bean.common.FilterResultOrderBean;
-import digiwin.smartdepott100.module.logic.common.CommonLogic;
 
 /**
  * @author 赵浩然
@@ -64,15 +65,15 @@ public class ProductionLeaderListActivity extends BaseTitleActivity {
 
     ProductionLeaderListAdapter adapter;
 
-    CommonLogic commonLogic;
+    ProductionLeaderLogic commonLogic;
 
-    @BindViews({R.id.ll_super_number,R.id.ll_order_number,R.id.ll_applicant,
+    @BindViews({R.id.ll_super_number,R.id.ll_applicant,
             R.id.ll_department,R.id.ll_plan_date})
     List<View> views;
-    @BindViews({R.id.tv_super_number,R.id.tv_order_number,R.id.tv_applicant,
+    @BindViews({R.id.tv_super_number,R.id.tv_applicant,
             R.id.tv_department,R.id.tv_plan_date})
     List<TextView> textViews;
-    @BindViews({R.id.et_super_number,R.id.et_order_number,R.id.et_applicant,
+    @BindViews({R.id.et_super_number,R.id.et_applicant,
             R.id.et_department,R.id.et_plan_date})
     List<EditText> editTexts;
 
@@ -93,22 +94,22 @@ public class ProductionLeaderListActivity extends BaseTitleActivity {
         ModuleUtils.etChange(activity, et_super_number, editTexts);
     }
 
-    /**
-     * 工单号
-     */
-    @BindView(R.id.ll_order_number)
-    LinearLayout ll_order_number;
-    @BindView(R.id.tv_order_number)
-    TextView tv_order_number;
-    @BindView(R.id.et_order_number)
-    EditText et_order_number;
-
-    @OnFocusChange(R.id.et_order_number)
-    void item_noFocusChanage() {
-        ModuleUtils.viewChange(ll_order_number, views);
-        ModuleUtils.tvChange(activity, tv_order_number, textViews);
-        ModuleUtils.etChange(activity, et_order_number, editTexts);
-    }
+//    /**
+//     * 工单号
+//     */
+//    @BindView(R.id.ll_order_number)
+//    LinearLayout ll_order_number;
+//    @BindView(R.id.tv_order_number)
+//    TextView tv_order_number;
+//    @BindView(R.id.et_order_number)
+//    EditText et_order_number;
+//
+//    @OnFocusChange(R.id.et_order_number)
+//    void item_noFocusChanage() {
+//        ModuleUtils.viewChange(ll_order_number, views);
+//        ModuleUtils.tvChange(activity, tv_order_number, textViews);
+//        ModuleUtils.etChange(activity, et_order_number, editTexts);
+//    }
 
     /**
      * 申请人
@@ -198,16 +199,11 @@ public class ProductionLeaderListActivity extends BaseTitleActivity {
             if(null == accoutBean){
                 return;
             }
-            FilterBean.setWarehouse_out_no(accoutBean.getWare());
+            FilterBean.setWarehouse_no(accoutBean.getWare());
 
             if(!StringUtils.isBlank(et_super_number.getText().toString().trim())){
                 FilterBean.setDoc_no(et_super_number.getText().toString().trim());
             }
-
-            if(!StringUtils.isBlank(et_order_number.getText().toString().trim())){
-                FilterBean.setWo_no(et_order_number.getText().toString().trim());
-            }
-
             if(!StringUtils.isBlank(et_applicant.getText().toString().trim())){
                 FilterBean.setEmployee_no(et_applicant.getText().toString().trim());
             }
@@ -224,12 +220,11 @@ public class ProductionLeaderListActivity extends BaseTitleActivity {
             e.printStackTrace();
         }
 
-        commonLogic.getOrderData(FilterBean, new CommonLogic.GetOrderListener() {
+        commonLogic.getPLListData(FilterBean, new ProductionLeaderLogic.GetDataListListener() {
             @Override
             public void onSuccess(final List<FilterResultOrderBean> list) {
                 dismissLoadingDialog();
                 if(list.size() > 0){
-                    mName.setText(R.string.title_production_leader);
                     ll_search_dialog.setVisibility(View.GONE);
                     scrollview.setVisibility(View.VISIBLE);
                     dataList = new ArrayList<FilterResultOrderBean>();
@@ -254,7 +249,12 @@ public class ProductionLeaderListActivity extends BaseTitleActivity {
             @Override
             public void onFailed(String error) {
                 dismissLoadingDialog();
-                showFailedDialog(error);
+                showFailedDialog(error, new OnDialogClickListener() {
+                    @Override
+                    public void onCallback() {
+                        SearchDialog();
+                    }
+                });
                 ArrayList dataList = new ArrayList<FilterResultOrderBean>();
                 adapter = new ProductionLeaderListAdapter(activity,dataList);
                 ry_list.setAdapter(adapter);
@@ -271,9 +271,6 @@ public class ProductionLeaderListActivity extends BaseTitleActivity {
             if(null != dataList && dataList.size()>0){
                 ll_search_dialog.setVisibility(View.GONE);
                 scrollview.setVisibility(View.VISIBLE);
-//                adapter = new PickUpShipmentListAdapter(activity,dataList);
-//                ryList.setAdapter(adapter);
-//                onItemClick(dataList);
             }
         }else{
             ll_search_dialog.setVisibility(View.VISIBLE);
@@ -284,7 +281,7 @@ public class ProductionLeaderListActivity extends BaseTitleActivity {
     @Override
     protected void doBusiness() {
         et_plan_date.setKeyListener(null);
-        commonLogic =  CommonLogic.getInstance(activity,ModuleCode.PRODUCTIONLEADER,mTimestamp.toString());
+        commonLogic =  ProductionLeaderLogic.getInstance(activity,ModuleCode.PRODUCTIONLEADER,mTimestamp.toString());
         LinearLayoutManager linearlayoutmanager = new LinearLayoutManager(activity);
         ry_list.setLayoutManager(linearlayoutmanager);
     }
@@ -310,7 +307,7 @@ public class ProductionLeaderListActivity extends BaseTitleActivity {
     protected void initNavigationTitle() {
         super.initNavigationTitle();
         activity = this;
-        mName.setText(R.string.filter_condition);
+        mName.setText(getString(R.string.title_production_leader)+""+getString(R.string.list));
         iv_title_setting.setVisibility(View.VISIBLE);
         iv_title_setting.setImageResource(R.drawable.search);
     }

@@ -35,6 +35,7 @@ import digiwin.smartdepott100.module.adapter.produce.WorkOrderReturnListAdapter;
 import digiwin.smartdepott100.module.bean.common.FilterBean;
 import digiwin.smartdepott100.module.bean.common.FilterResultOrderBean;
 import digiwin.smartdepott100.module.logic.common.CommonLogic;
+import digiwin.smartdepott100.module.logic.produce.WorkOrderReturnLogic;
 
 
 /**
@@ -198,7 +199,7 @@ public class WorkOrderReturnListActivity extends BaseTitleActivity {
      */
     private boolean isSearching;
 
-    CommonLogic logic;
+    WorkOrderReturnLogic logic;
 
     BaseRecyclerAdapter adapter;
 
@@ -212,11 +213,11 @@ public class WorkOrderReturnListActivity extends BaseTitleActivity {
     @Override
     protected void initNavigationTitle() {
         super.initNavigationTitle();
-        mName.setText(R.string.work_order_return);
+        mName.setText(getString(R.string.title_worksupplement)+""+getString(R.string.list));
         search.setVisibility(View.VISIBLE);
         search.setImageResource(R.drawable.search);
         isSearching = true;
-        unCom.setVisibility(View.VISIBLE);
+        unCom.setVisibility(View.GONE);
     }
 
     @Override
@@ -239,7 +240,7 @@ public class WorkOrderReturnListActivity extends BaseTitleActivity {
         etDate.setKeyListener(null);
         list = new ArrayList<>();
         ryList.setLayoutManager(new LinearLayoutManager(activity));
-        logic = CommonLogic.getInstance(context, module, mTimestamp.toString());
+        logic = WorkOrderReturnLogic.getInstance(context, module, mTimestamp.toString());
     }
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -259,14 +260,14 @@ public class WorkOrderReturnListActivity extends BaseTitleActivity {
             ryList.setAdapter(adapter);
             showLoadingDialog();
             FilterBean filterBean = new FilterBean();
-            filterBean.setWarehouse_in_no(LoginLogic.getWare());
-            filterBean.setWo_no(etWorkorder.getText().toString());
-            filterBean.setBarcode_no(etEndprduct.getText().toString());
+            filterBean.setWarehouse_no(LoginLogic.getWare());
+            filterBean.setDoc_no(etWorkorder.getText().toString());
+            filterBean.setItem_no(etEndprduct.getText().toString());
             filterBean.setLow_order_item_no(etLowerItemNo.getText().toString());
             filterBean.setDepartment_no(etDepartSupplier.getText().toString());
             filterBean.setDate_begin(startDate);
             filterBean.setDate_end(endDate);
-            logic.getOrderData(filterBean, new CommonLogic.GetOrderListener() {
+            logic.getWORList(filterBean, new CommonLogic.GetDataListListener() {
                 @Override
                 public void onSuccess(List<FilterResultOrderBean> masterDatas) {
                     list = masterDatas;

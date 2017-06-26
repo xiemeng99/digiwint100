@@ -23,6 +23,9 @@ import butterknife.OnCheckedChanged;
 import butterknife.OnClick;
 import butterknife.OnFocusChange;
 import butterknife.OnTextChanged;
+import digiwin.smartdepott100.core.coreutil.CommonUtils;
+import digiwin.smartdepott100.core.coreutil.FiFoCheckUtils;
+import digiwin.smartdepott100.module.logic.sale.saleoutlet.SaleOutLetLogic;
 import digiwin.library.dialog.OnDialogClickListener;
 import digiwin.library.utils.LogUtils;
 import digiwin.library.utils.StringUtils;
@@ -44,6 +47,7 @@ import digiwin.smartdepott100.module.bean.common.SaveBean;
 import digiwin.smartdepott100.module.bean.common.ScanBarcodeBackBean;
 import digiwin.smartdepott100.module.bean.common.ScanLocatorBackBean;
 import digiwin.smartdepott100.module.logic.common.CommonLogic;
+import digiwin.smartdepott100.module.logic.sale.saleoutlet.SaleOutLetLogic;
 
 
 /**
@@ -53,7 +57,7 @@ import digiwin.smartdepott100.module.logic.common.CommonLogic;
  */
 public class SaleOutletScanFg extends BaseFragment {
 
-    @BindViews({ R.id.et_scan_locator, R.id.et_scan_barocde, R.id.et_input_num})
+    @BindViews({R.id.et_scan_locator, R.id.et_scan_barocde, R.id.et_input_num})
     List<EditText> editTexts;
     @BindViews({R.id.ll_scan_barcode, R.id.ll_scan_locator, R.id.ll_input_num})
     List<View> views;
@@ -84,8 +88,12 @@ public class SaleOutletScanFg extends BaseFragment {
     LinearLayout llZxInput;
     @BindView(R.id.ry_list)
     RecyclerView ryList;
-    @BindView(R.id.tv_notice)
-    TextView tvNotice;
+
+    /**
+     * 出通单号
+     */
+    @BindView(R.id.tv_general_number)
+    TextView tvGeneralNumber;
 
     @OnCheckedChanged(R.id.cb_locatorlock)
     void isLock(boolean checked) {
@@ -173,12 +181,12 @@ public class SaleOutletScanFg extends BaseFragment {
         saveBean.setQty(etInputNum.getText().toString());
 
         String fifoCheck = FiFoCheckUtils.fifoCheck(saveBean, fiFoList);
-        if (!StringUtils.isBlank(fifoCheck)){
+        if (!StringUtils.isBlank(fifoCheck)) {
             showFailedDialog(fifoCheck);
             return;
         }
         showLoadingDialog();
-        commonLogic.scanSave(saveBean, new CommonLogic.SaveListener() {
+        logic.scanSave(saveBean, new CommonLogic.SaveListener() {
             @Override
             public void onSuccess(SaveBackBean saveBackBean) {
                 dismissLoadingDialog();
@@ -197,7 +205,7 @@ public class SaleOutletScanFg extends BaseFragment {
     /**
      * 出通单号
      */
-    final int SALEWHAT = 1000;
+    final int FIFOWHAT = 1000;
     /**
      * 物料条码
      */
@@ -209,7 +217,7 @@ public class SaleOutletScanFg extends BaseFragment {
 
     SaleOutletActivity pactivity;
 
-    CommonLogic commonLogic;
+    SaleOutLetLogic logic;
     /**
      * 条码扫描
      */
@@ -236,20 +244,25 @@ public class SaleOutletScanFg extends BaseFragment {
      * 出通单号
      */
     String notice_no;
+    /**
+     * 日期
+     */
+    String date;
 
     private Handler mHandler = new Handler(new Handler.Callback() {
         @Override
         public boolean handleMessage(Message msg) {
             switch (msg.what) {
-                case SALEWHAT:
+                case FIFOWHAT:
                     HashMap<String, String> map = new HashMap<String, String>();
-                    map.put(AddressContants.ISSUING_NO, String.valueOf(msg.obj));
+                    map.put(AddressContants.DOC_NO, String.valueOf(msg.obj));
                     map.put(AddressContants.WAREHOUSE_NO, ware);
                     ClickItemPutBean itemPutBean = new ClickItemPutBean();
                     itemPutBean.setNotice_no(notice_no);
                     itemPutBean.setWarehouse_no(ware);
+                    itemPutBean.setCreate_date(date);
                     EventBus.getDefault().post(itemPutBean);
-                    commonLogic.postMaterialFIFO(map, new CommonLogic.PostMaterialFIFOListener() {
+                    logic.getFifoInfo(map, new SaleOutLetLogic.FIFOInfoGETListener() {
                         @Override
                         public void onSuccess(List<FifoCheckBean> fiFoBeanList) {
                             fiFoList.clear();
@@ -278,7 +291,8 @@ public class SaleOutletScanFg extends BaseFragment {
                     barcodeMap.put(AddressContants.DOC_NO, notice_no);
                     barcodeMap.put(AddressContants.WAREHOUSE_NO, ware);
                     barcodeMap.put(AddressContants.BARCODE_NO, String.valueOf(msg.obj));
-                    commonLogic.scanBarcode(barcodeMap, new CommonLogic.ScanBarcodeListener() {
+                    barcodeMap.put(AddressContants.STORAGE_SPACES_NO,saveBean.getStorage_spaces_out_no());
+                    logic.scanBarcode(barcodeMap, new CommonLogic.ScanBarcodeListener() {
                         @Override
                         public void onSuccess(ScanBarcodeBackBean barcodeBackBean) {
                             etInputNum.setText(StringUtils.deleteZero(barcodeBackBean.getBarcode_qty()));
@@ -290,7 +304,11 @@ public class SaleOutletScanFg extends BaseFragment {
                             saveBean.setLot_no(barcodeBackBean.getLot_no());
                             saveBean.setDoc_no(notice_no);
                             saveBean.setFifo_check(barcodeBackBean.getFifo_check());
+                            saveBean.setItem_barcode_type(barcodeBackBean.getItem_barcode_type());
                             etInputNum.requestFocus();
+                            if (CommonUtils.isAutoSave(saveBean)){
+                                save();
+                            }
                         }
 
                         @Override
@@ -308,7 +326,7 @@ public class SaleOutletScanFg extends BaseFragment {
                 case LOCATORWHAT:
                     HashMap<String, String> locatorMap = new HashMap<>();
                     locatorMap.put(AddressContants.STORAGE_SPACES_BARCODE, String.valueOf(msg.obj));
-                    commonLogic.scanLocator(locatorMap, new CommonLogic.ScanLocatorListener() {
+                    logic.scanLocator(locatorMap, new CommonLogic.ScanLocatorListener() {
                         @Override
                         public void onSuccess(ScanLocatorBackBean locatorBackBean) {
                             locatorFlag = true;
@@ -316,6 +334,9 @@ public class SaleOutletScanFg extends BaseFragment {
                             saveBean.setWarehouse_out_no(locatorBackBean.getWarehouse_no());
                             saveBean.setAllow_negative_stock(locatorBackBean.getAllow_negative_stock());
                             etScanBarocde.requestFocus();
+                            if (CommonUtils.isAutoSave(saveBean)){
+                                save();
+                            }
                         }
 
                         @Override
@@ -348,16 +369,17 @@ public class SaleOutletScanFg extends BaseFragment {
     }
 
     /**
-     *获取 fifo
+     * 获取 fifo
      */
-    public  void getFIFo(){
+    public void getFIFo() {
         try {
             FilterResultOrderBean filterBean = (FilterResultOrderBean) pactivity.getIntent().getSerializableExtra(pactivity.filterBean);
-            notice_no=filterBean.getDoc_no();
-            tvNotice.setText(notice_no);
-            mHandler.sendMessage(mHandler.obtainMessage(SALEWHAT,notice_no));
-        }catch (Exception e){
-            LogUtils.e(TAG,"fifo获取"+e);
+            notice_no = filterBean.getDoc_no();
+            tvGeneralNumber.setText(notice_no);
+            date = filterBean.getCreate_date();
+            mHandler.sendMessage(mHandler.obtainMessage(FIFOWHAT, notice_no));
+        } catch (Exception e) {
+            LogUtils.e(TAG, "fifo获取" + e);
         }
     }
 
@@ -375,10 +397,8 @@ public class SaleOutletScanFg extends BaseFragment {
             etScanLocator.setText("");
             etScanLocator.requestFocus();
         }
-       getFIFo();
+        getFIFo();
     }
-
-
 
 
     /**
@@ -390,9 +410,10 @@ public class SaleOutletScanFg extends BaseFragment {
         locatorFlag = false;
         saveBean = new SaveBean();
         fiFoList = new ArrayList<>();
-        notice_no="";
+        notice_no = "";
         ware = "";
-        commonLogic = CommonLogic.getInstance(context, pactivity.module, pactivity.mTimestamp.toString());
+        date = "";
+        logic = SaleOutLetLogic.getInstance(context, pactivity.module, pactivity.mTimestamp.toString());
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(pactivity);
         ryList.setLayoutManager(linearLayoutManager);
         AccoutBean accoutBean = LoginLogic.getUserInfo();

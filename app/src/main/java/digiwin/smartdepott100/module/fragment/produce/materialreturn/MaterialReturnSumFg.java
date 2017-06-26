@@ -15,6 +15,7 @@ import java.util.Map;
 
 import butterknife.BindView;
 import butterknife.OnClick;
+import digiwin.smartdepott100.module.logic.produce.materialreturn.MaterialReturnLogic;
 import digiwin.library.dialog.OnDialogClickListener;
 import digiwin.library.dialog.OnDialogTwoListener;
 import digiwin.library.utils.ActivityManagerUtils;
@@ -70,7 +71,7 @@ public class MaterialReturnSumFg extends BaseFragment {
 
 
     MaterialReturnActivity pactivity;
-    CommonLogic commonLogic;
+    MaterialReturnLogic commonLogic;
 
     boolean upDateFlag;
 
@@ -87,7 +88,7 @@ public class MaterialReturnSumFg extends BaseFragment {
         upDateFlag = false;
         sumBeanList = new ArrayList<>();
         pactivity = (MaterialReturnActivity) this.activity;
-        commonLogic = CommonLogic.getInstance(context, pactivity.module, pactivity.mTimestamp.toString());
+        commonLogic = MaterialReturnLogic.getInstance(context, pactivity.module, pactivity.mTimestamp.toString());
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(pactivity);
         ryList.setLayoutManager(linearLayoutManager);
     }
@@ -101,9 +102,9 @@ public class MaterialReturnSumFg extends BaseFragment {
             FilterResultOrderBean filterBean = (FilterResultOrderBean) bundle.getSerializable(MaterialReturnActivity.filterBean);
             ClickItemPutBean itemPutBean = new ClickItemPutBean();
             itemPutBean.setDoc_no(filterBean.getDoc_no());
-            itemPutBean.setWarehouse_in_no(LoginLogic.getWare());
+            itemPutBean.setWarehouse_no(LoginLogic.getWare());
             showLoadingDialog();
-            commonLogic.getOrderSumData(itemPutBean, new CommonLogic.GetOrderSumListener() {
+            commonLogic.getMRSumData(itemPutBean, new MaterialReturnLogic.GetZSumListener() {
                 @Override
                 public void onSuccess(List<ListSumBean> list) {
                     dismissLoadingDialog();
@@ -165,7 +166,7 @@ public class MaterialReturnSumFg extends BaseFragment {
         final SumShowBean sumShowBean = new SumShowBean();
         sumShowBean.setItem_no(orderSumData.getItem_no());
         sumShowBean.setItem_name(orderSumData.getItem_name());
-        sumShowBean.setAvailable_in_qty(orderSumData.getReceipt_qty());
+        sumShowBean.setAvailable_in_qty(orderSumData.getApply_qty());
         commonLogic.getDetail(map, new CommonLogic.GetDetailListener() {
             @Override
             public void onSuccess(List<DetailShowBean> detailShowBeen) {
@@ -193,7 +194,7 @@ public class MaterialReturnSumFg extends BaseFragment {
         }
         showLoadingDialog();
         HashMap<String, String> map = new HashMap<>();
-        commonLogic.commit(map, new CommonLogic.CommitListener() {
+        commonLogic.commitMRData(map, new CommonLogic.CommitListener() {
             @Override
             public void onSuccess(String msg) {
                 dismissLoadingDialog();

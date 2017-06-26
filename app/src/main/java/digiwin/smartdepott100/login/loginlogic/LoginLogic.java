@@ -4,8 +4,6 @@ import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.support.annotation.Nullable;
 
-import com.zhy.http.okhttp.request.OkHttpRequest;
-
 import org.litepal.crud.DataSupport;
 import org.litepal.tablemanager.Connector;
 
@@ -17,15 +15,12 @@ import java.util.Map;
 
 import digiwin.library.json.JsonResp;
 import digiwin.library.utils.LogUtils;
-import digiwin.library.xml.ParseXmlResp;
 import digiwin.smartdepott100.R;
 import digiwin.smartdepott100.core.appcontants.ReqTypeName;
+import digiwin.smartdepott100.core.json.JsonParseForJava;
 import digiwin.smartdepott100.core.json.JsonReqForERP;
-import digiwin.smartdepott100.core.json.JsonText;
 import digiwin.smartdepott100.core.net.IRequestCallbackImp;
 import digiwin.smartdepott100.core.net.OkhttpRequest;
-import digiwin.smartdepott100.core.net.OkhttpRequestJson;
-import digiwin.smartdepott100.core.xml.CreateParaXmlReqIm;
 import digiwin.smartdepott100.login.bean.AccoutBean;
 import digiwin.smartdepott100.login.bean.EntSiteBean;
 
@@ -78,7 +73,7 @@ public class LoginLogic {
      */
     public void getEntIdCom(final Map<String, String> map, final GetEntIdComListener listener) {
         try {
-            String createJson = JsonReqForERP.mapCreateJson(mModule, ReqTypeName.GETOC, mTimestamp, map);
+            String createJson = JsonReqForERP.noWhereJsonforloginPage(mModule, ReqTypeName.GETOC, mTimestamp);
             OkhttpRequest.getInstance(mContext).post(createJson, new IRequestCallbackImp() {
                 @Override
                 public void onResponse(String string) {
@@ -129,6 +124,44 @@ public class LoginLogic {
             listener.onSuccess(companyBeen);
         } catch (Exception e) {
             LogUtils.e(TAG, "getSite" + e);
+            listener.onFailed(mContext.getString(R.string.unknow_error));
+        }
+    }
+
+
+    /**
+     * 验证是否授权可以登录
+     */
+    public interface CheckBindInfoListener {
+        public void onSuccess();
+
+        public void onFailed(String msg);
+    }
+
+    /**
+     * 验证是否授权可以登录
+     */
+    public void checkBindInfo(final Map<String, String> map, final CheckBindInfoListener listener) {
+        try {
+            String createJson = JsonReqForERP.mapCreateJson(mModule, ReqTypeName.DEVICHECK, mTimestamp,map);
+            OkhttpRequest.getInstance(mContext).post(createJson, new IRequestCallbackImp() {
+                @Override
+                public void onResponse(String string) {
+                    String error = mContext.getString(R.string.unknow_error);
+                    //string = JsonText.readAssertResource();
+                    JsonParseForJava resp = JsonParseForJava.getObject(string, JsonParseForJava.class);
+                    if (null != resp) {
+                        if (ReqTypeName.SUCCCESSCODEJAVA.equals(resp.getAppcode())) {
+                            listener.onSuccess();
+                        } else {
+                            error = JsonResp.getDescription(string);
+                        }
+                    }
+                    listener.onFailed(error);
+                }
+            });
+        } catch (Exception e) {
+            LogUtils.e(TAG, "getEntIdCom" + e);
             listener.onFailed(mContext.getString(R.string.unknow_error));
         }
     }

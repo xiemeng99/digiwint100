@@ -14,26 +14,26 @@ import java.util.Map;
 
 import butterknife.BindView;
 import butterknife.OnClick;
-import digiwin.library.dialog.OnDialogClickListener;
-import digiwin.library.dialog.OnDialogTwoListener;
-import digiwin.library.utils.ActivityManagerUtils;
-import digiwin.library.utils.LogUtils;
-import digiwin.pulltorefreshlibrary.recyclerview.FullyLinearLayoutManager;
-import digiwin.pulltorefreshlibrary.recyclerviewAdapter.OnItemClickListener;
 import digiwin.smartdepott100.R;
 import digiwin.smartdepott100.core.appcontants.AddressContants;
 import digiwin.smartdepott100.core.base.BaseFragment;
 import digiwin.smartdepott100.login.bean.AccoutBean;
 import digiwin.smartdepott100.login.loginlogic.LoginLogic;
 import digiwin.smartdepott100.module.activity.common.CommonDetailActivity;
-import digiwin.smartdepott100.module.activity.purchase.purchaseinstore.PurchaseInStoreSecondActivity;
+import digiwin.smartdepott100.module.activity.purchase.purchaseinstore.PurchaseInStoreActivity;
 import digiwin.smartdepott100.module.adapter.purchase.PurchaseInStorageSumAdapter;
 import digiwin.smartdepott100.module.bean.common.ClickItemPutBean;
 import digiwin.smartdepott100.module.bean.common.DetailShowBean;
 import digiwin.smartdepott100.module.bean.common.FilterResultOrderBean;
 import digiwin.smartdepott100.module.bean.common.ListSumBean;
 import digiwin.smartdepott100.module.bean.common.SumShowBean;
-import digiwin.smartdepott100.module.logic.common.CommonLogic;
+import digiwin.smartdepott100.module.logic.purchase.PurchaseInStoreLogic;
+import digiwin.library.dialog.OnDialogClickListener;
+import digiwin.library.dialog.OnDialogTwoListener;
+import digiwin.library.utils.ActivityManagerUtils;
+import digiwin.library.utils.LogUtils;
+import digiwin.pulltorefreshlibrary.recyclerview.FullyLinearLayoutManager;
+import digiwin.pulltorefreshlibrary.recyclerviewAdapter.OnItemClickListener;
 
 
 /**
@@ -74,9 +74,9 @@ public class PurchaseInStoreSumFg extends BaseFragment {
         });
     }
 
-    PurchaseInStoreSecondActivity pactivity;
+    PurchaseInStoreActivity pactivity;
 
-    CommonLogic commonLogic;
+    PurchaseInStoreLogic commonLogic;
 
     private boolean upDateFlag;
 
@@ -92,8 +92,8 @@ public class PurchaseInStoreSumFg extends BaseFragment {
 
     @Override
     protected void doBusiness() {
-        pactivity = (PurchaseInStoreSecondActivity) activity;
-        commonLogic = CommonLogic.getInstance(pactivity, pactivity.module, pactivity.mTimestamp.toString());
+        pactivity = (PurchaseInStoreActivity) activity;
+        commonLogic = PurchaseInStoreLogic.getInstance(pactivity, pactivity.module, pactivity.mTimestamp.toString());
         FullyLinearLayoutManager linearLayoutManager = new FullyLinearLayoutManager(activity);
         ryList.setLayoutManager(linearLayoutManager);
         upDateFlag = false;
@@ -117,14 +117,14 @@ public class PurchaseInStoreSumFg extends BaseFragment {
             }
             clickItemPutData.setReceipt_date(orderData.getCreate_date());
             showLoadingDialog();
-            commonLogic.getOrderSumData(clickItemPutData, new CommonLogic.GetOrderSumListener() {
+            commonLogic.getPISSumData(clickItemPutData, new PurchaseInStoreLogic.GetZSumListener() {
                 @Override
                 public void onSuccess(List<ListSumBean> list) {
                     dismissLoadingDialog();
                     sumShowBeanList = list;
                     if(list.size()>0){
-                        tv_head_plan_date.setText(list.get(0).getReceipt_date());
-                        tv_head_post_order.setText(list.get(0).getReceipt_no());
+                        tv_head_plan_date.setText(list.get(0).getCreate_date());
+                        tv_head_post_order.setText(list.get(0).getDoc_no());
                         tv_head_provider.setText(list.get(0).getSupplier_name());
                         adapter = new PurchaseInStorageSumAdapter(pactivity, sumShowBeanList);
                         ryList.setAdapter(adapter);
@@ -151,7 +151,6 @@ public class PurchaseInStoreSumFg extends BaseFragment {
             LogUtils.e(TAG, "updateList--getSum--Exception" + e);
         }
     }
-
     /**
      * 查看单笔料明细
      */
@@ -168,7 +167,6 @@ public class PurchaseInStoreSumFg extends BaseFragment {
         }
     }
 
-
     /**
      * 查看明细
      */
@@ -180,7 +178,7 @@ public class PurchaseInStoreSumFg extends BaseFragment {
         sumShowBean.setItem_name(orderSumData.getItem_name());
         sumShowBean.setItem_no(orderSumData.getItem_no());
         sumShowBean.setAvailable_in_qty(orderSumData.getReq_qty());
-        commonLogic.getDetail(map, new CommonLogic.GetDetailListener() {
+        commonLogic.getDetail(map, new PurchaseInStoreLogic.GetDetailListener() {
             @Override
             public void onSuccess(List<DetailShowBean> detailShowBeen) {
                 Bundle bundle = new Bundle();
@@ -188,7 +186,8 @@ public class PurchaseInStoreSumFg extends BaseFragment {
                 bundle.putString(CommonDetailActivity.MODULECODE, pactivity.module);
                 bundle.putSerializable(CommonDetailActivity.ONESUM, sumShowBean);
                 bundle.putSerializable(CommonDetailActivity.DETAIL, (Serializable) detailShowBeen);
-                ActivityManagerUtils.startActivityBundleForResult(activity, CommonDetailActivity.class, bundle, pactivity.DETAILCODE);
+                ActivityManagerUtils.startActivityBundleForResult(activity, CommonDetailActivity.class
+                        , bundle, pactivity.DETAILCODE);
                 dismissLoadingDialog();
             }
 
@@ -207,7 +206,7 @@ public class PurchaseInStoreSumFg extends BaseFragment {
         }
         showLoadingDialog();
         HashMap<String, String> map = new HashMap<>();
-        commonLogic.commit(map, new CommonLogic.CommitListener() {
+        commonLogic.commitPISData(map, new PurchaseInStoreLogic.CommitListener() {
             @Override
             public void onSuccess(String msg) {
                 dismissLoadingDialog();
@@ -215,12 +214,12 @@ public class PurchaseInStoreSumFg extends BaseFragment {
                     @Override
                     public void onCallback() {
                         pactivity.mZXVp.setCurrentItem(0);
-                        pactivity.createNewModuleId(pactivity.module);
                         tv_head_plan_date.setText("");
                         tv_head_post_order.setText("");
                         tv_head_provider.setText("");
                         pactivity.scanFg.initData();
-                        activity.finish();                    }
+                        activity.finish();
+                    }
                 });
             }
 
@@ -232,6 +231,5 @@ public class PurchaseInStoreSumFg extends BaseFragment {
         });
 
     }
-
 
 }

@@ -24,6 +24,8 @@ import butterknife.OnTextChanged;
 import digiwin.library.dialog.OnDialogClickListener;
 import digiwin.library.dialog.OnDialogTwoListener;
 import digiwin.library.utils.ActivityManagerUtils;
+import digiwin.library.utils.LogUtils;
+import digiwin.library.utils.ObjectAndMapUtils;
 import digiwin.library.utils.StringUtils;
 import digiwin.pulltorefreshlibrary.recyclerview.FullyLinearLayoutManager;
 import digiwin.pulltorefreshlibrary.recyclerviewAdapter.OnItemClickListener;
@@ -39,11 +41,13 @@ import digiwin.smartdepott100.module.bean.common.ClickItemPutBean;
 import digiwin.smartdepott100.module.bean.common.DetailShowBean;
 import digiwin.smartdepott100.module.bean.common.ListSumBean;
 import digiwin.smartdepott100.module.bean.common.SumShowBean;
+import digiwin.smartdepott100.module.bean.produce.AccordingMaterialSumBean;
 import digiwin.smartdepott100.module.logic.common.CommonLogic;
+import digiwin.smartdepott100.module.logic.produce.WorkOrderlLogic;
 
 
 /**
- * @author 赵浩然
+ * @author songjie
  * @module 依工单发料
  * @date 2017/3/10
  */
@@ -92,7 +96,7 @@ public class WorkOrderActivity extends BaseFirstModuldeActivity {
 
     private final String SUMDATA = "sumdata";
 
-    CommonLogic commonLogic;
+    WorkOrderlLogic commonLogic;
 
     @BindViews({R.id.et_job_number_scan})
     List<EditText> editTexts;
@@ -172,7 +176,7 @@ public class WorkOrderActivity extends BaseFirstModuldeActivity {
     protected void initNavigationTitle() {
         super.initNavigationTitle();
         activity = this;
-        mName.setText(getResources().getString(R.string.title_work_order));
+        mName.setText(getResources().getString(R.string.title_work_order_sum));
     }
 
     @Override
@@ -188,7 +192,7 @@ public class WorkOrderActivity extends BaseFirstModuldeActivity {
 
     @Override
     protected void doBusiness() {
-        commonLogic = CommonLogic.getInstance(activity,activity.module,activity.mTimestamp.toString());
+        commonLogic = WorkOrderlLogic.getInstance(activity,activity.module,activity.mTimestamp.toString());
         FullyLinearLayoutManager fullyLinearLayoutManager = new FullyLinearLayoutManager(activity);
         mRc_list.setLayoutManager(fullyLinearLayoutManager);
     }
@@ -225,10 +229,11 @@ public class WorkOrderActivity extends BaseFirstModuldeActivity {
      */
     void updateList(String item_no){
         ClickItemPutBean putBean = new ClickItemPutBean();
-        putBean.setWo_no(item_no);
+        putBean.setDoc_no(item_no);
         putBean.setWarehouse_no(LoginLogic.getUserInfo().getWare());
-
-        commonLogic.getOrderSumData(putBean, new CommonLogic.GetOrderSumListener() {
+        Map<String,String> map=new HashMap<>();
+        map= ObjectAndMapUtils.getValueMap(putBean);
+        commonLogic.scanCode(map, new WorkOrderlLogic.ScanCodeListener() {
             @Override
             public void onSuccess(final List<ListSumBean> list) {
                 if (list.size() > 0) {
@@ -237,7 +242,6 @@ public class WorkOrderActivity extends BaseFirstModuldeActivity {
                 adapter = new WorkOrderSumAdapter(activity,list);
                 mRc_list.setAdapter(adapter);
                 dismissLoadingDialog();
-
                 adapter.setOnItemClickListener(new OnItemClickListener() {
                     @Override
                     public void onItemClick(View itemView, int position) {
@@ -297,7 +301,7 @@ public class WorkOrderActivity extends BaseFirstModuldeActivity {
                 showCommitSuccessDialog(msg);
                 clearData();
                 createNewModuleId(module);
-                commonLogic = CommonLogic.getInstance(activity,activity.module,activity.mTimestamp.toString());
+                commonLogic = WorkOrderlLogic.getInstance(activity,activity.module,activity.mTimestamp.toString());
             }
 
             @Override

@@ -38,7 +38,7 @@ public class ScanBarcodeBackBean {
     /**
      * 展示
      */
-    private  String show;
+    private  String showing;
     /**
      * 料号
      */
@@ -158,12 +158,12 @@ public class ScanBarcodeBackBean {
         this.barcode_qty = barcode_qty;
     }
 
-    public String getShow() {
-        return show;
+    public String getShowing() {
+        return showing;
     }
 
-    public void setShow(String show) {
-        this.show = show;
+    public void setShowing(String showing) {
+        this.showing = showing;
     }
 
     public String getAvailable_in_qty() {

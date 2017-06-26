@@ -15,6 +15,7 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.OnClick;
+import digiwin.library.dialog.OnDialogTwoListener;
 import digiwin.library.utils.ActivityManagerUtils;
 import digiwin.library.utils.LogUtils;
 import digiwin.smartdepott100.R;
@@ -28,9 +29,9 @@ import digiwin.smartdepott100.module.fragment.stock.storeallot.StoreAllotSumFg;
 import digiwin.smartdepott100.module.logic.common.CommonLogic;
 
 /**
- * @des      无来源调拨
- * @author  xiemeng
- * @date    2017/3/9
+ * @author xiemeng
+ * @des 无来源调拨
+ * @date 2017/3/9
  */
 
 public class StoreAllotActivity extends BaseFirstModuldeActivity {
@@ -49,17 +50,30 @@ public class StoreAllotActivity extends BaseFirstModuldeActivity {
      */
     @BindView(R.id.module_vp)
     public ViewPager mZXVp;
-    @BindView(R.id.un_com)
-    ImageView unCom;
+//    @BindView(R.id.un_com)
+//    ImageView unCom;
 
-    @OnClick(R.id.un_com)
-    void toUnCom() {
-        Bundle bundle = new Bundle();
-        bundle.putString(AddressContants.MODULEID_INTENT, mTimestamp.toString());
-        bundle.putString(NoComeUnComActivity.MODULECODE, module);
-        ActivityManagerUtils.startActivityForBundleData(activity, NoComeUnComActivity.class, bundle);
+//    @OnClick(R.id.un_com)
+//    void toUnCom() {
+//        Bundle bundle = new Bundle();
+//        bundle.putString(AddressContants.MODULEID_INTENT, mTimestamp.toString());
+//        bundle.putString(NoComeUnComActivity.MODULECODE, module);
+//        ActivityManagerUtils.startActivityForBundleData(activity, NoComeUnComActivity.class, bundle);
+//    }
+
+    @BindView(R.id.img_chooseallot)
+   public ImageView ImgChooseallot;
+    @OnClick(R.id.img_chooseallot)
+    void chooseAllot(){
+        if (OUT.equals(INOROUT)) {
+            scanFg.etScanInLocator.requestFocus();
+            INOROUT=IN;
+        }else {
+            INOROUT=OUT;
+            scanFg.etScanOutLocator.requestFocus();
+        }
+        initNavigationTitle();
     }
-
     /**
      * Fragment设置
      */
@@ -69,7 +83,7 @@ public class StoreAllotActivity extends BaseFirstModuldeActivity {
     /**
      * 扫码
      */
-   public StoreAllotScanFg scanFg;
+    public StoreAllotScanFg scanFg;
     /**
      * 汇总提交
      */
@@ -81,7 +95,20 @@ public class StoreAllotActivity extends BaseFirstModuldeActivity {
      */
     public final int DETAILCODE = 1234;
 
-    CommonLogic logic;
+
+    /**
+     * 拨入
+     */
+    public String IN = "IN";
+    /**
+     * 拨出
+     */
+    public String OUT = "OUT";
+
+    /**
+     * 当前为拨入还是拨出
+     */
+    public String INOROUT = "";
 
     @Override
     protected Toolbar toolbar() {
@@ -97,8 +124,14 @@ public class StoreAllotActivity extends BaseFirstModuldeActivity {
     @Override
     protected void initNavigationTitle() {
         super.initNavigationTitle();
+        ImgChooseallot.setVisibility(View.VISIBLE);
         mName.setText(R.string.nocome_allot);
-        unCom.setVisibility(View.VISIBLE);
+        if (OUT.equals(INOROUT)) {
+            mName.setText(getString(R.string.nocome_allot) + getString(R.string.nocomeallot_out));
+        } else {
+            mName.setText(getString(R.string.nocome_allot) + getString(R.string.nocomeallot_in));
+        }
+//        unCom.setVisibility(View.VISIBLE);
     }
 
     @Override
@@ -109,9 +142,30 @@ public class StoreAllotActivity extends BaseFirstModuldeActivity {
     @Override
     protected void doBusiness() {
         initFragment();
-        logic = CommonLogic.getInstance(activity, module, mTimestamp.toString());
+        initDialog();
     }
 
+    public void initDialog() {
+        INOROUT = "";
+        INOROUT=OUT;
+        ChooseAllotDailog.showChooseAllotDailog(activity, new OnDialogTwoListener() {
+            @Override
+            public void onCallback1() {
+                //拨入
+                scanFg.etScanInLocator.requestFocus();
+                INOROUT = IN;
+                initNavigationTitle();
+            }
+
+            @Override
+            public void onCallback2() {
+                //拨出
+                scanFg.etScanOutLocator.requestFocus();
+                INOROUT = OUT;
+                initNavigationTitle();
+            }
+        });
+    }
 
     /**
      * 初始化Fragment

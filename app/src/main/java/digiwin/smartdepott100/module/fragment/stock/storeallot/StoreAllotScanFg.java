@@ -19,23 +19,23 @@ import butterknife.OnClick;
 import butterknife.OnFocusChange;
 import butterknife.OnTextChanged;
 import digiwin.library.dialog.OnDialogClickListener;
-import digiwin.library.dialog.OnDialogTwoListener;
 import digiwin.library.utils.StringUtils;
 import digiwin.smartdepott100.R;
 import digiwin.smartdepott100.core.appcontants.AddressContants;
 import digiwin.smartdepott100.core.base.BaseFragment;
+import digiwin.smartdepott100.core.coreutil.CommonUtils;
 import digiwin.smartdepott100.core.modulecommon.ModuleUtils;
-import digiwin.smartdepott100.module.activity.stock.storeallot.ChooseAllotDailog;
 import digiwin.smartdepott100.module.activity.stock.storeallot.StoreAllotActivity;
 import digiwin.smartdepott100.module.bean.common.SaveBackBean;
 import digiwin.smartdepott100.module.bean.common.SaveBean;
 import digiwin.smartdepott100.module.bean.common.ScanBarcodeBackBean;
 import digiwin.smartdepott100.module.bean.common.ScanLocatorBackBean;
 import digiwin.smartdepott100.module.logic.common.CommonLogic;
+import digiwin.smartdepott100.module.logic.stock.StoreAllotLogic;
 
 /**
  * @author xiemeng
- * @des 生产完工入库扫码页面
+ * @des 无来源调拨扫码页面
  * @date 2017/2/23
  */
 public class StoreAllotScanFg extends BaseFragment {
@@ -50,14 +50,14 @@ public class StoreAllotScanFg extends BaseFragment {
     @BindView(R.id.tv_inlocator)
     TextView tvInLocator;
     @BindView(R.id.et_scan_inlocator)
-    EditText etScanInLocator;
+    public EditText etScanInLocator;
     @BindView(R.id.ll_scan_inlocator)
     LinearLayout llScanInLocator;
 
     @BindView(R.id.tv_outlocator)
     TextView tvOutLocator;
     @BindView(R.id.et_scan_outlocator)
-    EditText etScanOutLocator;
+    public EditText etScanOutLocator;
     @BindView(R.id.ll_scan_outlocator)
     LinearLayout llScanOutLocator;
 
@@ -182,7 +182,7 @@ public class StoreAllotScanFg extends BaseFragment {
         }
         showLoadingDialog();
         saveBean.setQty(etInputNum.getText().toString());
-        commonLogic.scanSave(saveBean, new CommonLogic.SaveListener() {
+        storeAllotLogic.scanSave(saveBean, new CommonLogic.SaveListener() {
             @Override
             public void onSuccess(SaveBackBean saveBackBean) {
                 dismissLoadingDialog();
@@ -211,22 +211,10 @@ public class StoreAllotScanFg extends BaseFragment {
      * 拨出库位
      */
     final int OUTLOCATORWHAT = 1003;
-    /**
-     * 当前为拨入还是拨出
-     */
-    String INOROUT="";
-    /**
-     * 拨入
-     */
-    String IN="IN";
-    /**
-     * 拨出
-     */
-    String OUT="OUT";
 
     StoreAllotActivity pactivity;
 
-    CommonLogic commonLogic;
+    StoreAllotLogic storeAllotLogic;
     /**
      * 条码展示
      */
@@ -261,22 +249,25 @@ public class StoreAllotScanFg extends BaseFragment {
                 case INLOCATORWHAT:
                     HashMap<String, String> locatorMap = new HashMap<>();
                     locatorMap.put(AddressContants.STORAGE_SPACES_BARCODE, String.valueOf(msg.obj));
-                    commonLogic.scanLocator(locatorMap, new CommonLogic.ScanLocatorListener() {
+                    storeAllotLogic.scanLocator(locatorMap, new CommonLogic.ScanLocatorListener() {
                         @Override
                         public void onSuccess(ScanLocatorBackBean locatorBackBean) {
-                            inlocatorShow = locatorBackBean.getShow();
+                            inlocatorShow = locatorBackBean.getShowing();
                             inlocatorFlag = true;
                             show();
                             saveBean.setStorage_spaces_in_no(locatorBackBean.getStorage_spaces_no());
                             saveBean.setWarehouse_in_no(locatorBackBean.getWarehouse_no());
-                            if (INOROUT.equals(IN)){
+                            if (pactivity.INOROUT.equals(pactivity.IN)) {
 //                                cbInLocatorlock.setChecked(true);
-                                INOROUT="";
+                                pactivity.INOROUT = "";
                             }
                             if (cbOutLocatorlock.isChecked()) {
                                 etScanBarocde.requestFocus();
                             } else {
                                 etScanOutLocator.requestFocus();
+                            }
+                            if (CommonUtils.isAutoSave(saveBean)){
+                                save();
                             }
                         }
 
@@ -295,19 +286,22 @@ public class StoreAllotScanFg extends BaseFragment {
                 case OUTLOCATORWHAT:
                     HashMap<String, String> outlocatorMap = new HashMap<>();
                     outlocatorMap.put(AddressContants.STORAGE_SPACES_BARCODE, String.valueOf(msg.obj));
-                    commonLogic.scanLocator(outlocatorMap, new CommonLogic.ScanLocatorListener() {
+                    storeAllotLogic.scanLocator(outlocatorMap, new CommonLogic.ScanLocatorListener() {
                         @Override
                         public void onSuccess(ScanLocatorBackBean locatorBackBean) {
-                            outlocatorShow = locatorBackBean.getShow();
+                            outlocatorShow = locatorBackBean.getShowing();
                             outlocatorFlag = true;
                             show();
                             saveBean.setStorage_spaces_out_no(locatorBackBean.getStorage_spaces_no());
                             saveBean.setWarehouse_out_no(locatorBackBean.getWarehouse_no());
-                            if (INOROUT.equals(OUT)){
+                            if (pactivity.INOROUT.equals(pactivity.OUT)) {
 //                                cbOutLocatorlock.setChecked(true);
-                                INOROUT="";
+                                pactivity.INOROUT = "";
                             }
                             etScanBarocde.requestFocus();
+                            if (CommonUtils.isAutoSave(saveBean)){
+                                save();
+                            }
                         }
 
                         @Override
@@ -325,10 +319,10 @@ public class StoreAllotScanFg extends BaseFragment {
                 case BARCODEWHAT:
                     HashMap<String, String> barcodeMap = new HashMap<>();
                     barcodeMap.put(AddressContants.BARCODE_NO, String.valueOf(msg.obj));
-                    commonLogic.scanBarcode(barcodeMap, new CommonLogic.ScanBarcodeListener() {
+                    storeAllotLogic.scanBarcode(barcodeMap, new CommonLogic.ScanBarcodeListener() {
                         @Override
                         public void onSuccess(ScanBarcodeBackBean barcodeBackBean) {
-                            barcodeShow = barcodeBackBean.getShow();
+                            barcodeShow = barcodeBackBean.getShowing();
                             etInputNum.setText(StringUtils.deleteZero(barcodeBackBean.getBarcode_qty()));
                             tv_scaned_num.setText(barcodeBackBean.getScan_sumqty());
                             barcodeFlag = true;
@@ -338,7 +332,11 @@ public class StoreAllotScanFg extends BaseFragment {
                             saveBean.setItem_no(barcodeBackBean.getItem_no());
                             saveBean.setUnit_no(barcodeBackBean.getUnit_no());
                             saveBean.setLot_no(barcodeBackBean.getLot_no());
+                            saveBean.setItem_barcode_type(barcodeBackBean.getItem_barcode_type());
                             etInputNum.requestFocus();
+                            if (CommonUtils.isAutoSave(saveBean)){
+                                save();
+                            }
                         }
 
                         @Override
@@ -367,20 +365,6 @@ public class StoreAllotScanFg extends BaseFragment {
     protected void doBusiness() {
         pactivity = (StoreAllotActivity) activity;
         initData();
-        ChooseAllotDailog.showChooseAllotDailog(activity, new OnDialogTwoListener() {
-            @Override
-            public void onCallback1() {
-                //拨入
-                etScanInLocator.requestFocus();
-                INOROUT=IN;
-            }
-            @Override
-            public void onCallback2() {
-                //拨出
-                etScanOutLocator.requestFocus();
-                INOROUT=OUT;
-            }
-        });
     }
 
 
@@ -388,10 +372,11 @@ public class StoreAllotScanFg extends BaseFragment {
      * 公共区域展示
      */
     private void show() {
-        if (!StringUtils.isBlank(inlocatorShow)&&!inlocatorShow.startsWith(context.getResources().getString(R.string.allotin))) {
+        pactivity.ImgChooseallot.setEnabled(false);
+        if (!StringUtils.isBlank(inlocatorShow) && !inlocatorShow.startsWith(context.getResources().getString(R.string.allotin))) {
             inlocatorShow = context.getResources().getString(R.string.allotin) + inlocatorShow;
         }
-        if (!StringUtils.isBlank(outlocatorShow)&&!outlocatorShow.startsWith(context.getResources().getString(R.string.allotout))) {
+        if (!StringUtils.isBlank(outlocatorShow) && !outlocatorShow.startsWith(context.getResources().getString(R.string.allotout))) {
             outlocatorShow = context.getResources().getString(R.string.allotout) + outlocatorShow;
         }
         tvDetailShow.setText(StringUtils.lineChange(inlocatorShow + "\\n" + outlocatorShow + "\\n" + barcodeShow));
@@ -433,7 +418,6 @@ public class StoreAllotScanFg extends BaseFragment {
      * 初始化一些变量
      */
     public void initData() {
-        INOROUT=IN;
         tv_scaned_num.setText("");
         barcodeShow = "";
         inlocatorShow = "";
@@ -447,6 +431,6 @@ public class StoreAllotScanFg extends BaseFragment {
         etScanInLocator.setText("");
         etScanOutLocator.setText("");
         includeDetail.setVisibility(View.GONE);
-        commonLogic = CommonLogic.getInstance(context, pactivity.module, pactivity.mTimestamp.toString());
+        storeAllotLogic = StoreAllotLogic.getInstance(context, pactivity.module, pactivity.mTimestamp.toString());
     }
 }

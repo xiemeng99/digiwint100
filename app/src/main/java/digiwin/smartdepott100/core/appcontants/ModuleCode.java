@@ -12,9 +12,13 @@ public interface ModuleCode {
     public final String OTHER="OTHER";
 
     /**
-     * 扫码收获
+     * 扫码收货
      */
-    public final String PURCHASEGOODSSCAN = "A003";
+    public final String PURCHASEGOODSSCAN = "A001";
+    /**
+     * 扫码收货供应商
+     */
+    public final String PURCHASESUPPLIERSCAN = "A003";
     /**
      * 收货检验
      */
@@ -37,9 +41,21 @@ public interface ModuleCode {
      */
     public final String STORERETURNMATERIAL="A008";
     /**
+     * 原材料标签打印
+     */
+    public final String RAWMATERAILPRINT="A009";
+    /**
      * pqc 检验
      */
     public final String PQCCHECK="A060";
+    /**
+     * 采购收货
+     */
+    public final String PURCHASERECEIVING="A060";
+    /**
+     * PQC检验
+     */
+    public final String PQCCHECKOUT="A060";
     /**
      * 依成品调拨
      */
@@ -118,10 +134,6 @@ public interface ModuleCode {
      */
     public final String INBINNING="B028";
     /**
-     * 标签补打
-     */
-    public final String PRINTLABEL="C001";
-    /**
      * 调拨过账
      */
     public final String POSTALLOCATE="C002";
@@ -140,7 +152,7 @@ public interface ModuleCode {
     /**
      * 杂项发料
      */
-    public final String MISCELLANEOUSISSUESOUT="C009";
+    public final String MISCELLANEOUSISSUESOUT="C007";
     /**
      * 调拨，无来源
      */
@@ -148,7 +160,7 @@ public interface ModuleCode {
     /**
      * 条码移库
      */
-    public final String MOVESTORE="C011";
+    public final String MOVESTORE="C003";
 
     /**
      * 库存交易锁定
@@ -218,6 +230,24 @@ public interface ModuleCode {
      * 工序报工
      */
     public final String PROCESSREPORTING = "E005";
+
+    /**
+     * 工序转移move
+     */
+    public final String PROCEDUCEMOVE = "E007";
+    /**
+     * 生产报工checkin
+     */
+    public final String PROCEDUCECHECK="E008";
+    /**
+     * 流转标签打印
+     */
+    public final String PRINTLABEL="E009";
+    /**
+     * 成品标签打印
+     */
+    public final String PRINTFINISHLABEL="E010";
+
     /**
      * 收货完成待检验看板
      */
@@ -226,5 +256,13 @@ public interface ModuleCode {
      * 检验完成待入库看板
      */
     public final String TCTSBOARD="F002";
+    /**
+     *生产成套领料
+     */
+    public final String SUITPICKING="B016";
+    /**
+     *生产成套领料半成品
+     */
+    public final String SUITPICKINGHALF="B017";
 
 }

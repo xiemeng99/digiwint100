@@ -27,11 +27,12 @@ import digiwin.library.utils.StringUtils;
 import digiwin.smartdepott100.R;
 import digiwin.smartdepott100.core.appcontants.AddressContants;
 import digiwin.smartdepott100.core.base.BaseFragment;
+import digiwin.smartdepott100.core.coreutil.CommonUtils;
 import digiwin.smartdepott100.core.coreutil.FiFoCheckUtils;
 import digiwin.smartdepott100.core.modulecommon.ModuleUtils;
 import digiwin.smartdepott100.login.loginlogic.LoginLogic;
 import digiwin.smartdepott100.module.activity.sale.pickupshipment.PickUpShipmentActivity;
-import digiwin.smartdepott100.module.adapter.sale.pickupshipment.PickUpShipmentFIFoAdapter;
+import digiwin.smartdepott100.module.adapter.common.CommonDocNoFifoAdapter;
 import digiwin.smartdepott100.module.bean.common.FifoCheckBean;
 import digiwin.smartdepott100.module.bean.common.FilterResultOrderBean;
 import digiwin.smartdepott100.module.bean.common.SaveBackBean;
@@ -82,7 +83,7 @@ public class PickUpShipmentScanFg extends BaseFragment {
      */
     boolean locatorFlag;
 
-    PickUpShipmentFIFoAdapter adapter;
+    CommonDocNoFifoAdapter adapter;
 
     @BindView(R.id.ry_list)
     RecyclerView mRy_list;
@@ -267,6 +268,9 @@ public class PickUpShipmentScanFg extends BaseFragment {
                         saveBean.setWarehouse_out_no(locatorBackBean.getWarehouse_no());
                         saveBean.setAllow_negative_stock(locatorBackBean.getAllow_negative_stock());
                         etScanBarocde.requestFocus();
+                        if (CommonUtils.isAutoSave(saveBean)){
+                            save();
+                        }
                     }
 
                     @Override
@@ -288,6 +292,7 @@ public class PickUpShipmentScanFg extends BaseFragment {
                 barcodeMap.put(AddressContants.BARCODE_NO, String.valueOf(msg.obj));
                 barcodeMap.put(AddressContants.DOC_NO, localData.getDoc_no());
                 barcodeMap.put(AddressContants.WAREHOUSE_NO,LoginLogic.getWare());
+                barcodeMap.put(AddressContants.STORAGE_SPACES_NO,saveBean.getStorage_spaces_out_no());
                 commonLogic.scanBarcode(barcodeMap, new CommonLogic.ScanBarcodeListener() {
                     @Override
                     public void onSuccess(ScanBarcodeBackBean barcodeBackBean) {
@@ -311,16 +316,16 @@ public class PickUpShipmentScanFg extends BaseFragment {
                 Map<String,String> map = new HashMap<String,String>();
                 map.put(AddressContants.ISSUING_NO,String.valueOf(msg.obj));
                 map.put(AddressContants.WAREHOUSE_NO, LoginLogic.getWare());
-                commonLogic.postMaterialFIFO(map, new CommonLogic.PostMaterialFIFOListener() {
+                commonLogic.docNoFIFO(map, new CommonLogic.PostMaterialFIFOListener() {
                     @Override
                     public void onSuccess(List<FifoCheckBean> fiFoBeanList) {
                         if(null != fiFoBeanList && fiFoBeanList.size() > 0){
                             fiFoList = fiFoBeanList;
-                            adapter = new PickUpShipmentFIFoAdapter(context,fiFoBeanList);
+                            adapter = new CommonDocNoFifoAdapter(context,fiFoBeanList);
                             mRy_list.setAdapter(adapter);
                         }else{
                             fiFoList = new ArrayList<FifoCheckBean>();
-                            adapter = new PickUpShipmentFIFoAdapter(context,fiFoList);
+                            adapter = new CommonDocNoFifoAdapter(context,fiFoList);
                             mRy_list.setAdapter(adapter);
                         }
                     }
@@ -353,7 +358,11 @@ public class PickUpShipmentScanFg extends BaseFragment {
         saveBean.setLot_no(barcodeBackBean.getLot_no());
         saveBean.setDoc_no(localData.getDoc_no());
         saveBean.setFifo_check(barcodeBackBean.getFifo_check());
+        saveBean.setItem_barcode_type(barcodeBackBean.getItem_barcode_type());
         etInputNum.requestFocus();
+        if (CommonUtils.isAutoSave(saveBean)){
+            save();
+        }
     }
 
     @Override

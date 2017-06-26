@@ -65,7 +65,6 @@ public class MaterialReturnActivity extends BaseFirstModuldeActivity {
      */
     public final int DETAILCODE = 1234;
 
-
     @Override
     protected Toolbar toolbar() {
         return toolbarTitle;
@@ -92,7 +91,6 @@ public class MaterialReturnActivity extends BaseFirstModuldeActivity {
     protected void doBusiness() {
         initFragment();
     }
-
 
     /**
      * 初始化Fragment

@@ -28,7 +28,7 @@ import digiwin.smartdepott100.module.fragment.produce.finishedstorage.FinishedSt
 
 /**
  * @author xiemeng
- * @des 生产完工入库上架 依成品入库
+ * @des  依成品入库
  * @date 2017/2/22
  */
 public class FinishedStorageActivity extends BaseFirstModuldeActivity {
@@ -47,7 +47,7 @@ public class FinishedStorageActivity extends BaseFirstModuldeActivity {
      */
     @BindView(R.id.module_vp)
     public ViewPager moduleVp;
-    @BindView(R.id.un_com)
+   /* @BindView(R.id.un_com)
     ImageView unCom;
 
     @OnClick(R.id.un_com)
@@ -57,7 +57,7 @@ public class FinishedStorageActivity extends BaseFirstModuldeActivity {
         bundle.putString(NoComeUnComActivity.MODULECODE, module);
         ActivityManagerUtils.startActivityForBundleData(activity, NoComeUnComActivity.class, bundle);
     }
-
+*/
     /**
      * Fragment设置
      */
@@ -79,7 +79,6 @@ public class FinishedStorageActivity extends BaseFirstModuldeActivity {
      */
     public final int DETAILCODE = 1234;
 
-
     @Override
     protected Toolbar toolbar() {
         return toolbarTitle;
@@ -95,7 +94,7 @@ public class FinishedStorageActivity extends BaseFirstModuldeActivity {
     protected void initNavigationTitle() {
         super.initNavigationTitle();
         mName.setText(R.string.finishedstorage);
-        unCom.setVisibility(View.VISIBLE);
+       // unCom.setVisibility(View.VISIBLE);
     }
 
     @Override

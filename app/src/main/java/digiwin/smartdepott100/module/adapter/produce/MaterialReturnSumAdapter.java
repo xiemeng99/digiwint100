@@ -31,7 +31,7 @@ public class MaterialReturnSumAdapter extends BaseRecyclerAdapter<ListSumBean> {
 
     @Override
     protected void bindData(RecyclerViewHolder holder, int position, ListSumBean item) {
-        float numb1 = StringUtils.string2Float(item.getReceipt_qty());
+        float numb1 = StringUtils.string2Float(item.getApply_qty());
         float numb2 = StringUtils.string2Float(item.getScan_sumqty());
 
         holder.setText(R.id.tv_item_no, item.getItem_no());
@@ -43,12 +43,12 @@ public class MaterialReturnSumAdapter extends BaseRecyclerAdapter<ListSumBean> {
 
         if (numb2 == 0) {
             holder.setBackground(R.id.item_ll,R.drawable.red_scandetail_bg);
-            holder.setTextColor(R.id.tv_item_name, mContext.getResources().getColor(R.color.red));
-            holder.setTextColor(R.id.tv_model, mContext.getResources().getColor(R.color.red));
-            holder.setTextColor(R.id.tv_unit_no, mContext.getResources().getColor(R.color.red));
-            holder.setTextColor(R.id.tv_item_no, mContext.getResources().getColor(R.color.red));
-            holder.setTextColor(R.id.tv_apply_number, mContext.getResources().getColor(R.color.red));
-            holder.setTextColor(R.id.tv_match_number, mContext.getResources().getColor(R.color.red));
+            holder.setTextColor(R.id.tv_item_name, mContext.getResources().getColor(R.color.Base_color));
+            holder.setTextColor(R.id.tv_model, mContext.getResources().getColor(R.color.Base_color));
+            holder.setTextColor(R.id.tv_unit_no, mContext.getResources().getColor(R.color.Base_color));
+            holder.setTextColor(R.id.tv_item_no, mContext.getResources().getColor(R.color.Base_color));
+            holder.setTextColor(R.id.tv_apply_number, mContext.getResources().getColor(R.color.Base_color));
+            holder.setTextColor(R.id.tv_match_number, mContext.getResources().getColor(R.color.Base_color));
         } else if (numb1 > numb2) {
             holder.setBackground(R.id.item_ll,R.drawable.yellow_scandetail_bg);
             holder.setTextColor(R.id.tv_item_name,mContext.getResources().getColor( R.color.outside_yellow));
@@ -59,12 +59,12 @@ public class MaterialReturnSumAdapter extends BaseRecyclerAdapter<ListSumBean> {
             holder.setTextColor(R.id.tv_match_number, mContext.getResources().getColor(R.color.outside_yellow));
         } else if (numb1 ==numb2) {
             holder.setBackground(R.id.item_ll,R.drawable.green_scandetail_bg);
-            holder.setTextColor(R.id.tv_item_name, mContext.getResources().getColor(R.color.Base_color));
-            holder.setTextColor(R.id.tv_model, mContext.getResources().getColor(R.color.Base_color));
-            holder.setTextColor(R.id.tv_unit_no, mContext.getResources().getColor(R.color.Base_color));
-            holder.setTextColor(R.id.tv_item_no, mContext.getResources().getColor(R.color.Base_color));
-            holder.setTextColor(R.id.tv_apply_number,mContext.getResources().getColor( R.color.Base_color));
-            holder.setTextColor(R.id.tv_match_number,mContext.getResources().getColor( R.color.Base_color));
+            holder.setTextColor(R.id.tv_item_name, mContext.getResources().getColor(R.color.green1b));
+            holder.setTextColor(R.id.tv_model, mContext.getResources().getColor(R.color.green1b));
+            holder.setTextColor(R.id.tv_unit_no, mContext.getResources().getColor(R.color.green1b));
+            holder.setTextColor(R.id.tv_item_no, mContext.getResources().getColor(R.color.green1b));
+            holder.setTextColor(R.id.tv_apply_number,mContext.getResources().getColor( R.color.green1b));
+            holder.setTextColor(R.id.tv_match_number,mContext.getResources().getColor( R.color.green1b));
         }
 
     }

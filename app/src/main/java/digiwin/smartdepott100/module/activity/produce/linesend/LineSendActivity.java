@@ -133,7 +133,7 @@ public class LineSendActivity extends BaseTitleActivity {
         mName.setText(R.string.line_send);
         //显示默认仓库
        // tvWarehouse.setVisibility(View.VISIBLE);
-        //tvWarehouse.setText(LoginLogic.getWare());
+        //tvWarehouse.setText(LoginLogic.getWarehouse_no());
     }
 
     @Override

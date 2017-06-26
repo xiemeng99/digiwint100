@@ -1,16 +1,23 @@
 package digiwin.smartdepott100.module.activity.sale.saleoutlet;
 
 import android.content.Intent;
+import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.Toolbar;
+import android.view.View;
+import android.widget.ImageView;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
+import butterknife.OnClick;
+import digiwin.smartdepott100.core.appcontants.AddressContants;
+import digiwin.smartdepott100.module.activity.common.HaveSourceUnComActivity;
+import digiwin.library.utils.ActivityManagerUtils;
 import digiwin.library.utils.LogUtils;
 import digiwin.smartdepott100.R;
 import digiwin.smartdepott100.core.appcontants.ModuleCode;
@@ -41,7 +48,18 @@ public class SaleOutletActivity extends BaseFirstModuldeActivity {
      */
     @BindView(R.id.module_vp)
     public ViewPager mZXVp;
-
+//    /**
+//     * 未完成事项
+//     */
+//    @BindView(R.id.un_com)
+//    ImageView unCom;
+//    @OnClick(R.id.un_com)
+//    void clickUnCom(){
+//        Bundle bundle = new Bundle();
+//        bundle.putString(AddressContants.MODULEID_INTENT, mTimestamp.toString());
+//        bundle.putString(HaveSourceUnComActivity.MODULECODE, module);
+//        ActivityManagerUtils.startActivityForBundleData(activity, HaveSourceUnComActivity.class, bundle);
+//    }
     /**
      * Fragment设置
      */
@@ -81,6 +99,7 @@ public class SaleOutletActivity extends BaseFirstModuldeActivity {
     protected void initNavigationTitle() {
         super.initNavigationTitle();
         mName.setText(R.string.saleoutlet);
+//        unCom.setVisibility(View.VISIBLE);
     }
 
     @Override

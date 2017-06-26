@@ -69,7 +69,9 @@ public class DetailFragment extends BaseFragment {
                     }
                     String ware = LoginLogic.getWare();
                     if(!StringUtils.isBlank(ware) ||
-                            beanLists.get(position).getId().equals(ModuleCode.PROCESSREPORTING)){
+                            beanLists.get(position).getId().equals(ModuleCode.PROCESSREPORTING)
+                            ||beanLists.get(position).getId().equals(ModuleCode.PROCEDUCECHECK)
+                            ||beanLists.get(position).getId().equals(ModuleCode.PROCEDUCEMOVE)){
                         ActivityManagerUtils.startActivity(activity,beanLists.get(position).getIntent());
                     }else{
                         showFailedDialog(R.string.system_warehouse_null);
@@ -80,5 +82,6 @@ public class DetailFragment extends BaseFragment {
             }
         });
     }
+
 
 }

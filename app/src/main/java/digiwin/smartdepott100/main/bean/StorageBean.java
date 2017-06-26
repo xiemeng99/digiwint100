@@ -11,13 +11,13 @@ public class StorageBean extends DataSupport {
     /**
      * 仓库
      */
-    private String ware;
+    private String warehouse_no;
 
-    public String getWare() {
-        return ware;
+    public String getWarehouse_no() {
+        return warehouse_no;
     }
 
-    public void setWare(String ware) {
-        this.ware = ware;
+    public void setWarehouse_no(String warehouse_no) {
+        this.warehouse_no = warehouse_no;
     }
 }

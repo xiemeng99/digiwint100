@@ -29,7 +29,7 @@ public class PostAllocateSumAdapter extends BaseRecyclerAdapter<ListSumBean> {
 
     @Override
     protected void bindData(RecyclerViewHolder holder, int position, final ListSumBean item) {
-        float numb1 = StringUtils.string2Float(item.getReceipt_qty());
+        float numb1 = StringUtils.string2Float(item.getApply_qty());
         float numb2 = StringUtils.string2Float(item.getScan_sumqty());
         holder.setText(R.id.tv_item_no, item.getItem_no());
         holder.setText(R.id.tv_item_danwei, item.getUnit_no());
@@ -58,13 +58,13 @@ public class PostAllocateSumAdapter extends BaseRecyclerAdapter<ListSumBean> {
             holder.setTextColor(R.id.tv_locator_num_, mContext.getResources().getColor(R.color.outside_yellow));
         } else if (numb1 ==numb2) {
             holder.setBackground(R.id.item_ll,R.drawable.green_scandetail_bg);
-            holder.setTextColor(R.id.tv_item_no, mContext.getResources().getColor(R.color.Base_color));
-            holder.setTextColor(R.id.tv_item_danwei, mContext.getResources().getColor(R.color.Base_color));
-            holder.setTextColor(R.id.tv_item_name, mContext.getResources().getColor(R.color.Base_color));
-            holder.setTextColor(R.id.tv_item_model, mContext.getResources().getColor(R.color.Base_color));
-            holder.setTextColor(R.id.tv_apply_number, mContext.getResources().getColor(R.color.Base_color));
-            holder.setTextColor(R.id.tv_scaned_numb, mContext.getResources().getColor(R.color.Base_color));
-            holder.setTextColor(R.id.tv_locator_num_, mContext.getResources().getColor(R.color.Base_color));
+            holder.setTextColor(R.id.tv_item_no, mContext.getResources().getColor(R.color.green1b));
+            holder.setTextColor(R.id.tv_item_danwei, mContext.getResources().getColor(R.color.green1b));
+            holder.setTextColor(R.id.tv_item_name, mContext.getResources().getColor(R.color.green1b));
+            holder.setTextColor(R.id.tv_item_model, mContext.getResources().getColor(R.color.green1b));
+            holder.setTextColor(R.id.tv_apply_number, mContext.getResources().getColor(R.color.green1b));
+            holder.setTextColor(R.id.tv_scaned_numb, mContext.getResources().getColor(R.color.green1b));
+            holder.setTextColor(R.id.tv_locator_num_, mContext.getResources().getColor(R.color.green1b));
         }
     }
 }

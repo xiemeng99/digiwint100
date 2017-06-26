@@ -20,6 +20,8 @@ import butterknife.OnCheckedChanged;
 import butterknife.OnClick;
 import butterknife.OnFocusChange;
 import butterknife.OnTextChanged;
+import digiwin.smartdepott100.core.coreutil.CommonUtils;
+import digiwin.smartdepott100.module.logic.stock.PostAllocateLogic;
 import digiwin.library.dialog.OnDialogClickListener;
 import digiwin.library.utils.StringUtils;
 import digiwin.smartdepott100.R;
@@ -36,8 +38,9 @@ import digiwin.smartdepott100.module.bean.common.ScanLocatorBackBean;
 import digiwin.smartdepott100.module.logic.common.CommonLogic;
 
 /**
- * @author 唐孟宇
- * @des 调拨过账 扫码页面
+ * @des  调拨 拨出，拨入
+ * @date 2017/6/7
+ * @author xiemeng
  */
 
 public class PostAllocateScanFg extends BaseFragment {
@@ -168,7 +171,7 @@ public class PostAllocateScanFg extends BaseFragment {
      */
     final int LOCATORWHATOUT = 1003;
 
-    CommonLogic commonLogic;
+    PostAllocateLogic commonLogic;
 
     @OnCheckedChanged(R.id.cb_locatorlock_in)
     void isLock_in(boolean checked) {
@@ -291,7 +294,7 @@ public class PostAllocateScanFg extends BaseFragment {
                     commonLogic.scanBarcode(barcodeMap, new CommonLogic.ScanBarcodeListener() {
                         @Override
                         public void onSuccess(ScanBarcodeBackBean barcodeBackBean) {
-                            barcodeShow = barcodeBackBean.getShow();
+                            barcodeShow = barcodeBackBean.getShowing();
                             if(!StringUtils.isBlank(barcodeBackBean.getBarcode_qty())){
                                 et_input_num.setText(StringUtils.deleteZero(barcodeBackBean.getBarcode_qty()));
                             }
@@ -307,7 +310,11 @@ public class PostAllocateScanFg extends BaseFragment {
                             saveBean.setLot_no(barcodeBackBean.getLot_no());
                             saveBean.setScan_sumqty(barcodeBackBean.getScan_sumqty());
                             saveBean.setAvailable_in_qty(barcodeBackBean.getAvailable_in_qty());
+                            saveBean.setItem_barcode_type(barcodeBackBean.getItem_barcode_type());
                             et_input_num.requestFocus();
+                            if (CommonUtils.isAutoSave(saveBean)){
+                                Save();
+                            }
                         }
 
                         @Override
@@ -328,12 +335,15 @@ public class PostAllocateScanFg extends BaseFragment {
                     commonLogic.scanLocator(locatorMap, new CommonLogic.ScanLocatorListener() {
                         @Override
                         public void onSuccess(ScanLocatorBackBean locatorBackBean) {
-                            inLocatorShow = locatorBackBean.getShow();
+                            inLocatorShow = locatorBackBean.getShowing();
                             inLocatorFlag = true;
                             show();
                             saveBean.setStorage_spaces_in_no(locatorBackBean.getStorage_spaces_no());
                             saveBean.setWarehouse_in_no(locatorBackBean.getWarehouse_no());
                             et_scan_barocde.requestFocus();
+                            if (CommonUtils.isAutoSave(saveBean)){
+                                Save();
+                            }
                         }
 
                         @Override
@@ -354,7 +364,7 @@ public class PostAllocateScanFg extends BaseFragment {
                     commonLogic.scanLocator(locatorMap1, new CommonLogic.ScanLocatorListener() {
                         @Override
                         public void onSuccess(ScanLocatorBackBean locatorBackBean) {
-                            outLocatorShow = locatorBackBean.getShow();
+                            outLocatorShow = locatorBackBean.getShowing();
                             outLocatorFlag = true;
                             show();
                             saveBean.setStorage_spaces_out_no(locatorBackBean.getStorage_spaces_no());
@@ -363,6 +373,9 @@ public class PostAllocateScanFg extends BaseFragment {
                                 et_scan_barocde.requestFocus();
                             }else{
                                 et_scan_locator_in.requestFocus();
+                            }
+                            if (CommonUtils.isAutoSave(saveBean)){
+                                Save();
                             }
                         }
 
@@ -457,7 +470,7 @@ public class PostAllocateScanFg extends BaseFragment {
         cb_locatorlock_in.setChecked(false);
         cb_locatorlock_out.setChecked(false);
         saveBean = new SaveBean();
-        commonLogic = CommonLogic.getInstance(context, pactivity.module, pactivity.mTimestamp.toString());
+        commonLogic = PostAllocateLogic.getInstance(context, pactivity.module, pactivity.mTimestamp.toString());
         orderBean = (FilterResultOrderBean) pactivity.getIntent().getExtras().getSerializable(AddressContants.ORDERDATA);
         et_scan_locator_out.requestFocus();
         }

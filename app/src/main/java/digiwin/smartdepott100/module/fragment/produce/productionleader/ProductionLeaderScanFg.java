@@ -19,6 +19,8 @@ import butterknife.OnCheckedChanged;
 import butterknife.OnClick;
 import butterknife.OnFocusChange;
 import butterknife.OnTextChanged;
+import digiwin.smartdepott100.core.coreutil.CommonUtils;
+import digiwin.smartdepott100.module.logic.produce.productionleader.ProductionLeaderLogic;
 import digiwin.library.dialog.OnDialogClickListener;
 import digiwin.library.utils.StringUtils;
 import digiwin.smartdepott100.R;
@@ -57,7 +59,7 @@ public class ProductionLeaderScanFg extends BaseFragment {
 
     FilterResultOrderBean localData;
 
-    CommonLogic commonLogic;
+    ProductionLeaderLogic commonLogic;
     /**
      * 条码扫描
      */
@@ -254,8 +256,11 @@ public class ProductionLeaderScanFg extends BaseFragment {
                         saveBean.setStorage_spaces_out_no(locatorBackBean.getStorage_spaces_no());
                         saveBean.setWarehouse_out_no(locatorBackBean.getWarehouse_no());
                         et_barcode_no.requestFocus();
-                        locatorShow = locatorBackBean.getShow();
+                        locatorShow = locatorBackBean.getShowing();
                         show();
+                        if (CommonUtils.isAutoSave(saveBean)){
+                            save();
+                        }
                     }
 
                     @Override
@@ -277,7 +282,7 @@ public class ProductionLeaderScanFg extends BaseFragment {
                 barcodeMap.put(AddressContants.BARCODE_NO, String.valueOf(msg.obj));
                 barcodeMap.put(AddressContants.DOC_NO, localData.getDoc_no());
                 barcodeMap.put(AddressContants.WAREHOUSE_NO, LoginLogic.getWare());
-
+                barcodeMap.put(AddressContants.STORAGE_SPACES_NO,saveBean.getStorage_spaces_out_no());
                 commonLogic.scanBarcode(barcodeMap, new CommonLogic.ScanBarcodeListener() {
                     @Override
                     public void onSuccess(ScanBarcodeBackBean barcodeBackBean) {
@@ -311,7 +316,7 @@ public class ProductionLeaderScanFg extends BaseFragment {
      * @param barcodeBackBean
      */
     public void showBarcode(ScanBarcodeBackBean barcodeBackBean){
-        locatorShow = barcodeBackBean.getShow();
+        barcodeShow = barcodeBackBean.getShowing();
 
         tv_swept_volume.setText(StringUtils.deleteZero(barcodeBackBean.getScan_sumqty()));
         etInputNum.setText(StringUtils.deleteZero(barcodeBackBean.getBarcode_qty()));
@@ -323,8 +328,12 @@ public class ProductionLeaderScanFg extends BaseFragment {
         saveBean.setLot_no(barcodeBackBean.getLot_no());
         saveBean.setDoc_no(localData.getDoc_no());
         saveBean.setFifo_check(barcodeBackBean.getFifo_check());
+        saveBean.setItem_barcode_type(barcodeBackBean.getItem_barcode_type());
         show();
         etInputNum.requestFocus();
+        if (CommonUtils.isAutoSave(saveBean)){
+            save();
+        }
     }
 
     @Override
@@ -335,7 +344,7 @@ public class ProductionLeaderScanFg extends BaseFragment {
     @Override
     protected void doBusiness() {
         pactivity = (ProductionLeaderActivity) activity;
-        commonLogic = CommonLogic.getInstance(context, pactivity.module, pactivity.mTimestamp.toString());
+        commonLogic = ProductionLeaderLogic.getInstance(context, pactivity.module, pactivity.mTimestamp.toString());
         initData();
     }
 

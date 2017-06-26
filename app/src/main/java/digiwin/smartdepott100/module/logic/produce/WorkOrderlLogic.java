@@ -6,45 +6,37 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import digiwin.library.json.JsonResp;
 import digiwin.library.utils.LogUtils;
 import digiwin.library.utils.StringUtils;
 import digiwin.library.utils.ThreadPoolManager;
 import digiwin.library.xml.ParseXmlResp;
 import digiwin.smartdepott100.R;
 import digiwin.smartdepott100.core.appcontants.ReqTypeName;
+import digiwin.smartdepott100.core.json.JsonReqForERP;
 import digiwin.smartdepott100.core.net.IRequestCallbackImp;
 import digiwin.smartdepott100.core.net.OkhttpRequest;
 import digiwin.smartdepott100.core.xml.CreateParaXmlReqIm;
+import digiwin.smartdepott100.module.bean.common.FilterResultOrderBean;
+import digiwin.smartdepott100.module.bean.common.ListSumBean;
 import digiwin.smartdepott100.module.bean.common.ScanLocatorBackBean;
 import digiwin.smartdepott100.module.bean.produce.AccordingMaterialSumBean;
 import digiwin.smartdepott100.module.logic.common.CommonLogic;
 
 /**
- * @author 赵浩然
+ * @author songjie
  * @module 依工单发料管理类
  * @date 2017/3/2
  */
 
-public class WorkOrderlLogic {
+public class WorkOrderlLogic extends CommonLogic{
 
     private static final String TAG = "WorkOrderlLogic";
-
-    private Context mContext;
-    /**
-     * 模组名
-     */
-    private String mModule = "";
-    /**
-     * 设备号+模组+时间
-     */
-    private String mTimestamp = "";
 
     private static WorkOrderlLogic logic;
 
     private WorkOrderlLogic(Context context, String module, String timestamp) {
-        mContext = context;
-        mModule = module;
-        mTimestamp = timestamp;
+        super(context, module, timestamp);
 
     }
 
@@ -58,7 +50,7 @@ public class WorkOrderlLogic {
      * 扫描工单号监听
      */
     public interface ScanCodeListener {
-        public void onSuccess(List<AccordingMaterialSumBean> accordingMaterialSumBeen);
+        public void onSuccess(List<ListSumBean> accordingMaterialSumBeen);
 
         public void onFailed(String error);
     }
@@ -70,92 +62,43 @@ public class WorkOrderlLogic {
         ThreadPoolManager.getInstance().executeTask(new Runnable() {
             @Override
             public void run() {
-                try {
-                    String xml = CreateParaXmlReqIm.getInstance(map, mModule, ReqTypeName.WORKORDER, mTimestamp).toXml();
-                    OkhttpRequest.getInstance(mContext).post(xml, new IRequestCallbackImp() {
+                try{
+                    String createJson = JsonReqForERP.mapCreateJson(mModule, "als.b003.list.detail.get", mTimestamp, map);
+                    OkhttpRequest.getInstance(mContext).post(createJson, new IRequestCallbackImp() {
                         @Override
-                        public void onResponse(String string) {
-                            ParseXmlResp xmlResp = ParseXmlResp.fromXml(ReqTypeName.WORKORDER, string);
+                        public void onResponse(String s) {
                             String error = mContext.getString(R.string.unknow_error);
-                            if (null != xmlResp) {
-                                if (ReqTypeName.SUCCCESSCODE.equals(xmlResp.getCode())) {
-                                    List<AccordingMaterialSumBean> accordingMaterialSumBeen = xmlResp.getMasterDatas(AccordingMaterialSumBean.class);
-                                    if (accordingMaterialSumBeen.size() > 0) {
-                                        List<AccordingMaterialSumBean> dataList = new ArrayList<AccordingMaterialSumBean>();
+                            if (null != s) {
+                                if (ReqTypeName.SUCCCESSCODE.equals(JsonResp.getCode(s))) {
+                                    List<ListSumBean> accordingMaterialSumBeen = JsonResp.getParaDatas(s,"list_detail",ListSumBean.class);
+                                   if(accordingMaterialSumBeen.size()>0){
+                                       List<ListSumBean> dataList = new ArrayList<ListSumBean>();
                                         for (int i = 0; i < accordingMaterialSumBeen.size(); i++) {
-                                            AccordingMaterialSumBean data = accordingMaterialSumBeen.get(i);
-                                            data.setShortage_qty(StringUtils.deleteZero(data.getShortage_qty()));
+                                            ListSumBean data = accordingMaterialSumBeen.get(i);
                                             data.setStock_qty(StringUtils.deleteZero(data.getStock_qty()));
+                                            data.setApply_qty(StringUtils.deleteZero(data.getApply_qty()));
                                             data.setScan_sumqty(StringUtils.deleteZero(data.getScan_sumqty()));
                                             dataList.add(data);
                                         }
+                                       listener.onSuccess(dataList);
+                                       return;
+                                   }
 
-                                        listener.onSuccess(dataList);
-                                        return;
-                                    } else {
-                                        error = mContext.getString(R.string.data_null);
-                                    }
                                 } else {
-                                    error = xmlResp.getDescription();
+                                    error = JsonResp.getDescription(s);
                                 }
                             }
                             listener.onFailed(error);
                         }
                     });
-                } catch (Exception e) {
+                }catch (Exception e){
                     listener.onFailed(mContext.getString(R.string.unknow_error));
-                    LogUtils.e(TAG, "scanBarcode--->" + e);
+                    LogUtils.e(TAG, "getSum--->" + e);
                 }
             }
-        }, null);
+        },null);
     }
 
-    /**
-     * 扫描库位
-     */
-    public interface ScanLocatorListener {
-        public void onSuccess(ScanLocatorBackBean locatorBackBean);
-
-        public void onFailed(String error);
-    }
-
-    /**
-     * 扫描库位
-     */
-    public void scanLocator(final Map<String, String> map, final CommonLogic.ScanLocatorListener listener) {
-        ThreadPoolManager.getInstance().executeTask(new Runnable() {
-            @Override
-            public void run() {
-                try {
-                    String xml = CreateParaXmlReqIm.getInstance(map, mModule, ReqTypeName.STORAGE, mTimestamp).toXml();
-                    OkhttpRequest.getInstance(mContext).post(xml, new IRequestCallbackImp() {
-                        @Override
-                        public void onResponse(String string) {
-                            ParseXmlResp xmlResp = ParseXmlResp.fromXml(ReqTypeName.STORAGE, string);
-                            String error = mContext.getString(R.string.unknow_error);
-                            if (null != xmlResp) {
-                                if (ReqTypeName.SUCCCESSCODE .equals( xmlResp.getCode())) {
-                                    List<ScanLocatorBackBean> locatorBackBeen = xmlResp.getParameterDatas(ScanLocatorBackBean.class);
-                                    if (locatorBackBeen.size() > 0) {
-                                        listener.onSuccess(locatorBackBeen.get(0));
-                                        return;
-                                    } else {
-                                        error = mContext.getString(R.string.data_null);
-                                    }
-                                } else {
-                                    error = xmlResp.getDescription();
-                                }
-                            }
-                            listener.onFailed(error);
-                        }
-                    });
-                } catch (Exception e) {
-                    listener.onFailed(mContext.getString(R.string.unknow_error));
-                    LogUtils.e(TAG, "scanLocator--->" + e);
-                }
-            }
-        }, null);
-    }
 
     /**
      * 提交
@@ -174,30 +117,55 @@ public class WorkOrderlLogic {
             @Override
             public void run() {
                 try {
-                    final String xml = CreateParaXmlReqIm.getInstance(map, mModule, ReqTypeName.COMMIT, mTimestamp).toXml();
-                    OkhttpRequest.getInstance(mContext).post(xml, new IRequestCallbackImp() {
+                    String createJson = JsonReqForERP.mapCreateJson(mModule, "als.b003.submit", mTimestamp, map);
+                    OkhttpRequest.getInstance(mContext).post(createJson, new IRequestCallbackImp() {
                         @Override
                         public void onResponse(String string) {
-                            ParseXmlResp xmlResp = ParseXmlResp.fromXml(ReqTypeName.COMMIT, string);
-                            String error= mContext.getString(R.string.unknow_error);
-                            if (null!=xmlResp){
-                                if (ReqTypeName.SUCCCESSCODE.equals(xmlResp.getCode())){
-                                    listener.onSuccess(xmlResp.getFieldString());
+                            String error = mContext.getString(R.string.unknow_error);
+                            if (null != string) {
+                                if (ReqTypeName.SUCCCESSCODE.equals(JsonResp.getCode(string))) {
+                                    String doc_no = JsonResp.getParaString(string,"doc_no");
+                                    if(null != doc_no){
+                                        listener.onSuccess(JsonResp.getParaString(string,"doc_no"));
+                                    }
                                     return;
-                                }else {
-                                    error=xmlResp.getDescription();
+                                } else {
+                                    error = JsonResp.getDescription(string);
                                 }
                             }
                             listener.onFailed(error);
                         }
                     });
-                }catch (Exception e){
+                } catch (Exception e) {
                     listener.onFailed(mContext.getString(R.string.unknow_error));
                     LogUtils.e(TAG, "getSum--->" + e);
                 }
             }
-        },null);
+        }, null);
     }
-
+//            public void run() {
+//                try {
+//                    String createJson = JsonReqForERP.mapCreateJson(mModule, ReqTypeName.COMMIT, mTimestamp, map);
+//                    OkhttpRequest.getInstance(mContext).post(xml, new IRequestCallbackImp() {
+//                        @Override
+//                        public void onResponse(String string) {
+//                            ParseXmlResp xmlResp = ParseXmlResp.fromXml(ReqTypeName.COMMIT, string);
+//                            String error= mContext.getString(R.string.unknow_error);
+//                            if (null!=xmlResp){
+//                                if (ReqTypeName.SUCCCESSCODE.equals(xmlResp.getCode())){
+//                                    listener.onSuccess(xmlResp.getFieldString());
+//                                    return;
+//                                }else {
+//                                    error=xmlResp.getDescription();
+//                                }
+//                            }
+//                            listener.onFailed(error);
+//                        }
+//                    });
+//                }catch (Exception e){
+//                    listener.onFailed(mContext.getString(R.string.unknow_error));
+//                    LogUtils.e(TAG, "getSum--->" + e);
+//                }
+//            }
 
 }

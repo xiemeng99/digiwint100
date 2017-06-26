@@ -14,6 +14,7 @@ import java.util.Map;
 
 import butterknife.BindView;
 import butterknife.OnClick;
+import digiwin.smartdepott100.module.logic.sale.salereturn.SaleReturnLogic;
 import digiwin.library.dialog.OnDialogClickListener;
 import digiwin.library.dialog.OnDialogTwoListener;
 import digiwin.library.utils.ActivityManagerUtils;
@@ -76,7 +77,7 @@ public class SaleReturnSumFg extends BaseFragment {
 
     SaleReturnSecondActivity pactivity;
 
-    CommonLogic commonLogic;
+    SaleReturnLogic logic;
 
     private boolean upDateFlag;
 
@@ -93,7 +94,7 @@ public class SaleReturnSumFg extends BaseFragment {
     @Override
     protected void doBusiness() {
         pactivity = (SaleReturnSecondActivity) activity;
-        commonLogic = CommonLogic.getInstance(pactivity, pactivity.module, pactivity.mTimestamp.toString());
+        logic = SaleReturnLogic.getInstance(pactivity, pactivity.module, pactivity.mTimestamp.toString());
         FullyLinearLayoutManager linearLayoutManager = new FullyLinearLayoutManager(activity);
         ryList.setLayoutManager(linearLayoutManager);
         upDateFlag = false;
@@ -117,7 +118,9 @@ public class SaleReturnSumFg extends BaseFragment {
             }
             clickItemPutData.setReceipt_date(orderData.getCreate_date());
             showLoadingDialog();
-            commonLogic.getOrderSumData(clickItemPutData, new CommonLogic.GetOrderSumListener() {
+            HashMap<String,String> map = new HashMap<>();
+            map.put(AddressContants.DOC_NO,clickItemPutData.getDoc_no());
+            logic.getSOLSumData(map, new CommonLogic.GetZSumListener() {
                 @Override
                 public void onSuccess(List<ListSumBean> list) {
                     dismissLoadingDialog();
@@ -132,7 +135,7 @@ public class SaleReturnSumFg extends BaseFragment {
 
                 @Override
                 public void onFailed(String error) {
-                   dismissLoadingDialog();
+                    dismissLoadingDialog();
                     upDateFlag = false;
                     try {
                         showFailedDialog(error);
@@ -177,7 +180,7 @@ public class SaleReturnSumFg extends BaseFragment {
         sumShowBean.setItem_name(orderSumData.getItem_name());
         sumShowBean.setItem_no(orderSumData.getItem_no());
         sumShowBean.setAvailable_in_qty(orderSumData.getReceipt_qty());
-        commonLogic.getDetail(map, new CommonLogic.GetDetailListener() {
+        logic.getDetail(map, new CommonLogic.GetDetailListener() {
             @Override
             public void onSuccess(List<DetailShowBean> detailShowBeen) {
                 Bundle bundle = new Bundle();
@@ -192,7 +195,7 @@ public class SaleReturnSumFg extends BaseFragment {
             @Override
             public void onFailed(String error) {
                 dismissLoadingDialog();
-                showCommitFailDialog(error);
+                showFailedDialog(error);
             }
         });
     }
@@ -204,9 +207,11 @@ public class SaleReturnSumFg extends BaseFragment {
         }
         showLoadingDialog();
         HashMap<String, String> map = new HashMap<>();
-        commonLogic.commit(map, new CommonLogic.CommitListener() {
+        map.put(AddressContants.DOC_NO,orderData.getDoc_no());
+        logic.commitSOLData(map, new CommonLogic.CommitListener() {
             @Override
             public void onSuccess(String msg) {
+                LogUtils.e(TAG,msg);
                 dismissLoadingDialog();
                 showCommitSuccessDialog(msg, new OnDialogClickListener() {
                     @Override
@@ -224,6 +229,7 @@ public class SaleReturnSumFg extends BaseFragment {
 
             @Override
             public void onFailed(String error) {
+                LogUtils.e(TAG,error);
                 dismissLoadingDialog();
                 showCommitFailDialog(error);
             }

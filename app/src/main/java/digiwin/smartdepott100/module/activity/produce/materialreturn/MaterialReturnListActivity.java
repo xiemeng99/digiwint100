@@ -19,6 +19,7 @@ import butterknife.BindView;
 import butterknife.BindViews;
 import butterknife.OnClick;
 import butterknife.OnFocusChange;
+import digiwin.smartdepott100.module.logic.produce.materialreturn.MaterialReturnLogic;
 import digiwin.library.datepicker.DatePickerUtils;
 import digiwin.library.utils.ActivityManagerUtils;
 import digiwin.library.utils.LogUtils;
@@ -28,12 +29,10 @@ import digiwin.smartdepott100.R;
 import digiwin.smartdepott100.core.appcontants.ModuleCode;
 import digiwin.smartdepott100.core.base.BaseTitleActivity;
 import digiwin.smartdepott100.core.modulecommon.ModuleUtils;
-import digiwin.smartdepott100.login.bean.AccoutBean;
 import digiwin.smartdepott100.login.loginlogic.LoginLogic;
 import digiwin.smartdepott100.module.adapter.produce.MaterialReturnListAdapter;
 import digiwin.smartdepott100.module.bean.common.FilterBean;
 import digiwin.smartdepott100.module.bean.common.FilterResultOrderBean;
-import digiwin.smartdepott100.module.logic.common.CommonLogic;
 
 /**
  * @author xiemeng
@@ -73,7 +72,7 @@ public class MaterialReturnListActivity extends BaseTitleActivity {
     @BindView(R.id.ll_search_input)
     LinearLayout llSearchInput;
 
-    private CommonLogic logic;
+    private MaterialReturnLogic logic;
 
     private boolean isSearching;
 
@@ -201,8 +200,8 @@ public class MaterialReturnListActivity extends BaseTitleActivity {
     @Override
     protected void initNavigationTitle() {
         super.initNavigationTitle();
-        mName.setText(R.string.mataerial_returning);
         search.setVisibility(View.VISIBLE);
+        mName.setText(getString(R.string.mataerial_returning)+""+getString(R.string.list));
         search.setImageResource(R.drawable.search);
         isSearching = true;
     }
@@ -217,7 +216,7 @@ public class MaterialReturnListActivity extends BaseTitleActivity {
         etDate.setKeyListener(null);
         list = new ArrayList<>();
         ryList.setLayoutManager(new LinearLayoutManager(activity));
-        logic = CommonLogic.getInstance(activity, module, mTimestamp.toString());
+        logic = MaterialReturnLogic.getInstance(activity, module, mTimestamp.toString());
     }
 
     @Override
@@ -238,14 +237,13 @@ public class MaterialReturnListActivity extends BaseTitleActivity {
             adapter = new MaterialReturnListAdapter(activity, list);
             ryList.setAdapter(adapter);
             FilterBean filterBean = new FilterBean();
-            AccoutBean userInfo = LoginLogic.getUserInfo();
             filterBean.setDoc_no(etMateialreturnNumber.getText().toString());
-            filterBean.setWarehouse_in_no(LoginLogic.getWare());
+            filterBean.setWarehouse_no(LoginLogic.getWare());
             filterBean.setDepartment_no(etDepartment.getText().toString());
             filterBean.setEmployee_no(etPerson.getText().toString());
             filterBean.setDate_begin(startDate);
             filterBean.setDate_end(endDate);
-            logic.getOrderData(filterBean, new CommonLogic.GetOrderListener() {
+            logic.getMRListData(filterBean, new MaterialReturnLogic.GetDataListListener() {
                 @Override
                 public void onSuccess(List<FilterResultOrderBean> masterDatas) {
                     list = masterDatas;

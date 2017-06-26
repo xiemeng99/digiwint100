@@ -19,6 +19,9 @@ import butterknife.BindView;
 import butterknife.BindViews;
 import butterknife.OnClick;
 import butterknife.OnTextChanged;
+import digiwin.smartdepott100.login.loginlogic.LoginLogic;
+import digiwin.smartdepott100.module.bean.common.ListSumBean;
+import digiwin.smartdepott100.module.logic.stock.MoveStoreLogic;
 import digiwin.library.dialog.OnDialogClickListener;
 import digiwin.library.dialog.OnDialogTwoListener;
 import digiwin.library.utils.ActivityManagerUtils;
@@ -33,7 +36,6 @@ import digiwin.smartdepott100.core.base.BaseFragment;
 import digiwin.smartdepott100.module.activity.common.CommonDetailActivity;
 import digiwin.smartdepott100.module.activity.stock.movestore.MoveStoreActivity;
 import digiwin.smartdepott100.module.adapter.stock.MoveStoreAdapter;
-import digiwin.smartdepott100.module.adapter.stock.storeallot.StoreAllotSumAdapter;
 import digiwin.smartdepott100.module.bean.common.DetailShowBean;
 import digiwin.smartdepott100.module.bean.common.ScanLocatorBackBean;
 import digiwin.smartdepott100.module.bean.common.SumShowBean;
@@ -93,9 +95,9 @@ public class MoveStoreSumFg extends BaseFragment {
 
     BaseRecyclerAdapter adapter;
 
-    List<SumShowBean> sumShowBeanList;
+    List<ListSumBean> sumShowBeanList;
 
-    CommonLogic commonLogic;
+    MoveStoreLogic moveStoreLogic;
     private Handler mHandler = new Handler(new Handler.Callback() {
         @Override
         public boolean handleMessage(Message msg) {
@@ -103,10 +105,10 @@ public class MoveStoreSumFg extends BaseFragment {
                 case LOCATORWHAT:
                     HashMap<String, String> locatorMap = new HashMap<>();
                     locatorMap.put(AddressContants.STORAGE_SPACES_BARCODE, String.valueOf(msg.obj));
-                    commonLogic.scanLocator(locatorMap, new CommonLogic.ScanLocatorListener() {
+                    moveStoreLogic.scanLocator(locatorMap, new CommonLogic.ScanLocatorListener() {
                         @Override
                         public void onSuccess(ScanLocatorBackBean locatorBackBean) {
-                            tvLocator.setText(locatorBackBean.getStorage_spaces_name());
+                            tvLocator.setText(locatorBackBean.getStorage_spaces_no());
                             tvStorage.setText(locatorBackBean.getWarehouse_name());
                             locatorFlag=true;
                         }
@@ -152,10 +154,11 @@ public class MoveStoreSumFg extends BaseFragment {
             adapter = new MoveStoreAdapter(activity, sumShowBeanList);
             ryList.setAdapter(adapter);
             Map<String, String> map = new HashMap<>();
+            map.put(AddressContants.WAREHOUSE_NO, LoginLogic.getWare());
             showLoadingDialog();
-            commonLogic.getSum(map, new CommonLogic.GetSumListener() {
+            moveStoreLogic.getMoveStoreList(map, new CommonLogic.GetZSumListener() {
                 @Override
-                public void onSuccess(List<SumShowBean> list) {
+                public void onSuccess(List<ListSumBean> list) {
                     sumShowBeanList = list;
                     adapter = new MoveStoreAdapter(activity, sumShowBeanList);
                     ryList.setAdapter(adapter);
@@ -170,8 +173,8 @@ public class MoveStoreSumFg extends BaseFragment {
                     try {
                         dismissLoadingDialog();
                         showFailedDialog(error);
-                        sumShowBeanList = new ArrayList<SumShowBean>();
-                        adapter = new StoreAllotSumAdapter(activity, sumShowBeanList);
+                        sumShowBeanList = new ArrayList<ListSumBean>();
+                        adapter = new MoveStoreAdapter(activity, sumShowBeanList);
                         ryList.setAdapter(adapter);
                     } catch (Exception e) {
                         LogUtils.e(TAG, "updateList--getSum--onFailed" + e);
@@ -203,17 +206,19 @@ public class MoveStoreSumFg extends BaseFragment {
     /**
      * 查看明细
      */
-    private void getDetail(final SumShowBean sumShowBean) {
+    private void getDetail(final ListSumBean listSumBean) {
         Map<String, String> map = new HashMap<>();
         showLoadingDialog();
-        map.put(AddressContants.ITEM_NO, sumShowBean.getItem_no());
-        commonLogic.getDetail(map, new CommonLogic.GetDetailListener() {
+       final SumShowBean showBean = new SumShowBean();
+        showBean.setItem_no(listSumBean.getItem_no());
+        map.put(AddressContants.ITEM_NO, showBean.getItem_no());
+        moveStoreLogic.getDetail(map, new CommonLogic.GetDetailListener() {
             @Override
             public void onSuccess(List<DetailShowBean> detailShowBeen) {
                 Bundle bundle = new Bundle();
                 bundle.putString(AddressContants.MODULEID_INTENT, pactivity.mTimestamp.toString());
                 bundle.putString(CommonDetailActivity.MODULECODE,pactivity.module);
-                bundle.putSerializable(CommonDetailActivity.ONESUM, sumShowBean);
+                bundle.putSerializable(CommonDetailActivity.ONESUM, showBean);
                 bundle.putSerializable(CommonDetailActivity.DETAIL, (Serializable) detailShowBeen);
                 dismissLoadingDialog();
                 ActivityManagerUtils.startActivityBundleForResult(activity, CommonDetailActivity.class, bundle, pactivity.DETAILCODE);
@@ -222,16 +227,17 @@ public class MoveStoreSumFg extends BaseFragment {
             @Override
             public void onFailed(String error) {
                 dismissLoadingDialog();
-                showCommitFailDialog(error);
+                showFailedDialog(error);
             }
         });
+
     }
 
     /**
      * 提交
      */
     private void sureCommit(){
-        if (!locatorFlag) {
+        if (!locatorFlag||StringUtils.isBlank(tvLocator.getText().toString().trim())) {
             showFailedDialog(R.string.scan_in_movelocator);
             return;
         }
@@ -242,7 +248,7 @@ public class MoveStoreSumFg extends BaseFragment {
         showLoadingDialog();
         HashMap<String, String> map = new HashMap<>();
         map.put("storage_spaces_in_no",tvLocator.getText().toString());
-        commonLogic.commit(map, new CommonLogic.CommitListener() {
+        moveStoreLogic.commit(map, new CommonLogic.CommitListener() {
             @Override
             public void onSuccess(String msg) {
                 dismissLoadingDialog();
@@ -268,7 +274,7 @@ public class MoveStoreSumFg extends BaseFragment {
 
     private void initData(){
         sumShowBeanList=new ArrayList<>();
-        commonLogic = CommonLogic.getInstance(activity, pactivity.module, pactivity.mTimestamp.toString());
+        moveStoreLogic = MoveStoreLogic.getInstance(activity, pactivity.module, pactivity.mTimestamp.toString());
         locatorFlag=false;
         upDateFlag = false;
         etScanMoveinlocator.setText("");

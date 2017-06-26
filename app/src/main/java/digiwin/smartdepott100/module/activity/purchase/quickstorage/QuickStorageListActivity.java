@@ -1,6 +1,7 @@
 package digiwin.smartdepott100.module.activity.purchase.quickstorage;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
@@ -19,13 +20,16 @@ import butterknife.BindView;
 import butterknife.BindViews;
 import butterknife.OnClick;
 import butterknife.OnFocusChange;
+import digiwin.library.constant.SharePreKey;
 import digiwin.library.datepicker.DatePickerUtils;
 import digiwin.library.utils.ActivityManagerUtils;
+import digiwin.library.utils.SharedPreferencesUtils;
 import digiwin.library.utils.StringUtils;
 import digiwin.pulltorefreshlibrary.recyclerview.FullyLinearLayoutManager;
 import digiwin.pulltorefreshlibrary.recyclerviewAdapter.OnItemClickListener;
 import digiwin.smartdepott100.R;
 import digiwin.smartdepott100.core.appcontants.ModuleCode;
+import digiwin.smartdepott100.core.appcontants.SharePreferenceKey;
 import digiwin.smartdepott100.core.base.BaseTitleActivity;
 import digiwin.smartdepott100.core.modulecommon.ModuleUtils;
 import digiwin.smartdepott100.login.loginlogic.LoginLogic;
@@ -33,11 +37,12 @@ import digiwin.smartdepott100.module.adapter.stock.QuickStorageListAdapter;
 import digiwin.smartdepott100.module.bean.common.FilterBean;
 import digiwin.smartdepott100.module.bean.common.FilterResultOrderBean;
 import digiwin.smartdepott100.module.logic.common.CommonLogic;
+import digiwin.smartdepott100.module.logic.produce.QuickStorageLogic;
 
 /**
- * @author 赵浩然
+ * @author 孙长权
  * @module 快速入库 -- 清单
- * @date 2017/3/31
+ * @date 2017/6/15
  */
 
 public class QuickStorageListActivity extends BaseTitleActivity{
@@ -45,7 +50,7 @@ public class QuickStorageListActivity extends BaseTitleActivity{
 
     QuickStorageListAdapter adapter;
 
-    CommonLogic commonLogic;
+    QuickStorageLogic quickStorageLogic;
 
     @BindView(R.id.toolbar_title)
     Toolbar toolbar_title;
@@ -171,14 +176,15 @@ public class QuickStorageListActivity extends BaseTitleActivity{
         try {
             showLoadingDialog();
 
-            FilterBean.setWarehouse_in_no(LoginLogic.getWare());
+//            FilterBean.setWarehouse_in_no(LoginLogic.getWare());
+            FilterBean.setPagesize((String)SharedPreferencesUtils.get(this, SharePreKey.PAGE_SETTING,"10"));
 
             if(!StringUtils.isBlank(et_provider_code.getText().toString().trim())){
-                FilterBean.setDoc_no(et_provider_code.getText().toString().trim());
+                FilterBean.setSupplier_no(et_provider_code.getText().toString().trim());//供应商
             }
 
             if(!StringUtils.isBlank(et_barcode_no.getText().toString().trim())){
-                FilterBean.setBarcode_no(et_barcode_no.getText().toString().trim());
+                FilterBean.setItem_no(et_barcode_no.getText().toString().trim());//料号
             }
 
             if(!StringUtils.isBlank(et_item_name.getText().toString().trim())){
@@ -193,12 +199,11 @@ public class QuickStorageListActivity extends BaseTitleActivity{
             e.printStackTrace();
         }
 
-        commonLogic.getOrderData(FilterBean, new CommonLogic.GetOrderListener() {
+        quickStorageLogic.getQuickStorageOrderData(FilterBean, new CommonLogic.GetOrderListener() {
             @Override
             public void onSuccess(final List<FilterResultOrderBean> list) {
                 dismissLoadingDialog();
                 if(list.size() > 0){
-                    mName.setText(R.string.title_quickstorage_list);
                     ll_search_dialog.setVisibility(View.GONE);
                     scrollview.setVisibility(View.VISIBLE);
                     dataList = new ArrayList<FilterResultOrderBean>();
@@ -234,7 +239,7 @@ public class QuickStorageListActivity extends BaseTitleActivity{
     @Override
     protected void doBusiness() {
         et_plan_date.setKeyListener(null);
-        commonLogic = CommonLogic.getInstance(activity,module,mTimestamp.toString());
+        quickStorageLogic = QuickStorageLogic.getInstance(activity,module,mTimestamp.toString());
         FullyLinearLayoutManager linearLayoutManager = new FullyLinearLayoutManager(activity);
         ry_list.setLayoutManager(linearLayoutManager);
 
@@ -293,7 +298,7 @@ public class QuickStorageListActivity extends BaseTitleActivity{
     @Override
     protected void initNavigationTitle() {
         super.initNavigationTitle();
-        mName.setText(R.string.filter_condition);
+        mName.setText(R.string.title_quickstorage_list);
         activity = this;
         iv_title_setting.setVisibility(View.VISIBLE);
         iv_title_setting.setImageResource(R.drawable.search);

@@ -11,6 +11,10 @@ public interface ReqTypeName {
      */
     static final String SUCCCESSCODE = "0";
     /**
+     *java 成功时的返回码
+     */
+    static final String SUCCCESSCODEJAVA = "200";
+    /**
      * 登录验证
      */
     static final String GETAC = "als.user.login.get";
@@ -19,30 +23,34 @@ public interface ReqTypeName {
      */
     static  final  String GETAP="GetAp";
     /**
+     * 验证是否可以登录
+     */
+    static final String DEVICHECK = "als.user.device.check";
+    /**
      * 获取营用中心
      */
     static final String GETOC = "als.ent.site.get";
     /**
      * 版本更新
      */
-    static final String GETVERUP = "GetVerup";
+    static final String GETVERUP = "als.ver.up.get";
 
     /**
      * 获取仓库
      */
-    static final String GETWARE = "GetWare";
+    static final String GETWARE = "als.user.ware.get";
     /**
      * 扫描物料条码
      */
-    static final String BARCODE = "app.barcode.no.get";
+    static final String BARCODE = "als.barcode.no.get";
     /**
      * 扫描库位
      */
-    static final String STORAGE = "app.storage.spaces.get";
+    static final String STORAGE = "als.ware.storage.get";
     /**
      * 保存
      */
-    static final String SCANINFOSAVE = "app.scaninfo.keep";
+    static final String SCANINFOSAVE = "als.data.save";
     /**
      * 装箱保存
      */
@@ -56,13 +64,17 @@ public interface ReqTypeName {
      */
     static final String COMMIT = "app.receipt.submit";
     /**
+     * 快速入库提交
+     */
+    static final String QUICKSTORAGE_COMMIT = "als.a007.submit";
+    /**
      * 获取明细
      */
-    static final String GETDETAIL = "app.scandetail.get";
+    static final String GETDETAIL = "als.scan.list.get";
     /**
      * 修改删除
      */
-    static final String UPDATEDELETE = "app.scandetail.upd";
+    static final String UPDATEDELETE = "als.scan.list.upd";
     /**
      * 修改删除(产品装箱)
      */
@@ -71,7 +83,7 @@ public interface ReqTypeName {
     /**
      * 退出调用
      */
-    static final String EXIT = "app.scan.del";
+    static final String EXIT = "als.return.clear";
     /**
      * 获取未完事项
      */
@@ -103,6 +115,10 @@ public interface ReqTypeName {
      */
     static final String  GETFIFO = "app.item.fifo.get";
     /**
+     * 获取FIFO数据-根据料号
+     */
+    static final String  GET_ALS_FIFO = "als.item.fifo.get";
+    /**
      *  获取FIFO数据
      */
     static final String  POSTMATERIALFIFO = "app.doc.no.fifo.get";
@@ -112,9 +128,17 @@ public interface ReqTypeName {
      */
     static final String POSTMATERIALGETORDERLIST = "app.get.data.list";
     /**
+     * 快速入库 获取待办事项
+     */
+    static final String QUICKSTORAGELIST = "als.a007.list.get";
+    /**
      * 领料过账 获取汇总数据
      */
     static final String POSTMATERIALSUMDATA = "app.get.data.list.detail";
+    /**
+     *  快速入库 获取汇总数据
+     */
+    static final String QUICKSTORAGESUMDATA = "als.a007.list.detail.get";
 
     /**
      * 调拨复核提交
@@ -262,4 +286,87 @@ public interface ReqTypeName {
      * 保存PQC
      */
     static final String SAVEPQC = "app.check.measure.data";
+
+    /**
+     * move 工序转移 对接人员
+     */
+    static final String SCANEMPMOVE="als.e007.employee_name.get";
+    /**
+     * 查询（流转标签补打）
+     */
+    static final String PRINTERQUERY="als.e009.plot_print.get";
+    /**
+     * 查询(成品标签补打)
+     */
+    static final String PRINTEFINISHRQUERY="als.e010.product_print.get";
+    /**
+     *move check模块 扫描生产批次
+     */
+    static final String SCANCIR = "als.e007.lot_no.get";
+    /**
+     * move 扫描工序号
+     */
+    static final String SCANPROCEMOVE="als.e007.op_seq.get";
+
+    /**
+     * check 扫描员工号
+     */
+    static final String SCANEMPLYEECHECK="als.e008.employee_name.get";
+    /**
+     * check 扫描工序号
+     */
+    static final String SCANPROCECHECK = "als.e008.op_seq.get";
+    /**
+     * 扫描工单号
+     */
+    static final String SCANORDER="als.e008.wo_basis.get";
+    /**
+     * PQC列表筛选
+     */
+    static final String FILTRATE="als.a060.list.get";
+    /**
+     * 采购仓退列表
+     */
+    static final String PURCHASE_STORE="als.a008.list.get";
+    /**
+     * 采购仓退汇总
+     */
+    static final String PURCHASE_SUM="als.a008.list.detail.get";
+    /**
+     * PQC提交
+     */
+    static final String PQCCOMMIT="als.a060.submit";
+
+    /**
+     * 扫描资源
+     */
+    static final String SCANRESOURCE="als.e008.machine_no.get";
+    /**
+     * 扫描不良原因
+     */
+    static final String DEFECTRES="als.e008.defect_reason.get";
+    /**
+     * 生产报工check in 提交
+     */
+    static final String CHECKINCOMMIT="als.e008.check_in.submit";
+
+    /**
+     * move in提交
+     */
+    static final String MOVEINCOMMIT = "als.e007.move_in.submit";
+    /**
+     * move out提交
+     */
+    static final String MOVEOUTCOMMIT = "als.e007.move_out.submit";
+    /**
+     * 生产报工check out 提交
+     */
+    static final String CHECKOUTCOMMIT="als.e008.check_out.submit";
+
+    /**
+     * 扫描批次
+     */
+    static final String SCANPLOTNO = "als.b006.plot.get";
+
+
 }

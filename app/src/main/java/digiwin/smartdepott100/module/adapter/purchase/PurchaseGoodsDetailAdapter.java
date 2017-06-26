@@ -24,7 +24,7 @@ import digiwin.smartdepott100.module.bean.common.DetailShowBean;
 public class PurchaseGoodsDetailAdapter extends BaseDetailRecyclerAdapter<DetailShowBean> {
     private static final String TAG = "PurchaseGoodsDetailAdapter";
     private Map<Integer, Boolean> map;
-
+    private List<DetailShowBean> detailList;
     public Map<Integer, Boolean> getMap() {
         return map;
     }
@@ -35,6 +35,7 @@ public class PurchaseGoodsDetailAdapter extends BaseDetailRecyclerAdapter<Detail
 
     public PurchaseGoodsDetailAdapter(Context ctx, List<DetailShowBean> list) {
         super(ctx, list);
+        detailList = list;
     }
 
     @Override
@@ -67,7 +68,9 @@ public class PurchaseGoodsDetailAdapter extends BaseDetailRecyclerAdapter<Detail
         }else{
             cb.setChecked(false);
         }
-
+        if(position == detailList.size()-1){
+            holder.setVisibility(R.id.bottom_line,View.GONE);
+        }
     }
 
     @Override

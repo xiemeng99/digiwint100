@@ -18,21 +18,22 @@ import butterknife.BindViews;
 import butterknife.OnClick;
 import butterknife.OnFocusChange;
 import butterknife.OnTextChanged;
-import digiwin.library.dialog.OnDialogClickListener;
-import digiwin.library.utils.StringUtils;
 import digiwin.smartdepott100.R;
 import digiwin.smartdepott100.core.appcontants.AddressContants;
 import digiwin.smartdepott100.core.base.BaseFirstModuldeActivity;
 import digiwin.smartdepott100.core.base.BaseFragment;
+import digiwin.smartdepott100.core.coreutil.CommonUtils;
 import digiwin.smartdepott100.core.modulecommon.ModuleUtils;
-import digiwin.smartdepott100.login.bean.AccoutBean;
 import digiwin.smartdepott100.login.loginlogic.LoginLogic;
-import digiwin.smartdepott100.module.activity.purchase.purchasegoodsscan.PurchaseGoodsScanSecondActivity;
+import digiwin.smartdepott100.module.activity.purchase.purchasegoodsscan.PurchaseGoodsScanActivity;
 import digiwin.smartdepott100.module.bean.common.FilterResultOrderBean;
 import digiwin.smartdepott100.module.bean.common.SaveBackBean;
 import digiwin.smartdepott100.module.bean.common.SaveBean;
 import digiwin.smartdepott100.module.bean.common.ScanBarcodeBackBean;
 import digiwin.smartdepott100.module.logic.common.CommonLogic;
+import digiwin.smartdepott100.module.logic.purchase.PurchaseGoodScanLogic;
+import digiwin.library.dialog.OnDialogClickListener;
+import digiwin.library.utils.StringUtils;
 
 
 /**
@@ -110,7 +111,7 @@ public class PurchaseGoodsScanFg extends BaseFragment {
      */
     final int BARCODEWHAT = 1001;
 
-    CommonLogic commonLogic;
+    PurchaseGoodScanLogic commonLogic;
 
     @OnFocusChange(R.id.et_scan_barocde)
     void barcodeFocusChanage() {
@@ -135,7 +136,7 @@ public class PurchaseGoodsScanFg extends BaseFragment {
     }
 
     @OnClick(R.id.save)
-    void Save() {
+    void save() {
         if (!barcodeFlag) {
             showFailedDialog(R.string.scan_barcode);
             return;
@@ -145,10 +146,7 @@ public class PurchaseGoodsScanFg extends BaseFragment {
             return;
         }
         saveBean.setDoc_no(orderBean.getDoc_no());
-        AccoutBean accoutBean = LoginLogic.getUserInfo();
-        if(null != accoutBean){
-            saveBean.setWarehouse_in_no(accoutBean.getWare());
-        }
+        saveBean.setWarehouse_in_no(LoginLogic.getWare());
         saveBean.setQty(et_input_num.getText().toString());
         showLoadingDialog();
         commonLogic.scanSave(saveBean, new CommonLogic.SaveListener() {
@@ -168,7 +166,7 @@ public class PurchaseGoodsScanFg extends BaseFragment {
 
     }
 
-    PurchaseGoodsScanSecondActivity pactivity;
+    PurchaseGoodsScanActivity pactivity;
 
     FilterResultOrderBean orderBean = new FilterResultOrderBean();
 
@@ -181,10 +179,11 @@ public class PurchaseGoodsScanFg extends BaseFragment {
                     barcodeMap.put(AddressContants.BARCODE_NO, String.valueOf(msg.obj));
                     barcodeMap.put(AddressContants.WAREHOUSE_NO,LoginLogic.getWare());
                     barcodeMap.put(AddressContants.DOC_NO,orderBean.getDoc_no());
+                    barcodeMap.put(AddressContants.STORAGE_SPACES_NO,saveBean.getStorage_spaces_no());
                     commonLogic.scanBarcode(barcodeMap, new CommonLogic.ScanBarcodeListener() {
                         @Override
                         public void onSuccess(ScanBarcodeBackBean barcodeBackBean) {
-                            barcodeShow = barcodeBackBean.getShow();
+                            barcodeShow = barcodeBackBean.getShowing();
                             if(!StringUtils.isBlank(barcodeBackBean.getBarcode_qty())){
                                 et_input_num.setText(StringUtils.deleteZero(barcodeBackBean.getBarcode_qty()));
                             }
@@ -198,7 +197,11 @@ public class PurchaseGoodsScanFg extends BaseFragment {
                             saveBean.setLot_no(barcodeBackBean.getLot_no());
                             saveBean.setScan_sumqty(barcodeBackBean.getScan_sumqty());
                             saveBean.setAvailable_in_qty(barcodeBackBean.getAvailable_in_qty());
+                            saveBean.setItem_barcode_type(barcodeBackBean.getItem_barcode_type());
                             et_input_num.requestFocus();
+                            if (CommonUtils.isAutoSave(saveBean)){
+                                save();
+                            }
                         }
 
                         @Override
@@ -225,7 +228,7 @@ public class PurchaseGoodsScanFg extends BaseFragment {
 
     @Override
     protected void doBusiness() {
-        pactivity = (PurchaseGoodsScanSecondActivity) activity;
+        pactivity = (PurchaseGoodsScanActivity) activity;
         initData();
     }
 
@@ -257,16 +260,16 @@ public class PurchaseGoodsScanFg extends BaseFragment {
      * 初始化一些变量
      */
     public void initData() {
-        delete();
         tv_scaned_num.setText("");
         et_scan_barocde.setText("");
         barcodeShow = "";
         show();
         barcodeFlag = false;
         saveBean = new SaveBean();
-        commonLogic = CommonLogic.getInstance(context, pactivity.module, pactivity.mTimestamp.toString());
+        commonLogic = PurchaseGoodScanLogic.getInstance(context, pactivity.module, pactivity.mTimestamp.toString());
         orderBean = (FilterResultOrderBean) pactivity.getIntent().getExtras().getSerializable(AddressContants.ORDERDATA);
         et_scan_barocde.requestFocus();
+        delete();
         }
 
     /**
@@ -275,7 +278,7 @@ public class PurchaseGoodsScanFg extends BaseFragment {
     private void delete() {
         Map<String,String> map = new HashMap<>();
         map.put(AddressContants.FLAG, BaseFirstModuldeActivity.ExitMode.EXITD.getName());
-        commonLogic.exit(map, new CommonLogic.ExitListener() {
+        commonLogic.exit(map, new PurchaseGoodScanLogic.ExitListener() {
             @Override
             public void onSuccess(String msg) {
 

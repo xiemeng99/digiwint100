@@ -6,13 +6,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.TextView;
 
 import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import digiwin.smartdepott100.R;
+import digiwin.smartdepott100.core.weight.CenterTextView;
 import digiwin.smartdepott100.main.bean.ModuleBean;
 
 
@@ -77,7 +77,7 @@ public class CustomRecyclerAdapter extends RecyclerView.Adapter<CustomRecyclerAd
      */
     class OCViewHolder extends RecyclerView.ViewHolder{
         @BindView(R.id.tv_gridview_item)
-        public TextView tvTitle;
+        public CenterTextView tvTitle;
         @BindView(R.id.iv_gridview_item)
         public ImageView ivImage;
 
@@ -85,5 +85,6 @@ public class CustomRecyclerAdapter extends RecyclerView.Adapter<CustomRecyclerAd
             super(itemView);
             ButterKnife.bind(this,itemView);
         }
+
     }
 }

@@ -18,6 +18,8 @@ import butterknife.OnCheckedChanged;
 import butterknife.OnClick;
 import butterknife.OnFocusChange;
 import butterknife.OnTextChanged;
+import digiwin.smartdepott100.core.coreutil.CommonUtils;
+import digiwin.smartdepott100.module.logic.stock.MoveStoreLogic;
 import digiwin.library.dialog.OnDialogClickListener;
 import digiwin.library.utils.StringUtils;
 import digiwin.smartdepott100.R;
@@ -140,7 +142,7 @@ public class MoveStoreScanFg extends BaseFragment {
         }
         saveBean.setQty(etInputNum.getText().toString());
         showLoadingDialog();
-        commonLogic.scanSave(saveBean, new CommonLogic.SaveListener() {
+        moveStoreLogic.scanSave(saveBean, new CommonLogic.SaveListener() {
             @Override
             public void onSuccess(SaveBackBean saveBackBean) {
                 dismissLoadingDialog();
@@ -187,7 +189,7 @@ public class MoveStoreScanFg extends BaseFragment {
 
     SaveBean saveBean;
 
-    CommonLogic commonLogic;
+    MoveStoreLogic moveStoreLogic;
 
     private Handler mHandler = new Handler(new Handler.Callback() {
         @Override
@@ -196,7 +198,9 @@ public class MoveStoreScanFg extends BaseFragment {
                 case BARCODEWHAT:
                     HashMap<String, String> barcodeMap = new HashMap<>();
                     barcodeMap.put(AddressContants.BARCODE_NO, String.valueOf(msg.obj));
-                    commonLogic.scanBarcode(barcodeMap, new CommonLogic.ScanBarcodeListener() {
+                    barcodeMap.put(AddressContants.STORAGE_SPACES_BARCODE, saveBean.getStorage_spaces_no());
+                    barcodeMap.put(AddressContants.STORAGE_SPACES_NO,saveBean.getStorage_spaces_out_no());
+                    moveStoreLogic.scanBarcode(barcodeMap, new CommonLogic.ScanBarcodeListener() {
                         @Override
                         public void onSuccess(ScanBarcodeBackBean barcodeBackBean) {
                             etInputNum.setText(StringUtils.deleteZero(barcodeBackBean.getBarcode_qty()));
@@ -208,9 +212,13 @@ public class MoveStoreScanFg extends BaseFragment {
                             saveBean.setUnit_no(barcodeBackBean.getUnit_no());
                             saveBean.setLot_no(barcodeBackBean.getLot_no());
                             saveBean.setFifo_check(barcodeBackBean.getFifo_check());
+                            saveBean.setItem_barcode_type(barcodeBackBean.getItem_barcode_type());
                             etInputNum.requestFocus();
-                            barcodeShow = barcodeBackBean.getShow();
+                            barcodeShow = barcodeBackBean.getShowing();
                             show();
+                            if (CommonUtils.isAutoSave(saveBean)){
+                                save();
+                            }
                         }
 
                         @Override
@@ -228,15 +236,18 @@ public class MoveStoreScanFg extends BaseFragment {
                 case LOCATORWHAT:
                     HashMap<String, String> locatorMap = new HashMap<>();
                     locatorMap.put(AddressContants.STORAGE_SPACES_BARCODE, String.valueOf(msg.obj));
-                    commonLogic.scanLocator(locatorMap, new CommonLogic.ScanLocatorListener() {
+                    moveStoreLogic.scanLocator(locatorMap, new CommonLogic.ScanLocatorListener() {
                         @Override
                         public void onSuccess(ScanLocatorBackBean locatorBackBean) {
                             locatorFlag = true;
                             saveBean.setStorage_spaces_out_no(locatorBackBean.getStorage_spaces_no());
                             saveBean.setWarehouse_out_no(locatorBackBean.getWarehouse_no());
                             etScanBarocde.requestFocus();
-                            locatorShow = locatorBackBean.getShow();
+                            locatorShow = locatorBackBean.getShowing();
                             show();
+                            if (CommonUtils.isAutoSave(saveBean)){
+                                save();
+                            }
                         }
 
                         @Override
@@ -315,7 +326,7 @@ public class MoveStoreScanFg extends BaseFragment {
         tvDetailShow.setText("");
         etScanMoveOutlocator.setText("");
         includeDetail.setVisibility(View.GONE);
-        commonLogic = CommonLogic.getInstance(context, pactivity.module, pactivity.mTimestamp.toString());
+        moveStoreLogic = MoveStoreLogic.getInstance(context, pactivity.module, pactivity.mTimestamp.toString());
     }
 
 

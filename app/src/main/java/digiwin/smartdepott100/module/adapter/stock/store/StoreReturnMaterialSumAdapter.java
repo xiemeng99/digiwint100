@@ -27,7 +27,7 @@ public class StoreReturnMaterialSumAdapter extends BaseRecyclerAdapter<ListSumBe
 
     @Override
     protected void bindData(RecyclerViewHolder holder, int position, ListSumBean item) {
-        float numb1 = StringUtils.string2Float(item.getReceipt_qty());
+        float numb1 = StringUtils.string2Float(item.getApply_qty());
         float numb2 = StringUtils.string2Float(item.getScan_sumqty());
         holder.setText(R.id.tv_item_name, item.getItem_name());
         holder.setText(R.id.tv_item_spec,item.getItem_spec());

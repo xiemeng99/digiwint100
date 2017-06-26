@@ -1,14 +1,7 @@
 package digiwin.smartdepott100.login.fragment;
 
-import android.content.Context;
-import android.widget.ImageView;
-import android.widget.RelativeLayout;
-
-import butterknife.BindView;
-import digiwin.library.utils.ActivityManagerUtils;
 import digiwin.smartdepott100.R;
 import digiwin.smartdepott100.core.base.BaseFragment;
-import digiwin.smartdepott100.login.activity.LoginActivity;
 
 /**
  * @des      引导页面使用单图片的fragment

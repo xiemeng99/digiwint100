@@ -1,9 +1,11 @@
 package digiwin.smartdepott100.core.base;
 
 import android.app.Activity;
+import android.content.Context;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
+import android.support.multidex.MultiDex;
 
 import com.iflytek.cloud.SpeechConstant;
 import com.iflytek.cloud.SpeechUtility;
@@ -43,7 +45,11 @@ public class BaseApplication extends LitePalApplication {
      * 极光IM使用
      */
     public static final String TARGET_ID = "targetId";
-
+    @Override
+    protected void attachBaseContext(Context base) {
+        super.attachBaseContext(base);
+        MultiDex.install(this);
+    }
     @Override
     public void onCreate() {
         super.onCreate();

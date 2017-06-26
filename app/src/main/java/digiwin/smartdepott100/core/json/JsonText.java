@@ -6,7 +6,6 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 
 
-import android.content.Context;
 import android.content.res.AssetManager;
 
 import digiwin.library.utils.LogUtils;

@@ -14,6 +14,7 @@ import java.util.Map;
 
 import butterknife.BindView;
 import butterknife.OnClick;
+import digiwin.smartdepott100.module.logic.stock.PostAllocateLogic;
 import digiwin.library.dialog.OnDialogClickListener;
 import digiwin.library.dialog.OnDialogTwoListener;
 import digiwin.library.utils.ActivityManagerUtils;
@@ -79,7 +80,7 @@ public class PostAllocateSumFg extends BaseFragment {
 
     PostAllocateScanActivity pactivity;
 
-    CommonLogic commonLogic;
+    PostAllocateLogic commonLogic;
 
     private boolean upDateFlag;
 
@@ -88,6 +89,8 @@ public class PostAllocateSumFg extends BaseFragment {
     List<ListSumBean> sumShowBeanList;
 
     FilterResultOrderBean orderData;
+
+    private String doc_stus;
     @Override
     protected int bindLayoutId() {
         return R.layout.activity_post_allocate_sum;
@@ -96,7 +99,7 @@ public class PostAllocateSumFg extends BaseFragment {
     @Override
     protected void doBusiness() {
         pactivity = (PostAllocateScanActivity) activity;
-        commonLogic = CommonLogic.getInstance(pactivity, pactivity.module, pactivity.mTimestamp.toString());
+        commonLogic = PostAllocateLogic.getInstance(pactivity, pactivity.module, pactivity.mTimestamp.toString());
         FullyLinearLayoutManager linearLayoutManager = new FullyLinearLayoutManager(activity);
         ryList.setLayoutManager(linearLayoutManager);
         upDateFlag = false;
@@ -106,6 +109,7 @@ public class PostAllocateSumFg extends BaseFragment {
         tv_head_plan_date.setText(orderData.getCreate_date());
         tv_applicant.setText(orderData.getEmployee_name());
         tv_department.setText(orderData.getDepartment_name());
+        doc_stus=bundle.getString(AddressContants.DOC_NO);
     }
 
     /**
@@ -122,7 +126,7 @@ public class PostAllocateSumFg extends BaseFragment {
             clickItemPutData.setDepartment_no(orderData.getDepartment_no());
             clickItemPutData.setCreate_date(orderData.getCreate_date());
             showLoadingDialog();
-            commonLogic.getOrderSumData(clickItemPutData, new CommonLogic.GetOrderSumListener() {
+            commonLogic.getPostAllocateSum(clickItemPutData, new CommonLogic.GetZSumListener() {
                 @Override
                 public void onSuccess(List<ListSumBean> list) {
                     dismissLoadingDialog();
@@ -196,7 +200,7 @@ public class PostAllocateSumFg extends BaseFragment {
             @Override
             public void onFailed(String error) {
                 dismissLoadingDialog();
-                showCommitFailDialog(error);
+                showFailedDialog(error);
             }
         });
     }
@@ -208,6 +212,7 @@ public class PostAllocateSumFg extends BaseFragment {
         }
         showLoadingDialog();
         HashMap<String, String> map = new HashMap<>();
+        map.put("doc_stus",doc_stus);
         commonLogic.commit(map, new CommonLogic.CommitListener() {
             @Override
             public void onSuccess(String msg) {

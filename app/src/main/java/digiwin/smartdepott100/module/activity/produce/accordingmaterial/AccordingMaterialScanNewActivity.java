@@ -29,6 +29,7 @@ import digiwin.smartdepott100.R;
 import digiwin.smartdepott100.core.appcontants.AddressContants;
 import digiwin.smartdepott100.core.appcontants.ModuleCode;
 import digiwin.smartdepott100.core.base.BaseTitleActivity;
+import digiwin.smartdepott100.core.coreutil.CommonUtils;
 import digiwin.smartdepott100.core.coreutil.FiFoCheckUtils;
 import digiwin.smartdepott100.core.modulecommon.ModuleUtils;
 import digiwin.smartdepott100.login.loginlogic.LoginLogic;
@@ -319,6 +320,9 @@ public class AccordingMaterialScanNewActivity extends BaseTitleActivity {
                         }else{
                             etScanBarocde.requestFocus();
                         }
+                        if (CommonUtils.isAutoSave(saveBean)){
+                            saveData();
+                        }
                     }
 
                     @Override
@@ -339,6 +343,7 @@ public class AccordingMaterialScanNewActivity extends BaseTitleActivity {
                 HashMap<String, String> barcodeMap = new HashMap<>();
                 barcodeMap.put(AddressContants.BARCODE_NO, String.valueOf(msg.obj));
                 barcodeMap.put(AddressContants.WAREHOUSE_NO, LoginLogic.getWare());
+                barcodeMap.put(AddressContants.STORAGE_SPACES_NO,saveBean.getStorage_spaces_out_no());
                 commonLogic.scanBarcode(barcodeMap, new CommonLogic.ScanBarcodeListener() {
                     @Override
                     public void onSuccess(ScanBarcodeBackBean barcodeBackBean) {
@@ -523,10 +528,14 @@ public class AccordingMaterialScanNewActivity extends BaseTitleActivity {
         saveBean.setLot_no(barcodeBackBean.getLot_no());
         saveBean.setLot_date(barcodeBackBean.getLot_date());
         saveBean.setFifo_check(barcodeBackBean.getFifo_check());
+        saveBean.setItem_barcode_type(barcodeBackBean.getItem_barcode_type());
         if(StringUtils.isBlank(etScanLocator.getText().toString()) && !cbLocatorlock.isChecked()){
             etScanLocator.requestFocus();
         }else{
             etInputNum.requestFocus();
+        }
+        if (CommonUtils.isAutoSave(saveBean)){
+            saveData();
         }
     }
 }

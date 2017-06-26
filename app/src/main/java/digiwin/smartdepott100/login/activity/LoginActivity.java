@@ -120,6 +120,11 @@ public class LoginActivity extends BaseActivity {
      */
     @OnClick(R.id.rl_entid)
     void showEntId() {
+        if (StringUtils.isBlank(et_login_user.getText().toString())||
+                StringUtils.isBlank(et_login_lock.getText().toString())){
+            showFailedDialog(R.string.username_pwd_not_null);
+            return;
+        }
         String entid = tv_entid.getText().toString();
         changeColor(3);
         EntIdDialog.showEntDialog(activity, entid, mEntIds);
@@ -130,6 +135,11 @@ public class LoginActivity extends BaseActivity {
      */
     @OnClick(R.id.rl_site)
     void showSite() {
+        if (StringUtils.isBlank(et_login_user.getText().toString())||
+                StringUtils.isBlank(et_login_lock.getText().toString())  ){
+            showFailedDialog(R.string.username_pwd_not_null);
+            return;
+        }
         String site = tvSite.getText().toString();
         changeColor(4);
         SiteDialog.showSiteDialog(activity, site, mSites);
@@ -214,6 +224,7 @@ public class LoginActivity extends BaseActivity {
             @Override
             public void isOpen(boolean isOpen) {
                 wiFiPrintManager.printText("123");
+                wiFiPrintManager.printText("123");
             }
         });
         mEntIds = new ArrayList<>();
@@ -231,7 +242,7 @@ public class LoginActivity extends BaseActivity {
 
 
     /**
-     * 对话框点击更新界面集团据点
+     * 对话框点击更新界面集团据点updateEntIdSite
      */
     private void updateEntIdSite() {
         EntIdDialog.setCallBack(new EntIdDialog.EntIdCallBack() {
@@ -239,14 +250,15 @@ public class LoginActivity extends BaseActivity {
             public void entIdCallBack(String chooseEntShow, String chooseEntIdno) {
                 tv_entid.setText(chooseEntShow);
                 entId = chooseEntIdno;
-                getSite(entId);
+                getSite(entId,true);
             }
         });
         SiteDialog.setCallBack(new SiteDialog.SiteCallBack() {
             @Override
-            public void siteCallBack(String chooseSite) {
-                tvSite.setText(chooseSite);
-                site = chooseSite;
+            public void siteCallBack(String chooseSiteShow, String chooseSiteno) {
+                tvSite.setText(chooseSiteShow);
+                site = chooseSiteno;
+                LogUtils.i(TAG,site+"site--"+site);
             }
         });
     }
@@ -295,14 +307,14 @@ public class LoginActivity extends BaseActivity {
             @Override
             public void onSuccess(AccoutBean accoutBean) {
                 String vernum = accoutBean.getVernum();
-//                if (!StringUtils.isBlank(vernum) && StringUtils.string2Float(vernum) > TelephonyUtils.getMAppVersion(context)) {
-//                    AppVersionBean versionBean = new AppVersionBean();
-//                    versionBean.setVernum(accoutBean.getVernum());
-//                    versionBean.setVerurl(accoutBean.getVerurl());
-//                    versionBean.setVerwhat(accoutBean.getVerwhat());
-//                    dismissLoadingDialog();
-//                    matchVersion(versionBean);
-//                } else {
+                if (!StringUtils.isBlank(vernum) && StringUtils.string2Float(vernum) > TelephonyUtils.getMAppVersion(context)) {
+                    AppVersionBean versionBean = new AppVersionBean();
+                    versionBean.setVernum(accoutBean.getVernum());
+                    versionBean.setVerurl(accoutBean.getVerurl());
+                    versionBean.setVerwhat(accoutBean.getVerwhat());
+                    dismissLoadingDialog();
+                    matchVersion(versionBean);
+                } else {
                 //传入权限
                 Bundle bundle = new Bundle();
                 bundle.putString("access", accoutBean.getAccess());
@@ -316,16 +328,14 @@ public class LoginActivity extends BaseActivity {
                 ArrayList<StorageBean> storageList = new ArrayList<>();
                 for (int i = 0; i < split.size(); i++) {
                     StorageBean storageBean = new StorageBean();
-                    storageBean.setWare(split.get(i));
+                    storageBean.setWarehouse_no(split.get(i));
                     storageList.add(storageBean);
                 }
                 if (storageList.size() > 0) {
-                    accoutBean.setWare(storageList.get(0).getWare());
+                    accoutBean.setWare(storageList.get(0).getWarehouse_no());
                 }
                 accoutBean.setEnterpriseShow(tv_entid.getText().toString());
                 accoutBean.setSiteShow(tvSite.getText().toString());
-                //TODO:仓库逻辑需修改
-                accoutBean.setWare("101");
                 SQLiteDatabase db = Connector.getDatabase();
                 DataSupport.deleteAll(StorageBean.class);
                 DataSupport.deleteAll(AccoutBean.class);
@@ -335,7 +345,7 @@ public class LoginActivity extends BaseActivity {
                 JPushManager.login(TelephonyUtils.getDeviceId(activity), TelephonyUtils.getDeviceId(activity));
 //                    dismissLoadingDialog();
             }
-//            }
+            }
 
             @Override
             public void onFailed(String msg) {
@@ -389,7 +399,8 @@ public class LoginActivity extends BaseActivity {
                 changeColor(1);
             }
             if (!hasFocus && !StringUtils.isBlank(userName)) {
-                getEntId(userName);
+                AddressContants.ACCTFIRSTLOGIN=  userName;
+                getEntId(userName,true);
             }
         }
     };
@@ -397,7 +408,7 @@ public class LoginActivity extends BaseActivity {
     /**
      * 从服务器获取集团
      */
-    private void getEntId(String userName) {
+    private void getEntId(String userName, final boolean flag) {
         Map<String, String> map = new HashMap<>();
         map.put("account", userName);
         logic.getEntIdCom(map, new LoginLogic.GetEntIdComListener() {
@@ -405,12 +416,11 @@ public class LoginActivity extends BaseActivity {
             public void onSuccess(List<EntSiteBean> plants) {
                 try {
                     mEntIds = plants;
-                    if (StringUtils.isBlank(tv_entid.getText().toString().trim())
-                            && mEntIds.size() > 0) {
+                    if (flag&&mEntIds.size() > 0) {
                         tv_entid.setText(mEntIds.get(0).getEnterprise_show());
                         entId = mEntIds.get(0).getEnterprise_no();
                     }
-                    getSite(entId);
+                    getSite(entId,flag);
                 } catch (Exception e) {
                     LogUtils.e(TAG, "getEntId:" + e);
                 }
@@ -429,17 +439,16 @@ public class LoginActivity extends BaseActivity {
 
     /**
      * 获取据点
-     *
+     *flag----true刷新----false不刷新
      * @param chooseEntId
      */
-    private void getSite(String chooseEntId) {
+    private void getSite(String chooseEntId, final boolean flag) {
         logic.getSite(chooseEntId, new LoginLogic.GetSiteListener() {
             @Override
             public void onSuccess(List<EntSiteBean> plants) {
                 try {
                     mSites = plants;
-                    if (StringUtils.isBlank(tvSite.getText().toString().trim())
-                            && mSites.size() > 0) {
+                    if (flag&&mSites.size() > 0)  {
                         tvSite.setText(mSites.get(0).getSite_show());
                         site = mSites.get(0).getSite_no();
                     }
@@ -493,7 +502,7 @@ public class LoginActivity extends BaseActivity {
             tv_entid.setText(accoutBean.getEnterpriseShow());
             tvSite.setText(accoutBean.getSiteShow());
             et_login_user.requestFocus();
-            getEntId(accoutBean.getAccount());
+            getEntId(accoutBean.getAccount(),false);
         }
     }
 

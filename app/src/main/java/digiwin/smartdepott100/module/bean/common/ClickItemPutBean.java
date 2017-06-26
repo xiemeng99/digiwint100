@@ -81,6 +81,14 @@ public class ClickItemPutBean {
      * 标记（1：物料库存；2：物料条码库存）
      */
     private  String flag;
+    /**
+     * 领料单号
+     */
+    private String issuing_no;
+    /**
+     * 领料单号
+     */
+    private String stock_in_no;
 
     public String getDepartment_no() {
         return department_no;
@@ -216,5 +224,21 @@ public class ClickItemPutBean {
 
     public void setFlag(String flag) {
         this.flag = flag;
+    }
+
+    public String getIssuing_no() {
+        return issuing_no;
+    }
+
+    public void setIssuing_no(String issuing_no) {
+        this.issuing_no = issuing_no;
+    }
+
+    public String getStock_in_no() {
+        return stock_in_no;
+    }
+
+    public void setStock_in_no(String stock_in_no) {
+        this.stock_in_no = stock_in_no;
     }
 }

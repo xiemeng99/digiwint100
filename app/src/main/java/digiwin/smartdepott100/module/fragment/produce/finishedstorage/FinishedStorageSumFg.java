@@ -28,6 +28,7 @@ import digiwin.smartdepott100.module.adapter.produce.FinishedStorageSumAdapter;
 import digiwin.smartdepott100.module.bean.common.DetailShowBean;
 import digiwin.smartdepott100.module.bean.common.SumShowBean;
 import digiwin.smartdepott100.module.logic.common.CommonLogic;
+import digiwin.smartdepott100.module.logic.produce.FinishedStorageLogic;
 
 
 /**
@@ -55,7 +56,7 @@ public class FinishedStorageSumFg extends BaseFragment {
 
     FinishedStorageActivity pactivity;
 
-    CommonLogic commonLogic;
+    FinishedStorageLogic commonLogic;
 
     private boolean upDateFlag;
 
@@ -88,7 +89,7 @@ public class FinishedStorageSumFg extends BaseFragment {
             adapter = new FinishedStorageSumAdapter(activity, sumShowBeanList);
             ryList.setAdapter(adapter);
             showLoadingDialog();
-            commonLogic.getSum(map, new CommonLogic.GetSumListener() {
+            commonLogic.getFinishStorageSum(map, new CommonLogic.GetSumListener() {
                     @Override
                     public void onSuccess(List<SumShowBean> list) {
                         sumShowBeanList = list;
@@ -186,7 +187,7 @@ public class FinishedStorageSumFg extends BaseFragment {
 
     }
     public void initData() {
-        commonLogic = CommonLogic.getInstance(activity, pactivity.module, pactivity.mTimestamp.toString());
+        commonLogic = FinishedStorageLogic.getInstance(activity, pactivity.module, pactivity.mTimestamp.toString());
         upDateFlag = false;
     }
 

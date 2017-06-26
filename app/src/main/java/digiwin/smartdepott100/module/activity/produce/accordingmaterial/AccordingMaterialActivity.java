@@ -40,11 +40,12 @@ import digiwin.smartdepott100.module.bean.common.DetailShowBean;
 import digiwin.smartdepott100.module.bean.common.ListSumBean;
 import digiwin.smartdepott100.module.bean.common.SumShowBean;
 import digiwin.smartdepott100.module.logic.common.CommonLogic;
+import digiwin.smartdepott100.module.logic.produce.AccordingMaterialLogic;
 
 /**
- * @author 赵浩然
- * @module 依成品发料
- * @date 2017/3/2
+ * @des  依成品发料
+ * @date 2017/6/21
+ * @author xiemeng
  */
 
 public class AccordingMaterialActivity extends BaseFirstModuldeActivity {
@@ -75,7 +76,7 @@ public class AccordingMaterialActivity extends BaseFirstModuldeActivity {
     TextView mTv_item_name;
 
     @BindView(R.id.ry_list)
-    RecyclerView mRc_list;
+    RecyclerView ryList;
 
     AccordingMaterialSumAdapter adapter;
 
@@ -89,7 +90,7 @@ public class AccordingMaterialActivity extends BaseFirstModuldeActivity {
      */
     public final int SCANCODE = 0123;
 
-    CommonLogic commonLogic;
+    AccordingMaterialLogic commonLogic;
 
     @BindViews({R.id.et_item_no_scan})
     List<EditText> editTexts;
@@ -183,9 +184,9 @@ public class AccordingMaterialActivity extends BaseFirstModuldeActivity {
 
     @Override
     protected void doBusiness() {
-        commonLogic = CommonLogic.getInstance(activity,activity.module,activity.mTimestamp.toString());
+        commonLogic = AccordingMaterialLogic.getInstance(activity,activity.module,activity.mTimestamp.toString());
         FullyLinearLayoutManager fullyLinearLayoutManager = new FullyLinearLayoutManager(activity);
-        mRc_list.setLayoutManager(fullyLinearLayoutManager);
+        ryList.setLayoutManager(fullyLinearLayoutManager);
     }
 
     @Override
@@ -195,7 +196,7 @@ public class AccordingMaterialActivity extends BaseFirstModuldeActivity {
             if(!StringUtils.isBlank(mEt_barcode_scan.getText().toString().trim())){
                 List<ListSumBean> list = new ArrayList<ListSumBean>();
                 adapter = new AccordingMaterialSumAdapter(activity,list);
-                mRc_list.setAdapter(adapter);
+                ryList.setAdapter(adapter);
                 showLoadingDialog();
                 updateList(mEt_barcode_scan.getText().toString().trim());
             }
@@ -211,7 +212,7 @@ public class AccordingMaterialActivity extends BaseFirstModuldeActivity {
         mEt_barcode_scan.requestFocus();
         List<ListSumBean> list = new ArrayList<ListSumBean>();
         adapter = new AccordingMaterialSumAdapter(activity,list);
-        mRc_list.setAdapter(adapter);
+        ryList.setAdapter(adapter);
     }
 
     /**
@@ -219,17 +220,15 @@ public class AccordingMaterialActivity extends BaseFirstModuldeActivity {
      * @param item_no
      */
     void updateList(String item_no){
-        ClickItemPutBean putBean = new ClickItemPutBean();
-        putBean.setItem_no(item_no);
-        putBean.setWarehouse_no(LoginLogic.getUserInfo().getWare());
-
-        commonLogic.getOrderSumData(putBean, new CommonLogic.GetOrderSumListener() {
+        Map<String, String> map = new HashMap<>();
+        map.put(AddressContants.ITEM_NO,item_no);
+        map.put(AddressContants.WAREHOUSE_NO,LoginLogic.getWare());
+        commonLogic.getSum(map, new CommonLogic.GetZSumListener() {
             @Override
             public void onSuccess(final List<ListSumBean> list) {
                 mTv_item_name.setText(list.get(0).getItem_name());
-
                 adapter = new AccordingMaterialSumAdapter(activity,list);
-                mRc_list.setAdapter(adapter);
+                ryList.setAdapter(adapter);
                 dismissLoadingDialog();
                 adapter.setOnItemClickListener(new OnItemClickListener() {
                     @Override
@@ -292,7 +291,7 @@ public class AccordingMaterialActivity extends BaseFirstModuldeActivity {
                 showCommitSuccessDialog(msg);
                 createNewModuleId(module);
                 clearData();
-                commonLogic = CommonLogic.getInstance(activity,activity.module,activity.mTimestamp.toString());
+                commonLogic = AccordingMaterialLogic.getInstance(activity,activity.module,activity.mTimestamp.toString());
             }
 
             @Override

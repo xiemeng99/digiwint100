@@ -18,7 +18,7 @@ public class WorkerPerson implements Serializable{
     /**
      * app展示
      */
-    private String show;
+    private String showing;
 
     public String getEmployee_name() {
         return employee_name;
@@ -28,11 +28,11 @@ public class WorkerPerson implements Serializable{
         this.employee_name = employee_name;
     }
 
-    public String getShow() {
-        return show;
+    public String getShowing() {
+        return showing;
     }
 
-    public void setShow(String show) {
-        this.show = show;
+    public void setShowing(String showing) {
+        this.showing = showing;
     }
 }

@@ -41,7 +41,7 @@ public abstract class   BaseFragment extends BaseAppFragment {
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-        if (unBind != null) unBind.unbind();
+        //    if (unBind != null) unBind.unbind();
         if (null != mFragmentView) {
             ((ViewGroup) mFragmentView.getParent()).removeView(mFragmentView);
         }

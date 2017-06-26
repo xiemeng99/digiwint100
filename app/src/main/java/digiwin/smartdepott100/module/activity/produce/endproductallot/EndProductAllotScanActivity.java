@@ -21,14 +21,18 @@ import butterknife.OnCheckedChanged;
 import butterknife.OnClick;
 import butterknife.OnFocusChange;
 import butterknife.OnTextChanged;
+import digiwin.library.dialog.OnDialogClickListener;
+import digiwin.library.utils.StringUtils;
+import digiwin.pulltorefreshlibrary.recyclerview.FullyLinearLayoutManager;
 import digiwin.smartdepott100.R;
 import digiwin.smartdepott100.core.appcontants.AddressContants;
 import digiwin.smartdepott100.core.appcontants.ModuleCode;
 import digiwin.smartdepott100.core.base.BaseTitleActivity;
+import digiwin.smartdepott100.core.coreutil.CommonUtils;
 import digiwin.smartdepott100.core.coreutil.FiFoCheckUtils;
 import digiwin.smartdepott100.core.modulecommon.ModuleUtils;
 import digiwin.smartdepott100.login.loginlogic.LoginLogic;
-import digiwin.smartdepott100.module.adapter.produce.EndProductAllotFifoAdapter;
+import digiwin.smartdepott100.module.adapter.common.CommonItemNoFiFoAdapter;
 import digiwin.smartdepott100.module.bean.common.FifoCheckBean;
 import digiwin.smartdepott100.module.bean.common.ListSumBean;
 import digiwin.smartdepott100.module.bean.common.SaveBackBean;
@@ -36,9 +40,8 @@ import digiwin.smartdepott100.module.bean.common.SaveBean;
 import digiwin.smartdepott100.module.bean.common.ScanBarcodeBackBean;
 import digiwin.smartdepott100.module.bean.common.ScanLocatorBackBean;
 import digiwin.smartdepott100.module.logic.common.CommonLogic;
-import digiwin.library.dialog.OnDialogClickListener;
-import digiwin.library.utils.StringUtils;
-import digiwin.pulltorefreshlibrary.recyclerview.FullyLinearLayoutManager;
+
+import static digiwin.library.utils.StringUtils.sum;
 
 
 /**
@@ -54,31 +57,6 @@ public class EndProductAllotScanActivity extends BaseTitleActivity {
     @BindView(R.id.toolbar_title)
     Toolbar toolbarTitle;
 
-    /**
-     * 品名
-     */
-    @BindView(R.id.tv_item_name)
-    TextView mTv_item_name;
-
-    /**
-     * 规格
-     */
-    @BindView(R.id.et_format)
-    TextView et_format;
-
-    /**
-     * 库存量
-     */
-    @BindView(R.id.tv_material_return_big)
-    TextView tv_material_return_big;
-
-    /**
-     * 欠料量
-     */
-    @BindView(R.id.tv_material_return)
-    TextView tv_material_return;
-
-
     @BindView(R.id.ry_list)
     RecyclerView mRc_list;
 
@@ -93,7 +71,7 @@ public class EndProductAllotScanActivity extends BaseTitleActivity {
     LinearLayout llScanBarcode;
 
     /**
-     * 库位
+     * 储位
      */
     @BindView(R.id.tv_locator)
     TextView tvLocator;
@@ -112,6 +90,12 @@ public class EndProductAllotScanActivity extends BaseTitleActivity {
     @BindView(R.id.ll_input_num)
     LinearLayout llInputNum;
 
+    /**
+     * 已扫量
+     */
+    @BindView(R.id.tv_scan_hasScan)
+    TextView tvScanHasScan;
+
     @BindViews({R.id.et_scan_barocde, R.id.et_scan_locator,R.id. et_input_num})
     List<EditText> editTexts;
     @BindViews({R.id.ll_scan_barcode, R.id.ll_scan_locator, R.id.ll_input_num})
@@ -127,18 +111,12 @@ public class EndProductAllotScanActivity extends BaseTitleActivity {
     @BindView(R.id.save)
     Button mBtn_save;
 
-    @BindView(R.id.tv_scan_hasScan)
-    TextView tvScanHasScan;
-
-    @BindView(R.id.tv_line_store)
-    TextView tvLineStore;
-
     /**
      * 条码类型 料号类型
      */
     private String codetype = "1";
 
-    EndProductAllotFifoAdapter adapter;
+    CommonItemNoFiFoAdapter adapter;
 
     SaveBean saveBean;
 
@@ -177,8 +155,17 @@ public class EndProductAllotScanActivity extends BaseTitleActivity {
 
     List<FifoCheckBean> localFifoList;
 
-    boolean fifo_check;
+    //弹出汇总的对话框
+    @OnClick(R.id.iv_title_setting)
+    void sumDialog(){
+        EndProductAllotDialog.showSumDataDialog(context,localData);
+    }
+
     ListSumBean localData;
+
+    /**
+     * 保存
+     */
     @OnClick(R.id.save)
     void saveData(){
         if(!locatorFlag){
@@ -196,7 +183,7 @@ public class EndProductAllotScanActivity extends BaseTitleActivity {
             return;
         }
         saveBean.setQty(etInputNum.getText().toString());
-        String minQty = StringUtils.getMinQty(tv_material_return.getText().toString(), tv_material_return_big.getText().toString());
+        saveBean.setAvailable_in_qty(localData.getApply_qty());
         saveBean.setStorage_spaces_in_no(localData.getWarehouse_in_no());
         saveBean.setWarehouse_in_no(localData.getWarehouse_in_no());
         //fifo check
@@ -209,10 +196,13 @@ public class EndProductAllotScanActivity extends BaseTitleActivity {
         commonLogic.scanSave(saveBean, new CommonLogic.SaveListener() {
             @Override
             public void onSuccess(SaveBackBean saveBackBean) {
+                //已扫量
                 tvScanHasScan.setText(saveBackBean.getScan_sumqty());
                 dismissLoadingDialog();
-                clearData(type);
+                //匹配量
+                localData.setScan_sumqty(tvScanHasScan.getText().toString());
                 getFifo();
+                clearData(type);
             }
 
             @Override
@@ -242,6 +232,9 @@ public class EndProductAllotScanActivity extends BaseTitleActivity {
         }
     }
 
+    /**
+     * 焦点颜色变化
+     */
     @OnFocusChange(R.id.et_scan_barocde)
     void barcodeFocusChanage() {
         ModuleUtils.viewChange(llScanBarcode, views);
@@ -283,6 +276,7 @@ public class EndProductAllotScanActivity extends BaseTitleActivity {
     @Override
     public boolean handleMessage(Message msg) {
         switch (msg.what) {
+            //储位 出库储位
             case LOCATORWHAT:
                 HashMap<String, String> locatorMap = new HashMap<>();
                 locatorMap.put(AddressContants.STORAGE_SPACES_BARCODE, String.valueOf(msg.obj));
@@ -294,10 +288,14 @@ public class EndProductAllotScanActivity extends BaseTitleActivity {
                         saveBean.setStorage_spaces_out_no(locatorBackBean.getStorage_spaces_no());
                         saveBean.setWarehouse_out_no(locatorBackBean.getWarehouse_no());
                         saveBean.setAllow_negative_stock(locatorBackBean.getAllow_negative_stock());
+                        //如果传入的料号为物料级，则跳过扫码，数量获取焦点
                         if(type.equals(codetype)){
                             etInputNum.requestFocus();
                         }else{
                             etScanBarocde.requestFocus();
+                        }
+                        if (CommonUtils.isAutoSave(saveBean)){
+                            saveData();
                         }
                     }
 
@@ -308,17 +306,18 @@ public class EndProductAllotScanActivity extends BaseTitleActivity {
                             @Override
                             public void onCallback() {
                                 etScanLocator.setText("");
+                                etScanLocator.requestFocus();
                             }
                         });
                         locatorFlag = false;
                     }
                 });
                 break;
-
+            //条码
             case BARCODEWHAT:
                 HashMap<String, String> barcodeMap = new HashMap<>();
                 barcodeMap.put(AddressContants.BARCODE_NO, String.valueOf(msg.obj));
-                barcodeMap.put(AddressContants.WAREHOUSE_NO, LoginLogic.getWare());
+                barcodeMap.put(AddressContants.STORAGE_SPACES_NO,saveBean.getStorage_spaces_out_no());
                 commonLogic.scanBarcode(barcodeMap, new CommonLogic.ScanBarcodeListener() {
                     @Override
                     public void onSuccess(ScanBarcodeBackBean barcodeBackBean) {
@@ -367,11 +366,11 @@ public class EndProductAllotScanActivity extends BaseTitleActivity {
                         if(null != fiFoBeanList && fiFoBeanList.size() > 0){
                             localFifoList = new ArrayList<FifoCheckBean>();
                             localFifoList = fiFoBeanList;
-                            adapter = new EndProductAllotFifoAdapter(activity,fiFoBeanList);
+                            adapter = new CommonItemNoFiFoAdapter(activity,fiFoBeanList);
                             mRc_list.setAdapter(adapter);
                         }else {
                             localFifoList = new ArrayList<FifoCheckBean>();
-                            adapter = new EndProductAllotFifoAdapter(activity,fiFoBeanList);
+                            adapter = new CommonItemNoFiFoAdapter(activity,fiFoBeanList);
                             mRc_list.setAdapter(adapter);
                         }
                     }
@@ -386,11 +385,14 @@ public class EndProductAllotScanActivity extends BaseTitleActivity {
         return false;
     }
 });
+
     @Override
     protected void initNavigationTitle() {
         super.initNavigationTitle();
         activity = this;
-        mName.setText(R.string.endproduct_allot);
+        mName.setText(getString(R.string.endproduct_allot)+getString(R.string.barcode_scan));
+        iv_title_setting.setVisibility(View.VISIBLE);
+        iv_title_setting.setImageResource(R.drawable.dankeliao);
     }
 
     @Override
@@ -407,26 +409,14 @@ public class EndProductAllotScanActivity extends BaseTitleActivity {
     @Override
     protected void doBusiness() {
         initData();
-
         localData = new ListSumBean();
         ListSumBean data = (ListSumBean) getIntent().getSerializableExtra("sumdata");
-        mTv_item_name.setText(data.getItem_name());
-        et_format.setText(data.getLow_order_item_spec());
-        tv_material_return.setText(StringUtils.deleteZero(data.getShortage_qty()));
-        tv_material_return_big.setText(StringUtils.deleteZero(data.getStock_qty()));
-        tvLineStore.setText(StringUtils.deleteZero(data.getW_stock_qty()));
         localData = data;
 
         type = data.getItem_barcode_type();
 
         if(type.equals(codetype)){
             etScanBarocde.setText(data.getLow_order_item_no());
-        }
-
-        if(data.getFifo_check().equals(AddressContants.FIFOY)){
-            fifo_check = true;
-        }else{
-            fifo_check = false;
         }
 
         commonLogic = CommonLogic.getInstance(context, module, mTimestamp.toString());
@@ -438,11 +428,9 @@ public class EndProductAllotScanActivity extends BaseTitleActivity {
     public void getFifo(){
         HashMap<String,String> map = new HashMap<String,String>();
         map.put(AddressContants.ITEM_NO,localData.getLow_order_item_no());
-        map.put(AddressContants.WAREHOUSE_NO, LoginLogic.getWare());
-
-        //欠料量-实发量
-       // float sub = StringUtils.sub(tv_material_return.getText().toString(), tvScanHasScan.getText().toString());
-        map.put("qty",tv_material_return.getText().toString());
+        map.put(AddressContants.WAREHOUSE_NO,LoginLogic.getWare());
+        map.put(AddressContants.QTY,localData.getApply_qty());
+        map.put("lot_no","");
         mHandler.sendMessageDelayed(mHandler.obtainMessage(FIFOWHAT, map), AddressContants.DELAYTIME);
     }
 
@@ -456,7 +444,6 @@ public class EndProductAllotScanActivity extends BaseTitleActivity {
                 locatorFlag = false;
             }
         }
-
         if(type.equals(codetype)){
             barcodeFlag = true;
             etInputNum.setText("");
@@ -489,13 +476,17 @@ public class EndProductAllotScanActivity extends BaseTitleActivity {
         etInputNum.setText(StringUtils.deleteZero(barcodeBackBean.getBarcode_qty()));
         barcodeFlag = true;
 
-      //  saveBean.setAvailable_in_qty(barcodeBackBean.getAvailable_in_qty());
+        saveBean.setFifo_check(barcodeBackBean.getFifo_check());
         saveBean.setBarcode_no(barcodeBackBean.getBarcode_no());
         saveBean.setItem_no(barcodeBackBean.getItem_no());
         saveBean.setUnit_no(barcodeBackBean.getUnit_no());
         saveBean.setLot_no(barcodeBackBean.getLot_no());
         saveBean.setCustomer_no(barcodeBackBean.getCol1());
+        saveBean.setItem_barcode_type(barcodeBackBean.getItem_barcode_type());
         etInputNum.requestFocus();
+        if (CommonUtils.isAutoSave(saveBean)){
+            saveData();
+        }
     }
 
     /**
@@ -509,7 +500,6 @@ public class EndProductAllotScanActivity extends BaseTitleActivity {
         saveBean = new SaveBean();
         etScanLocator.requestFocus();
         localFifoList = new ArrayList<FifoCheckBean>();
-        fifo_check=false;
     }
 
     @Override

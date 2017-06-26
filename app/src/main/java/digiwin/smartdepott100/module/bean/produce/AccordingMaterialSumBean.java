@@ -10,6 +10,11 @@ import java.io.Serializable;
 
 public class AccordingMaterialSumBean implements Serializable {
     /**
+     * 工单号
+     */
+    private  String doc_no;
+
+    /**
      * 成品品名
      */
     private String item_name;
@@ -39,10 +44,13 @@ public class AccordingMaterialSumBean implements Serializable {
      */
     private String unit_no;
 
-    /**
-     * 欠料量
-     */
+
+
     private String shortage_qty;
+    /**
+     * 申请量
+     */
+    private String apply_qty ;
 
     /**
      * 库存量
@@ -50,7 +58,7 @@ public class AccordingMaterialSumBean implements Serializable {
     private String stock_qty;
 
     /**
-     * 实发量
+     * 匹配量
      */
     private String scan_sumqty;
 
@@ -120,12 +128,20 @@ public class AccordingMaterialSumBean implements Serializable {
         this.unit_no = unit_no;
     }
 
-    public String getShortage_qty() {
-        return shortage_qty;
+    public String getDoc_no() {
+        return doc_no;
     }
 
-    public void setShortage_qty(String shortage_qty) {
-        this.shortage_qty = shortage_qty;
+    public void setDoc_no(String doc_no) {
+        this.doc_no = doc_no;
+    }
+
+    public String getApply_qty() {
+        return apply_qty;
+    }
+
+    public void setApply_qty(String apply_qty) {
+        this.apply_qty = apply_qty;
     }
 
     public String getStock_qty() {
@@ -150,5 +166,12 @@ public class AccordingMaterialSumBean implements Serializable {
 
     public void setFifo_check(String fifo_check) {
         this.fifo_check = fifo_check;
+    }
+    public String getShortage_qty() {
+        return shortage_qty;
+    }
+
+    public void setShortage_qty(String shortage_qty) {
+        this.shortage_qty = shortage_qty;
     }
 }

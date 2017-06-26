@@ -34,6 +34,7 @@ import digiwin.smartdepott100.module.adapter.sale.pickupshipment.PickUpShipmentL
 import digiwin.smartdepott100.module.bean.common.FilterBean;
 import digiwin.smartdepott100.module.bean.common.FilterResultOrderBean;
 import digiwin.smartdepott100.module.logic.common.CommonLogic;
+import digiwin.smartdepott100.module.logic.sale.pickupshipment.PickUpShipmentLogic;
 
 /**
  * @author 赵浩然
@@ -194,7 +195,7 @@ public class PickUpShipmentListActivity extends BaseTitleActivity{
 
     PickUpShipmentListAdapter adapter;
 
-    CommonLogic commonLogic;
+    PickUpShipmentLogic logic;
 
     private final int SCANCODE = 1234;
 
@@ -238,7 +239,7 @@ public class PickUpShipmentListActivity extends BaseTitleActivity{
             e.printStackTrace();
         }
 
-        commonLogic.getOrderData(FilterBean, new CommonLogic.GetOrderListener() {
+        logic.getOrderData(FilterBean, new CommonLogic.GetOrderListener() {
             @Override
             public void onSuccess(final List<FilterResultOrderBean> list) {
                 dismissLoadingDialog();
@@ -276,7 +277,7 @@ public class PickUpShipmentListActivity extends BaseTitleActivity{
     @Override
     protected void doBusiness() {
         et_plan_date.setKeyListener(null);
-        commonLogic = CommonLogic.getInstance(activity,module,mTimestamp.toString());
+        logic = PickUpShipmentLogic.getInstance(activity,module,mTimestamp.toString());
         FullyLinearLayoutManager linearLayoutManager = new FullyLinearLayoutManager(activity);
         ryList.setLayoutManager(linearLayoutManager);
     }

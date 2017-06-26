@@ -1,6 +1,7 @@
 package digiwin.smartdepott100.module.activity.stock.postallocate;
 
 import android.content.Intent;
+import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -11,6 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
+import digiwin.smartdepott100.core.appcontants.AddressContants;
 import digiwin.library.utils.LogUtils;
 import digiwin.smartdepott100.R;
 import digiwin.smartdepott100.core.appcontants.ModuleCode;
@@ -20,8 +22,9 @@ import digiwin.smartdepott100.module.fragment.stock.postallocate.PostAllocateSca
 import digiwin.smartdepott100.module.fragment.stock.postallocate.PostAllocateSumFg;
 
 /**
- * @author 唐孟宇
- * @des 调拨过账 扫描/汇总页面
+ * @des  调拨过账
+ * @date 2017/6/9
+ * @author xiemeng
  */
 public class PostAllocateScanActivity extends BaseFirstModuldeActivity {
     /**
@@ -75,7 +78,14 @@ public class PostAllocateScanActivity extends BaseFirstModuldeActivity {
     @Override
     protected void initNavigationTitle() {
         super.initNavigationTitle();
-        mName.setText(R.string.title_post_allocate);
+        Bundle bundle = getIntent().getExtras();
+        String doc_stus = bundle.getString(AddressContants.DOC_NO);
+        if ("N".equals(doc_stus)){
+            mName.setText(R.string.allocate_out);
+        }else {
+            mName.setText(R.string.allocate_in);
+        }
+
     }
 
     @Override

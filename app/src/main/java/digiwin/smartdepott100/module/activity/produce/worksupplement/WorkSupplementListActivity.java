@@ -34,6 +34,7 @@ import digiwin.smartdepott100.module.adapter.produce.WorkSupplementListAdapter;
 import digiwin.smartdepott100.module.bean.common.FilterBean;
 import digiwin.smartdepott100.module.bean.common.FilterResultOrderBean;
 import digiwin.smartdepott100.module.logic.common.CommonLogic;
+import digiwin.smartdepott100.module.logic.produce.WorkSupplementLogic;
 
 /**
  * @author 赵浩然
@@ -63,7 +64,7 @@ public class WorkSupplementListActivity extends BaseTitleActivity{
 
     WorkSupplementListAdapter adapter;
 
-    CommonLogic commonLogic;
+    WorkSupplementLogic commonLogic;
 
     @BindViews({R.id.ll_material_returning_number,R.id.ll_returning_item_no,R.id.ll_applicant,
             R.id.ll_apply_branch,R.id.ll_plan_date})
@@ -221,7 +222,7 @@ public class WorkSupplementListActivity extends BaseTitleActivity{
             e.printStackTrace();
         }
 
-        commonLogic.getOrderData(FilterBean, new CommonLogic.GetOrderListener() {
+        commonLogic.getWSList(FilterBean, new CommonLogic.GetDataListListener() {
             @Override
             public void onSuccess(final List<FilterResultOrderBean> list) {
                 dismissLoadingDialog();
@@ -261,7 +262,7 @@ public class WorkSupplementListActivity extends BaseTitleActivity{
     @Override
     protected void doBusiness() {
         et_plan_date.setKeyListener(null);
-        commonLogic = CommonLogic.getInstance(activity,module,mTimestamp.toString());
+        commonLogic = WorkSupplementLogic.getInstance(activity,module,mTimestamp.toString());
         FullyLinearLayoutManager linearLayoutManager = new FullyLinearLayoutManager(activity);
         ry_list.setLayoutManager(linearLayoutManager);
     }
@@ -275,9 +276,6 @@ public class WorkSupplementListActivity extends BaseTitleActivity{
             if(null != dataList && dataList.size()>0){
                 ll_search_dialog.setVisibility(View.GONE);
                 scrollview.setVisibility(View.VISIBLE);
-//                adapter = new PickUpShipmentListAdapter(activity,dataList);
-//                ryList.setAdapter(adapter);
-//                onItemClick(dataList);
             }
         }else{
             ll_search_dialog.setVisibility(View.VISIBLE);
@@ -310,7 +308,7 @@ public class WorkSupplementListActivity extends BaseTitleActivity{
     protected void initNavigationTitle() {
         super.initNavigationTitle();
         activity = this;
-        mName.setText(R.string.title_worksupplement_list);
+        mName.setText(getString(R.string.work_order_return)+""+getString(R.string.list));
         iv_title_setting.setVisibility(View.VISIBLE);
         iv_title_setting.setImageResource(R.drawable.search);
     }

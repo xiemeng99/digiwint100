@@ -1,5 +1,9 @@
 package digiwin.smartdepott100.core.appcontants;
 
+import digiwin.library.utils.TelephonyUtils;
+import digiwin.smartdepott100.R;
+import digiwin.smartdepott100.core.base.BaseApplication;
+
 /**
  * Created by Administrator on 2017/1/10 0010.
  */
@@ -19,7 +23,7 @@ public class AddressContants {
     /**
      * 下载好的安装包的名字
      */
-    public static String APK_NAME = "updateDiGiWin.apk";
+    public static String APK_NAME = BaseApplication.getInstance().getString(R.string.app_name)+ TelephonyUtils.getMAppVersion(BaseApplication.getInstance())+".apk";
     /**
      *  默认测试区地址
      */
@@ -57,7 +61,7 @@ public class AddressContants {
     /**
      * 物料条码扫描传输xml的field值
      */
-    public static final  String BARCODE_NO="barcode_no";
+    public static final  String BARCODE_NO="barcode";
     /**
      * 装箱单号
      */
@@ -102,10 +106,7 @@ public class AddressContants {
      * 线别
      */
     public static  final  String LINENO="line_no";
-    /**
-     * 工序
-     */
-    public static  final  String SUBOP_NO="subop_no";
+
     /**
      * 退出界面传输xml的value值，后台判断是否有数据
      */
@@ -134,6 +135,18 @@ public class AddressContants {
      */
     public static final String ITEM_NO = "item_no";
     /**
+     * 报工单号
+     */
+    public static final String REPORT_NO = "report_no";
+    /**
+     * 日期
+     */
+    public static final String QC_DATE = "qc_date";
+    /**
+     * 时间
+     */
+    public static final String QC_TIME = "qc_time";
+    /**
      * 出货单
      */
     public static final String RECEIPT_NO = "receipt_no";
@@ -159,14 +172,21 @@ public class AddressContants {
      */
     public static final String EMPLOYEENO = "employee_no";
     /**
+     * 机器编号
+     */
+    public static final String MACHINENO = "machine_no";
+    /**
+     * 模具编号
+     */
+    public static final String MOULDNO = "mould_no";
+    /**
+     * 打印类型
+     */
+    public static final String PRINT_TYPE = "print_type";
+    /**
      * 收货完成待检验看板中标记合格
      */
     public static  final String Y="Y";
-
-    /**
-     * 工单编号
-     */
-    public static final String WO_NO  = "wo_no";
 
     /**
      * 送货单号
@@ -271,10 +291,104 @@ public class AddressContants {
     /**
      * 首次使用抓取界面的用户信息--集团
      */
-    public static  String ENTERPRISEFIRSTLOGIN="1";
+    public static  String ENTERPRISEFIRSTLOGIN="99";
     /**
      * 首次使用抓取界面的用户信息--据点
      */
     public static  String SITEFIRSTLOGIN="1";
+
+
+    /**
+     *扫描工序号
+     */
+    public static  String PROCEDURE="subop_no";
+    /**
+     *作业序
+     */
+    public static  String OP_SEP="op_seq";
+    /**
+     *数量
+     */
+    public static  String QTY_UNDEFECT="undefect_qty";
+    /**
+     *检验结果
+     */
+    public static  String RESULT="result_type";
+    /**
+     * 扫描生产批次
+     */
+    public static  String PLOTNO ="plot_no";
+    /**
+     * 起始日期
+     */
+    public static  String DATEBEGIN ="date_begin";
+    /**
+     * 结束日期
+     */
+    public static  String DATEEND ="date_end";
+
+    /**
+     * 扫描工单号
+     */
+    public static  String ORDER="order_no";
+    /**
+     *MOVE_STATUS in
+     */
+    public static  String MOVEIN="movein";
+    /**
+     *MOVE_STATUS out
+     */
+    public static  String MOVEOUT="moveout";
+
+    /**
+     *CHECK_STATUS in
+     */
+    public static  String CHECKIN="checkin";
+    /**
+     * CHECK_STATUS out
+     */
+    public static  String CHECKOUT="checkout";
+    /**
+     * 资源编号
+     */
+    public static  String RESOURCE_NO="resource_no";
+    /**
+     * 资源类型
+     */
+    public static  String RESOURCE_TYPE="resource_type";
+    /**
+     * 工序号/作业编号
+     */
+    public static  String SUBOP_NO="subop_no";
+    /**
+     * 工单号
+     */
+    public static  String WO_NO="wo_no";
+    /**
+     * check状态
+     */
+    public static  String CHECK_STATUS="report_type";
+
+    /**
+     * move 状态
+     */
+    public static  String MOVE_STATUS="report_type";
+
+    /**
+     * 入库单号
+     */
+    public static String STOCKINNO="stock_in_no";
+
+    /**
+     * 打印类型
+     */
+    public static String PRINTTYPE="print_type";
+    /**
+     * 炉号
+     */
+    public static String FURNACE_NO="furnace_no";
+
+    public static final String STORAGE_SPACES_NO="storage_spaces_no";
+
 
 }

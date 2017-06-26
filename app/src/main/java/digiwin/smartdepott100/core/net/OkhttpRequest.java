@@ -2,11 +2,11 @@ package digiwin.smartdepott100.core.net;
 
 import android.content.Context;
 
+import digiwin.smartdepott100.core.appcontants.AddressContants;
 import digiwin.library.constant.SharePreKey;
 import digiwin.library.net.IRequestManager;
 import digiwin.library.net.RequestFactory;
 import digiwin.library.utils.SharedPreferencesUtils;
-import digiwin.smartdepott100.core.appcontants.AddressContants;
 
 /**
  * Created by ChangquanSun

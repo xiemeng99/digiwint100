@@ -27,6 +27,7 @@ import digiwin.smartdepott100.R;
 import digiwin.smartdepott100.core.appcontants.AddressContants;
 import digiwin.smartdepott100.core.base.BaseFirstModuldeActivity;
 import digiwin.smartdepott100.core.base.BaseFragment;
+import digiwin.smartdepott100.core.coreutil.CommonUtils;
 import digiwin.smartdepott100.core.modulecommon.ModuleUtils;
 import digiwin.smartdepott100.login.loginlogic.LoginLogic;
 import digiwin.smartdepott100.module.activity.sale.salereturn.SaleReturnSecondActivity;
@@ -236,10 +237,11 @@ public class SaleReturnScanFg extends BaseFragment {
                     barcodeMap.put(AddressContants.BARCODE_NO, String.valueOf(msg.obj));
                     barcodeMap.put(AddressContants.WAREHOUSE_NO,LoginLogic.getWare());
                     barcodeMap.put(AddressContants.DOC_NO,orderBean.getDoc_no());
+                    barcodeMap.put(AddressContants.STORAGE_SPACES_NO,saveBean.getStorage_spaces_in_no());
                     commonLogic.scanBarcode(barcodeMap, new CommonLogic.ScanBarcodeListener() {
                         @Override
                         public void onSuccess(ScanBarcodeBackBean barcodeBackBean) {
-                            barcodeShow = barcodeBackBean.getShow();
+                            barcodeShow = barcodeBackBean.getShowing();
                             if(!StringUtils.isBlank(barcodeBackBean.getBarcode_qty())){
                                 et_input_num.setText(StringUtils.deleteZero(barcodeBackBean.getBarcode_qty()));
                             }
@@ -255,7 +257,11 @@ public class SaleReturnScanFg extends BaseFragment {
                             saveBean.setLot_no(barcodeBackBean.getLot_no());
                             saveBean.setScan_sumqty(barcodeBackBean.getScan_sumqty());
                             saveBean.setAvailable_in_qty(barcodeBackBean.getAvailable_in_qty());
+                            saveBean.setItem_barcode_type(barcodeBackBean.getItem_barcode_type());
                             et_input_num.requestFocus();
+                            if (CommonUtils.isAutoSave(saveBean)){
+                                Save();
+                            }
                         }
 
                         @Override
@@ -276,12 +282,15 @@ public class SaleReturnScanFg extends BaseFragment {
                     commonLogic.scanLocator(locatorMap, new CommonLogic.ScanLocatorListener() {
                         @Override
                         public void onSuccess(ScanLocatorBackBean locatorBackBean) {
-                            locatorShow = locatorBackBean.getShow();
+                            locatorShow = locatorBackBean.getShowing();
                             locatorFlag = true;
                             show();
                             saveBean.setStorage_spaces_in_no(locatorBackBean.getStorage_spaces_no());
                             saveBean.setWarehouse_in_no(locatorBackBean.getWarehouse_no());
                             et_scan_barocde.requestFocus();
+                            if (CommonUtils.isAutoSave(saveBean)){
+                                Save();
+                            }
                         }
 
                         @Override

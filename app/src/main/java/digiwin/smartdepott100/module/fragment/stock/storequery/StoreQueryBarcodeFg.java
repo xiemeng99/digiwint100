@@ -26,7 +26,6 @@ public class StoreQueryBarcodeFg extends BaseFragment {
 
     @Override
     protected int bindLayoutId() {
-        EventBus.getDefault().register(this);
         return R.layout.fg_store_query_barcode;
     }
 
@@ -36,15 +35,10 @@ public class StoreQueryBarcodeFg extends BaseFragment {
         pactivity = (StoreQueryActivity) activity;
     }
 
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-        EventBus.getDefault().unregister(this);
-    }
     /**
-     * 订阅成功
+     * 更新页面
+     * @param sumBeen
      */
-    @Subscribe(threadMode = ThreadMode.MAIN)
     public void onSubscribe(List<ListSumBean> sumBeen) {
         StoreQueryBacodeAdapter adapter = new StoreQueryBacodeAdapter(activity, sumBeen);
         ryList.setAdapter(adapter);

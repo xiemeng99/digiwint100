@@ -20,6 +20,7 @@ import butterknife.BindView;
 import butterknife.BindViews;
 import butterknife.OnClick;
 import butterknife.OnFocusChange;
+import digiwin.smartdepott100.module.logic.sale.salereturn.SaleReturnLogic;
 import digiwin.library.datepicker.DatePickerUtils;
 import digiwin.library.utils.ActivityManagerUtils;
 import digiwin.library.utils.LogUtils;
@@ -35,7 +36,6 @@ import digiwin.smartdepott100.login.bean.AccoutBean;
 import digiwin.smartdepott100.module.adapter.sale.salereturn.SaleReturnAdapter;
 import digiwin.smartdepott100.module.bean.common.FilterBean;
 import digiwin.smartdepott100.module.bean.common.FilterResultOrderBean;
-import digiwin.smartdepott100.module.logic.common.CommonLogic;
 
 import static digiwin.smartdepott100.login.loginlogic.LoginLogic.getUserInfo;
 
@@ -153,7 +153,6 @@ public class SaleReturnActivity extends BaseTitleActivity {
         ModuleUtils.tvChange(activity, tv_department, textViews);
     }
 
-
     /**
      * 筛选框 日期
      */
@@ -214,7 +213,7 @@ public class SaleReturnActivity extends BaseTitleActivity {
      */
     public static final int SUMCODE = 1212;
 
-    CommonLogic commonLogic;
+    SaleReturnLogic logic;
 
     SaleReturnActivity pactivity;
 
@@ -266,7 +265,7 @@ public class SaleReturnActivity extends BaseTitleActivity {
     protected void doBusiness() {
         et_date.setKeyListener(null);
         pactivity = (SaleReturnActivity) activity;
-        commonLogic = CommonLogic.getInstance(pactivity, module, mTimestamp.toString());
+        logic = SaleReturnLogic.getInstance(pactivity, module, mTimestamp.toString());
         FullyLinearLayoutManager linearLayoutManager = new FullyLinearLayoutManager(activity);
         ryList.setLayoutManager(linearLayoutManager);
         SearchDialog();
@@ -334,7 +333,7 @@ public class SaleReturnActivity extends BaseTitleActivity {
                 filterBean.setDate_end(endDate);
             }
             showLoadingDialog();
-            commonLogic.getOrderData(filterBean, new CommonLogic.GetOrderListener() {
+            logic.getSOLListData(filterBean, new SaleReturnLogic.GetSaleRetrunListDataListener() {
                 @Override
                 public void onSuccess(List<FilterResultOrderBean> list) {
                     if (null != list && list.size() > 0) {
@@ -352,10 +351,10 @@ public class SaleReturnActivity extends BaseTitleActivity {
                 }
 
                 @Override
-                public void onFailed(String error) {
+                public void onFailed(String errmsg) {
                     dismissLoadingDialog();
                     try {
-                        showFailedDialog(error);
+                        showFailedDialog(errmsg);
                         sumShowBeanList = new ArrayList<FilterResultOrderBean>();
                         adapter = new SaleReturnAdapter(pactivity, sumShowBeanList);
                         ryList.setAdapter(adapter);

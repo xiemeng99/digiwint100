@@ -1,28 +1,22 @@
 package digiwin.smartdepott100.module.activity.stock.miscellaneousissues;
 
 import android.content.Intent;
-import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
-import android.widget.ImageView;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
-import butterknife.OnClick;
-import digiwin.library.utils.ActivityManagerUtils;
 import digiwin.library.utils.LogUtils;
 import digiwin.smartdepott100.R;
-import digiwin.smartdepott100.core.appcontants.AddressContants;
 import digiwin.smartdepott100.core.appcontants.ModuleCode;
 import digiwin.smartdepott100.core.base.BaseFirstModuldeActivity;
 import digiwin.smartdepott100.core.modulecommon.ModuleViewPagerAdapter;
-import digiwin.smartdepott100.module.activity.common.NoComeUnComActivity;
 import digiwin.smartdepott100.module.fragment.stock.miscellaneous.out.MiscellaneousIssueScanFg;
 import digiwin.smartdepott100.module.fragment.stock.miscellaneous.out.MiscellaneousIssueSumFg;
 
@@ -50,8 +44,8 @@ public class MiscellaneousissuesOutActivity extends BaseFirstModuldeActivity {
     /**
      * 未完事项
      */
-    @BindView(R.id.un_com)
-    ImageView iv_un_com;
+/*    @BindView(R.id.un_com)
+    ImageView iv_un_com;*/
 
     /**
      * Fragment设置
@@ -93,20 +87,20 @@ public class MiscellaneousissuesOutActivity extends BaseFirstModuldeActivity {
     /**
      * 未完事项
      */
-    @OnClick(R.id.un_com)
+/*    @OnClick(R.id.un_com)
     void unComaffair(){
         Bundle bundle = new Bundle();
         bundle.putString(AddressContants.MODULEID_INTENT, mTimestamp.toString());
         bundle.putString(NoComeUnComActivity.MODULECODE, module);
         ActivityManagerUtils.startActivityForBundleData(activity, NoComeUnComActivity.class, bundle);
-    }
+    }*/
 
     @Override
     protected void initNavigationTitle() {
         super.initNavigationTitle();
         mName.setText(R.string.miscellaneous_issues_out);
 
-        iv_un_com.setVisibility(View.VISIBLE);
+      //  iv_un_com.setVisibility(View.INVISIBLE);
     }
 
     @Override
@@ -130,7 +124,7 @@ public class MiscellaneousissuesOutActivity extends BaseFirstModuldeActivity {
         fragments.add(scanFg);
         fragments.add(sumFg);
         titles = new ArrayList<>();
-        titles.add(getResources().getString(R.string.ScanCode));
+        titles.add(getResources().getString(R.string.barcode_scan));
         titles.add(getResources().getString(R.string.SumData));
         fragmentManager = getSupportFragmentManager();
         adapter = new ModuleViewPagerAdapter(fragmentManager, fragments, titles);
@@ -157,8 +151,11 @@ public class MiscellaneousissuesOutActivity extends BaseFirstModuldeActivity {
             public void onPageSelected(int position) {
                 if (position == 1) {
                     sumFg.upDateList();
-                }else{
-                    scanFg.initFocus();
+                    ivScan.setVisibility(View.INVISIBLE);
+                }
+                else{
+                    ivScan.setVisibility(View.VISIBLE);
+                   // scanFg.initFocus();
                 }
             }
 

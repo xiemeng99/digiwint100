@@ -1,19 +1,9 @@
 package digiwin.smartdepott100.login.fragment;
 
-import android.animation.ObjectAnimator;
-import android.animation.ValueAnimator;
 import android.os.Bundle;
-import android.view.View;
-import android.widget.ImageView;
 
-import butterknife.BindView;
-import butterknife.OnClick;
-import digiwin.library.constant.SharePreKey;
-import digiwin.library.utils.ActivityManagerUtils;
-import digiwin.library.utils.SharedPreferencesUtils;
 import digiwin.smartdepott100.R;
 import digiwin.smartdepott100.core.base.BaseFragment;
-import digiwin.smartdepott100.login.activity.LoginActivity;
 import digiwin.smartdepott100.login.activity.WelcomeGuideActivity;
 
 

@@ -238,6 +238,37 @@ public class ListSumBean implements Serializable {
      */
     private String remark;
 
+    /**
+     * 需求量
+     */
+    private String apply_qty;
+    /**
+     * 领料单号
+     */
+    private String issuing_no;
+    /**
+     * 线边仓库存
+     */
+    private String  w_stock_qty;
+    /**
+     * iqc是否ok
+     * 1,ok
+     * 2,ng
+     */
+    private String result_type;
+    /**
+     * 物料批号
+     */
+    private String plot_no;
+    /**
+     * iqc使用项次
+     */
+    private String seq;
+    /**
+     * 供应商编码
+     */
+    private String supplier_no;
+
     public String getEmployee_no() {
         return employee_no;
     }
@@ -261,10 +292,6 @@ public class ListSumBean implements Serializable {
     public void setWarehouse_name(String warehouse_name) {
         this.warehouse_name = warehouse_name;
     }
-    /**
-     * 线边仓库存
-     */
-    private String  w_stock_qty;
 
     public String getDepartment_no() {
         return department_no;
@@ -665,5 +692,130 @@ public class ListSumBean implements Serializable {
 
     public void setSet_qty(String set_qty) {
         this.set_qty = set_qty;
+    }
+
+    public String getApply_qty() {
+        return apply_qty;
+    }
+
+    public void setApply_qty(String apply_qty) {
+        this.apply_qty = apply_qty;
+    }
+
+    public String getIssuing_no() {
+        return issuing_no;
+    }
+
+    public void setIssuing_no(String issuing_no) {
+
+        this.issuing_no = issuing_no;
+    }
+
+    public String getResult_type() {
+        return result_type;
+    }
+
+    public void setResult_type(String result_type) {
+        this.result_type = result_type;
+    }
+
+    public String getPlot_no() {
+        return plot_no;
+    }
+
+    public void setPlot_no(String plot_no) {
+        this.plot_no = plot_no;
+    }
+
+    public String getSeq() {
+        return seq;
+    }
+
+    public void setSeq(String seq) {
+        this.seq = seq;
+    }
+
+    private String showing;
+
+    public String getSupplier_no() {
+        return supplier_no;
+    }
+
+    public void setSupplier_no(String supplier_no) {
+        this.supplier_no = supplier_no;
+    }
+
+    public String getShowing() {
+        return showing;
+    }
+
+    public void setShowing(String showing) {
+        this.showing = showing;
+    }
+
+    @Override
+    public String toString() {
+        return "ListSumBean{" +
+                "wo_set_qty='" + wo_set_qty + '\'' +
+                ", set_qty='" + set_qty + '\'' +
+                ", create_date='" + create_date + '\'' +
+                ", wo_no='" + wo_no + '\'' +
+                ", department_name='" + department_name + '\'' +
+                ", department_no='" + department_no + '\'' +
+                ", item_no='" + item_no + '\'' +
+                ", item_name='" + item_name + '\'' +
+                ", wo_qty='" + wo_qty + '\'' +
+                ", distribute_qty='" + distribute_qty + '\'' +
+                ", stock_in_qty='" + stock_in_qty + '\'' +
+                ", available_in_qty='" + available_in_qty + '\'' +
+                ", scan_sumqty='" + scan_sumqty + '\'' +
+                ", item_spec='" + item_spec + '\'' +
+                ", unit_no='" + unit_no + '\'' +
+                ", shortage_qty='" + shortage_qty + '\'' +
+                ", stock_qty='" + stock_qty + '\'' +
+                ", supplier_name='" + supplier_name + '\'' +
+                ", receipt_date='" + receipt_date + '\'' +
+                ", receipt_no='" + receipt_no + '\'' +
+                ", receipt_qty='" + receipt_qty + '\'' +
+                ", item_barcode_type='" + item_barcode_type + '\'' +
+                ", fifo_check='" + fifo_check + '\'' +
+                ", warehouse_out_no='" + warehouse_out_no + '\'' +
+                ", warehouse_in_no='" + warehouse_in_no + '\'' +
+                ", employee_name='" + employee_name + '\'' +
+                ", workgroup_name='" + workgroup_name + '\'' +
+                ", receipt_seq='" + receipt_seq + '\'' +
+                ", req_qty='" + req_qty + '\'' +
+                ", accept_qty='" + accept_qty + '\'' +
+                ", stock_unit_no='" + stock_unit_no + '\'' +
+                ", warehouse_storage='" + warehouse_storage + '\'' +
+                ", barcode_no='" + barcode_no + '\'' +
+                ", low_order_item_no='" + low_order_item_no + '\'' +
+                ", low_order_item_name='" + low_order_item_name + '\'' +
+                ", low_order_item_spec='" + low_order_item_spec + '\'' +
+                ", qty='" + qty + '\'' +
+                ", warehouse_no='" + warehouse_no + '\'' +
+                ", warehouse_name='" + warehouse_name + '\'' +
+                ", doc_no='" + doc_no + '\'' +
+                ", check='" + check + '\'' +
+                ", storage_spaces_no='" + storage_spaces_no + '\'' +
+                ", notice_no='" + notice_no + '\'' +
+                ", customer_no='" + customer_no + '\'' +
+                ", customer_name='" + customer_name + '\'' +
+                ", match_qty='" + match_qty + '\'' +
+                ", return_qty='" + return_qty + '\'' +
+                ", issue_qty='" + issue_qty + '\'' +
+                ", item_lot_no='" + item_lot_no + '\'' +
+                ", show='" + show + '\'' +
+                ", employee_no='" + employee_no + '\'' +
+                ", remark='" + remark + '\'' +
+                ", apply_qty='" + apply_qty + '\'' +
+                ", issuing_no='" + issuing_no + '\'' +
+                ", w_stock_qty='" + w_stock_qty + '\'' +
+                ", result_type='" + result_type + '\'' +
+                ", plot_no='" + plot_no + '\'' +
+                ", seq='" + seq + '\'' +
+                ", supplier_no='" + supplier_no + '\'' +
+                ", showing='" + showing + '\'' +
+                '}';
     }
 }

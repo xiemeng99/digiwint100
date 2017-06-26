@@ -13,6 +13,7 @@ import android.widget.TextView;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import butterknife.BindView;
 import butterknife.BindViews;
@@ -20,6 +21,10 @@ import butterknife.OnCheckedChanged;
 import butterknife.OnClick;
 import butterknife.OnFocusChange;
 import butterknife.OnTextChanged;
+import digiwin.smartdepott100.core.base.BaseFirstModuldeActivity;
+import digiwin.smartdepott100.core.coreutil.CommonUtils;
+import digiwin.smartdepott100.module.bean.common.FilterResultOrderBean;
+import digiwin.smartdepott100.module.logic.purchase.PurchaseInStoreLogic;
 import digiwin.library.dialog.OnDialogClickListener;
 import digiwin.library.utils.StringUtils;
 import digiwin.smartdepott100.R;
@@ -31,9 +36,7 @@ import digiwin.smartdepott100.module.activity.stock.miscellaneousissues.Miscella
 import digiwin.smartdepott100.module.bean.common.SaveBackBean;
 import digiwin.smartdepott100.module.bean.common.SaveBean;
 import digiwin.smartdepott100.module.bean.common.ScanBarcodeBackBean;
-import digiwin.smartdepott100.module.bean.common.ScanEmployeeBackBean;
 import digiwin.smartdepott100.module.bean.common.ScanLocatorBackBean;
-import digiwin.smartdepott100.module.bean.common.ScanReasonCodeBackBean;
 import digiwin.smartdepott100.module.logic.common.CommonLogic;
 
 
@@ -43,28 +46,7 @@ import digiwin.smartdepott100.module.logic.common.CommonLogic;
  */
 public class MiscellaneousIssueInScanFg extends BaseFragment {
 
-    /**
-     * 理由码
-     */
-    @BindView(R.id.tv_reason_code)
-    TextView tv_reason_code;
 
-    /**
-     * 理由码
-     */
-    @BindView(R.id.et_reason_code)
-    EditText et_reason_code;
-    /**
-     * 申请部门
-     */
-    @BindView(R.id.tv_department)
-    TextView tv_department;
-
-    /**
-     * 申请部门
-     */
-    @BindView(R.id.et_department)
-    EditText et_department;
     /**
      * 条码
      */
@@ -93,16 +75,6 @@ public class MiscellaneousIssueInScanFg extends BaseFragment {
     @BindView(R.id.cb_locatorlock)
     CheckBox cb_locatorlock;
     /**
-     * 锁定理由码
-     */
-    @BindView(R.id.cb_reason_code)
-    CheckBox cb_reason_code;
-    /**
-     * 锁定部门
-     */
-    @BindView(R.id.cb_department)
-    CheckBox cb_department;
-    /**
      * 数量
      */
     @BindView(R.id.et_input_num)
@@ -114,10 +86,6 @@ public class MiscellaneousIssueInScanFg extends BaseFragment {
     @BindView( R.id.save)
     Button save;
 
-    @BindView(R.id.ll_reason_code)
-    LinearLayout ll_reason_code;
-    @BindView(R.id.ll_department)
-    LinearLayout ll_department;
     @BindView(R.id.ll_scan_barcode)
     LinearLayout ll_scan_barcode;
     @BindView(R.id.ll_scan_locator)
@@ -127,11 +95,11 @@ public class MiscellaneousIssueInScanFg extends BaseFragment {
     @BindView(R.id.ll_input_num)
     LinearLayout llInputNum;
 
-    @BindViews({R.id.et_reason_code,R.id.et_department,R.id.et_scan_barocde, R.id.et_scan_locator, R.id.et_input_num})
+    @BindViews({R.id.et_scan_barocde, R.id.et_scan_locator, R.id.et_input_num})
     List<EditText> editTexts;
-    @BindViews({R.id.ll_reason_code,R.id.ll_department,R.id.ll_scan_barcode, R.id.ll_scan_locator, R.id.ll_input_num})
+    @BindViews({R.id.ll_scan_barcode, R.id.ll_scan_locator, R.id.ll_input_num})
     List<View> views;
-    @BindViews({R.id.tv_reason_code,R.id.tv_department,R.id.tv_barcode, R.id.tv_locator, R.id.tv_number})
+    @BindViews({R.id.tv_barcode, R.id.tv_locator, R.id.tv_number})
     List<TextView> textViews;
 
     /**
@@ -157,14 +125,6 @@ public class MiscellaneousIssueInScanFg extends BaseFragment {
      */
     String locatorShow;
     /**
-     * 理由码展示
-     */
-    String reasonCodeShow;
-    /**
-     * 申请部门展示
-     */
-    String departmentShow;
-    /**
      * 条码扫描
      */
     boolean barcodeFlag;
@@ -172,14 +132,6 @@ public class MiscellaneousIssueInScanFg extends BaseFragment {
      * 库位扫描
      */
     boolean locatorFlag;
-    /**
-     * 理由码扫描
-     */
-    boolean reasonCodeFlag;
-    /**
-     * 部门扫描
-     */
-    boolean departmentFlag;
 
     SaveBean saveBean;
 
@@ -191,23 +143,6 @@ public class MiscellaneousIssueInScanFg extends BaseFragment {
      * 库位
      */
     final int LOCATORWHAT = 1002;
-    /**
-     * 理由码
-     */
-    final int REASONCODEWHAT = 1003;
-    /**
-     * 申请部门
-     */
-    final int DEPARTMENTWHAT = 1004;
-
-    /**
-     * 人员，汇总界面提交试用
-     */
-    static String employee_no = "";
-    /**
-     * 部门，汇总界面提交试用
-     */
-    static String department_no = "";
 
     CommonLogic commonLogic;
 
@@ -219,71 +154,28 @@ public class MiscellaneousIssueInScanFg extends BaseFragment {
             et_scan_locator.setKeyListener(new TextKeyListener(TextKeyListener.Capitalize.CHARACTERS, true));
         }
     }
-    @OnCheckedChanged(R.id.cb_reason_code)
-    void isLock1(boolean checked) {
-        if (checked) {
-            et_reason_code.setKeyListener(null);
-        } else {
-            et_reason_code.setKeyListener(new TextKeyListener(TextKeyListener.Capitalize.CHARACTERS, true));
-        }
-}
-    @OnCheckedChanged(R.id.cb_department)
-    void isLock2(boolean checked) {
-        if (checked) {
-            et_department.setKeyListener(null);
-        } else {
-            et_department.setKeyListener(new TextKeyListener(TextKeyListener.Capitalize.CHARACTERS, true));
-        }
-    }
 
-    @OnFocusChange(R.id.et_reason_code)
-    void reasonCodeFocusChanage() {
-        ModuleUtils.viewChange(ll_reason_code, views);
-        ModuleUtils.etChange(activity, et_reason_code, editTexts);
-        ModuleUtils.tvChange(activity, tv_reason_code, textViews);
-    }
-
-    @OnFocusChange(R.id.et_department)
-    void departmentFocusChanage() {
-        ModuleUtils.viewChange(ll_department, views);
-        ModuleUtils.etChange(activity, et_department, editTexts);
-        ModuleUtils.tvChange(activity, tv_department, textViews);
-    }
     @OnFocusChange(R.id.et_scan_barocde)
-    void barcodeFocusChanage() {
+    void barcodeFocusChange() {
         ModuleUtils.viewChange(ll_scan_barcode, views);
         ModuleUtils.etChange(activity, et_scan_barocde, editTexts);
         ModuleUtils.tvChange(activity, tvBarcode, textViews);
     }
 
     @OnFocusChange(R.id.et_scan_locator)
-    void locatorFocusChanage() {
+    void locatorFocusChange() {
         ModuleUtils.viewChange(ll_scan_locator, views);
         ModuleUtils.etChange(activity, et_scan_locator, editTexts);
         ModuleUtils.tvChange(activity, tv_locator, textViews);
     }
 
     @OnFocusChange(R.id.et_input_num)
-    void numFocusChanage() {
+    void numFocusChange() {
         ModuleUtils.viewChange(llInputNum, views);
         ModuleUtils.etChange(activity, et_input_num, editTexts);
         ModuleUtils.tvChange(activity, tvNumber, textViews);
     }
 
-    @OnTextChanged(value = R.id.et_reason_code, callback = OnTextChanged.Callback.AFTER_TEXT_CHANGED)
-    void reasonCodeChange(CharSequence s) {
-        if (!StringUtils.isBlank(s.toString().trim())) {
-            mHandler.removeMessages(REASONCODEWHAT);
-            mHandler.sendMessageDelayed(mHandler.obtainMessage(REASONCODEWHAT, s.toString().trim()), AddressContants.DELAYTIME);
-        }
-    }
-    @OnTextChanged(value = R.id.et_department, callback = OnTextChanged.Callback.AFTER_TEXT_CHANGED)
-    void departmentChange(CharSequence s) {
-        if (!StringUtils.isBlank(s.toString().trim())) {
-            mHandler.removeMessages(DEPARTMENTWHAT);
-            mHandler.sendMessageDelayed(mHandler.obtainMessage(DEPARTMENTWHAT, s.toString().trim()), AddressContants.DELAYTIME);
-        }
-    }
     @OnTextChanged(value = R.id.et_scan_barocde, callback = OnTextChanged.Callback.AFTER_TEXT_CHANGED)
     void barcodeChange(CharSequence s) {
         if (!StringUtils.isBlank(s.toString().trim())) {
@@ -302,14 +194,6 @@ public class MiscellaneousIssueInScanFg extends BaseFragment {
 
     @OnClick(R.id.save)
     void Save() {
-        if (!reasonCodeFlag) {
-            showFailedDialog(R.string.scan_reason_code);
-            return;
-        }
-        if (!departmentFlag) {
-            showFailedDialog(R.string.scan_apply_branch);
-            return;
-        }
         if (!barcodeFlag) {
             showFailedDialog(R.string.scan_barcode);
             return;
@@ -322,12 +206,10 @@ public class MiscellaneousIssueInScanFg extends BaseFragment {
             showFailedDialog(R.string.input_num);
             return;
         }
-        saveBean.setReason_code_no(et_reason_code.getText().toString());
-        saveBean.setDepartment_no(department_no);
-        saveBean.setEmployee_no(employee_no);
+        saveBean.setDoc_no(orderBean.getDoc_no());
         saveBean.setQty(et_input_num.getText().toString());
         showLoadingDialog();
-        commonLogic.scanSave(saveBean, new CommonLogic.SaveListener() {
+        commonLogic.scanSave(saveBean, new PurchaseInStoreLogic.SaveListener() {
             @Override
             public void onSuccess(SaveBackBean saveBackBean) {
                 dismissLoadingDialog();
@@ -341,90 +223,25 @@ public class MiscellaneousIssueInScanFg extends BaseFragment {
                 showFailedDialog(error);
             }
         });
-
     }
 
-    MiscellaneousissuesInActivity pactivity;
+    MiscellaneousissuesInActivity mactivity;
 
-    public Handler mHandler = new Handler(new Handler.Callback() {
+    FilterResultOrderBean orderBean = new FilterResultOrderBean();
+
+    private Handler mHandler = new Handler(new Handler.Callback() {
         @Override
         public boolean handleMessage(Message msg) {
             switch (msg.what) {
-                case REASONCODEWHAT:
-                    HashMap<String, String> reasonMap = new HashMap<>();
-                    reasonMap.put(AddressContants.REASONCODENO, String.valueOf(msg.obj));
-                    commonLogic.scanReasonCode(reasonMap, new CommonLogic.ScanReasonCodeListener() {
-                        @Override
-                        public void onSuccess(ScanReasonCodeBackBean barcodeBackBean) {
-                            reasonCodeShow = barcodeBackBean.getShow();
-                            reasonCodeFlag = true;
-                            show();
-                            saveBean.setReason_code_no(barcodeBackBean.getReason_code_no());
-                            cb_reason_code.setChecked(true);
-                            if (cb_department.isChecked()){
-                                if(cb_locatorlock.isChecked()){
-                                    et_scan_barocde.requestFocus();
-                                }else{
-                                    et_scan_locator.requestFocus();
-                                }
-                            }else {
-                                et_department.requestFocus();
-                            }
-                        }
-
-                        @Override
-                        public void onFailed(String error) {
-                            reasonCodeFlag = false;
-                            showFailedDialog(error, new OnDialogClickListener() {
-                                @Override
-                                public void onCallback() {
-                                    et_reason_code.setText("");
-                                }
-                            });
-                        }
-                    });
-                    break;
-                case DEPARTMENTWHAT:
-                    final HashMap<String, String> departmentMap = new HashMap<>();
-                    departmentMap.put(AddressContants.EMPLOYEENO, String.valueOf(msg.obj));
-                    commonLogic.scanEmployeeCode(departmentMap, new CommonLogic.ScanEmployeementListener() {
-                        @Override
-                        public void onSuccess(ScanEmployeeBackBean barcodeBackBean) {
-                            departmentShow = barcodeBackBean.getShow();
-                            departmentFlag = true;
-                            employee_no = barcodeBackBean.getEmployee_no();
-                            department_no = barcodeBackBean.getDepartment_no();
-                            saveBean.setDepartment_no(department_no);
-                            saveBean.setEmployee_no(employee_no);
-                            show();
-                            cb_department.setChecked(true);
-                            if(cb_locatorlock.isChecked()){
-                                et_scan_barocde.requestFocus();
-                            }else{
-                                et_scan_locator.requestFocus();
-                            }
-                        }
-
-                        @Override
-                        public void onFailed(String error) {
-                            departmentFlag = false;
-                            showFailedDialog(error, new OnDialogClickListener() {
-                                @Override
-                                public void onCallback() {
-                                    et_department.setText("");
-                                }
-                            });
-                        }
-                    });
-                    break;
                 case BARCODEWHAT:
                     HashMap<String, String> barcodeMap = new HashMap<>();
                     barcodeMap.put(AddressContants.BARCODE_NO, String.valueOf(msg.obj));
-                    barcodeMap.put(AddressContants.WAREHOUSE_NO, LoginLogic.getWare());
+                    barcodeMap.put(AddressContants.DOC_NO,orderBean.getDoc_no());
+                    barcodeMap.put(AddressContants.STORAGE_SPACES_NO,saveBean.getStorage_spaces_in_no());
                     commonLogic.scanBarcode(barcodeMap, new CommonLogic.ScanBarcodeListener() {
                         @Override
                         public void onSuccess(ScanBarcodeBackBean barcodeBackBean) {
-                            barcodeShow = barcodeBackBean.getShow();
+                            barcodeShow = barcodeBackBean.getShowing();
                             if(!StringUtils.isBlank(barcodeBackBean.getBarcode_qty())){
                                 et_input_num.setText(StringUtils.deleteZero(barcodeBackBean.getBarcode_qty()));
                             }
@@ -437,7 +254,12 @@ public class MiscellaneousIssueInScanFg extends BaseFragment {
                             saveBean.setUnit_no(barcodeBackBean.getUnit_no());
                             saveBean.setLot_no(barcodeBackBean.getLot_no());
                             saveBean.setScan_sumqty(barcodeBackBean.getScan_sumqty());
+                            saveBean.setAvailable_in_qty(barcodeBackBean.getAvailable_in_qty());
+                            saveBean.setItem_barcode_type(barcodeBackBean.getItem_barcode_type());
                             et_input_num.requestFocus();
+                            if (CommonUtils.isAutoSave(saveBean)){
+                                Save();
+                            }
                         }
 
                         @Override
@@ -458,12 +280,15 @@ public class MiscellaneousIssueInScanFg extends BaseFragment {
                     commonLogic.scanLocator(locatorMap, new CommonLogic.ScanLocatorListener() {
                         @Override
                         public void onSuccess(ScanLocatorBackBean locatorBackBean) {
-                            locatorShow = locatorBackBean.getShow();
+                            locatorShow = locatorBackBean.getShowing();
                             locatorFlag = true;
                             show();
                             saveBean.setStorage_spaces_in_no(locatorBackBean.getStorage_spaces_no());
                             saveBean.setWarehouse_in_no(locatorBackBean.getWarehouse_no());
                             et_scan_barocde.requestFocus();
+                            if (CommonUtils.isAutoSave(saveBean)){
+                                Save();
+                            }
                         }
 
                         @Override
@@ -490,7 +315,7 @@ public class MiscellaneousIssueInScanFg extends BaseFragment {
 
     @Override
     protected void doBusiness() {
-        pactivity = (MiscellaneousissuesInActivity) activity;
+        mactivity = (MiscellaneousissuesInActivity) activity;
         initData();
     }
 
@@ -498,12 +323,11 @@ public class MiscellaneousIssueInScanFg extends BaseFragment {
      * 公共区域展示
      */
     private void show() {
-        tvDetailShow.setText(StringUtils.lineChange(barcodeShow + "\\n" + locatorShow  + "\\n" +departmentShow + "\\n"+ reasonCodeShow));
-        if (!StringUtils.isBlank(tvDetailShow.getText().toString())){
-        includeDetail.setVisibility(View.VISIBLE);
-        }
-        else {
-        includeDetail.setVisibility(View.GONE);
+        tvDetailShow.setText(StringUtils.lineChange(barcodeShow + "\\n" + locatorShow));
+        if(StringUtils.isBlank(tvDetailShow.getText().toString().trim())){
+            includeDetail.setVisibility(View.GONE);
+        }else{
+            includeDetail.setVisibility(View.VISIBLE);
         }
     }
 
@@ -513,19 +337,11 @@ public class MiscellaneousIssueInScanFg extends BaseFragment {
     private void clear() {
         tv_scaned_num.setText(saveBean.getScan_sumqty());
         et_scan_barocde.setText("");
-        barcodeFlag = false;
         et_input_num.setText("");
-        if(!cb_department.isChecked()){
-            departmentFlag = false;
-            et_department.setText("");
-            departmentShow = "";
-        }
-        if(!cb_reason_code.isChecked()){
-            reasonCodeFlag = false;
-            et_reason_code.setText("");
-            reasonCodeShow = "";
-        }
-        if (!cb_locatorlock.isChecked()){
+        barcodeFlag = false;
+        if (cb_locatorlock.isChecked()){
+            et_scan_barocde.requestFocus();
+        }else {
             locatorFlag = false;
             locatorShow = "";
             et_scan_locator.setText("");
@@ -533,7 +349,6 @@ public class MiscellaneousIssueInScanFg extends BaseFragment {
         }
         barcodeShow = "";
         show();
-        initFocus();
     }
 
     /**
@@ -541,43 +356,38 @@ public class MiscellaneousIssueInScanFg extends BaseFragment {
      */
     public void initData() {
         tv_scaned_num.setText("");
-        et_reason_code.setText("");
-        et_department.setText("");
         et_scan_barocde.setText("");
         et_scan_locator.setText("");
-        cb_department.setChecked(false);
-        cb_locatorlock.setChecked(false);
-        cb_reason_code.setChecked(false);
-        reasonCodeShow = "";
-        departmentShow = "";
         barcodeShow = "";
         locatorShow = "";
         show();
-        reasonCodeFlag = false;
-        departmentFlag = false;
         barcodeFlag = false;
         locatorFlag = false;
+        cb_locatorlock.setChecked(false);
         saveBean = new SaveBean();
-        et_reason_code.requestFocus();
-        commonLogic = CommonLogic.getInstance(context, pactivity.module, pactivity.mTimestamp.toString());
-        }
+        commonLogic =CommonLogic.getInstance(mactivity, mactivity.module, mactivity.mTimestamp.toString());
+        delete();
+        orderBean = (FilterResultOrderBean) mactivity.getIntent().getExtras().getSerializable(AddressContants.ORDERDATA);
+        et_scan_locator.requestFocus();
+    }
 
-        public void initFocus(){
-            if(!cb_reason_code.isChecked()){
-                et_reason_code.requestFocus();
+    /**
+     * 进入界面先清空后台存的表
+     */
+    private void delete() {
+        Map<String,String> map = new HashMap<>();
+        map.put(AddressContants.FLAG, BaseFirstModuldeActivity.ExitMode.EXITD.getName());
+        commonLogic.exit(map, new CommonLogic.ExitListener() {
+            @Override
+            public void onSuccess(String msg) {
+
             }
-            else {
-                if(!cb_department.isChecked()){
-                    et_department.requestFocus();
-                }
-                else{
-                    if(!cb_locatorlock.isChecked()){
-                        et_scan_locator.requestFocus();
-                    }else{
-                        et_scan_barocde.requestFocus();
-                    }
-                }
+
+            @Override
+            public void onFailed(String error) {
+
             }
-        }
+        });
+    }
 
 }

@@ -4,6 +4,7 @@ package digiwin.smartdepott100.module.fragment.stock.miscellaneous.out;
 import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.widget.TextView;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -13,6 +14,11 @@ import java.util.Map;
 
 import butterknife.BindView;
 import butterknife.OnClick;
+import digiwin.smartdepott100.login.bean.AccoutBean;
+import digiwin.smartdepott100.login.loginlogic.LoginLogic;
+import digiwin.smartdepott100.module.bean.common.FilterResultOrderBean;
+import digiwin.smartdepott100.module.bean.common.ListSumBean;
+import digiwin.smartdepott100.module.logic.stock.miscellaneousissues.MiscellaneousissuesOutLogic;
 import digiwin.library.dialog.OnDialogClickListener;
 import digiwin.library.dialog.OnDialogTwoListener;
 import digiwin.library.utils.ActivityManagerUtils;
@@ -38,6 +44,27 @@ public class MiscellaneousIssueSumFg extends BaseFragment {
     @BindView(R.id.ry_list)
     RecyclerView ryList;
 
+    /**
+     * 杂收单号
+     */
+    @BindView(R.id.tv_head_miscellaneous_in_no)
+    TextView tv_head_miscellaneous_in_no;
+    /**
+     * 日期
+     */
+    @BindView(R.id.tv_head_plan_date)
+    TextView tv_head_plan_date;
+    /**
+     * 申请人
+     */
+    @BindView(R.id.tv_head_person)
+    TextView tv_head_person;
+    /**
+     * 部门
+     */
+    @BindView(R.id.tv_head_department)
+    TextView tv_head_department;
+
     @OnClick(R.id.commit)
     void commit() {
         showCommitSureDialog(new OnDialogTwoListener() {
@@ -52,15 +79,15 @@ public class MiscellaneousIssueSumFg extends BaseFragment {
         });
     }
 
-    MiscellaneousissuesOutActivity pactivity;
+    MiscellaneousissuesOutActivity mactivity;
 
-    CommonLogic commonLogic;
+    MiscellaneousissuesOutLogic commonLogic;
 
     private boolean upDateFlag;
 
     MiscellaneousOutSumAdapter adapter;
-
-    List<SumShowBean> sumShowBeanList;
+    List<ListSumBean> sumShowBeanList;
+    FilterResultOrderBean orderData;
 
     @Override
     protected int bindLayoutId() {
@@ -69,13 +96,17 @@ public class MiscellaneousIssueSumFg extends BaseFragment {
 
     @Override
     protected void doBusiness() {
-        pactivity = (MiscellaneousissuesOutActivity) activity;
+        mactivity = (MiscellaneousissuesOutActivity) activity;
         FullyLinearLayoutManager linearLayoutManager = new FullyLinearLayoutManager(activity);
         ryList.setLayoutManager(linearLayoutManager);
         initData();
-
+        Bundle bundle = getActivity().getIntent().getExtras();
+        orderData = (FilterResultOrderBean) bundle.getSerializable("orderData");
+        tv_head_plan_date.setText(orderData.getCreate_date());
+        tv_head_miscellaneous_in_no.setText(orderData.getDoc_no());
+        tv_head_person.setText(orderData.getEmployee_name());
+        tv_head_department.setText(orderData.getDepartment_name());
     }
-
 
     /**
      * 汇总展示
@@ -83,15 +114,21 @@ public class MiscellaneousIssueSumFg extends BaseFragment {
     public void upDateList() {
         try {
             HashMap<String,String> map = new HashMap<>();
+            map.put("doc_no",orderData.getDoc_no());
+            AccoutBean accoutBean= LoginLogic.getUserInfo();
+            if (accoutBean!=null) {
+                map.put("warehouse_no", accoutBean.getWare());
+            }
+            map.put("create_date",orderData.getCreate_date());
             showLoadingDialog();
-            commonLogic.getSum(map, new CommonLogic.GetSumListener() {
+            commonLogic.getMIISumData(map, new CommonLogic.GetZSumListener() {
                 @Override
-                public void onSuccess(List<SumShowBean> list) {
+                public void onSuccess(List<ListSumBean> list) {
                     dismissLoadingDialog();
-                    sumShowBeanList = new ArrayList<SumShowBean>();
+                    sumShowBeanList = new ArrayList<ListSumBean>();
                     sumShowBeanList = list;
                     if (list.size() > 0) {
-                        adapter = new MiscellaneousOutSumAdapter(pactivity, sumShowBeanList);
+                        adapter = new MiscellaneousOutSumAdapter(mactivity, sumShowBeanList);
                         ryList.setAdapter(adapter);
                         upDateFlag = true;
                         toDetail();
@@ -104,8 +141,8 @@ public class MiscellaneousIssueSumFg extends BaseFragment {
                     upDateFlag = false;
                     try {
                         showFailedDialog(error);
-                        sumShowBeanList = new ArrayList<SumShowBean>();
-                        adapter = new MiscellaneousOutSumAdapter(pactivity, sumShowBeanList);
+                        sumShowBeanList = new ArrayList<ListSumBean>();
+                        adapter = new MiscellaneousOutSumAdapter(mactivity, sumShowBeanList);
                         ryList.setAdapter(adapter);
                     } catch (Exception e) {
                         LogUtils.e(TAG, "updateList--getSum--onFailed" + e);
@@ -137,19 +174,23 @@ public class MiscellaneousIssueSumFg extends BaseFragment {
     /**
      * 查看明细
      */
-    private void getDetail(final SumShowBean orderSumData) {
+    private void getDetail(final ListSumBean orderSumData) {
         Map<String, String> map = new HashMap<>();
         showLoadingDialog();
         map.put(AddressContants.ITEM_NO, orderSumData.getItem_no());
+        final SumShowBean sumShowBean = new SumShowBean();
+        sumShowBean.setItem_no(orderSumData.getItem_no());
+        sumShowBean.setItem_name(orderSumData.getItem_name());
+        sumShowBean.setAvailable_in_qty(orderSumData.getApply_qty());
         commonLogic.getDetail(map, new CommonLogic.GetDetailListener() {
             @Override
             public void onSuccess(List<DetailShowBean> detailShowBeen) {
                 Bundle bundle = new Bundle();
-                bundle.putString(AddressContants.MODULEID_INTENT, pactivity.mTimestamp.toString());
-                bundle.putString(CommonDetailActivity.MODULECODE, pactivity.module);
-                bundle.putSerializable(CommonDetailActivity.ONESUM, orderSumData);
+                bundle.putString(AddressContants.MODULEID_INTENT, mactivity.mTimestamp.toString());
+                bundle.putString(CommonDetailActivity.MODULECODE, mactivity.module);
+                bundle.putSerializable(CommonDetailActivity.ONESUM, sumShowBean);
                 bundle.putSerializable(CommonDetailActivity.DETAIL, (Serializable) detailShowBeen);
-                ActivityManagerUtils.startActivityBundleForResult(activity, CommonDetailActivity.class, bundle, pactivity.DETAILCODE);
+                ActivityManagerUtils.startActivityBundleForResult(activity, CommonDetailActivity.class, bundle, mactivity.DETAILCODE);
                 dismissLoadingDialog();
             }
 
@@ -167,24 +208,25 @@ public class MiscellaneousIssueSumFg extends BaseFragment {
             return;
         }
         showLoadingDialog();
-        List<Map<String,String>> maps = new ArrayList<>();
-        HashMap<String, String> map = new HashMap<>();
-        map.put("employee_no", MiscellaneousIssueScanFg.employee_no);
-        map.put("department_no",MiscellaneousIssueScanFg.department_no);
-        maps.add(map);
-        commonLogic.commitList(maps, new CommonLogic.CommitListListener() {
+        Map<String, String> hashMap = new HashMap<>();
+        commonLogic.commitMIIData(hashMap, new CommonLogic.CommitListListener() {
             @Override
             public void onSuccess(String msg) {
                 dismissLoadingDialog();
                 showCommitSuccessDialog(msg, new OnDialogClickListener() {
                     @Override
                     public void onCallback() {
-                        sumShowBeanList = new ArrayList<SumShowBean>();
-                        adapter = new MiscellaneousOutSumAdapter(pactivity,sumShowBeanList);
+                        sumShowBeanList = new ArrayList<ListSumBean>();
+                        adapter = new MiscellaneousOutSumAdapter(mactivity,sumShowBeanList);
+
                         ryList.setAdapter(adapter);
-                        pactivity.createNewModuleId(pactivity.module);
-                        pactivity.mZXVp.setCurrentItem(0);
-                        pactivity.scanFg.initData();
+                        mactivity.createNewModuleId(mactivity.module);
+                        tv_head_plan_date.setText("");
+                        tv_head_miscellaneous_in_no.setText("");
+                        tv_head_person.setText("");
+                        tv_head_department.setText("");
+                        mactivity.mZXVp.setCurrentItem(0);
+                        mactivity.scanFg.initData();
                         initData();
                     }
                 });
@@ -198,9 +240,11 @@ public class MiscellaneousIssueSumFg extends BaseFragment {
         });
 
     }
-    private void initData() {
-        commonLogic = CommonLogic.getInstance(pactivity, pactivity.module, pactivity.mTimestamp.toString());
+
+    public void  initData(){
+        commonLogic=MiscellaneousissuesOutLogic.getInstance(mactivity,mactivity.module,mactivity.mTimestamp.toString());
         upDateFlag = false;
+
     }
 
 }

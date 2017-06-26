@@ -28,10 +28,11 @@ import digiwin.smartdepott100.R;
 import digiwin.smartdepott100.core.appcontants.AddressContants;
 import digiwin.smartdepott100.core.appcontants.ModuleCode;
 import digiwin.smartdepott100.core.base.BaseTitleActivity;
+import digiwin.smartdepott100.core.coreutil.CommonUtils;
 import digiwin.smartdepott100.core.coreutil.FiFoCheckUtils;
 import digiwin.smartdepott100.core.modulecommon.ModuleUtils;
 import digiwin.smartdepott100.login.loginlogic.LoginLogic;
-import digiwin.smartdepott100.module.adapter.produce.AccordingMaterialFiFoAdapter;
+import digiwin.smartdepott100.module.adapter.common.CommonItemNoFiFoAdapter;
 import digiwin.smartdepott100.module.bean.common.FifoCheckBean;
 import digiwin.smartdepott100.module.bean.common.ListSumBean;
 import digiwin.smartdepott100.module.bean.common.SaveBackBean;
@@ -39,6 +40,7 @@ import digiwin.smartdepott100.module.bean.common.SaveBean;
 import digiwin.smartdepott100.module.bean.common.ScanBarcodeBackBean;
 import digiwin.smartdepott100.module.bean.common.ScanLocatorBackBean;
 import digiwin.smartdepott100.module.logic.common.CommonLogic;
+import digiwin.smartdepott100.module.logic.produce.AccordingMaterialLogic;
 
 import static digiwin.smartdepott100.R.id.et_input_num;
 import static digiwin.smartdepott100.R.id.et_scan_barocde;
@@ -154,7 +156,7 @@ public class AccordingMaterialScanActivity extends BaseTitleActivity {
     @BindView(R.id.cb_locatorlock)
     CheckBox cbLocatorlock;
 
-    AccordingMaterialFiFoAdapter adapter;
+    CommonItemNoFiFoAdapter adapter;
 
     SaveBean saveBean;
 
@@ -168,7 +170,7 @@ public class AccordingMaterialScanActivity extends BaseTitleActivity {
      */
     public final int SCANCODE = 0123;
 
-    CommonLogic commonLogic;
+    AccordingMaterialLogic commonLogic;
 
     List<FifoCheckBean> localFifoList;
 
@@ -306,6 +308,9 @@ public class AccordingMaterialScanActivity extends BaseTitleActivity {
                             } else {
                                 etScanBarocde.requestFocus();
                             }
+                            if (CommonUtils.isAutoSave(saveBean)){
+                                saveData();
+                            }
                         }
 
                         @Override
@@ -326,6 +331,7 @@ public class AccordingMaterialScanActivity extends BaseTitleActivity {
                     HashMap<String, String> barcodeMap = new HashMap<>();
                     barcodeMap.put(AddressContants.BARCODE_NO, String.valueOf(msg.obj));
                     barcodeMap.put(AddressContants.WAREHOUSE_NO, LoginLogic.getWare());
+                    barcodeMap.put(AddressContants.STORAGE_SPACES_NO,saveBean.getStorage_spaces_out_no());
                     commonLogic.scanBarcode(barcodeMap, new CommonLogic.ScanBarcodeListener() {
                         @Override
                         public void onSuccess(ScanBarcodeBackBean barcodeBackBean) {
@@ -373,11 +379,11 @@ public class AccordingMaterialScanActivity extends BaseTitleActivity {
                             if (null != fiFoBeanList && fiFoBeanList.size() > 0) {
                                 localFifoList = new ArrayList<FifoCheckBean>();
                                 localFifoList = fiFoBeanList;
-                                adapter = new AccordingMaterialFiFoAdapter(activity, fiFoBeanList);
+                                adapter = new CommonItemNoFiFoAdapter(activity, fiFoBeanList);
                                 mRc_list.setAdapter(adapter);
                             } else {
                                 localFifoList = new ArrayList<FifoCheckBean>();
-                                adapter = new AccordingMaterialFiFoAdapter(activity, fiFoBeanList);
+                                adapter = new CommonItemNoFiFoAdapter(activity, fiFoBeanList);
                                 mRc_list.setAdapter(adapter);
                             }
                         }
@@ -414,7 +420,6 @@ public class AccordingMaterialScanActivity extends BaseTitleActivity {
     @Override
     protected void doBusiness() {
         initData();
-
         localData = new ListSumBean();
         ListSumBean data = (ListSumBean) getIntent().getSerializableExtra("sumdata");
         mTv_item_name.setText(data.getItem_name());
@@ -430,7 +435,7 @@ public class AccordingMaterialScanActivity extends BaseTitleActivity {
             etScanBarocde.setText(data.getLow_order_item_no());
         }
 
-        commonLogic = CommonLogic.getInstance(context, module, mTimestamp.toString());
+        commonLogic = AccordingMaterialLogic.getInstance(context, module, mTimestamp.toString());
         FullyLinearLayoutManager fullyLinearLayoutManager = new FullyLinearLayoutManager(activity);
         mRc_list.setLayoutManager(fullyLinearLayoutManager);
         getFifo();
@@ -494,10 +499,14 @@ public class AccordingMaterialScanActivity extends BaseTitleActivity {
         saveBean.setUnit_no(barcodeBackBean.getUnit_no());
         saveBean.setLot_no(barcodeBackBean.getLot_no());
         saveBean.setFifo_check(barcodeBackBean.getFifo_check());
+        saveBean.setItem_barcode_type(barcodeBackBean.getItem_barcode_type());
         if (StringUtils.isBlank(etScanLocator.getText().toString()) && !cbLocatorlock.isChecked()) {
             etScanLocator.requestFocus();
         } else {
             etInputNum.requestFocus();
+        }
+        if (CommonUtils.isAutoSave(saveBean)){
+            saveData();
         }
     }
 

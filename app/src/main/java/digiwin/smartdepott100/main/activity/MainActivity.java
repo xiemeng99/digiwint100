@@ -13,17 +13,14 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import org.litepal.crud.DataSupport;
-import org.litepal.tablemanager.Connector;
-
 import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
 import butterknife.OnClick;
+import digiwin.smartdepott100.main.logic.MainLogic;
 import digiwin.library.constant.SharePreKey;
 import digiwin.library.utils.ActivityManagerUtils;
-import digiwin.library.utils.LogUtils;
 import digiwin.library.utils.SharedPreferencesUtils;
 import digiwin.library.utils.ToastUtils;
 import digiwin.library.voiceutils.VoiceUtils;
@@ -32,10 +29,8 @@ import digiwin.smartdepott100.core.appcontants.ModuleCode;
 import digiwin.smartdepott100.core.base.BaseApplication;
 import digiwin.smartdepott100.core.base.BaseTitleActivity;
 import digiwin.smartdepott100.main.bean.ModuleBean;
-import digiwin.smartdepott100.main.bean.StorageBean;
 import digiwin.smartdepott100.main.bean.TotalMode;
 import digiwin.smartdepott100.main.fragment.DetailFragment;
-import digiwin.smartdepott100.main.logic.MainLogic;
 
 
 public class MainActivity extends BaseTitleActivity {
@@ -207,11 +202,6 @@ public class MainActivity extends BaseTitleActivity {
     protected void onResume() {
         super.onResume();
        // MainLogic.setTitle(tvPersonName, tv_title_operation);
-        Connector.getDatabase();
-        List<StorageBean> all = DataSupport.findAll(StorageBean.class);
-        for (int i=0;i<all.size();i++) {
-            LogUtils.e(TAG, "StorageBean--" + all.get(i).getWare());
-        }
     }
     /**
      * 用户信息界面跳转

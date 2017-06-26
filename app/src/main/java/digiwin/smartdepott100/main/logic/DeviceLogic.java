@@ -2,18 +2,17 @@ package digiwin.smartdepott100.main.logic;
 
 import android.content.Context;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import digiwin.library.json.JsonResp;
 import digiwin.library.utils.LogUtils;
-import digiwin.library.xml.ParseXmlResp;
 import digiwin.smartdepott100.R;
 import digiwin.smartdepott100.core.appcontants.ReqTypeName;
+import digiwin.smartdepott100.core.json.JsonReqForERP;
 import digiwin.smartdepott100.core.net.IRequestCallbackImp;
 import digiwin.smartdepott100.core.net.OkhttpRequest;
-import digiwin.smartdepott100.core.xml.CreateParaXmlReqIm;
-import digiwin.smartdepott100.login.bean.AccoutBean;
-import digiwin.smartdepott100.login.loginlogic.LoginLogic;
 import digiwin.smartdepott100.main.bean.DeviceInfoBean;
 
 /**
@@ -70,25 +69,20 @@ public class DeviceLogic {
      */
     public void getDevice(Map<String, String> map, final DeviceListener listener) {
         try {
-            AccoutBean info = LoginLogic.getUserInfo();
-            String plant="SYSTEM";
-            if (null!=info){
-                plant=info.getEnterprise_no();
-            }
-            String xml = CreateParaXmlReqIm.getInstance(map,plant, mModule, ReqTypeName.GETAP,mTimestamp).toXml();
-            OkhttpRequest.getInstance(mContext).post(xml, new IRequestCallbackImp() {
+            String createJson = JsonReqForERP.mapCreateJson(mModule, ReqTypeName.GETAP, mTimestamp, map);
+            OkhttpRequest.getInstance(mContext).post(createJson, new IRequestCallbackImp() {
                 @Override
                 public void onResponse(String string) {
                     String error = mContext.getString(R.string.unknow_error);
-                    ParseXmlResp xmlResp = ParseXmlResp.fromXml(ReqTypeName.GETAP, string);
-                    if (null != xmlResp) {
-                        if (ReqTypeName.SUCCCESSCODE.equals(xmlResp.getCode())) {
-                            DeviceInfoBean deviceInfoBean = new DeviceInfoBean();
-                            List<DeviceInfoBean> deviceInfoBeen = xmlResp.getParameterDatas(DeviceInfoBean.class);
-                            listener.onSuccess(deviceInfoBeen);
+                    if (null != string) {
+                        if (ReqTypeName.SUCCCESSCODE.equals(JsonResp.getCode(string))) {
+                            DeviceInfoBean deviceInfoBean =JsonResp.getParaData(string,DeviceInfoBean.class);
+                            ArrayList<DeviceInfoBean> list = new ArrayList<>();
+                            list.add(deviceInfoBean);
+                            listener.onSuccess(list);
                             return;
                         }else {
-                            error=xmlResp.getDescription();
+                            error=JsonResp.getDescription(string);
                         }
                     }
                     listener.onFailed(error);

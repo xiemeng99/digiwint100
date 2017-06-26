@@ -19,6 +19,7 @@ import java.util.Map;
 
 import butterknife.BindView;
 import butterknife.OnClick;
+import digiwin.smartdepott100.module.logic.sale.saleoutlet.SaleOutLetLogic;
 import digiwin.library.dialog.OnDialogClickListener;
 import digiwin.library.dialog.OnDialogTwoListener;
 import digiwin.library.utils.ActivityManagerUtils;
@@ -90,7 +91,7 @@ public class SaleOutletSumFg extends BaseFragment {
     }
 
     SaleOutletActivity pactivity;
-    CommonLogic commonLogic;
+    SaleOutLetLogic logic;
 
     boolean upDateFlag;
 
@@ -107,7 +108,7 @@ public class SaleOutletSumFg extends BaseFragment {
         upDateFlag=false;
         sumBeanList=new ArrayList<>();
         pactivity = (SaleOutletActivity) this.activity;
-        commonLogic = CommonLogic.getInstance(context, pactivity.module, pactivity.mTimestamp.toString());
+        logic = SaleOutLetLogic.getInstance(pactivity,pactivity.module,pactivity.mTimestamp.toString());
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(pactivity);
         ryList.setLayoutManager(linearLayoutManager);
     }
@@ -123,7 +124,9 @@ public class SaleOutletSumFg extends BaseFragment {
             return;
         }
         showLoadingDialog();
-        commonLogic.getOrderSumData(mPutBean, new CommonLogic.GetOrderSumListener() {
+        HashMap<String,String> map = new HashMap<>();
+        map.put(AddressContants.DOC_NO,mPutBean.getNotice_no());
+        logic.getSOLSumData(map, new CommonLogic.GetZSumListener() {
             @Override
             public void onSuccess(List<ListSumBean> list) {
                 dismissLoadingDialog();
@@ -133,8 +136,8 @@ public class SaleOutletSumFg extends BaseFragment {
                 if (null!=list&&list.size()>0){
                     upDateFlag=true;
                     toDetail();
-                    tvHeadPostOrder.setText(list.get(0).getNotice_no());
-                    tvCustom.setText(list.get(0).getCustomer_no()+"|"+list.get(0).getCustomer_name());
+                    tvHeadPostOrder.setText(list.get(0).getDoc_no());
+                    tvCustom.setText(list.get(0).getCustomer_name());
                 }
             }
 
@@ -192,7 +195,7 @@ public class SaleOutletSumFg extends BaseFragment {
         sumShowBean.setItem_no(orderSumData.getItem_no());
         sumShowBean.setItem_name(orderSumData.getItem_name());
         sumShowBean.setAvailable_in_qty(StringUtils.getMinQty(orderSumData.getStock_qty(),orderSumData.getReq_qty()));
-        commonLogic.getDetail(map, new CommonLogic.GetDetailListener() {
+        logic.getDetail(map, new CommonLogic.GetDetailListener() {
             @Override
             public void onSuccess(List<DetailShowBean> detailShowBeen) {
                 Bundle bundle = new Bundle();
@@ -207,7 +210,7 @@ public class SaleOutletSumFg extends BaseFragment {
             @Override
             public void onFailed(String error) {
                 dismissLoadingDialog();
-                showCommitFailDialog(error);
+                showFailedDialog(error);
             }
         });
     }
@@ -219,7 +222,8 @@ public class SaleOutletSumFg extends BaseFragment {
         }
         showLoadingDialog();
         HashMap<String, String> map = new HashMap<>();
-        commonLogic.commit(map, new CommonLogic.CommitListener() {
+        map.put(AddressContants.DOC_NO,mPutBean.getNotice_no());
+        logic.commitSOLData(map, new CommonLogic.CommitListener() {
             @Override
             public void onSuccess(String msg) {
                 dismissLoadingDialog();

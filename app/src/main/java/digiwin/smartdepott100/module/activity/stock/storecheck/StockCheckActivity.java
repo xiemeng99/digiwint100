@@ -10,7 +10,6 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -185,15 +184,17 @@ public class StockCheckActivity extends BaseFirstModuldeActivity {
                     barcodeMap.put(AddressContants.DOC_NO, data.getDoc_no());
                     barcodeMap.put(AddressContants.BARCODE_NO, String.valueOf(msg.obj));
                     barcodeMap.put(AddressContants.WAREHOUSE_NO, LoginLogic.getWare());
+                    barcodeMap.put(AddressContants.STORAGE_SPACES_NO,saveBean.getStorage_spaces_no());
                     commonLogic.scanBarcode(barcodeMap, new CommonLogic.ScanBarcodeListener() {
                         @Override
                         public void onSuccess(ScanBarcodeBackBean barcodeBackBean) {
-                            barcodeShow = barcodeBackBean.getShow();
+                            barcodeShow = barcodeBackBean.getShowing();
                             barcodeFlag = true;
                             show();
                             saveBean.setBarcode_no(barcodeBackBean.getBarcode_no());//料号
                             saveBean.setItem_no(barcodeBackBean.getItem_no());//料号
                             saveBean.setLot_no(barcodeBackBean.getLot_no());//批号
+                            saveBean.setItem_barcode_type(barcodeBackBean.getItem_barcode_type());
                             //赋值累积量
                             tv_material_sumnumber.setText(barcodeBackBean.getScan_sumqty());
                             et_chcek_number.requestFocus();
@@ -216,7 +217,7 @@ public class StockCheckActivity extends BaseFirstModuldeActivity {
                     commonLogic.scanLocator(locatorMap, new CommonLogic.ScanLocatorListener() {
                         @Override
                         public void onSuccess(ScanLocatorBackBean locatorBackBean) {
-                            locatorShow = locatorBackBean.getShow();
+                            locatorShow = locatorBackBean.getShowing();
                             locatorFlag = true;
                             show();
                             saveBean.setStorage_spaces_no(locatorBackBean.getStorage_spaces_no());//库位
@@ -254,10 +255,7 @@ public class StockCheckActivity extends BaseFirstModuldeActivity {
         }
         showLoadingDialog();
         Map<String, String> map = ObjectAndMapUtils.getValueMap(saveBean);
-        List<Map<String, String>> listMap=new ArrayList<>();
-        listMap.add(map);
-
-        commonLogic.commitList(listMap, new CommonLogic.CommitListListener() {
+        commonLogic.commit(map, new CommonLogic.CommitListener() {
             @Override
             public void onSuccess(String msg) {
                 dismissLoadingDialog();

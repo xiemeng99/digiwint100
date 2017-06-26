@@ -27,12 +27,15 @@ import digiwin.smartdepott100.module.activity.common.CommonDetailActivity;
 import digiwin.smartdepott100.module.activity.stock.storeallot.StoreAllotActivity;
 import digiwin.smartdepott100.module.adapter.stock.storeallot.StoreAllotSumAdapter;
 import digiwin.smartdepott100.module.bean.common.DetailShowBean;
+import digiwin.smartdepott100.module.bean.common.ListSumBean;
 import digiwin.smartdepott100.module.bean.common.SumShowBean;
 import digiwin.smartdepott100.module.logic.common.CommonLogic;
+import digiwin.smartdepott100.module.logic.stock.StoreAllotLogic;
+
 /**
- * @des    无来源调拨数据汇总提交
- * @author  xiemeng
- * @date    2017/3/9
+ * @author xiemeng
+ * @des 无来源调拨数据汇总提交
+ * @date 2017/3/9
  */
 public class StoreAllotSumFg extends BaseFragment {
     @BindView(R.id.ry_list)
@@ -45,6 +48,7 @@ public class StoreAllotSumFg extends BaseFragment {
             public void onCallback1() {
                 sureCommit();
             }
+
             @Override
             public void onCallback2() {
 
@@ -54,13 +58,13 @@ public class StoreAllotSumFg extends BaseFragment {
 
     StoreAllotActivity pactivity;
 
-    CommonLogic commonLogic;
+    StoreAllotLogic storeAllotLogic;
 
     private boolean upDateFlag;
 
     BaseRecyclerAdapter adapter;
 
-    List<SumShowBean> sumShowBeanList;
+    List<ListSumBean> sumShowBeanList;
 
     @Override
     protected int bindLayoutId() {
@@ -85,9 +89,9 @@ public class StoreAllotSumFg extends BaseFragment {
             ryList.setAdapter(adapter);
             Map<String, String> map = new HashMap<>();
             showLoadingDialog();
-            commonLogic.getSum(map, new CommonLogic.GetSumListener() {
+            storeAllotLogic.getStoreList(map, new CommonLogic.GetZSumListener() {
                 @Override
-                public void onSuccess(List<SumShowBean> list) {
+                public void onSuccess(List<ListSumBean> list) {
                     sumShowBeanList = list;
                     adapter = new StoreAllotSumAdapter(activity, sumShowBeanList);
                     ryList.setAdapter(adapter);
@@ -102,7 +106,7 @@ public class StoreAllotSumFg extends BaseFragment {
                     try {
                         dismissLoadingDialog();
                         showFailedDialog(error);
-                        sumShowBeanList = new ArrayList<SumShowBean>();
+                        sumShowBeanList = new ArrayList<ListSumBean>();
                         adapter = new StoreAllotSumAdapter(activity, sumShowBeanList);
                         ryList.setAdapter(adapter);
                     } catch (Exception e) {
@@ -135,17 +139,20 @@ public class StoreAllotSumFg extends BaseFragment {
     /**
      * 查看明细
      */
-    private void getDetail(final SumShowBean sumShowBean) {
+    private void getDetail(final ListSumBean sumShowBean) {
         Map<String, String> map = new HashMap<>();
         showLoadingDialog();
+        final SumShowBean toDetailBean = new SumShowBean();
+        toDetailBean.setItem_no(sumShowBean.getItem_no());
+        toDetailBean.setAvailable_in_qty(sumShowBean.getAvailable_in_qty());
         map.put(AddressContants.ITEM_NO, sumShowBean.getItem_no());
-        commonLogic.getDetail(map, new CommonLogic.GetDetailListener() {
+        storeAllotLogic.getDetail(map, new CommonLogic.GetDetailListener() {
             @Override
             public void onSuccess(List<DetailShowBean> detailShowBeen) {
                 Bundle bundle = new Bundle();
                 bundle.putString(AddressContants.MODULEID_INTENT, pactivity.mTimestamp.toString());
-                bundle.putString(CommonDetailActivity.MODULECODE,pactivity.module);
-                bundle.putSerializable(CommonDetailActivity.ONESUM, sumShowBean);
+                bundle.putString(CommonDetailActivity.MODULECODE, pactivity.module);
+                bundle.putSerializable(CommonDetailActivity.ONESUM, toDetailBean);
                 bundle.putSerializable(CommonDetailActivity.DETAIL, (Serializable) detailShowBeen);
                 dismissLoadingDialog();
                 ActivityManagerUtils.startActivityBundleForResult(activity, CommonDetailActivity.class, bundle, pactivity.DETAILCODE);
@@ -154,30 +161,32 @@ public class StoreAllotSumFg extends BaseFragment {
             @Override
             public void onFailed(String error) {
                 dismissLoadingDialog();
-                showCommitFailDialog(error);
+                showFailedDialog(error);
             }
         });
     }
 
-    private void sureCommit(){
+    private void sureCommit() {
         if (!upDateFlag) {
             showFailedDialog(R.string.nodate);
             return;
         }
         showLoadingDialog();
         HashMap<String, String> map = new HashMap<>();
-        commonLogic.commit(map, new CommonLogic.CommitListener() {
+        storeAllotLogic.commit(map, new CommonLogic.CommitListener() {
             @Override
             public void onSuccess(String msg) {
                 dismissLoadingDialog();
+                pactivity.ImgChooseallot.setEnabled(true);
                 showCommitSuccessDialog(msg, new OnDialogClickListener() {
                     @Override
                     public void onCallback() {
-                        pactivity.finish();
-//                        pactivity.mZXVp.setCurrentItem(0);
-//                        pactivity.createNewModuleId(pactivity.module);
-//                        pactivity.scanFg.initData();
-//                        initData();
+//                        pactivity.finish();
+                        pactivity.mZXVp.setCurrentItem(0);
+                        pactivity.createNewModuleId(pactivity.module);
+                        pactivity.scanFg.initData();
+                        initData();
+                        pactivity.initDialog();
                     }
                 });
             }
@@ -191,9 +200,9 @@ public class StoreAllotSumFg extends BaseFragment {
 
     }
 
-    public void initData(){
-        sumShowBeanList=new ArrayList<>();
-        commonLogic = CommonLogic.getInstance(activity, pactivity.module, pactivity.mTimestamp.toString());
+    public void initData() {
+        sumShowBeanList = new ArrayList<>();
+        storeAllotLogic = StoreAllotLogic.getInstance(activity, pactivity.module, pactivity.mTimestamp.toString());
         upDateFlag = false;
     }
 

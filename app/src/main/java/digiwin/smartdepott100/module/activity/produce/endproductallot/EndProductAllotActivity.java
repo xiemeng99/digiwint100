@@ -22,6 +22,8 @@ import butterknife.BindView;
 import butterknife.BindViews;
 import butterknife.OnClick;
 import butterknife.OnFocusChange;
+import digiwin.library.utils.ObjectAndMapUtils;
+import digiwin.library.utils.StringUtils;
 import digiwin.smartdepott100.R;
 import digiwin.smartdepott100.core.appcontants.AddressContants;
 import digiwin.smartdepott100.core.appcontants.ModuleCode;
@@ -34,13 +36,15 @@ import digiwin.smartdepott100.module.bean.common.ClickItemPutBean;
 import digiwin.smartdepott100.module.bean.common.DetailShowBean;
 import digiwin.smartdepott100.module.bean.common.ListSumBean;
 import digiwin.smartdepott100.module.bean.common.SumShowBean;
-import digiwin.smartdepott100.module.logic.common.CommonLogic;
+
 import digiwin.library.dialog.OnDialogTwoListener;
 import digiwin.library.utils.ActivityManagerUtils;
 import digiwin.library.utils.LogUtils;
 import digiwin.pulltorefreshlibrary.recyclerview.FullyLinearLayoutManager;
 import digiwin.pulltorefreshlibrary.recyclerviewAdapter.BaseRecyclerAdapter;
 import digiwin.pulltorefreshlibrary.recyclerviewAdapter.OnItemClickListener;
+import digiwin.smartdepott100.module.logic.common.CommonLogic;
+import digiwin.smartdepott100.module.logic.produce.EndProductAllotLogic;
 
 /**
  * @author xiemeng
@@ -52,7 +56,7 @@ public class EndProductAllotActivity extends BaseFirstModuldeActivity {
 
     BaseRecyclerAdapter adapter;
 
-    List<ListSumBean> listSumBeen;
+    List<ListSumBean> listSumBean;
 
     /**
      * 跳转明细使用
@@ -68,34 +72,38 @@ public class EndProductAllotActivity extends BaseFirstModuldeActivity {
      */
     private boolean isSearching;
 
-    CommonLogic commonLogic;
+    EndProductAllotLogic commonLogic;
 
     /**
      * 标题
      */
     @BindView(R.id.toolbar_title)
     Toolbar toolbarTitle;
+    /**
+     * 筛选框
+     */
     @BindView(R.id.tv_item_no)
     TextView tvItemNo;
     @BindView(R.id.et_item_no)
     EditText etItemNo;
     @BindView(R.id.ll_item_no)
     LinearLayout llItemNo;
+
     @BindView(R.id.tv_department)
     TextView tvDepartment;
     @BindView(R.id.et_department)
     EditText etDepartment;
     @BindView(R.id.ll_department)
     LinearLayout llDepartment;
+
     @BindView(R.id.tv_target_store)
     TextView tvTargetStore;
     @BindView(R.id.et_target_store)
     EditText etTargetStore;
     @BindView(R.id.ll_target_store)
     LinearLayout llTargetStore;
-    @BindView(R.id.btn_search_sure)
-    Button btnSearchSure;
-    @BindView(R.id.ll_search_input)
+
+    @BindView(R.id.ll_search_dialog)
     LinearLayout llSearchInput;
     @BindView(R.id.ry_list)
     RecyclerView ryList;
@@ -107,10 +115,11 @@ public class EndProductAllotActivity extends BaseFirstModuldeActivity {
     @BindViews({R.id.ll_item_no, R.id.ll_department, R.id.ll_target_store})
     List<View> views;
 
-    @BindView(R.id.tv_headitem_no)
+    /**
+     * 汇总界面
+     */
+    @BindView(R.id.tv_head_item_no)
     TextView tvHeaditemNo;
-    @BindView(R.id.tv_headitem_name)
-    TextView tvHeaditemName;
     @BindView(R.id.tv_head_depart)
     TextView tvHeadDepart;
     @BindView(R.id.tv_head_source)
@@ -119,23 +128,25 @@ public class EndProductAllotActivity extends BaseFirstModuldeActivity {
     TextView tvHeadTarget;
     @BindView(R.id.ll_head)
     LinearLayout llHead;
-
+    /**
+     *筛选框 焦点颜色变化
+     */
     @OnFocusChange(R.id.et_item_no)
-    void itemFocusChanage() {
+    void itemFocusChange() {
         ModuleUtils.viewChange(llItemNo, views);
         ModuleUtils.etChange(activity, etItemNo, editTexts);
         ModuleUtils.tvChange(activity, tvItemNo, textViews);
     }
 
     @OnFocusChange(R.id.et_department)
-    void departmentFocusChanage() {
+    void departmentFocusChange() {
         ModuleUtils.viewChange(llDepartment, views);
         ModuleUtils.etChange(activity, etDepartment, editTexts);
         ModuleUtils.tvChange(activity, tvDepartment, textViews);
     }
 
     @OnFocusChange(R.id.et_target_store)
-    void locatorFocusChanage() {
+    void locatorFocusChange() {
         ModuleUtils.viewChange(llTargetStore, views);
         ModuleUtils.etChange(activity, etTargetStore, editTexts);
         ModuleUtils.tvChange(activity, tvTargetStore, textViews);
@@ -151,17 +162,27 @@ public class EndProductAllotActivity extends BaseFirstModuldeActivity {
     void search() {
         if (isSearching) {
             isSearching = false;
-            llHead.setVisibility(View.VISIBLE);
+            mName.setText(getString(R.string.endproduct_allot)+getString(R.string.SumData));
+            ivScan.setVisibility(View.GONE);
             commit.setVisibility(View.VISIBLE);
+            scrollView.setVisibility(View.VISIBLE);
             llSearchInput.setVisibility(View.GONE);
             return;
         } else {
             isSearching = true;
-            llHead.setVisibility(View.GONE);
+            mName.setText(getString(R.string.endproduct_allot)+getString(R.string.condition_filter));
+            ivScan.setVisibility(View.VISIBLE);
             commit.setVisibility(View.GONE);
+            scrollView.setVisibility(View.GONE);
             llSearchInput.setVisibility(View.VISIBLE);
         }
     }
+
+    /**
+     * 确定按钮
+     */
+    @BindView(R.id.btn_search_sure)
+    Button btnSearchSure;
 
     @OnClick(R.id.btn_search_sure)
     void search_sure(){
@@ -180,10 +201,14 @@ public class EndProductAllotActivity extends BaseFirstModuldeActivity {
         });
 
     }
+
     @BindView(R.id.scrollView)
     ScrollView scrollView;
+    /**
+     * 提交按钮
+     */
     @BindView(R.id.commit)
-    View commit;
+    Button commit;
 
     @OnClick(R.id.commit)
     void commit() {
@@ -191,7 +216,7 @@ public class EndProductAllotActivity extends BaseFirstModuldeActivity {
             @Override
             public void onCallback1() {
                 showLoadingDialog();
-                if (null==listSumBeen||listSumBeen.size()==0)
+                if (null==listSumBean||listSumBean.size()==0)
                 {
                     showFailedDialog(R.string.nodate);
                     return;
@@ -211,11 +236,10 @@ public class EndProductAllotActivity extends BaseFirstModuldeActivity {
         return toolbarTitle;
     }
 
-
     @Override
     protected void initNavigationTitle() {
         super.initNavigationTitle();
-        mName.setText(getResources().getString(R.string.endproduct_allot));
+        mName.setText(getString(R.string.endproduct_allot)+getString(R.string.condition_filter));
         search.setVisibility(View.VISIBLE);
         search.setImageResource(R.drawable.search);
         isSearching = true;
@@ -234,8 +258,8 @@ public class EndProductAllotActivity extends BaseFirstModuldeActivity {
 
     @Override
     protected void doBusiness() {
-        listSumBeen =new ArrayList<>();
-        commonLogic = CommonLogic.getInstance(activity, module,mTimestamp.toString());
+        listSumBean =new ArrayList<>();
+        commonLogic = EndProductAllotLogic.getInstance(activity,module,mTimestamp.toString());
         FullyLinearLayoutManager linearLayoutManager = new FullyLinearLayoutManager(activity);
         ryList.setLayoutManager(linearLayoutManager);
     }
@@ -244,9 +268,11 @@ public class EndProductAllotActivity extends BaseFirstModuldeActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == SCANCODE) {
-            if (null!=listSumBeen&&listSumBeen.size()>0) {
+            if (null!=listSumBean && listSumBean.size()>0) {
                onUpdate();
             };
+        }else if (requestCode==DETAILCODE){
+            onUpdate();
         }
     }
 
@@ -256,25 +282,34 @@ public class EndProductAllotActivity extends BaseFirstModuldeActivity {
     private void onUpdate() {
         showLoadingDialog();
         //先清空数据
-        listSumBeen.clear();
-        adapter = new EndProductAllotSumAdapter(this, listSumBeen);
+        listSumBean.clear();
+        adapter = new EndProductAllotSumAdapter(this, listSumBean);
         ryList.setAdapter(adapter);
         ClickItemPutBean putBean = new ClickItemPutBean();
         putBean.setItem_no(etItemNo.getText().toString());
         putBean.setDepartment_no(etDepartment.getText().toString());
         putBean.setWarehouse_in_no(etTargetStore.getText().toString());
-        putBean.setWarehouse_no(LoginLogic.getWare());
-        commonLogic.getOrderSumData(putBean, new CommonLogic.GetOrderSumListener() {
+        putBean.setWarehouse_out_no(LoginLogic.getWare());
+        Map<String, String> map = ObjectAndMapUtils.getValueMap(putBean);
+        commonLogic.getEndProductSumData(map, new CommonLogic.GetZSumListener() {
             @Override
             public void onSuccess(List<ListSumBean> list) {
                 dismissLoadingDialog();
-                listSumBeen=list;
+                listSumBean = list;
                 showData();
             }
+
             @Override
             public void onFailed(String error) {
                 dismissLoadingDialog();
-                showFailedDialog(error);
+                try {
+                    showFailedDialog(error);
+                    listSumBean.clear();
+                    adapter = new EndProductAllotSumAdapter(activity, listSumBean);
+                    ryList.setAdapter(adapter);
+                } catch (Exception e) {
+                    LogUtils.e(TAG, "updateList--getSum--onFailed" + e);
+                }
             }
         });
     }
@@ -285,20 +320,22 @@ public class EndProductAllotActivity extends BaseFirstModuldeActivity {
     private void showData() {
         try {
             isSearching = true;
+            mName.setText(getString(R.string.endproduct_allot)+getString(R.string.SumData));
+            ivScan.setVisibility(View.GONE);
             llSearchInput.setVisibility(View.GONE);
-            llHead.setVisibility(View.VISIBLE);
+            scrollView.setVisibility(View.VISIBLE);
             commit.setVisibility(View.VISIBLE);
-            if (listSumBeen.size()>0){
-                ListSumBean sumBean = listSumBeen.get(0);
+            if (listSumBean.size()>0){
+                ListSumBean sumBean = listSumBean.get(0);
                 tvHeadDepart.setText(sumBean.getDepartment_name());
-                tvHeaditemName.setText(sumBean.getItem_name());
                 tvHeaditemNo.setText(sumBean.getItem_no());
                 tvHeadSource.setText(LoginLogic.getWare());
                 tvHeadTarget.setText(etTargetStore.getText().toString());
             }
-            adapter = new EndProductAllotSumAdapter(activity, listSumBeen);
+            adapter = new EndProductAllotSumAdapter(activity, listSumBean);
             ryList.setAdapter(adapter);
             itemClick();
+            //滚动到原点
             scrollView.smoothScrollTo(0,0);
         } catch (Exception e) {
             LogUtils.e(TAG, "showDates---Exception>" + e);
@@ -306,15 +343,16 @@ public class EndProductAllotActivity extends BaseFirstModuldeActivity {
     }
 
     /**
-     * 跳转至扫码页面
+     * 条目点击 跳转至扫码页面
      */
     private void itemClick(){
         adapter.setOnItemClickListener(new OnItemClickListener() {
             @Override
             public void onItemClick(View itemView, int position) {
                 Bundle bundle = new Bundle();
-                ListSumBean data = listSumBeen.get(position);
+                ListSumBean data = listSumBean.get(position);
                 data.setWarehouse_in_no(tvHeadTarget.getText().toString());
+                data.setWarehouse_out_no(LoginLogic.getWare());
                 bundle.putSerializable("sumdata", data);
                 bundle.putString(AddressContants.MODULEID_INTENT,mTimestamp.toString());
                 ActivityManagerUtils.startActivityBundleForResult(activity,EndProductAllotScanActivity.class,bundle,SCANCODE);
@@ -327,6 +365,7 @@ public class EndProductAllotActivity extends BaseFirstModuldeActivity {
      */
     public void ToDetailAct(final SumShowBean bean) {
         HashMap<String, String> map = new HashMap<String, String>();
+        showLoadingDialog();
         map.put(AddressContants.ITEM_NO, bean.getItem_no());
         commonLogic.getDetail(map, new CommonLogic.GetDetailListener() {
             @Override
@@ -336,11 +375,12 @@ public class EndProductAllotActivity extends BaseFirstModuldeActivity {
                 bundle.putSerializable(CommonDetailActivity.DETAIL, (Serializable) detailShowBeen);
                 bundle.putString(AddressContants.MODULEID_INTENT, mTimestamp.toString());
                 bundle.putString(CommonDetailActivity.MODULECODE, module);
-                ActivityManagerUtils.startActivityBundleForResult(activity, CommonDetailActivity.class, bundle, SCANCODE);
+                ActivityManagerUtils.startActivityBundleForResult(activity, CommonDetailActivity.class, bundle, DETAILCODE);
             }
 
             @Override
             public void onFailed(String error) {
+                dismissLoadingDialog();
                 showFailedDialog(error);
             }
         });
@@ -351,23 +391,22 @@ public class EndProductAllotActivity extends BaseFirstModuldeActivity {
      */
     public void commitData() {
         HashMap<String, String> barcodeMap = new HashMap<String, String>();
-        commonLogic.commit(barcodeMap, new CommonLogic.CommitListener() {
+        commonLogic.endProductCommit(barcodeMap, new CommonLogic.CommitListener() {
             @Override
             public void onSuccess(String msg) {
                 dismissLoadingDialog();
                 showCommitSuccessDialog(msg);
                 createNewModuleId(module);
-                commonLogic = CommonLogic.getInstance(activity, module, mTimestamp.toString());
+                commonLogic = EndProductAllotLogic.getInstance(activity, module, mTimestamp.toString());
                 isSearching=false;
                 search();
-                listSumBeen.clear();
+                listSumBean.clear();
                 tvHeadDepart.setText("");
-                tvHeaditemName.setText("");
                 tvHeaditemNo.setText("");
                 tvHeadSource.setText("");
                 tvHeadTarget.setText("");
-                listSumBeen.clear();
-                adapter=new EndProductAllotSumAdapter(activity,listSumBeen);
+                listSumBean.clear();
+                adapter=new EndProductAllotSumAdapter(activity,listSumBean);
                 ryList.setAdapter(adapter);
             }
 

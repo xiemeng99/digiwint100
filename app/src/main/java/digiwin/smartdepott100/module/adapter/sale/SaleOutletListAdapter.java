@@ -29,5 +29,9 @@ public class SaleOutletListAdapter extends BaseRecyclerAdapter<FilterResultOrder
     protected void bindData(RecyclerViewHolder holder, int position, final FilterResultOrderBean item) {
         holder.setText(R.id.tv_item_general_number, item.getDoc_no());
         holder.setText(R.id.tv_item_date,item.getCreate_date());
+
+//        holder.setText(R.id.tv_item_custom,item.getCustomer_name());
+//        holder.setText(R.id.tv_item_applicant,item.getEmployee_name());
+//        holder.setText(R.id.tv_item_department,item.getDepartment_name());
     }
 }

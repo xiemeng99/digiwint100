@@ -14,6 +14,7 @@ import java.util.Map;
 
 import butterknife.BindView;
 import butterknife.OnClick;
+import digiwin.smartdepott100.module.logic.produce.productionleader.ProductionLeaderLogic;
 import digiwin.library.dialog.OnDialogClickListener;
 import digiwin.library.dialog.OnDialogTwoListener;
 import digiwin.library.utils.ActivityManagerUtils;
@@ -76,7 +77,7 @@ public class ProductionLeaderSumFg extends BaseFragment {
     FilterResultOrderBean localData = new FilterResultOrderBean();
 
     ProductionLeaderActivity pactivity;
-    CommonLogic commonLogic;
+    ProductionLeaderLogic commonLogic;
 
     boolean upDateFlag;
 
@@ -89,11 +90,6 @@ public class ProductionLeaderSumFg extends BaseFragment {
         ryList.setLayoutManager(linearLayoutManager);
         upDateFlag = false;
         localData = (FilterResultOrderBean) pactivity.getIntent().getExtras().getSerializable("data");
-        //获取单号 日期 人员参数
-        tv_super_number.setText(localData.getDoc_no());
-        tv_date.setText(localData.getCreate_date());
-        tv_department.setText(localData.getDepartment_name());
-        tv_applicant.setText(localData.getEmployee_name());
 
     }
 
@@ -101,12 +97,12 @@ public class ProductionLeaderSumFg extends BaseFragment {
         try {
             ClickItemPutBean putBean = new ClickItemPutBean();
             putBean.setDoc_no(localData.getDoc_no());
-            putBean.setWarehouse_out_no(LoginLogic.getUserInfo().getWare());
+            putBean.setWarehouse_no(LoginLogic.getWare());
 
-            commonLogic = CommonLogic.getInstance(pactivity, pactivity.module, pactivity.mTimestamp.toString());
+            commonLogic = ProductionLeaderLogic.getInstance(pactivity, pactivity.module, pactivity.mTimestamp.toString());
 
             showLoadingDialog();
-            commonLogic.getOrderSumData(putBean, new CommonLogic.GetOrderSumListener() {
+            commonLogic.getPLSumData(putBean, new ProductionLeaderLogic.GetZSumListener() {
                 @Override
                 public void onSuccess(List<ListSumBean> list) {
                     if (list.size() > 0) {
@@ -114,6 +110,11 @@ public class ProductionLeaderSumFg extends BaseFragment {
                         upDateFlag = true;
                         adapter = new ProductionLeaderAdapter(getActivity(), list);
                         ryList.setAdapter(adapter);
+                        //获取单号 日期 人员参数
+                        tv_super_number.setText(list.get(0).getDoc_no());
+                        tv_date.setText(list.get(0).getCreate_date());
+                        tv_department.setText(list.get(0).getDepartment_name());
+                        tv_applicant.setText(list.get(0).getEmployee_name());
                         sumBeanList = new ArrayList<ListSumBean>();
                         sumBeanList = list;
                         adapter.setOnItemClickListener(new OnItemClickListener() {
@@ -151,7 +152,7 @@ public class ProductionLeaderSumFg extends BaseFragment {
         final SumShowBean sumShowBean = new SumShowBean();
         sumShowBean.setItem_no(orderSumData.getItem_no());
         sumShowBean.setItem_name(orderSumData.getItem_name());
-        sumShowBean.setAvailable_in_qty(orderSumData.getReceipt_qty());
+        sumShowBean.setAvailable_in_qty(orderSumData.getApply_qty());
         commonLogic.getDetail(map, new CommonLogic.GetDetailListener() {
             @Override
             public void onSuccess(List<DetailShowBean> detailShowBeen) {
@@ -185,7 +186,7 @@ public class ProductionLeaderSumFg extends BaseFragment {
                 showLoadingDialog();
                 HashMap<String, String> map = new HashMap<>();
                 map.put(AddressContants.DOC_NO, tv_super_number.getText().toString().trim());
-                commonLogic.commit(map, new CommonLogic.CommitListener() {
+                commonLogic.commitPLData(map, new CommonLogic.CommitListener() {
                     @Override
                     public void onSuccess(String msg) {
                         dismissLoadingDialog();

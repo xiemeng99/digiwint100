@@ -19,6 +19,7 @@ import butterknife.BindView;
 import butterknife.BindViews;
 import butterknife.OnClick;
 import butterknife.OnFocusChange;
+import digiwin.smartdepott100.module.logic.stock.StockCheckLogic;
 import digiwin.library.constant.SharePreKey;
 import digiwin.library.datepicker.DatePickerUtils;
 import digiwin.library.utils.ActivityManagerUtils;
@@ -59,7 +60,7 @@ public class StockCheckListActivity extends BaseTitleActivity {
 
     StockCheckListAdapter adapter;
 
-    CommonLogic commonLogic;
+    StockCheckLogic stockCheckLogic;
 
     @BindViews({R.id.ll_post_material_order, R.id.ll_data, R.id.ll_person})
     List<View> views;
@@ -152,7 +153,7 @@ public class StockCheckListActivity extends BaseTitleActivity {
         }
         showLoadingDialog();
         Map<String, String> map = ObjectAndMapUtils.getValueMap(filterBean);
-        commonLogic.getOrderData(map, new CommonLogic.GetOrderListener() {
+        stockCheckLogic.getStockCheckList(map, new CommonLogic.GetDataListListener() {
             @Override
             public void onSuccess(final List<FilterResultOrderBean> list) {
                 dismissLoadingDialog();
@@ -162,7 +163,6 @@ public class StockCheckListActivity extends BaseTitleActivity {
                     ry_list.setVisibility(View.VISIBLE);
                     dataList = list;
                     upDataUi();
-
                     adapter.setOnItemClickListener(new OnItemClickListener() {
                         @Override
                         public void onItemClick(View itemView, int position) {
@@ -204,12 +204,11 @@ public class StockCheckListActivity extends BaseTitleActivity {
 
     @Override
     protected void doBusiness() {
-        commonLogic = CommonLogic.getInstance(activity, moduleCode(), mTimestamp.toString());
+        stockCheckLogic = StockCheckLogic.getInstance(activity, moduleCode(), mTimestamp.toString());
         dataList = new ArrayList<>();
         LinearLayoutManager linearlayoutmanager = new LinearLayoutManager(activity);
         ry_list.setLayoutManager(linearlayoutmanager);
         filterBean = new InBinningBean();
-        //加载页数
         String str = SharedPreferencesUtils.get(context, SharePreKey.PAGE_SETTING, AddressContants.PAGE_NUM).toString();
         filterBean.setPagesize(str);
     }

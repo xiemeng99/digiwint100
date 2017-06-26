@@ -143,7 +143,7 @@ public class PickUpShipmentCommitActivity extends BaseTitleActivity{
             });
 
         } catch (Exception e) {
-            LogUtils.e(TAG, "commit-->" + e);
+            LogUtils.e(TAG, "commitMovein-->" + e);
         }
     }
 

@@ -206,7 +206,7 @@ public class PutInStoreScanFg extends BaseFragment {
                     commonLogic.scanBarcode(barcodeMap, new CommonLogic.ScanBarcodeListener() {
                         @Override
                         public void onSuccess(ScanBarcodeBackBean barcodeBackBean) {
-                            barcodeShow = barcodeBackBean.getShow();
+                            barcodeShow = barcodeBackBean.getShowing();
                             etInputNum.setText(StringUtils.deleteZero(barcodeBackBean.getBarcode_qty()));
                             tvScanHasScan.setText(barcodeBackBean.getScan_sumqty());
                             barcodeFlag = true;
@@ -238,7 +238,7 @@ public class PutInStoreScanFg extends BaseFragment {
                     commonLogic.scanLocator(locatorMap, new CommonLogic.ScanLocatorListener() {
                         @Override
                         public void onSuccess(ScanLocatorBackBean locatorBackBean) {
-                            locatorShow = locatorBackBean.getShow();
+                            locatorShow = locatorBackBean.getShowing();
                             locatorFlag = true;
                             show();
                             saveBean.setStorage_spaces_in_no(locatorBackBean.getStorage_spaces_no());

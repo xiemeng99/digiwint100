@@ -24,6 +24,7 @@ import digiwin.library.utils.StringUtils;
 import digiwin.smartdepott100.R;
 import digiwin.smartdepott100.core.appcontants.AddressContants;
 import digiwin.smartdepott100.core.base.BaseFragment;
+import digiwin.smartdepott100.core.coreutil.CommonUtils;
 import digiwin.smartdepott100.core.modulecommon.ModuleUtils;
 import digiwin.smartdepott100.module.activity.produce.workorderreturn.WorkOrderReturnActivity;
 import digiwin.smartdepott100.module.activity.produce.workorderreturn.WorkOrderReturnListActivity;
@@ -33,6 +34,7 @@ import digiwin.smartdepott100.module.bean.common.SaveBean;
 import digiwin.smartdepott100.module.bean.common.ScanBarcodeBackBean;
 import digiwin.smartdepott100.module.bean.common.ScanLocatorBackBean;
 import digiwin.smartdepott100.module.logic.common.CommonLogic;
+import digiwin.smartdepott100.module.logic.produce.WorkOrderReturnLogic;
 
 /**
  * @des    依工单退料扫描界面
@@ -168,7 +170,7 @@ public class WorkOrderReturnScanFg extends BaseFragment {
     WorkOrderReturnActivity pactivity;
 
 
-    CommonLogic commonLogic;
+    WorkOrderReturnLogic commonLogic;
     /**
      * 条码展示
      */
@@ -198,10 +200,11 @@ public class WorkOrderReturnScanFg extends BaseFragment {
                     HashMap<String, String> barcodeMap = new HashMap<>();
                     barcodeMap.put(AddressContants.BARCODE_NO, String.valueOf(msg.obj));
                     barcodeMap.put(AddressContants.DOC_NO, doc_no);
+                    barcodeMap.put(AddressContants.STORAGE_SPACES_NO,saveBean.getStorage_spaces_in_no());
                     commonLogic.scanBarcode(barcodeMap, new CommonLogic.ScanBarcodeListener() {
                         @Override
                         public void onSuccess(ScanBarcodeBackBean barcodeBackBean) {
-                            barcodeShow = barcodeBackBean.getShow();
+                            barcodeShow = barcodeBackBean.getShowing();
                             etInputNum.setText(StringUtils.deleteZero(barcodeBackBean.getBarcode_qty()));
                             tvScanHasScan.setText(barcodeBackBean.getScan_sumqty());
                             barcodeFlag = true;
@@ -211,7 +214,11 @@ public class WorkOrderReturnScanFg extends BaseFragment {
                             saveBean.setItem_no(barcodeBackBean.getItem_no());
                             saveBean.setUnit_no(barcodeBackBean.getUnit_no());
                             saveBean.setLot_no(barcodeBackBean.getLot_no());
+                            saveBean.setItem_barcode_type(barcodeBackBean.getItem_barcode_type());
                             etInputNum.requestFocus();
+                            if (CommonUtils.isAutoSave(saveBean)){
+                                save();
+                            }
                         }
 
                         @Override
@@ -232,12 +239,15 @@ public class WorkOrderReturnScanFg extends BaseFragment {
                     commonLogic.scanLocator(locatorMap, new CommonLogic.ScanLocatorListener() {
                         @Override
                         public void onSuccess(ScanLocatorBackBean locatorBackBean) {
-                            locatorShow = locatorBackBean.getShow();
+                            locatorShow = locatorBackBean.getShowing();
                             locatorFlag = true;
                             show();
                             saveBean.setStorage_spaces_in_no(locatorBackBean.getStorage_spaces_no());
                             saveBean.setWarehouse_in_no(locatorBackBean.getWarehouse_no());
                             etScanBarocde.requestFocus();
+                            if (CommonUtils.isAutoSave(saveBean)){
+                                save();
+                            }
                         }
 
                         @Override
@@ -314,7 +324,7 @@ public class WorkOrderReturnScanFg extends BaseFragment {
         etScanLocator.setText("");
         etScanLocator.setText("");
         etScanLocator.requestFocus();
-        commonLogic = CommonLogic.getInstance(context, pactivity.module, pactivity.mTimestamp.toString());
+        commonLogic = WorkOrderReturnLogic.getInstance(context, pactivity.module, pactivity.mTimestamp.toString());
         try{
             FilterResultOrderBean headBean = (FilterResultOrderBean) activity.getIntent().getSerializableExtra(WorkOrderReturnListActivity.filterBean);
             saveBean.setDoc_no(headBean.getDoc_no());

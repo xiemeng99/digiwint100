@@ -30,6 +30,5 @@ public class PurchaseGoodsScanAdapter extends BaseRecyclerAdapter<FilterResultOr
         holder.setText(R.id.tv_item_delivery_note_no, item.getDoc_no());
         holder.setText(R.id.tv_item_date,item.getCreate_date());
         holder.setText(R.id.tv_supplier,item.getSupplier_name());
-        holder.setText(R.id.tv_receipt_address,item.getDelivery_address());
     }
 }

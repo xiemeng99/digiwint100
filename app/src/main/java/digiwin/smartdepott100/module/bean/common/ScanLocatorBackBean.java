@@ -26,7 +26,7 @@ public class ScanLocatorBackBean {
     /**
      * 展示
      */
-    private String show;
+    private String showing;
 
     /**
      * 是否允许仓负库存
@@ -65,12 +65,12 @@ public class ScanLocatorBackBean {
         this.warehouse_name = warehouse_name;
     }
 
-    public String getShow() {
-        return show;
+    public String getShowing() {
+        return showing;
     }
 
-    public void setShow(String show) {
-        this.show = show;
+    public void setShowing(String showing) {
+        this.showing = showing;
     }
 
     public String getAllow_negative_stock() {

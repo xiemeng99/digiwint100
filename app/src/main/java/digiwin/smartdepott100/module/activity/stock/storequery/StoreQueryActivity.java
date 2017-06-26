@@ -22,7 +22,6 @@ import butterknife.BindViews;
 import butterknife.OnClick;
 import butterknife.OnFocusChange;
 import digiwin.smartdepott100.R;
-import digiwin.smartdepott100.core.appcontants.AddressContants;
 import digiwin.smartdepott100.core.appcontants.ModuleCode;
 import digiwin.smartdepott100.core.base.BaseTitleHActivity;
 import digiwin.smartdepott100.core.modulecommon.ModuleUtils;
@@ -31,7 +30,7 @@ import digiwin.smartdepott100.module.bean.common.ClickItemPutBean;
 import digiwin.smartdepott100.module.bean.common.ListSumBean;
 import digiwin.smartdepott100.module.fragment.stock.storequery.StoreQueryBarcodeFg;
 import digiwin.smartdepott100.module.fragment.stock.storequery.StoreQueryItemNoFg;
-import digiwin.smartdepott100.module.logic.common.CommonLogic;
+import digiwin.smartdepott100.module.logic.stock.StoreQueryLogic;
 
 /**
  * @author xiemeng
@@ -88,68 +87,77 @@ public class StoreQueryActivity extends BaseTitleHActivity {
     List<EditText> editTexts;
     @BindViews({R.id.ll_barcode, R.id.ll_item_no, R.id.ll_item_name, R.id.ll_storage, R.id.ll_locator})
     List<View> views;
-    @BindViews({R.id.tv_barcode, R.id.tv_item_no, R.id.tv_item_name, R.id.tv_storage,  R.id.tv_locator})
+    @BindViews({R.id.tv_barcode, R.id.tv_item_no, R.id.tv_item_name, R.id.tv_storage, R.id.tv_locator})
     List<TextView> textViews;
+
     @OnFocusChange(R.id.et_barcode)
-    void barcodeFocusChange(){
+    void barcodeFocusChange() {
         ModuleUtils.viewChange(llBarcode, views);
         ModuleUtils.etChange(activity, etBarcode, editTexts);
         ModuleUtils.tvChange(activity, tvBarcode, textViews);
     }
+
     @OnFocusChange(R.id.et_item_no)
-    void itemNoFocusChange(){
+    void itemNoFocusChange() {
         ModuleUtils.viewChange(llItemNo, views);
         ModuleUtils.etChange(activity, etItemNo, editTexts);
         ModuleUtils.tvChange(activity, tvItemNo, textViews);
     }
+
     @OnFocusChange(R.id.et_item_name)
-    void itemNameFocusChange(){
+    void itemNameFocusChange() {
         ModuleUtils.viewChange(llItemName, views);
         ModuleUtils.etChange(activity, etItemName, editTexts);
         ModuleUtils.tvChange(activity, tvItemName, textViews);
     }
+
     @OnFocusChange(R.id.et_storage)
-    void storageFocusChange(){
+    void storageFocusChange() {
         ModuleUtils.viewChange(llStorage, views);
         ModuleUtils.etChange(activity, etStorage, editTexts);
         ModuleUtils.tvChange(activity, tvStorage, textViews);
-    }@OnFocusChange(R.id.et_locator)
-    void locatorFocusChange(){
+    }
+
+    @OnFocusChange(R.id.et_locator)
+    void locatorFocusChange() {
         ModuleUtils.viewChange(llLocator, views);
         ModuleUtils.etChange(activity, etLocator, editTexts);
         ModuleUtils.tvChange(activity, tvLocator, textViews);
     }
+
     /**
      * 筛选按钮
      */
     @BindView(R.id.iv_title_setting)
     ImageView search;
+
     @OnClick(R.id.iv_title_setting)
-    void isShowSearch(){
-        if (isSearching){
+    void isShowSearch() {
+        if (isSearching) {
             llTaylayout.setVisibility(View.VISIBLE);
             llSearchInput.setVisibility(View.GONE);
-            isSearching=false;
-        }else {
+            isSearching = false;
+        } else {
             llTaylayout.setVisibility(View.GONE);
             llSearchInput.setVisibility(View.VISIBLE);
-            isSearching=true;
+            isSearching = true;
         }
     }
+
     ClickItemPutBean clickItemPutBean;
-   @OnClick(R.id.btn_search_sure)
-    void search(){
-         clickItemPutBean = new ClickItemPutBean();
+
+    @OnClick(R.id.btn_search_sure)
+    void search() {
+        clickItemPutBean = new ClickItemPutBean();
         clickItemPutBean.setBarcode_no(etBarcode.getText().toString());
         clickItemPutBean.setItem_no(etItemNo.getText().toString());
         clickItemPutBean.setItem_name(etItemName.getText().toString());
         clickItemPutBean.setWarehouse_no(etStorage.getText().toString());
         clickItemPutBean.setStorage_space(etLocator.getText().toString());
-        clickItemPutBean.setFlag(AddressContants.TWO);
         showLoadingDialog();
-        logic.getOrderSumData(clickItemPutBean, new CommonLogic.GetOrderSumListener() {
+        logic.getStoreList(clickItemPutBean, new StoreQueryLogic.GetStoreListListener() {
             @Override
-            public void onSuccess(List<ListSumBean> list) {
+            public void onSuccess(List<ListSumBean> showNoBarcodeList,List<ListSumBean> showHasBarcodeList) {
                 dismissLoadingDialog();
 //                if (null==list||list.size()==0){
 //                    showFailedDialog(R.string.nodate);
@@ -157,11 +165,12 @@ public class StoreQueryActivity extends BaseTitleHActivity {
 //                }
                 llTaylayout.setVisibility(View.VISIBLE);
                 llSearchInput.setVisibility(View.GONE);
-                isSearching=false;
-                barcodeList=list;
-                EventBus.getDefault().post(list);
-                EventBus.getDefault().post(clickItemPutBean);
+                isSearching = false;
+                barcodeFg.onSubscribe(showNoBarcodeList);
+                itemNoFg.upDateList(showHasBarcodeList);
+
             }
+
             @Override
             public void onFailed(String error) {
                 dismissLoadingDialog();
@@ -169,10 +178,11 @@ public class StoreQueryActivity extends BaseTitleHActivity {
             }
         });
     }
+
     /**
      * 是否在搜索
      */
-    private  boolean isSearching;
+    private boolean isSearching;
 
     /**
      * Fragment设置
@@ -182,17 +192,14 @@ public class StoreQueryActivity extends BaseTitleHActivity {
     private FragmentManager fragmentManager;
     ModuleViewPagerAdapter adapter;
     /**
-     *条码库存
+     * 条码库存
      */
     StoreQueryBarcodeFg barcodeFg;
     /**
      * 料件库存
      */
     StoreQueryItemNoFg itemNoFg;
-    CommonLogic logic;
-
-    public  List<ListSumBean> barcodeList;
-
+    StoreQueryLogic logic;
     @Override
     protected int bindLayoutId() {
         return R.layout.activity_store_query;
@@ -205,14 +212,14 @@ public class StoreQueryActivity extends BaseTitleHActivity {
         ivScan.setVisibility(View.VISIBLE);
         search.setVisibility(View.VISIBLE);
         search.setImageResource(R.drawable.search);
-        isSearching=true;
+        isSearching = true;
     }
 
     @Override
     protected void doBusiness() {
         barcodeFg = new StoreQueryBarcodeFg();
         itemNoFg = new StoreQueryItemNoFg();
-        logic = CommonLogic.getInstance(context, module, mTimestamp.toString());
+        logic = StoreQueryLogic.getInstance(context, module, mTimestamp.toString());
         fragments = new ArrayList<>();
         fragments.add(barcodeFg);
         fragments.add(itemNoFg);
@@ -235,6 +242,7 @@ public class StoreQueryActivity extends BaseTitleHActivity {
             }
         });
     }
+
     /**
      * 滑动
      */
@@ -258,6 +266,7 @@ public class StoreQueryActivity extends BaseTitleHActivity {
             }
         });
     }
+
     @Override
     protected Toolbar toolbar() {
         return toolbarTitle;
@@ -265,7 +274,7 @@ public class StoreQueryActivity extends BaseTitleHActivity {
 
     @Override
     public String moduleCode() {
-        module= ModuleCode.STOREQUERY;
+        module = ModuleCode.STOREQUERY;
         return module;
     }
 

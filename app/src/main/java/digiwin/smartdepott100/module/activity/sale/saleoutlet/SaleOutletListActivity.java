@@ -19,20 +19,20 @@ import butterknife.BindView;
 import butterknife.BindViews;
 import butterknife.OnClick;
 import butterknife.OnFocusChange;
+import digiwin.smartdepott100.module.logic.sale.saleoutlet.SaleOutLetLogic;
+import digiwin.library.constant.SharePreKey;
 import digiwin.library.datepicker.DatePickerUtils;
 import digiwin.library.utils.ActivityManagerUtils;
 import digiwin.library.utils.LogUtils;
+import digiwin.library.utils.SharedPreferencesUtils;
 import digiwin.pulltorefreshlibrary.recyclerviewAdapter.OnItemClickListener;
 import digiwin.smartdepott100.R;
 import digiwin.smartdepott100.core.appcontants.ModuleCode;
 import digiwin.smartdepott100.core.base.BaseTitleActivity;
 import digiwin.smartdepott100.core.modulecommon.ModuleUtils;
-import digiwin.smartdepott100.login.loginlogic.LoginLogic;
 import digiwin.smartdepott100.module.adapter.sale.SaleOutletListAdapter;
 import digiwin.smartdepott100.module.bean.common.FilterBean;
 import digiwin.smartdepott100.module.bean.common.FilterResultOrderBean;
-import digiwin.smartdepott100.module.logic.common.CommonLogic;
-
 
 
 /**
@@ -52,12 +52,12 @@ public class SaleOutletListActivity extends BaseTitleActivity {
     EditText etGeneralNumber;
     @BindView(R.id.ll_general_number_list)
     LinearLayout llGeneralNumberList;
-    @BindView(R.id.tv_custom_no)
-    TextView tvCustomNo;
-    @BindView(R.id.et_custom_no)
-    EditText etCustomNo;
-    @BindView(R.id.ll_custom_no)
-    LinearLayout llCustomNo;
+    @BindView(R.id.tv_custom)
+    TextView tvCustom;
+    @BindView(R.id.et_custom)
+    EditText etCustom;
+    @BindView(R.id.ll_custom)
+    LinearLayout llCustom;
     @BindView(R.id.tv_department)
     TextView tvDepartment;
     @BindView(R.id.et_department)
@@ -78,22 +78,20 @@ public class SaleOutletListActivity extends BaseTitleActivity {
     LinearLayout llItemNo;
     @BindView(R.id.tv_item_name)
     TextView tvItemName;
-    @BindView(R.id.et_item_name)
-    EditText etItemName;
     @BindView(R.id.ll_item_name)
     LinearLayout llItemName;
+    @BindView(R.id.et_item_name)
+    EditText etItemName;
     @BindView(R.id.date)
     ImageView date;
     @BindView(R.id.btn_search_sure)
     Button btnSearchSure;
     @BindView(R.id.ll_search_input)
     LinearLayout llSearchInput;
-    private CommonLogic logic;
+
+    private SaleOutLetLogic logic;
 
     private boolean isSearching;
-
-
-
 
 
     /**
@@ -118,8 +116,6 @@ public class SaleOutletListActivity extends BaseTitleActivity {
             }
         });
     }
-
-
 
 
     @OnClick(R.id.btn_search_sure)
@@ -151,11 +147,11 @@ public class SaleOutletListActivity extends BaseTitleActivity {
     /**
      * 控件集合
      */
-    @BindViews({R.id.et_general_number,R.id.et_custom_no, R.id.et_department, R.id.et_person, R.id.et_item_no, R.id.et_item_name, R.id.et_date})
+    @BindViews({R.id.et_general_number, R.id.et_custom, R.id.et_department, R.id.et_person, R.id.et_item_no, R.id.et_date, R.id.et_item_name})
     List<EditText> editTexts;
-    @BindViews({R.id.ll_general_number_list, R.id.ll_custom_no, R.id.ll_department, R.id.ll_person, R.id.ll_item_name, R.id.ll_item_no, R.id.ll_date})
+    @BindViews({R.id.ll_general_number_list, R.id.ll_custom, R.id.ll_department, R.id.ll_person, R.id.ll_item_no, R.id.ll_date, R.id.ll_item_name})
     List<View> views;
-    @BindViews({R.id.tv_general_number, R.id.tv_custom_no, R.id.tv_department, R.id.tv_person, R.id.tv_item_name,R.id.tv_item_no, R.id.tv_date})
+    @BindViews({R.id.tv_general_number, R.id.tv_custom, R.id.tv_department, R.id.tv_person, R.id.tv_item_no, R.id.tv_date, R.id.tv_item_name})
     List<TextView> textViews;
 
     /**
@@ -168,11 +164,11 @@ public class SaleOutletListActivity extends BaseTitleActivity {
         ModuleUtils.tvChange(activity, tvGeneralNumber, textViews);
     }
 
-    @OnFocusChange(R.id.et_custom_no)
+    @OnFocusChange(R.id.et_custom)
     void customFocusChange() {
-        ModuleUtils.viewChange(llCustomNo, views);
-        ModuleUtils.etChange(activity, etCustomNo, editTexts);
-        ModuleUtils.tvChange(activity, tvCustomNo, textViews);
+        ModuleUtils.viewChange(llCustom, views);
+        ModuleUtils.etChange(activity, etCustom, editTexts);
+        ModuleUtils.tvChange(activity, tvCustom, textViews);
     }
 
     @OnFocusChange(R.id.et_department)
@@ -189,19 +185,18 @@ public class SaleOutletListActivity extends BaseTitleActivity {
         ModuleUtils.tvChange(activity, tvPerson, textViews);
     }
 
-    @OnFocusChange(R.id.et_item_name)
-    void in_warehouseFocusChange() {
-        ModuleUtils.viewChange(llItemName, views);
-        ModuleUtils.etChange(activity, etItemName, editTexts);
-        ModuleUtils.tvChange(activity, tvItemName, textViews);
-    }
-
-
     @OnFocusChange(R.id.et_item_no)
     void item_noFocusChange() {
         ModuleUtils.viewChange(llItemNo, views);
         ModuleUtils.etChange(activity, etItemNo, editTexts);
         ModuleUtils.tvChange(activity, tvItemNo, textViews);
+    }
+
+    @OnFocusChange(R.id.et_item_name)
+    void item_nameFocusChange() {
+        ModuleUtils.viewChange(llItemName, views);
+        ModuleUtils.etChange(activity, etItemName, editTexts);
+        ModuleUtils.tvChange(activity, tvItemName, textViews);
     }
 
     @OnFocusChange(R.id.et_date)
@@ -213,7 +208,7 @@ public class SaleOutletListActivity extends BaseTitleActivity {
 
     SaleOutletListAdapter adapter;
 
-    List<FilterResultOrderBean> list;
+    List<FilterResultOrderBean> datas;
     /**
      * 开始日期
      */
@@ -255,9 +250,9 @@ public class SaleOutletListActivity extends BaseTitleActivity {
     @Override
     protected void doBusiness() {
         etDate.setKeyListener(null);
-        list = new ArrayList<>();
+        datas = new ArrayList<>();
         ryList.setLayoutManager(new LinearLayoutManager(activity));
-        logic = CommonLogic.getInstance(activity, module, mTimestamp.toString());
+        logic = SaleOutLetLogic.getInstance(activity, module, mTimestamp.toString());
     }
 
     @Override
@@ -272,32 +267,31 @@ public class SaleOutletListActivity extends BaseTitleActivity {
      * 更新
      */
     private void onUpdate() {
-        list.clear();
-        adapter = new SaleOutletListAdapter(activity, list);
+        datas.clear();
+        adapter = new SaleOutletListAdapter(activity, datas);
         ryList.setAdapter(adapter);
         showLoadingDialog();
         FilterBean filterBean = new FilterBean();
-        filterBean.setWarehouse_out_no(LoginLogic.getWare());
         filterBean.setDoc_no(etGeneralNumber.getText().toString());
-        filterBean.setCustomer_no(etCustomNo.getText().toString());
+        filterBean.setItem_name(tvItemName.getText().toString());
+        filterBean.setPagesize((String)SharedPreferencesUtils.get(activity, SharePreKey.PAGE_SETTING,"10"));
+        filterBean.setCustomer_no(etCustom.getText().toString());
         filterBean.setDepartment_no(etDepartment.getText().toString());
         filterBean.setEmployee_no(etPerson.getText().toString());
-        filterBean.setItem_name(etItemName.getText().toString());
-        filterBean.setItem_no(etItemNo.getText().toString());
         filterBean.setDate_begin(startDate);
         filterBean.setDate_end(endDate);
-        logic.getOrderData(filterBean, new CommonLogic.GetOrderListener() {
+        logic.getSOLListData(filterBean, new SaleOutLetLogic.GetSaleOutListDataListener() {
             @Override
-            public void onSuccess(List<FilterResultOrderBean> masterDatas) {
-                list = masterDatas;
+            public void onSuccess(List<FilterResultOrderBean> list) {
+                datas = list;
                 showData();
                 dismissLoadingDialog();
             }
 
             @Override
-            public void onFailed(String error) {
+            public void onFailed(String errmsg) {
                 dismissLoadingDialog();
-                showFailedDialog(error);
+                showFailedDialog(errmsg);
             }
         });
     }
@@ -310,7 +304,7 @@ public class SaleOutletListActivity extends BaseTitleActivity {
             isSearching = true;
             ryList.setVisibility(View.VISIBLE);
             llSearchInput.setVisibility(View.GONE);
-            adapter = new SaleOutletListAdapter(activity, list);
+            adapter = new SaleOutletListAdapter(activity, datas);
             ryList.setAdapter(adapter);
             itemClick();
         } catch (Exception e) {
@@ -327,7 +321,7 @@ public class SaleOutletListActivity extends BaseTitleActivity {
             public void onItemClick(View itemView, final int position) {
                 try {
                     Bundle bundle = new Bundle();
-                    bundle.putSerializable(SaleOutletActivity.filterBean,list.get(position));
+                    bundle.putSerializable(SaleOutletActivity.filterBean, datas.get(position));
                     ActivityManagerUtils.startActivityBundleForResult(activity, SaleOutletActivity.class, bundle, TOCOMMIT);
                     dismissLoadingDialog();
                 } catch (Exception e) {

@@ -19,8 +19,6 @@ import digiwin.smartdepott100.R;
 import digiwin.smartdepott100.core.appcontants.ModuleCode;
 import digiwin.smartdepott100.core.base.BaseTitleActivity;
 import digiwin.smartdepott100.module.adapter.produce.FinishedStorageSumAdapter;
-import digiwin.smartdepott100.module.adapter.stock.MiscellaneousInSumAdapter;
-import digiwin.smartdepott100.module.adapter.stock.MiscellaneousOutSumAdapter;
 import digiwin.smartdepott100.module.adapter.stock.storeallot.StoreAllotSumAdapter;
 import digiwin.smartdepott100.module.bean.common.SumShowBean;
 import digiwin.smartdepott100.module.logic.common.CommonLogic;
@@ -96,14 +94,9 @@ public class CommonTwoCommitActivity extends BaseTitleActivity {
                 case ModuleCode.FINISHEDSTORAGE:
                     adapter = new FinishedStorageSumAdapter(activity, sumShowBeanList);
                     break;
+
                 case ModuleCode.NOCOMESTOREALLOT:
-                    adapter = new StoreAllotSumAdapter(context, sumShowBeanList);
-                    break;
-                case ModuleCode.MISCELLANEOUSISSUESIN:
-                    adapter = new MiscellaneousInSumAdapter(context, sumShowBeanList);
-                    break;
-                case ModuleCode.MISCELLANEOUSISSUESOUT:
-                    adapter = new MiscellaneousOutSumAdapter(context, sumShowBeanList);
+//                    adapter = new StoreAllotSumAdapter(context, sumShowBeanList);
                     break;
                 default:
                     break;
@@ -145,7 +138,7 @@ public class CommonTwoCommitActivity extends BaseTitleActivity {
             });
 
         } catch (Exception e) {
-            LogUtils.e(TAG, "commit-->" + e);
+            LogUtils.e(TAG, "commitMovein-->" + e);
         }
     }
 

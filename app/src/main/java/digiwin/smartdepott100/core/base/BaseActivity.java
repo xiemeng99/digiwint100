@@ -94,8 +94,6 @@ public abstract class BaseActivity extends BaseAppActivity {
     protected void onDestroy() {
         super.onDestroy();
         listener.unregisterListener();
-//        EventBus.getDefault().unregister(this);
-        if (unBind != null) unBind.unbind();
     }
 
     /**

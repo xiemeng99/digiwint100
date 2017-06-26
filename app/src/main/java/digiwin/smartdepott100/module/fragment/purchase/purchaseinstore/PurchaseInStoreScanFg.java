@@ -21,6 +21,8 @@ import butterknife.OnCheckedChanged;
 import butterknife.OnClick;
 import butterknife.OnFocusChange;
 import butterknife.OnTextChanged;
+import digiwin.smartdepott100.core.coreutil.CommonUtils;
+import digiwin.smartdepott100.module.logic.purchase.PurchaseInStoreLogic;
 import digiwin.library.dialog.OnDialogClickListener;
 import digiwin.library.utils.StringUtils;
 import digiwin.smartdepott100.R;
@@ -29,13 +31,12 @@ import digiwin.smartdepott100.core.base.BaseFirstModuldeActivity;
 import digiwin.smartdepott100.core.base.BaseFragment;
 import digiwin.smartdepott100.core.modulecommon.ModuleUtils;
 import digiwin.smartdepott100.login.loginlogic.LoginLogic;
-import digiwin.smartdepott100.module.activity.purchase.purchaseinstore.PurchaseInStoreSecondActivity;
+import digiwin.smartdepott100.module.activity.purchase.purchaseinstore.PurchaseInStoreActivity;
 import digiwin.smartdepott100.module.bean.common.FilterResultOrderBean;
 import digiwin.smartdepott100.module.bean.common.SaveBackBean;
 import digiwin.smartdepott100.module.bean.common.SaveBean;
 import digiwin.smartdepott100.module.bean.common.ScanBarcodeBackBean;
 import digiwin.smartdepott100.module.bean.common.ScanLocatorBackBean;
-import digiwin.smartdepott100.module.logic.common.CommonLogic;
 
 
 /**
@@ -141,7 +142,7 @@ public class PurchaseInStoreScanFg extends BaseFragment {
      */
     final int LOCATORWHAT = 1002;
 
-    CommonLogic commonLogic;
+    PurchaseInStoreLogic commonLogic;
 
     @OnCheckedChanged(R.id.cb_locatorlock)
     void isLock(boolean checked) {
@@ -206,7 +207,7 @@ public class PurchaseInStoreScanFg extends BaseFragment {
         saveBean.setDoc_no(orderBean.getDoc_no());
         saveBean.setQty(et_input_num.getText().toString());
         showLoadingDialog();
-        commonLogic.scanSave(saveBean, new CommonLogic.SaveListener() {
+        commonLogic.scanSave(saveBean, new PurchaseInStoreLogic.SaveListener() {
             @Override
             public void onSuccess(SaveBackBean saveBackBean) {
                 dismissLoadingDialog();
@@ -223,7 +224,7 @@ public class PurchaseInStoreScanFg extends BaseFragment {
 
     }
 
-    PurchaseInStoreSecondActivity pactivity;
+    PurchaseInStoreActivity pactivity;
 
     FilterResultOrderBean orderBean = new FilterResultOrderBean();
 
@@ -236,10 +237,11 @@ public class PurchaseInStoreScanFg extends BaseFragment {
                     barcodeMap.put(AddressContants.BARCODE_NO, String.valueOf(msg.obj));
                     barcodeMap.put(AddressContants.WAREHOUSE_NO,LoginLogic.getWare());
                     barcodeMap.put(AddressContants.DOC_NO,orderBean.getDoc_no());
-                    commonLogic.scanBarcode(barcodeMap, new CommonLogic.ScanBarcodeListener() {
+                    barcodeMap.put(AddressContants.STORAGE_SPACES_NO,saveBean.getStorage_spaces_in_no());
+                    commonLogic.scanBarcode(barcodeMap, new PurchaseInStoreLogic.ScanBarcodeListener() {
                         @Override
                         public void onSuccess(ScanBarcodeBackBean barcodeBackBean) {
-                            barcodeShow = barcodeBackBean.getShow();
+                            barcodeShow = barcodeBackBean.getShowing();
                             if(!StringUtils.isBlank(barcodeBackBean.getBarcode_qty())){
                                 et_input_num.setText(StringUtils.deleteZero(barcodeBackBean.getBarcode_qty()));
                             }
@@ -253,7 +255,11 @@ public class PurchaseInStoreScanFg extends BaseFragment {
                             saveBean.setLot_no(barcodeBackBean.getLot_no());
                             saveBean.setScan_sumqty(barcodeBackBean.getScan_sumqty());
                             saveBean.setAvailable_in_qty(barcodeBackBean.getAvailable_in_qty());
+                            saveBean.setItem_barcode_type(barcodeBackBean.getItem_barcode_type());
                             et_input_num.requestFocus();
+                            if (CommonUtils.isAutoSave(saveBean)){
+                                Save();
+                            }
                         }
 
                         @Override
@@ -271,15 +277,18 @@ public class PurchaseInStoreScanFg extends BaseFragment {
                 case LOCATORWHAT:
                     HashMap<String, String> locatorMap = new HashMap<>();
                     locatorMap.put(AddressContants.STORAGE_SPACES_BARCODE, String.valueOf(msg.obj));
-                    commonLogic.scanLocator(locatorMap, new CommonLogic.ScanLocatorListener() {
+                    commonLogic.scanLocator(locatorMap, new PurchaseInStoreLogic.ScanLocatorListener() {
                         @Override
                         public void onSuccess(ScanLocatorBackBean locatorBackBean) {
-                            locatorShow = locatorBackBean.getShow();
+                            locatorShow = locatorBackBean.getShowing();
                             locatorFlag = true;
                             show();
                             saveBean.setStorage_spaces_in_no(locatorBackBean.getStorage_spaces_no());
                             saveBean.setWarehouse_in_no(locatorBackBean.getWarehouse_no());
                             et_scan_barocde.requestFocus();
+                            if (CommonUtils.isAutoSave(saveBean)){
+                                Save();
+                            }
                         }
 
                         @Override
@@ -306,7 +315,7 @@ public class PurchaseInStoreScanFg extends BaseFragment {
 
     @Override
     protected void doBusiness() {
-        pactivity = (PurchaseInStoreSecondActivity) activity;
+        pactivity = (PurchaseInStoreActivity) activity;
         initData();
     }
 
@@ -356,7 +365,7 @@ public class PurchaseInStoreScanFg extends BaseFragment {
         locatorFlag = false;
         cb_locatorlock.setChecked(false);
         saveBean = new SaveBean();
-        commonLogic = CommonLogic.getInstance(context, pactivity.module, pactivity.mTimestamp.toString());
+        commonLogic = PurchaseInStoreLogic.getInstance(context, pactivity.module, pactivity.mTimestamp.toString());
         delete();
         orderBean = (FilterResultOrderBean) pactivity.getIntent().getExtras().getSerializable(AddressContants.ORDERDATA);
         et_scan_locator.requestFocus();
@@ -368,7 +377,7 @@ public class PurchaseInStoreScanFg extends BaseFragment {
     private void delete() {
         Map<String,String> map = new HashMap<>();
         map.put(AddressContants.FLAG, BaseFirstModuldeActivity.ExitMode.EXITD.getName());
-        commonLogic.exit(map, new CommonLogic.ExitListener() {
+        commonLogic.exit(map, new PurchaseInStoreLogic.ExitListener() {
             @Override
             public void onSuccess(String msg) {
 

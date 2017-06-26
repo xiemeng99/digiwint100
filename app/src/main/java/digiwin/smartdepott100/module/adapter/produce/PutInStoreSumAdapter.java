@@ -56,12 +56,12 @@ public class PutInStoreSumAdapter extends BaseRecyclerAdapter<ListSumBean> {
             holder.setTextColor(R.id.tv_item_model, mContext.getResources().getColor(R.color.outside_yellow));
         } else if (numb1 == numb2) {
             holder.setBackground(R.id.item_ll,R.drawable.green_scandetail_bg);
-            holder.setTextColor(R.id.tv_item_no, mContext.getResources().getColor(R.color.Base_color));
-            holder.setTextColor(R.id.tv_item_name, mContext.getResources().getColor(R.color.Base_color));
-            holder.setTextColor(R.id.tv_in_storage_number, mContext.getResources().getColor(R.color.Base_color));
-            holder.setTextColor(R.id.tv_match_number, mContext.getResources().getColor(R.color.Base_color));
-            holder.setTextColor(R.id.tv_item_danwei, mContext.getResources().getColor(R.color.Base_color));
-            holder.setTextColor(R.id.tv_item_model, mContext.getResources().getColor(R.color.Base_color));
+            holder.setTextColor(R.id.tv_item_no, mContext.getResources().getColor(R.color.green1b));
+            holder.setTextColor(R.id.tv_item_name, mContext.getResources().getColor(R.color.green1b));
+            holder.setTextColor(R.id.tv_in_storage_number, mContext.getResources().getColor(R.color.green1b));
+            holder.setTextColor(R.id.tv_match_number, mContext.getResources().getColor(R.color.green1b));
+            holder.setTextColor(R.id.tv_item_danwei, mContext.getResources().getColor(R.color.green1b));
+            holder.setTextColor(R.id.tv_item_model, mContext.getResources().getColor(R.color.green1b));
         }
     }
 }

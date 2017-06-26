@@ -17,23 +17,34 @@ public class FilterResultOrderBean implements Serializable {
      */
     private String remark;
     /**
-     * 单号
+     * 入库单号(收货单号)
      */
     private String doc_no;
     /**
-     * 日期 出货日期
+     * 日期 出货日期（创建日期）
      */
     private String create_date;
-
+    /**
+     * 供应商编码
+     */
+    private String supplier_no;
+    /**
+     * 收货日期
+     */
+    private String receipt_date;
     /**
      * 部门
      */
-
     private String department_name ;
     /**
      * 人员
      */
     private String employee_name ;
+
+    /**
+     * 客户
+     */
+    private String customer_name;
     /**
      * 人员编号
      */
@@ -67,6 +78,43 @@ public class FilterResultOrderBean implements Serializable {
      * 退料单号
      */
     private String return_no;
+    /**
+     * 入库单号
+     */
+    private String stock_in_no;
+    /**
+     * 领料单号
+     */
+    private String issuing_no;
+    /**
+     * 1.一般收货
+     * 2.委外
+     */
+    private String purchase_type;
+
+    public String getReceipt_date() {
+        return receipt_date;
+    }
+
+    public void setReceipt_date(String receipt_date) {
+        this.receipt_date = receipt_date;
+    }
+
+    public String getCustomer_name() {
+        return customer_name;
+    }
+
+    public void setCustomer_name(String customer_name) {
+        this.customer_name = customer_name;
+    }
+
+    public String getSupplier_no() {
+        return supplier_no;
+    }
+
+    public void setSupplier_no(String supplier_no) {
+        this.supplier_no = supplier_no;
+    }
 
     public String getWarehouse_name() {
         return warehouse_name;
@@ -149,22 +197,13 @@ public class FilterResultOrderBean implements Serializable {
         this.supplier_name = supplier_name;
     }
 
-    public String getCustomer_name() {
-        return customer_name;
-    }
     public String getItem_no() {
         return item_no;
     }
     public void setItem_no(String item_no) {
         this.item_no = item_no;
     }
-    public void setCustomer_name(String customer_no) {
-        this.customer_name = customer_name;
-    }
-    /**
-     * 客户
-     */
-    private String customer_name;
+
     public String getItem_name() {
         return item_name;
     }
@@ -189,4 +228,30 @@ public class FilterResultOrderBean implements Serializable {
     public void setReturn_no(String return_no) {
         this.return_no = return_no;
     }
+
+    public String getStock_in_no() {
+        return stock_in_no;
+    }
+
+    public void setStock_in_no(String stock_in_no) {
+
+        this.stock_in_no = stock_in_no;
+    }
+
+    public String getIssuing_no() {
+        return issuing_no;
+    }
+
+    public void setIssuing_no(String issuing_no) {
+        this.issuing_no = issuing_no;
+    }
+
+    public String getPurchase_type() {
+        return purchase_type;
+    }
+
+    public void setPurchase_type(String purchase_type) {
+        this.purchase_type = purchase_type;
+    }
+
 }

@@ -28,7 +28,7 @@ import digiwin.smartdepott100.core.base.BaseFragment;
 import digiwin.smartdepott100.login.bean.AccoutBean;
 import digiwin.smartdepott100.login.loginlogic.LoginLogic;
 import digiwin.smartdepott100.module.activity.sale.scanout.ScanOutStoreActivity;
-import digiwin.smartdepott100.module.adapter.sale.scanout.ScanOutFifoAdapter;
+import digiwin.smartdepott100.module.adapter.common.CommonDocNoFifoAdapter;
 import digiwin.smartdepott100.module.bean.common.ClickItemPutBean;
 import digiwin.smartdepott100.module.bean.common.FifoCheckBean;
 import digiwin.smartdepott100.module.bean.common.SaveBean;
@@ -136,7 +136,7 @@ public class ScanOutStoreScanFg extends BaseFragment {
             switch (msg.what) {
                 case SALEWHAT:
                     fiFoList.clear();
-                    adapter = new ScanOutFifoAdapter(sActivity,fiFoList);
+                    adapter = new CommonDocNoFifoAdapter(sActivity,fiFoList);
                     ryList.setAdapter(adapter);
                     HashMap<String, String> map = new HashMap<String, String>();
                     map.put(AddressContants.RECEIPT_NO, String.valueOf(msg.obj));
@@ -145,12 +145,12 @@ public class ScanOutStoreScanFg extends BaseFragment {
                     itemPutBean.setNotice_no(notice_no);
                     itemPutBean.setWarehouse_no(ware);
                     EventBus.getDefault().post(itemPutBean);
-                    commonLogic.postMaterialFIFO(map, new CommonLogic.PostMaterialFIFOListener() {
+                    commonLogic.docNoFIFO(map, new CommonLogic.PostMaterialFIFOListener() {
                         @Override
                         public void onSuccess(List<FifoCheckBean> fiFoBeanList) {
                             fiFoList.clear();
                             fiFoList = fiFoBeanList;
-                            adapter = new ScanOutFifoAdapter(sActivity, fiFoList);
+                            adapter = new CommonDocNoFifoAdapter(sActivity, fiFoList);
                             ryList.setAdapter(adapter);
                             etScanBarocde.requestFocus();
                         }
@@ -158,7 +158,7 @@ public class ScanOutStoreScanFg extends BaseFragment {
                         @Override
                         public void onFailed(String error) {
                             fiFoList.clear();
-                            adapter = new ScanOutFifoAdapter(sActivity, fiFoList);
+                            adapter = new CommonDocNoFifoAdapter(sActivity, fiFoList);
                             ryList.setAdapter(adapter);
                         }
                     });

@@ -23,8 +23,10 @@ import digiwin.smartdepott100.module.bean.common.DetailShowBean;
 public class CommonDetailAdapter extends BaseDetailRecyclerAdapter<DetailShowBean> {
     private static final String TAG = "CommonDetailAdapter";
 
+    private List<DetailShowBean> detailList;
     public CommonDetailAdapter(Context ctx, List<DetailShowBean> list) {
         super(ctx, list);
+        detailList = list;
     }
     @Override
     protected int getItemLayout(int viewType) {
@@ -56,6 +58,9 @@ public class CommonDetailAdapter extends BaseDetailRecyclerAdapter<DetailShowBea
             cb.setChecked(map.get(position));
         }else{
             cb.setChecked(false);
+        }
+        if(position == detailList.size()-1){
+            holder.setVisibility(R.id.bottom_line,View.GONE);
         }
 
     }

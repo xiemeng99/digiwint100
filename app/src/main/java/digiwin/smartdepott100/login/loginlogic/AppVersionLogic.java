@@ -2,16 +2,15 @@ package digiwin.smartdepott100.login.loginlogic;
 
 import android.content.Context;
 
-import java.util.List;
 import java.util.Map;
 
+import digiwin.library.json.JsonResp;
 import digiwin.library.utils.LogUtils;
-import digiwin.library.xml.ParseXmlResp;
 import digiwin.smartdepott100.R;
 import digiwin.smartdepott100.core.appcontants.ReqTypeName;
+import digiwin.smartdepott100.core.json.JsonReqForERP;
 import digiwin.smartdepott100.core.net.IRequestCallbackImp;
 import digiwin.smartdepott100.core.net.OkhttpRequest;
-import digiwin.smartdepott100.core.xml.CreateParaXmlReqIm;
 import digiwin.smartdepott100.login.bean.AppVersionBean;
 
 /**
@@ -65,23 +64,18 @@ public class AppVersionLogic {
      */
     public void getNewVersion(Map<String, String> map, final GetNewVersionListener listener) {
         try {
-            String xml = CreateParaXmlReqIm.getInstance(map, mModule, ReqTypeName.GETVERUP,mTimestamp).toXml();
-            OkhttpRequest.getInstance(mContext).post(xml, new IRequestCallbackImp() {
+            String createJson = JsonReqForERP.mapCreateJson(mModule, ReqTypeName.GETVERUP, mTimestamp, map);
+            OkhttpRequest.getInstance(mContext).post(createJson, new IRequestCallbackImp() {
                 @Override
                 public void onResponse(String string) {
                     String error =mContext.getString(R.string.unknow_error);
-                    ParseXmlResp xmlResp = ParseXmlResp.fromXml(ReqTypeName.GETVERUP, string);
-                    if (null != xmlResp) {
-                        if (ReqTypeName.SUCCCESSCODE.equals(xmlResp.getCode())) {
-                            List<AppVersionBean> versionBeans = xmlResp.getParameterDatas(AppVersionBean.class);
-                            if (versionBeans.size() > 0) {
-                                listener.onSuccess(versionBeans.get(0));
-                                return;
-                            } else {
-                                error = mContext.getString(R.string.data_null);
-                            }
+                    if (null != string) {
+                        if (ReqTypeName.SUCCCESSCODE.equals(JsonResp.getCode(string))) {
+                            AppVersionBean versionBean = JsonResp.getParaData(string, AppVersionBean.class);
+                                listener.onSuccess(versionBean);
+                            return;
                         } else {
-                            error = xmlResp.getDescription();
+                            error = JsonResp.getDescription(string);
                         }
                     }
                     listener.onFailed(error);

@@ -33,7 +33,7 @@ import digiwin.smartdepott100.core.coreutil.FiFoCheckUtils;
 import digiwin.smartdepott100.core.modulecommon.ModuleUtils;
 import digiwin.smartdepott100.login.loginlogic.LoginLogic;
 import digiwin.smartdepott100.module.activity.produce.postmaterial.PostMaterialSecondActivity;
-import digiwin.smartdepott100.module.adapter.produce.PostmaterialFiFoAdapter;
+import digiwin.smartdepott100.module.adapter.common.CommonDocNoFifoAdapter;
 import digiwin.smartdepott100.module.bean.common.FifoCheckBean;
 import digiwin.smartdepott100.module.bean.common.FilterResultOrderBean;
 import digiwin.smartdepott100.module.bean.common.ListSumBean;
@@ -140,7 +140,7 @@ public class PostMaterialScanFg extends BaseFragment {
      */
     FilterResultOrderBean orderData;
 
-    PostmaterialFiFoAdapter adapter;
+    CommonDocNoFifoAdapter adapter;
 
     List<FifoCheckBean> fiFoList = new ArrayList<FifoCheckBean>();
 
@@ -224,7 +224,7 @@ public class PostMaterialScanFg extends BaseFragment {
                     commonLogic.scanBarcode(barcodeMap, new CommonLogic.ScanBarcodeListener() {
                         @Override
                         public void onSuccess(ScanBarcodeBackBean barcodeBackBean) {
-                            barcodeShow = barcodeBackBean.getShow();
+                            barcodeShow = barcodeBackBean.getShowing();
                             if(!StringUtils.isBlank(barcodeBackBean.getBarcode_qty())){
                                 et_input_num.setText(StringUtils.deleteZero(barcodeBackBean.getBarcode_qty()));
                             }
@@ -261,7 +261,7 @@ public class PostMaterialScanFg extends BaseFragment {
                     commonLogic.scanLocator(locatorMap, new CommonLogic.ScanLocatorListener() {
                         @Override
                         public void onSuccess(ScanLocatorBackBean locatorBackBean) {
-                            locatorShow = locatorBackBean.getShow();
+                            locatorShow = locatorBackBean.getShowing();
                             locatorFlag = true;
 //                            show();
                             saveBean.setAllow_negative_stock(locatorBackBean.getAllow_negative_stock());
@@ -291,19 +291,19 @@ public class PostMaterialScanFg extends BaseFragment {
         HashMap<String,String> map = new HashMap<String,String>();
         map.put(AddressContants.ISSUING_NO,orderData.getDoc_no());
         map.put(AddressContants.WAREHOUSE_NO,LoginLogic.getWare());
-        commonLogic.postMaterialFIFO(map, new CommonLogic.PostMaterialFIFOListener() {
+        commonLogic.docNoFIFO(map, new CommonLogic.PostMaterialFIFOListener() {
             @Override
             public void onSuccess(List<FifoCheckBean> fiFoBeanList) {
                 fiFoList.clear();
                 fiFoList = fiFoBeanList;
-                adapter = new PostmaterialFiFoAdapter(pactivity,fiFoList);
+                adapter = new CommonDocNoFifoAdapter(pactivity,fiFoList);
                 ryList.setAdapter(adapter);
             }
 
             @Override
             public void onFailed(String error) {
                 fiFoList = new ArrayList<FifoCheckBean>();
-                adapter = new PostmaterialFiFoAdapter(pactivity,fiFoList);
+                adapter = new CommonDocNoFifoAdapter(pactivity,fiFoList);
             }
         });
     }

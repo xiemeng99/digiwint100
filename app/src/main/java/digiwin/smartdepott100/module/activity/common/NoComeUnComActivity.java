@@ -154,7 +154,7 @@ public class NoComeUnComActivity extends BaseTitleActivity {
                     holder.setText(R.id.tv_date, item.getTransaction_date() + " " + item.getTransaction_time());
                     if (AddressContants.N.equals(item.getTransfer_status())) {
                         holder.setText(R.id.tv_state, context.getString(R.string.un_com));
-                        holder.setTextColor(R.id.tv_state, context.getResources().getColor(R.color.red));
+                        holder.setTextColor(R.id.tv_state, context.getResources().getColor(R.color.black32));
                     } else {
                         holder.setText(R.id.tv_state, context.getString(R.string.commit_failed));
                         holder.setTextColor(R.id.tv_state, context.getResources().getColor(R.color.Base_color));

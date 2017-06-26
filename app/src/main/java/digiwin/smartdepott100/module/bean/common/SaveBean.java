@@ -105,9 +105,18 @@ public class SaveBean {
      */
     private  String warehouse_no;
     /**
+     * 炉号
+     */
+    private  String furnace_no;
+    /**
      * 是否允许仓负库存
      */
     private String allow_negative_stock;
+
+    /**
+     * 条码类型，3，4的时候自动保存
+     */
+    private String item_barcode_type;
 
 
     public String getStorage_spaces_no() {
@@ -308,5 +317,46 @@ public class SaveBean {
 
     public void setAllow_negative_stock(String allow_negative_stock) {
         this.allow_negative_stock = allow_negative_stock;
+    }
+
+    public String getFurnace_no() {
+        return furnace_no;
+    }
+
+    public void setFurnace_no(String furnace_no) {
+        this.furnace_no = furnace_no;
+    }
+
+    /**
+     * 储位
+     */
+    private String warehouse_storage;
+
+    public String getWarehouse_storage() {
+        return warehouse_storage;
+    }
+
+    public void setWarehouse_storage(String warehouse_storage) {
+        this.warehouse_storage = warehouse_storage;
+    }
+    /**
+     * 数量
+     */
+    public String req_qty;
+
+    public String getReq_qty() {
+        return req_qty;
+    }
+
+    public void setReq_qty(String req_qty) {
+        this.req_qty = req_qty;
+    }
+
+    public String getItem_barcode_type() {
+        return item_barcode_type;
+    }
+
+    public void setItem_barcode_type(String item_barcode_type) {
+        this.item_barcode_type = item_barcode_type;
     }
 }

@@ -36,6 +36,7 @@ public class ChoosePicAdapter extends BaseRecyclerAdapter<ChoosePicBean> {
         if (position == 0 || position == mItems.size()-1) {
             Picasso.with(mContext).load(item.getDrawId()).into(imageView);
         } else {
+            //“file://”
             Picasso.with(mContext).load(new File(item.getPicPath())).into(imageView);
         }
     }

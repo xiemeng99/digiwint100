@@ -24,6 +24,7 @@ import digiwin.library.utils.StringUtils;
 import digiwin.smartdepott100.R;
 import digiwin.smartdepott100.core.appcontants.AddressContants;
 import digiwin.smartdepott100.core.base.BaseFragment;
+import digiwin.smartdepott100.core.coreutil.CommonUtils;
 import digiwin.smartdepott100.core.modulecommon.ModuleUtils;
 import digiwin.smartdepott100.login.loginlogic.LoginLogic;
 import digiwin.smartdepott100.module.activity.produce.inbinning.InBinningActivity;
@@ -234,13 +235,16 @@ public class InBinningScanFg extends BaseFragment {
                                 showFailedDialog(activity.getString(R.string.wareuse_error));
                                 return;
                             }
-                            locatorShow=locatorBackBean.getShow();
+                            locatorShow=locatorBackBean.getShowing();
                             locatorFlag = true;
                             //入仓库，入仓位
                             saveBean.setStorage_spaces_in_no(locatorBackBean.getStorage_spaces_no());
                             saveBean.setWarehouse_in_no(locatorBackBean.getWarehouse_no());
                             et_box_code.requestFocus();
                             show();
+                            if (CommonUtils.isAutoSave(saveBean)){
+                                save();
+                            }
                         }
 
                         @Override

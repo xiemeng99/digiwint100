@@ -14,6 +14,8 @@ import java.util.Map;
 
 import butterknife.BindView;
 import butterknife.OnClick;
+import digiwin.smartdepott100.module.activity.purchase.purchasegoodsscan.PurchaseGoodsScanActivity;
+import digiwin.smartdepott100.module.logic.purchase.PurchaseGoodScanLogic;
 import digiwin.library.dialog.OnDialogClickListener;
 import digiwin.library.dialog.OnDialogTwoListener;
 import digiwin.library.utils.ActivityManagerUtils;
@@ -23,10 +25,7 @@ import digiwin.pulltorefreshlibrary.recyclerviewAdapter.OnItemClickListener;
 import digiwin.smartdepott100.R;
 import digiwin.smartdepott100.core.appcontants.AddressContants;
 import digiwin.smartdepott100.core.base.BaseFragment;
-import digiwin.smartdepott100.login.bean.AccoutBean;
-import digiwin.smartdepott100.login.loginlogic.LoginLogic;
 import digiwin.smartdepott100.module.activity.common.CommonDetailActivity;
-import digiwin.smartdepott100.module.activity.purchase.purchasegoodsscan.PurchaseGoodsScanSecondActivity;
 import digiwin.smartdepott100.module.adapter.purchase.PurchaseGoodsSumAdapter;
 import digiwin.smartdepott100.module.bean.common.ClickItemPutBean;
 import digiwin.smartdepott100.module.bean.common.DetailShowBean;
@@ -59,11 +58,6 @@ public class PurchaseGoodsSumFg extends BaseFragment {
      */
     @BindView(R.id.tv_head_provider)
     TextView tv_head_provider;
-    /**
-     * 收货地址
-     */
-    @BindView(R.id.tv_head_receipt_address)
-    TextView tv_head_receipt_address;
 
     @OnClick(R.id.commit)
     void commit() {
@@ -79,9 +73,9 @@ public class PurchaseGoodsSumFg extends BaseFragment {
         });
     }
 
-    PurchaseGoodsScanSecondActivity pactivity;
+    PurchaseGoodsScanActivity pactivity;
 
-    CommonLogic commonLogic;
+    PurchaseGoodScanLogic commonLogic;
 
     private boolean upDateFlag;
 
@@ -97,17 +91,13 @@ public class PurchaseGoodsSumFg extends BaseFragment {
 
     @Override
     protected void doBusiness() {
-        pactivity = (PurchaseGoodsScanSecondActivity) activity;
-        commonLogic = CommonLogic.getInstance(pactivity, pactivity.module, pactivity.mTimestamp.toString());
+        pactivity = (PurchaseGoodsScanActivity) activity;
+        commonLogic = PurchaseGoodScanLogic.getInstance(pactivity, pactivity.module, pactivity.mTimestamp.toString());
         FullyLinearLayoutManager linearLayoutManager = new FullyLinearLayoutManager(activity);
         ryList.setLayoutManager(linearLayoutManager);
         upDateFlag = false;
         Bundle bundle = getActivity().getIntent().getExtras();
         orderData = (FilterResultOrderBean) bundle.getSerializable("orderData");
-        tv_head_plan_date.setText(orderData.getCreate_date());
-        tv_head_post_order.setText(orderData.getDoc_no());
-        tv_head_provider.setText(orderData.getSupplier_name());
-        tv_head_receipt_address.setText(orderData.getDelivery_address());
     }
 
     /**
@@ -116,14 +106,11 @@ public class PurchaseGoodsSumFg extends BaseFragment {
     public void upDateList() {
         try {
             ClickItemPutBean clickItemPutData = new ClickItemPutBean();
-            clickItemPutData.setReceipt_no(orderData.getDoc_no());
-            AccoutBean accoutBean = LoginLogic.getUserInfo();
-            if(null != accoutBean){
-                clickItemPutData.setWarehouse_in_no(accoutBean.getWare());
-            }
-            clickItemPutData.setReceipt_date(orderData.getCreate_date());
+            clickItemPutData.setDoc_no(orderData.getDoc_no());
+            //clickItemPutData.setWarehouse_no(LoginLogic.getWare());
+            clickItemPutData.setCreate_date(orderData.getCreate_date());
             showLoadingDialog();
-            commonLogic.getOrderSumData(clickItemPutData, new CommonLogic.GetOrderSumListener() {
+            commonLogic.getPGSSumData(clickItemPutData, new PurchaseGoodScanLogic.GetZSumListener() {
                 @Override
                 public void onSuccess(List<ListSumBean> list) {
                     dismissLoadingDialog();
@@ -132,6 +119,9 @@ public class PurchaseGoodsSumFg extends BaseFragment {
                         adapter = new PurchaseGoodsSumAdapter(pactivity, sumShowBeanList);
                         ryList.setAdapter(adapter);
                         upDateFlag = true;
+                        tv_head_plan_date.setText(list.get(0).getCreate_date());
+                        tv_head_post_order.setText(list.get(0).getDoc_no());
+                        tv_head_provider.setText(list.get(0).getSupplier_name());
                         toDetail();
                     }
                 }
@@ -171,7 +161,6 @@ public class PurchaseGoodsSumFg extends BaseFragment {
         }
     }
 
-
     /**
      * 查看明细
      */
@@ -182,7 +171,7 @@ public class PurchaseGoodsSumFg extends BaseFragment {
         final SumShowBean sumShowBean = new SumShowBean();
         sumShowBean.setItem_name(orderSumData.getItem_name());
         sumShowBean.setItem_no(orderSumData.getItem_no());
-        sumShowBean.setAvailable_in_qty(orderSumData.getReq_qty());
+        sumShowBean.setAvailable_in_qty(orderSumData.getApply_qty());
         commonLogic.getDetail(map, new CommonLogic.GetDetailListener() {
             @Override
             public void onSuccess(List<DetailShowBean> detailShowBeen) {
@@ -198,7 +187,12 @@ public class PurchaseGoodsSumFg extends BaseFragment {
             @Override
             public void onFailed(String error) {
                 dismissLoadingDialog();
-                showCommitFailDialog(error);
+                showFailedDialog(error, new OnDialogClickListener() {
+                    @Override
+                    public void onCallback() {
+
+                    }
+                });
             }
         });
     }
@@ -210,7 +204,7 @@ public class PurchaseGoodsSumFg extends BaseFragment {
         }
         showLoadingDialog();
         HashMap<String, String> map = new HashMap<>();
-        commonLogic.commit(map, new CommonLogic.CommitListener() {
+        commonLogic.commitPGSData(map, new CommonLogic.CommitListener() {
             @Override
             public void onSuccess(String msg) {
                 dismissLoadingDialog();
@@ -222,7 +216,6 @@ public class PurchaseGoodsSumFg extends BaseFragment {
                         tv_head_plan_date.setText("");
                         tv_head_post_order.setText("");
                         tv_head_provider.setText("");
-                        tv_head_receipt_address.setText("");
                         pactivity.scanFg.initData();
                         activity.finish();
                     }

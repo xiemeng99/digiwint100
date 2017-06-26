@@ -12,15 +12,17 @@ import android.widget.ScrollView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import butterknife.BindView;
 import butterknife.BindViews;
 import butterknife.OnClick;
 import butterknife.OnFocusChange;
+import digiwin.smartdepott100.login.loginlogic.LoginLogic;
+import digiwin.smartdepott100.module.activity.stock.storeallot.ChooseAllotDailog;
+import digiwin.smartdepott100.module.logic.stock.PostAllocateLogic;
 import digiwin.library.datepicker.DatePickerUtils;
+import digiwin.library.dialog.OnDialogTwoListener;
 import digiwin.library.utils.ActivityManagerUtils;
 import digiwin.library.utils.LogUtils;
 import digiwin.library.utils.StringUtils;
@@ -31,17 +33,15 @@ import digiwin.smartdepott100.core.appcontants.AddressContants;
 import digiwin.smartdepott100.core.appcontants.ModuleCode;
 import digiwin.smartdepott100.core.base.BaseTitleActivity;
 import digiwin.smartdepott100.core.modulecommon.ModuleUtils;
-import digiwin.smartdepott100.login.bean.AccoutBean;
 import digiwin.smartdepott100.module.adapter.stock.postallocate.PostAllocateOrderAdapter;
 import digiwin.smartdepott100.module.bean.common.FilterBean;
 import digiwin.smartdepott100.module.bean.common.FilterResultOrderBean;
 import digiwin.smartdepott100.module.logic.common.CommonLogic;
 
-import static digiwin.smartdepott100.login.loginlogic.LoginLogic.getUserInfo;
-
 /**
- * 调拨过账 清单界面
- * @author 唐孟宇
+ * @des  调拨过账
+ * @date 2017/6/9
+ * @author xiemeng
  */
 public class PostAllocateActivity extends BaseTitleActivity {
 
@@ -51,11 +51,11 @@ public class PostAllocateActivity extends BaseTitleActivity {
     @BindView(R.id.toolbar_title)
     Toolbar toolbarTitle;
 
-    @BindViews({R.id.et_transfers_list_no, R.id.et_applicant,R.id.et_department, R.id.et_date})
+    @BindViews({R.id.et_transfers_list_no, R.id.et_applicant, R.id.et_department, R.id.et_date})
     List<EditText> editTexts;
     @BindViews({R.id.ll_transfers_list_no, R.id.ll_applicant, R.id.ll_department, R.id.ll_date})
     List<View> views;
-    @BindViews({R.id.tv_transfers_list_no, R.id.tv_applicant, R.id.tv_department,R.id.tv_date})
+    @BindViews({R.id.tv_transfers_list_no, R.id.tv_applicant, R.id.tv_department, R.id.tv_date})
     List<TextView> textViews;
 
     /**
@@ -104,6 +104,7 @@ public class PostAllocateActivity extends BaseTitleActivity {
         ModuleUtils.etChange(activity, et_applicant, editTexts);
         ModuleUtils.tvChange(activity, tv_applicant, textViews);
     }
+
     /**
      * 筛选框 部门
      */
@@ -189,9 +190,13 @@ public class PostAllocateActivity extends BaseTitleActivity {
      */
     public static final int SUMCODE = 1212;
 
-    CommonLogic commonLogic;
+    PostAllocateLogic commonLogic;
 
     PostAllocateActivity pactivity;
+    /**
+     * 拨入拨出状态
+     */
+    private String doc_stus;
 
     /**
      * 弹出筛选对话框
@@ -238,13 +243,33 @@ public class PostAllocateActivity extends BaseTitleActivity {
 
     @Override
     protected void doBusiness() {
+        doc_stus = "N";//默认拨出
         et_date.setKeyListener(null);
         pactivity = (PostAllocateActivity) activity;
-        commonLogic = CommonLogic.getInstance(pactivity, module, mTimestamp.toString());
+        commonLogic = PostAllocateLogic.getInstance(pactivity, module, mTimestamp.toString());
         FullyLinearLayoutManager linearLayoutManager = new FullyLinearLayoutManager(activity);
         ryList.setLayoutManager(linearLayoutManager);
-        SearchDialog();
+        showOutOrIn();
     }
+
+    private void showOutOrIn() {
+        ChooseAllotDailog.showChooseAllotDailog(context, new OnDialogTwoListener() {
+            @Override
+            public void onCallback1() {
+                doc_stus = "O";
+                initNavigationTitle();
+            }
+
+            @Override
+            public void onCallback2() {
+                doc_stus = "N";
+                initNavigationTitle();
+            }
+        });
+
+
+    }
+
 
     /**
      * 点击item跳转到汇总界面
@@ -255,8 +280,9 @@ public class PostAllocateActivity extends BaseTitleActivity {
             public void onItemClick(View itemView, int position) {
                 final FilterResultOrderBean orderData = sumShowBeanList.get(position);
                 Bundle bundle = new Bundle();
-                        bundle.putSerializable(AddressContants.ORDERDATA, orderData);
-                        ActivityManagerUtils.startActivityBundleForResult(pactivity, PostAllocateScanActivity.class, bundle, SUMCODE);
+                bundle.putString(AddressContants.DOC_NO, doc_stus);
+                bundle.putSerializable(AddressContants.ORDERDATA, orderData);
+                ActivityManagerUtils.startActivityBundleForResult(pactivity, PostAllocateScanActivity.class, bundle, SUMCODE);
             }
         });
     }
@@ -264,7 +290,11 @@ public class PostAllocateActivity extends BaseTitleActivity {
     @Override
     protected void initNavigationTitle() {
         super.initNavigationTitle();
-        mName.setText(R.string.title_post_allocate);
+        if ("N".equals(doc_stus)) {
+            mName.setText(getString(R.string.allocate_out) + getString(R.string.list));
+        } else {
+            mName.setText(getString(R.string.allocate_in) + getString(R.string.list));
+        }
         iv_title_setting.setVisibility(View.VISIBLE);
         iv_title_setting.setImageResource(R.drawable.search);
     }
@@ -274,18 +304,13 @@ public class PostAllocateActivity extends BaseTitleActivity {
     List<FilterResultOrderBean> sumShowBeanList;
 
     /**
-     * 汇总展示
+     * 清单展示
      */
     public void upDateList() {
         FilterBean filterBean = new FilterBean();
         try {
-            AccoutBean accoutBean = getUserInfo();
-            if (null == accoutBean) {
-                return;
-            }
-            Map<String, String> map = new HashMap<>();
             //仓库
-            filterBean.setWarehouse_in_no(accoutBean.getWare());
+            filterBean.setWarehouse_in_no(LoginLogic.getWare());
             //调拨单号
             if (!StringUtils.isBlank(et_transfers_list_no.getText().toString())) {
                 filterBean.setDoc_no(et_transfers_list_no.getText().toString());
@@ -303,8 +328,9 @@ public class PostAllocateActivity extends BaseTitleActivity {
                 filterBean.setDate_begin(startDate);
                 filterBean.setDate_end(endDate);
             }
+            filterBean.setDoc_stus(doc_stus);
             showLoadingDialog();
-            commonLogic.getOrderData(filterBean, new CommonLogic.GetOrderListener() {
+            commonLogic.getPostAllocateList(filterBean, new CommonLogic.GetDataListListener() {
                 @Override
                 public void onSuccess(List<FilterResultOrderBean> list) {
                     if (null != list && list.size() > 0) {
@@ -351,7 +377,7 @@ public class PostAllocateActivity extends BaseTitleActivity {
         try {
 
             if (requestCode == SUMCODE) {
-                adapter = new PostAllocateOrderAdapter(pactivity,new ArrayList<FilterResultOrderBean>());
+                adapter = new PostAllocateOrderAdapter(pactivity, new ArrayList<FilterResultOrderBean>());
                 ryList.setAdapter(adapter);
                 upDateList();
             }

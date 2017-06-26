@@ -18,12 +18,14 @@ import digiwin.library.dialog.OnDialogClickListener;
 import digiwin.library.dialog.OnDialogTwoListener;
 import digiwin.library.utils.ActivityManagerUtils;
 import digiwin.library.utils.LogUtils;
+import digiwin.library.utils.ObjectAndMapUtils;
 import digiwin.library.utils.StringUtils;
 import digiwin.pulltorefreshlibrary.recyclerviewAdapter.BaseRecyclerAdapter;
 import digiwin.pulltorefreshlibrary.recyclerviewAdapter.OnItemClickListener;
 import digiwin.smartdepott100.R;
 import digiwin.smartdepott100.core.appcontants.AddressContants;
 import digiwin.smartdepott100.core.base.BaseFragment;
+import digiwin.smartdepott100.login.loginlogic.LoginLogic;
 import digiwin.smartdepott100.module.activity.common.CommonDetailActivity;
 import digiwin.smartdepott100.module.activity.produce.workorderreturn.WorkOrderReturnActivity;
 import digiwin.smartdepott100.module.activity.produce.workorderreturn.WorkOrderReturnListActivity;
@@ -34,6 +36,7 @@ import digiwin.smartdepott100.module.bean.common.FilterResultOrderBean;
 import digiwin.smartdepott100.module.bean.common.ListSumBean;
 import digiwin.smartdepott100.module.bean.common.SumShowBean;
 import digiwin.smartdepott100.module.logic.common.CommonLogic;
+import digiwin.smartdepott100.module.logic.produce.WorkOrderReturnLogic;
 
 /**
  * @author xiemeng
@@ -52,6 +55,8 @@ public class WorkOrderReturnSumFg extends BaseFragment {
     TextView tvEndProduct;
     @BindView(R.id.tv_end_productname)
     TextView tvEndProductname;
+    @BindView(R.id.tv_date)
+    TextView tvDate;
 
     @OnClick(R.id.commit)
     void commit() {
@@ -73,9 +78,8 @@ public class WorkOrderReturnSumFg extends BaseFragment {
      */
     private ClickItemPutBean mPutBean;
 
-
     WorkOrderReturnActivity pactivity;
-    CommonLogic commonLogic;
+    WorkOrderReturnLogic commonLogic;
 
     boolean upDateFlag;
 
@@ -105,7 +109,8 @@ public class WorkOrderReturnSumFg extends BaseFragment {
             sumBeanList.clear();
             adapter = new WorkOrderReturnSumAdapter(context, sumBeanList);
             ryList.setAdapter(adapter);
-            commonLogic.getOrderSumData(mPutBean, new CommonLogic.GetOrderSumListener() {
+            Map<String,String> map = ObjectAndMapUtils.getValueMap(mPutBean);
+            commonLogic.getWORSum(map, new CommonLogic.GetZSumListener() {
                 @Override
                 public void onSuccess(List<ListSumBean> list) {
                     dismissLoadingDialog();
@@ -114,6 +119,11 @@ public class WorkOrderReturnSumFg extends BaseFragment {
                     ryList.setAdapter(adapter);
                     if (null != list && list.size() > 0) {
                         upDateFlag = true;
+                        tvHeadOrder.setText(list.get(0).getDoc_no());
+                        tvDepartSupplier.setText(list.get(0).getDepartment_name());
+                        tvEndProduct.setText(list.get(0).getItem_no());
+                        tvEndProductname.setText(list.get(0).getItem_name());
+                        tvDate.setText(list.get(0).getCreate_date());
                         toDetail();
                     }
                 }
@@ -196,6 +206,11 @@ public class WorkOrderReturnSumFg extends BaseFragment {
                     @Override
                     public void onCallback() {
                         pactivity.finish();
+                        tvHeadOrder.setText("");
+                        tvDepartSupplier.setText("");
+                        tvEndProduct.setText("");
+                        tvEndProductname.setText("");
+                        tvDate.setText("");
                     }
                 });
             }
@@ -210,17 +225,14 @@ public class WorkOrderReturnSumFg extends BaseFragment {
     }
 
     private void initData() {
-        commonLogic = CommonLogic.getInstance(context, pactivity.module, pactivity.mTimestamp.toString());
+        commonLogic = WorkOrderReturnLogic.getInstance(context, pactivity.module, pactivity.mTimestamp.toString());
         upDateFlag = false;
         sumBeanList = new ArrayList<>();
         try {
             FilterResultOrderBean orderHeadBean = (FilterResultOrderBean) activity.getIntent().getSerializableExtra(WorkOrderReturnListActivity.filterBean);
-            tvHeadOrder.setText(orderHeadBean.getDoc_no());
-            tvDepartSupplier.setText(orderHeadBean.getDepartment_name());
-            tvEndProduct.setText(orderHeadBean.getItem_no());
-            tvEndProductname.setText(orderHeadBean.getItem_name());
             mPutBean=new ClickItemPutBean();
             mPutBean.setDoc_no(orderHeadBean.getDoc_no());
+            mPutBean.setWarehouse_no(LoginLogic.getWare());
         }catch (Exception e){
             LogUtils.e(TAG,"initData()"+ e);
         }
