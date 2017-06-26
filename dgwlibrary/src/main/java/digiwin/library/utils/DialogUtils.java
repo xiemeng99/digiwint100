@@ -95,4 +95,23 @@ public class DialogUtils {
             }
         }
     };
+    /**
+     * 显示Dialog 背景透明
+     */
+    public void showDialogWithTransparent(){
+        if(dialog != null && dialog.isShowing()){
+            dialog.dismiss();
+            dialog = null;
+        }
+        dialog = new Dialog(context,R.style.CustomDialog);
+        dialog.setContentView(dialogView);
+        Window dialogWindow = dialog.getWindow();
+        WindowManager.LayoutParams lp = dialogWindow.getAttributes();
+        dialogWindow.setGravity(Gravity.CENTER_HORIZONTAL | Gravity.CENTER_VERTICAL);
+        lp.width = (int) (ViewUtils.getScreenWidth(context)*0.9); // 宽度
+        lp.height = WindowManager.LayoutParams.WRAP_CONTENT;//高度
+        dialogWindow.setAttributes(lp);
+        setCanceledOnTouchOutside();
+        dialog.show();
+    }
 }

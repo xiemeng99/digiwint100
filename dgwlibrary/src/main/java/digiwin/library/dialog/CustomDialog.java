@@ -206,6 +206,13 @@ public class CustomDialog extends Dialog {
             return this;
         }
 
+        public Builder setViewTextColor(int viewRes, String content,int resId) {
+            TextView textView= (TextView) view.findViewById(viewRes);
+            textView.setText(content);
+            textView.setTextColor(resId);
+            return this;
+        }
+
         public Builder setViewText(int viewRes, int contentId) {
             ((TextView) view.findViewById(viewRes)).setText(contentId);
             return this;
