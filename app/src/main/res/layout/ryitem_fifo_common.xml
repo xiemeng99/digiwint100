@@ -11,7 +11,8 @@
         android:paddingBottom="@dimen/layout_60dp">
 
         <android.support.v7.widget.RecyclerView
-            android:background="@drawable/fifo_bg"
+            style="@style/ry_style"
+            android:background="@drawable/green_scandetail_bg"
             android:layout_marginTop="@dimen/layout_10dp"
             android:layout_marginRight="@dimen/layout_10dp"
             android:layout_marginLeft="@dimen/layout_10dp"

@@ -24,26 +24,15 @@
         android:orientation="vertical"
         android:visibility="visible">
 
-        <LinearLayout
-            android:id="@+id/ll_search_input"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/layout_15dp"
-            android:layout_marginLeft="@dimen/layout_10dp"
-            android:layout_marginRight="@dimen/layout_10dp"
-            android:layout_marginTop="@dimen/layout_6dp"
-            android:background="@drawable/radiuswhiteback"
-            android:orientation="vertical">
-
             <LinearLayout
                 android:id="@+id/ll_super_number"
-                style="@style/itemstyle"
+                style="@style/search_scan_style"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
                 <TextView
                     android:id="@+id/tv_super_number"
-                    android:layout_width="@dimen/layout_70dp"
+                    android:layout_width="@dimen/layout_60dp"
                     android:layout_height="wrap_content"
                     android:text="@string/super_number"
                     style="@style/app_text_inwhite" />
@@ -52,7 +41,7 @@
                     android:id="@+id/et_super_number"
                     android:layout_width="@dimen/layout_0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="@dimen/layout_10dp"
+                    android:layout_marginLeft="@dimen/layout_3dp"
                     android:layout_weight="1"
                     android:background="@null"
                     android:selectAllOnFocus="true"
@@ -62,49 +51,17 @@
                     android:textSize="@dimen/textSize_14sp" />
             </LinearLayout>
 
-
-            <View style="@style/fg_line_style" />
-
-            <LinearLayout
-                android:id="@+id/ll_order_number"
-                style="@style/itemstyle"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <TextView
-                    android:id="@+id/tv_order_number"
-                    android:layout_width="@dimen/layout_70dp"
-                    android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:text="@string/order_number"
-                    style="@style/app_text_inwhite" />
-
-                <EditText
-                    android:id="@+id/et_order_number"
-                    android:layout_width="@dimen/layout_0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="@dimen/layout_10dp"
-                    android:layout_weight="1"
-                    android:background="@null"
-                    android:selectAllOnFocus="true"
-                    android:singleLine="true"
-                    android:textColor="@color/black_32"
-                    android:textCursorDrawable="@drawable/et_cursor_yellow"
-                    android:textSize="@dimen/textSize_14sp" />
-            </LinearLayout>
-
-
-            <View style="@style/fg_line_style" />
+            <View style="@style/ry_line_style" />
 
             <LinearLayout
                 android:id="@+id/ll_applicant"
-                style="@style/itemstyle"
+                style="@style/search_scan_style"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
                 <TextView
                     android:id="@+id/tv_applicant"
-                    android:layout_width="@dimen/layout_70dp"
+                    android:layout_width="@dimen/layout_60dp"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
                     android:text="@string/applicant"
@@ -114,7 +71,7 @@
                     android:id="@+id/et_applicant"
                     android:layout_width="@dimen/layout_0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="@dimen/layout_10dp"
+                    android:layout_marginLeft="@dimen/layout_3dp"
                     android:layout_weight="1"
                     android:background="@null"
                     android:selectAllOnFocus="true"
@@ -124,17 +81,17 @@
                     android:textSize="@dimen/textSize_14sp" />
             </LinearLayout>
 
-            <View style="@style/fg_line_style" />
+            <View style="@style/ry_line_style" />
 
             <LinearLayout
                 android:id="@+id/ll_department"
-                style="@style/itemstyle"
+                style="@style/search_scan_style"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
                 <TextView
                     android:id="@+id/tv_department"
-                    android:layout_width="@dimen/layout_70dp"
+                    android:layout_width="@dimen/layout_60dp"
                     android:layout_height="wrap_content"
                     android:text="@string/department"
                     style="@style/app_text_inwhite"/>
@@ -143,7 +100,7 @@
                     android:id="@+id/et_department"
                     android:layout_width="@dimen/layout_0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="@dimen/layout_10dp"
+                    android:layout_marginLeft="@dimen/layout_3dp"
                     android:layout_weight="1"
                     android:background="@null"
                     android:selectAllOnFocus="true"
@@ -153,17 +110,17 @@
                     android:textSize="@dimen/textSize_14sp" />
             </LinearLayout>
 
-            <View style="@style/fg_line_style" />
+            <View style="@style/ry_line_style" />
 
             <LinearLayout
                 android:id="@+id/ll_plan_date"
-                style="@style/itemstyle"
+                style="@style/search_scan_style"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
                 <TextView
                     android:id="@+id/tv_plan_date"
-                    android:layout_width="@dimen/layout_70dp"
+                    android:layout_width="@dimen/layout_60dp"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
                     android:text="@string/data"
@@ -173,7 +130,7 @@
                     android:id="@+id/et_plan_date"
                     android:layout_width="@dimen/layout_0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="@dimen/layout_10dp"
+                    android:layout_marginLeft="@dimen/layout_3dp"
                     android:layout_weight="1"
                     android:background="@null"
                     android:singleLine="true"
@@ -189,14 +146,13 @@
 
             </LinearLayout>
 
-            <View style="@style/fg_line_style" />
-        </LinearLayout>
-
+            <View style="@style/ry_line_style" />
         <Button
             android:id="@+id/btn_search_sure"
             android:layout_width="match_parent"
             android:layout_height="@dimen/layout_40dp"
-            android:layout_marginBottom="@dimen/layout_15dp"
+            android:layout_marginBottom="@dimen/layout_10dp"
+            android:layout_marginTop="@dimen/layout_10dp"
             android:layout_marginLeft="@dimen/layout_10dp"
             android:layout_marginRight="@dimen/layout_10dp"
             android:background="@drawable/accordingmaterialtop_sharp"

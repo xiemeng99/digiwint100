@@ -31,10 +31,10 @@ tools:context="digiwin.smartdepott100.module.activity.produce.distribute.Distrib
             android:orientation="vertical"
             android:focusable="true"
             android:background="@drawable/accordingmaterialtop_pink_sharp"
-            android:padding="@dimen/layout_5dp">
+            android:padding="@dimen/layout_7dp">
 
             <LinearLayout
-                style="@style/itemstyle"
+                style="@style/ry_sum_itemstyle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
@@ -43,22 +43,45 @@ tools:context="digiwin.smartdepott100.module.activity.produce.distribute.Distrib
                     android:layout_height="wrap_content"
                     android:gravity="center_vertical"
                     style="@style/app_text_ingreen"
-                    android:text="@string/send_goods_order"
+                    android:text="@string/purchase_no"
                     />
                 <TextView
                     android:id="@+id/tv_head_post_order"
                     android:layout_width="@dimen/layout_0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="@dimen/layout_5dp"
+                    android:layout_marginLeft="@dimen/layout_3dp"
                     android:layout_weight="3"
                     style="@style/ser_text_ingreen"
                     />
             </LinearLayout>
 
-            <View style="@style/act_line_style"></View>
+            <View style="@style/ry_line_style"/>
 
             <LinearLayout
-                style="@style/itemstyle"
+                style="@style/ry_sum_itemstyle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <TextView
+                    android:layout_width="@dimen/layout_60dp"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    style="@style/app_text_ingreen"
+                    android:text="@string/data"
+                    />
+
+                <TextView
+                    android:id="@+id/tv_head_plan_date"
+                    android:layout_width="@dimen/layout_0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/layout_3dp"
+                    android:layout_weight="1"
+                    style="@style/ser_text_ingreen" />
+            </LinearLayout>
+            <View style="@style/ry_line_style"/>
+
+            <LinearLayout
+                style="@style/ry_sum_itemstyle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
@@ -71,46 +94,6 @@ tools:context="digiwin.smartdepott100.module.activity.produce.distribute.Distrib
                     />
                 <TextView
                     android:id="@+id/tv_head_provider"
-                    android:layout_width="@dimen/layout_0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="@dimen/layout_5dp"
-                    android:layout_weight="1"
-                    style="@style/ser_text_ingreen"
-                    />
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:gravity="center_vertical"
-                    style="@style/app_text_ingreen"
-                    android:layout_marginLeft="@dimen/layout_5dp"
-                    android:text="@string/data"
-                    />
-
-                <TextView
-                    android:id="@+id/tv_head_plan_date"
-                    android:layout_width="@dimen/layout_0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="@dimen/layout_5dp"
-                    android:layout_weight="1"
-                    style="@style/ser_text_ingreen" />
-            </LinearLayout>
-
-            <View style="@style/act_line_style"></View>
-
-            <LinearLayout
-                style="@style/itemstyle"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-                <TextView
-                    android:layout_width="@dimen/layout_60dp"
-                    android:layout_height="wrap_content"
-                    android:gravity="center_vertical"
-                    style="@style/app_text_ingreen"
-                    android:text="@string/receipt_address"
-                    />
-                <TextView
-                    android:id="@+id/tv_head_receipt_address"
                     android:layout_width="@dimen/layout_0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="@dimen/layout_5dp"

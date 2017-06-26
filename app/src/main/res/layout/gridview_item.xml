@@ -11,7 +11,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         />
-    <TextView
+    <digiwin.smartdepott100.core.weight.CenterTextView
         android:id="@+id/tv_gridview_item"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

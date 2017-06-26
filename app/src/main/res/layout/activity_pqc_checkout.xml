@@ -1,0 +1,253 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <include layout="@layout/activity_title_toolbar_bar" />
+
+    <LinearLayout
+        style="@style/ry_style"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/toolbar_title"
+        android:layout_marginTop="@dimen/layout_6dp"
+        android:orientation="vertical"
+        android:padding="@dimen/layout_6dp">
+
+        <LinearLayout
+            android:id="@+id/ll_check_time"
+            style="@style/itemstyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/tv_check_time"
+                style="@style/app_text_inwhite"
+                android:layout_width="@dimen/layout_70dp"
+                android:layout_height="wrap_content"
+                android:text="@string/check_time" />
+
+            <TextView
+                android:id="@+id/tv_worktime"
+                style="@style/ser_text_inwhite"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+
+        <View style="@style/fg_line_style" />
+
+        <LinearLayout
+            style="@style/itemstyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                style="@style/app_text_inwhite"
+                android:layout_width="@dimen/layout_70dp"
+                android:layout_height="wrap_content"
+                android:text="@string/gongDan_no" />
+
+            <TextView
+                android:id="@+id/tv_gongDan_no"
+                style="@style/ser_text_inwhite"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+
+        <View style="@style/fg_line_style" />
+
+        <LinearLayout
+            style="@style/itemstyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                style="@style/app_text_inwhite"
+                android:layout_width="@dimen/layout_70dp"
+                android:layout_height="wrap_content"
+                android:text="@string/baogong_order" />
+
+            <TextView
+                android:id="@+id/tv_model"
+                style="@style/ser_text_inwhite"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+
+        <View style="@style/fg_line_style" />
+
+        <LinearLayout
+            style="@style/itemstyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                style="@style/app_text_inwhite"
+                android:layout_width="@dimen/layout_70dp"
+                android:layout_height="wrap_content"
+                android:text="@string/pallet" />
+
+            <TextView
+                android:id="@+id/tv_pallet"
+                style="@style/ser_text_inwhite"
+                android:layout_width="@dimen/layout_0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1" />
+        </LinearLayout>
+        <View style="@style/fg_line_style" />
+
+        <LinearLayout
+            style="@style/itemstyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                style="@style/app_text_inwhite"
+                android:layout_width="@dimen/layout_70dp"
+                android:layout_height="wrap_content"
+                android:text="@string/check_mold" />
+
+            <TextView
+                android:id="@+id/tv_check_mold"
+                style="@style/ser_text_inwhite"
+                android:layout_width="@dimen/layout_0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1" />
+        </LinearLayout>
+
+        <View style="@style/fg_line_style" />
+
+        <LinearLayout
+            style="@style/itemstyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                style="@style/app_text_inwhite"
+                android:layout_width="@dimen/layout_70dp"
+                android:layout_height="wrap_content"
+                android:text="@string/item_name" />
+
+            <TextView
+                android:id="@+id/tv_item_name"
+                style="@style/ser_text_inwhite"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+
+        <View style="@style/fg_line_style" />
+
+        <LinearLayout
+            style="@style/itemstyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                style="@style/app_text_inwhite"
+                android:layout_width="@dimen/layout_70dp"
+                android:layout_height="wrap_content"
+                android:text="@string/item_no" />
+
+            <TextView
+                android:id="@+id/tv_item_no"
+                style="@style/ser_text_inwhite"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+
+        <View style="@style/fg_line_style" />
+
+        <LinearLayout
+            style="@style/itemstyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                style="@style/app_text_inwhite"
+                android:layout_width="@dimen/layout_70dp"
+                android:layout_height="wrap_content"
+                android:text="@string/circulation_no" />
+
+            <TextView
+                android:id="@+id/tv_circulation_no"
+                style="@style/ser_text_inwhite"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+
+        <View style="@style/fg_line_style" />
+
+        <LinearLayout
+            style="@style/itemstyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                style="@style/app_text_inwhite"
+                android:layout_width="@dimen/layout_70dp"
+                android:layout_height="wrap_content"
+                android:text="@string/num" />
+
+            <TextView
+                android:id="@+id/tv_num"
+                style="@style/ser_text_inwhite"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+
+        <View style="@style/fg_line_style" />
+
+        <LinearLayout
+            style="@style/itemstyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                style="@style/app_text_inwhite"
+                android:layout_width="@dimen/layout_0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/is_ok" />
+
+            <CheckBox
+                android:id="@+id/cb_OK"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:button="@drawable/cb_pqc_selector" />
+        </LinearLayout>
+
+        <View style="@style/fg_line_style" />
+
+        <LinearLayout
+            style="@style/itemstyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                style="@style/app_text_inwhite"
+                android:layout_width="@dimen/layout_0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/is_NG" />
+
+            <CheckBox
+                android:id="@+id/cb_seletor_NG"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:button="@drawable/cb_pqc_selector" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <include layout="@layout/inclu_commit" />
+</RelativeLayout>

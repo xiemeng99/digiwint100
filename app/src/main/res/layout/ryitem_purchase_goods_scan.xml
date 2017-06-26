@@ -7,7 +7,7 @@
     android:orientation="vertical">
 
     <LinearLayout
-        style="@style/itemstyle"
+        style="@style/ry_sum_itemstyle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
@@ -16,13 +16,14 @@
             style="@style/app_text_inwhite"
             android:layout_width="@dimen/layout_60dp"
             android:layout_height="wrap_content"
-            android:text="@string/delivery_note_no" />
+            android:text="@string/purchase_no" />
 
         <TextView
             android:id="@+id/tv_item_delivery_note_no"
             style="@style/ser_text_inwhite"
             android:layout_width="@dimen/layout_0dp"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/layout_3dp"
             android:layout_weight="1" />
 
     </LinearLayout>
@@ -30,7 +31,29 @@
     <View style="@style/ry_line_style" />
 
     <LinearLayout
-        style="@style/itemstyle"
+        style="@style/ry_sum_itemstyle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            style="@style/app_text_inwhite"
+            android:layout_width="@dimen/layout_60dp"
+            android:layout_height="wrap_content"
+            android:text="@string/data" />
+
+        <TextView
+            android:id="@+id/tv_item_date"
+            style="@style/ser_text_inwhite"
+            android:layout_width="@dimen/layout_0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/layout_3dp"
+            android:layout_weight="1" />
+    </LinearLayout>
+
+    <View style="@style/ry_line_style" />
+    <LinearLayout
+        style="@style/ry_sum_itemstyle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
@@ -46,42 +69,9 @@
             style="@style/ser_text_inwhite"
             android:layout_width="@dimen/layout_0dp"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/layout_3dp"
             android:layout_weight="1" />
 
-        <TextView
-            style="@style/app_text_inwhite"
-            android:layout_width="@dimen/layout_30dp"
-            android:layout_height="wrap_content"
-            android:text="@string/data" />
-
-        <TextView
-            android:id="@+id/tv_item_date"
-            style="@style/ser_text_inwhite"
-            android:layout_width="@dimen/layout_0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/layout_10dp"
-            android:layout_weight="1" />
-    </LinearLayout>
-
-    <View style="@style/ry_line_style" />
-
-    <LinearLayout
-        style="@style/itemstyle"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-
-        <TextView
-            style="@style/app_text_inwhite"
-            android:layout_width="@dimen/layout_60dp"
-            android:layout_height="wrap_content"
-            android:text="@string/receipt_address" />
-
-        <TextView
-            android:id="@+id/tv_receipt_address"
-            style="@style/ser_text_inwhite"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
     </LinearLayout>
 
 </LinearLayout>

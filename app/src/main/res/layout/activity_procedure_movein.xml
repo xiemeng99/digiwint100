@@ -1,0 +1,213 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:background="@color/white_ff"
+    android:layout_height="match_parent">
+
+    <include layout="@layout/activity_title_toolbar_bar"></include>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/toolbar_title">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:id="@+id/ll_zx_input"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/layout_6dp"
+                android:layout_marginLeft="@dimen/layout_10dp"
+                android:layout_marginRight="@dimen/layout_10dp"
+                android:layout_marginTop="@dimen/layout_6dp"
+                android:background="@drawable/allscanedit_bg"
+                android:orientation="vertical"
+                android:padding="@dimen/layout_5dp">
+
+                <LinearLayout
+                    android:id="@+id/ll_docking_per"
+                    style="@style/itemstyle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:id="@+id/tv_docking_per"
+                        style="@style/app_text_inwhite"
+                        android:layout_width="@dimen/layout_60dp"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:text="@string/docking_per" />
+
+                    <EditText
+                        android:id="@+id/et_docking_per"
+                        android:layout_width="@dimen/layout_0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/layout_10dp"
+                        android:layout_weight="1"
+                        android:background="@null"
+                        android:singleLine="true"
+                        android:textColor="@color/black_32"
+                        android:textCursorDrawable="@drawable/et_cursor_yellow"
+                        android:textSize="@dimen/textSize_14sp" />
+
+                    <CheckBox
+                        android:id="@+id/cb_docking_per"
+                        android:layout_width="wrap_content"
+                        android:layout_height="@dimen/layout_20dp"
+                        android:button="@drawable/lock_checkbox" />
+                </LinearLayout>
+
+                <View style="@style/fg_line_style" />
+
+                <LinearLayout
+                    android:id="@+id/ll_circulation_number"
+                    style="@style/itemstyle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:id="@+id/tv_circulation_number"
+                        style="@style/app_text_inwhite"
+                        android:layout_width="@dimen/layout_60dp"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:text="@string/circulation_no" />
+
+                    <EditText
+                        android:id="@+id/et_circulation_number"
+                        android:layout_width="@dimen/layout_0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/layout_10dp"
+                        android:layout_weight="1"
+                        android:background="@null"
+                        android:singleLine="true"
+                        android:textColor="@color/black_32"
+                        android:textCursorDrawable="@drawable/et_cursor_yellow"
+                        android:textSize="@dimen/textSize_14sp" />
+                </LinearLayout>
+
+                <View style="@style/fg_line_style" />
+
+                <LinearLayout
+                    android:id="@+id/ll_procedure_no"
+                    style="@style/itemstyle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:id="@+id/tv_procedure_no"
+                        style="@style/app_text_inwhite"
+                        android:layout_width="@dimen/layout_60dp"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:text="@string/procedure_no" />
+
+                    <EditText
+                        android:id="@+id/et_procedure_no"
+                        android:layout_width="@dimen/layout_0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/layout_10dp"
+                        android:layout_weight="1"
+                        android:background="@null"
+                        android:singleLine="true"
+                        android:textColor="@color/black_32"
+                        android:textCursorDrawable="@drawable/et_cursor_yellow"
+                        android:textSize="@dimen/textSize_14sp" />
+
+                    <CheckBox
+                        android:id="@+id/cb_procedure_no"
+                        android:layout_width="wrap_content"
+                        android:layout_height="@dimen/layout_20dp"
+                        android:button="@drawable/lock_checkbox" />
+                </LinearLayout>
+
+                <View style="@style/fg_line_style" />
+
+                <LinearLayout
+                    android:id="@+id/ll_input_num"
+                    style="@style/itemstyle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:id="@+id/tv_number"
+                        style="@style/app_text_inwhite"
+                        android:layout_width="@dimen/layout_60dp"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:text="@string/actual_yield_num" />
+
+                    <EditText
+                        android:id="@+id/et_input_num"
+                        style="@style/text_hint_style"
+                        android:layout_width="@dimen/layout_0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/layout_10dp"
+                        android:layout_weight="1"
+                        android:background="@null"
+                        android:hint="@string/input_num"
+                        android:inputType="numberDecimal"
+                        android:singleLine="true"
+                        android:textCursorDrawable="@drawable/et_cursor_yellow"
+                        android:textSize="@dimen/textSize_14sp" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/layout_10dp"
+                android:layout_marginRight="@dimen/layout_10dp"
+                android:layout_marginTop="@dimen/layout_6dp"
+                android:background="@drawable/accordingmaterialtop_pink_sharp"
+                android:orientation="vertical"
+                android:padding="@dimen/layout_5dp">
+
+                <LinearLayout
+                    style="@style/itemstyle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        style="@style/app_text_ingreen"
+                        android:layout_width="@dimen/layout_60dp"
+                        android:layout_height="wrap_content"
+                        android:text="@string/accept_per" />
+
+                    <TextView
+                        android:id="@+id/tv_accept_per"
+                        style="@style/ser_text_ingreen"
+                        android:layout_width="@dimen/layout_0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/layout_10dp"
+                        android:layout_weight="1" />
+
+                    <TextView
+                        style="@style/app_text_ingreen"
+                        android:layout_width="@dimen/layout_30dp"
+                        android:layout_height="wrap_content"
+                        android:text="@string/name" />
+
+                    <TextView
+                        android:id="@+id/tv_name"
+                        style="@style/ser_text_ingreen"
+                        android:layout_width="@dimen/layout_0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/layout_5dp"
+                        android:layout_weight="1" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <include
+                layout="@layout/show_playdetail_layout"
+                android:visibility="gone" />
+        </LinearLayout>
+    </ScrollView>
+
+    <include layout="@layout/inclu_commit"></include>
+</RelativeLayout>

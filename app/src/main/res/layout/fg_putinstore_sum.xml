@@ -10,10 +10,11 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="@dimen/layout_10dp"
         android:layout_marginRight="@dimen/layout_10dp"
-        android:layout_marginTop="@dimen/layout_6dp"
         android:background="@drawable/accordingmaterialtop_pink_sharp"
         android:orientation="vertical"
-        android:padding="@dimen/layout_5dp">
+        android:padding="@dimen/layout_5dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignStart="@+id/include">
 
         <LinearLayout
             style="@style/itemstyle"
@@ -77,7 +78,8 @@
         </LinearLayout>
     </LinearLayout>
 
-    <include layout="@layout/inclu_commit" />
+    <include layout="@layout/inclu_commit"
+        android:id="@+id/include" />
 
     <LinearLayout
         android:layout_width="match_parent"

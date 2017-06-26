@@ -11,24 +11,24 @@
         android:id="@+id/ll_search_input"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="@dimen/layout_10dp"
+        android:layout_marginLeft="@dimen/layout_10dp"
+        android:layout_marginRight="@dimen/layout_10dp"
         android:layout_marginTop="@dimen/layout_6dp"
         android:layout_marginBottom="@dimen/layout_6dp"
         android:background="@drawable/yellow_scandetail_bg"
         android:orientation="vertical"
-        android:padding="@dimen/layout_5dp">
+        android:padding="@dimen/layout_7dp">
 
         <LinearLayout
             android:id="@+id/ll_mateialreturn_list"
-            style="@style/itemstyle"
+            style="@style/search_scan_style"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
             <TextView
                 android:id="@+id/tv_mateialreturn_number"
-                android:layout_width="@dimen/layout_70dp"
+                android:layout_width="@dimen/layout_60dp"
                 android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
                 android:text="@string/material_returning_number"
                 style="@style/app_text_inwhite"/>
 
@@ -45,19 +45,18 @@
                 android:textSize="@dimen/textSize_14sp" />
         </LinearLayout>
 
-        <View style="@style/fg_line_style" />
+        <View style="@style/ry_line_style" />
 
         <LinearLayout
             android:id="@+id/ll_department"
-            style="@style/itemstyle"
+            style="@style/search_scan_style"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
             <TextView
                 android:id="@+id/tv_department"
-                android:layout_width="@dimen/layout_70dp"
+                android:layout_width="@dimen/layout_60dp"
                 android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
                 android:text="@string/department"
                 style="@style/app_text_inwhite"/>
 
@@ -74,19 +73,18 @@
                 android:textSize="@dimen/textSize_14sp" />
         </LinearLayout>
 
-        <View style="@style/fg_line_style" />
+        <View style="@style/ry_line_style" />
 
         <LinearLayout
             android:id="@+id/ll_person"
-            style="@style/itemstyle"
+            style="@style/search_scan_style"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
             <TextView
                 android:id="@+id/tv_person"
-                android:layout_width="@dimen/layout_70dp"
+                android:layout_width="@dimen/layout_60dp"
                 android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
                 android:text="@string/person"
                 style="@style/app_text_inwhite" />
 
@@ -103,19 +101,18 @@
                 android:textSize="@dimen/textSize_14sp" />
         </LinearLayout>
 
-        <View style="@style/fg_line_style" />
+        <View style="@style/ry_line_style" />
 
         <LinearLayout
             android:id="@+id/ll_date"
-            style="@style/itemstyle"
+            style="@style/search_scan_style"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
             <TextView
                 android:id="@+id/tv_date"
-                android:layout_width="@dimen/layout_70dp"
+                android:layout_width="@dimen/layout_60dp"
                 android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
                 android:text="@string/data"
                 style="@style/app_text_inwhite"/>
 
@@ -138,13 +135,16 @@
                 android:src="@drawable/time" />
         </LinearLayout>
 
-        <View style="@style/fg_line_style" />
+        <View style="@style/ry_line_style" />
 
         <Button
             android:id="@+id/btn_search_sure"
             android:layout_width="match_parent"
             android:layout_height="@dimen/layout_40dp"
-            android:layout_margin="@dimen/layout_10dp"
+            android:layout_marginTop="@dimen/layout_10dp"
+            android:layout_marginBottom="@dimen/layout_10dp"
+            android:layout_marginLeft="@dimen/layout_10dp"
+            android:layout_marginRight="@dimen/layout_10dp"
             android:background="@drawable/accordingmaterialtop_sharp"
             android:text="@string/label_sure"
             android:textColor="@color/WHITE"

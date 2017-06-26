@@ -47,7 +47,7 @@
             android:layout_height="wrap_content">
 
             <TextView
-                android:layout_width="@dimen/layout_30dp"
+                android:layout_width="@dimen/layout_60dp"
                 android:layout_height="wrap_content"
                 android:gravity="center_vertical"
                 android:text="@string/data"
@@ -60,10 +60,18 @@
                 android:layout_marginLeft="@dimen/layout_10dp"
                 android:layout_weight="1"
                 style="@style/ser_text_ingreen" />
+        </LinearLayout>
+
+        <View style="@style/act_line_style"></View>
+
+        <LinearLayout
+            style="@style/itemstyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
             <TextView
                 android:id="@+id/textView8"
-                android:layout_width="@dimen/layout_45dp"
+                android:layout_width="@dimen/layout_60dp"
                 android:layout_height="wrap_content"
                 android:gravity="center_vertical"
                 android:text="@string/supplier"
@@ -78,14 +86,13 @@
                 style="@style/ser_text_ingreen" />
         </LinearLayout>
     </LinearLayout>
-
-    <include layout="@layout/inclu_commit" />
-
     <LinearLayout
+        android:paddingBottom="@dimen/layout_60dp"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:layout_below="@+id/ll_head"
         android:layout_marginTop="@dimen/layout_6dp">
         <include layout="@layout/ryitem_common" />
     </LinearLayout>
+    <include layout="@layout/inclu_commit" />
 </RelativeLayout>

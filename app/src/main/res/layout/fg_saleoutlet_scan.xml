@@ -29,25 +29,25 @@
                 android:padding="@dimen/layout_5dp">
 
                 <LinearLayout
-                    android:id="@+id/ll_notice"
                     style="@style/itemstyle"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent">
+                    android:layout_height="wrap_content">
 
                     <TextView
                         style="@style/app_text_inwhite"
-                        android:layout_width="@dimen/layout_70dp"
+                        android:layout_width="@dimen/layout_60dp"
                         android:layout_height="wrap_content"
                         android:layout_centerVertical="true"
                         android:text="@string/general_number" />
 
                     <TextView
-                        android:id="@+id/tv_notice"
-                        style="@style/ser_text_inwhite"
+                        android:id="@+id/tv_general_number"
+                        style="@style/app_text_inwhite"
                         android:layout_width="@dimen/layout_0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="@dimen/layout_10dp"
                         android:layout_weight="1" />
+
                 </LinearLayout>
 
                 <View style="@style/fg_line_style" />
@@ -61,7 +61,7 @@
                     <TextView
                         android:id="@+id/tv_locator"
                         style="@style/app_text_inwhite"
-                        android:layout_width="@dimen/layout_70dp"
+                        android:layout_width="@dimen/layout_60dp"
                         android:layout_height="wrap_content"
                         android:layout_centerVertical="true"
                         android:text="@string/locator" />
@@ -96,7 +96,7 @@
                     <TextView
                         android:id="@+id/tv_barcode"
                         style="@style/app_text_inwhite"
-                        android:layout_width="@dimen/layout_70dp"
+                        android:layout_width="@dimen/layout_60dp"
                         android:layout_height="wrap_content"
                         android:layout_centerVertical="true"
                         android:text="@string/barcode_no" />
@@ -125,7 +125,7 @@
                     <TextView
                         android:id="@+id/tv_number"
                         style="@style/app_text_inwhite"
-                        android:layout_width="@dimen/layout_70dp"
+                        android:layout_width="@dimen/layout_60dp"
                         android:layout_height="wrap_content"
                         android:layout_centerVertical="true"
                         android:text="@string/num" />
@@ -144,7 +144,6 @@
                         android:textCursorDrawable="@drawable/et_cursor_yellow"
                         android:textSize="@dimen/textSize_14sp" />
                 </LinearLayout>
-
 
             </LinearLayout>
 

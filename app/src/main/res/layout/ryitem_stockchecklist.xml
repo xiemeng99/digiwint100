@@ -76,7 +76,7 @@
 
         <TextView
             style="@style/app_text_inwhite"
-            android:layout_width="@dimen/layout_30dp"
+            android:layout_width="@dimen/layout_40dp"
             android:layout_height="match_parent"
             android:text="@string/person" />
 

@@ -20,17 +20,17 @@
             android:layout_marginRight="@dimen/layout_10dp"
             android:background="@drawable/allscanedit_bg"
             android:orientation="vertical"
-            android:padding="@dimen/layout_5dp">
+            android:padding="@dimen/layout_7dp">
 
             <LinearLayout
                 android:id="@+id/ll_scan_locator"
-                style="@style/itemstyle"
+                style="@style/search_scan_style"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
                 <TextView
                     android:id="@+id/tv_locator"
-                    android:layout_width="@dimen/layout_70dp"
+                    android:layout_width="@dimen/layout_60dp"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
                     android:text="@string/locator"
@@ -40,10 +40,10 @@
                     android:id="@+id/et_scan_locator"
                     android:layout_width="@dimen/layout_0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="@dimen/layout_10dp"
+                    android:layout_marginLeft="@dimen/layout_3dp"
                     android:layout_weight="1"
-                    android:singleLine="true"
                     android:background="@null"
+                    android:singleLine="true"
                     android:textColor="@color/black_32"
                     android:textCursorDrawable="@drawable/et_cursor_yellow"
                     android:textSize="@dimen/textSize_14sp" />
@@ -55,17 +55,17 @@
                     android:button="@drawable/lock_checkbox" />
             </LinearLayout>
 
-            <View style="@style/fg_line_style" />
+            <View style="@style/ry_line_style" />
 
             <LinearLayout
                 android:id="@+id/ll_barcode_no"
-                style="@style/itemstyle"
+                style="@style/search_scan_style"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
                 <TextView
                     android:id="@+id/tv_barcode_no_string"
-                    android:layout_width="@dimen/layout_70dp"
+                    android:layout_width="@dimen/layout_60dp"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
                     android:text="@string/barcode_no"
@@ -75,7 +75,7 @@
                     android:id="@+id/et_barcode_no"
                     android:layout_width="@dimen/layout_0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="@dimen/layout_10dp"
+                    android:layout_marginLeft="@dimen/layout_3dp"
                     android:singleLine="true"
                     android:layout_weight="1"
                     android:background="@null"
@@ -84,27 +84,27 @@
                     android:textSize="@dimen/textSize_14sp" />
             </LinearLayout>
 
-            <View style="@style/fg_line_style" />
+            <View style="@style/ry_line_style" />
 
             <LinearLayout
                 android:id="@+id/ll_input_num"
-                style="@style/itemstyle"
+                style="@style/search_scan_style"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
                 <TextView
                     android:id="@+id/tv_number"
-                    android:layout_width="@dimen/layout_70dp"
+                    style="@style/app_text_inwhite"
+                    android:layout_width="@dimen/layout_60dp"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
-                    android:text="@string/num"
-                    style="@style/app_text_inwhite"/>
+                    android:text="@string/num" />
 
                 <EditText
                     android:id="@+id/et_input_num"
                     android:layout_width="@dimen/layout_0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="@dimen/layout_10dp"
+                    android:layout_marginLeft="@dimen/layout_3dp"
                     android:layout_weight="1"
                     android:background="@null"
                     android:hint="@string/input_num"
@@ -115,17 +115,17 @@
                     android:textSize="@dimen/textSize_14sp" />
             </LinearLayout>
 
-            <View style="@style/fg_line_style" />
+            <View style="@style/ry_line_style" />
 
             <LinearLayout
                 android:id="@+id/ll_swept_volume"
-                style="@style/itemstyle"
+                style="@style/search_scan_style"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
                 <TextView
                     android:id="@+id/tv_swept_volume_string"
-                    android:layout_width="@dimen/layout_70dp"
+                    android:layout_width="@dimen/layout_60dp"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
                     android:text="@string/swept_volume"
@@ -135,7 +135,7 @@
                     android:id="@+id/tv_swept_volume"
                     android:layout_width="@dimen/layout_0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="@dimen/layout_10dp"
+                    android:layout_marginLeft="@dimen/layout_3dp"
                     android:layout_weight="1"
                     android:background="@null"
                     style="@style/ser_text_inwhite"/>

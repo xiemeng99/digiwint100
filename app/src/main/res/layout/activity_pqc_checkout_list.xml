@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_distribute"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical"
+    tools:context="digiwin.smartdepott100.module.activity.produce.distribute.DistributeActivity">
+
+    <include layout="@layout/activity_title_toolbar_bar" />
+
+    <LinearLayout
+        android:id="@+id/ll_search_dialog"
+        style="@style/itemstyle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/toolbar_title"
+        android:layout_centerHorizontal="true"
+        android:layout_marginLeft="@dimen/layout_10dp"
+        android:layout_marginRight="@dimen/layout_10dp"
+        android:layout_marginTop="@dimen/layout_6dp"
+        android:background="@drawable/yellow_scandetail_bg"
+        android:orientation="vertical"
+        android:visibility="visible">
+
+        <LinearLayout
+            android:id="@+id/ll_provider_code"
+            style="@style/itemstyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/tv_provider_code"
+                style="@style/app_text_inwhite"
+                android:layout_width="@dimen/layout_70dp"
+                android:layout_height="wrap_content"
+                android:text="@string/gongDan_no" />
+
+            <EditText
+                android:id="@+id/et_provider_code"
+                android:layout_width="@dimen/layout_0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/layout_10dp"
+                android:layout_weight="1"
+                android:background="@null"
+                android:selectAllOnFocus="true"
+                android:singleLine="true"
+                android:textColor="@color/black_32"
+                android:textCursorDrawable="@drawable/et_cursor_yellow"
+                android:textSize="@dimen/textSize_14sp" />
+        </LinearLayout>
+
+
+        <View style="@style/fg_line_style" />
+
+        <LinearLayout
+            android:id="@+id/ll_barcode_no"
+            style="@style/itemstyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/tv_barcode_no"
+                style="@style/app_text_inwhite"
+                android:layout_width="@dimen/layout_70dp"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:text="@string/item_no" />
+
+            <EditText
+                android:id="@+id/et_barcode_no"
+                android:layout_width="@dimen/layout_0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/layout_10dp"
+                android:layout_weight="1"
+                android:background="@null"
+                android:selectAllOnFocus="true"
+                android:singleLine="true"
+                android:textColor="@color/black_32"
+                android:textCursorDrawable="@drawable/et_cursor_yellow"
+                android:textSize="@dimen/textSize_14sp" />
+        </LinearLayout>
+
+        <View style="@style/fg_line_style" />
+
+        <LinearLayout
+            android:id="@+id/ll_item_name"
+            style="@style/itemstyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/tv_item_name"
+                style="@style/app_text_inwhite"
+                android:layout_width="@dimen/layout_70dp"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:text="@string/circulation_no" />
+
+            <EditText
+                android:id="@+id/et_item_name"
+                android:layout_width="@dimen/layout_0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/layout_10dp"
+                android:layout_weight="1"
+                android:background="@null"
+                android:selectAllOnFocus="true"
+                android:singleLine="true"
+                android:textColor="@color/black_32"
+                android:textCursorDrawable="@drawable/et_cursor_yellow"
+                android:textSize="@dimen/textSize_14sp" />
+        </LinearLayout>
+
+        <View style="@style/fg_line_style" />
+
+        <LinearLayout
+            android:id="@+id/ll_plan_date"
+            style="@style/itemstyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/tv_plan_date"
+                style="@style/app_text_inwhite"
+                android:layout_width="@dimen/layout_70dp"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:text="@string/data" />
+
+            <EditText
+                android:id="@+id/et_plan_date"
+                android:layout_width="@dimen/layout_0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/layout_10dp"
+                android:layout_weight="1"
+                android:background="@null"
+                android:singleLine="true"
+                android:textColor="@color/red50"
+                android:textCursorDrawable="@drawable/et_cursor_yellow"
+                android:textSize="@dimen/textSize_14sp" />
+
+            <ImageView
+                android:id="@+id/iv_plan_date"
+                android:layout_width="@dimen/layout_30dp"
+                android:layout_height="@dimen/layout_20dp"
+                android:src="@drawable/time" />
+
+        </LinearLayout>
+
+        <View style="@style/fg_line_style" />
+
+        <Button
+            android:id="@+id/btn_search_sure"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/layout_40dp"
+            android:layout_marginBottom="@dimen/layout_10dp"
+            android:layout_marginLeft="@dimen/layout_10dp"
+            android:layout_marginRight="@dimen/layout_10dp"
+            android:layout_marginTop="@dimen/layout_10dp"
+            android:background="@drawable/accordingmaterialtop_sharp"
+            android:text="@string/label_sure"
+            android:textColor="@color/WHITE"
+            android:textSize="@dimen/textSize_18sp" />
+
+    </LinearLayout>
+
+    <ExpandableListView
+        android:id="@+id/expand_lv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/toolbar_title"
+        android:layout_marginLeft="@dimen/layout_10dp"
+        android:layout_marginRight="@dimen/layout_10dp"
+        android:divider="@null"
+        android:visibility="gone"
+        android:groupIndicator="@null"
+        />
+
+    <!--<ScrollView
+        android:id="@+id/scrollview"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/toolbar_title"
+        android:layout_marginTop="@dimen/layout_10dp"
+        android:visibility="gone">
+
+        <include layout="@layout/ryitem_common" />
+
+    </ScrollView>-->
+</RelativeLayout>

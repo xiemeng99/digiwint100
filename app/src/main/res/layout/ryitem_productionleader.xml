@@ -7,7 +7,7 @@
     android:orientation="vertical">
 
     <LinearLayout
-        style="@style/itemstyle"
+        style="@style/ry_sum_itemstyle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
@@ -35,11 +35,10 @@
     </LinearLayout>
 
     <View
-        android:id="@+id/line_1"
         style="@style/ry_line_style" />
 
     <LinearLayout
-        style="@style/itemstyle"
+        style="@style/ry_sum_itemstyle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
@@ -59,11 +58,10 @@
     </LinearLayout>
 
     <View
-        android:id="@+id/line_2"
         style="@style/ry_line_style" />
 
     <LinearLayout
-        style="@style/itemstyle"
+        style="@style/ry_sum_itemstyle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
@@ -83,11 +81,10 @@
     </LinearLayout>
 
     <View
-        android:id="@+id/line_3"
         style="@style/ry_line_style" />
 
     <LinearLayout
-        style="@style/itemstyle"
+        style="@style/ry_sum_itemstyle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">

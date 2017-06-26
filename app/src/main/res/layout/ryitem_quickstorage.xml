@@ -45,6 +45,7 @@
                 style="@style/ser_text_inwhite"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:background="@null"
                 android:drawableRight="@drawable/bottomsp"
                 android:paddingLeft="@dimen/layout_2dp"
                 android:paddingRight="@dimen/layout_2dp" />
@@ -174,24 +175,16 @@
             android:layout_height="wrap_content"
             android:text="@string/match_number" />
 
-        <LinearLayout
-            android:id="@+id/match_num_ll"
+        <EditText
+            android:id="@+id/tv_match_number"
             android:layout_width="@dimen/layout_0dp"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:orientation="horizontal">
-            >
-
-            <EditText
-                android:id="@+id/tv_match_number"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@null"
-                android:inputType="numberDecimal"
-                android:paddingLeft="@dimen/layout_2dp"
-                android:selectAllOnFocus="true"
-                android:textColor="@color/outside_yellow"
-                android:textSize="@dimen/textSize_14sp" />
-        </LinearLayout>
+            android:background="@null"
+            android:drawableRight="@drawable/amend"
+            android:inputType="numberDecimal"
+            android:paddingLeft="@dimen/layout_2dp"
+            android:selectAllOnFocus="true"
+            android:textSize="@dimen/textSize_14sp" />
     </LinearLayout>
 </LinearLayout>

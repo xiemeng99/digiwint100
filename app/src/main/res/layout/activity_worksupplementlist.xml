@@ -24,25 +24,15 @@
         android:orientation="vertical"
         android:visibility="visible">
 
-        <LinearLayout
-            android:id="@+id/ll_search_input"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/layout_15dp"
-            android:layout_marginLeft="@dimen/layout_10dp"
-            android:layout_marginRight="@dimen/layout_10dp"
-            android:background="@drawable/radiuswhiteback"
-            android:orientation="vertical">
-
             <LinearLayout
                 android:id="@+id/ll_material_returning_number"
-                style="@style/itemstyle"
+                style="@style/search_scan_style"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
                 <TextView
                     android:id="@+id/tv_material_returning_number"
-                    android:layout_width="@dimen/layout_70dp"
+                    android:layout_width="@dimen/layout_60dp"
                     android:layout_height="wrap_content"
                     android:text="@string/material_returning_number"
                     style="@style/app_text_inwhite"/>
@@ -62,20 +52,20 @@
             </LinearLayout>
 
 
-            <View style="@style/fg_line_style" />
+            <View style="@style/ry_line_style" />
 
             <LinearLayout
                 android:id="@+id/ll_returning_item_no"
-                style="@style/itemstyle"
+                style="@style/search_scan_style"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
                 <TextView
                     android:id="@+id/tv_returning_item_no"
-                    android:layout_width="@dimen/layout_70dp"
+                    android:layout_width="@dimen/layout_60dp"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
-                    android:text="@string/returning_item_no"
+                    android:text="@string/item_no"
                     style="@style/app_text_inwhite" />
 
                 <EditText
@@ -93,17 +83,17 @@
             </LinearLayout>
 
 
-            <View style="@style/fg_line_style" />
+            <View style="@style/ry_line_style" />
 
             <LinearLayout
                 android:id="@+id/ll_applicant"
-                style="@style/itemstyle"
+                style="@style/search_scan_style"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
                 <TextView
                     android:id="@+id/tv_applicant"
-                    android:layout_width="@dimen/layout_70dp"
+                    android:layout_width="@dimen/layout_60dp"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
                     android:text="@string/applicant"
@@ -123,19 +113,19 @@
                     android:textSize="@dimen/textSize_14sp" />
             </LinearLayout>
 
-            <View style="@style/fg_line_style" />
+            <View style="@style/ry_line_style" />
 
             <LinearLayout
                 android:id="@+id/ll_apply_branch"
-                style="@style/itemstyle"
+                style="@style/search_scan_style"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
                 <TextView
                     android:id="@+id/tv_apply_branch"
-                    android:layout_width="@dimen/layout_70dp"
+                    android:layout_width="@dimen/layout_60dp"
                     android:layout_height="wrap_content"
-                    android:text="@string/apply_branch"
+                    android:text="@string/department"
                     style="@style/app_text_inwhite"/>
 
                 <EditText
@@ -152,17 +142,17 @@
                     android:textSize="@dimen/textSize_14sp" />
             </LinearLayout>
 
-            <View style="@style/fg_line_style" />
+            <View style="@style/ry_line_style" />
 
             <LinearLayout
                 android:id="@+id/ll_plan_date"
-                style="@style/itemstyle"
+                style="@style/search_scan_style"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
                 <TextView
                     android:id="@+id/tv_plan_date"
-                    android:layout_width="@dimen/layout_70dp"
+                    android:layout_width="@dimen/layout_60dp"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
                     android:text="@string/data"
@@ -188,14 +178,14 @@
 
             </LinearLayout>
 
-            <View style="@style/fg_line_style" />
-        </LinearLayout>
+        <View style="@style/ry_line_style" />
 
         <Button
             android:id="@+id/btn_search_sure"
             android:layout_width="match_parent"
             android:layout_height="@dimen/layout_40dp"
-            android:layout_marginBottom="@dimen/layout_15dp"
+            android:layout_marginBottom="@dimen/layout_10dp"
+            android:layout_marginTop="@dimen/layout_10dp"
             android:layout_marginLeft="@dimen/layout_10dp"
             android:layout_marginRight="@dimen/layout_10dp"
             android:background="@drawable/accordingmaterialtop_sharp"

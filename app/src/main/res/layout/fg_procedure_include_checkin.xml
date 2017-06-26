@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white_ff">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:id="@+id/item_ll"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/layout_6dp"
+            android:layout_marginLeft="@dimen/layout_10dp"
+            android:layout_marginRight="@dimen/layout_10dp"
+            android:layout_marginTop="@dimen/layout_6dp"
+            android:background="@drawable/accordingmaterialtop_pink_sharp"
+            android:orientation="vertical"
+            android:padding="@dimen/layout_5dp">
+
+            <LinearLayout
+                style="@style/itemstyle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    style="@style/app_text_ingreen"
+                    android:layout_width="@dimen/layout_60dp"
+                    android:layout_height="wrap_content"
+                    android:text="@string/procedure_no" />
+
+                <TextView
+                    android:id="@+id/tv_procedure_no"
+                    style="@style/ser_text_ingreen"
+                    android:layout_weight="1"
+                    android:layout_width="@dimen/layout_0dp"
+                    android:layout_height="wrap_content" />
+                <TextView
+                    style="@style/app_text_ingreen"
+                    android:layout_width="@dimen/layout_60dp"
+                    android:layout_height="wrap_content"
+                    android:text="@string/procedure_name" />
+
+                <TextView
+                    android:id="@+id/tv_procedure_name"
+                    style="@style/ser_text_ingreen"
+                    android:layout_weight="1"
+                    android:layout_width="@dimen/layout_0dp"
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
+
+            <View style="@style/ry_line_style" />
+
+            <LinearLayout
+                style="@style/itemstyle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    style="@style/app_text_ingreen"
+                    android:layout_width="@dimen/layout_60dp"
+                    android:layout_height="wrap_content"
+                    android:text="@string/circulation_no" />
+
+                <TextView
+                    android:id="@+id/tv_circulation_no"
+                    style="@style/ser_text_ingreen"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
+
+            <View style="@style/ry_line_style" />
+
+            <LinearLayout
+                style="@style/itemstyle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    style="@style/app_text_ingreen"
+                    android:layout_width="@dimen/layout_60dp"
+                    android:layout_height="wrap_content"
+                    android:text="@string/order_number" />
+
+                <TextView
+                    android:id="@+id/tv_order_number"
+                    style="@style/ser_text_ingreen"
+                    android:layout_width="@dimen/layout_0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1" />
+
+            </LinearLayout>
+        </LinearLayout>
+
+    </LinearLayout>
+</RelativeLayout>

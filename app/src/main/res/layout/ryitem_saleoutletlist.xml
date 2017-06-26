@@ -46,5 +46,60 @@
             android:layout_height="wrap_content"
             style="@style/ser_text_inwhite" />
     </LinearLayout>
+    <!--<View-->
+    <!--style="@style/ry_line_style" />-->
+
+    <!--<LinearLayout-->
+        <!--style="@style/itemstyle"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:orientation="horizontal">-->
+
+        <!--<TextView-->
+            <!--android:layout_width="@dimen/layout_60dp"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:text="@string/custom"-->
+            <!--style="@style/app_text_inwhite" />-->
+
+        <!--<TextView-->
+            <!--android:id="@+id/tv_item_custom"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--style="@style/ser_text_inwhite" />-->
+    <!--</LinearLayout>-->
+    <!--<View-->
+        <!--style="@style/ry_line_style" />-->
+
+    <!--<LinearLayout-->
+        <!--style="@style/itemstyle"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:orientation="horizontal">-->
+
+        <!--<TextView-->
+            <!--android:layout_width="@dimen/layout_60dp"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:text="@string/applicant"-->
+            <!--style="@style/app_text_inwhite" />-->
+
+        <!--<TextView-->
+            <!--android:id="@+id/tv_item_applicant"-->
+            <!--android:layout_width="@dimen/layout_0dp"-->
+            <!--android:layout_weight="1"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--style="@style/ser_text_inwhite" />-->
+        <!--<TextView-->
+            <!--android:layout_width="@dimen/layout_60dp"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:text="@string/department"-->
+            <!--style="@style/app_text_inwhite" />-->
+
+        <!--<TextView-->
+            <!--android:id="@+id/tv_item_department"-->
+            <!--android:layout_width="@dimen/layout_0dp"-->
+            <!--android:layout_weight="1"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--style="@style/ser_text_inwhite" />-->
+    <!--</LinearLayout>-->
 
 </LinearLayout>

@@ -127,18 +127,17 @@
         android:orientation="horizontal">
 
         <TextView
+            android:id="@+id/tv_locator_num__string"
             style="@style/app_text_inwhite"
             android:layout_width="@dimen/layout_50dp"
             android:layout_height="wrap_content"
             android:text="@string/locator_num_" />
 
         <TextView
-            android:id="@+id/tv_store_number"
+            android:id="@+id/tv_locator_num"
             style="@style/ry_ser_text_inwhite"
-            android:layout_width="@dimen/layout_0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/layout_10dp"
-            android:layout_weight="1" />
-
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
     </LinearLayout>
+
 </LinearLayout>

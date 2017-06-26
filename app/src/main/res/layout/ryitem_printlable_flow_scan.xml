@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center_vertical"
+    android:orientation="horizontal"
+    android:padding="@dimen/layout_6dp">
+
+    <TextView
+        android:layout_width="@dimen/layout_70dp"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="@string/material_number"
+        android:textSize="@dimen/textSize_16sp" />
+
+    <TextView
+        android:id="@+id/tv_material"
+        android:layout_width="@dimen/layout_0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:gravity="center_vertical"
+        android:textColor="@color/D_GREEN" />
+
+    <CheckBox
+        android:id="@+id/cb_seletor"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:button="@drawable/cb_printer_selector" />
+
+</LinearLayout>

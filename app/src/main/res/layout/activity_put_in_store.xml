@@ -28,10 +28,6 @@
             android:id="@+id/ll_search_input"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/layout_15dp"
-            android:layout_marginLeft="@dimen/layout_10dp"
-            android:layout_marginRight="@dimen/layout_10dp"
-            android:layout_marginTop="@dimen/layout_6dp"
             android:background="@drawable/radiuswhiteback"
             android:orientation="vertical">
 
@@ -193,9 +189,10 @@
             android:id="@+id/btn_search_sure"
             android:layout_width="match_parent"
             android:layout_height="@dimen/layout_40dp"
-            android:layout_marginBottom="@dimen/layout_15dp"
+            android:layout_marginBottom="@dimen/layout_10dp"
             android:layout_marginLeft="@dimen/layout_10dp"
             android:layout_marginRight="@dimen/layout_10dp"
+            android:layout_marginTop="@dimen/layout_10dp"
             android:background="@drawable/accordingmaterialtop_sharp"
             android:text="@string/label_sure"
             android:textColor="@color/WHITE"

@@ -25,18 +25,18 @@
                 android:layout_marginRight="@dimen/layout_10dp"
                 android:background="@drawable/allscanedit_bg"
                 android:orientation="vertical"
-                android:padding="@dimen/layout_5dp">
+                android:padding="@dimen/layout_7dp">
 
                 <LinearLayout
                     android:id="@+id/ll_scan_locator"
-                    style="@style/itemstyle"
+                    style="@style/search_scan_style"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
 
                     <TextView
                         android:id="@+id/tv_locator"
                         style="@style/app_text_inwhite"
-                        android:layout_width="@dimen/layout_70dp"
+                        android:layout_width="@dimen/layout_60dp"
                         android:layout_height="wrap_content"
                         android:layout_centerVertical="true"
                         android:text="@string/locator" />
@@ -60,18 +60,18 @@
                         android:button="@drawable/lock_checkbox" />
                 </LinearLayout>
 
-                <View style="@style/fg_line_style" />
+                <View style="@style/ry_line_style" />
 
                 <LinearLayout
                     android:id="@+id/ll_barcode"
-                    style="@style/itemstyle"
+                    style="@style/search_scan_style"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent">
 
                     <TextView
                         android:id="@+id/tv_barcode_string"
                         style="@style/app_text_inwhite"
-                        android:layout_width="@dimen/layout_70dp"
+                        android:layout_width="@dimen/layout_60dp"
                         android:layout_height="wrap_content"
                         android:layout_centerVertical="true"
                         android:text="@string/barcode" />
@@ -89,18 +89,18 @@
                         android:textSize="@dimen/textSize_14sp" />
                 </LinearLayout>
 
-                <View style="@style/fg_line_style" />
+                <View style="@style/ry_line_style" />
 
                 <LinearLayout
                     android:id="@+id/ll_input_num"
-                    style="@style/itemstyle"
+                    style="@style/search_scan_style"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent">
 
                     <TextView
                         android:id="@+id/tv_number"
                         style="@style/app_text_inwhite"
-                        android:layout_width="@dimen/layout_70dp"
+                        android:layout_width="@dimen/layout_60dp"
                         android:layout_height="wrap_content"
                         android:layout_centerVertical="true"
                         android:text="@string/num" />
@@ -121,116 +121,6 @@
                 </LinearLayout>
             </LinearLayout>
 
-            <!-- <LinearLayout
-                 android:layout_marginTop="@dimen/layout_10dp"
-                 style="@style/ry_style"
-                 android:layout_width="match_parent"
-                 android:layout_height="wrap_content"
-                 android:orientation="vertical">
-
-                 <LinearLayout
-                     style="@style/itemstyle"
-                     android:layout_width="match_parent"
-                     android:layout_height="wrap_content"
-                     android:orientation="horizontal">
-
-                     <TextView
-                         android:id="@+id/tv_item_name_string"
-                         android:layout_width="@dimen/layout_70dp"
-                         android:layout_height="wrap_content"
-                         android:text="@string/item_name"
-                         android:textSize="@dimen/textSize_14sp" />
-
-                     <TextView
-                         android:id="@+id/tv_item_name"
-                         android:layout_width="@dimen/layout_0dp"
-                         android:layout_height="wrap_content"
-                         android:layout_weight="2"
-                         android:textSize="@dimen/textSize_14sp" />
-
-                     <TextView
-                         android:id="@+id/tv_unit"
-                         android:layout_width="@dimen/layout_0dp"
-                         android:layout_height="wrap_content"
-                         android:layout_weight="1"
-                         android:paddingRight="@dimen/layout_10dp"
-                         android:textSize="@dimen/textSize_14sp" />
-                 </LinearLayout>
-
-                 <View
-                     android:id="@+id/line_1"
-                     style="@style/ry_line_style" />
-
-                 <LinearLayout
-                     style="@style/itemstyle"
-                     android:layout_width="match_parent"
-                     android:layout_height="match_parent"
-                     android:orientation="horizontal">
-
-                     <TextView
-                         android:id="@+id/tv_item_format_string"
-                         android:layout_width="@dimen/layout_70dp"
-                         android:layout_height="wrap_content"
-                         android:text="@string/model"
-                         android:textSize="@dimen/textSize_14sp" />
-
-                     <TextView
-                         android:id="@+id/tv_item_format"
-                         android:layout_width="match_parent"
-                         android:layout_height="wrap_content"
-                         android:textSize="@dimen/textSize_14sp" />
-                 </LinearLayout>
-
-                 <View
-                     android:id="@+id/line_2"
-                     style="@style/ry_line_style" />
-
-                 <LinearLayout
-                     style="@style/itemstyle"
-                     android:layout_width="match_parent"
-                     android:layout_height="wrap_content"
-                     android:orientation="horizontal">
-
-                     <LinearLayout
-                         android:orientation="horizontal"
-                         android:layout_weight="1"
-                         android:layout_width="@dimen/layout_0dp"
-                         android:layout_height="match_parent">
-                         <TextView
-                             android:id="@+id/tv_under_feed_string"
-                             android:layout_width="@dimen/layout_70dp"
-                             android:layout_height="wrap_content"
-                             android:text="@string/available_quantity"
-                             android:textSize="@dimen/textSize_14sp" />
-
-                         <TextView
-                             android:id="@+id/tv_available_quantity"
-                             android:layout_width="match_parent"
-                             android:layout_height="wrap_content"
-                             android:textSize="@dimen/textSize_14sp" />
-                     </LinearLayout>
-
-                     <LinearLayout
-                         android:orientation="horizontal"
-                         android:layout_weight="1"
-                         android:layout_width="@dimen/layout_0dp"
-                         android:layout_height="match_parent">
-                         <TextView
-                             android:id="@+id/tv_scaned_numb_string"
-                             android:layout_width="@dimen/layout_70dp"
-                             android:layout_height="wrap_content"
-                             android:text="@string/scaned_numb"
-                             android:textSize="@dimen/textSize_14sp" />
-
-                         <TextView
-                             android:id="@+id/tv_scaned_numb"
-                             android:layout_width="match_parent"
-                             android:layout_height="wrap_content"
-                             android:textSize="@dimen/textSize_14sp" />
-
-                     </LinearLayout>
-                 </LinearLayout>
-             </LinearLayout>-->
             <include layout="@layout/ryitem_fifo_common" />
         </LinearLayout>
     </ScrollView>

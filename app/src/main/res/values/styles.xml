@@ -39,6 +39,20 @@
         <item name="android:paddingBottom">@dimen/layout_10dp</item>
         <item name="android:gravity">center_vertical</item>
     </style>
+    <!--汇总列表使用 -->
+    <style name="ry_sum_itemstyle">
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:paddingTop">@dimen/digiwin_top</item>
+        <item name="android:paddingBottom">@dimen/digiwin_top</item>
+    </style>
+    <!--扫描/筛选使用 -->
+    <style name="search_scan_style">
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:paddingTop">@dimen/digiwin_top</item>
+        <item name="android:paddingBottom">@dimen/digiwin_top</item>
+        <item name="android:paddingLeft">@dimen/layout_2dp</item>
+        <item name="android:paddingRight">@dimen/layout_2dp</item>
+    </style>
     <!--扫描条目使用 -->
     <style name="itemstyle">
         <item name="android:gravity">center_vertical</item>
@@ -47,11 +61,26 @@
         <item name="android:paddingLeft">@dimen/layout_7dp</item>
         <item name="android:paddingRight">@dimen/layout_7dp</item>
     </style>
+    <!--扫描条目使用 -->
+    <style name="itemstyle_ep">
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:paddingTop">@dimen/digiwin_top</item>
+        <item name="android:paddingBottom">@dimen/digiwin_top</item>
+        <item name="android:paddingLeft">@dimen/layout_7dp</item>
+        <item name="android:layout_marginTop">@dimen/layout_10dp</item>
+        <item name="android:paddingRight">@dimen/layout_7dp</item>
+    </style>
     <!--列表中线条样式-->
     <style name="ry_line_style">
         <item name="android:layout_height">@dimen/layout_0.5dp</item>
         <item name="android:layout_width">match_parent</item>
-        <item name="android:background">@color/gray_f0</item>
+        <item name="android:background">@color/gray_da</item>
+    </style>
+    <!--列表中线条样式-->
+    <style name="ry_line_style3">
+        <item name="android:layout_height">@dimen/layout_0.5dp</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:background">@color/materialDivider_color</item>
     </style>
     <!--列表中线条样式2-->
     <style name="ry_line_style2">
@@ -67,16 +96,26 @@
         <item name="android:layout_marginRight">@dimen/layout_5dp</item>
         <item name="android:background">@color/line_gray_f0</item>
     </style>
-
+    <!-- 绿色列表边框-->
     <style name="ry_style">
         <item name="android:layout_marginRight">@dimen/layout_10dp</item>
         <item name="android:layout_marginLeft">@dimen/layout_10dp</item>
         <item name="android:layout_marginBottom">@dimen/digiwin_top</item>
         <item name="android:paddingLeft">@dimen/layout_10dp</item>
         <item name="android:paddingRight">@dimen/layout_10dp</item>
-        <item name="android:background">@drawable/green_scandetail_bg</item>
+        <item name="android:background">@drawable/red_scandetail_bg</item>
     </style>
-
+    <!-- 绿色列表边框-->
+    <style name="ry_style_ep">
+        <item name="android:layout_marginRight">@dimen/layout_10dp</item>
+        <item name="android:layout_marginLeft">@dimen/layout_10dp</item>
+        <item name="android:layout_marginTop">@dimen/layout_10dp</item>
+        <item name="android:layout_marginBottom">@dimen/digiwin_top</item>
+        <item name="android:paddingLeft">@dimen/layout_10dp</item>
+        <item name="android:paddingRight">@dimen/layout_10dp</item>
+        <item name="android:background">@drawable/red_group_unexpand_bg</item>
+    </style>
+    <!-- 灰色列表边框-->
     <style name="ry_style1">
         <item name="android:layout_marginRight">@dimen/layout_10dp</item>
         <item name="android:layout_marginLeft">@dimen/layout_10dp</item>
@@ -85,7 +124,7 @@
         <item name="android:paddingRight">@dimen/layout_10dp</item>
         <item name="android:background">@drawable/item_detail_bg</item>
     </style>
-
+    <!-- 未完事项列表边框-->
     <style name="uncom_itemstyle">
         <item name="android:paddingTop">@dimen/digiwin_top</item>
         <item name="android:paddingBottom">@dimen/digiwin_top</item>
@@ -106,7 +145,7 @@
     <style name="fifo_line_style">
         <item name="android:layout_height">@dimen/layout_0.5dp</item>
         <item name="android:layout_width">match_parent</item>
-        <item name="android:background">@color/green7d</item>
+        <item name="android:background">@color/green1b</item>
     </style>
 
     <!-- 采购收货checkbox-->
@@ -157,7 +196,7 @@
     <!--明细页面服务器返回字段-->
     <style name="ser_text_indetail">
         <item name="android:textSize">@dimen/digiwin_textsize</item>
-        <item name="android:textColor">@color/black_32</item>
+        <item name="android:textColor">@color/green1b</item>
     </style>
     <!--明细页面服务器返回字段可修改的数字-->
     <style name="ser_num_indetail">
@@ -168,65 +207,6 @@
     <style name="ser_text_inhitem">
         <item name="android:textSize">@dimen/digiwin_textsize</item>
         <item name="android:textColor">@color/materialText_color</item>
-    </style>
-
-    <style name="CustomDialog" parent="android:style/Theme.Dialog">
-        <item name="android:background">@android:color/transparent</item>
-        <item name="android:windowBackground">@android:color/transparent</item>
-        <item name="android:backgroundDimEnabled">true</item>
-        <item name="android:windowNoTitle">true</item>
-        <item name="android:windowAnimationStyle">@style/DialogAnimation</item>
-    </style>
-
-    <style name="DialogAnimation" parent="@android:style/Animation.Dialog">
-        <item name="android:windowEnterAnimation">@anim/dialog_enter</item>
-        <item name="android:windowExitAnimation">@anim/dialog_exit</item>
-    </style>
-
-    <style name="LoadingDialog" parent="@android:style/Theme.Dialog">
-        <item name="android:windowFrame">@null</item>
-        <item name="android:windowNoTitle">true</item>
-        <item name="android:windowBackground">@android:color/transparent</item>
-        <item name="android:windowIsFloating">true</item>
-        <item name="android:backgroundDimEnabled">true</item>
-        <item name="android:windowContentOverlay">@null</item>
-    </style>
-
-    <style name="MyDialog" parent="android:style/Theme.Dialog">
-        <!--背景颜色及透明程度-->
-        <item name="android:windowBackground">@drawable/operatingcenter_bg</item>
-        <item name="android:windowFrame">@null</item>
-        <item name="android:windowIsTranslucent">true</item>
-        <!--是否有标题 -->
-        <item name="android:windowNoTitle">true</item>
-        <!--是否浮现在activity之上-->
-        <item name="android:windowIsFloating">true</item>
-        <!--是否模糊-->
-        <item name="android:backgroundDimEnabled">true</item>
-        <item name="android:windowAnimationStyle">@style/DialogAnimation</item> <!-- 显示和消失的动画效果 -->
-    </style>
-
-    <style name="activityAnimation" parent="@android:style/Animation.Activity">
-        <item name="android:activityOpenEnterAnimation">@anim/slide_right_in</item>
-        <item name="android:activityOpenExitAnimation">@anim/slide_left_out</item>
-        <item name="android:activityCloseEnterAnimation">@anim/slide_left_in</item>
-        <item name="android:activityCloseExitAnimation">@anim/slide_right_out</item>
-    </style>
-
-    <style name="progress_dialog" parent="@android:style/Theme.Dialog">
-        <item name="android:windowFrame">@null</item>
-        <item name="android:windowIsFloating">true</item>
-        <item name="android:windowIsTranslucent">true</item>
-        <item name="android:windowNoTitle">true</item>
-        <item name="android:background">@null</item>
-        <item name="android:windowBackground">@null</item>
-        <item name="android:windowAnimationStyle">@style/DialogAnimation</item> <!-- 显示和消失的动画效果 -->
-        <item name="android:backgroundDimEnabled">false</item>
-    </style>
-
-    <style name="splashActivityAnimation" parent="@android:style/Animation">
-        <item name="android:windowEnterAnimation">@anim/slide_right_in</item>
-        <item name="android:windowExitAnimation">@anim/slide_left_out</item>
     </style>
 
 
@@ -249,10 +229,8 @@
         <item name="android:layout_height">@dimen/layout_0.5dp</item>
         <item name="android:layout_width">match_parent</item>
         <item name="android:background">@color/red50</item>
-        <item name="android:layout_marginLeft">@dimen/layout_15dp</item>
+        <item name="android:layout_marginLeft">@dimen/layout_9dp</item>
         <item name="android:layout_marginRight">@dimen/layout_7dp</item>
-        <item name="android:layout_marginTop">@dimen/layout_5dp</item>
-        <item name="android:layout_marginBottom">@dimen/layout_10dp</item>
     </style>
 
     <!-- 数量EditText的样式-->
@@ -261,5 +239,10 @@
         <item name="android:textColorHint">@color/text_hint_color</item>
     </style>
 
-
+    <!--FIFO中线条样式-->
+    <style name="futai_procedure_line">
+        <item name="android:layout_height">@dimen/layout_0.5dp</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:background">@color/orangeYellow</item>
+    </style>
 </resources>

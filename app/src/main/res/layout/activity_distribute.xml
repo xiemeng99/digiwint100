@@ -28,8 +28,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/layout_15dp"
-            android:layout_marginLeft="@dimen/layout_10dp"
-            android:layout_marginRight="@dimen/layout_10dp"
             android:background="@drawable/radiuswhiteback"
             android:orientation="vertical">
 

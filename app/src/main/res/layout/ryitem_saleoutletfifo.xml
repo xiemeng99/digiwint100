@@ -103,5 +103,7 @@
             android:layout_weight="1" />
     </LinearLayout>
 
-    <View style="@style/fifo_line_style" />
+    <View
+        android:id="@+id/fifo_bottom_line"
+        style="@style/fifo_line_style" />
 </LinearLayout>

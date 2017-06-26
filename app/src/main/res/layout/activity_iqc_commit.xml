@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical">
+
+    <include layout="@layout/activity_title_toolbar_bar"></include>
+
+    <LinearLayout
+        android:id="@+id/rl_top"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/toolbar_title"
+        android:layout_marginBottom="@dimen/digiwin_top"
+        android:layout_marginLeft="@dimen/layout_10dp"
+        android:layout_marginRight="@dimen/layout_10dp"
+        android:layout_marginTop="@dimen/digiwin_top"
+        android:background="@drawable/accordingmaterialtop_pink_sharp"
+        android:orientation="vertical"
+        android:padding="@dimen/layout_5dp">
+
+        <LinearLayout
+            style="@style/itemstyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                style="@style/app_text_ingreen"
+                android:layout_width="@dimen/layout_70dp"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:text="@string/purchase_order" />
+
+            <TextView
+                android:id="@+id/tv_purchase_order"
+                style="@style/ser_text_ingreen"
+                android:layout_width="@dimen/layout_0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/layout_10dp"
+                android:layout_weight="1"
+                android:background="@null" />
+        </LinearLayout>
+
+        <View style="@style/act_line_style"></View>
+
+        <LinearLayout
+            style="@style/itemstyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                style="@style/app_text_ingreen"
+                android:layout_width="@dimen/layout_70dp"
+                android:layout_height="wrap_content"
+                android:paddingRight="@dimen/layout_5dp"
+                android:text="@string/data" />
+
+            <TextView
+                android:id="@+id/tv_date"
+                style="@style/ser_text_ingreen"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/layout_10dp" />
+        </LinearLayout>
+
+        <View style="@style/act_line_style"></View>
+
+        <LinearLayout
+            style="@style/itemstyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                style="@style/app_text_ingreen"
+                android:layout_width="@dimen/layout_70dp"
+                android:layout_height="wrap_content"
+                android:paddingRight="@dimen/layout_5dp"
+                android:text="@string/supplier" />
+
+            <TextView
+                android:id="@+id/tv_supplier"
+                style="@style/ser_text_ingreen"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/layout_10dp" />
+        </LinearLayout>
+        <View  android:id="@+id/line_technics_name" style="@style/act_line_style"></View>
+        <LinearLayout
+            android:id="@+id/ll_technics_name"
+            style="@style/itemstyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                style="@style/app_text_ingreen"
+                android:layout_width="@dimen/layout_70dp"
+                android:layout_height="wrap_content"
+                android:paddingRight="@dimen/layout_5dp"
+                android:text="@string/technics_name" />
+
+            <TextView
+                android:id="@+id/tv_technics_name"
+                style="@style/ser_text_ingreen"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/layout_10dp" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/ry_list"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="true"
+        android:paddingBottom="@dimen/layout_50dp"
+        android:layout_below="@id/rl_top" />
+
+    <include layout="@layout/inclu_commit" />
+</RelativeLayout>

@@ -5,9 +5,9 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
-    tools:context="digiwin.smartdepott100.module.activity.produce.distribute.DistributeActivity">
+    tools:context="digiwin.smartdepott100.module.activity.stock.printlabel.PrintLabelFillActivity">
 
-    <include layout="@layout/activity_title_toolbar_bar" />
+    <include layout="@layout/activity_title_toolbar_bar"></include>
 
     <LinearLayout
         android:id="@+id/ll_search_dialog"
@@ -18,7 +18,7 @@
         android:layout_centerHorizontal="true"
         android:layout_marginLeft="@dimen/layout_10dp"
         android:layout_marginRight="@dimen/layout_10dp"
-        android:layout_marginTop="@dimen/layout_6dp"
+        android:layout_marginTop="@dimen/layout_10dp"
         android:background="@drawable/yellow_scandetail_bg"
         android:orientation="vertical"
         android:visibility="visible">
@@ -32,10 +32,11 @@
 
             <TextView
                 android:id="@+id/tv_resource_barcode"
-                android:layout_width="@dimen/layout_70dp"
+                android:layout_width="@dimen/layout_60dp"
                 android:layout_height="wrap_content"
-                android:text="@string/resource_barcode"
-                style="@style/app_text_inwhite"/>
+                android:text="@string/barcode"
+                android:textColor="@color/black_32"
+                android:textSize="@dimen/textSize_14sp" />
 
             <EditText
                 android:id="@+id/et_resource_barcode"
@@ -61,19 +62,23 @@
 
             <TextView
                 android:id="@+id/tv_sum_num"
-                android:layout_width="@dimen/layout_70dp"
+                android:layout_width="@dimen/layout_60dp"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
                 android:text="@string/sum_num"
-                style="@style/app_text_inwhite" />
+                android:textColor="@color/black_32"
+                android:textSize="@dimen/textSize_14sp" />
 
             <EditText
                 android:id="@+id/et_sum_num"
+                style="@style/text_hint_style"
                 android:layout_width="@dimen/layout_0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/layout_10dp"
                 android:layout_weight="1"
                 android:background="@null"
+                android:hint="@string/input_num"
+                android:inputType="numberDecimal"
                 android:singleLine="true"
                 android:textColor="@color/black_32"
                 android:textCursorDrawable="@drawable/et_cursor_yellow"
@@ -91,19 +96,23 @@
 
             <TextView
                 android:id="@+id/tv_single_package_num"
-                android:layout_width="@dimen/layout_70dp"
+                android:layout_width="@dimen/layout_60dp"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
                 android:text="@string/single_page_num"
-                style="@style/app_text_inwhite"/>
+                android:textColor="@color/black_32"
+                android:textSize="@dimen/textSize_14sp" />
 
             <EditText
                 android:id="@+id/et_single_package_num"
+                style="@style/text_hint_style"
                 android:layout_width="@dimen/layout_0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/layout_10dp"
                 android:layout_weight="1"
                 android:background="@null"
+                android:hint="@string/input_num"
+                android:inputType="numberDecimal"
                 android:singleLine="true"
                 android:textColor="@color/black_32"
                 android:textCursorDrawable="@drawable/et_cursor_yellow"
@@ -119,7 +128,7 @@
         android:layout_centerHorizontal="true"
         android:layout_marginLeft="@dimen/layout_10dp"
         android:layout_marginRight="@dimen/layout_10dp"
-        android:layout_marginTop="@dimen/layout_6dp"
+        android:layout_marginTop="@dimen/layout_10dp"
         android:background="@drawable/red_scandetail_bg"
         android:orientation="vertical"
         android:visibility="visible">
@@ -127,14 +136,16 @@
 
         <LinearLayout
             style="@style/itemstyle"
+            android:paddingRight="@dimen/layout_2dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
             <TextView
-                android:layout_width="@dimen/layout_70dp"
+                android:layout_width="@dimen/layout_60dp"
                 android:layout_height="wrap_content"
                 android:text="@string/item_name"
-                style="@style/app_text_inwhite" />
+                android:textColor="@color/black_32"
+                android:textSize="@dimen/textSize_14sp" />
 
             <TextView
                 android:id="@+id/tv_item_name"
@@ -142,7 +153,14 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/layout_10dp"
                 android:layout_weight="1"
-                style="@style/ser_text_inwhite"/>
+                android:textColor="@color/red50"
+                android:textSize="@dimen/textSize_14sp" />
+
+            <TextView
+                android:id="@+id/tv_item_danwei"
+                style="@style/ser_text_inwhite"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
         </LinearLayout>
 
 
@@ -154,10 +172,11 @@
             android:layout_height="wrap_content">
 
             <TextView
-                android:layout_width="@dimen/layout_70dp"
+                android:layout_width="@dimen/layout_60dp"
                 android:layout_height="wrap_content"
                 android:text="@string/model"
-                style="@style/app_text_inwhite"/>
+                android:textColor="@color/black_32"
+                android:textSize="@dimen/textSize_14sp" />
 
             <TextView
                 android:id="@+id/tv_model"
@@ -165,7 +184,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/layout_10dp"
                 android:layout_weight="1"
-                style="@style/ser_text_inwhite"/>
+                android:textColor="@color/red50"
+                android:textSize="@dimen/textSize_14sp" />
         </LinearLayout>
 
 
@@ -177,11 +197,12 @@
             android:layout_height="wrap_content">
 
             <TextView
-                android:layout_width="@dimen/layout_70dp"
+                android:layout_width="@dimen/layout_60dp"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
                 android:text="@string/item_no"
-                style="@style/app_text_inwhite" />
+                android:textColor="@color/black_32"
+                android:textSize="@dimen/textSize_14sp" />
 
             <TextView
                 android:id="@+id/tv_item_no"
@@ -189,7 +210,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/layout_10dp"
                 android:layout_weight="1"
-                style="@style/ser_text_inwhite"/>
+                android:textColor="@color/red50"
+                android:textSize="@dimen/textSize_14sp" />
         </LinearLayout>
 
 
@@ -201,10 +223,11 @@
             android:layout_height="wrap_content">
 
             <TextView
-                android:layout_width="@dimen/layout_70dp"
+                android:layout_width="@dimen/layout_60dp"
                 android:layout_height="wrap_content"
                 android:text="@string/barcode_type"
-                style="@style/app_text_inwhite"/>
+                android:textColor="@color/black_32"
+                android:textSize="@dimen/textSize_14sp" />
 
             <TextView
                 android:id="@+id/tv_barcode_type"
@@ -212,7 +235,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/layout_10dp"
                 android:layout_weight="1"
-                style="@style/ser_text_inwhite" />
+                android:textColor="@color/red50"
+                android:textSize="@dimen/textSize_14sp" />
         </LinearLayout>
 
         <View style="@style/fg_line_style" />
@@ -223,10 +247,11 @@
             android:layout_height="wrap_content">
 
             <TextView
-                android:layout_width="@dimen/layout_70dp"
+                android:layout_width="@dimen/layout_60dp"
                 android:layout_height="wrap_content"
                 android:text="@string/num_of_print_pieces"
-                style="@style/app_text_inwhite" />
+                android:textColor="@color/black_32"
+                android:textSize="@dimen/textSize_14sp" />
 
             <TextView
                 android:id="@+id/tv_num_of_print_pieces"
@@ -234,7 +259,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/layout_10dp"
                 android:layout_weight="1"
-                style="@style/ser_text_inwhite" />
+                android:textColor="@color/red50"
+                android:textSize="@dimen/textSize_14sp" />
         </LinearLayout>
     </LinearLayout>
 

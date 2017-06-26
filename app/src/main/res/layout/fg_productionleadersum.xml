@@ -6,6 +6,7 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_alignParentTop="true"
         android:layout_alignParentStart="true">
 
         <LinearLayout
@@ -23,15 +24,15 @@
                 android:layout_marginTop="@dimen/layout_6dp"
                 android:background="@drawable/accordingmaterialtop_pink_sharp"
                 android:orientation="vertical"
-                android:padding="@dimen/layout_5dp">
+                android:padding="@dimen/layout_7dp">
 
                 <LinearLayout
-                    style="@style/itemstyle"
+                    style="@style/ry_sum_itemstyle"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
 
                     <TextView
-                        android:layout_width="@dimen/layout_70dp"
+                        android:layout_width="@dimen/layout_60dp"
                         android:layout_height="wrap_content"
                         android:gravity="center_vertical"
                         android:text="@string/super_number"
@@ -41,21 +42,21 @@
                         android:id="@+id/tv_super_number"
                         android:layout_width="@dimen/layout_0dp"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="@dimen/layout_10dp"
+                        android:layout_marginLeft="@dimen/layout_3dp"
                         android:layout_weight="1"
                         android:background="@null"
                         style="@style/ser_text_ingreen" />
                 </LinearLayout>
 
-                <View style="@style/act_line_style"></View>
+                <View style="@style/ry_line_style"/>
 
                 <LinearLayout
-                    style="@style/itemstyle"
+                    style="@style/ry_sum_itemstyle"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
 
                     <TextView
-                        android:layout_width="@dimen/layout_70dp"
+                        android:layout_width="@dimen/layout_60dp"
                         android:layout_height="wrap_content"
                         android:gravity="center_vertical"
                         android:text="@string/data"
@@ -65,26 +66,40 @@
                         android:id="@+id/tv_date"
                         android:layout_width="@dimen/layout_0dp"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="@dimen/layout_10dp"
+                        android:layout_marginLeft="@dimen/layout_3dp"
                         android:layout_weight="1"
                         android:background="@null"
                         style="@style/ser_text_ingreen" />
                 </LinearLayout>
 
-                <View style="@style/act_line_style"></View>
+                <View style="@style/ry_line_style"/>
 
                 <LinearLayout
-                    style="@style/itemstyle"
+                    style="@style/ry_sum_itemstyle"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal">
 
+                    <TextView
+                        android:id="@+id/tv_applicant_string"
+                        android:layout_width="@dimen/layout_60dp"
+                        android:layout_height="wrap_content"
+                        android:text="@string/applicant"
+                        android:paddingLeft="@dimen/layout_3dp"
+                        style="@style/app_text_ingreen"/>
+
+                    <TextView
+                        android:id="@+id/tv_applicant"
+                        android:layout_width="@dimen/layout_0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/layout_3dp"
+                        android:layout_weight="1"
+                        style="@style/ser_text_ingreen"/>
 
                     <TextView
                         android:id="@+id/tv_department_string"
-                        android:layout_width="@dimen/layout_70dp"
+                        android:layout_width="@dimen/layout_60dp"
                         android:layout_height="wrap_content"
-                        android:paddingRight="@dimen/layout_5dp"
                         android:text="@string/department"
                         style="@style/app_text_ingreen"/>
 
@@ -92,26 +107,9 @@
                         android:id="@+id/tv_department"
                         android:layout_width="@dimen/layout_0dp"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="@dimen/layout_10dp"
+                        android:layout_marginLeft="@dimen/layout_3dp"
                         android:layout_weight="1"
                         style="@style/ser_text_ingreen" />
-
-                    <TextView
-                        android:id="@+id/tv_applicant_string"
-                        android:layout_width="@dimen/layout_70dp"
-                        android:layout_height="wrap_content"
-                        android:paddingRight="@dimen/layout_5dp"
-                        android:text="@string/applicant"
-                        style="@style/app_text_ingreen"/>
-
-                    <TextView
-                        android:id="@+id/tv_applicant"
-                        android:layout_width="@dimen/layout_0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="@dimen/layout_10dp"
-                        android:layout_weight="1"
-                        style="@style/ser_text_ingreen"/>
-
                 </LinearLayout>
             </LinearLayout>
 

@@ -24,122 +24,110 @@
         android:visibility="visible">
 
         <LinearLayout
-            android:id="@+id/ll_search_input"
+            android:id="@+id/ll_post_material_order"
+            style="@style/itemstyle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/layout_15dp"
-            android:layout_marginLeft="@dimen/layout_10dp"
-            android:layout_marginRight="@dimen/layout_10dp"
-            android:background="@drawable/radiuswhiteback"
-            android:orientation="vertical">
+            >
 
+            <TextView
+                android:id="@+id/tv_post_material_order"
+                style="@style/app_text_inwhite"
+                android:layout_width="@dimen/layout_60dp"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:text="@string/check_order" />
 
-            <LinearLayout
-                android:id="@+id/ll_post_material_order"
-                style="@style/itemstyle"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+            <EditText
+                android:id="@+id/et_post_material_order"
+                android:layout_width="@dimen/layout_0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/layout_10dp"
+                android:layout_weight="1"
+                android:background="@null"
+                android:selectAllOnFocus="true"
+                android:singleLine="true"
+                android:textColor="@color/black_32"
+                android:textCursorDrawable="@drawable/et_cursor_yellow"
+                android:textSize="@dimen/textSize_14sp" />
+        </LinearLayout>
 
-                <TextView
-                    android:id="@+id/tv_post_material_order"
-                    android:layout_width="@dimen/layout_70dp"
-                    android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:text="@string/check_order"
-                    style="@style/app_text_inwhite"/>
+        <View style="@style/fg_line_style" />
 
-                <EditText
-                    android:id="@+id/et_post_material_order"
-                    android:layout_width="@dimen/layout_0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="@dimen/layout_10dp"
-                    android:layout_weight="1"
-                    android:background="@null"
-                    android:selectAllOnFocus="true"
-                    android:singleLine="true"
-                    android:textColor="@color/black_32"
-                    android:textCursorDrawable="@drawable/et_cursor_yellow"
-                    android:textSize="@dimen/textSize_14sp" />
-            </LinearLayout>
+        <LinearLayout
+            android:id="@+id/ll_person"
+            style="@style/itemstyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
+            <TextView
+                android:id="@+id/tv_person"
+                style="@style/app_text_inwhite"
+                android:layout_width="@dimen/layout_60dp"
+                android:layout_height="wrap_content"
+                android:text="@string/check_person" />
 
-            <View style="@style/fg_line_style" />
+            <EditText
+                android:id="@+id/et_person"
+                android:layout_width="@dimen/layout_0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/layout_10dp"
+                android:layout_weight="1"
+                android:background="@null"
+                android:selectAllOnFocus="true"
+                android:singleLine="true"
+                android:textColor="@color/black_32"
+                android:textCursorDrawable="@drawable/et_cursor_yellow"
+                android:textSize="@dimen/textSize_14sp" />
+        </LinearLayout>
 
-            <LinearLayout
-                android:id="@+id/ll_data"
-                style="@style/itemstyle"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+        <View style="@style/fg_line_style" />
 
-                <TextView
-                    android:id="@+id/tv_data"
-                    android:layout_width="@dimen/layout_70dp"
-                    android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:text="@string/plan_data"
-                    style="@style/app_text_inwhite" />
+        <LinearLayout
+            android:id="@+id/ll_data"
+            style="@style/itemstyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
-                <EditText
-                    android:id="@+id/et_data"
-                    android:layout_width="@dimen/layout_0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="@dimen/layout_10dp"
-                    android:layout_weight="1"
-                    android:background="@null"
-                    android:selectAllOnFocus="true"
-                    android:singleLine="true"
-                    android:textColor="@color/black_32"
-                    android:textCursorDrawable="@drawable/et_cursor_yellow"
-                    android:textSize="@dimen/textSize_14sp" />
+            <TextView
+                android:id="@+id/tv_data"
+                style="@style/app_text_inwhite"
+                android:layout_width="@dimen/layout_60dp"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:text="@string/plan_data" />
 
-                <ImageView
-                    android:id="@+id/iv_date"
-                    android:layout_width="@dimen/layout_30dp"
-                    android:layout_height="@dimen/layout_20dp"
-                    android:src="@drawable/time" />
+            <EditText
+                android:id="@+id/et_data"
+                android:layout_width="@dimen/layout_0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/layout_10dp"
+                android:layout_weight="1"
+                android:background="@null"
+                android:selectAllOnFocus="true"
+                android:singleLine="true"
+                android:textColor="@color/black_32"
+                android:textCursorDrawable="@drawable/et_cursor_yellow"
+                android:textSize="@dimen/textSize_14sp" />
 
-            </LinearLayout>
-
-            <View style="@style/fg_line_style" />
-
-            <LinearLayout
-                android:id="@+id/ll_person"
-                style="@style/itemstyle"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <TextView
-                    android:id="@+id/tv_person"
-                    android:layout_width="@dimen/layout_70dp"
-                    android:layout_height="wrap_content"
-                    android:text="@string/check_person"
-                    style="@style/app_text_inwhite"/>
-
-                <EditText
-                    android:id="@+id/et_person"
-                    android:layout_width="@dimen/layout_0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="@dimen/layout_10dp"
-                    android:layout_weight="1"
-                    android:background="@null"
-                    android:selectAllOnFocus="true"
-                    android:singleLine="true"
-                    android:textColor="@color/black_32"
-                    android:textCursorDrawable="@drawable/et_cursor_yellow"
-                    android:textSize="@dimen/textSize_14sp" />
-            </LinearLayout>
-
-            <View style="@style/fg_line_style" />
+            <ImageView
+                android:id="@+id/iv_date"
+                android:layout_width="@dimen/layout_30dp"
+                android:layout_height="@dimen/layout_20dp"
+                android:src="@drawable/time" />
 
         </LinearLayout>
+
+        <View style="@style/fg_line_style" />
 
         <Button
             android:id="@+id/btn_search_sure"
             android:layout_width="match_parent"
             android:layout_height="@dimen/layout_40dp"
-            android:layout_marginBottom="@dimen/layout_15dp"
+            android:layout_marginBottom="@dimen/layout_10dp"
             android:layout_marginLeft="@dimen/layout_10dp"
             android:layout_marginRight="@dimen/layout_10dp"
+            android:layout_marginTop="@dimen/layout_10dp"
             android:background="@drawable/accordingmaterialtop_sharp"
             android:text="@string/label_sure"
             android:textColor="@color/WHITE"

@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="@color/white"
     android:orientation="vertical"
-    tools:context="digiwin.smartdepott100.module.activity.produce.distribute.DistributeActivity">
+    tools:context="digiwin.smartdepott100.module.activity.stock.postallocate.PostAllocateActivity">
 
     <include layout="@layout/activity_title_toolbar_bar"></include>
 
@@ -27,8 +27,6 @@
             android:id="@+id/ll_search_input"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/layout_10dp"
-            android:layout_marginRight="@dimen/layout_10dp"
             android:background="@drawable/radiuswhiteback"
             android:orientation="vertical">
 

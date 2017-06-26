@@ -38,7 +38,7 @@
                     <TextView
                         android:id="@+id/tv_locator"
                         style="@style/app_text_inwhite"
-                        android:layout_width="@dimen/layout_50dp"
+                        android:layout_width="@dimen/layout_60dp"
                         android:layout_height="wrap_content"
                         android:layout_centerVertical="true"
                         android:text="@string/locator" />
@@ -73,7 +73,7 @@
                     <TextView
                         android:id="@+id/tv_barcode"
                         style="@style/app_text_inwhite"
-                        android:layout_width="@dimen/layout_50dp"
+                        android:layout_width="@dimen/layout_60dp"
                         android:layout_height="wrap_content"
                         android:layout_centerVertical="true"
                         android:text="@string/barcode_no" />
@@ -102,7 +102,7 @@
                     <TextView
                         android:id="@+id/tv_number"
                         style="@style/app_text_inwhite"
-                        android:layout_width="@dimen/layout_50dp"
+                        android:layout_width="@dimen/layout_60dp"
                         android:layout_height="wrap_content"
                         android:layout_centerVertical="true"
                         android:text="@string/num" />
@@ -133,7 +133,7 @@
                     <TextView
                         android:id="@+id/textView7"
                         style="@style/app_text_inwhite"
-                        android:layout_width="@dimen/layout_50dp"
+                        android:layout_width="@dimen/layout_60dp"
                         android:layout_height="wrap_content"
                         android:layout_centerVertical="true"
                         android:text="@string/scaned_numb" />

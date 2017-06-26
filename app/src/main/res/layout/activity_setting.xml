@@ -62,7 +62,7 @@
                 android:background="@color/gray_f0"></View>
 
             <LinearLayout
-                android:id="@+id/ll_operatingCenterSetting"
+                android:id="@+id/ll_ent_setting"
                 style="@style/SettingLinearLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -79,12 +79,48 @@
                     android:layout_marginLeft="@dimen/layout_5dp"
                     android:layout_weight="1"
                     android:gravity="left"
-                    android:text="@string/operating_center"
+                    android:text="@string/enterprise"
                     android:textColor="@color/black_32"
                     android:textSize="@dimen/textSize_14sp" />
 
                 <TextView
-                    android:id="@+id/tv_operatingCenterSetting"
+                    android:id="@+id/tv_ent_setting"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/red50"
+                    android:textSize="@dimen/textSize_14sp" />
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/layout_0.5dp"
+                android:background="@color/gray_f0"></View>
+
+            <LinearLayout
+                android:id="@+id/ll_site"
+                style="@style/SettingLinearLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="@dimen/layout_20dp"
+                    android:layout_height="@dimen/layout_20dp"
+                    android:src="@mipmap/center" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/layout_5dp"
+                    android:layout_weight="1"
+                    android:gravity="left"
+                    android:text="@string/site"
+                    android:textColor="@color/black_32"
+                    android:textSize="@dimen/textSize_14sp" />
+
+                <TextView
+                    android:id="@+id/tv_site"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textColor="@color/red50"
@@ -364,11 +400,46 @@
 
             </LinearLayout>
 
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/layout_0.5dp"
+                android:background="@color/gray_f0" />
+
+            <LinearLayout
+                android:id="@+id/ll_printer_input_ip"
+                style="@style/SettingLinearLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="@dimen/layout_20dp"
+                    android:layout_height="@dimen/layout_20dp"
+                    android:src="@mipmap/setip" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/layout_5dp"
+                    android:layout_weight="1"
+                    android:gravity="left"
+                    android:text="@string/printer_ip"
+                    android:textColor="@color/black_32"
+                    android:textSize="@dimen/textSize_14sp" />
+
+                <TextView
+                    android:id="@+id/tv_printer_ip"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/red50"
+                    android:textSize="@dimen/textSize_14sp" />
+
+            </LinearLayout>
 
             <View
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/layout_0.5dp"
-                android:background="@color/gray_f0"></View>
+                android:background="@color/gray_f0" />
 
             <RelativeLayout
                 android:id="@+id/rl_versionsSetting"

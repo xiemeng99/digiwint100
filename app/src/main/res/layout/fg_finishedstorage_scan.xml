@@ -25,11 +25,11 @@
                 android:layout_marginTop="@dimen/layout_6dp"
                 android:background="@drawable/allscanedit_bg"
                 android:orientation="vertical"
-                android:padding="@dimen/layout_5dp">
+                android:padding="@dimen/layout_7dp">
 
                 <LinearLayout
                     android:id="@+id/ll_scan_locator"
-                    style="@style/itemstyle"
+                    style="@style/search_scan_style"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
 
@@ -60,11 +60,11 @@
                         android:button="@drawable/lock_checkbox" />
                 </LinearLayout>
 
-                <View style="@style/fg_line_style" />
+                <View style="@style/ry_line_style" />
 
                 <LinearLayout
                     android:id="@+id/ll_scan_barcode"
-                    style="@style/itemstyle"
+                    style="@style/search_scan_style"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
 
@@ -89,11 +89,11 @@
                         android:textSize="@dimen/textSize_14sp" />
                 </LinearLayout>
 
-                <View style="@style/fg_line_style" />
+                <View style="@style/ry_line_style" />
 
                 <LinearLayout
                     android:id="@+id/ll_input_num"
-                    style="@style/itemstyle"
+                    style="@style/search_scan_style"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
 
@@ -120,11 +120,11 @@
                         android:textSize="@dimen/textSize_14sp" />
                 </LinearLayout>
 
-                <View style="@style/fg_line_style" />
+                <View style="@style/ry_line_style" />
 
                 <LinearLayout
                     android:id="@+id/ll_hasScan"
-                    style="@style/itemstyle"
+                    style="@style/search_scan_style"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
 
@@ -151,7 +151,7 @@
             <include
                 android:id="@+id/includedetail"
                 layout="@layout/show_playdetail_layout"
-                android:visibility="gone"></include>
+                android:visibility="gone"/>
         </RelativeLayout>
     </ScrollView>
 

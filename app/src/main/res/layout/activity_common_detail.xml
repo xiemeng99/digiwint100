@@ -36,16 +36,15 @@
                     android:button="@drawable/all_checkbox" />
 
                 <TextView
-                    android:id="@+id/tv_item_no"
-                    android:layout_width="match_parent"
+                    android:layout_width="@dimen/layout_30dp"
                     android:layout_height="wrap_content"
                     android:text="@string/item_no"
                     android:textColor="@color/red50" />
 
                 <TextView
-                    android:layout_width="@dimen/layout_70dp"
+                    android:id="@+id/tv_item_no"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@string/item_no"
                     android:textColor="@color/red50" />
 
             </LinearLayout>
@@ -57,7 +56,7 @@
                 android:id="@+id/ry_list"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginLeft="@dimen/layout_25dp"
+                android:layout_marginLeft="@dimen/layout_10dp"
                 android:layout_marginRight="@dimen/layout_10dp" />
         </LinearLayout>
     </LinearLayout>

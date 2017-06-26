@@ -76,7 +76,7 @@
                         android:background="@null"
                         android:hint="@string/input_num"
                         android:inputType="numberDecimal"
-                        android:textColor="@color/black_32"
+                        style="@style/text_hint_style"
                         android:textCursorDrawable="@drawable/et_cursor_yellow"
                         android:textSize="@dimen/textSize_14sp" />
                 </LinearLayout>

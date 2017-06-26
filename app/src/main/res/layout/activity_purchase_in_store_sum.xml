@@ -32,16 +32,16 @@
                 android:background="@drawable/accordingmaterialtop_pink_sharp"
                 android:focusable="true"
                 android:orientation="vertical"
-                android:padding="@dimen/layout_5dp">
+                android:padding="@dimen/layout_7dp">
 
                 <LinearLayout
-                    style="@style/itemstyle"
+                    style="@style/ry_sum_itemstyle"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal">
 
                     <TextView
-                        android:layout_width="wrap_content"
+                        android:layout_width="@dimen/layout_60dp"
                         android:layout_height="wrap_content"
                         android:gravity="center_vertical"
                         android:text="@string/post_material_order"
@@ -51,14 +51,24 @@
                         android:id="@+id/tv_head_post_order"
                         android:layout_width="@dimen/layout_0dp"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="@dimen/layout_5dp"
+                        android:layout_marginLeft="@dimen/layout_3dp"
                         android:layout_weight="3"
                         style="@style/ser_text_ingreen" />
 
+
+                </LinearLayout>
+
+                <View style="@style/ry_line_style"/>
+
+                <LinearLayout
+                    style="@style/ry_sum_itemstyle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
                     <TextView
-                        android:layout_width="wrap_content"
+                        android:layout_width="@dimen/layout_60dp"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="@dimen/layout_5dp"
                         android:gravity="center_vertical"
                         android:text="@string/data"
                         style="@style/app_text_ingreen"  />
@@ -67,21 +77,20 @@
                         android:id="@+id/tv_head_plan_date"
                         android:layout_width="@dimen/layout_0dp"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="@dimen/layout_5dp"
-                        android:layout_weight="2"
+                        android:layout_marginLeft="@dimen/layout_3dp"
+                        android:layout_weight="1"
                         style="@style/ser_text_ingreen"/>
                 </LinearLayout>
-
-                <View style="@style/act_line_style"></View>
+                <View style="@style/ry_line_style"/>
 
                 <LinearLayout
-                    style="@style/itemstyle"
+                    style="@style/ry_sum_itemstyle"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal">
 
                     <TextView
-                        android:layout_width="wrap_content"
+                        android:layout_width="@dimen/layout_60dp"
                         android:layout_height="wrap_content"
                         android:gravity="center_vertical"
                         android:text="@string/supplier"
@@ -91,7 +100,7 @@
                         android:id="@+id/tv_head_provider"
                         android:layout_width="@dimen/layout_0dp"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="@dimen/layout_5dp"
+                        android:layout_marginLeft="@dimen/layout_3dp"
                         android:layout_weight="1"
                         style="@style/ser_text_ingreen" />
                 </LinearLayout>

@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginLeft="@dimen/layout_50dp"
+    android:layout_marginRight="@dimen/layout_50dp"
+    android:background="@drawable/exit_dialog_background"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/layout_40dp"
+        android:padding="@dimen/layout_10dp"
+        android:layout_marginTop="@dimen/layout_6dp"
+        android:gravity="center_vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="@string/item_no"
+            android:textColor="@color/D_GREEN"
+            android:textSize="@dimen/textSize_16sp" />
+        <TextView
+            android:id="@+id/tv_material"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:textColor="@color/D_GREEN"
+            android:layout_marginLeft="@dimen/layout_10dp"
+            android:textSize="@dimen/textSize_16sp" />
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/layout_10dp"
+        android:gravity="center_vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/weight"
+            android:textSize="@dimen/textSize_16sp" />
+        <EditText
+            android:id="@+id/et_weight"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/D_GREEN"
+            android:inputType="numberDecimal"
+            android:background="@null"
+            android:layout_marginLeft="@dimen/layout_10dp"
+            android:textSize="@dimen/textSize_16sp" />
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/layout_10dp"
+        android:gravity="center_vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/print_number"
+            android:textSize="@dimen/textSize_16sp" />
+        <EditText
+            android:id="@+id/et_print_number"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/D_GREEN"
+            android:inputType="number"
+            android:background="@null"
+            android:layout_marginLeft="@dimen/layout_10dp"
+            android:textSize="@dimen/textSize_16sp" />
+    </LinearLayout>
+
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/layout_50dp"
+        android:orientation="horizontal">
+
+        <RelativeLayout
+            android:layout_width="@dimen/layout_0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1">
+
+            <TextView
+                android:id="@+id/tv_sure"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:layout_marginLeft="@dimen/layout_10dp"
+                android:layout_marginRight="@dimen/layout_10dp"
+                android:background="@drawable/sure_dialogbutton_print_bg"
+                android:gravity="center"
+                android:paddingBottom="@dimen/layout_5dp"
+                android:paddingLeft="@dimen/layout_10dp"
+                android:paddingRight="@dimen/layout_10dp"
+                android:paddingTop="@dimen/layout_5dp"
+                android:text="@string/print_start"
+                android:textColor="@color/white" />
+        </RelativeLayout>
+
+    </LinearLayout>
+
+</LinearLayout>

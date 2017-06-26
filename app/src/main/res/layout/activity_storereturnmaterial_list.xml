@@ -13,7 +13,7 @@
         android:layout_height="@dimen/layout_0dp"
         android:layout_marginTop="@dimen/layout_6dp"
         android:layout_weight="1"
-        android:visibility="gone"></android.support.v7.widget.RecyclerView>
+        android:visibility="gone" />
 
     <LinearLayout
         android:id="@+id/ll_search_input"
@@ -67,7 +67,7 @@
                 android:layout_width="@dimen/layout_70dp"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
-                android:text="@string/supplier_no" />
+                android:text="@string/supplier" />
 
             <EditText
                 android:id="@+id/et_supplier_no"

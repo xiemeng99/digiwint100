@@ -1,12 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/item_ll"
+    style="@style/ry_style"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginTop="@dimen/layout_6dp"
-    android:orientation="vertical"
-    android:paddingLeft="@dimen/layout_10dp"
-    android:paddingRight="@dimen/layout_10dp">
+    android:orientation="vertical">
 
     <LinearLayout
         style="@style/itemstyle"
@@ -18,36 +16,12 @@
             style="@style/app_text_inwhite"
             android:layout_width="@dimen/layout_60dp"
             android:layout_height="wrap_content"
-            android:text="@string/locator" />
+            android:text="@string/purchase_order" />
 
         <TextView
-            android:id="@+id/tv_locator"
+            android:id="@+id/tv_purchase_order"
             style="@style/ser_text_inwhite"
-            android:layout_width="@dimen/layout_0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="2" />
-    </LinearLayout>
-
-    <View
-        android:id="@+id/line_1"
-        style="@style/ry_line_style" />
-
-    <LinearLayout
-        style="@style/itemstyle"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-
-        <TextView
-            style="@style/app_text_inwhite"
-            android:layout_width="@dimen/layout_60dp"
-            android:layout_height="wrap_content"
-            android:text="@string/barcode_no" />
-
-        <TextView
-            android:id="@+id/tv_barcode_no"
-            style="@style/ser_text_inwhite"
-            android:layout_width="264dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content" />
     </LinearLayout>
 
@@ -63,28 +37,33 @@
             style="@style/app_text_inwhite"
             android:layout_width="@dimen/layout_60dp"
             android:layout_height="wrap_content"
-            android:text="@string/rdna_num" />
+            android:text="@string/data" />
 
         <TextView
-            android:id="@+id/tv_rdna_num"
+            android:id="@+id/tv_item_date"
             style="@style/ser_text_inwhite"
-            android:layout_width="@dimen/layout_0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1" />
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+    <View style="@style/ry_line_style" />
+    <LinearLayout
+        style="@style/itemstyle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
 
         <TextView
             style="@style/app_text_inwhite"
             android:layout_width="@dimen/layout_60dp"
             android:layout_height="wrap_content"
-            android:text="@string/actual_yield" />
+            android:text="@string/supplier" />
 
         <TextView
-            android:id="@+id/tv_actual_yield"
+            android:id="@+id/tv_supplier"
             style="@style/ser_text_inwhite"
             android:layout_width="@dimen/layout_0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1" />
+            android:layout_weight="1"
+            android:layout_height="wrap_content" />
     </LinearLayout>
 
-    <View style="@style/fifo_line_style" />
 </LinearLayout>

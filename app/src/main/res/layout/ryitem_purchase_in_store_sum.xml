@@ -7,7 +7,7 @@
     android:orientation="vertical">
 
     <LinearLayout
-        style="@style/itemstyle"
+        style="@style/ry_sum_itemstyle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
@@ -15,7 +15,7 @@
         <TextView
             android:id="@+id/tv_item_no_string"
             style="@style/app_text_inwhite"
-            android:layout_width="@dimen/layout_50dp"
+            android:layout_width="@dimen/layout_60dp"
             android:layout_height="wrap_content"
             android:text="@string/item_no" />
 
@@ -34,11 +34,10 @@
     </LinearLayout>
 
     <View
-        android:id="@+id/line_2"
         style="@style/ry_line_style" />
 
     <LinearLayout
-        style="@style/itemstyle"
+        style="@style/ry_sum_itemstyle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
@@ -46,7 +45,7 @@
         <TextView
             android:id="@+id/tv_item_name_string"
             style="@style/app_text_inwhite"
-            android:layout_width="@dimen/layout_50dp"
+            android:layout_width="@dimen/layout_60dp"
             android:layout_height="wrap_content"
             android:text="@string/item_name" />
 
@@ -58,11 +57,10 @@
     </LinearLayout>
 
     <View
-        android:id="@+id/line_1"
         style="@style/ry_line_style" />
 
     <LinearLayout
-        style="@style/itemstyle"
+        style="@style/ry_sum_itemstyle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
@@ -70,7 +68,7 @@
         <TextView
             android:id="@+id/tv_item_model_string"
             style="@style/app_text_inwhite"
-            android:layout_width="@dimen/layout_50dp"
+            android:layout_width="@dimen/layout_60dp"
             android:layout_height="wrap_content"
             android:text="@string/model" />
 
@@ -83,11 +81,10 @@
     </LinearLayout>
 
     <View
-        android:id="@+id/line_4"
         style="@style/ry_line_style" />
 
     <LinearLayout
-        style="@style/itemstyle"
+        style="@style/ry_sum_itemstyle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
@@ -95,9 +92,9 @@
         <TextView
             android:id="@+id/tv_wait_recheck_numb_string"
             style="@style/app_text_inwhite"
-            android:layout_width="@dimen/layout_50dp"
+            android:layout_width="@dimen/layout_60dp"
             android:layout_height="wrap_content"
-            android:text="@string/in_storage_number" />
+            android:text="@string/apply_number" />
 
         <TextView
             android:id="@+id/tv_in_storage_number"
@@ -109,7 +106,7 @@
         <TextView
             android:id="@+id/tv_act_send_numb_string"
             style="@style/app_text_inwhite"
-            android:layout_width="@dimen/layout_50dp"
+            android:layout_width="@dimen/layout_60dp"
             android:layout_height="wrap_content"
             android:text="@string/match_number" />
 

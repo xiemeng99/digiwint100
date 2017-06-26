@@ -151,7 +151,7 @@
             <include
                 android:id="@+id/includeDetail"
                 layout="@layout/show_playdetail_layout"
-                android:visibility="gone"></include>
+                android:visibility="gone" />
         </RelativeLayout>
     </ScrollView>
 
