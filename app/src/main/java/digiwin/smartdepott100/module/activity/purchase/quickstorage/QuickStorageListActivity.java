@@ -298,7 +298,7 @@ public class QuickStorageListActivity extends BaseTitleActivity{
     @Override
     protected void initNavigationTitle() {
         super.initNavigationTitle();
-        mName.setText(R.string.title_quickstorage_list);
+        mName.setText(getString(R.string.title_quickstorage)+getString(R.string.list));
         activity = this;
         iv_title_setting.setVisibility(View.VISIBLE);
         iv_title_setting.setImageResource(R.drawable.search);

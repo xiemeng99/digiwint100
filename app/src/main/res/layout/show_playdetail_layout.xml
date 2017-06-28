@@ -6,7 +6,7 @@
     android:layout_below="@id/ll_zx_input"
     android:layout_marginLeft="@dimen/layout_10dp"
     android:layout_marginRight="@dimen/layout_10dp"
-    android:layout_marginTop="@dimen/layout_10dp"
+    android:layout_marginTop="@dimen/layout_6dp"
     android:background="@drawable/red_scandetail_bg"
     android:padding="@dimen/layout_5dp">
 

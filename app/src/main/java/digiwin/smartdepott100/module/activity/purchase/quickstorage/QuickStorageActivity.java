@@ -15,6 +15,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -162,8 +163,7 @@ public class QuickStorageActivity extends BaseFirstModuldeActivity {
             if (msg.what == QUICKSTORAGECODE) {//获取汇总数据
                 showLoadingDialog();
                 ClickItemPutBean putBean = new ClickItemPutBean();
-                putBean.setDoc_no("CNJ-P55-201411070001");
-//                putBean.setDoc_no(String.valueOf(msg.obj));
+                putBean.setDoc_no(String.valueOf(msg.obj));
 //                putBean.setWarehouse_in_no(LoginLogic.getWare());
                 quickStorageLogic.getQuickStorageOrderSumData(putBean, new CommonLogic.GetOrderSumListener() {
                     @Override
@@ -200,7 +200,6 @@ public class QuickStorageActivity extends BaseFirstModuldeActivity {
     }
 
     public void commitData(final List<ListSumBean> checkedList) {
-        LogUtils.e(TAG,"快速入库---------"+checkedList.size());
         final List<Map<String, String>> listMap = ObjectAndMapUtils.getListMap(checkedList);
         quickStorageLogic.commitQuickStorageList(listMap, new CommonLogic.CommitListListener() {
             @Override

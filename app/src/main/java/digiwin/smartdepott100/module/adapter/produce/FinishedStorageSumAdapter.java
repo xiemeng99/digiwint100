@@ -47,12 +47,12 @@ public class FinishedStorageSumAdapter extends BaseRecyclerAdapter<SumShowBean> 
             holder.setTextColor(R.id.tv_scaned_numb, mContext.getResources().getColor(R.color.Base_color));
         } else if (numb1 > numb2) {
             holder.setBackground(R.id.item_ll,R.drawable.yellow_scandetail_bg);
-            holder.setTextColor(R.id.tv_item_no,mContext.getResources().getColor( R.color.outside_yellow));
-            holder.setTextColor(R.id.tv_item_danwei,mContext.getResources().getColor( R.color.outside_yellow));
-            holder.setTextColor(R.id.tv_item_name,mContext.getResources().getColor( R.color.outside_yellow));
-            holder.setTextColor(R.id.tv_item_spec, mContext.getResources().getColor(R.color.outside_yellow));
-            holder.setTextColor(R.id.tv_plan_numb,mContext.getResources().getColor( R.color.outside_yellow));
-            holder.setTextColor(R.id.tv_scaned_numb, mContext.getResources().getColor(R.color.outside_yellow));
+            holder.setTextColor(R.id.tv_item_no,mContext.getResources().getColor( R.color.textfous_yellow));
+            holder.setTextColor(R.id.tv_item_danwei,mContext.getResources().getColor( R.color.textfous_yellow));
+            holder.setTextColor(R.id.tv_item_name,mContext.getResources().getColor( R.color.textfous_yellow));
+            holder.setTextColor(R.id.tv_item_spec, mContext.getResources().getColor(R.color.textfous_yellow));
+            holder.setTextColor(R.id.tv_plan_numb,mContext.getResources().getColor( R.color.textfous_yellow));
+            holder.setTextColor(R.id.tv_scaned_numb, mContext.getResources().getColor(R.color.textfous_yellow));
         } else if (numb1 ==numb2) {
             holder.setBackground(R.id.item_ll,R.drawable.green_scandetail_bg);
             holder.setTextColor(R.id.tv_item_no, mContext.getResources().getColor(R.color.green1b));

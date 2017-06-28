@@ -215,7 +215,7 @@ public class PutInStoreActivity extends BaseTitleActivity {
     @Override
     protected void initNavigationTitle() {
         super.initNavigationTitle();
-        mName.setText(R.string.put_in_store);
+        mName.setText(getString(R.string.put_in_store)+getString(R.string.list));
         iv_title_setting.setVisibility(View.VISIBLE);
         iv_title_setting.setImageResource(R.drawable.search);
     }

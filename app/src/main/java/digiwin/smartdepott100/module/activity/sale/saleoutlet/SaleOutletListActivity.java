@@ -236,7 +236,7 @@ public class SaleOutletListActivity extends BaseTitleActivity {
     @Override
     protected void initNavigationTitle() {
         super.initNavigationTitle();
-        mName.setText(R.string.saleoutlet);
+        mName.setText(getString(R.string.saleoutlet)+getString(R.string.list));
         search.setVisibility(View.VISIBLE);
         search.setImageResource(R.drawable.search);
         isSearching = true;

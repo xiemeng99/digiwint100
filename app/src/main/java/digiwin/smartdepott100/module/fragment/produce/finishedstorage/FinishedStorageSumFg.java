@@ -75,7 +75,7 @@ public class FinishedStorageSumFg extends BaseFragment {
         pactivity = (FinishedStorageActivity) activity;
         FullyLinearLayoutManager linearLayoutManager = new FullyLinearLayoutManager(activity);
         ryList.setLayoutManager(linearLayoutManager);
-       initData();
+        initData();
     }
 
 

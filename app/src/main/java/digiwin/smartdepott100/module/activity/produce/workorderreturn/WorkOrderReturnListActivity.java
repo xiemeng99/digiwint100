@@ -213,7 +213,7 @@ public class WorkOrderReturnListActivity extends BaseTitleActivity {
     @Override
     protected void initNavigationTitle() {
         super.initNavigationTitle();
-        mName.setText(getString(R.string.title_worksupplement)+""+getString(R.string.list));
+        mName.setText(getString(R.string.work_order_return)+""+getString(R.string.list));
         search.setVisibility(View.VISIBLE);
         search.setImageResource(R.drawable.search);
         isSearching = true;

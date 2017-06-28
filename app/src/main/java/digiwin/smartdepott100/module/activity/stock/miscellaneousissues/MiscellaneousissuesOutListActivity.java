@@ -242,7 +242,6 @@ public class MiscellaneousissuesOutListActivity extends BaseTitleActivity {
             if (null != sumShowBeanList && sumShowBeanList.size() > 0) {
                 ll_search_dialog.setVisibility(View.GONE);
                 scrollview.setVisibility(View.VISIBLE);
-                mName.setText(getString(R.string.filter_result_list));
                 adapter = new MiscellaneousissuesOutAdapter(mactivity, sumShowBeanList);
                 ryList.setAdapter(adapter);
                 onItemClick();
@@ -272,7 +271,7 @@ public class MiscellaneousissuesOutListActivity extends BaseTitleActivity {
     @Override
     protected void initNavigationTitle() {
         super.initNavigationTitle();
-        mName.setText(getString(R.string.miscellaneous_issues_out)+getString(R.string.condition_filter));
+        mName.setText(getString(R.string.miscellaneous_issues_out_list));
         iv_title_setting.setVisibility(View.VISIBLE);
         iv_title_setting.setImageResource(R.drawable.search);
         ivScan.setVisibility(View.VISIBLE);

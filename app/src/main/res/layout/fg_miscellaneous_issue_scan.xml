@@ -19,7 +19,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/ll_distribute_input"
-                android:layout_marginBottom="@dimen/layout_1dp"
+                android:layout_marginBottom="@dimen/layout_0dp"
                 android:layout_marginLeft="@dimen/layout_10dp"
                 android:layout_marginRight="@dimen/layout_10dp"
                 android:layout_marginTop="@dimen/layout_6dp"

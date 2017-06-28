@@ -239,13 +239,11 @@ public class StoreReturnMaterialListActivity extends BaseTitleActivity {
             isSearching=false;
             ryList.setVisibility(View.VISIBLE);
             llSearchInput.setVisibility(View.GONE);
-            mName.setText(R.string.store_return_material_list);
             return;
         } else {
             isSearching=true;
             ryList.setVisibility(View.GONE);
             llSearchInput.setVisibility(View.VISIBLE);
-            mName.setText(R.string.filter_condition);
         }
     }
 
@@ -259,7 +257,7 @@ public class StoreReturnMaterialListActivity extends BaseTitleActivity {
     protected void initNavigationTitle() {
         super.initNavigationTitle();
         activity = this;
-        mName.setText(R.string.filter_condition);
+        mName.setText(getString(R.string.store_returnmaterial)+getString(R.string.list));
         ivScan.setVisibility(View.GONE);
         search.setVisibility(View.VISIBLE);
         search.setImageResource(R.drawable.search);

@@ -53,7 +53,7 @@
         android:layout_gravity="center_vertical|left"
         android:clickable="true"
         android:visibility="gone"
-        android:src="@mipmap/scan"
+        android:src="@mipmap/change_allot"
         android:layout_marginLeft="@dimen/layout_10dp"
         android:gravity="center_vertical"
         android:textColor="@color/white" />

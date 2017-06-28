@@ -1,12 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <litepal>
     <dbname value="digiwin.db" />
-    <version value="2" />
+    <version value="3" />
     <list>
        <!--写入对应实体类的完整包名及类名-->
         <mapping class="digiwin.smartdepott100.litepal.Test"></mapping>
         <mapping class="digiwin.smartdepott100.login.bean.AccoutBean"></mapping>
         <mapping class="digiwin.smartdepott100.main.bean.StorageBean"></mapping>
         <mapping class="digiwin.smartdepott100.login.bean.EntSiteBean"></mapping>
+        <mapping class="digiwin.smartdepott100.module.bean.dailywork.ProcedureEmployeeBean"></mapping>
+        <mapping class="digiwin.smartdepott100.module.bean.dailywork.ProcedureDevMouKniBean"></mapping>
+        <mapping class="digiwin.smartdepott100.module.bean.dailywork.ProcedureCheckoutBadResBean"></mapping>
     </list>
 </litepal>

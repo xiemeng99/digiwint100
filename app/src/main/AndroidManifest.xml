@@ -57,9 +57,19 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name="digiwin.smartdepott100.main.activity.MainActivity"></activity>
+        <activity android:name=".main.activity.MainActivity" />
+        <!-- <activity -->
+        <!-- android:name="digiwin.futai.main.activity.MainActivity" -->
+        <!-- android:theme="@style/SplashTheme"> -->
+        <!-- <intent-filter> -->
+        <!-- <action android:name="android.intent.action.MAIN" /> -->
+
+
+        <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
+        <!-- </intent-filter> -->
+        <!-- </activity> -->
         <activity
-            android:name="digiwin.smartdepott100.login.activity.WelcomeGuideActivity"
+            android:name=".login.activity.WelcomeGuideActivity"
             android:theme="@style/SplashTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -67,246 +77,262 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="digiwin.smartdepott100.main.activity.UserInfoActivity" />
-        <activity android:name="digiwin.smartdepott100.main.activity.SettingActivity" />
+        <activity android:name=".main.activity.UserInfoActivity" />
+        <activity android:name=".main.activity.SettingActivity" />
         <activity
-            android:name="digiwin.smartdepott100.module.test.TestModuleActivity"
+            android:name=".module.test.TestModuleActivity"
             android:windowSoftInputMode="stateAlwaysHidden|adjustPan" />
         <activity
-            android:name="digiwin.smartdepott100.module.activity.produce.finishstorage.FinishedStorageActivity"
+            android:name=".module.activity.produce.finishstorage.FinishedStorageActivity"
             android:configChanges="keyboardHidden|screenSize"
-            android:windowSoftInputMode="stateAlwaysHidden|adjustPan" >
+            android:windowSoftInputMode="stateAlwaysHidden|adjustPan">
             <intent-filter>
-                <action android:name="android.intent.actiont100.digiwin.FinishedStorageActivity" />
+                <action android:name="android.intent.actiont100.smartdepot.FinishedStorageActivity" />
 
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
         <activity
-            android:name="digiwin.smartdepott100.module.activity.common.CommonDetailActivity"
+            android:name=".module.activity.common.CommonDetailActivity"
             android:windowSoftInputMode="stateAlwaysHidden|adjustPan" />
         <activity
-            android:name="digiwin.smartdepott100.module.activity.produce.distribute.DistributeActivity"
+            android:name=".module.activity.produce.distribute.DistributeActivity"
             android:configChanges="keyboardHidden|screenSize"
-            android:windowSoftInputMode="stateAlwaysHidden|adjustPan" >
+            android:windowSoftInputMode="stateAlwaysHidden|adjustPan">
             <intent-filter>
-                <action android:name="android.intent.actiont100.digiwin.DistributeActivity" />
+                <action android:name="android.intent.actiont100.smartdepot.DistributeActivity" />
 
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
         <activity
-            android:name="digiwin.smartdepott100.module.activity.common.NoComeUnComActivity"
+            android:name=".module.activity.common.NoComeUnComActivity"
             android:windowSoftInputMode="stateAlwaysHidden|adjustPan" />
         <activity
-            android:name="digiwin.smartdepott100.module.activity.common.CommonTwoCommitActivity"
+            android:name=".module.activity.common.CommonTwoCommitActivity"
             android:windowSoftInputMode="stateAlwaysHidden|adjustPan" />
         <activity
             android:name=".login.activity.LoginActivity"
-            android:windowSoftInputMode="stateAlwaysHidden|adjustPan"/>
-
-        <activity android:name="digiwin.smartdepott100.module.activity.produce.transtersreview.TransfersToReviewActivity"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustPan" />
+        <activity
+            android:name=".module.activity.produce.transtersreview.TransfersToReviewActivity"
             android:windowSoftInputMode="stateAlwaysHidden|adjustPan">
             <intent-filter>
-                <action android:name="android.intent.actiont100.digiwin.TransfersToReviewActivity" />
+                <action android:name="android.intent.actiont100.smartdepot.TransfersToReviewActivity" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".module.activity.produce.transtersreview.TransfersToReviewComActivity" />
+
+        <!-- 退料过账 -->
+        <activity
+            android:name=".module.activity.produce.materialreturn.MaterialReturnListActivity"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustPan">
+            <intent-filter>
+                <action android:name="android.intent.actiont100.smartdepot.MaterialReturnListActivity" />
 
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
         <activity
-            android:name="digiwin.smartdepott100.module.activity.produce.transtersreview.TransfersToReviewComActivity"
-            />
-
+            android:name=".module.activity.produce.materialreturn.MaterialReturnActivity"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustPan" />
         <!-- 退料过账 -->
-        <activity android:name="digiwin.smartdepott100.module.activity.produce.materialreturn.MaterialReturnListActivity"
+        <activity
+            android:name=".module.activity.stock.storecheck.StockCheckListActivity"
             android:windowSoftInputMode="stateAlwaysHidden|adjustPan">
             <intent-filter>
-                <action android:name="android.intent.actiont100.digiwin.MaterialReturnListActivity" />
+                <action android:name="android.intent.actiont100.smartdepot.StockCheckListActivity" />
 
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
-        <activity android:name="digiwin.smartdepott100.module.activity.produce.materialreturn.MaterialReturnActivity"
-            android:windowSoftInputMode="stateAlwaysHidden|adjustPan"/>
-        <!-- 退料过账 -->
-        <activity android:name="digiwin.smartdepott100.module.activity.stock.storecheck.StockCheckListActivity"
+        <activity
+            android:name=".module.activity.stock.storecheck.StockCheckActivity"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustPan" />
+        <!-- 直接入库 -->
+        <activity
+            android:name=".module.activity.produce.directstorage.DirectStorageActivity"
             android:windowSoftInputMode="stateAlwaysHidden|adjustPan">
             <intent-filter>
-                <action android:name="android.intent.actiont100.digiwin.StockCheckListActivity" />
-
-                <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
-        </activity>
-        <activity android:name="digiwin.smartdepott100.module.activity.stock.storecheck.StockCheckActivity"
-            android:windowSoftInputMode="stateAlwaysHidden|adjustPan"/>
-        <!--直接入库-->
-        <activity android:name="digiwin.smartdepott100.module.activity.produce.directstorage.DirectStorageActivity"
-            android:windowSoftInputMode="stateAlwaysHidden|adjustPan">
-            <intent-filter>
-                <action android:name="android.intent.actiont100.digiwin.DirectStorageActivity" />
+                <action android:name="android.intent.actiont100.smartdepot.DirectStorageActivity" />
 
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
 
         <!-- 依成品发料汇总 -->
-        <activity android:name="digiwin.smartdepott100.module.activity.produce.accordingmaterial.AccordingMaterialActivity"
+        <activity
+            android:name=".module.activity.produce.accordingmaterial.AccordingMaterialActivity"
             android:windowSoftInputMode="stateAlwaysHidden|adjustPan">
             <intent-filter>
-                <action android:name="android.intent.actiont100.digiwin.AccordingMaterialActivity" />
+                <action android:name="android.intent.actiont100.smartdepot.AccordingMaterialActivity" />
 
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
 
         <!-- 依成品发料扫描 -->
-        <activity android:name = ".module.activity.produce.accordingmaterial.AccordingMaterialScanActivity"
-            android:windowSoftInputMode="stateAlwaysHidden|adjustPan"/>
+        <activity
+            android:name=".module.activity.produce.accordingmaterial.AccordingMaterialScanActivity"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustPan" />
 
         <!-- 采购收获 快速 -->
         <activity
             android:name=".module.activity.purchase.materialreceipt.MaterialReceiptActivity"
-            android:windowSoftInputMode="stateAlwaysHidden|adjustPan"
-            >
+            android:windowSoftInputMode="stateAlwaysHidden|adjustPan">
             <intent-filter>
-                <action android:name="android.intent.actiont100.digiwin.MaterialReceiptActivity" />
-                <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
-        </activity>
+                <action android:name="android.intent.actiont100.smartdepot.MaterialReceiptActivity" />
 
-        <activity android:name="digiwin.smartdepott100.module.activity.board.RcttBoardActivity"
-            android:configChanges="orientation|keyboardHidden|screenSize"
-            >
-            <intent-filter>
-                <action android:name="android.intent.actiont100.digiwin.RcttBoardActivity" />
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
-        <activity android:name="digiwin.smartdepott100.module.activity.board.TctsBoardActivity"
+        <activity
+            android:name=".module.activity.board.RcttBoardActivity"
             android:configChanges="orientation|keyboardHidden|screenSize">
             <intent-filter>
-                <action android:name="android.intent.actiont100.digiwin.TctsBoardActivity" />
+                <action android:name="android.intent.actiont100.smartdepot.RcttBoardActivity" />
+
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
-
-        <activity android:name="digiwin.smartdepott100.module.activity.stock.storeallot.StoreAllotActivity"
-            android:windowSoftInputMode="stateAlwaysHidden|adjustPan" >
-            <intent-filter>
-                <action android:name="android.intent.actiont100.digiwin.StoreAllotActivity" />
-                <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
-        </activity>
-
-        <!-- 依工单发料  -->
         <activity
-            android:name="digiwin.smartdepott100.module.activity.produce.workorder.WorkOrderActivity"
+            android:name=".module.activity.board.TctsBoardActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize">
+            <intent-filter>
+                <action android:name="android.intent.actiont100.smartdepot.TctsBoardActivity" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".module.activity.stock.storeallot.StoreAllotActivity"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustPan">
+            <intent-filter>
+                <action android:name="android.intent.actiont100.smartdepot.StoreAllotActivity" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+
+        <!-- 依工单发料 -->
+        <activity
+            android:name=".module.activity.produce.workorder.WorkOrderActivity"
             android:configChanges="keyboardHidden|screenSize"
-            android:windowSoftInputMode="stateAlwaysHidden|adjustPan" >
+            android:windowSoftInputMode="stateAlwaysHidden|adjustPan">
             <intent-filter>
-                <action android:name="android.intent.actiont100.digiwin.WorkOrderActivity" />
+                <action android:name="android.intent.actiont100.smartdepot.WorkOrderActivity" />
 
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
         <activity
-            android:name="digiwin.smartdepott100.module.activity.produce.workorder.WorkOrderScanActivity"
-            android:windowSoftInputMode="stateAlwaysHidden|adjustPan" >
-        </activity>
+            android:name=".module.activity.produce.workorder.WorkOrderScanActivity"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustPan" />
 
         <!-- 完工入库 -->
         <activity
-            android:name="digiwin.smartdepott100.module.activity.produce.completingstore.CompletingStoreActivity"
-            android:windowSoftInputMode="stateAlwaysHidden|adjustPan" >
-            <intent-filter>
-                <action android:name="android.intent.actiont100.digiwin.CompletingStoreActivity" />
-
-                <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
-        </activity>
-        <!-- 领料过账-->
-        <activity android:name="digiwin.smartdepott100.module.activity.produce.postmaterial.PostMaterialActivity"
+            android:name=".module.activity.produce.completingstore.CompletingStoreActivity"
             android:windowSoftInputMode="stateAlwaysHidden|adjustPan">
             <intent-filter>
-                <action android:name="android.intent.actiont100.digiwin.PostMaterialActivity" />
+                <action android:name="android.intent.actiont100.smartdepot.CompletingStoreActivity" />
 
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
-        <activity android:name="digiwin.smartdepott100.module.activity.produce.postmaterial.PostMaterialSecondActivity"
-            android:windowSoftInputMode="stateAlwaysHidden|adjustPan"/>
-
-        <!-- 采购入库-->
-        <activity android:name="digiwin.smartdepott100.module.activity.purchase.purchaseinstore.PurchaseInStoreActivity"
+        <!-- 领料过账 -->
+        <activity
+            android:name=".module.activity.produce.postmaterial.PostMaterialActivity"
             android:windowSoftInputMode="stateAlwaysHidden|adjustPan">
             <intent-filter>
-                <action android:name="android.intent.actiont100.digiwin.PurchaseInStoreActivity" />
+                <action android:name="android.intent.actiont100.smartdepot.PostMaterialActivity" />
 
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
-        <activity android:name="digiwin.smartdepott100.module.activity.purchase.purchaseinstore.PurchaseInStoreSecondActivity"
-            android:windowSoftInputMode="stateAlwaysHidden|adjustPan"/>
+        <activity
+            android:name=".module.activity.produce.postmaterial.PostMaterialSecondActivity"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustPan" />
+
+        <!-- 采购入库 -->
+        <activity
+            android:name=".module.activity.purchase.purchaseinstore.PurchaseInStoreListActivity"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustPan">
+            <intent-filter>
+                <action android:name="android.intent.actiont100.smartdepot.PurchaseInStoreListActivity" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".module.activity.purchase.purchaseinstore.PurchaseInStoreActivity"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustPan" />
 
         <!-- 入库上架 待办事项 -->
         <activity
-            android:name="digiwin.smartdepott100.module.activity.produce.putinstore.PutInStoreActivity"
+            android:name=".module.activity.produce.putinstore.PutInStoreActivity"
             android:configChanges="keyboardHidden|screenSize"
-            android:windowSoftInputMode="stateAlwaysHidden|adjustPan" >
-            <intent-filter>
-                <action android:name="android.intent.actiont100.digiwin.PutInStoreActivity" />
-                <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
-        </activity>
-        <activity
-            android:name="digiwin.smartdepott100.module.activity.produce.putinstore.PutInStoreSecondActivity"
-            android:windowSoftInputMode="stateAlwaysHidden|adjustPan" />
-        <activity
-            android:name="digiwin.smartdepott100.module.activity.sale.saleoutlet.SaleOutletListActivity"
-            android:windowSoftInputMode="stateAlwaysHidden|adjustPan" >
-            <intent-filter>
-                <action android:name="android.intent.actiont100.digiwin.SaleOutletListActivity" />
-                <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
-        </activity>
-        <activity
-            android:name="digiwin.smartdepott100.module.activity.sale.saleoutlet.SaleOutletActivity"
-            android:windowSoftInputMode="stateAlwaysHidden|adjustPan"/>
-        <!--销售退货-->
-        <activity
-            android:name="digiwin.smartdepott100.module.activity.sale.salereturn.SaleReturnActivity"
-            android:windowSoftInputMode="stateAlwaysHidden|adjustPan" >
-            <intent-filter>
-                <action android:name="android.intent.actiont100.digiwin.SaleReturnActivity" />
-                <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
-        </activity>
-        <activity
-            android:name="digiwin.smartdepott100.module.activity.sale.salereturn.SaleReturnSecondActivity"
-            android:windowSoftInputMode="stateAlwaysHidden|adjustPan"/>
-
-        <activity
-            android:name="digiwin.smartdepott100.module.activity.stock.miscellaneousissues.MiscellaneousissuesOutActivity"
-            android:windowSoftInputMode="stateAlwaysHidden|adjustPan" >
-            <intent-filter>
-                <action android:name="android.intent.actiont100.digiwin.MiscellaneousissuesOutActivity" />
-                <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
-        </activity>
-        <activity
-            android:name="digiwin.smartdepott100.module.activity.stock.miscellaneousissues.MiscellaneousissuesInActivity"
-            android:windowSoftInputMode="stateAlwaysHidden|adjustPan" >
-            <intent-filter>
-                <action android:name="android.intent.actiont100.digiwin.MiscellaneousissuesInActivity" />
-                <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
-        </activity>
-
-        <!-- 工序报工-->
-        <activity android:name="digiwin.smartdepott100.module.activity.dailywork.processreporting.ProcessReportingActivity"
             android:windowSoftInputMode="stateAlwaysHidden|adjustPan">
             <intent-filter>
-                <action android:name="android.intent.actiont100.digiwin.ProcessReportingActivity" />
+                <action android:name="android.intent.actiont100.smartdepot.PutInStoreActivity" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".module.activity.produce.putinstore.PutInStoreSecondActivity"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustPan" />
+        <activity
+            android:name=".module.activity.sale.saleoutlet.SaleOutletListActivity"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustPan">
+            <intent-filter>
+                <action android:name="android.intent.actiont100.smartdepot.SaleOutletListActivity" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".module.activity.sale.saleoutlet.SaleOutletActivity"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustPan" />
+        <!-- 销售退货 -->
+        <activity
+            android:name=".module.activity.sale.salereturn.SaleReturnActivity"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustPan">
+            <intent-filter>
+                <action android:name="android.intent.actiont100.smartdepot.SaleReturnActivity" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".module.activity.sale.salereturn.SaleReturnSecondActivity"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustPan" />
+        <activity
+            android:name=".module.activity.stock.miscellaneousissues.MiscellaneousissuesOutActivity"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustPan">
+            <intent-filter>
+                <action android:name="android.intent.actiont100.smartdepot.MiscellaneousissuesOutActivity" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".module.activity.stock.miscellaneousissues.MiscellaneousissuesInActivity"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustPan">
+            <intent-filter>
+                <action android:name="android.intent.actiont100.smartdepot.MiscellaneousissuesInActivity" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+
+        <!-- 工序报工 -->
+        <activity
+            android:name=".module.activity.dailywork.processreporting.ProcessReportingActivity"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustPan">
+            <intent-filter>
+                <action android:name="android.intent.actiont100.smartdepot.ProcessReportingActivity" />
 
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
@@ -314,363 +340,543 @@
 
         <!-- 依成品发料 新FIFO -->
         <activity
-            android:name="digiwin.smartdepott100.module.activity.produce.accordingmaterial.AccordingMaterialScanNewActivity"
+            android:name=".module.activity.produce.accordingmaterial.AccordingMaterialScanNewActivity"
             android:windowSoftInputMode="stateAlwaysHidden|adjustPan" />
 
-        <!-- 采购收货扫描-->
+        <!-- 采购收货扫描 -->
         <activity
-            android:name="digiwin.smartdepott100.module.activity.purchase.purchasegoodsscan.PurchaseGoodsScanActivity"
-            android:windowSoftInputMode="stateAlwaysHidden|adjustPan" >
-            <intent-filter>
-                <action android:name="android.intent.actiont100.digiwin.PurchaseGoodsScanActivity" />
-                <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
-        </activity>
-        <activity
-            android:name=".module.activity.purchase.purchasegoodsscan.PurchaseGoodsScanSecondActivity"
-            android:windowSoftInputMode="stateAlwaysHidden|adjustPan" >
-        </activity>
-        <!-- 收货检验-->
-        <activity
-            android:name="digiwin.smartdepott100.module.activity.purchase.purchasecheck.PurchaseCheckActivity"
+            android:name=".module.activity.purchase.purchasegoodsscan.PurchaseGoodsScanListActivity"
             android:windowSoftInputMode="stateAlwaysHidden|adjustPan">
             <intent-filter>
-                <action android:name="android.intent.actiont100.digiwin.PurchaseCheckActivity" />
+                <action android:name="android.intent.actiont100.smartdepot.PurchaseGoodsScanListActivity" />
+
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
-
-        <!-- 捡料出货清单-->
-
         <activity
-            android:name="digiwin.smartdepott100.module.activity.sale.pickupshipment.PickUpShipmentListActivity"
+            android:name=".module.activity.purchase.purchasegoodsscan.PurchaseGoodsScanActivity"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustPan" />
+        <!-- 收货检验 -->
+        <activity
+            android:name=".module.activity.purchase.purchasecheck.PurchaseCheckActivity"
             android:windowSoftInputMode="stateAlwaysHidden|adjustPan">
             <intent-filter>
-                <action android:name="android.intent.actiont100.digiwin.PickUpShipmentListActivity" />
+                <action android:name="android.intent.actiont100.smartdepot.PurchaseCheckActivity" />
+
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
 
-        <!-- 捡料出货-->
-        <activity
-            android:name="digiwin.smartdepott100.module.activity.sale.pickupshipment.PickUpShipmentActivity"
-            android:windowSoftInputMode="stateAlwaysHidden|adjustPan"/>
-        <!-- 二次提交-->
-        <activity
-            android:name="digiwin.smartdepott100.module.activity.sale.pickupshipment.PickUpShipmentCommitActivity"
-            android:windowSoftInputMode="stateAlwaysHidden|adjustPan"/>
-
-
+        <!-- 捡料出货清单 -->
 
         <activity
-        android:name="digiwin.smartdepott100.module.activity.produce.enchaseprint.EnchasePrintActivity"
-        android:windowSoftInputMode="stateAlwaysHidden|adjustPan">
-            <intent-filter>
-                <action android:name="android.intent.actiont100.digiwin.EnchasePrintActivity" />
-                <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
-        </activity>
-
-        <activity
-            android:name="digiwin.smartdepott100.module.activity.stock.storequery.StoreQueryActivity"
+            android:name=".module.activity.sale.pickupshipment.PickUpShipmentListActivity"
             android:windowSoftInputMode="stateAlwaysHidden|adjustPan">
             <intent-filter>
-                <action android:name="android.intent.actiont100.digiwin.StoreQueryActivity" />
+                <action android:name="android.intent.actiont100.smartdepot.PickUpShipmentListActivity" />
+
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
 
+        <!-- 捡料出货 -->
         <activity
-            android:name="digiwin.smartdepott100.module.activity.purchase.purchasecheck.BadReasonActivity"
+            android:name=".module.activity.sale.pickupshipment.PickUpShipmentActivity"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustPan" />
+        <!-- 二次提交 -->
+        <activity
+            android:name=".module.activity.sale.pickupshipment.PickUpShipmentCommitActivity"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustPan" />
+        <activity
+            android:name=".module.activity.produce.enchaseprint.EnchasePrintActivity"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustPan">
+            <intent-filter>
+                <action android:name="android.intent.actiont100.smartdepot.EnchasePrintActivity" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".module.activity.stock.storequery.StoreQueryActivity"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustPan">
+            <intent-filter>
+                <action android:name="android.intent.actiont100.smartdepot.StoreQueryActivity" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".module.activity.purchase.purchasecheck.BadReasonActivity"
             android:screenOrientation="landscape"
             android:windowSoftInputMode="stateAlwaysHidden|adjustPan" />
         <activity
-            android:name="digiwin.smartdepott100.module.activity.stock.movestore.MoveStoreActivity"
+            android:name=".module.activity.stock.movestore.MoveStoreActivity"
             android:windowSoftInputMode="stateAlwaysHidden|adjustPan">
             <intent-filter>
-                <action android:name="android.intent.actiont100.digiwin.MoveStoreActivity" />
+                <action android:name="android.intent.actiont100.smartdepot.MoveStoreActivity" />
+
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
         <activity
-            android:name="digiwin.smartdepott100.module.activity.purchase.purchasecheck.CheckShowImageActivity"
+            android:name=".module.activity.purchase.purchasecheck.CheckShowImageActivity"
             android:screenOrientation="landscape"
             android:windowSoftInputMode="stateAlwaysHidden|adjustPan" />
-
         <activity
-            android:name="digiwin.smartdepott100.module.activity.produce.workorderreturn.WorkOrderReturnListActivity"
-            android:windowSoftInputMode="stateAlwaysHidden|adjustPan" >
-            <intent-filter>
-                <action android:name="android.intent.actiont100.digiwin.WorkOrderReturnListActivity" />
-                <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
-        </activity>
-        <activity
-            android:name="digiwin.smartdepott100.module.activity.produce.workorderreturn.WorkOrderReturnActivity"
-            android:windowSoftInputMode="stateAlwaysHidden|adjustPan"/>
-
-        <activity
-            android:name="digiwin.smartdepott100.module.activity.stock.PrintLabelActivity"
+            android:name=".module.activity.produce.workorderreturn.WorkOrderReturnListActivity"
             android:windowSoftInputMode="stateAlwaysHidden|adjustPan">
             <intent-filter>
-                <action android:name="android.intent.actiont100.digiwin.PrintLabelActivity" />
-                <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
-        </activity>
-        <activity
-            android:name="digiwin.smartdepott100.module.activity.common.HaveSourceUnComActivity"
-            android:windowSoftInputMode="stateAlwaysHidden|adjustPan"/>
-        <activity
-            android:name="digiwin.smartdepott100.module.activity.produce.workorderreturn.WorkOrderReturnCommitActivity"
-            android:windowSoftInputMode="stateAlwaysHidden|adjustPan"/>
+                <action android:name="android.intent.actiont100.smartdepot.WorkOrderReturnListActivity" />
 
-        <!-- 依工单补料-补料清单-->
-        <activity
-            android:name="digiwin.smartdepott100.module.activity.produce.worksupplement.WorkSupplementListActivity"
-            android:windowSoftInputMode="stateAlwaysHidden|adjustPan">
-            <intent-filter>
-                <action android:name="android.intent.actiont100.digiwin.WorkSupplementListActivity" />
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
-        <!-- 产品装箱-->
         <activity
-            android:name="digiwin.smartdepott100.module.activity.stock.productbinning.ProductBinningActivity"
+            android:name=".module.activity.produce.workorderreturn.WorkOrderReturnActivity"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustPan" />
+        <!-- 流转标签打印 -->
+        <activity
+            android:name=".module.activity.stock.printlabel.PrintLabelFlowActivity"
             android:windowSoftInputMode="stateAlwaysHidden|adjustPan">
             <intent-filter>
-                <action android:name="android.intent.actiont100.digiwin.ProductBinningActivity" />
+                <action android:name="android.intent.actiont100.smartdepot.PrintLabelFlowActivity" />
+
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
-        <!-- 产品出箱-->
+        <!-- 成品标签补打 -->
         <activity
-            android:name="digiwin.smartdepott100.module.activity.stock.productoutbox.ProductOutBoxActivity"
+            android:name=".module.activity.stock.printlabel.PrintLabelFinishActivity"
             android:windowSoftInputMode="stateAlwaysHidden|adjustPan">
             <intent-filter>
-                <action android:name="android.intent.actiont100.digiwin.ProductOutBoxActivity" />
+                <action android:name="android.intent.actiont100.smartdepot.PrintLabelFinishActivity" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".module.activity.common.HaveSourceUnComActivity"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustPan" />
+        <activity
+            android:name=".module.activity.produce.workorderreturn.WorkOrderReturnCommitActivity"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustPan" />
+
+        <!-- 依工单补料-补料清单 -->
+        <activity
+            android:name=".module.activity.produce.worksupplement.WorkSupplementListActivity"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustPan">
+            <intent-filter>
+                <action android:name="android.intent.actiont100.smartdepot.WorkSupplementListActivity" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <!-- 产品装箱 -->
+        <activity
+            android:name=".module.activity.stock.productbinning.ProductBinningActivity"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustPan">
+            <intent-filter>
+                <action android:name="android.intent.actiont100.smartdepot.ProductBinningActivity" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <!-- 产品出箱 -->
+        <activity
+            android:name=".module.activity.stock.productoutbox.ProductOutBoxActivity"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustPan">
+            <intent-filter>
+                <action android:name="android.intent.actiont100.smartdepot.ProductOutBoxActivity" />
+
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
 
-        <!-- 依工单补料-->
+        <!-- 依工单补料 -->
         <activity
-            android:name="digiwin.smartdepott100.module.activity.produce.worksupplement.WorkSupplementActivity"
-            android:windowSoftInputMode="stateAlwaysHidden|adjustPan"/>
+            android:name=".module.activity.produce.worksupplement.WorkSupplementActivity"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustPan" />
 
         <!-- 库存交易锁定 -->
         <activity
-            android:name="digiwin.smartdepott100.module.activity.stock.storetranscation.StoreTransLockActivity"
+            android:name=".module.activity.stock.storetranscation.StoreTransLockActivity"
             android:windowSoftInputMode="stateAlwaysHidden|adjustPan">
             <intent-filter>
-                <action android:name="android.intent.actiont100.digiwin.StoreTransLockActivity" />
+                <action android:name="android.intent.actiont100.smartdepot.StoreTransLockActivity" />
+
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
         <!-- 库存交易解锁 -->
         <activity
-            android:name="digiwin.smartdepott100.module.activity.stock.storetranscation.StoreTransUnlockActivity"
+            android:name=".module.activity.stock.storetranscation.StoreTransUnlockActivity"
             android:windowSoftInputMode="stateAlwaysHidden|adjustPan">
             <intent-filter>
-                <action android:name="android.intent.actiont100.digiwin.StoreTransUnlockActivity" />
+                <action android:name="android.intent.actiont100.smartdepot.StoreTransUnlockActivity" />
+
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
         <!-- 库存交易解锁明细 -->
         <activity
-            android:name="digiwin.smartdepott100.module.activity.stock.storetranscation.StoreTransUnLockDetailActivity"
-            android:windowSoftInputMode="stateAlwaysHidden|adjustPan">
-        </activity>
+            android:name=".module.activity.stock.storetranscation.StoreTransUnLockDetailActivity"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustPan" />
         <!-- 仓库退料清单 -->
         <activity
-            android:name="digiwin.smartdepott100.module.activity.stock.store.StoreReturnMaterialListActivity"
+            android:name=".module.activity.stock.store.StoreReturnMaterialListActivity"
             android:windowSoftInputMode="stateAlwaysHidden|adjustPan">
             <intent-filter>
-                <action android:name="android.intent.actiont100.digiwin.StoreReturnMaterialListActivity" />
+                <action android:name="android.intent.actiont100.smartdepot.StoreReturnMaterialListActivity" />
+
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
+        <!-- 采购仓库退料清单 -->
+        <activity
+            android:name=".module.activity.purchase.purchasestore.PurchaseStoreListActivity"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustPan">
+            <intent-filter>
+                <action android:name="android.intent.actiont100.smartdepot.PurchaseStoreListActivity" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".module.activity.purchase.purchasestore.PurchaseStoreActivity"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustPan" />
         <!-- 仓库退料 -->
         <activity
-            android:name="digiwin.smartdepott100.module.activity.stock.store.StoreReturnMaterialActivity"
-            android:windowSoftInputMode="stateAlwaysHidden|adjustPan">
-        </activity>
+            android:name=".module.activity.stock.store.StoreReturnMaterialActivity"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustPan" />
 
-        <!-- 生产超领-超领清单-->
+        <!-- 生产超领-超领清单 -->
         <activity
-            android:name="digiwin.smartdepott100.module.activity.produce.productionleader.ProductionLeaderListActivity"
+            android:name=".module.activity.produce.productionleader.ProductionLeaderListActivity"
             android:windowSoftInputMode="stateAlwaysHidden|adjustPan">
             <intent-filter>
-                <action android:name="android.intent.actiont100.digiwin.ProductionLeaderListActivity" />
+                <action android:name="android.intent.actiont100.smartdepot.ProductionLeaderListActivity" />
+
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
 
-
-        <!--装箱入库-清单-->
+        <!-- 装箱入库-清单 -->
         <activity
             android:name=".module.activity.produce.inbinning.InBinningListActivity"
             android:windowSoftInputMode="stateAlwaysHidden|adjustPan">
             <intent-filter>
-                <action android:name="android.intent.actiont100.digiwin.InBinningListActivity" />
+                <action android:name="android.intent.actiont100.smartdepot.InBinningListActivity" />
+
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
-        <!--装箱入库-->
+        <!-- 装箱入库 -->
         <activity
             android:name=".module.activity.produce.inbinning.InBinningActivity"
-            android:windowSoftInputMode="stateAlwaysHidden|adjustPan"/>
+            android:windowSoftInputMode="stateAlwaysHidden|adjustPan" />
 
-
-        <!-- 生产超领-->
+        <!-- 生产超领 -->
         <activity
-            android:name="digiwin.smartdepott100.module.activity.produce.productionleader.ProductionLeaderActivity"
-            android:windowSoftInputMode="stateAlwaysHidden|adjustPan"/>
+            android:name=".module.activity.produce.productionleader.ProductionLeaderActivity"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustPan" />
 
-        <!-- 快速入库-清单-->
+        <!-- 快速入库-清单 -->
         <activity
-            android:name="digiwin.smartdepott100.module.activity.purchase.quickstorage.QuickStorageListActivity"
+            android:name=".module.activity.purchase.quickstorage.QuickStorageListActivity"
             android:windowSoftInputMode="stateAlwaysHidden|adjustPan">
             <intent-filter>
-                <action android:name="android.intent.actiont100.digiwin.QuickStorageListActivity" />
+                <action android:name="android.intent.actiont100.smartdepot.QuickStorageListActivity" />
+
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
 
-        <!-- 快速入库-->
+        <!-- 快速入库 -->
         <activity
-            android:name="digiwin.smartdepott100.module.activity.purchase.quickstorage.QuickStorageActivity"
-            android:windowSoftInputMode="stateAlwaysHidden|adjustPan"/>
+            android:name=".module.activity.purchase.quickstorage.QuickStorageActivity"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustPan" />
 
         <!-- 扫入扫描 -->
         <activity
-            android:name="digiwin.smartdepott100.module.activity.dailywork.dailworkscan.EntranceActivity"
+            android:name=".module.activity.dailywork.dailworkscan.EntranceActivity"
             android:windowSoftInputMode="stateAlwaysHidden|adjustPan">
             <intent-filter>
-                <action android:name="android.intent.actiont100.digiwin.EntranceActivity" />
+                <action android:name="android.intent.actiont100.smartdepot.EntranceActivity" />
+
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
         <!-- 开工扫描 -->
         <activity
-            android:name="digiwin.smartdepott100.module.activity.dailywork.dailworkscan.StartWorkActivity"
+            android:name=".module.activity.dailywork.dailworkscan.StartWorkActivity"
             android:windowSoftInputMode="stateAlwaysHidden|adjustPan">
             <intent-filter>
-                <action android:name="android.intent.actiont100.digiwin.StartWorkActivity" />
+                <action android:name="android.intent.actiont100.smartdepot.StartWorkActivity" />
+
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
         <!-- 完工扫描 -->
         <activity
-            android:name="digiwin.smartdepott100.module.activity.dailywork.dailworkscan.FinishWorkActivity"
+            android:name=".module.activity.dailywork.dailworkscan.FinishWorkActivity"
             android:windowSoftInputMode="stateAlwaysHidden|adjustPan">
             <intent-filter>
-                <action android:name="android.intent.actiont100.digiwin.FinishWorkActivity" />
+                <action android:name="android.intent.actiont100.smartdepot.FinishWorkActivity" />
+
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
         <!-- 扫出扫描 -->
         <activity
-            android:name="digiwin.smartdepott100.module.activity.dailywork.dailworkscan.StockRemovalActivity"
+            android:name=".module.activity.dailywork.dailworkscan.StockRemovalActivity"
             android:windowSoftInputMode="stateAlwaysHidden|adjustPan">
             <intent-filter>
-                <action android:name="android.intent.actiont100.digiwin.StockRemovalActivity" />
+                <action android:name="android.intent.actiont100.smartdepot.StockRemovalActivity" />
+
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
 
         <!-- 扫码出货列表 -->
         <activity
-            android:name="digiwin.smartdepott100.module.activity.sale.scanout.ScanOutStoreListActivity"
+            android:name=".module.activity.sale.scanout.ScanOutStoreListActivity"
             android:windowSoftInputMode="stateAlwaysHidden|adjustPan">
             <intent-filter>
-                <action android:name="android.intent.actiont100.digiwin.ScanOutStoreListActivity" />
+                <action android:name="android.intent.actiont100.smartdepot.ScanOutStoreListActivity" />
+
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
         <!-- 扫码出货 -->
         <activity
-            android:name="digiwin.smartdepott100.module.activity.sale.scanout.ScanOutStoreActivity"
-            android:windowSoftInputMode="stateAlwaysHidden|adjustPan">
-        </activity>
+            android:name=".module.activity.sale.scanout.ScanOutStoreActivity"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustPan" />
         <!-- 扫码出货二次提交 -->
         <activity
-            android:name="digiwin.smartdepott100.module.activity.sale.scanout.ScanOutCommitActiivty"
-            android:windowSoftInputMode="stateAlwaysHidden|adjustPan">
-        </activity>
+            android:name=".module.activity.sale.scanout.ScanOutCommitActiivty"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustPan" />
         <!-- 扫码出货明细 -->
         <activity
-            android:name="digiwin.smartdepott100.module.activity.sale.scanout.ScanOutDetailActivity"
-            android:windowSoftInputMode="stateAlwaysHidden|adjustPan">
-        </activity>
-        <!-- 产品质量追溯-->
+            android:name=".module.activity.sale.scanout.ScanOutDetailActivity"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustPan" />
+        <!-- 产品质量追溯 -->
         <activity
-            android:name="digiwin.smartdepott100.module.activity.sale.tranceproduct.TraceProductActivity"
+            android:name=".module.activity.sale.tranceproduct.TraceProductActivity"
             android:screenOrientation="landscape"
             android:windowSoftInputMode="stateAlwaysHidden|adjustPan">
             <intent-filter>
-                <action android:name="android.intent.actiont100.digiwin.TraceProductActivity" />
-                <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
-        </activity>
-        <!-- 产品质量追溯明细-->
-        <activity
-            android:name="digiwin.smartdepott100.module.activity.sale.tranceproduct.TraceProductDetailActivity"
-            android:screenOrientation="landscape"
-            android:windowSoftInputMode="stateAlwaysHidden|adjustPan">
-        </activity>
+                <action android:name="android.intent.actiont100.smartdepot.TraceProductActivity" />
 
-        <!-- 调拨过账-->
-        <activity
-            android:name="digiwin.smartdepott100.module.activity.stock.postallocate.PostAllocateActivity"
-            android:windowSoftInputMode="stateAlwaysHidden|adjustPan">
-            <intent-filter>
-                <action android:name="android.intent.actiont100.digiwin.PostAllocateActivity" />
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
-        <!-- 调拨过账扫描-->
+        <!-- 产品质量追溯明细 -->
+        <activity
+            android:name=".module.activity.sale.tranceproduct.TraceProductDetailActivity"
+            android:screenOrientation="landscape"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustPan" />
+
+        <!-- 调拨过账 -->
+        <activity
+            android:name=".module.activity.stock.postallocate.PostAllocateActivity"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustPan">
+            <intent-filter>
+                <action android:name="android.intent.actiont100.smartdepot.PostAllocateActivity" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <!-- 调拨过账扫描 -->
         <activity
             android:name=".module.activity.stock.postallocate.PostAllocateScanActivity"
-            android:windowSoftInputMode="stateAlwaysHidden|adjustPan">
-        </activity>
+            android:windowSoftInputMode="stateAlwaysHidden|adjustPan" />
         <!-- 依成品调拨汇总 -->
-        <activity android:name="digiwin.smartdepott100.module.activity.produce.endproductallot.EndProductAllotActivity"
+        <activity
+            android:name=".module.activity.produce.endproductallot.EndProductAllotActivity"
             android:windowSoftInputMode="stateAlwaysHidden|adjustPan">
             <intent-filter>
-                <action android:name="android.intent.actiont100.digiwin.EndProductAllotActivity" />
+                <action android:name="android.intent.actiont100.smartdepot.EndProductAllotActivity" />
 
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
         <!-- 依成品调拨扫描 -->
-        <activity android:name = "digiwin.smartdepott100.module.activity.produce.endproductallot.EndProductAllotScanActivity"
-            android:windowSoftInputMode="stateAlwaysHidden|adjustPan"/>
-        <!-- PQC检验-->
         <activity
-            android:name="digiwin.smartdepott100.module.activity.purchase.pqccheck.PQCCheckActivity"
-            android:screenOrientation="landscape"
+            android:name=".module.activity.produce.endproductallot.EndProductAllotScanActivity"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustPan" />
+        <!-- PQC检验 -->
+        <activity
+            android:name=".module.activity.purchase.pqccheckout.PQCCheckOutListActivity"
             android:windowSoftInputMode="stateAlwaysHidden|adjustPan">
             <intent-filter>
-                <action android:name="android.intent.actiont100.digiwin.PQCCheckActivity" />
+                <action android:name="android.intent.actiont100.smartdepot.PQCCheckOutListActivity" />
+
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
-        <!-- PQC检验-->
         <activity
-            android:name="digiwin.smartdepott100.module.activity.purchase.pqccheck.PQCValueActivity"
+            android:name=".module.activity.purchase.pqccheckout.PQCCheckOutActivity"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustPan" />
+        <!-- PQC检验 -->
+        <activity
+            android:name=".module.activity.purchase.pqccheck.PQCValueActivity"
             android:screenOrientation="landscape"
-            android:windowSoftInputMode="stateAlwaysHidden|adjustPan">
-        </activity>
-        <activity android:name = "digiwin.smartdepott100.module.activity.common.ChoosePicActivity"
-            android:windowSoftInputMode="stateAlwaysHidden|adjustPan"/>
+            android:windowSoftInputMode="stateAlwaysHidden|adjustPan" />
         <activity
-            android:name="digiwin.smartdepott100.module.activity.produce.linesend.LineSendActivity"
+            android:name=".module.activity.common.ChoosePicActivity"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustPan" />
+        <!-- 线边发料 -->
+        <activity
+            android:name=".module.activity.produce.linesend.LineSendActivity"
             android:windowSoftInputMode="stateAlwaysHidden|adjustPan">
             <intent-filter>
-                <action android:name="android.intent.actiont100.digiwin.LineSendActivity" />
+                <action android:name="android.intent.actiont100.smartdepot.LineSendActivity" />
+
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
+        <!-- 采购收货t100版 -->
+        <activity
+            android:name=".module.activity.purchase.purchasereceiving.PurchaseReceivingActivity"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustPan">
+            <intent-filter>
+                <action android:name="android.intent.actiont100.smartdepot.PurchaseReceivingActivity" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <!-- procedure_movein -->
+        <activity
+            android:name=".module.activity.dailywork.proceduremove.ProcedureMoveinActivity"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustPan">
+            <intent-filter>
+                <action android:name="android.intent.actiont100.smartdepot.ProcedureMoveinActivity" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <!-- procedure_moveout -->
+        <activity
+            android:name=".module.activity.dailywork.proceduremove.ProcedureMoveoutActivity"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustPan">
+            <intent-filter>
+                <action android:name="android.intent.actiont100.smartdepot.ProcedureMoveoutActivity" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <!-- checkin -->
+        <activity
+            android:name=".module.activity.dailywork.procedurecheck.ProcedureCheckinActivity"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustPan">
+            <intent-filter>
+                <action android:name="android.intent.actiont100.smartdepot.ProcedureCheckinActivity" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".module.activity.dailywork.procedurecheck.ProcedureCheckinSetActivity"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustPan" />
+        <!-- checkout -->
+        <activity
+            android:name=".module.activity.dailywork.procedurecheck.ProcedureCheckoutActivity"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustPan">
+            <intent-filter>
+                <action android:name="android.intent.actiont100.smartdepot.ProcedureCheckoutActivity" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".module.activity.dailywork.procedurecheck.ProcedureCheckBadResActivity"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustPan" />
+        <activity
+            android:name=".module.activity.produce.finishstorage.WipStorageActivity"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustPan">
+            <intent-filter>
+                <action android:name="android.intent.actiont100.smartdepot.WipStorageActivity" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".module.activity.produce.putinstore.ZPutInStoreActivity"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustPan">
+            <intent-filter>
+                <action android:name="android.intent.actiont100.smartdepot.ZPutInStoreActivity" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".module.activity.produce.putinstore.ZPutInStoreSecondActivity"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustPan" />
+        <!-- 生产成套领料 -->
+        <activity
+            android:name=".module.activity.produce.suitpicking.SuitPickingListAcitivity"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustPan">
+            <intent-filter>
+                <action android:name="android.intent.actiont100.smartdepot.SuitPickingListAcitivity" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".module.activity.produce.suitpicking.SuitPickingActivity"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustPan" />
+        <!-- 生产成套领料 半成品 -->
+        <activity
+            android:name=".module.activity.produce.suitpickinghalf.SuitPickingHalfListAcitivity"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustPan">
+            <intent-filter>
+                <action android:name="android.intent.actiont100.smartdepot.SuitPickingHalfListAcitivity" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".module.activity.produce.suitpickinghalf.SuitPickingHalfActivity"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustPan" />
+        <!-- IQCt100检验 -->
+        <activity
+            android:name=".module.activity.purchase.iqc.IQCListActivity"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustPan">
+            <intent-filter>
+                <action android:name="android.intent.actiont100.smartdepot.IQCListActivity" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".module.activity.purchase.iqc.IQCommitActivity"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustPan" />
+        <!-- 原材料标签打印 -->
+        <activity
+            android:name=".module.activity.purchase.rawmaterial.RawMaterialPrintActivity"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustPan">
+            <intent-filter>
+                <action android:name="android.intent.actiont100.smartdepot.RawMaterialPrintActivity" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+
+        <!--扫码收货供应商 -->
+        <activity
+            android:name="digiwin.smartdepott100.module.activity.purchase.purchasesupplier.PurhcaseSupplierListActivity"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustPan">
+            <intent-filter>
+                <action android:name="android.intent.actiont100.smartdepot.PurhcaseSupplierListActivity" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <!-- 扫码收货供应商 -->
+        <activity
+            android:name="digiwin.smartdepott100.module.activity.purchase.purchasesupplier.PurchaseSupplierActivity"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustPan" />
+
         <!-- Required SDK 核心功能极光推送需要 -->
         <!-- 可配置android:process参数将PushService放在其他进程中 -->
         <service
@@ -729,7 +935,7 @@
         <!-- //TODO:极光IM DigiWin需改成具体客户名称 -->
         <meta-data
             android:name="JPUSH_CHANNEL"
-            android:value="DigiWin" />
+            android:value="DigiWinT100" />
         <!-- Required. AppKey copied from Portal -->
         <meta-data
             android:name="JPUSH_APPKEY"
@@ -740,7 +946,7 @@
             android:value="5875904ac895761b530029ce" />
         <meta-data
             android:name="UMENG_CHANNEL"
-            android:value="DigiWin" />
+            android:value="DigiWinT100" />
 
         <!-- 监听网络状态变化 -->
         <!-- <receiver android:name=".login.netstatus.NetStatusReceiver"> -->
@@ -750,7 +956,7 @@
         <!-- </intent-filter> -->
         <!-- </receiver> -->
         <!-- 开机启动广播 -->
-        <receiver android:name="digiwin.smartdepott100.login.poweredup.StartUpReceiver">
+        <receiver android:name=".login.poweredup.StartUpReceiver">
             <intent-filter>
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
 
@@ -764,6 +970,36 @@
         <meta-data
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
+        <!-- 杂项收料 -->
+        <activity
+            android:name=".module.activity.stock.miscellaneousissues.MiscellaneousissuesInListActivity"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustPan">
+            <intent-filter>
+                <action android:name="android.intent.actiont100.smartdepot.MiscellaneousissuesInListActivity" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <!-- 杂项发料 -->
+        <activity
+            android:name=".module.activity.stock.miscellaneousissues.MiscellaneousissuesOutListActivity"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustPan">
+            <intent-filter>
+                <action android:name="android.intent.actiont100.smartdepot.MiscellaneousissuesOutListActivity" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <!-- 标签补打 -->
+        <activity
+            android:name=".module.activity.stock.printlabel.PrintLabelFillActivity"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustPan">
+            <intent-filter>
+                <action android:name="android.intent.actiont100.smartdepot.PrintLabelFillActivity" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
     </application>
 
 </manifest>

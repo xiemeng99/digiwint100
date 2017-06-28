@@ -175,7 +175,6 @@
     <string name="title_in_binning">装箱入库</string>
 
     <string name="check_stock">库存盘点</string>
-    <string name="check_stock_wait">库存盘点待办事项</string>
     <string name="check_person">盘点人员</string>
     <string name="check_order">盘点单号</string>
     <string name="plan_data">计划日期</string>
@@ -473,7 +472,6 @@
     <string name="scan_out_store">扫箱码出货</string>
     <string name="warehouse_error">返回库位与当前库位不一致</string>
     <string name="scan_out_store_detail">扫码出货明细</string>
-    <string name="scan_out_store_list">扫码出货清单</string>
     <string name="caseNo_barcode">箱码</string>
     <string name="case_no">箱号</string>
     <string name="warehouse_failed">箱码库位与当前库位不一致,请重新扫描</string>
@@ -753,4 +751,5 @@
     <string name="title_work_order_scan">工单发条码扫描</string>
 
     <string name="condition_filter">条件筛选</string>
+    <string name="miscellaneous_issues_out_list">杂项发料列表</string>
 </resources>

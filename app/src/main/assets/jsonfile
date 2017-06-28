@@ -1,36 +1,23 @@
 {
-  "srvver": "1.0",
-  "srvcode": "000",
-  "payload": {
-    "std_data": {
-      "execution": {
-        "code": "0",
-        "sql_code": "",
-        "description": ""
-      },
-      "parameter": {
-        "enterprise_site":[
-          {
-            "enterprise_no":"99",
-            "enterprise_lang":"名称",
-            "company_no":"1234",
-            "company_lang":"鼎捷"
-          },
-          {
-            "enterprise_no":"99",
-            "enterprise_lang":"名称",
-            "company_no":"455",
-            "company_lang":"鼎新"
-          },
-          {
-            "enterprise_no":"98",
-            "enterprise_lang":"名称98",
-            "company_no":"44",
-            "company_lang":"鼎强"
-          }
-        ]
-      }
+    "srvver": "1.0",
+    "srvcode": "000",
+    "payload": {
+        "std_data": {
+            "execution": {
+                "code": "0",
+                "sqlcode": "0",
+                "description": ""
+            },
+            "parameter": {
+                "list": [
+                    {
+                        "reason_code_no": "201",
+                        "reason_code_name": "客户产品呆滞",
+                        "show": "201   理由码名称 客户产品呆滞"
+                    }
+                ]
+            }
+        }
     }
-  }
 }
 

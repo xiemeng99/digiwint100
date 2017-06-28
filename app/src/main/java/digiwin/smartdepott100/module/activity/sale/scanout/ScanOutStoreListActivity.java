@@ -225,7 +225,6 @@ public class ScanOutStoreListActivity extends BaseTitleActivity {
             isSearching=true;
             ryList.setVisibility(View.VISIBLE);
             llSearchInput.setVisibility(View.GONE);
-            mName.setText(R.string.scan_out_store_list);
         } catch (Exception e) {
             LogUtils.e(TAG, "showDates---Exception>" + e);
         }
@@ -277,13 +276,11 @@ public class ScanOutStoreListActivity extends BaseTitleActivity {
             isSearching=false;
             ryList.setVisibility(View.VISIBLE);
             llSearchInput.setVisibility(View.GONE);
-            mName.setText(R.string.scan_out_store_list);
             return;
         } else {
             isSearching=true;
             ryList.setVisibility(View.GONE);
             llSearchInput.setVisibility(View.VISIBLE);
-            mName.setText(R.string.filter_condition);
         }
     }
 
@@ -302,8 +299,7 @@ public class ScanOutStoreListActivity extends BaseTitleActivity {
     @Override
     protected void initNavigationTitle() {
         super.initNavigationTitle();
-        mName.setText(R.string.filter_condition);
-//        ivScan.setVisibility(View.GONE);
+        mName.setText(getString(R.string.scan_out_store)+getString(R.string.list));
         search.setVisibility(View.VISIBLE);
         search.setImageResource(R.drawable.search);
         isSearching = true;

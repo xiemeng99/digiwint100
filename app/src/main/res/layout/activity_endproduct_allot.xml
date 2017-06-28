@@ -154,6 +154,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 style="@style/ry_style_ep"
+                android:layout_marginTop="@dimen/layout_6dp"
                 android:paddingBottom="@dimen/layout_6dp"
                 android:paddingTop="@dimen/layout_6dp"
                 android:background="@drawable/accordingmaterialtop_pink_sharp"

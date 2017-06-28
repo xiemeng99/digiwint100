@@ -289,7 +289,7 @@ public class SaleReturnActivity extends BaseTitleActivity {
     @Override
     protected void initNavigationTitle() {
         super.initNavigationTitle();
-        mName.setText(R.string.title_sale_return);
+        mName.setText(getString(R.string.title_sale_return)+getString(R.string.list));
         iv_title_setting.setVisibility(View.VISIBLE);
         iv_title_setting.setImageResource(R.drawable.search);
     }

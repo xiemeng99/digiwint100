@@ -250,7 +250,7 @@ public class TransfersToReviewActivity extends BaseTitleActivity {
     @Override
     protected void initNavigationTitle() {
         super.initNavigationTitle();
-        mName.setText(R.string.transfers_to_reviewlist);
+        mName.setText(getString(R.string.transfers_to_review)+getString(R.string.list));
         search.setVisibility(View.VISIBLE);
         search.setImageResource(R.drawable.search);
         isSearching=true;

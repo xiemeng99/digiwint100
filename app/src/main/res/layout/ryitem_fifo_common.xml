@@ -13,7 +13,7 @@
         <android.support.v7.widget.RecyclerView
             style="@style/ry_style"
             android:background="@drawable/green_scandetail_bg"
-            android:layout_marginTop="@dimen/layout_10dp"
+            android:layout_marginTop="@dimen/layout_6dp"
             android:layout_marginRight="@dimen/layout_10dp"
             android:layout_marginLeft="@dimen/layout_10dp"
             android:id="@+id/ry_list"
