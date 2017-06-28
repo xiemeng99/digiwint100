@@ -20,6 +20,8 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
+import android.content.res.Resources;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -187,39 +189,39 @@ public class DoubleDatePickerDialog extends AlertDialog implements OnClickListen
     }
 
 
-    
-    /**
-     * 隐藏日期
-     * 
-     * @param mDatePicker
-     */
-    private void hidDay(DatePicker mDatePicker)
-    {
-        Field[] datePickerfFields = mDatePicker.getClass().getDeclaredFields();
-        for (Field datePickerField : datePickerfFields)
-        {
-            if ("mDaySpinner".equals(datePickerField.getName()))
-            {
-                datePickerField.setAccessible(true);
-                Object dayPicker = new Object();
-                try
-                {
-                    dayPicker = datePickerField.get(mDatePicker);
+
+    private void hidDay(DatePicker mDatePicker) {
+        try {
+            /* 处理android5.0以上的特殊情况 */
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                int daySpinnerId = Resources.getSystem().getIdentifier("day", "id", "android");
+                if (daySpinnerId != 0) {
+                    View daySpinner = mDatePicker.findViewById(daySpinnerId);
+                    if (daySpinner != null) {
+                        daySpinner.setVisibility(View.GONE);
+                    }
                 }
-                catch (IllegalAccessException e)
-                {
-                    e.printStackTrace();
+            } else {
+                Field[] datePickerfFields = mDatePicker.getClass().getDeclaredFields();
+                for (Field datePickerField : datePickerfFields) {
+                    if ("mDaySpinner".equals(datePickerField.getName()) || ("mDayPicker").equals(datePickerField.getName())) {
+                        datePickerField.setAccessible(true);
+                        Object dayPicker = new Object();
+                        try {
+                            dayPicker = datePickerField.get(mDatePicker);
+                        } catch (IllegalAccessException e) {
+                            e.printStackTrace();
+                        } catch (IllegalArgumentException e) {
+                            e.printStackTrace();
+                        }
+                        ((View) dayPicker).setVisibility(View.GONE);
+                    }
                 }
-                catch (IllegalArgumentException e)
-                {
-                    e.printStackTrace();
-                }
-                // datePicker.getCalendarView().setVisibility(View.GONE);
-                ((View)dayPicker).setVisibility(View.GONE);
             }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
-
     public void onClick(DialogInterface dialog, int which)
     {
         int TYPE;

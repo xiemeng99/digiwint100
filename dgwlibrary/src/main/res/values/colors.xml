@@ -213,8 +213,8 @@
     <color name="gray_f0">#e4e4e4</color>
     <color name="Base_color_click">#168073</color>
     <color name="gray_c2">#c2c2c2</color>
-    <color name="outside_yellow">#e6b40f</color>
-    <color name="red">#FF0000</color>
+    <color name="outside_yellow">#ef8132</color>
+    <color name="red">#e50150</color>
 
     <color name="colorTransParent">#00000000</color><!--辅助色调-->
 
