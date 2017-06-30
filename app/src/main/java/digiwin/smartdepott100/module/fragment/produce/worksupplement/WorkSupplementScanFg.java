@@ -40,6 +40,7 @@ import digiwin.smartdepott100.module.bean.common.SaveBean;
 import digiwin.smartdepott100.module.bean.common.ScanBarcodeBackBean;
 import digiwin.smartdepott100.module.bean.common.ScanLocatorBackBean;
 import digiwin.smartdepott100.module.logic.common.CommonLogic;
+import digiwin.smartdepott100.module.logic.produce.WorkSupplementLogic;
 
 
 /**
@@ -71,7 +72,7 @@ public class WorkSupplementScanFg extends BaseFragment {
 
     FilterResultOrderBean localData;
 
-    CommonLogic commonLogic;
+    WorkSupplementLogic commonLogic;
     /**
      * 条码扫描
      */
@@ -320,9 +321,9 @@ public class WorkSupplementScanFg extends BaseFragment {
 
             case FIFOWHAT:
                 Map<String,String> map = new HashMap<String,String>();
-                map.put(AddressContants.ISSUING_NO,String.valueOf(msg.obj));
+                map.put(AddressContants.DOC_NO,String.valueOf(msg.obj));
                 map.put(AddressContants.WAREHOUSE_NO, LoginLogic.getWare());
-                commonLogic.docNoFIFO(map, new CommonLogic.PostMaterialFIFOListener() {
+                commonLogic.getWSFIFO(map, new CommonLogic.PostMaterialFIFOListener() {
                     @Override
                     public void onSuccess(List<FifoCheckBean> fiFoBeanList) {
                         dismissLoadingDialog();
@@ -387,7 +388,7 @@ public class WorkSupplementScanFg extends BaseFragment {
     protected void doBusiness() {
         pactivity = (WorkSupplementActivity) activity;
         fiFoList = new ArrayList<FifoCheckBean>();
-        commonLogic = CommonLogic.getInstance(context, pactivity.module, pactivity.mTimestamp.toString());
+        commonLogic = WorkSupplementLogic.getInstance(context, pactivity.module, pactivity.mTimestamp.toString());
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(pactivity);
         mRy_list.setLayoutManager(linearLayoutManager);
         initData();

@@ -57,12 +57,12 @@
         android:id="@+id/rl_top"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/layout_10dp"
-        android:layout_marginBottom="@dimen/layout_10dp"
+        android:layout_marginTop="@dimen/layout_6dp"
+        android:layout_marginBottom="@dimen/layout_6dp"
         android:layout_marginLeft="@dimen/layout_10dp"
         android:layout_marginRight="@dimen/layout_10dp"
         android:padding="@dimen/layout_5dp"
-        android:background="@drawable/accordingmaterialtop_sharp"
+        android:background="@drawable/accordingmaterialtop_pink_sharp"
         android:orientation="vertical"
         android:visibility="gone">
 
@@ -71,12 +71,11 @@
           android:layout_width="match_parent"
           android:layout_height="wrap_content">
           <TextView
-            android:layout_width="@dimen/layout_70dp"
+            android:layout_width="@dimen/layout_60dp"
             android:layout_height="wrap_content"
             android:gravity="center_vertical"
             android:text="@string/delivery_note_no"
-            android:textColor="@color/back47"
-            android:textSize="@dimen/textSize_14sp" />
+            style="@style/app_text_ingreen"/>
           <TextView
             android:id="@+id/tv_delivery_note_no"
             android:layout_width="@dimen/layout_0dp"
@@ -84,11 +83,10 @@
             android:layout_weight="1"
             android:layout_marginLeft="@dimen/layout_10dp"
             android:background="@null"
-            android:textColor="@color/white"
-            android:textSize="@dimen/textSize_14sp" />
+            style="@style/ser_text_ingreen"/>
         </LinearLayout>
 
-        <View style="@style/act_line_style"></View>
+        <View style="@style/ry_line_style"></View>
 
         <LinearLayout
           style="@style/itemstyle"
@@ -98,24 +96,22 @@
 
           <TextView
             android:id="@+id/tv_delivery_date_string"
-            android:layout_width="@dimen/layout_70dp"
+            android:layout_width="@dimen/layout_60dp"
             android:layout_height="wrap_content"
             android:paddingRight="@dimen/layout_5dp"
-            android:text="@string/delivery_date_"
-            android:textColor="@color/back47"
-            android:textSize="@dimen/textSize_14sp" />
+            android:text="@string/data"
+            style="@style/app_text_ingreen"/>
 
           <TextView
             android:id="@+id/tv_delivery_date"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/layout_10dp"
-            android:textColor="@color/white"
-            android:textSize="@dimen/textSize_14sp" />
+            style="@style/ser_text_ingreen"/>
 
         </LinearLayout>
 
-        <View style="@style/act_line_style"></View>
+        <View style="@style/ry_line_style"></View>
 
         <LinearLayout
           style="@style/itemstyle"
@@ -124,20 +120,18 @@
           android:orientation="horizontal">
           <TextView
             android:id="@+id/tv_supplier_string"
-            android:layout_width="@dimen/layout_70dp"
+            android:layout_width="@dimen/layout_60dp"
             android:layout_height="wrap_content"
             android:paddingRight="@dimen/layout_5dp"
             android:text="@string/supplier"
-            android:textColor="@color/back47"
-            android:textSize="@dimen/textSize_14sp" />
+            style="@style/app_text_ingreen" />
 
           <TextView
             android:id="@+id/tv_supplier"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/layout_10dp"
-            android:textColor="@color/white"
-            android:textSize="@dimen/textSize_14sp" />
+            style="@style/ser_text_ingreen" />
         </LinearLayout>
       </LinearLayout>
       <include layout="@layout/ryitem_common" />

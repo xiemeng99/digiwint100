@@ -99,7 +99,7 @@ public class MainLogic {
 //        ModuleBean purchaseCheck = new ModuleBean(R.string.purchase_check, R.mipmap.inspection_tests, ModuleCode.PURCHASECHECK, "android.intent.actiont100.smartdepot.PurchaseCheckActivity");
 
 //        ModuleBean storeReturnMaterial = new ModuleBean(R.string.store_return_material, R.mipmap.warehouse_return, ModuleCode.STORERETURNMATERIAL, "android.intent.actiont100.smartdepot.StoreReturnMaterialListActivity");
-        //  ModuleBean materialreceipt = new ModuleBean(R.string.title_material_receipt, R.mipmap.material_receipt, ModuleCode.MATERIALRECEIPTCODE, "android.intent.actiont100.smartdepot.MaterialReceiptActivity");
+          ModuleBean materialreceipt = new ModuleBean(R.string.title_material_receipt, R.mipmap.material_receipt, ModuleCode.MATERIALRECEIPTCODE, "android.intent.actiont100.smartdepot.MaterialReceiptActivity");
 
 //        ModuleBean quickstorage = new ModuleBean(R.string.title_quickstorage, R.mipmap.quickly_storage, ModuleCode.QUICKSTORAGE, "android.intent.actiont100.smartdepot.QuickStorageListActivity");
 
@@ -120,7 +120,7 @@ public class MainLogic {
         ModuleBean printrawmaterial = new ModuleBean(R.string.print_rawmaterial, R.mipmap.inspection_tests, ModuleCode.RAWMATERAILPRINT, "android.intent.actiont100.smartdepot.RawMaterialPrintActivity");
         ModuleBean purchasesupplier = new ModuleBean(R.string.purchase_scan_supplier, R.mipmap.scan_inapection, ModuleCode.PURCHASESUPPLIERSCAN, "android.intent.actiont100.smartdepot.PurhcaseSupplierListActivity");
 
-//        purchaseItems.add(materialreceipt);
+        purchaseItems.add(materialreceipt);
         purchaseItems.add(quickstorage);
 //        purchaseItems.add(purchaseCheck);
 //        purchaseItems.add(storeReturnMaterial);

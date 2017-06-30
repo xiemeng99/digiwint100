@@ -26,7 +26,7 @@ import digiwin.smartdepott100.module.bean.purchase.MaterialReceiptBean;
 
 public class MaterialReceiptLogic {
 
-    private static final String TAG = "MaterialReceiptLogic";
+    private static final String TAG = "QuickReceiptLogic";
 
     private Context mContext;
     /**

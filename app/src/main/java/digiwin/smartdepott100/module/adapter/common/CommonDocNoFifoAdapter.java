@@ -38,6 +38,11 @@ public class CommonDocNoFifoAdapter extends BaseRecyclerAdapter<FifoCheckBean> {
         holder.setText(R.id.tv_rdna_num, item.getRecommended_qty());
         holder.setText(R.id.tv_feeding_amount, item.getScan_sumqty());
 
+//        holder.setTextColor(R.id.tv_item_name, R.color.green1b);
+//        holder.setTextColor(R.id.tv_locator,R.color.green1b);
+//        holder.setTextColor(R.id.tv_barcode,R.color.green1b);
+//        holder.setTextColor(R.id.tv_rdna_num, R.color.green1b);
+//        holder.setTextColor(R.id.tv_feeding_amount, R.color.green1b);
         if(position == fifoList.size() -1){
             holder.setVisibility(R.id.fifo_bottom_line, View.GONE);
         }

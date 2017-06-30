@@ -41,6 +41,13 @@
       <sourceFolder url="file://$MODULE_DIR$/src/devDebug/java" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/devDebug/rs" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/devDebug/shaders" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/build/generated/source/apt/androidTest/dev/debug" isTestSource="true" generated="true" />
+      <sourceFolder url="file://$MODULE_DIR$/build/generated/source/r/androidTest/dev/debug" isTestSource="true" generated="true" />
+      <sourceFolder url="file://$MODULE_DIR$/build/generated/source/aidl/androidTest/dev/debug" isTestSource="true" generated="true" />
+      <sourceFolder url="file://$MODULE_DIR$/build/generated/source/buildConfig/androidTest/dev/debug" isTestSource="true" generated="true" />
+      <sourceFolder url="file://$MODULE_DIR$/build/generated/source/rs/androidTest/dev/debug" isTestSource="true" generated="true" />
+      <sourceFolder url="file://$MODULE_DIR$/build/generated/res/rs/androidTest/dev/debug" type="java-test-resource" />
+      <sourceFolder url="file://$MODULE_DIR$/build/generated/res/resValues/androidTest/dev/debug" type="java-test-resource" />
       <sourceFolder url="file://$MODULE_DIR$/build/generated/source/apt/test/dev/debug" isTestSource="true" generated="true" />
       <sourceFolder url="file://$MODULE_DIR$/src/testDevDebug/res" type="java-test-resource" />
       <sourceFolder url="file://$MODULE_DIR$/src/testDevDebug/resources" type="java-test-resource" />
@@ -49,13 +56,6 @@
       <sourceFolder url="file://$MODULE_DIR$/src/testDevDebug/java" isTestSource="true" />
       <sourceFolder url="file://$MODULE_DIR$/src/testDevDebug/rs" isTestSource="true" />
       <sourceFolder url="file://$MODULE_DIR$/src/testDevDebug/shaders" isTestSource="true" />
-      <sourceFolder url="file://$MODULE_DIR$/build/generated/source/apt/androidTest/dev/debug" isTestSource="true" generated="true" />
-      <sourceFolder url="file://$MODULE_DIR$/build/generated/source/r/androidTest/dev/debug" isTestSource="true" generated="true" />
-      <sourceFolder url="file://$MODULE_DIR$/build/generated/source/aidl/androidTest/dev/debug" isTestSource="true" generated="true" />
-      <sourceFolder url="file://$MODULE_DIR$/build/generated/source/buildConfig/androidTest/dev/debug" isTestSource="true" generated="true" />
-      <sourceFolder url="file://$MODULE_DIR$/build/generated/source/rs/androidTest/dev/debug" isTestSource="true" generated="true" />
-      <sourceFolder url="file://$MODULE_DIR$/build/generated/res/rs/androidTest/dev/debug" type="java-test-resource" />
-      <sourceFolder url="file://$MODULE_DIR$/build/generated/res/resValues/androidTest/dev/debug" type="java-test-resource" />
       <sourceFolder url="file://$MODULE_DIR$/src/dev/res" type="java-resource" />
       <sourceFolder url="file://$MODULE_DIR$/src/dev/resources" type="java-resource" />
       <sourceFolder url="file://$MODULE_DIR$/src/dev/assets" type="java-resource" />
@@ -114,18 +114,29 @@
       <sourceFolder url="file://$MODULE_DIR$/src/androidTest/shaders" isTestSource="true" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/assets" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/blame" />
+      <excludeFolder url="file://$MODULE_DIR$/build/intermediates/builds" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/classes" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/incremental" />
+      <excludeFolder url="file://$MODULE_DIR$/build/intermediates/incremental-classes" />
+      <excludeFolder url="file://$MODULE_DIR$/build/intermediates/incremental-runtime-classes" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/incremental-safeguard" />
+      <excludeFolder url="file://$MODULE_DIR$/build/intermediates/incremental-verifier" />
+      <excludeFolder url="file://$MODULE_DIR$/build/intermediates/instant-run-resources" />
+      <excludeFolder url="file://$MODULE_DIR$/build/intermediates/instant-run-support" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/jniLibs" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/manifests" />
+      <excludeFolder url="file://$MODULE_DIR$/build/intermediates/multi-dex" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/pre-dexed" />
+      <excludeFolder url="file://$MODULE_DIR$/build/intermediates/reload-dex" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/res" />
+      <excludeFolder url="file://$MODULE_DIR$/build/intermediates/restart-dex" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/rs" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/shaders" />
+      <excludeFolder url="file://$MODULE_DIR$/build/intermediates/split-apk" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/symbols" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/transforms" />
       <excludeFolder url="file://$MODULE_DIR$/build/outputs" />
+      <excludeFolder url="file://$MODULE_DIR$/build/reports" />
       <excludeFolder url="file://$MODULE_DIR$/build/tmp" />
     </content>
     <orderEntry type="jdk" jdkName="Android API 23 Platform" jdkType="Android SDK" />
@@ -145,6 +156,7 @@
     <orderEntry type="library" exported="" name="recyclerview-swipe-1.0.2" level="project" />
     <orderEntry type="library" exported="" scope="TEST" name="jsr305-2.0.1" level="project" />
     <orderEntry type="library" exported="" name="PersistentCookieJar-v0.9.3" level="project" />
+    <orderEntry type="library" exported="" scope="TEST" name="multidex-instrumentation-1.0.1" level="project" />
     <orderEntry type="library" exported="" name="support-media-compat-24.2.1" level="project" />
     <orderEntry type="library" exported="" scope="TEST" name="espresso-core-2.2.2" level="project" />
     <orderEntry type="library" exported="" name="design-23.4.0" level="project" />
@@ -159,6 +171,7 @@
     <orderEntry type="library" exported="" scope="TEST" name="javax.inject-1" level="project" />
     <orderEntry type="library" exported="" name="support-annotations-24.2.1" level="project" />
     <orderEntry type="library" exported="" scope="TEST" name="javawriter-2.1.1" level="project" />
+    <orderEntry type="library" exported="" name="multidex-1.0.1" level="project" />
     <orderEntry type="library" exported="" scope="TEST" name="hamcrest-core-1.3" level="project" />
     <orderEntry type="library" exported="" name="butterknife-8.0.1" level="project" />
     <orderEntry type="library" exported="" name="butterknife-annotations-8.0.1" level="project" />
@@ -170,6 +183,7 @@
     <orderEntry type="library" exported="" name="android-android-23" level="project" />
     <orderEntry type="library" exported="" name="commons-io-1.4" level="project" />
     <orderEntry type="library" exported="" name="okio-1.8.0" level="project" />
+    <orderEntry type="library" exported="" name="fastjson-1.2.32" level="project" />
     <orderEntry type="library" exported="" name="jmessage-android-2.0.0" level="project" />
     <orderEntry type="library" exported="" name="zxing" level="project" />
     <orderEntry type="library" exported="" name="xstream-1.4.7" level="project" />
@@ -178,9 +192,8 @@
     <orderEntry type="library" exported="" name="Msc" level="project" />
     <orderEntry type="library" exported="" name="appcompat-v7-23.1.0" level="project" />
     <orderEntry type="library" exported="" name="support-annotations-23.1.0" level="project" />
-    <orderEntry type="library" exported="" name="fastjson-1.2.23" level="project" />
     <orderEntry type="library" exported="" name="jcore-android_v1.1.0" level="project" />
-    <orderEntry type="library" exported="" name="analytics-6.1.0" level="project" />
+    <orderEntry type="library" exported="" name="analytics-6.1.1" level="project" />
     <orderEntry type="library" exported="" name="gestureimageview" level="project" />
     <orderEntry type="library" exported="" name="design-23.1.0" level="project" />
     <orderEntry type="library" exported="" name="eventbus-3.0.0" level="project" />

@@ -59,7 +59,7 @@ public class PickUpShipmentLogic extends CommonLogic{
             @Override
             public void run() {
                 try{
-                    String createJson = JsonReqForERP.objCreateJson(mModule, "als.d001.list.get", mTimestamp, filterBean);
+                    String createJson = JsonReqForERP.objCreateJson(mModule, "als.d003.list.get", mTimestamp, filterBean);
                     OkhttpRequest.getInstance(mContext).post(createJson, new IRequestCallbackImp() {
                         @Override
                         public void onResponse(String s) {
@@ -105,7 +105,7 @@ public class PickUpShipmentLogic extends CommonLogic{
             @Override
             public void run() {
                 try{
-                    String createJson = JsonReqForERP.mapCreateJson(mModule, "als.d001.list.detail.get", mTimestamp, map);
+                    String createJson = JsonReqForERP.mapCreateJson(mModule, "als.d003.list.detail.get", mTimestamp, map);
                     OkhttpRequest.getInstance(mContext).post(createJson, new IRequestCallbackImp() {
                         @Override
                         public void onResponse(String string) {

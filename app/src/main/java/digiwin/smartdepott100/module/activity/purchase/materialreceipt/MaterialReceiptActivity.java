@@ -11,6 +11,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -29,10 +30,12 @@ import digiwin.smartdepott100.core.appcontants.AddressContants;
 import digiwin.smartdepott100.core.appcontants.ModuleCode;
 import digiwin.smartdepott100.core.base.BaseTitleActivity;
 import digiwin.smartdepott100.core.modulecommon.ModuleUtils;
+import digiwin.smartdepott100.login.loginlogic.LoginLogic;
 import digiwin.smartdepott100.module.adapter.purchase.MaterialReceiptAdapter;
 import digiwin.smartdepott100.module.bean.common.ClickItemPutBean;
 import digiwin.smartdepott100.module.bean.common.ListSumBean;
 import digiwin.smartdepott100.module.logic.common.CommonLogic;
+import digiwin.smartdepott100.module.logic.produce.QuickReceiptLogic;
 
 import static android.R.attr.keyHeight;
 
@@ -85,7 +88,7 @@ public class MaterialReceiptActivity extends BaseTitleActivity implements
   @BindView(R.id.rl_top)
   LinearLayout rl_top;
 
-  CommonLogic commonLogic;
+  QuickReceiptLogic commonLogic;
 
   /**
    * 送货单
@@ -164,14 +167,15 @@ public class MaterialReceiptActivity extends BaseTitleActivity implements
       if (msg.what == DELIVERY_NOTE_NO) {
         ClickItemPutBean putBean = new ClickItemPutBean();
         putBean.setDoc_no(String.valueOf(msg.obj));
-        commonLogic.getOrderSumData(putBean, new CommonLogic.GetOrderSumListener() {
+        putBean.setWarehouse_no(LoginLogic.getWare());
+        Map<String,String> map = ObjectAndMapUtils.getValueMap(putBean);
+        commonLogic.getMRSumData(map, new CommonLogic.GetOrderSumListener() {
           @Override
           public void onSuccess(List<ListSumBean> list) {
             for (int i = 0; i < list.size(); i++) {
                 ListSumBean bean = list.get(i);
                 bean.setCheck("1");
             }
-
             rl_top.setVisibility(View.VISIBLE);
             ListSumBean bean = list.get(0);
             tv_delivery_note_no.setText(bean.getDoc_no());
@@ -205,7 +209,7 @@ public class MaterialReceiptActivity extends BaseTitleActivity implements
 
   @Override
   protected void doBusiness() {
-      commonLogic = CommonLogic
+      commonLogic = QuickReceiptLogic
           .getInstance(activity, activity.module, activity.mTimestamp.toString());
       FullyLinearLayoutManager fullyLinearLayoutManager = new FullyLinearLayoutManager(activity);
       ry_list.setLayoutManager(fullyLinearLayoutManager);
@@ -231,7 +235,9 @@ public class MaterialReceiptActivity extends BaseTitleActivity implements
 
   public void commitData(final List<ListSumBean> checkedList) {
     final List<Map<String, String>> listMap = ObjectAndMapUtils.getListMap(checkedList);
-    commonLogic.commitList(listMap, new CommonLogic.CommitListListener() {
+    Map<String,Object> map = new HashMap<>();
+    map.put("data",listMap);
+    commonLogic.commitMRData(map, new CommonLogic.CommitListener() {
       @Override
       public void onSuccess(String msg) {
         dismissLoadingDialog();
@@ -240,7 +246,7 @@ public class MaterialReceiptActivity extends BaseTitleActivity implements
           public void onCallback() {
             createNewModuleId(module);
             clearData();
-            commonLogic = CommonLogic
+            commonLogic = QuickReceiptLogic
                 .getInstance(activity, activity.module, activity.mTimestamp.toString());
           }
         });

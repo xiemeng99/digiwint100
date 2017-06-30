@@ -95,6 +95,11 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal">
 
+        <LinearLayout
+            android:layout_width="@dimen/layout_0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="horizontal">
         <TextView
             android:id="@+id/tv_locator_string"
             style="@style/app_text_inwhite"
@@ -106,8 +111,42 @@
             android:id="@+id/tv_locator"
             style="@style/ser_text_inwhite"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"/>
+            </LinearLayout>
 
+        <LinearLayout
+            android:layout_width="@dimen/layout_0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="horizontal">
+        <TextView
+            android:id="@+id/tv_delivery_quantity_string"
+            style="@style/app_text_inwhite"
+            android:layout_width="@dimen/layout_60dp"
+            android:layout_height="wrap_content"
+            android:text="@string/delivery_quantity" />
+
+        <TextView
+            android:id="@+id/tv_delivery_quantity"
+            style="@style/ser_text_inwhite"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+            </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="@dimen/layout_0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0.4"
+            android:visibility="invisible"
+            android:orientation="horizontal">
+            >
+
+            <CheckBox
+                style="@style/checkbox_selector"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_gravity="center" />
+        </LinearLayout>
     </LinearLayout>
 
     <View
@@ -127,14 +166,13 @@
             android:orientation="horizontal">
 
             <TextView
-                android:id="@+id/tv_delivery_quantity_string"
                 style="@style/app_text_inwhite"
                 android:layout_width="@dimen/layout_60dp"
                 android:layout_height="wrap_content"
-                android:text="@string/delivery_quantity" />
+                android:text="@string/allow_yield_num" />
 
             <TextView
-                android:id="@+id/tv_delivery_quantity"
+                android:id="@+id/tv_allow_yield_num"
                 style="@style/ser_text_inwhite"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
@@ -167,14 +205,14 @@
         <LinearLayout
             android:layout_width="@dimen/layout_0dp"
             android:layout_height="match_parent"
-            android:layout_weight="0.2"
+            android:layout_weight="0.4"
             android:orientation="horizontal">
             >
 
             <CheckBox
                 android:id="@+id/cb_confirm_num"
                 style="@style/checkbox_selector"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_gravity="center" />
         </LinearLayout>

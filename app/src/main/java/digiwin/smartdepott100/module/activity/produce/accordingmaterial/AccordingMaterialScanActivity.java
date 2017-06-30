@@ -422,7 +422,7 @@ public class AccordingMaterialScanActivity extends BaseTitleActivity {
         initData();
         localData = new ListSumBean();
         ListSumBean data = (ListSumBean) getIntent().getSerializableExtra("sumdata");
-        mTv_item_name.setText(data.getItem_name());
+        mTv_item_name.setText(data.getLow_order_item_name());
         et_format.setText(data.getLow_order_item_spec());
         tv_under_feed.setText(StringUtils.deleteZero(data.getShortage_qty()));
         tv_stock_balance.setText(StringUtils.deleteZero(data.getStock_qty()));

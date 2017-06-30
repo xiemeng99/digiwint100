@@ -207,11 +207,11 @@ public class BlueToothManager {
         }
         int num = Integer.valueOf(printBarcodeBean.getQty());
         String encoding2 = "A\n" + "PS\n"
-                + "%0H0040V0020L0101P02C9B" + printBarcodeBean.getItem_name() + "\n"
-                + "%0H0040V0045L0101P02C9B" + printBarcodeBean.getItem_spec() + "\n"
-                + "%0H0040V00652D30,M,05,1,0DN"+printBarcodeBean.getBarcode().length()+","+printBarcodeBean.getBarcode()
-                + "%0H0040V0195L0101P02C9B" + printBarcodeBean.getBarcode() + "\n"
-                 +"%0H0040V0225L0101P02C9B" +mContext.getResources().getString(R.string.num)+"   "+printBarcodeBean.getQty()
+                + "%0H0040V0070L0101P02C9B" +mContext.getResources().getString(R.string.item_name)+": "+ printBarcodeBean.getItem_name() + "\n"
+                + "%0H0040V0140L0101P02C9B" +mContext.getResources().getString(R.string.model)+": "+ printBarcodeBean.getItem_spec() + "\n"
+                + "%0H0150V02102D30,M,05,1,0DN"+printBarcodeBean.getBarcode().length()+","+printBarcodeBean.getBarcode()
+                + "%0H0040V0380L0101P02C9B" + printBarcodeBean.getBarcode() + "\n"
+                + "%0H0040V0450L0101P02C9B" +mContext.getResources().getString(R.string.num)+": "+num
 //                + "  "+ unit+"\n"
                 + "Q1\n" + "Z\n";
         if(num != 0){
@@ -225,11 +225,11 @@ public class BlueToothManager {
                 }
                 num = sumnum%num;
                 encoding2 = "A\n" + "PS\n"
-                        + "%0H0040V0020L0101P02C9B" + printBarcodeBean.getItem_name() + "\n"
-                        + "%0H0040V0045L0101P02C9B" + printBarcodeBean.getItem_spec() + "\n"
-                        + "%0H0040V00652D30,M,05,1,0DN"+printBarcodeBean.getBarcode().length()+","+printBarcodeBean.getBarcode()
-                        + "%0H0040V0195L0101P02C9B" + printBarcodeBean.getBarcode() + "\n"
-                        +"%0H0040V0225L0101P02C9B" +mContext.getResources().getString(R.string.num)+"   "+num
+                        + "%0H0040V0070L0101P02C9B" +mContext.getResources().getString(R.string.item_name)+": "+ printBarcodeBean.getItem_name() + "\n"
+                        + "%0H0040V0140L0101P02C9B" +mContext.getResources().getString(R.string.model)+": "+ printBarcodeBean.getItem_spec() + "\n"
+                        + "%0H0150V02102D30,M,05,1,0DN"+printBarcodeBean.getBarcode().length()+","+printBarcodeBean.getBarcode()
+                        + "%0H0040V0380L0101P02C9B" + printBarcodeBean.getBarcode() + "\n"
+                        + "%0H0040V0450L0101P02C9B" +mContext.getResources().getString(R.string.num)+": "+num
 //                + "  "+ unit+"\n"
                         + "Q1\n" + "Z\n";
                 mPrintSend.sendBtMessage(encoding2);

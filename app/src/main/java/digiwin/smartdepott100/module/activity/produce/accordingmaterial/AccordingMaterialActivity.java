@@ -98,6 +98,11 @@ public class AccordingMaterialActivity extends BaseFirstModuldeActivity {
     List<TextView> textViews;
 
     /**
+     * 页面展示的数据
+     */
+    private List<ListSumBean>  showList;
+
+    /**
      * 提交按钮
      */
     @BindView(R.id.commit)
@@ -227,6 +232,7 @@ public class AccordingMaterialActivity extends BaseFirstModuldeActivity {
             @Override
             public void onSuccess(final List<ListSumBean> list) {
                 mTv_item_name.setText(list.get(0).getItem_name());
+                showList=list;
                 adapter = new AccordingMaterialSumAdapter(activity,list);
                 ryList.setAdapter(adapter);
                 dismissLoadingDialog();
@@ -282,6 +288,18 @@ public class AccordingMaterialActivity extends BaseFirstModuldeActivity {
     }
 
     public void commitData(){
+        try {
+            for (int i=0;i<showList.size();i++){
+                ListSumBean tempBean = showList.get(i);
+                float sub = StringUtils.sub(tempBean.getStock_qty(), tempBean.getScan_sumqty());
+                if (sub>0){
+                    showFailedDialog(tempBean.getItem_no()+getResources().getString(R.string.scan_big_storenum));
+                    return;
+                }
+            }
+        }catch (Exception e){
+
+        }
         showLoadingDialog();
         HashMap<String, String> barcodeMap = new HashMap<String, String>();
         commonLogic.commit(barcodeMap, new CommonLogic.CommitListener() {
