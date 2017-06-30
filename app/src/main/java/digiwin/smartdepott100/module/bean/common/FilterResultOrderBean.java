@@ -92,6 +92,20 @@ public class FilterResultOrderBean implements Serializable {
      */
     private String purchase_type;
 
+    /**
+     * 出货日期
+     * @return
+     */
+    private String shipment_date;
+
+    public String getShipment_date() {
+        return shipment_date;
+    }
+
+    public void setShipment_date(String shipment_date) {
+        this.shipment_date = shipment_date;
+    }
+
     public String getReceipt_date() {
         return receipt_date;
     }

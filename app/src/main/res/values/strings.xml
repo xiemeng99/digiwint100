@@ -222,6 +222,7 @@
     <string name="delivery_note_no">送货单号</string>
     <string name="delivery_quantity">送货量</string>
     <string name="actual_yield_num">实收量</string>
+    <string name="allow_yield_num">允收量</string>
     <string name="delivery_date_">送货日期</string>
     <string name="please_delivery_note">请扫描送货单</string>
     <string name="please_delivery_note_num">请确认所有实收数量</string>
@@ -534,7 +535,7 @@
     <string name="bad_qty">不良原因数量</string>
     <string name="check_employee">检验员</string>
     <string name="print_psw">请输入登入密码</string>
-    <string name="print_ip">请输入ip地址</string>
+    <string name="print_ip">请输入ip地址和端口号</string>
     <string name="psw_error">密码错误</string>
     <string name="check_all">全选</string>
 
@@ -752,4 +753,6 @@
 
     <string name="condition_filter">条件筛选</string>
     <string name="miscellaneous_issues_out_list">杂项发料列表</string>
+
+    <string name="scan_big_storenum">实发量大于库存量</string>
 </resources>

@@ -19,12 +19,15 @@ import butterknife.BindView;
 import butterknife.BindViews;
 import butterknife.OnClick;
 import butterknife.OnFocusChange;
+import digiwin.library.constant.SharePreKey;
 import digiwin.library.datepicker.DatePickerUtils;
 import digiwin.library.utils.ActivityManagerUtils;
+import digiwin.library.utils.SharedPreferencesUtils;
 import digiwin.library.utils.StringUtils;
 import digiwin.pulltorefreshlibrary.recyclerview.FullyLinearLayoutManager;
 import digiwin.pulltorefreshlibrary.recyclerviewAdapter.OnItemClickListener;
 import digiwin.smartdepott100.R;
+import digiwin.smartdepott100.core.appcontants.AddressContants;
 import digiwin.smartdepott100.core.appcontants.ModuleCode;
 import digiwin.smartdepott100.core.base.BaseTitleActivity;
 import digiwin.smartdepott100.core.modulecommon.ModuleUtils;
@@ -215,6 +218,12 @@ public class PickUpShipmentListActivity extends BaseTitleActivity{
             }
             FilterBean.setWarehouse_out_no(accoutBean.getWare());
 
+            if(!StringUtils.isBlank(et_shipping_order.getText().toString().trim())){
+                FilterBean.setDoc_no(et_shipping_order.getText().toString().trim());
+            }
+
+            FilterBean.setPagesize((String) SharedPreferencesUtils.get(activity, SharePreKey.PAGE_SETTING, AddressContants.PAGE_NUM));
+
             if(!StringUtils.isBlank(et_item_no.getText().toString().trim())){
                 FilterBean.setItem_no(et_item_no.getText().toString().trim());
             }
@@ -239,7 +248,7 @@ public class PickUpShipmentListActivity extends BaseTitleActivity{
             e.printStackTrace();
         }
 
-        logic.getOrderData(FilterBean, new CommonLogic.GetOrderListener() {
+        logic.getSearchListData(FilterBean, new PickUpShipmentLogic.GetSearchListDataListener() {
             @Override
             public void onSuccess(final List<FilterResultOrderBean> list) {
                 dismissLoadingDialog();
@@ -264,9 +273,9 @@ public class PickUpShipmentListActivity extends BaseTitleActivity{
             }
 
             @Override
-            public void onFailed(String error) {
+            public void onFailed(String errmsg) {
                 dismissLoadingDialog();
-                showFailedDialog(error);
+                showFailedDialog(errmsg);
                 dataList = new ArrayList<FilterResultOrderBean>();
                 adapter = new PickUpShipmentListAdapter(activity,dataList);
                 ryList.setAdapter(adapter);

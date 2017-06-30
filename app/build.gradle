@@ -5,7 +5,7 @@ def releaseTime() {
     return new Date().format("yyyy-MM-dd", TimeZone.getTimeZone("UTC"))
 }
 def name() {
-    return "T100智能物流"
+    return "智能物流"
 }
 
 android {
@@ -20,8 +20,9 @@ android {
         minSdkVersion 17
         targetSdkVersion 23
         versionCode 1
-        versionName "1.10"
+        versionName "1.27"
         resConfigs "en"
+        multiDexEnabled true
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
 //    signingConfigs{
@@ -75,8 +76,38 @@ dependencies {
     //litepal数据库
     compile 'org.litepal.android:core:1.4.1'
     compile 'com.squareup.picasso:picasso:2.5.2'
-//    compile 'com.github.xiemeng99.digiwin:dgwlibrary:1.5'
-//    compile 'com.github.xiemeng99.digiwin:pulltorefreshlibrary:1.5'
+//     compile 'com.github.xiemeng99.digiwint100:dgwlibrary:1.2'
+//     compile 'com.github.xiemeng99.digiwint100:pulltorefreshlibrary:1.2'
+    //65525问题
+    compile 'com.android.support:multidex:1.0.0'
     compile project(':dgwlibrary')
     compile project(':pulltorefreshlibrary')
+}
+
+//指定编码
+tasks.withType(JavaCompile) {
+    options.encoding = "UTF-8"
+}
+
+//打包源码
+task sourcesJar(type: Jar) {
+    from android.sourceSets.main.java.srcDirs
+    classifier = 'sources'
+}
+
+task javadoc(type: Javadoc) {
+    failOnError  false
+    source = android.sourceSets.main.java.sourceFiles
+    classpath += project.files(android.getBootClasspath().join(File.pathSeparator))
+    classpath += configurations.compile
+}
+
+// 制作文档(Javadoc)
+task javadocJar(type: Jar, dependsOn: javadoc) {
+    classifier = 'javadoc'
+    from javadoc.destinationDir
+}
+artifacts {
+    archives sourcesJar
+    archives javadocJar
 }

@@ -19,6 +19,7 @@ import butterknife.OnClick;
 import butterknife.OnFocusChange;
 import butterknife.OnTextChanged;
 import digiwin.library.dialog.OnDialogClickListener;
+import digiwin.library.dialog.OnDialogTwoListener;
 import digiwin.library.utils.ObjectAndMapUtils;
 import digiwin.library.utils.StringUtils;
 import digiwin.smartdepott100.R;
@@ -174,26 +175,36 @@ public class DirectStorageActivity extends BaseFirstModuldeActivity {
             showFailedDialog(R.string.input_num);
             return;
         }
-        saveBean.setWarehouse_storage(tvWarehouse.getText().toString());
+        saveBean.setWarehouse_no(tvWarehouse.getText().toString());
         saveBean.setReq_qty(etInputNum.getText().toString().trim());
-        showLoadingDialog();
-        Map<String, String> map = ObjectAndMapUtils.getValueMap(saveBean);
-        logic.directStorageCommit(map, new DirectStorageLogic.DirectStorageCommitListener() {
+        showCommitSureDialog(new OnDialogTwoListener() {
             @Override
-            public void onSuccess(String msg) {
-                dismissLoadingDialog();
-                showCommitSuccessDialog(msg, new OnDialogClickListener() {
+            public void onCallback1() {
+                showLoadingDialog();
+                Map<String, String> map = ObjectAndMapUtils.getValueMap(saveBean);
+                logic.directStorageCommit(map, new DirectStorageLogic.DirectStorageCommitListener() {
                     @Override
-                    public void onCallback() {
-                        clear();
+                    public void onSuccess(String msg) {
+                        dismissLoadingDialog();
+                        showCommitSuccessDialog(msg, new OnDialogClickListener() {
+                            @Override
+                            public void onCallback() {
+                                clear();
+                            }
+                        });
+                    }
+
+                    @Override
+                    public void onFailed(String error) {
+                        dismissLoadingDialog();
+                        showCommitFailDialog(error);
                     }
                 });
             }
 
             @Override
-            public void onFailed(String error) {
-                dismissLoadingDialog();
-                showCommitFailDialog(error);
+            public void onCallback2() {
+
             }
         });
     }

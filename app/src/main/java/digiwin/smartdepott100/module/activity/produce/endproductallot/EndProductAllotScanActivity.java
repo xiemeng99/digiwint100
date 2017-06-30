@@ -412,9 +412,7 @@ public class EndProductAllotScanActivity extends BaseTitleActivity {
         localData = new ListSumBean();
         ListSumBean data = (ListSumBean) getIntent().getSerializableExtra("sumdata");
         localData = data;
-
         type = data.getItem_barcode_type();
-
         if(type.equals(codetype)){
             etScanBarocde.setText(data.getLow_order_item_no());
         }

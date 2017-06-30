@@ -155,7 +155,7 @@ public class WorkSupplementSumFg extends BaseFragment {
         float numb1 = StringUtils.string2Float(orderSumData.getReturn_qty());
         float numb2 = StringUtils.string2Float(orderSumData.getIssue_qty());
         if(numb1 > numb2){
-            sumShowBean.setAvailable_in_qty(orderSumData.getIssue_qty());
+            sumShowBean.setAvailable_in_qty(orderSumData.getQty());
         }else if(numb1 < numb2){
             sumShowBean.setAvailable_in_qty(orderSumData.getReturn_qty());
         }else if(numb1 == numb2){
@@ -180,7 +180,7 @@ public class WorkSupplementSumFg extends BaseFragment {
             @Override
             public void onFailed(String error) {
                 dismissLoadingDialog();
-                showCommitFailDialog(error);
+                showFailedDialog(error);
             }
         });
     }

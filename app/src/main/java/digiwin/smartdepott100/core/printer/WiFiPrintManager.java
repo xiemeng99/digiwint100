@@ -109,7 +109,7 @@ public class WiFiPrintManager {
                     isOpen = socket.isConnected();
                 } catch (IOException e) {
                     isOpen = false;
-                    LogUtils.e(TAG, "IOException--连接不成功");
+                    LogUtils.e(TAG, "IOException--连接不成功"+e);
                 }
                 catch (Exception e) {
                     isOpen = false;

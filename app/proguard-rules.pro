@@ -409,7 +409,7 @@ public void xxxxxx(**);
 
 ##glide
 #-keep public class * implements com.bumptech.glide.module.GlideModule
-#-keep public enum com.bumptech.glide.load.resource.bitmap.ImageHeaderParser$** {
+#-keep public enum com.bumptech.glide.load.employee_no.bitmap.ImageHeaderParser$** {
 #  **[] $VALUES;
 #  public *;
 #}

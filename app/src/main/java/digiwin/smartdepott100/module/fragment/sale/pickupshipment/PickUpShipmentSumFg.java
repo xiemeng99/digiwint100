@@ -32,6 +32,7 @@ import digiwin.smartdepott100.module.bean.common.FilterResultOrderBean;
 import digiwin.smartdepott100.module.bean.common.ListSumBean;
 import digiwin.smartdepott100.module.bean.common.SumShowBean;
 import digiwin.smartdepott100.module.logic.common.CommonLogic;
+import digiwin.smartdepott100.module.logic.sale.pickupshipment.PickUpShipmentLogic;
 
 /**
  * @author 赵浩然
@@ -71,7 +72,7 @@ public class PickUpShipmentSumFg extends BaseFragment {
     FilterResultOrderBean localData = new FilterResultOrderBean();
 
     PickUpShipmentActivity pactivity;
-    CommonLogic commonLogic;
+    PickUpShipmentLogic logic;
 
     boolean upDateFlag;
 
@@ -86,24 +87,23 @@ public class PickUpShipmentSumFg extends BaseFragment {
         localData = (FilterResultOrderBean) pactivity.getIntent().getExtras().getSerializable("data");
         //获取单号 日期 人员参数
         tv_shipping_order.setText(localData.getDoc_no());
-        tv_apply_date.setText(localData.getCreate_date());
+        tv_apply_date.setText(localData.getShipment_date());
         tv_custom.setText(localData.getCustomer_name());
 
     }
 
     public void upDateList() {
         try {
-            ClickItemPutBean putBean = new ClickItemPutBean();
-            putBean.setDoc_no(localData.getDoc_no());
-            putBean.setWarehouse_no(LoginLogic.getUserInfo().getWare());
-            commonLogic = CommonLogic.getInstance(pactivity, pactivity.module, pactivity.mTimestamp.toString());
-
+            HashMap<String,String> map = new HashMap<>();
+            map.put(AddressContants.DOC_NO,localData.getDoc_no());
+            map.put(AddressContants.WAREHOUSE_NO,LoginLogic.getUserInfo().getWare());
+            logic = PickUpShipmentLogic.getInstance(pactivity, pactivity.module, pactivity.mTimestamp.toString());
             showLoadingDialog();
-            commonLogic.getOrderSumData(putBean, new CommonLogic.GetOrderSumListener() {
+            logic.getSOLSumData(map, new PickUpShipmentLogic.GetSumDataListener() {
                 @Override
                 public void onSuccess(List<ListSumBean> list) {
+                    dismissLoadingDialog();
                     if(list.size() > 0){
-                        dismissLoadingDialog();
                         upDateFlag = true;
                         adapter = new PickUpShipmentSumAdapter(getActivity(),list);
                         ryList.setAdapter(adapter);
@@ -119,9 +119,9 @@ public class PickUpShipmentSumFg extends BaseFragment {
                 }
 
                 @Override
-                public void onFailed(String error) {
+                public void onFailed(String errmsg) {
                     dismissLoadingDialog();
-                    showFailedDialog(error, new OnDialogClickListener() {
+                    showFailedDialog(errmsg, new OnDialogClickListener() {
                         @Override
                         public void onCallback() {
                         }
@@ -154,7 +154,7 @@ public class PickUpShipmentSumFg extends BaseFragment {
             sumShowBean.setAvailable_in_qty(orderSumData.getReq_qty());
         }
 
-        commonLogic.getDetail(map, new CommonLogic.GetDetailListener() {
+        logic.getDetail(map, new CommonLogic.GetDetailListener() {
             @Override
             public void onSuccess(List<DetailShowBean> detailShowBeen) {
                 Bundle bundle = new Bundle();
@@ -169,7 +169,7 @@ public class PickUpShipmentSumFg extends BaseFragment {
             @Override
             public void onFailed(String error) {
                 dismissLoadingDialog();
-                showCommitFailDialog(error);
+                showFailedDialog(error);
             }
         });
     }
@@ -184,7 +184,7 @@ public class PickUpShipmentSumFg extends BaseFragment {
             public void onCallback1() {
                 showLoadingDialog();
                 HashMap<String, String> map = new HashMap<>();
-                commonLogic.commit(map, new CommonLogic.CommitListener() {
+                logic.commit(map, new CommonLogic.CommitListener() {
                     @Override
                     public void onSuccess(String msg) {
                         dismissLoadingDialog();

@@ -17,6 +17,7 @@ import digiwin.smartdepott100.core.json.JsonReqForERP;
 import digiwin.smartdepott100.core.net.IRequestCallbackImp;
 import digiwin.smartdepott100.core.net.OkhttpRequest;
 import digiwin.smartdepott100.module.bean.common.ClickItemPutBean;
+import digiwin.smartdepott100.module.bean.common.FifoCheckBean;
 import digiwin.smartdepott100.module.bean.common.FilterBean;
 import digiwin.smartdepott100.module.bean.common.FilterResultOrderBean;
 import digiwin.smartdepott100.module.bean.common.ListSumBean;
@@ -92,6 +93,38 @@ public class WorkSupplementLogic extends CommonLogic{
                             if (null != string) {
                                 if (ReqTypeName.SUCCCESSCODE.equals(JsonResp.getCode(string))) {
                                     List<ListSumBean> showBeanList = JsonResp.getParaDatas(string,"list_detail",ListSumBean.class);
+                                    listener.onSuccess(showBeanList);
+                                    return;
+                                } else {
+                                    error = JsonResp.getDescription(string);
+                                }
+                            }
+                            listener.onFailed(error);
+                        }
+                    });
+                } catch (Exception e) {
+                    listener.onFailed(mContext.getString(R.string.unknow_error));
+                    LogUtils.e(TAG, "getPutInStoreSum--->" + e);
+                }
+            }
+        }, null);
+    }
+    /**
+     * 退料补料获取汇总列表
+     */
+    public void getWSFIFO(final Map<String,String> map, final PostMaterialFIFOListener listener) {
+        ThreadPoolManager.getInstance().executeTask(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    String createJson = JsonReqForERP.mapCreateJson(mModule, "als.b023.fifo.get", mTimestamp, map);
+                    OkhttpRequest.getInstance(mContext).post(createJson, new IRequestCallbackImp() {
+                        @Override
+                        public void onResponse(String string) {
+                            String error = mContext.getString(R.string.unknow_error);
+                            if (null != string) {
+                                if (ReqTypeName.SUCCCESSCODE.equals(JsonResp.getCode(string))) {
+                                    List<FifoCheckBean> showBeanList = JsonResp.getParaDatas(string,"list",FifoCheckBean.class);
                                     listener.onSuccess(showBeanList);
                                     return;
                                 } else {

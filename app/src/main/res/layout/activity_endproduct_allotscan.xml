@@ -9,7 +9,8 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_alignParentStart="true"
-        android:layout_below="@+id/toolbar_title">
+        android:layout_below="@+id/toolbar_title"
+        android:paddingBottom="@dimen/layout_50dp">
 
         <LinearLayout
             android:layout_width="match_parent"

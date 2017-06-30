@@ -148,7 +148,6 @@ public class JsonReqForERP {
      * 没有查询条件获取数据,有payload节点
      *
      * @param timestamp 时间戳
-     * @param type      接口名
      * @return
      */
     public static String noWhereJsonforloginPage(String module, String serviceName, String timestamp) {
@@ -170,7 +169,6 @@ public class JsonReqForERP {
      * 没有查询条件获取数据,有payload节点
      *
      * @param timestamp 时间戳
-     * @param type      接口名
      * @return
      */
     public static String noWhereJson1(String module, String serviceName, String timestamp) {

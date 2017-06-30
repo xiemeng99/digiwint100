@@ -27,7 +27,7 @@ public class PickUpShipmentListAdapter extends BaseRecyclerAdapter<FilterResultO
     @Override
     protected void bindData(RecyclerViewHolder holder, int position, FilterResultOrderBean item) {
         holder.setText(R.id.tv_shipping_order, item.getDoc_no());
-        holder.setText(R.id.tv_shipping_date,item.getCreate_date());
+        holder.setText(R.id.tv_shipping_date,item.getShipment_date());
         holder.setText(R.id.tv_custom,item.getCustomer_name());
         holder.setText(R.id.tv_apply_branch, item.getDepartment_name());
         holder.setText(R.id.tv_applicant, item.getEmployee_name());

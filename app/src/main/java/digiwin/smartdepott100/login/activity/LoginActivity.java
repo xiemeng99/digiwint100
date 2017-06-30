@@ -33,6 +33,7 @@ import digiwin.smartdepott100.core.appcontants.AddressContants;
 import digiwin.smartdepott100.core.appcontants.ModuleCode;
 import digiwin.smartdepott100.core.base.BaseActivity;
 import digiwin.smartdepott100.core.coreutil.MD5Utils;
+import digiwin.smartdepott100.core.coreutil.PermissionUtils;
 import digiwin.smartdepott100.core.jpush.JPushManager;
 import digiwin.smartdepott100.core.printer.WiFiPrintManager;
 import digiwin.smartdepott100.login.activity.entIdcom.SiteDialog;
@@ -219,6 +220,7 @@ public class LoginActivity extends BaseActivity {
 
     @Override
     protected void doBusiness() {
+        PermissionUtils.verifyStoragePermissions(this);
         final WiFiPrintManager wiFiPrintManager = WiFiPrintManager.getManager();
         wiFiPrintManager.openWiFi("", 0, new WiFiPrintManager.OpenWiFiPrintListener() {
             @Override

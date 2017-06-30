@@ -191,7 +191,7 @@
     <!--白色背景下服务器返回文字样式，当列表数据颜色随数量变化时使用-->
     <style name="ry_ser_text_inwhite">
         <item name="android:textSize">@dimen/digiwin_textsize</item>
-        <item name="android:textColor">@color/black_32</item>
+        <item name="android:textColor">@color/green1b</item>
     </style>
     <!--明细页面服务器返回字段-->
     <style name="ser_text_indetail">

@@ -268,6 +268,10 @@ public class ListSumBean implements Serializable {
      * 供应商编码
      */
     private String supplier_no;
+    /**
+     * 允收数量
+     */
+    private String ac_qty;
 
     public String getEmployee_no() {
         return employee_no;
@@ -751,6 +755,14 @@ public class ListSumBean implements Serializable {
 
     public void setShowing(String showing) {
         this.showing = showing;
+    }
+
+    public String getAc_qty() {
+        return ac_qty;
+    }
+
+    public void setAc_qty(String ac_qty) {
+        this.ac_qty = ac_qty;
     }
 
     @Override

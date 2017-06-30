@@ -9,7 +9,8 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_alignParentStart="true"
-        android:layout_below="@+id/toolbar_title">
+        android:layout_below="@+id/toolbar_title"
+        android:paddingBottom="@dimen/layout_50dp">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -34,20 +35,20 @@
                     android:layout_height="wrap_content">
 
                     <TextView
+                        style="@style/app_text_ingreen"
                         android:layout_width="@dimen/layout_70dp"
                         android:layout_height="wrap_content"
                         android:gravity="center_vertical"
-                        android:text="@string/item_name"
-                        style="@style/app_text_ingreen" />
+                        android:text="@string/item_name" />
 
                     <TextView
                         android:id="@+id/tv_item_name"
+                        style="@style/ser_text_ingreen"
                         android:layout_width="@dimen/layout_0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="@dimen/layout_10dp"
                         android:layout_weight="1"
-                        android:background="@null"
-                        style="@style/ser_text_ingreen"/>
+                        android:background="@null" />
                 </LinearLayout>
 
                 <View style="@style/act_line_style"></View>
@@ -59,20 +60,20 @@
 
                     <TextView
                         android:id="@+id/tv_format"
+                        style="@style/app_text_ingreen"
                         android:layout_width="@dimen/layout_70dp"
                         android:layout_height="wrap_content"
                         android:gravity="center_vertical"
-                        android:text="@string/model"
-                        style="@style/app_text_ingreen"/>
+                        android:text="@string/model" />
 
                     <TextView
                         android:id="@+id/et_format"
+                        style="@style/ser_text_ingreen"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="@dimen/layout_10dp"
                         android:layout_weight="1"
-                        android:background="@null"
-                        style="@style/ser_text_ingreen" />
+                        android:background="@null" />
                 </LinearLayout>
 
                 <View style="@style/act_line_style"></View>
@@ -91,18 +92,18 @@
 
                         <TextView
                             android:id="@+id/tv_stock_balance_string"
+                            style="@style/app_text_ingreen"
                             android:layout_width="@dimen/layout_70dp"
                             android:layout_height="wrap_content"
                             android:paddingRight="@dimen/layout_5dp"
-                            android:text="@string/locator_num"
-                            style="@style/app_text_ingreen"/>
+                            android:text="@string/locator_num" />
 
                         <TextView
                             android:id="@+id/tv_material_return_big"
+                            style="@style/ser_text_ingreen"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginLeft="@dimen/layout_10dp"
-                            style="@style/ser_text_ingreen" />
+                            android:layout_marginLeft="@dimen/layout_10dp" />
 
                     </LinearLayout>
 
@@ -114,18 +115,18 @@
 
                         <TextView
                             android:id="@+id/tv_under_feed_string"
+                            style="@style/app_text_ingreen"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:paddingRight="@dimen/layout_5dp"
-                            android:text="@string/left_material_num"
-                            style="@style/app_text_ingreen" />
+                            android:text="@string/left_material_num" />
 
                         <TextView
                             android:id="@+id/tv_material_return"
+                            style="@style/ser_text_ingreen"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginLeft="@dimen/layout_10dp"
-                            style="@style/ser_text_ingreen"/>
+                            android:layout_marginLeft="@dimen/layout_10dp" />
                     </LinearLayout>
 
                 </LinearLayout>
@@ -139,18 +140,18 @@
 
                     <TextView
                         android:id="@+id/tv_actual_yield_string"
+                        style="@style/app_text_ingreen"
                         android:layout_width="@dimen/layout_70dp"
                         android:layout_height="wrap_content"
                         android:paddingRight="@dimen/layout_5dp"
-                        android:text="@string/scanned"
-                        style="@style/app_text_ingreen" />
+                        android:text="@string/scanned" />
 
                     <TextView
                         android:id="@+id/tv_feeding_amount"
+                        style="@style/ser_text_ingreen"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="@dimen/layout_10dp"
-                        style="@style/ser_text_ingreen"/>
+                        android:layout_marginLeft="@dimen/layout_10dp" />
                 </LinearLayout>
             </LinearLayout>
 
@@ -172,11 +173,11 @@
 
                     <TextView
                         android:id="@+id/tv_locator"
+                        style="@style/app_text_inwhite"
                         android:layout_width="@dimen/layout_70dp"
                         android:layout_height="wrap_content"
                         android:layout_centerVertical="true"
-                        android:text="@string/locator"
-                        style="@style/app_text_inwhite"/>
+                        android:text="@string/locator" />
 
                     <EditText
                         android:id="@+id/et_scan_locator"
@@ -207,11 +208,11 @@
 
                     <TextView
                         android:id="@+id/tv_barcode"
+                        style="@style/app_text_inwhite"
                         android:layout_width="@dimen/layout_70dp"
                         android:layout_height="wrap_content"
                         android:layout_centerVertical="true"
-                        android:text="@string/barcode_no"
-                        style="@style/app_text_inwhite"/>
+                        android:text="@string/barcode_no" />
 
                     <EditText
                         android:id="@+id/et_scan_barocde"
@@ -236,11 +237,11 @@
 
                     <TextView
                         android:id="@+id/tv_number"
+                        style="@style/app_text_inwhite"
                         android:layout_width="@dimen/layout_70dp"
                         android:layout_height="wrap_content"
                         android:layout_centerVertical="true"
-                        android:text="@string/num"
-                        style="@style/app_text_inwhite"/>
+                        android:text="@string/num" />
 
                     <EditText
                         android:id="@+id/et_input_num"
@@ -257,6 +258,7 @@
                         android:textSize="@dimen/textSize_14sp" />
                 </LinearLayout>
             </LinearLayout>
+
             <include layout="@layout/ryitem_fifo_common" />
         </LinearLayout>
     </ScrollView>
