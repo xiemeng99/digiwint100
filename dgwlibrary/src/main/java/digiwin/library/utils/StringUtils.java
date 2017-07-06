@@ -280,7 +280,7 @@ public class StringUtils {
      */
     public static String deleteZero(String str) {
         if (null != str) {
-            if(str.indexOf(".") > 0){
+            if (str.indexOf(".") > 0) {
                 str = str.replaceAll("0+?$", "");//去掉多余的0
                 str = str.replaceAll("[.]$", "");//如最后一位是.则去掉
                 return str;

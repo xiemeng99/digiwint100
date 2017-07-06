@@ -13,7 +13,7 @@ import android.view.WindowManager;
 import static android.content.ContentValues.TAG;
 
 /**
- * Created by ChangquanSun
+ * Created by qGod
  * 2017/1/1
  * 获取屏幕属性工具类
  */
@@ -161,6 +161,6 @@ public class ViewUtils {
     public static View getFocusView(Activity activity) {
         View rootview = activity.getWindow().getDecorView();
         View focusView = rootview.findFocus();
-        return  focusView;
+        return focusView;
     }
 }

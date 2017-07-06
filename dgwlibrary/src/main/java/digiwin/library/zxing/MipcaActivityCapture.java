@@ -1,7 +1,9 @@
 package digiwin.library.zxing;
 
+import android.Manifest;
 import android.app.Activity;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.content.res.AssetFileDescriptor;
 import android.graphics.Bitmap;
 import android.hardware.Camera;
@@ -11,6 +13,8 @@ import android.media.MediaPlayer.OnCompletionListener;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Vibrator;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.view.Surface;
 import android.view.SurfaceHolder;
 import android.view.SurfaceHolder.Callback;
@@ -67,6 +71,13 @@ public class MipcaActivityCapture extends Activity implements Callback {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.zxing_capture);
         CameraManager.init(getApplication());
+
+        //检测照相机权限
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA)
+                != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.CAMERA}, 0);
+        }
+
         viewfinderView = (ViewfinderView) findViewById(R.id.viewfinder_view);
 
         View mBack = findViewById(R.id.iv_back);

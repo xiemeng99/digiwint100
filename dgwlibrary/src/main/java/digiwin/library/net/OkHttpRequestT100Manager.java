@@ -52,7 +52,7 @@ public class OkHttpRequestT100Manager implements IRequestManager {
     }
 
     public static OkHttpRequestT100Manager getInstance(Context context) {
-        OkHttpRequestT100Manager.context = context;
+        OkHttpRequestT100Manager.context = context.getApplicationContext();
         return SingletonHolder.INSTANCE;
     }
 
@@ -67,7 +67,7 @@ public class OkHttpRequestT100Manager implements IRequestManager {
                 .url(url)
                 .get()
                 .build();
-        addCallBack(context,requestCallBack, request);
+        addCallBack(context, requestCallBack, request);
     }
 
     @Override
@@ -78,7 +78,7 @@ public class OkHttpRequestT100Manager implements IRequestManager {
                 .url(url)
                 .post(body)
                 .build();
-        addCallBack(context,requestCallBack, request);
+        addCallBack(context, requestCallBack, request);
     }
 
     @Override
@@ -93,7 +93,7 @@ public class OkHttpRequestT100Manager implements IRequestManager {
                 .addHeader("SOAPAction", "\"\"")
                 .url(url)
                 .build();
-        downLoad(context,request, filePath, apkName, callBack);
+        downLoad(context, request, filePath, apkName, callBack);
     }
 
     @Override
@@ -110,7 +110,7 @@ public class OkHttpRequestT100Manager implements IRequestManager {
                     handler.post(new Runnable() {
                         @Override
                         public void run() {
-                            requestCallback.onFailure(context,new Exception("NewWork connection fail"));
+                            requestCallback.onFailure(context, new Exception("NewWork connection fail"));
                         }
                     });
                 }
@@ -122,7 +122,7 @@ public class OkHttpRequestT100Manager implements IRequestManager {
                         @Override
                         public void run() {
                             if (string.equals("") || string == null) {
-                                requestCallback.onFailure(context,new NullPointerException("Response data is null"));
+                                requestCallback.onFailure(context, new NullPointerException("Response data is null"));
                                 return;
                             }
                             requestCallback.onResponse(string);
@@ -136,7 +136,7 @@ public class OkHttpRequestT100Manager implements IRequestManager {
 
     }
 
-    private void downLoad(final Context context,Request request, final String filePath, final String apkName, final IDownLoadCallBack callBack) {
+    private void downLoad(final Context context, Request request, final String filePath, final String apkName, final IDownLoadCallBack callBack) {
 
         okHttpClient.newCall(request).enqueue(new Callback() {
             @Override
@@ -144,7 +144,7 @@ public class OkHttpRequestT100Manager implements IRequestManager {
                 handler.post(new Runnable() {
                     @Override
                     public void run() {
-                        callBack.onFailure(context,new Exception("NewWork connection fail"));
+                        callBack.onFailure(context, new Exception("NewWork connection fail"));
                     }
                 });
             }

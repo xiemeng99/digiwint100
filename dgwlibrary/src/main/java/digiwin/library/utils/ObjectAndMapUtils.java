@@ -21,23 +21,24 @@ public class ObjectAndMapUtils {
     public static <T> Map<String, String> getValueMap(T obj) {
 
         Map<String, String> map = new HashMap<String, String>();
-        if (null!=obj){
-        Field[] fields = obj.getClass().getDeclaredFields();
-        for (int i = 0, len = fields.length; i < len; i++) {
-            String varName = fields[i].getName();
-            try {
-                boolean accessFlag = fields[i].isAccessible();
-                fields[i].setAccessible(true);
-                Object o = fields[i].get(obj);
-                if (o != null)
-                    map.put(varName, o.toString());
-                fields[i].setAccessible(accessFlag);
-            } catch (IllegalArgumentException ex) {
-                ex.printStackTrace();
-            } catch (IllegalAccessException ex) {
-                ex.printStackTrace();
+        if (null != obj) {
+            Field[] fields = obj.getClass().getDeclaredFields();
+            for (int i = 0, len = fields.length; i < len; i++) {
+                String varName = fields[i].getName();
+                try {
+                    boolean accessFlag = fields[i].isAccessible();
+                    fields[i].setAccessible(true);
+                    Object o = fields[i].get(obj);
+                    if (o != null)
+                        map.put(varName, o.toString());
+                    fields[i].setAccessible(accessFlag);
+                } catch (IllegalArgumentException ex) {
+                    ex.printStackTrace();
+                } catch (IllegalAccessException ex) {
+                    ex.printStackTrace();
+                }
             }
-        }}
+        }
         return map;
     }
 

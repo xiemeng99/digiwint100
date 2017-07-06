@@ -8,7 +8,9 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 /**
- * Created by ChangQuan.Sun on 2016/12/16.
+ * Created by qGod
+ * 2016/12/16
+ * 线程池工具类
  */
 
 public class ThreadPoolManager {
@@ -18,7 +20,7 @@ public class ThreadPoolManager {
     private ExecutorService executor;
 
     private ThreadPoolManager() {
-        executor =  Executors.newCachedThreadPool();
+        executor = Executors.newCachedThreadPool();
     }
 
     public static synchronized ThreadPoolManager getInstance() {
@@ -28,17 +30,17 @@ public class ThreadPoolManager {
         return sInstance;
     }
 
-    private Handler handler=new Handler(Looper.getMainLooper()){
+    private Handler handler = new Handler(Looper.getMainLooper()) {
         @Override
         public void handleMessage(Message msg) {
-            TaskCompletedListener listener = (TaskCompletedListener)msg.obj;
-            if (listener != null)
-            {
+            TaskCompletedListener listener = (TaskCompletedListener) msg.obj;
+            if (listener != null) {
                 //更新UI，运行在UI线程当中
                 listener.doSome();
             }
         }
     };
+
     /**
      * 方法描述：关闭线程池不再接受新的任务
      */
@@ -64,24 +66,23 @@ public class ThreadPoolManager {
      *
      * @param runnable 任务的Runnable对象
      */
-    public void executeTask(Runnable runnable,TaskCompletedListener listener) {
+    public void executeTask(Runnable runnable, TaskCompletedListener listener) {
         if (executor.isShutdown()) {
             ThreadPoolManager.getInstance();
         }
         //异步操作
-        if(runnable!=null) {
+        if (runnable != null) {
             executor.execute(runnable);
         }
         //回调主线程，用于更新相关ui
-        if(listener!=null) {
+        if (listener != null) {
             Message msg = new Message();
             msg.obj = listener;
             handler.sendMessage(msg);
         }
     }
 
-    public interface TaskCompletedListener
-    {
-         void doSome();
+    public interface TaskCompletedListener {
+        void doSome();
     }
 }

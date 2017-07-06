@@ -33,7 +33,7 @@ public class OkHttpRequestManager implements IRequestManager {
     public static final int DOWNLOAD_FAIL = 2;
     public static final int DOWNLOAD_PROGRESS = 3;
     public static final MediaType TYPE_JSON = MediaType.parse("application/json; charset=utf-8");
-   public static final MediaType TYPE_XML = MediaType.parse("text/xml; charset=utf-8");
+    public static final MediaType TYPE_XML = MediaType.parse("text/xml; charset=utf-8");
     private OkHttpClient okHttpClient;
     private Handler handler;
     private static Context context;
@@ -53,7 +53,7 @@ public class OkHttpRequestManager implements IRequestManager {
     }
 
     public static OkHttpRequestManager getInstance(Context context) {
-        OkHttpRequestManager.context = context;
+        OkHttpRequestManager.context = context.getApplicationContext();
         return SingletonHolder.INSTANCE;
     }
 
@@ -68,7 +68,7 @@ public class OkHttpRequestManager implements IRequestManager {
                 .url(url)
                 .get()
                 .build();
-        addCallBack(context,requestCallBack, request);
+        addCallBack(context, requestCallBack, request);
     }
 
     @Override
@@ -79,7 +79,7 @@ public class OkHttpRequestManager implements IRequestManager {
                 .url(url)
                 .post(body)
                 .build();
-        addCallBack(context,requestCallBack, request);
+        addCallBack(context, requestCallBack, request);
     }
 
     @Override
@@ -94,7 +94,7 @@ public class OkHttpRequestManager implements IRequestManager {
                 .addHeader("SOAPAction", "\"\"")
                 .url(url)
                 .build();
-        downLoad(context,request, filePath, apkName, callBack);
+        downLoad(context, request, filePath, apkName, callBack);
     }
 
     @Override
@@ -111,7 +111,7 @@ public class OkHttpRequestManager implements IRequestManager {
                     handler.post(new Runnable() {
                         @Override
                         public void run() {
-                            requestCallback.onFailure(context,new Exception("NewWork connection fail"));
+                            requestCallback.onFailure(context, new Exception("NewWork connection fail"));
                         }
                     });
                 }
@@ -123,7 +123,7 @@ public class OkHttpRequestManager implements IRequestManager {
                         @Override
                         public void run() {
                             if (string.equals("") || string == null) {
-                                requestCallback.onFailure(context,new NullPointerException("Response data is null"));
+                                requestCallback.onFailure(context, new NullPointerException("Response data is null"));
                                 return;
                             }
                             requestCallback.onResponse(string);
@@ -137,7 +137,7 @@ public class OkHttpRequestManager implements IRequestManager {
 
     }
 
-    private void downLoad(final Context context,Request request, final String filePath, final String apkName, final IDownLoadCallBack callBack) {
+    private void downLoad(final Context context, Request request, final String filePath, final String apkName, final IDownLoadCallBack callBack) {
 
         okHttpClient.newCall(request).enqueue(new Callback() {
             @Override
@@ -145,7 +145,7 @@ public class OkHttpRequestManager implements IRequestManager {
                 handler.post(new Runnable() {
                     @Override
                     public void run() {
-                        callBack.onFailure(context,new Exception("NewWork connection fail"));
+                        callBack.onFailure(context, new Exception("NewWork connection fail"));
                     }
                 });
             }

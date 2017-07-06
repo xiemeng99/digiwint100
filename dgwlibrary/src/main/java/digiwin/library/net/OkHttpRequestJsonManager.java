@@ -65,7 +65,7 @@ public class OkHttpRequestJsonManager implements IRequestManager {
     }
 
     public static OkHttpRequestJsonManager getInstance(Context context) {
-        OkHttpRequestJsonManager.context = context;
+        OkHttpRequestJsonManager.context = context.getApplicationContext();
         return SingletonHolder.INSTANCE;
     }
 
@@ -131,7 +131,7 @@ public class OkHttpRequestJsonManager implements IRequestManager {
                 builder.addFormDataPart(key, object.toString());
             } else {
                 File file = (File) object;
-                LogUtils.i(TAG, "updateFile--->"+file);
+                LogUtils.i(TAG, "updateFile--->" + file);
                 builder.addFormDataPart(key, file.getName(), createProgressRequestBody(MEDIA_OBJECT_STREAM, file, updateCallBack));
             }
         }
@@ -178,7 +178,6 @@ public class OkHttpRequestJsonManager implements IRequestManager {
     }
 
 
-
     private void addCallBack(final Context context, final IRequestCallBack requestCallback, final Request request) {
         try {
             okHttpClient.newCall(request).enqueue(new Callback() {
@@ -212,6 +211,7 @@ public class OkHttpRequestJsonManager implements IRequestManager {
         }
 
     }
+
     /**
      * 上传进度
      */
@@ -220,7 +220,7 @@ public class OkHttpRequestJsonManager implements IRequestManager {
     /**
      * 上传进度
      */
-    public  RequestBody createProgressRequestBody(final MediaType contentType, final File file, final IUpdateCallBack callBack) {
+    public RequestBody createProgressRequestBody(final MediaType contentType, final File file, final IUpdateCallBack callBack) {
         return new RequestBody() {
             @Override
             public MediaType contentType() {
@@ -239,7 +239,7 @@ public class OkHttpRequestJsonManager implements IRequestManager {
                     source = Okio.source(file);
                     Buffer buf = new Buffer();
                     final long remaining = contentLength();
-                    current=0;
+                    current = 0;
                     for (long readCount; (readCount = source.read(buf, 2048)) != -1; ) {
                         sink.write(buf, readCount);
                         current += readCount;

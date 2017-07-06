@@ -191,25 +191,27 @@ public class TelephonyUtils {
         }
 
     }
+
     /**
      * 获取唯一设备号
+     *
      * @param
      */
     public static String getDeviceId(Context aty) {
-       StringBuffer sb=new StringBuffer();
+        StringBuffer sb = new StringBuffer();
         sb.append(getIME(aty));
 
         String wifi = getWifi(aty);
-        if (wifi.length()>6){
-            sb.append(wifi.substring(0,5));
-        }else {
+        if (wifi.length() > 6) {
+            sb.append(wifi.substring(0, 5));
+        } else {
             sb.append(wifi);
         }
 
         String androidId = getAndroidId(aty);
-        if (androidId.length()>6){
-            sb.append(androidId.substring(0,5));
-        }else {
+        if (androidId.length() > 6) {
+            sb.append(androidId.substring(0, 5));
+        } else {
             sb.append(androidId);
         }
         return sb.toString();
@@ -217,6 +219,7 @@ public class TelephonyUtils {
 
     /**
      * 获取设备号
+     *
      * @param context
      */
     public static String getIME(Context context) {
@@ -230,7 +233,7 @@ public class TelephonyUtils {
 //                }
 //            }
             TelephonyManager TelephonyMgr = (TelephonyManager) context.getSystemService(TELEPHONY_SERVICE);
-            if (null!= TelephonyMgr.getDeviceId()) {
+            if (null != TelephonyMgr.getDeviceId()) {
                 szImei = TelephonyMgr.getDeviceId();
             }
         } catch (Exception e) {
@@ -239,20 +242,20 @@ public class TelephonyUtils {
         return szImei;
     }
 
-    public static String getWifi(Context context){
-        String mac="";
+    public static String getWifi(Context context) {
+        String mac = "";
         WifiManager wifi = (WifiManager) context.getApplicationContext().getSystemService(Context.WIFI_SERVICE);
         WifiInfo info = wifi.getConnectionInfo();
         String wifiMac = info.getMacAddress();
-        if(!StringUtils.isBlank(wifiMac)){
-            mac=wifiMac;
+        if (!StringUtils.isBlank(wifiMac)) {
+            mac = wifiMac;
             return mac;
         }
-        LogUtils.e(TAG,"getDeviceId : "+mac);
+        LogUtils.e(TAG, "getDeviceId : " + mac);
         return mac;
     }
 
-    public  static String getAndroidId(Context context){
+    public static String getAndroidId(Context context) {
         String m_szAndroidID = Settings.Secure.getString(context.getContentResolver(), Settings.Secure.ANDROID_ID);
         return m_szAndroidID;
     }

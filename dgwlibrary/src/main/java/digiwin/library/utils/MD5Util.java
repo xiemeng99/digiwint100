@@ -11,14 +11,14 @@ import java.security.MessageDigest;
 public class MD5Util {
 
     private static final String TAG = "MD5Util";
+
     /***
      * MD5加密 生成32位md5码
      *
      * @param inStr 待加密字符串
      * @return 返回32位md5码
      */
-    public static String md5EncodeDeviceId(String inStr)
-         {
+    public static String md5EncodeDeviceId(String inStr) {
         inStr = "0" + inStr;
         try {
             MessageDigest md5 = null;
@@ -35,7 +35,7 @@ public class MD5Util {
             }
             return hexValue.toString();
         } catch (Exception e) {
-            LogUtils.e(TAG,"md5EncodeDeviceId异常");
+            LogUtils.e(TAG, "md5EncodeDeviceId异常");
         }
         return inStr;
     }
