@@ -15,7 +15,7 @@
         <TextView
             android:id="@+id/tv_shipping_order_string"
             style="@style/app_text_inwhite"
-            android:layout_width="@dimen/layout_70dp"
+            android:layout_width="@dimen/layout_60dp"
             android:layout_height="wrap_content"
             android:text="@string/shipping_order" />
 
@@ -39,7 +39,7 @@
         <TextView
             android:id="@+id/tv_shipping_date_string"
             style="@style/app_text_inwhite"
-            android:layout_width="@dimen/layout_70dp"
+            android:layout_width="@dimen/layout_60dp"
             android:layout_height="wrap_content"
             android:text="@string/shipping_date" />
 
@@ -63,7 +63,7 @@
         <TextView
             android:id="@+id/tv_custom_string"
             style="@style/app_text_inwhite"
-            android:layout_width="@dimen/layout_70dp"
+            android:layout_width="@dimen/layout_60dp"
             android:layout_height="wrap_content"
             android:text="@string/custom" />
 
@@ -88,7 +88,7 @@
         <TextView
             android:id="@+id/tv_apply_branch_string"
             style="@style/app_text_inwhite"
-            android:layout_width="@dimen/layout_70dp"
+            android:layout_width="@dimen/layout_60dp"
             android:layout_height="wrap_content"
             android:text="@string/apply_branch" />
 

@@ -24,7 +24,7 @@
                 android:layout_marginTop="@dimen/layout_6dp"
                 android:background="@drawable/accordingmaterialtop_pink_sharp"
                 android:orientation="vertical"
-                android:padding="@dimen/layout_7dp">
+                android:padding="@dimen/layout_5dp">
 
                 <LinearLayout
                     style="@style/ry_sum_itemstyle"
@@ -34,7 +34,6 @@
                     <TextView
                         android:layout_width="@dimen/layout_60dp"
                         android:layout_height="wrap_content"
-                        android:gravity="center_vertical"
                         android:text="@string/super_number"
                         style="@style/app_text_ingreen"/>
 
@@ -42,7 +41,6 @@
                         android:id="@+id/tv_super_number"
                         android:layout_width="@dimen/layout_0dp"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="@dimen/layout_3dp"
                         android:layout_weight="1"
                         android:background="@null"
                         style="@style/ser_text_ingreen" />
@@ -58,7 +56,6 @@
                     <TextView
                         android:layout_width="@dimen/layout_60dp"
                         android:layout_height="wrap_content"
-                        android:gravity="center_vertical"
                         android:text="@string/data"
                         style="@style/app_text_ingreen"/>
 
@@ -66,7 +63,6 @@
                         android:id="@+id/tv_date"
                         android:layout_width="@dimen/layout_0dp"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="@dimen/layout_3dp"
                         android:layout_weight="1"
                         android:background="@null"
                         style="@style/ser_text_ingreen" />
@@ -85,14 +81,12 @@
                         android:layout_width="@dimen/layout_60dp"
                         android:layout_height="wrap_content"
                         android:text="@string/applicant"
-                        android:paddingLeft="@dimen/layout_3dp"
                         style="@style/app_text_ingreen"/>
 
                     <TextView
                         android:id="@+id/tv_applicant"
                         android:layout_width="@dimen/layout_0dp"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="@dimen/layout_3dp"
                         android:layout_weight="1"
                         style="@style/ser_text_ingreen"/>
 
@@ -107,7 +101,6 @@
                         android:id="@+id/tv_department"
                         android:layout_width="@dimen/layout_0dp"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="@dimen/layout_3dp"
                         android:layout_weight="1"
                         style="@style/ser_text_ingreen" />
                 </LinearLayout>

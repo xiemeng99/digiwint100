@@ -7,7 +7,7 @@
     android:orientation="vertical">
 
     <LinearLayout
-        style="@style/itemstyle"
+        style="@style/ry_sum_itemstyle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
@@ -36,7 +36,7 @@
     <View style="@style/ry_line_style" />
 
     <LinearLayout
-        style="@style/itemstyle"
+        style="@style/ry_sum_itemstyle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
@@ -57,7 +57,7 @@
     <View style="@style/ry_line_style" />
 
     <LinearLayout
-        style="@style/itemstyle"
+        style="@style/ry_sum_itemstyle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
@@ -78,7 +78,7 @@
     <View style="@style/ry_line_style" />
 
     <LinearLayout
-        style="@style/itemstyle"
+        style="@style/ry_sum_itemstyle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
@@ -97,7 +97,7 @@
     </LinearLayout>
     <View style="@style/ry_line_style" />
     <LinearLayout
-        style="@style/itemstyle"
+        style="@style/ry_sum_itemstyle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
@@ -119,7 +119,7 @@
     <View style="@style/fg_line_style" />
 
     <LinearLayout
-        style="@style/itemstyle"
+        style="@style/ry_sum_itemstyle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
@@ -142,7 +142,7 @@
     <View style="@style/fg_line_style" />
 
     <LinearLayout
-        style="@style/itemstyle"
+        style="@style/ry_sum_itemstyle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">

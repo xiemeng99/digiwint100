@@ -38,7 +38,7 @@
 
                 <TextView
                     android:id="@+id/tv_shipping_order"
-                    android:layout_width="@dimen/layout_70dp"
+                    android:layout_width="@dimen/layout_60dp"
                     android:layout_height="wrap_content"
                     android:text="@string/shipping_order"
                     style="@style/app_text_inwhite" />
@@ -68,7 +68,7 @@
 
                 <TextView
                     android:id="@+id/tv_item_no"
-                    android:layout_width="@dimen/layout_70dp"
+                    android:layout_width="@dimen/layout_60dp"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
                     android:text="@string/item_no"
@@ -99,7 +99,7 @@
 
                 <TextView
                     android:id="@+id/tv_custom"
-                    android:layout_width="@dimen/layout_70dp"
+                    android:layout_width="@dimen/layout_60dp"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
                     android:text="@string/custom"
@@ -129,7 +129,7 @@
 
                 <TextView
                     android:id="@+id/tv_salesman"
-                    android:layout_width="@dimen/layout_70dp"
+                    android:layout_width="@dimen/layout_60dp"
                     android:layout_height="wrap_content"
                     android:text="@string/salesman"
                     style="@style/app_text_inwhite"/>
@@ -158,7 +158,7 @@
 
                 <TextView
                     android:id="@+id/tv_operating_department"
-                    android:layout_width="@dimen/layout_70dp"
+                    android:layout_width="@dimen/layout_60dp"
                     android:layout_height="wrap_content"
                     android:text="@string/operating_department"
                     style="@style/app_text_inwhite"/>
@@ -188,7 +188,7 @@
 
                 <TextView
                     android:id="@+id/tv_plan_date"
-                    android:layout_width="@dimen/layout_70dp"
+                    android:layout_width="@dimen/layout_60dp"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
                     android:text="@string/shipping_date"

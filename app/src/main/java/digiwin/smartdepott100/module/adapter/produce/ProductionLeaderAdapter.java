@@ -39,7 +39,7 @@ public class ProductionLeaderAdapter  extends BaseRecyclerAdapter<ListSumBean> {
         holder.setText(R.id.tv_model, item.getItem_spec());
         holder.setText(R.id.tv_apply_number, StringUtils.deleteZero(item.getApply_qty()));
         holder.setText(R.id.tv_swept_volume, StringUtils.deleteZero(item.getScan_sumqty()));
-
+        holder.setText(R.id.tv_material_return_big,StringUtils.deleteZero(item.getStock_qty()));
         if (numb2 == 0) {
             holder.setBackground(R.id.item_ll,R.drawable.red_scandetail_bg);
             holder.setTextColor(R.id.tv_item_no, mContext.getResources().getColor(R.color.Base_color));
@@ -48,6 +48,7 @@ public class ProductionLeaderAdapter  extends BaseRecyclerAdapter<ListSumBean> {
             holder.setTextColor(R.id.tv_model, mContext.getResources().getColor(R.color.Base_color));
             holder.setTextColor(R.id.tv_apply_number, mContext.getResources().getColor(R.color.Base_color));
             holder.setTextColor(R.id.tv_swept_volume, mContext.getResources().getColor(R.color.Base_color));
+            holder.setTextColor(R.id.tv_material_return_big, mContext.getResources().getColor(R.color.Base_color));
         } else if (numb1 > numb2) {
             holder.setBackground(R.id.item_ll,R.drawable.yellow_scandetail_bg);
             holder.setTextColor(R.id.tv_item_no,mContext.getResources().getColor( R.color.outside_yellow));
@@ -56,6 +57,7 @@ public class ProductionLeaderAdapter  extends BaseRecyclerAdapter<ListSumBean> {
             holder.setTextColor(R.id.tv_model, mContext.getResources().getColor(R.color.outside_yellow));
             holder.setTextColor(R.id.tv_apply_number,mContext.getResources().getColor( R.color.outside_yellow));
             holder.setTextColor(R.id.tv_swept_volume, mContext.getResources().getColor(R.color.outside_yellow));
+            holder.setTextColor(R.id.tv_material_return_big, mContext.getResources().getColor(R.color.outside_yellow));
         } else if (numb1 ==numb2) {
             holder.setBackground(R.id.item_ll,R.drawable.green_scandetail_bg);
             holder.setTextColor(R.id.tv_item_no,mContext.getResources().getColor( R.color.green1b));
@@ -64,6 +66,7 @@ public class ProductionLeaderAdapter  extends BaseRecyclerAdapter<ListSumBean> {
             holder.setTextColor(R.id.tv_model, mContext.getResources().getColor(R.color.green1b));
             holder.setTextColor(R.id.tv_apply_number,mContext.getResources().getColor( R.color.green1b));
             holder.setTextColor(R.id.tv_swept_volume, mContext.getResources().getColor(R.color.green1b));
+            holder.setTextColor(R.id.tv_material_return_big, mContext.getResources().getColor(R.color.green1b));
         }
     }
 }

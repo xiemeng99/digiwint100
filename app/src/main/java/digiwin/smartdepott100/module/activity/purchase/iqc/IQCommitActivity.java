@@ -154,6 +154,7 @@ public class IQCommitActivity extends BaseTitleActivity {
             public void onFailed(String error) {
                 dismissLoadingDialog();
                 showCommitFailDialog(error);
+
             }
         });
 

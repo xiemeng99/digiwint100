@@ -7,11 +7,9 @@
     android:orientation="vertical">
 
     <LinearLayout
-        style="@style/itemstyle"
+        style="@style/ry_sum_itemstyle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingLeft="@dimen/layout_0dp"
-        android:paddingRight="@dimen/layout_0dp"
         android:orientation="horizontal">
 
         <TextView
@@ -33,9 +31,7 @@
     <View style="@style/ry_line_style" />
 
     <LinearLayout
-        style="@style/itemstyle"
-        android:paddingLeft="@dimen/layout_0dp"
-        android:paddingRight="@dimen/layout_0dp"
+        style="@style/ry_sum_itemstyle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
@@ -69,11 +65,9 @@
 
     <View style="@style/ry_line_style" />
     <LinearLayout
-        style="@style/itemstyle"
+        style="@style/ry_sum_itemstyle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingLeft="@dimen/layout_0dp"
-        android:paddingRight="@dimen/layout_0dp"
         android:orientation="horizontal">
 
         <TextView

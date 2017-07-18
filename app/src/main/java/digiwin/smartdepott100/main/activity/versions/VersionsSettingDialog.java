@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Environment;
+import android.text.method.ScrollingMovementMethod;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.WindowManager;
@@ -56,6 +57,7 @@ public class VersionsSettingDialog {
         rl_download = (RelativeLayout) view.findViewById(R.id.rl_download);
         tv_download = (TextView) view.findViewById(R.id.tv_download);
         versions_dialog_tv = (TextView) view.findViewById(R.id.versions_dialog_tv);
+        versions_dialog_tv.setMovementMethod(ScrollingMovementMethod.getInstance());
         versions_num_tv = (TextView) view.findViewById(R.id.versions_num_tv);
 
         if(versionBean!=null){

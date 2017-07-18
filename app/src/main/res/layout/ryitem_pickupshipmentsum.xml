@@ -7,7 +7,7 @@
     android:orientation="vertical">
 
     <LinearLayout
-        style="@style/itemstyle"
+        style="@style/ry_sum_itemstyle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
@@ -35,12 +35,10 @@
             android:textSize="@dimen/textSize_14sp" />
     </LinearLayout>
 
-    <View
-        android:id="@+id/line_1"
-        style="@style/ry_line_style" />
+    <View style="@style/ry_line_style" />
 
     <LinearLayout
-        style="@style/itemstyle"
+        style="@style/ry_sum_itemstyle"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="horizontal">
@@ -59,12 +57,10 @@
             android:layout_height="wrap_content" />
     </LinearLayout>
 
-    <View
-        android:id="@+id/line_2"
-        style="@style/ry_line_style" />
+    <View style="@style/ry_line_style" />
 
     <LinearLayout
-        style="@style/itemstyle"
+        style="@style/ry_sum_itemstyle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
@@ -83,12 +79,10 @@
             android:layout_height="wrap_content" />
     </LinearLayout>
 
-    <View
-        android:id="@+id/line_3"
-        style="@style/ry_line_style" />
+    <View style="@style/ry_line_style" />
 
     <LinearLayout
-        style="@style/itemstyle"
+        style="@style/ry_sum_itemstyle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
@@ -108,6 +102,30 @@
             android:layout_weight="1" />
 
         <TextView
+            android:id="@+id/tv_actual_yield_string"
+            style="@style/app_text_inwhite"
+            android:layout_width="@dimen/layout_60dp"
+            android:layout_height="match_parent"
+            android:text="@string/actual_yield" />
+
+        <TextView
+            android:id="@+id/tv_feeding_amount"
+            style="@style/ry_ser_text_inwhite"
+            android:layout_width="@dimen/layout_0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" />
+
+    </LinearLayout>
+
+    <View style="@style/ry_line_style" />
+
+    <LinearLayout
+        style="@style/ry_sum_itemstyle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
             android:id="@+id/tv_stock_balance_string"
             style="@style/app_text_inwhite"
             android:layout_width="@dimen/layout_60dp"
@@ -121,30 +139,6 @@
             android:layout_height="wrap_content"
             android:layout_weight="1" />
 
-    </LinearLayout>
 
-    <View
-        android:id="@+id/line_4"
-        style="@style/ry_line_style" />
-
-    <LinearLayout
-        style="@style/itemstyle"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-
-
-        <TextView
-            android:id="@+id/tv_actual_yield_string"
-            style="@style/app_text_inwhite"
-            android:layout_width="@dimen/layout_60dp"
-            android:layout_height="match_parent"
-            android:text="@string/actual_yield" />
-
-        <TextView
-            android:id="@+id/tv_feeding_amount"
-            style="@style/ry_ser_text_inwhite"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
     </LinearLayout>
 </LinearLayout>

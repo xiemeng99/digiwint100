@@ -8,14 +8,14 @@
     android:orientation="vertical">
 
     <LinearLayout
-        style="@style/itemstyle"
+        style="@style/ry_sum_itemstyle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
 
         <TextView
             style="@style/app_text_inwhite"
-            android:layout_width="@dimen/layout_50dp"
+            android:layout_width="@dimen/layout_60dp"
             android:layout_height="wrap_content"
             android:text="@string/order_number" />
 
@@ -31,7 +31,7 @@
     <View style="@style/ry_line_style" />
 
     <LinearLayout
-        style="@style/itemstyle"
+        style="@style/ry_sum_itemstyle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
