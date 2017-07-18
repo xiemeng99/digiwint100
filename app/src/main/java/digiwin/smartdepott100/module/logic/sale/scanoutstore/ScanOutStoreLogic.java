@@ -41,7 +41,7 @@ public class ScanOutStoreLogic {
 
     private ScanOutStoreLogic(Context context, String module, String timestamp) {
         mTimestamp = timestamp;
-        mContext = context;
+        mContext = context.getApplicationContext();
         mModule = module;
 
     }
@@ -60,10 +60,11 @@ public class ScanOutStoreLogic {
 
         public void onFailed(String error);
     }
+
     /**
      * 保存
      */
-    public void saveScanOutStore(final SaveBean saveBean, final ScanOutSaveListener listener){
+    public void saveScanOutStore(final SaveBean saveBean, final ScanOutSaveListener listener) {
         ThreadPoolManager.getInstance().executeTask(new Runnable() {
             @Override
             public void run() {
@@ -102,7 +103,7 @@ public class ScanOutStoreLogic {
     /**
      * 点击获取明细
      */
-    public interface GetScanOutDetailDataListener{
+    public interface GetScanOutDetailDataListener {
 
         public void onSuccess(List<ScanOutDetailData> datas);
 
@@ -112,7 +113,7 @@ public class ScanOutStoreLogic {
     /**
      * 点击获取明细
      */
-    public void getScanOutDetailData(final Map<String,String> map,final GetScanOutDetailDataListener listener){
+    public void getScanOutDetailData(final Map<String, String> map, final GetScanOutDetailDataListener listener) {
         ThreadPoolManager.getInstance().executeTask(new Runnable() {
             @Override
             public void run() {
@@ -126,7 +127,7 @@ public class ScanOutStoreLogic {
                             if (null != xmlResp) {
                                 if (ReqTypeName.SUCCCESSCODE.equals(xmlResp.getCode())) {
                                     List<ScanOutDetailData> masterDatas = xmlResp.getMasterDatas(ScanOutDetailData.class);
-                                    if(masterDatas.size() == 0) {
+                                    if (masterDatas.size() == 0) {
                                         listener.onFailed(mContext.getResources().getString(R.string.data_null));
                                         return;
                                     }
@@ -150,7 +151,7 @@ public class ScanOutStoreLogic {
     /**
      * 点击删除明细
      */
-    public interface DeleteScanOutDetailDataListener{
+    public interface DeleteScanOutDetailDataListener {
 
         public void onSuccess(String msg);
 
@@ -160,7 +161,7 @@ public class ScanOutStoreLogic {
     /**
      * 点击获取明细
      */
-    public void deleteScanOutDetailData(final List<Map<String,String>> maps,final DeleteScanOutDetailDataListener listener){
+    public void deleteScanOutDetailData(final List<Map<String, String>> maps, final DeleteScanOutDetailDataListener listener) {
         ThreadPoolManager.getInstance().executeTask(new Runnable() {
             @Override
             public void run() {

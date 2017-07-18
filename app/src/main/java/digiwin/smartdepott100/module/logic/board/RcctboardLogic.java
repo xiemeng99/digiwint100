@@ -35,7 +35,7 @@ public class RcctboardLogic {
     private static RcctboardLogic logic;
 
     private RcctboardLogic(Context context, String module, String timestamp) {
-        mContext = context;
+        mContext = context.getApplicationContext();
         mModule = module;
         mTimestamp = timestamp;
 

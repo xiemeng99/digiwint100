@@ -1,6 +1,8 @@
 package digiwin.smartdepott100.core.base;
 
 import android.content.pm.ActivityInfo;
+import android.content.pm.ConfigurationInfo;
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.text.method.KeyListener;

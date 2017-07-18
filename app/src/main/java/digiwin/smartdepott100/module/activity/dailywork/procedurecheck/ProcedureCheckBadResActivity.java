@@ -37,6 +37,7 @@ import butterknife.OnTextChanged;
 import digiwin.library.dialog.OnDialogClickListener;
 import digiwin.library.utils.LogUtils;
 import digiwin.library.utils.StringUtils;
+import digiwin.library.utils.WeakRefHandler;
 import digiwin.pulltorefreshlibrary.recyclerview.DividerItemDecoration;
 import digiwin.pulltorefreshlibrary.recyclerview.FullyLinearLayoutManager;
 import digiwin.pulltorefreshlibrary.recyclerviewAdapter.BaseRecyclerAdapter;
@@ -136,7 +137,7 @@ public class ProcedureCheckBadResActivity extends BaseTitleActivity {
      */
     BaseSwipeMenuAdapter<ProcedureCheckoutBadResBean> hasBadReaAdapter;
 
-    private Handler mHandler = new Handler(new Handler.Callback() {
+    private Handler.Callback mCallback= new Handler.Callback() {
         @Override
         public boolean handleMessage(Message msg) {
             switch (msg.what) {
@@ -189,7 +190,10 @@ public class ProcedureCheckBadResActivity extends BaseTitleActivity {
             }
             return false;
         }
-    });
+    };
+
+    private Handler mHandler = new WeakRefHandler(mCallback);
+
     @Override
     protected Toolbar toolbar() {
         return toolbarTitle;
@@ -406,5 +410,11 @@ public class ProcedureCheckBadResActivity extends BaseTitleActivity {
             }
             holder.setText(R.id.tv_detail_reason, item.getDefect_reason_name());
         }
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        mHandler.removeCallbacksAndMessages(null);
     }
 }

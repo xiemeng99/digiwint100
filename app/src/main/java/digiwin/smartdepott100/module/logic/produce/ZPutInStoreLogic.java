@@ -28,9 +28,10 @@ import digiwin.library.utils.ThreadPoolManager;
  * @date 2017/5/28 11:01
  */
 
-public class ZPutInStoreLogic extends CommonLogic{
+public class ZPutInStoreLogic extends CommonLogic {
 
     public static ZPutInStoreLogic logic;
+
     protected ZPutInStoreLogic(Context context, String module, String timestamp) {
         super(context, module, timestamp);
     }
@@ -41,7 +42,6 @@ public class ZPutInStoreLogic extends CommonLogic{
     }
 
 
-
     /**
      * 入库上架获取列表数据
      */
@@ -50,7 +50,7 @@ public class ZPutInStoreLogic extends CommonLogic{
             @Override
             public void run() {
                 try {
-                    filterBean.setPagesize((String) SharedPreferencesUtils.get(mContext,SharePreKey.PAGE_SETTING, AddressContants.PAGE_NUM));
+                    filterBean.setPagesize((String) SharedPreferencesUtils.get(mContext, SharePreKey.PAGE_SETTING, AddressContants.PAGE_NUM));
                     String createJson = JsonReqForERP.objCreateJson(mModule, "als.b007.list.get", mTimestamp, filterBean);
                     OkhttpRequest.getInstance(mContext).post(createJson, new IRequestCallbackImp() {
                         @Override
@@ -58,7 +58,7 @@ public class ZPutInStoreLogic extends CommonLogic{
                             String error = mContext.getString(R.string.unknow_error);
                             if (null != string) {
                                 if (ReqTypeName.SUCCCESSCODE.equals(JsonResp.getCode(string))) {
-                                    List<FilterResultOrderBean> showBeanList = JsonResp.getParaDatas(string,"list",FilterResultOrderBean.class);
+                                    List<FilterResultOrderBean> showBeanList = JsonResp.getParaDatas(string, "list", FilterResultOrderBean.class);
                                     listener.onSuccess(showBeanList);
                                     return;
                                 } else {
@@ -77,8 +77,6 @@ public class ZPutInStoreLogic extends CommonLogic{
     }
 
 
-
-
     /**
      * 富钛入库上架获取汇总列表
      */
@@ -94,7 +92,7 @@ public class ZPutInStoreLogic extends CommonLogic{
                             String error = mContext.getString(R.string.unknow_error);
                             if (null != string) {
                                 if (ReqTypeName.SUCCCESSCODE.equals(JsonResp.getCode(string))) {
-                                    List<ListSumBean> showBeanList = JsonResp.getParaDatas(string,"list_detail",ListSumBean.class);
+                                    List<ListSumBean> showBeanList = JsonResp.getParaDatas(string, "list_detail", ListSumBean.class);
                                     listener.onSuccess(showBeanList);
                                     return;
                                 } else {
@@ -115,6 +113,7 @@ public class ZPutInStoreLogic extends CommonLogic{
 
     /**
      * 提交
+     *
      * @param map map可以直接为空
      */
     public void commit(final Map<String, String> map, final CommitListener listener) {
@@ -129,7 +128,7 @@ public class ZPutInStoreLogic extends CommonLogic{
                             String error = mContext.getString(R.string.unknow_error);
                             if (null != string) {
                                 if (ReqTypeName.SUCCCESSCODE.equals(JsonResp.getCode(string))) {
-                                    listener.onSuccess(JsonResp.getParaString(string,AddressContants.DOC_NO));
+                                    listener.onSuccess(JsonResp.getParaString(string, AddressContants.DOC_NO));
                                     return;
                                 } else {
                                     error = JsonResp.getDescription(string);

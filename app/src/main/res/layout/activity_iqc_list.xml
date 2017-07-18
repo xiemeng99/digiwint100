@@ -11,9 +11,9 @@
         android:id="@+id/ll_search_input"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/layout_6dp"
         android:layout_marginLeft="@dimen/layout_10dp"
         android:layout_marginRight="@dimen/layout_10dp"
+        android:layout_marginTop="@dimen/layout_6dp"
         android:background="@drawable/yellow_scandetail_bg"
         android:orientation="vertical"
         android:padding="@dimen/layout_5dp">
@@ -26,11 +26,11 @@
 
             <TextView
                 android:id="@+id/tv_purchase_order"
-                android:layout_width="@dimen/layout_70dp"
+                style="@style/app_text_inwhite"
+                android:layout_width="@dimen/layout_60dp"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
-                android:text="@string/purchase_order"
-                style="@style/app_text_inwhite"/>
+                android:text="@string/purchase_order" />
 
             <EditText
                 android:id="@+id/et_purchase_order"
@@ -46,22 +46,138 @@
         </LinearLayout>
 
         <View style="@style/fg_line_style" />
+
         <LinearLayout
-            android:id="@+id/ll_supplier"
+            android:id="@+id/ll_check_no"
             style="@style/itemstyle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
             <TextView
-                android:id="@+id/tv_supplier"
-                android:layout_width="@dimen/layout_70dp"
+                android:id="@+id/tv_check_no"
+                style="@style/app_text_inwhite"
+                android:layout_width="@dimen/layout_60dp"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
-                android:text="@string/supplier"
-                style="@style/app_text_inwhite"/>
+                android:text="@string/check_no" />
 
             <EditText
-                android:id="@+id/et_supplier"
+                android:id="@+id/et_check_no"
+                android:layout_width="@dimen/layout_0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/layout_10dp"
+                android:layout_weight="1"
+                android:background="@null"
+                android:singleLine="true"
+                android:textColor="@color/black_32"
+                android:textCursorDrawable="@drawable/et_cursor_yellow"
+                android:textSize="@dimen/textSize_14sp" />
+        </LinearLayout>
+
+        <View style="@style/fg_line_style" />
+
+        <LinearLayout
+            android:id="@+id/ll_item_no"
+            style="@style/itemstyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/tv_item_no"
+                style="@style/app_text_inwhite"
+                android:layout_width="@dimen/layout_60dp"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:text="@string/item_no" />
+
+            <EditText
+                android:id="@+id/et_item_no"
+                android:layout_width="@dimen/layout_0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/layout_10dp"
+                android:layout_weight="1"
+                android:background="@null"
+                android:singleLine="true"
+                android:textColor="@color/black_32"
+                android:textCursorDrawable="@drawable/et_cursor_yellow"
+                android:textSize="@dimen/textSize_14sp" />
+        </LinearLayout>
+
+        <View style="@style/fg_line_style" />
+
+        <LinearLayout
+            android:id="@+id/ll_barcode_no"
+            style="@style/itemstyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/tv_barcode_no"
+                style="@style/app_text_inwhite"
+                android:layout_width="@dimen/layout_60dp"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:text="@string/barcode_no" />
+
+            <EditText
+                android:id="@+id/et_barcode_no"
+                android:layout_width="@dimen/layout_0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/layout_10dp"
+                android:layout_weight="1"
+                android:background="@null"
+                android:singleLine="true"
+                android:textColor="@color/black_32"
+                android:textCursorDrawable="@drawable/et_cursor_yellow"
+                android:textSize="@dimen/textSize_14sp" />
+        </LinearLayout>
+
+        <View style="@style/fg_line_style" />
+        <LinearLayout
+            android:id="@+id/ll_check_employ"
+            style="@style/itemstyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/tv_check_employ"
+                style="@style/app_text_inwhite"
+                android:layout_width="@dimen/layout_60dp"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:text="@string/check_employee" />
+
+            <EditText
+                android:id="@+id/et_check_employ"
+                android:layout_width="@dimen/layout_0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/layout_10dp"
+                android:layout_weight="1"
+                android:background="@null"
+                android:singleLine="true"
+                android:textColor="@color/black_32"
+                android:textCursorDrawable="@drawable/et_cursor_yellow"
+                android:textSize="@dimen/textSize_14sp" />
+        </LinearLayout>
+
+        <View style="@style/fg_line_style" />
+
+        <LinearLayout
+            android:id="@+id/ll_depart"
+            style="@style/itemstyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/tv_depart"
+                style="@style/app_text_inwhite"
+                android:layout_width="@dimen/layout_60dp"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:text="@string/check_depart" />
+
+            <EditText
+                android:id="@+id/et_depart"
                 android:layout_width="@dimen/layout_0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/layout_10dp"
@@ -76,8 +192,6 @@
         <View style="@style/fg_line_style" />
 
 
-
-
         <LinearLayout
             android:id="@+id/ll_date"
             style="@style/itemstyle"
@@ -86,11 +200,11 @@
 
             <TextView
                 android:id="@+id/tv_date"
-                android:layout_width="@dimen/layout_70dp"
+                style="@style/app_text_inwhite"
+                android:layout_width="@dimen/layout_60dp"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
-                android:text="@string/data"
-                style="@style/app_text_inwhite"/>
+                android:text="@string/data" />
 
             <EditText
                 android:id="@+id/et_date"

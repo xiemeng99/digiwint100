@@ -35,7 +35,7 @@ public class TctsboardLogic {
     private static TctsboardLogic logic;
 
     private TctsboardLogic(Context context, String module, String timestamp) {
-        mContext = context;
+        mContext = context.getApplicationContext();
         mModule = module;
         mTimestamp = timestamp;
 

@@ -96,6 +96,10 @@ public class FilterBean {
      * 调拨拨入拨出状态
      */
     private String doc_stus;
+    /**
+     * 收货单号
+     */
+    private String receipt_no;
 
     public String getPagesize() {
         return pagesize;
@@ -269,5 +273,13 @@ public class FilterBean {
 
     public void setDoc_stus(String doc_stus) {
         this.doc_stus = doc_stus;
+    }
+
+    public String getReceipt_no() {
+        return receipt_no;
+    }
+
+    public void setReceipt_no(String receipt_no) {
+        this.receipt_no = receipt_no;
     }
 }

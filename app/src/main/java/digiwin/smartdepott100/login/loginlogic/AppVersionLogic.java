@@ -34,7 +34,7 @@ public class AppVersionLogic {
     private static AppVersionLogic logic;
 
     private AppVersionLogic(Context context,String module,String timestamp) {
-        mContext = context;
+        mContext = context.getApplicationContext();
         mModule=module;
         mTimestamp=timestamp;
 

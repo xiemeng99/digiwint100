@@ -4,7 +4,6 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -17,7 +16,6 @@ import digiwin.smartdepott100.R;
 import digiwin.smartdepott100.core.appcontants.ModuleCode;
 import digiwin.smartdepott100.core.base.BaseTitleActivity;
 import digiwin.smartdepott100.module.adapter.purchase.IQCCommitAdapter;
-import digiwin.smartdepott100.module.adapter.purchase.IQCOutCommitAdapter;
 import digiwin.smartdepott100.module.bean.common.FilterResultOrderBean;
 import digiwin.smartdepott100.module.bean.common.ListSumBean;
 import digiwin.smartdepott100.module.logic.common.CommonLogic;
@@ -35,23 +33,18 @@ import digiwin.pulltorefreshlibrary.recyclerviewAdapter.BaseRecyclerAdapter;
 public class IQCommitActivity extends BaseTitleActivity {
     @BindView(R.id.toolbar_title)
     Toolbar toolbarTitle;
-    @BindView(R.id.tv_purchase_order)
-    TextView tvPurchaseOrder;
+    @BindView(R.id.tv_check_no)
+    TextView tvCheckNo;
     @BindView(R.id.tv_date)
     TextView tvDate;
-    @BindView(R.id.tv_supplier)
-    TextView tvSupplier;
+    @BindView(R.id.tv_check_employee)
+    TextView tvCheckEmploy;
+    @BindView(R.id.tv_check_depart)
+    TextView tvCheckDepart;
     @BindView(R.id.rl_top)
     LinearLayout rlTop;
     @BindView(R.id.ry_list)
     RecyclerView ryList;
-    @BindView(R.id.line_technics_name)
-    View lineTechnicsName;
-    @BindView(R.id.tv_technics_name)
-    TextView tvTechnicsName;
-    @BindView(R.id.ll_technics_name)
-    LinearLayout llTechnicsName;
-
     @OnClick(R.id.commit)
     void commit() {
         showCommitSureDialog(new OnDialogTwoListener() {
@@ -108,13 +101,10 @@ public class IQCommitActivity extends BaseTitleActivity {
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(activity);
         ryList.setLayoutManager(linearLayoutManager);
         upDateList();
-        tvPurchaseOrder.setText(filterOneBean.getDoc_no());
+        tvCheckNo.setText(filterOneBean.getDoc_no());
         tvDate.setText(filterOneBean.getCreate_date());
-        tvSupplier.setText(filterOneBean.getSupplier_name());
-        if ("1".equals(filterOneBean.getPurchase_type())) {
-            llTechnicsName.setVisibility(View.GONE);
-            lineTechnicsName.setVisibility(View.GONE);
-        }
+        tvCheckEmploy.setText(filterOneBean.getEmployee_name());
+        tvCheckDepart.setText(filterOneBean.getDepartment_name());
     }
 
     public void upDateList() {
@@ -124,11 +114,7 @@ public class IQCommitActivity extends BaseTitleActivity {
             public void onSuccess(List<ListSumBean> list) {
                 dismissLoadingDialog();
                 sumBeanList = list;
-                if ("2".equals(filterOneBean.getPurchase_type())) {
-                    adapter = new IQCOutCommitAdapter(context, sumBeanList);
-                } else {
-                    adapter = new IQCCommitAdapter(context, sumBeanList);
-                }
+                adapter = new IQCCommitAdapter(context, sumBeanList);
                 ryList.setAdapter(adapter);
             }
 
@@ -137,11 +123,7 @@ public class IQCommitActivity extends BaseTitleActivity {
                 dismissLoadingDialog();
                 sumBeanList.clear();
                 //清空列表
-                if ("2".equals(filterOneBean.getPurchase_type())) {
-                    adapter = new IQCOutCommitAdapter(context, sumBeanList);
-                } else {
-                    adapter = new IQCCommitAdapter(context, sumBeanList);
-                }
+                adapter = new IQCCommitAdapter(context, sumBeanList);
                 ryList.setAdapter(adapter);
                 showFailedDialog(error);
             }
@@ -155,23 +137,6 @@ public class IQCommitActivity extends BaseTitleActivity {
             showFailedDialog(R.string.nodate);
             return;
         }
-//        Map<Integer,Boolean> flagMap=new HashMap<>();
-//        if (adapter instanceof IQCCommitAdapter) {
-//            IQCCommitAdapter iqcCommitAdapter = (IQCCommitAdapter)adapter;
-//            flagMap = iqcCommitAdapter.getmFlagMap();
-//        }
-//        else if (adapter instanceof IQCOutCommitAdapter) {
-//            IQCOutCommitAdapter iqcCommitAdapter = (IQCOutCommitAdapter)adapter;
-//            flagMap = iqcCommitAdapter.getmFlagMap();
-//        }
-//        for (int i = 0; i < sumBeanList.size(); i++) {
-//            if (flagMap.get(i)){
-//                sumBeanList.get(i).setResult_type("1");
-//            }else {
-//                sumBeanList.get(i).setResult_type("2");
-//            }
-//
-//        }
         showLoadingDialog();
         iqcLogic.commit(sumBeanList, new CommonLogic.CommitListener() {
             @Override

@@ -38,7 +38,7 @@ public class PQCLogic {
     private static PQCLogic logic;
 
     private PQCLogic(Context context, String module, String timestamp) {
-        mContext = context;
+        mContext = context.getApplicationContext();
         mModule = module;
         mTimestamp = timestamp;
     }

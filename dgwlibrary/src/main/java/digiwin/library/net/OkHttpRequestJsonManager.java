@@ -186,7 +186,7 @@ public class OkHttpRequestJsonManager implements IRequestManager {
                     handler.post(new Runnable() {
                         @Override
                         public void run() {
-                            requestCallback.onFailure(context, new Exception("NewWork connection fail"));
+                            requestCallback.onFailure(context, new Exception("Network connection is failed"));
                         }
                     });
                 }

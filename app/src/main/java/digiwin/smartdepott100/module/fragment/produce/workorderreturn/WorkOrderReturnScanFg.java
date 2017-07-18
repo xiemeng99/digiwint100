@@ -21,6 +21,7 @@ import butterknife.OnTextChanged;
 import digiwin.library.dialog.OnDialogClickListener;
 import digiwin.library.utils.LogUtils;
 import digiwin.library.utils.StringUtils;
+import digiwin.library.utils.WeakRefHandler;
 import digiwin.smartdepott100.R;
 import digiwin.smartdepott100.core.appcontants.AddressContants;
 import digiwin.smartdepott100.core.base.BaseFragment;
@@ -192,7 +193,7 @@ public class WorkOrderReturnScanFg extends BaseFragment {
 
     String doc_no;
 
-    private Handler mHandler = new Handler(new Handler.Callback() {
+    private Handler.Callback mCallback= new Handler.Callback() {
         @Override
         public boolean handleMessage(Message msg) {
             switch (msg.what) {
@@ -265,7 +266,9 @@ public class WorkOrderReturnScanFg extends BaseFragment {
             }
             return false;
         }
-    });
+    };
+
+    private Handler mHandler = new WeakRefHandler(mCallback);
 
     @Override
     protected int bindLayoutId() {
@@ -334,4 +337,9 @@ public class WorkOrderReturnScanFg extends BaseFragment {
         }
     }
 
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        mHandler.removeCallbacksAndMessages(null);
+    }
 }

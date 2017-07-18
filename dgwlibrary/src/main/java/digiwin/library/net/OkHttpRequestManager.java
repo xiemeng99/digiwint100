@@ -105,15 +105,31 @@ public class OkHttpRequestManager implements IRequestManager {
 
     private void addCallBack(final Context context, final IRequestCallBack requestCallback, final Request request) {
         try {
+            final   String errmsg="{\n" +
+                    "             \"srvver\": \"1.0\",\n" +
+                    "              \"srvcode\": \"000\",\n" +
+                    "               \"payload\": {\n" +
+                    "                 \"std_data\": {\n" +
+                    "                    \"execution\": {\n" +
+                    "                        \"code\": \"azz-00204\",\n" +
+                    "                             \"sqlcode\": \"0\",\n" +
+                    "                  \"description\": \"Network connection is failed\"\n" +
+                    "                              }\n" +
+                    "                       }\n" +
+                    "                             }\n" +
+                    "                  }";
+
             okHttpClient.newCall(request).enqueue(new Callback() {
                 @Override
                 public void onFailure(final Call call, final IOException e) {
                     handler.post(new Runnable() {
                         @Override
                         public void run() {
-                            requestCallback.onFailure(context, new Exception("NewWork connection fail"));
+//                            requestCallback.onFailure(context, new Exception("NewWork connection fail"));
+                            requestCallback.onResponse(errmsg);
                         }
                     });
+
                 }
 
                 @Override
@@ -123,7 +139,8 @@ public class OkHttpRequestManager implements IRequestManager {
                         @Override
                         public void run() {
                             if (string.equals("") || string == null) {
-                                requestCallback.onFailure(context, new NullPointerException("Response data is null"));
+//                                requestCallback.onFailure(context, new NullPointerException("Response data is null"));
+                                requestCallback.onResponse(errmsg);
                                 return;
                             }
                             requestCallback.onResponse(string);

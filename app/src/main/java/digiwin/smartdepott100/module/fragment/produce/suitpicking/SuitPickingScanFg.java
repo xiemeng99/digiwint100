@@ -26,6 +26,7 @@ import butterknife.OnTextChanged;
 import digiwin.library.dialog.OnDialogClickListener;
 import digiwin.library.utils.LogUtils;
 import digiwin.library.utils.StringUtils;
+import digiwin.library.utils.WeakRefHandler;
 import digiwin.pulltorefreshlibrary.recyclerviewAdapter.BaseRecyclerAdapter;
 import digiwin.smartdepott100.R;
 import digiwin.smartdepott100.core.appcontants.AddressContants;
@@ -235,7 +236,7 @@ public class SuitPickingScanFg extends BaseFragment {
      */
     String issuingNo;
 
-    private Handler mHandler = new Handler(new Handler.Callback() {
+    private Handler.Callback mCallback= new Handler.Callback() {
         @Override
         public boolean handleMessage(Message msg) {
             switch (msg.what) {
@@ -264,7 +265,7 @@ public class SuitPickingScanFg extends BaseFragment {
 
                         @Override
                         public void onFailed(String error) {
-                          //  pickingFlag = false;
+                            //  pickingFlag = false;
                             fiFoList.clear();
                             adapter = new CommonDocNoFifoAdapter(pactivity, fiFoList);
                             ryList.setAdapter(adapter);
@@ -339,7 +340,9 @@ public class SuitPickingScanFg extends BaseFragment {
             }
             return false;
         }
-    });
+    };
+
+    private Handler mHandler = new WeakRefHandler(mCallback);
 
     @Override
     protected int bindLayoutId() {
@@ -400,4 +403,9 @@ public class SuitPickingScanFg extends BaseFragment {
         ryList.setLayoutManager(linearLayoutManager);
     }
 
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        mHandler.removeCallbacksAndMessages(null);
+    }
 }

@@ -96,16 +96,6 @@
             android:name=".module.activity.common.CommonDetailActivity"
             android:windowSoftInputMode="stateAlwaysHidden|adjustPan" />
         <activity
-            android:name=".module.activity.produce.distribute.DistributeActivity"
-            android:configChanges="keyboardHidden|screenSize"
-            android:windowSoftInputMode="stateAlwaysHidden|adjustPan">
-            <intent-filter>
-                <action android:name="android.intent.actiont100.smartdepot.DistributeActivity" />
-
-                <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
-        </activity>
-        <activity
             android:name=".module.activity.common.NoComeUnComActivity"
             android:windowSoftInputMode="stateAlwaysHidden|adjustPan" />
         <activity
@@ -124,6 +114,21 @@
             </intent-filter>
         </activity>
         <activity android:name=".module.activity.produce.transtersreview.TransfersToReviewComActivity" />
+        <!--生产配货-->
+        <activity
+            android:name=".module.activity.produce.distribute.DistributeActivity"
+            android:configChanges="keyboardHidden|screenSize"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustPan">
+            <intent-filter>
+                <action android:name="android.intent.actiont100.smartdepot.DistributeActivity" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".module.activity.produce.distribute.DistributeScanActivity"
+            android:configChanges="keyboardHidden|screenSize"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustPan"/>
 
         <!-- 退料过账 -->
         <activity
@@ -802,6 +807,7 @@
         </activity>
         <activity
             android:name=".module.activity.produce.putinstore.ZPutInStoreActivity"
+            android:configChanges="screenSize|orientation|keyboardHidden"
             android:windowSoftInputMode="stateAlwaysHidden|adjustPan">
             <intent-filter>
                 <action android:name="android.intent.actiont100.smartdepot.ZPutInStoreActivity" />
@@ -811,7 +817,8 @@
         </activity>
         <activity
             android:name=".module.activity.produce.putinstore.ZPutInStoreSecondActivity"
-            android:windowSoftInputMode="stateAlwaysHidden|adjustPan" />
+            android:windowSoftInputMode="stateAlwaysHidden|adjustPan"
+            android:configChanges="screenSize|orientation|keyboardHidden"/>
         <!-- 生产成套领料 -->
         <activity
             android:name=".module.activity.produce.suitpicking.SuitPickingListAcitivity"

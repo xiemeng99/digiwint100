@@ -41,8 +41,6 @@ public class SuitPickingHalfLogic extends CommonLogic {
     }
 
 
-
-
     /**
      * 生产成套领料半成品获取列表数据
      */
@@ -59,7 +57,7 @@ public class SuitPickingHalfLogic extends CommonLogic {
                             String error = mContext.getString(R.string.unknow_error);
                             if (null != string) {
                                 if (ReqTypeName.SUCCCESSCODE.equals(JsonResp.getCode(string))) {
-                                    List<FilterResultOrderBean> showBeanList = JsonResp.getParaDatas(string,"list",FilterResultOrderBean.class);
+                                    List<FilterResultOrderBean> showBeanList = JsonResp.getParaDatas(string, "list", FilterResultOrderBean.class);
                                     listener.onSuccess(showBeanList);
                                     return;
                                 } else {
@@ -78,8 +76,6 @@ public class SuitPickingHalfLogic extends CommonLogic {
     }
 
 
-
-
     /**
      * 生产成套领料半成品获取汇总列表
      */
@@ -95,7 +91,7 @@ public class SuitPickingHalfLogic extends CommonLogic {
                             String error = mContext.getString(R.string.unknow_error);
                             if (null != string) {
                                 if (ReqTypeName.SUCCCESSCODE.equals(JsonResp.getCode(string))) {
-                                    List<ListSumBean> showBeanList = JsonResp.getParaDatas(string,"list_detail",ListSumBean.class);
+                                    List<ListSumBean> showBeanList = JsonResp.getParaDatas(string, "list_detail", ListSumBean.class);
                                     listener.onSuccess(showBeanList);
                                     return;
                                 } else {
@@ -115,6 +111,7 @@ public class SuitPickingHalfLogic extends CommonLogic {
 
     /**
      * 提交
+     *
      * @param map map可以直接为空
      */
     public void commit(final Map<String, String> map, final CommitListener listener) {
@@ -129,7 +126,7 @@ public class SuitPickingHalfLogic extends CommonLogic {
                             String error = mContext.getString(R.string.unknow_error);
                             if (null != string) {
                                 if (ReqTypeName.SUCCCESSCODE.equals(JsonResp.getCode(string))) {
-                                    listener.onSuccess(JsonResp.getParaString(string,AddressContants.DOC_NO));
+                                    listener.onSuccess(JsonResp.getParaString(string, AddressContants.DOC_NO));
                                     return;
                                 } else {
                                     error = JsonResp.getDescription(string);

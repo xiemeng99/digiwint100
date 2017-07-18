@@ -321,7 +321,6 @@ public class MiscellaneousissuesOutListActivity extends BaseTitleActivity {
                         scrollview.setVisibility(View.VISIBLE);
                         iv_title_setting.setVisibility(View.VISIBLE);
                         ivScan.setVisibility(View.INVISIBLE);
-                        mName.setText(getString(R.string.filter_result_list));
                         sumShowBeanList = new ArrayList<FilterResultOrderBean>();
                         sumShowBeanList = list;
                         adapter = new MiscellaneousissuesOutAdapter(mactivity, sumShowBeanList);

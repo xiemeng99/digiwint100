@@ -18,6 +18,7 @@
         android:layout_below="@+id/toolbar_title"
         android:layout_marginLeft="@dimen/layout_10dp"
         android:layout_marginRight="@dimen/layout_10dp"
+        android:layout_marginBottom="@dimen/layout_6dp"
         android:layout_marginTop="@dimen/layout_6dp"
         android:background="@drawable/yellow_scandetail_bg"
         android:orientation="vertical"
@@ -212,7 +213,6 @@
         android:layout_alignParentStart="true"
         android:layout_below="@+id/toolbar_title"
         android:layout_marginTop="@dimen/layout_6dp"
-        android:layout_marginBottom="@dimen/layout_6dp"
         android:visibility="visible">
 
         <LinearLayout
@@ -225,6 +225,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/layout_10dp"
+                android:layout_marginBottom="@dimen/layout_6dp"
                 android:layout_marginRight="@dimen/layout_10dp"
                 android:background="@drawable/accordingmaterialtop_pink_sharp"
                 android:orientation="vertical"

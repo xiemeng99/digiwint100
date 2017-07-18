@@ -11,11 +11,11 @@ import butterknife.Unbinder;
 import digiwin.library.base.BaseAppFragment;
 
 /**
- * Created by ChangquanSun
+ * Created by qGod
  * 2017/1/9
  */
 
-public abstract class   BaseFragment extends BaseAppFragment {
+public abstract class BaseFragment extends BaseAppFragment {
     protected String TAG;
     protected View mFragmentView;
     private Unbinder unBind;
@@ -41,7 +41,7 @@ public abstract class   BaseFragment extends BaseAppFragment {
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-        //    if (unBind != null) unBind.unbind();
+        unBind.unbind();
         if (null != mFragmentView) {
             ((ViewGroup) mFragmentView.getParent()).removeView(mFragmentView);
         }

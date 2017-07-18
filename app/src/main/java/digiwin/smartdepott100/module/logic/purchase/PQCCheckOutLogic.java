@@ -58,7 +58,7 @@ public class PQCCheckOutLogic extends CommonLogic {
                             String error = mContext.getString(R.string.unknow_error);
                             if (null != string) {
                                 if (ReqTypeName.SUCCCESSCODE.equals(JsonResp.getCode(string))) {
-                                    List<PQCCheckOutBean> datas=JsonResp.getParaDatas(string,"list",PQCCheckOutBean.class);
+                                    List<PQCCheckOutBean> datas = JsonResp.getParaDatas(string, "list", PQCCheckOutBean.class);
                                     if (null != datas) {
                                         listener.onSuccess(datas);
                                         return;
@@ -77,6 +77,7 @@ public class PQCCheckOutLogic extends CommonLogic {
             }
         }, null);
     }
+
     /**
      * 提交
      */
@@ -101,7 +102,7 @@ public class PQCCheckOutLogic extends CommonLogic {
                             String error = mContext.getString(R.string.unknow_error);
                             if (null != string) {
                                 if (ReqTypeName.SUCCCESSCODE.equals(JsonResp.getCode(string))) {
-                                    String str=JsonResp.getParaString(string, AddressContants.DOC_NO);
+                                    String str = JsonResp.getParaString(string, AddressContants.DOC_NO);
                                     if (null != str) {
                                         listener.onSuccess(str);
                                         return;

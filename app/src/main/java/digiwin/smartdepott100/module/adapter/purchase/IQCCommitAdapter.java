@@ -46,9 +46,9 @@ public class IQCCommitAdapter extends BaseRecyclerAdapter<ListSumBean> {
     @Override
     protected void bindData(RecyclerViewHolder holder, final int i, final ListSumBean item) {
         holder.setText(R.id.tv_item_name, item.getItem_name());
-        holder.setText(R.id.tv_model, item.getStorage_spaces_no());
+        holder.setText(R.id.tv_model, item.getItem_spec());
         holder.setText(R.id.tv_item_no, item.getItem_no());
-        holder.setText(R.id.tv_number, StringUtils.deleteZero(item.getReceipt_qty()));
+        holder.setText(R.id.tv_number, StringUtils.deleteZero(item.getQc_qty()));
         final CheckBox cbOK = (CheckBox) holder.getView(R.id.cb_OK);
         final CheckBox cbNG = (CheckBox) holder.getView(R.id.cb_seletor_NG);
         cbOK.setChecked(mFlagMap.get(i));

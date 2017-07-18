@@ -8,13 +8,13 @@
         android:id="@+id/ll_head"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
         android:layout_marginLeft="@dimen/layout_10dp"
         android:layout_marginRight="@dimen/layout_10dp"
+        android:layout_marginTop="@dimen/layout_6dp"
         android:background="@drawable/accordingmaterialtop_pink_sharp"
         android:orientation="vertical"
-        android:padding="@dimen/layout_5dp"
-        android:layout_alignParentTop="true"
-        android:layout_alignEnd="@+id/include3">
+        android:padding="@dimen/layout_5dp">
 
         <LinearLayout
             android:id="@+id/ll_scan_inlocator"
@@ -49,32 +49,34 @@
             style="@style/itemstyle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
+
             <TextView
+                style="@style/app_text_ingreen"
                 android:layout_width="@dimen/layout_60dp"
                 android:layout_height="wrap_content"
-                android:text="@string/locator"
-                style="@style/app_text_ingreen"  />
+                android:text="@string/locator" />
 
             <TextView
                 android:id="@+id/tv_locator"
+                style="@style/ser_text_ingreen"
                 android:layout_width="@dimen/layout_0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/layout_5dp"
-                android:layout_weight="1"
-                style="@style/ser_text_ingreen" />
+                android:layout_weight="1" />
+
             <TextView
+                style="@style/app_text_ingreen"
                 android:layout_width="@dimen/layout_40dp"
                 android:layout_height="wrap_content"
-                android:text="@string/label_storage"
-                style="@style/app_text_ingreen"  />
+                android:text="@string/label_storage" />
 
             <TextView
                 android:id="@+id/tv_storage"
+                style="@style/ser_text_ingreen"
                 android:layout_width="@dimen/layout_0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/layout_5dp"
-                android:layout_weight="1"
-                style="@style/ser_text_ingreen"/>
+                android:layout_weight="1" />
         </LinearLayout>
     </LinearLayout>
 
@@ -86,6 +88,7 @@
 
         <include layout="@layout/ryitem_common" />
     </LinearLayout>
-    <include layout="@layout/inclu_commit"
-        android:id="@+id/include3" />
+
+    <include
+        layout="@layout/inclu_commit" />
 </RelativeLayout>

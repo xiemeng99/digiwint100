@@ -28,6 +28,7 @@ import digiwin.library.dialog.OnDialogClickListener;
 import digiwin.library.dialog.OnDialogTwoListener;
 import digiwin.library.utils.ActivityManagerUtils;
 import digiwin.library.utils.StringUtils;
+import digiwin.library.utils.WeakRefHandler;
 import digiwin.smartdepott100.R;
 import digiwin.smartdepott100.core.appcontants.AddressContants;
 import digiwin.smartdepott100.core.appcontants.ModuleCode;
@@ -216,7 +217,7 @@ public class ProcedureCheckinActivity extends BaseTitleActivity {
 
     ProcedureCheckinCommitBean commitBean;
 
-    private Handler mHandler = new Handler(new Handler.Callback() {
+    private Handler.Callback mCallback= new Handler.Callback() {
         @Override
         public boolean handleMessage(Message msg) {
             switch (msg.what) {
@@ -312,7 +313,9 @@ public class ProcedureCheckinActivity extends BaseTitleActivity {
             }
             return false;
         }
-    });
+    };
+
+    private Handler mHandler = new WeakRefHandler(mCallback);
 
 
 
@@ -433,4 +436,9 @@ public class ProcedureCheckinActivity extends BaseTitleActivity {
         DataSupport.deleteAll(ProcedureDevMouKniBean.class);
     }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        mHandler.removeCallbacksAndMessages(null);
+    }
 }

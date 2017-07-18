@@ -92,6 +92,7 @@
     <string name="save">保存</string>
     <string name="commit">提交</string>
     <string name="check_network_error">网络已断开,请检查网络设置</string>
+    <string name="check_network_error1">网络异常：</string>
     <string name="plan_numb">计划量</string>
     <string name="scaned_numb">已扫量</string>
 
@@ -115,8 +116,8 @@
     <string name="scan_material">请扫描退料单号</string>
     <string name="scan_locator">请扫描储位</string>
     <string name="scan_storage">请扫描库位</string>
-    <string name="delete_choose">请至少选中一个进行删除</string>
-    <string name="order_number">工单号</string>
+    <string name="delete_choose">请选择一笔数据</string>
+    <string name="order_number">工单单号</string>
     <string name="again_commit">再次提交</string>
     <string name="commit_failed">抛转失败</string>
     <string name="un_com">未抛转</string>
@@ -308,8 +309,10 @@
     <string name="send_goods_num">发货量</string>
 
     <string name="purchase_check">收货检验</string>
+    <string name="check_no">检验单号</string>
     <string name="check_mold">检验类型</string>
     <string name="check_time">检验时间</string>
+    <string name="check_depart">检验部门</string>
     <string name="please_scan_send_order_or_barcode">请扫描发货单号/物料条码</string>
     <string name="get_material_time">收料时间</string>
     <string name="to_get_material_minute">距收料（分钟）</string>
@@ -416,7 +419,7 @@
     <string name="lock_store">锁定库位</string>
     <string name="baocode_store">仓储条码</string>
     <string name="lock_reason">锁定原因</string>
-    <string name="store_failed_be_empty">库位不能为空!</string>
+    <string name="store_failed_be_empty">库位不能为空</string>
     <string name="lock_failed_other_empty">锁定信息不全!请扫描其他相关信息</string>
 
     <string name="store_trans_unlock">库存交易解锁</string>
@@ -533,7 +536,7 @@
     <string name="bad_string">不良原因说明</string>
     <string name="string">说明</string>
     <string name="bad_qty">不良原因数量</string>
-    <string name="check_employee">检验员</string>
+    <string name="check_employee">检验人员</string>
     <string name="print_psw">请输入登入密码</string>
     <string name="print_ip">请输入ip地址和端口号</string>
     <string name="psw_error">密码错误</string>
@@ -666,7 +669,7 @@
     <string name="purchase_count">采购量</string>
     <string name="docking_per">对接人员</string>
     <string name="people_name">人员姓名</string>
-    <string name="circulation_no">物料批号</string>
+    <string name="circulation_no">物料批次</string>
     <string name="print_start">开始打印</string>
     <string name="procedure_no">工序号</string>
     <string name="procedure_name">工序名称</string>
@@ -755,4 +758,5 @@
     <string name="miscellaneous_issues_out_list">杂项发料列表</string>
 
     <string name="scan_big_storenum">实发量大于库存量</string>
+    <string name="scan_byfifo_order">请按照fifo顺序进行扫描</string>
 </resources>

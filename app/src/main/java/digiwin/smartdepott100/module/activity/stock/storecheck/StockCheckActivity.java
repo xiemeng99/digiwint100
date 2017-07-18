@@ -22,6 +22,7 @@ import butterknife.OnFocusChange;
 import butterknife.OnTextChanged;
 import digiwin.library.utils.ObjectAndMapUtils;
 import digiwin.library.utils.StringUtils;
+import digiwin.library.utils.WeakRefHandler;
 import digiwin.smartdepott100.R;
 import digiwin.smartdepott100.core.appcontants.AddressContants;
 import digiwin.smartdepott100.core.appcontants.ModuleCode;
@@ -175,7 +176,7 @@ public class StockCheckActivity extends BaseFirstModuldeActivity {
         }
     }
 
-    private Handler mHandler = new Handler(new Handler.Callback() {
+    private Handler.Callback mCallback= new Handler.Callback() {
         @Override
         public boolean handleMessage(Message msg) {
             switch (msg.what) {
@@ -237,7 +238,9 @@ public class StockCheckActivity extends BaseFirstModuldeActivity {
             }
             return false;
         }
-    });
+    };
+
+    private Handler mHandler = new WeakRefHandler(mCallback);
 
     @OnClick(R.id.commit)
     void commit() {
@@ -361,5 +364,11 @@ public class StockCheckActivity extends BaseFirstModuldeActivity {
     @Override
     public ExitMode exitOrDel() {
         return ExitMode.EXITISD;
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        mHandler.removeCallbacksAndMessages(null);
     }
 }

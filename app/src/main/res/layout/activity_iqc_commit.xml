@@ -20,28 +20,6 @@
         android:orientation="vertical"
         android:padding="@dimen/layout_5dp">
 
-        <LinearLayout
-            style="@style/itemstyle"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <TextView
-                style="@style/app_text_ingreen"
-                android:layout_width="@dimen/layout_70dp"
-                android:layout_height="wrap_content"
-                android:gravity="center_vertical"
-                android:text="@string/purchase_order" />
-
-            <TextView
-                android:id="@+id/tv_purchase_order"
-                style="@style/ser_text_ingreen"
-                android:layout_width="@dimen/layout_0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/layout_10dp"
-                android:layout_weight="1"
-                android:background="@null" />
-        </LinearLayout>
-
         <View style="@style/act_line_style"></View>
 
         <LinearLayout
@@ -51,20 +29,39 @@
 
             <TextView
                 style="@style/app_text_ingreen"
-                android:layout_width="@dimen/layout_70dp"
+                android:layout_width="@dimen/layout_60dp"
                 android:layout_height="wrap_content"
-                android:paddingRight="@dimen/layout_5dp"
+                android:gravity="center_vertical"
+                android:text="@string/check_no" />
+
+            <TextView
+                android:id="@+id/tv_check_no"
+                style="@style/ser_text_ingreen"
+                android:layout_width="@dimen/layout_0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/layout_10dp"
+                android:layout_weight="1" />
+        </LinearLayout>
+
+        <LinearLayout
+            style="@style/itemstyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                style="@style/app_text_ingreen"
+                android:layout_width="@dimen/layout_60dp"
+                android:layout_height="wrap_content"
                 android:text="@string/data" />
 
             <TextView
                 android:id="@+id/tv_date"
                 style="@style/ser_text_ingreen"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/layout_10dp" />
+                android:layout_height="wrap_content" />
         </LinearLayout>
 
-        <View style="@style/act_line_style"></View>
+        <View style="@style/act_line_style" />
 
         <LinearLayout
             style="@style/itemstyle"
@@ -72,39 +69,31 @@
             android:layout_height="wrap_content">
 
             <TextView
+                android:id="@+id/textView11"
                 style="@style/app_text_ingreen"
-                android:layout_width="@dimen/layout_70dp"
+                android:layout_width="@dimen/layout_60dp"
                 android:layout_height="wrap_content"
-                android:paddingRight="@dimen/layout_5dp"
-                android:text="@string/supplier" />
+                android:text="@string/check_employee" />
 
             <TextView
-                android:id="@+id/tv_supplier"
+                android:id="@+id/tv_check_employee"
                 style="@style/ser_text_ingreen"
-                android:layout_width="match_parent"
+                android:layout_width="@dimen/layout_0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/layout_10dp" />
-        </LinearLayout>
-        <View  android:id="@+id/line_technics_name" style="@style/act_line_style"></View>
-        <LinearLayout
-            android:id="@+id/ll_technics_name"
-            style="@style/itemstyle"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+                android:layout_weight="1" />
 
             <TextView
                 style="@style/app_text_ingreen"
-                android:layout_width="@dimen/layout_70dp"
+                android:layout_width="@dimen/layout_60dp"
                 android:layout_height="wrap_content"
-                android:paddingRight="@dimen/layout_5dp"
-                android:text="@string/technics_name" />
+                android:text="@string/check_depart" />
 
             <TextView
-                android:id="@+id/tv_technics_name"
+                android:id="@+id/tv_check_depart"
                 style="@style/ser_text_ingreen"
-                android:layout_width="match_parent"
+                android:layout_width="@dimen/layout_0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/layout_10dp" />
+                android:layout_weight="1" />
         </LinearLayout>
     </LinearLayout>
 
@@ -114,8 +103,8 @@
         android:layout_height="match_parent"
         android:layout_alignParentBottom="true"
         android:layout_alignParentStart="true"
-        android:paddingBottom="@dimen/layout_50dp"
-        android:layout_below="@id/rl_top" />
+        android:layout_below="@id/rl_top"
+        android:paddingBottom="@dimen/layout_50dp" />
 
     <include layout="@layout/inclu_commit" />
 </RelativeLayout>

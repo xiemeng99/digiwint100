@@ -20,6 +20,7 @@ import butterknife.OnCheckedChanged;
 import butterknife.OnClick;
 import butterknife.OnFocusChange;
 import butterknife.OnTextChanged;
+import digiwin.library.utils.WeakRefHandler;
 import digiwin.smartdepott100.core.coreutil.CommonUtils;
 import digiwin.smartdepott100.module.logic.stock.PostAllocateLogic;
 import digiwin.library.dialog.OnDialogClickListener;
@@ -282,7 +283,7 @@ public class PostAllocateScanFg extends BaseFragment {
 
     FilterResultOrderBean orderBean = new FilterResultOrderBean();
 
-    private Handler mHandler = new Handler(new Handler.Callback() {
+    private Handler.Callback mCallback= new Handler.Callback() {
         @Override
         public boolean handleMessage(Message msg) {
             switch (msg.what) {
@@ -394,7 +395,10 @@ public class PostAllocateScanFg extends BaseFragment {
             }
             return false;
         }
-    });
+    };
+
+    private Handler mHandler = new WeakRefHandler(mCallback);
+
 
     @Override
     protected int bindLayoutId() {
@@ -474,4 +478,10 @@ public class PostAllocateScanFg extends BaseFragment {
         orderBean = (FilterResultOrderBean) pactivity.getIntent().getExtras().getSerializable(AddressContants.ORDERDATA);
         et_scan_locator_out.requestFocus();
         }
-        }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        mHandler.removeCallbacksAndMessages(null);
+    }
+}

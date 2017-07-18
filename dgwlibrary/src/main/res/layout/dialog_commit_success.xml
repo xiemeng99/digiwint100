@@ -35,6 +35,7 @@
             android:layout_marginLeft="@dimen/layout_20dp"
             android:layout_marginRight="@dimen/layout_20dp"
             android:paddingTop="@dimen/layout_5dp"
+            android:scrollbars="vertical"
             android:textColor="@color/WHITE"
             android:textSize="@dimen/textSize_15sp" />
 

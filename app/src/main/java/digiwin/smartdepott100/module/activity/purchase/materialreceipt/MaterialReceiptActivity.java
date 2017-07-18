@@ -24,6 +24,7 @@ import digiwin.library.dialog.OnDialogClickListener;
 import digiwin.library.dialog.OnDialogTwoListener;
 import digiwin.library.utils.ObjectAndMapUtils;
 import digiwin.library.utils.StringUtils;
+import digiwin.library.utils.WeakRefHandler;
 import digiwin.pulltorefreshlibrary.recyclerview.FullyLinearLayoutManager;
 import digiwin.smartdepott100.R;
 import digiwin.smartdepott100.core.appcontants.AddressContants;
@@ -161,7 +162,7 @@ public class MaterialReceiptActivity extends BaseTitleActivity implements
     }
   }
 
-  public Handler mHandler = new Handler(new Handler.Callback() {
+  private Handler.Callback mCallback= new Handler.Callback() {
     @Override
     public boolean handleMessage(Message msg) {
       if (msg.what == DELIVERY_NOTE_NO) {
@@ -173,8 +174,8 @@ public class MaterialReceiptActivity extends BaseTitleActivity implements
           @Override
           public void onSuccess(List<ListSumBean> list) {
             for (int i = 0; i < list.size(); i++) {
-                ListSumBean bean = list.get(i);
-                bean.setCheck("1");
+              ListSumBean bean = list.get(i);
+              bean.setCheck("1");
             }
             rl_top.setVisibility(View.VISIBLE);
             ListSumBean bean = list.get(0);
@@ -200,7 +201,9 @@ public class MaterialReceiptActivity extends BaseTitleActivity implements
       }
       return false;
     }
-  });
+  };
+
+  private Handler mHandler = new WeakRefHandler(mCallback);
 
   @Override
   protected Toolbar toolbar() {
@@ -284,4 +287,9 @@ public class MaterialReceiptActivity extends BaseTitleActivity implements
       }
   }
 
+  @Override
+  protected void onDestroy() {
+    super.onDestroy();
+    mHandler.removeCallbacksAndMessages(null);
+  }
 }

@@ -26,6 +26,7 @@ import digiwin.library.dialog.OnDialogTwoListener;
 import digiwin.library.utils.LogUtils;
 import digiwin.library.utils.ObjectAndMapUtils;
 import digiwin.library.utils.StringUtils;
+import digiwin.library.utils.WeakRefHandler;
 import digiwin.pulltorefreshlibrary.recyclerviewAdapter.BaseRecyclerAdapter;
 import digiwin.pulltorefreshlibrary.recyclerviewAdapter.RecyclerViewHolder;
 import digiwin.smartdepott100.R;
@@ -157,7 +158,7 @@ public class QuickStorageActivity extends BaseFirstModuldeActivity {
 
     }
 
-    public Handler mHandler = new Handler(new Handler.Callback() {
+    private Handler.Callback mCallback= new Handler.Callback() {
         @Override
         public boolean handleMessage(Message msg) {
             if (msg.what == QUICKSTORAGECODE) {//获取汇总数据
@@ -187,7 +188,9 @@ public class QuickStorageActivity extends BaseFirstModuldeActivity {
             }
             return false;
         }
-    });
+    };
+
+    private Handler mHandler = new WeakRefHandler(mCallback);
 
     public void clearData() {
         tv_post_material_order.setText("");
@@ -382,5 +385,11 @@ public class QuickStorageActivity extends BaseFirstModuldeActivity {
 //                holder.setBackground(R.id.match_num_ll, R.drawable.numchange_bg_green);
             }
         }
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        mHandler.removeCallbacksAndMessages(null);
     }
 }

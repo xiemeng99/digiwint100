@@ -86,11 +86,6 @@ public class FilterResultOrderBean implements Serializable {
      * 领料单号
      */
     private String issuing_no;
-    /**
-     * 1.一般收货
-     * 2.委外
-     */
-    private String purchase_type;
 
     /**
      * 出货日期
@@ -260,12 +255,5 @@ public class FilterResultOrderBean implements Serializable {
         this.issuing_no = issuing_no;
     }
 
-    public String getPurchase_type() {
-        return purchase_type;
-    }
-
-    public void setPurchase_type(String purchase_type) {
-        this.purchase_type = purchase_type;
-    }
 
 }

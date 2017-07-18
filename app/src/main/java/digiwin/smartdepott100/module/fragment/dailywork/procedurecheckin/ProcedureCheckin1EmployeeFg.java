@@ -33,6 +33,7 @@ import butterknife.OnFocusChange;
 import butterknife.OnTextChanged;
 import digiwin.library.dialog.OnDialogClickListener;
 import digiwin.library.utils.StringUtils;
+import digiwin.library.utils.WeakRefHandler;
 import digiwin.pulltorefreshlibrary.recyclerview.DividerItemDecoration;
 import digiwin.pulltorefreshlibrary.recyclerviewAdapter.BaseSwipeMenuAdapter;
 import digiwin.pulltorefreshlibrary.recyclerviewAdapter.RecyclerViewHolder;
@@ -106,7 +107,7 @@ public class ProcedureCheckin1EmployeeFg extends BaseFragment {
      */
     private final int EMPLOYEEWHAT = 1001;
 
-    private Handler mHandler = new Handler(new Handler.Callback() {
+    private Handler.Callback mCallback= new Handler.Callback() {
         @Override
         public boolean handleMessage(Message msg) {
             switch (msg.what) {
@@ -144,7 +145,9 @@ public class ProcedureCheckin1EmployeeFg extends BaseFragment {
             }
             return false;
         }
-    });
+    };
+
+    private Handler mHandler = new WeakRefHandler(mCallback);
 
     private BaseSwipeMenuAdapter<ProcedureEmployeeBean> adapter;
     private ProcedureCheckinSetActivity pactivity;
@@ -243,5 +246,9 @@ public class ProcedureCheckin1EmployeeFg extends BaseFragment {
         }
     };
 
-
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        mHandler.removeCallbacksAndMessages(null);
+    }
 }

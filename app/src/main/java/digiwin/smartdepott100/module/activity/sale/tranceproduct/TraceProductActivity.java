@@ -26,6 +26,7 @@ import butterknife.OnTextChanged;
 import digiwin.library.utils.ActivityManagerUtils;
 import digiwin.library.utils.StringUtils;
 import digiwin.library.utils.ViewUtils;
+import digiwin.library.utils.WeakRefHandler;
 import digiwin.library.zxing.MipcaActivityCapture;
 import digiwin.library.zxing.camera.GetBarCodeListener;
 import digiwin.smartdepott100.R;
@@ -99,10 +100,9 @@ public class TraceProductActivity extends BaseActivity {
 
     public static ScanBarcodeBackBean backBean;
 
-    private Handler mHandler = new Handler() {
+    private Handler.Callback mCallback= new Handler.Callback() {
         @Override
-        public void handleMessage(Message msg) {
-            super.handleMessage(msg);
+        public boolean handleMessage(Message msg) {
             switch (msg.what) {
                 case BARCODEWHAT:
                     Map<String, String> map = new HashMap<>();
@@ -141,8 +141,11 @@ public class TraceProductActivity extends BaseActivity {
                 default:
                     break;
             }
+            return false;
         }
     };
+
+    private Handler mHandler = new WeakRefHandler(mCallback);
 
     @OnClick(R.id.rl_iv_input_scan)
     void ScanCamara() {
@@ -302,6 +305,7 @@ public class TraceProductActivity extends BaseActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
+        mHandler.removeCallbacksAndMessages(null);
     }
 
     private TraceProductActivity tactivity;
@@ -375,4 +379,5 @@ public class TraceProductActivity extends BaseActivity {
             }
         });
     }
+
 }

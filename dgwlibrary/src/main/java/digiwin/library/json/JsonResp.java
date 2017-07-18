@@ -95,7 +95,7 @@ public class JsonResp {
      * @see [类、类#方法、类#成员]
      */
     public static String getDescription(String resp) {
-        String description = "服务器错误";
+        String description = "";
         try {
             Resp resp2 = getObject(resp, Resp.class);
             Payload payload = getObject(resp2.payload, Payload.class);

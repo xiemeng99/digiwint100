@@ -54,14 +54,14 @@ public class PurchaseStoreLogic extends CommonLogic {
             @Override
             public void run() {
                 try {
-                    String createJson = JsonReqForERP.objCreateJson(mModule, ReqTypeName.PURCHASE_STORE, mTimestamp,bean);
+                    String createJson = JsonReqForERP.objCreateJson(mModule, ReqTypeName.PURCHASE_STORE, mTimestamp, bean);
                     OkhttpRequest.getInstance(mContext).post(createJson, new IRequestCallbackImp() {
                         @Override
                         public void onResponse(String string) {
                             String error = mContext.getString(R.string.unknow_error);
                             if (null != string) {
                                 if (ReqTypeName.SUCCCESSCODE.equals(JsonResp.getCode(string))) {
-                                    List<FilterResultOrderBean> datas=JsonResp.getParaDatas(string,"list",FilterResultOrderBean.class);
+                                    List<FilterResultOrderBean> datas = JsonResp.getParaDatas(string, "list", FilterResultOrderBean.class);
                                     if (null != datas) {
                                         listener.onSuccess(datas);
                                         return;
@@ -80,6 +80,7 @@ public class PurchaseStoreLogic extends CommonLogic {
             }
         }, null);
     }
+
     /**
      * 获取汇总界面数据
      */
@@ -90,21 +91,21 @@ public class PurchaseStoreLogic extends CommonLogic {
     }
 
     /**
-     *  获取汇总界面数据
+     * 获取汇总界面数据
      */
-    public void getSumDatas(final HashMap<String,String> map, final GetSumDataListener listener) {
+    public void getSumDatas(final HashMap<String, String> map, final GetSumDataListener listener) {
         ThreadPoolManager.getInstance().executeTask(new Runnable() {
             @Override
             public void run() {
                 try {
-                    String createJson = JsonReqForERP.mapCreateJson(mModule, ReqTypeName.PURCHASE_SUM, mTimestamp,map);
+                    String createJson = JsonReqForERP.mapCreateJson(mModule, ReqTypeName.PURCHASE_SUM, mTimestamp, map);
                     OkhttpRequest.getInstance(mContext).post(createJson, new IRequestCallbackImp() {
                         @Override
                         public void onResponse(String string) {
                             String error = mContext.getString(R.string.unknow_error);
                             if (null != string) {
                                 if (ReqTypeName.SUCCCESSCODE.equals(JsonResp.getCode(string))) {
-                                    List<ListSumBean> datas=JsonResp.getParaDatas(string,"list_detail",ListSumBean.class);
+                                    List<ListSumBean> datas = JsonResp.getParaDatas(string, "list_detail", ListSumBean.class);
                                     if (null != datas) {
                                         listener.onSuccess(datas);
                                         return;
@@ -126,6 +127,7 @@ public class PurchaseStoreLogic extends CommonLogic {
 
     /**
      * 提交
+     *
      * @param map map可以直接为空
      */
     public void commit(final Map<String, String> map, final CommitListener listener) {

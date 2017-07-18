@@ -38,7 +38,7 @@ public class StoreTransLogic {
 
     private StoreTransLogic(Context context, String module, String timestamp) {
         mTimestamp = timestamp;
-        mContext = context;
+        mContext = context.getApplicationContext();
         mModule = module;
 
     }
@@ -48,6 +48,7 @@ public class StoreTransLogic {
 
         return logic = new StoreTransLogic(context, module, timestamp);
     }
+
     /**
      * 扫描料号带出信息
      */
@@ -57,10 +58,11 @@ public class StoreTransLogic {
 
         public void onFailed(String error);
     }
+
     /**
      * 扫描料号带出信息
      */
-    public void getScanBarcode(final HashMap<String,String> map, final ScanItemNoListener listener){
+    public void getScanBarcode(final HashMap<String, String> map, final ScanItemNoListener listener) {
         ThreadPoolManager.getInstance().executeTask(new Runnable() {
             @Override
             public void run() {
@@ -74,10 +76,10 @@ public class StoreTransLogic {
                             if (null != xmlResp) {
                                 if (ReqTypeName.SUCCCESSCODE.equals(xmlResp.getCode())) {
                                     List<StoreTransItemNoBean> masterDatas = xmlResp.getMasterDatas(StoreTransItemNoBean.class);
-                                    if(masterDatas.size()!=0){
+                                    if (masterDatas.size() != 0) {
                                         listener.onSuccess(masterDatas.get(0));
                                         return;
-                                    }else {
+                                    } else {
                                         error = mContext.getString(R.string.data_null);
                                     }
                                 } else {

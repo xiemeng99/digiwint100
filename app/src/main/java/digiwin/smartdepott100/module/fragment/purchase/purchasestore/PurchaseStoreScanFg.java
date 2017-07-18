@@ -16,6 +16,7 @@ import butterknife.BindViews;
 import butterknife.OnClick;
 import butterknife.OnFocusChange;
 import butterknife.OnTextChanged;
+import digiwin.library.utils.WeakRefHandler;
 import digiwin.smartdepott100.R;
 import digiwin.smartdepott100.core.appcontants.AddressContants;
 import digiwin.smartdepott100.core.base.BaseFragment;
@@ -69,7 +70,7 @@ public class PurchaseStoreScanFg extends BaseFragment {
 
     private PurchaseStoreLogic commonLogic;
 
-    private Handler mHandler = new Handler(new Handler.Callback() {
+    private Handler.Callback mCallback= new Handler.Callback() {
         @Override
         public boolean handleMessage(Message msg) {
             switch (msg.what) {
@@ -143,7 +144,9 @@ public class PurchaseStoreScanFg extends BaseFragment {
             }
             return false;
         }
-    });
+    };
+
+    private Handler mHandler = new WeakRefHandler(mCallback);
 
     /**
      * 公共区域展示
@@ -325,4 +328,9 @@ public class PurchaseStoreScanFg extends BaseFragment {
         commonLogic = PurchaseStoreLogic.getInstance(activity, rmActivity.module, rmActivity.mTimestamp.toString());
     }
 
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        mHandler.removeCallbacksAndMessages(null);
+    }
 }

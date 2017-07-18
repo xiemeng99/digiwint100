@@ -328,25 +328,5 @@ public class PutInStoreScanFg extends BaseFragment {
         saveBean = new SaveBean();
         orderBean = (FilterResultOrderBean) pactivity.getIntent().getExtras().getSerializable(AddressContants.ORDERDATA);
         commonLogic = CommonLogic.getInstance(context, pactivity.module, pactivity.mTimestamp.toString());
-        delete();
-    }
-
-    /**
-     * 进入界面先清空后台存的表
-     */
-    private void delete() {
-        Map<String,String> map = new HashMap<>();
-        map.put(AddressContants.FLAG, BaseFirstModuldeActivity.ExitMode.EXITD.getName());
-        commonLogic.exit(map, new CommonLogic.ExitListener() {
-            @Override
-            public void onSuccess(String msg) {
-
-            }
-
-            @Override
-            public void onFailed(String error) {
-
-            }
-        });
     }
 }

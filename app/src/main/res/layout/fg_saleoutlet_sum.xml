@@ -31,14 +31,32 @@
                 android:id="@+id/tv_head_post_order"
                 android:layout_width="@dimen/layout_0dp"
                 android:layout_height="match_parent"
-                android:layout_marginLeft="@dimen/layout_10dp"
                 android:layout_weight="1"
                 style="@style/ser_text_ingreen"/>
 
         </LinearLayout>
 
-        <View style="@style/act_line_style"></View>
+        <View style="@style/act_line_style"/>
 
+        <LinearLayout
+            style="@style/itemstyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="@dimen/layout_60dp"
+                android:layout_height="wrap_content"
+                android:text="@string/data"
+                style="@style/app_text_ingreen" />
+
+            <TextView
+                android:id="@+id/tv_item_date"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                style="@style/ser_text_ingreen" />
+        </LinearLayout>
+        <View style="@style/act_line_style"/>
         <LinearLayout
             style="@style/itemstyle"
             android:layout_width="match_parent"
@@ -55,7 +73,6 @@
                 android:id="@+id/tv_custom"
                 android:layout_width="@dimen/layout_0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/layout_10dp"
                 android:layout_weight="1"
                 style="@style/ser_text_ingreen"/>
 

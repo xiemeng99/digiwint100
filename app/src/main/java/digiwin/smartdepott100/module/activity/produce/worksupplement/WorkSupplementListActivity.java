@@ -196,7 +196,7 @@ public class WorkSupplementListActivity extends BaseTitleActivity{
             if(null == accoutBean){
                 return;
             }
-            FilterBean.setWarehouse_in_no(accoutBean.getWare());
+            FilterBean.setWarehouse_no(accoutBean.getWare());
 
             if(!StringUtils.isBlank(et_material_returning_number.getText().toString().trim())){
                 FilterBean.setDoc_no(et_material_returning_number.getText().toString().trim());

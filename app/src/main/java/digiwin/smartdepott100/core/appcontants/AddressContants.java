@@ -27,15 +27,15 @@ public class AddressContants {
     /**
      *  默认测试区地址
      */
-    public static String TEST_ADDRESS = "http://172.16.100.7/wtopprd/ws/r/awsp920";
+    public static String TEST_ADDRESS = "http://172.16.100.7/wstopprd/ws/r/awsp920";
     /**
      * 测试区地址标记
      */
     public static String TEST_FLAG = "2";
     /**
-     *  默认正式区地址http://172.16.100.24/web/ws/r/aws_ttsrv2?wsdl
+     *  默认正式区地址http://180.167.0.43:8888/wtopprd/ws/r/awsp920
      */
-    public static String FORMAL_ADDRESS = "http://172.16.100.7/wtopprd/ws/r/awsp920";
+    public static String FORMAL_ADDRESS = "http://180.167.0.43:8888/wstopprd/ws/r/awsp920";
     /**
      * 正式区地址标记
      */

@@ -30,24 +30,26 @@ public class MaterialReturnLogic extends CommonLogic {
     private static MaterialReturnLogic logic;
 
     private String TAG = "MaterialReturnLogic";
+
     protected MaterialReturnLogic(Context context, String module, String timestamp) {
         super(context, module, timestamp);
     }
 
-    public static MaterialReturnLogic getInstance(Context context, String module, String timestamp){
+    public static MaterialReturnLogic getInstance(Context context, String module, String timestamp) {
         logic = new MaterialReturnLogic(context, module, timestamp);
         return logic;
     }
 
     /**
      * 生产退料获取列表数据
+     *
      * @param filterBean
      */
-    public void getMRListData(final FilterBean filterBean, final GetDataListListener listener){
+    public void getMRListData(final FilterBean filterBean, final GetDataListListener listener) {
         ThreadPoolManager.getInstance().executeTask(new Runnable() {
             @Override
             public void run() {
-                try{
+                try {
                     String createJson = JsonReqForERP.objCreateJson(mModule, "als.b010.list.get", mTimestamp, filterBean);
                     OkhttpRequest.getInstance(mContext).post(createJson, new IRequestCallbackImp() {
                         @Override
@@ -55,7 +57,7 @@ public class MaterialReturnLogic extends CommonLogic {
                             String error = mContext.getString(R.string.unknow_error);
                             if (null != s) {
                                 if (ReqTypeName.SUCCCESSCODE.equals(JsonResp.getCode(s))) {
-                                    List<FilterResultOrderBean> showBeanList = JsonResp.getParaDatas(s,"list",FilterResultOrderBean.class);
+                                    List<FilterResultOrderBean> showBeanList = JsonResp.getParaDatas(s, "list", FilterResultOrderBean.class);
                                     listener.onSuccess(showBeanList);
                                     return;
                                 } else {
@@ -65,24 +67,25 @@ public class MaterialReturnLogic extends CommonLogic {
                             listener.onFailed(error);
                         }
                     });
-                }catch (Exception e){
+                } catch (Exception e) {
                     listener.onFailed(mContext.getString(R.string.unknow_error));
                     LogUtils.e(TAG, "getSum--->" + e);
                 }
             }
-        },null);
+        }, null);
     }
 
     /**
      * 获取汇总数据
+     *
      * @param clickItemPutBean
      * @param listener
      */
-    public void getMRSumData(final ClickItemPutBean clickItemPutBean, final GetZSumListener listener){
+    public void getMRSumData(final ClickItemPutBean clickItemPutBean, final GetZSumListener listener) {
         ThreadPoolManager.getInstance().executeTask(new Runnable() {
             @Override
             public void run() {
-                try{
+                try {
                     String createJson = JsonReqForERP.objCreateJson(mModule, "als.b010.list.detail.get", mTimestamp, clickItemPutBean);
                     OkhttpRequest.getInstance(mContext).post(createJson, new IRequestCallbackImp() {
                         @Override
@@ -90,7 +93,7 @@ public class MaterialReturnLogic extends CommonLogic {
                             String error = mContext.getString(R.string.unknow_error);
                             if (null != string) {
                                 if (ReqTypeName.SUCCCESSCODE.equals(JsonResp.getCode(string))) {
-                                    List<ListSumBean> showBeanList = JsonResp.getParaDatas(string,"list_detail",ListSumBean.class);
+                                    List<ListSumBean> showBeanList = JsonResp.getParaDatas(string, "list_detail", ListSumBean.class);
                                     listener.onSuccess(showBeanList);
                                     return;
                                 } else {
@@ -100,12 +103,12 @@ public class MaterialReturnLogic extends CommonLogic {
                             listener.onFailed(error);
                         }
                     });
-                }catch (Exception e){
+                } catch (Exception e) {
                     listener.onFailed(mContext.getString(R.string.unknow_error));
                     LogUtils.e(TAG, "getSum--->" + e);
                 }
             }
-        },null);
+        }, null);
     }
 
     /**
@@ -125,9 +128,9 @@ public class MaterialReturnLogic extends CommonLogic {
                             String error = mContext.getString(R.string.unknow_error);
                             if (null != string) {
                                 if (ReqTypeName.SUCCCESSCODE.equals(JsonResp.getCode(string))) {
-                                    String doc_no = JsonResp.getParaString(string,"doc_no");
-                                    Log.d(TAG,"doc_no:"+doc_no);
-                                    if(null != doc_no){
+                                    String doc_no = JsonResp.getParaString(string, "doc_no");
+                                    Log.d(TAG, "doc_no:" + doc_no);
+                                    if (null != doc_no) {
                                         listener.onSuccess(doc_no);
                                     }
                                     return;

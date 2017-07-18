@@ -13,21 +13,26 @@ import digiwin.smartdepott100.login.bean.AccoutBean;
 import digiwin.smartdepott100.login.loginlogic.LoginLogic;
 
 /**
- * @des  java平台json请求格式
- * @author  xiemeng
- * @date    2017/3/29
+ * @author xiemeng
+ * @des java平台json请求格式
+ * @date 2017/3/29
  */
 public class JsonReqForJava {
 
     public static final String TAG = "JsonReqForJava";
+
+    private Context mContext;
+
     public JsonReqForJava(Context context) {
-        this.appid= TelephonyUtils.getDeviceId(context);
+        mContext = context.getApplicationContext();
+
+        this.appid = TelephonyUtils.getDeviceId(mContext);
         AccoutBean accoutBean = LoginLogic.getUserInfo();
-        if (null!=accoutBean){
-            this.user=accoutBean.getEmployee_no();
-            this.plant=accoutBean.getEnterprise_no();
+        if (null != accoutBean) {
+            this.user = accoutBean.getEmployee_no();
+            this.plant = accoutBean.getEnterprise_no();
         }
-        this.pagesize= (String)SharedPreferencesUtils.get(context, SharePreKey.PAGE_SETTING,AddressContants.PAGE_NUM);
+        this.pagesize = (String) SharedPreferencesUtils.get(mContext, SharePreKey.PAGE_SETTING, AddressContants.PAGE_NUM);
     }
 
     /**
@@ -128,9 +133,9 @@ public class JsonReqForJava {
         this.pagesize = pagesize;
     }
 
-    public String toJson(Object obj){
+    public String toJson(Object obj) {
         String s = JSON.toJSONString(obj);
-        LogUtils.i(TAG,"toJson-->"+s);
+        LogUtils.i(TAG, "toJson-->" + s);
         return s;
     }
 }

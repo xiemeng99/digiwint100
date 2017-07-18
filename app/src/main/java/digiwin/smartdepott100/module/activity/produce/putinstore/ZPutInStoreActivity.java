@@ -38,7 +38,7 @@ import digiwin.pulltorefreshlibrary.recyclerviewAdapter.OnItemClickListener;
 
 /**
  * @author xiemeng
- * @des  富钛入库上架
+ * @des  入库上架
  * @date 2017/5/26 14:09
  */
 
@@ -242,6 +242,7 @@ public class ZPutInStoreActivity  extends BaseTitleActivity {
 
     @Override
     protected void doBusiness() {
+        dataList = new ArrayList<>();
         et_plan_date.setKeyListener(null);
         pactivity = (ZPutInStoreActivity) activity;
         logic = ZPutInStoreLogic.getInstance(pactivity, module, mTimestamp.toString());
@@ -265,7 +266,7 @@ public class ZPutInStoreActivity  extends BaseTitleActivity {
         });
     }
 
-    private List<FilterResultOrderBean> dataList = new ArrayList<>();
+    private List<FilterResultOrderBean> dataList;
 
     ZPutInStoreFilterResultAdapter adapter;
 

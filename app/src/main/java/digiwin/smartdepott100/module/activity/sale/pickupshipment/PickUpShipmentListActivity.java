@@ -216,7 +216,7 @@ public class PickUpShipmentListActivity extends BaseTitleActivity{
             if(null == accoutBean){
                 return;
             }
-            FilterBean.setWarehouse_out_no(accoutBean.getWare());
+            FilterBean.setWarehouse_no(accoutBean.getWare());
 
             if(!StringUtils.isBlank(et_shipping_order.getText().toString().trim())){
                 FilterBean.setDoc_no(et_shipping_order.getText().toString().trim());

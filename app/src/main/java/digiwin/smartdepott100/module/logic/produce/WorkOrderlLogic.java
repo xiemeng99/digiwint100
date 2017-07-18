@@ -29,7 +29,7 @@ import digiwin.smartdepott100.module.logic.common.CommonLogic;
  * @date 2017/3/2
  */
 
-public class WorkOrderlLogic extends CommonLogic{
+public class WorkOrderlLogic extends CommonLogic {
 
     private static final String TAG = "WorkOrderlLogic";
 
@@ -62,7 +62,7 @@ public class WorkOrderlLogic extends CommonLogic{
         ThreadPoolManager.getInstance().executeTask(new Runnable() {
             @Override
             public void run() {
-                try{
+                try {
                     String createJson = JsonReqForERP.mapCreateJson(mModule, "als.b003.list.detail.get", mTimestamp, map);
                     OkhttpRequest.getInstance(mContext).post(createJson, new IRequestCallbackImp() {
                         @Override
@@ -70,9 +70,9 @@ public class WorkOrderlLogic extends CommonLogic{
                             String error = mContext.getString(R.string.unknow_error);
                             if (null != s) {
                                 if (ReqTypeName.SUCCCESSCODE.equals(JsonResp.getCode(s))) {
-                                    List<ListSumBean> accordingMaterialSumBeen = JsonResp.getParaDatas(s,"list_detail",ListSumBean.class);
-                                   if(accordingMaterialSumBeen.size()>0){
-                                       List<ListSumBean> dataList = new ArrayList<ListSumBean>();
+                                    List<ListSumBean> accordingMaterialSumBeen = JsonResp.getParaDatas(s, "list_detail", ListSumBean.class);
+                                    if (accordingMaterialSumBeen.size() > 0) {
+                                        List<ListSumBean> dataList = new ArrayList<ListSumBean>();
                                         for (int i = 0; i < accordingMaterialSumBeen.size(); i++) {
                                             ListSumBean data = accordingMaterialSumBeen.get(i);
                                             data.setStock_qty(StringUtils.deleteZero(data.getStock_qty()));
@@ -80,9 +80,9 @@ public class WorkOrderlLogic extends CommonLogic{
                                             data.setScan_sumqty(StringUtils.deleteZero(data.getScan_sumqty()));
                                             dataList.add(data);
                                         }
-                                       listener.onSuccess(dataList);
-                                       return;
-                                   }
+                                        listener.onSuccess(dataList);
+                                        return;
+                                    }
 
                                 } else {
                                     error = JsonResp.getDescription(s);
@@ -91,12 +91,12 @@ public class WorkOrderlLogic extends CommonLogic{
                             listener.onFailed(error);
                         }
                     });
-                }catch (Exception e){
+                } catch (Exception e) {
                     listener.onFailed(mContext.getString(R.string.unknow_error));
                     LogUtils.e(TAG, "getSum--->" + e);
                 }
             }
-        },null);
+        }, null);
     }
 
 
@@ -124,9 +124,9 @@ public class WorkOrderlLogic extends CommonLogic{
                             String error = mContext.getString(R.string.unknow_error);
                             if (null != string) {
                                 if (ReqTypeName.SUCCCESSCODE.equals(JsonResp.getCode(string))) {
-                                    String doc_no = JsonResp.getParaString(string,"doc_no");
-                                    if(null != doc_no){
-                                        listener.onSuccess(JsonResp.getParaString(string,"doc_no"));
+                                    String doc_no = JsonResp.getParaString(string, "doc_no");
+                                    if (null != doc_no) {
+                                        listener.onSuccess(JsonResp.getParaString(string, "doc_no"));
                                     }
                                     return;
                                 } else {

@@ -43,7 +43,7 @@ public class TraceProductLogic {
 
     private TraceProductLogic(Context context, String module, String timestamp) {
         mTimestamp = timestamp;
-        mContext = context;
+        mContext = context.getApplicationContext();
         mModule = module;
 
     }
@@ -62,7 +62,8 @@ public class TraceProductLogic {
 
         public void onFailed(String error);
     }
-    public void productProcessGet(final Map<String,String> map,final ProductProcessGetListener listener){
+
+    public void productProcessGet(final Map<String, String> map, final ProductProcessGetListener listener) {
         ThreadPoolManager.getInstance().executeTask(new Runnable() {
             @Override
             public void run() {
@@ -76,7 +77,7 @@ public class TraceProductLogic {
                             if (null != xmlResp) {
                                 if (ReqTypeName.SUCCCESSCODE.equals(xmlResp.getCode())) {
                                     List<ProcuctProcessBean> masterDatas = xmlResp.getMasterDatas(ProcuctProcessBean.class);
-                                    if(masterDatas.size() == 0) {
+                                    if (masterDatas.size() == 0) {
                                         listener.onFailed(mContext.getResources().getString(R.string.data_null));
                                         return;
                                     }
@@ -96,6 +97,7 @@ public class TraceProductLogic {
             }
         }, null);
     }
+
     /**
      * 当前库存列表
      */
@@ -105,7 +107,8 @@ public class TraceProductLogic {
 
         public void onFailed(String error);
     }
-    public void currentInventoryGet(final Map<String,String> map,final CurrentInventoryGetListener listener){
+
+    public void currentInventoryGet(final Map<String, String> map, final CurrentInventoryGetListener listener) {
         ThreadPoolManager.getInstance().executeTask(new Runnable() {
             @Override
             public void run() {
@@ -119,7 +122,7 @@ public class TraceProductLogic {
                             if (null != xmlResp) {
                                 if (ReqTypeName.SUCCCESSCODE.equals(xmlResp.getCode())) {
                                     List<CurrentInventoryBean> masterDatas = xmlResp.getMasterDatas(CurrentInventoryBean.class);
-                                    if(masterDatas.size() == 0) {
+                                    if (masterDatas.size() == 0) {
                                         listener.onFailed(mContext.getResources().getString(R.string.data_null));
                                         return;
                                     }
@@ -139,6 +142,7 @@ public class TraceProductLogic {
             }
         }, null);
     }
+
     /**
      * 工单信息列表
      */
@@ -148,7 +152,8 @@ public class TraceProductLogic {
 
         public void onFailed(String error);
     }
-    public void orderInfoGet(final Map<String,String> map,final OrderInfoGetListener listener){
+
+    public void orderInfoGet(final Map<String, String> map, final OrderInfoGetListener listener) {
         ThreadPoolManager.getInstance().executeTask(new Runnable() {
             @Override
             public void run() {
@@ -162,7 +167,7 @@ public class TraceProductLogic {
                             if (null != xmlResp) {
                                 if (ReqTypeName.SUCCCESSCODE.equals(xmlResp.getCode())) {
                                     List<OrderInfoBean> masterDatas = xmlResp.getMasterDatas(OrderInfoBean.class);
-                                    if(masterDatas.size() == 0) {
+                                    if (masterDatas.size() == 0) {
                                         listener.onFailed(mContext.getResources().getString(R.string.data_null));
                                         return;
                                     }
@@ -182,6 +187,7 @@ public class TraceProductLogic {
             }
         }, null);
     }
+
     /**
      * 生产过程列表
      */
@@ -191,7 +197,8 @@ public class TraceProductLogic {
 
         public void onFailed(String error);
     }
-    public void shipmentToGet(final Map<String,String> map,final ShipmentToGetListener listener){
+
+    public void shipmentToGet(final Map<String, String> map, final ShipmentToGetListener listener) {
         ThreadPoolManager.getInstance().executeTask(new Runnable() {
             @Override
             public void run() {
@@ -205,7 +212,7 @@ public class TraceProductLogic {
                             if (null != xmlResp) {
                                 if (ReqTypeName.SUCCCESSCODE.equals(xmlResp.getCode())) {
                                     List<ShipmentToBean> masterDatas = xmlResp.getMasterDatas(ShipmentToBean.class);
-                                    if(masterDatas.size() == 0) {
+                                    if (masterDatas.size() == 0) {
                                         listener.onFailed(mContext.getResources().getString(R.string.data_null));
                                         return;
                                     }
@@ -225,6 +232,7 @@ public class TraceProductLogic {
             }
         }, null);
     }
+
     /**
      * 投料明细、工作组明细、检验明细查询
      */
@@ -234,7 +242,8 @@ public class TraceProductLogic {
 
         public void onFailed(String error);
     }
-    public void traceProductDetailGet(final Map<String,String> map,final TraceProductDetailGetListener listener){
+
+    public void traceProductDetailGet(final Map<String, String> map, final TraceProductDetailGetListener listener) {
         ThreadPoolManager.getInstance().executeTask(new Runnable() {
             @Override
             public void run() {
@@ -248,7 +257,7 @@ public class TraceProductLogic {
                             if (null != xmlResp) {
                                 if (ReqTypeName.SUCCCESSCODE.equals(xmlResp.getCode())) {
                                     List<TraceProductDetailBean> masterDatas = xmlResp.getMasterDatas(TraceProductDetailBean.class);
-                                    if(masterDatas.size() == 0) {
+                                    if (masterDatas.size() == 0) {
                                         listener.onFailed(mContext.getResources().getString(R.string.data_null));
                                         return;
                                     }

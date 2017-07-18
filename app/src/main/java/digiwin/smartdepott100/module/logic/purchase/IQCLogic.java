@@ -23,9 +23,9 @@ import digiwin.library.utils.SharedPreferencesUtils;
 import digiwin.library.utils.ThreadPoolManager;
 
 /**
- * @des  收货检验IQC
- * @date 2017/5/30
  * @author xiemeng
+ * @des 收货检验IQC
+ * @date 2017/5/30
  */
 public class IQCLogic extends CommonLogic {
 
@@ -43,6 +43,7 @@ public class IQCLogic extends CommonLogic {
 
     /**
      * 获取iqc列表
+     *
      * @param filterBean
      * @param listener
      */
@@ -59,7 +60,7 @@ public class IQCLogic extends CommonLogic {
                             String error = mContext.getString(R.string.unknow_error);
                             if (null != string) {
                                 if (ReqTypeName.SUCCCESSCODE.equals(JsonResp.getCode(string))) {
-                                    List<FilterResultOrderBean> showBeanList = JsonResp.getParaDatas(string,"list",FilterResultOrderBean.class);
+                                    List<FilterResultOrderBean> showBeanList = JsonResp.getParaDatas(string, "list", FilterResultOrderBean.class);
                                     listener.onSuccess(showBeanList);
                                     return;
                                 } else {
@@ -78,10 +79,8 @@ public class IQCLogic extends CommonLogic {
     }
 
 
-
-
     /**
-     *iqc获取汇总列表
+     * iqc获取汇总列表
      */
     public void getIQCSum(final FilterResultOrderBean filterResultOrderBean, final GetZSumListener listener) {
         ThreadPoolManager.getInstance().executeTask(new Runnable() {
@@ -95,7 +94,7 @@ public class IQCLogic extends CommonLogic {
                             String error = mContext.getString(R.string.unknow_error);
                             if (null != string) {
                                 if (ReqTypeName.SUCCCESSCODE.equals(JsonResp.getCode(string))) {
-                                    List<ListSumBean> showBeanList = JsonResp.getParaDatas(string,"list_detail",ListSumBean.class);
+                                    List<ListSumBean> showBeanList = JsonResp.getParaDatas(string, "list_detail", ListSumBean.class);
                                     listener.onSuccess(showBeanList);
                                     return;
                                 } else {
@@ -116,6 +115,7 @@ public class IQCLogic extends CommonLogic {
 
     /**
      * 提交
+     *
      * @param map map可以直接为空
      */
     public void commit(final List<ListSumBean> listSumBeen, final CommitListener listener) {
@@ -123,16 +123,14 @@ public class IQCLogic extends CommonLogic {
             @Override
             public void run() {
                 try {
-                    Map<String, Object> map = new HashMap<>();
-                    map.put("data",listSumBeen);
-                    String createJson = JsonReqForERP.dataCreateJson(mModule, "als.a004.submit", mTimestamp, map);
+                    String createJson = JsonReqForERP.objCreateJson(mModule, "als.a004.submit", mTimestamp, listSumBeen.get(0));
                     OkhttpRequest.getInstance(mContext).post(createJson, new IRequestCallbackImp() {
                         @Override
                         public void onResponse(String string) {
                             String error = mContext.getString(R.string.unknow_error);
                             if (null != string) {
                                 if (ReqTypeName.SUCCCESSCODE.equals(JsonResp.getCode(string))) {
-                                    listener.onSuccess(JsonResp.getParaString(string,AddressContants.DOC_NO));
+                                    listener.onSuccess(JsonResp.getParaString(string, AddressContants.DOC_NO));
                                     return;
                                 } else {
                                     error = JsonResp.getDescription(string);

@@ -31,6 +31,10 @@ public class FiFoCheckUtils {
                     //保存对象存在于fifolist集合中
                     if (saveBean.getBarcode_no().equals(fifoList.get(i).getBarcode_no())
                             && saveBean.getStorage_spaces_out_no().equals(fifoList.get(i).getStorage_spaces_no())) {
+                        if (i!=0){
+                            fifocheck=BaseApplication.getInstance().getString(R.string.scan_byfifo_order);
+                            return fifocheck;
+                        }
                         //保存对象存在fifolist中，进一步判断是否允许负库存
                         //不允许负库存情况判断了保存数量是否大于建议量，若大于则报错
                         if (AddressContants.N.equals(saveBean.getAllow_negative_stock())

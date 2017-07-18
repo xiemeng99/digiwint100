@@ -28,7 +28,7 @@ import digiwin.smartdepott100.module.logic.sale.saleoutlet.SaleOutLetLogic;
  * Created by 毛衡 on 2017/6/15.
  */
 
-public class PickUpShipmentLogic extends CommonLogic{
+public class PickUpShipmentLogic extends CommonLogic {
 
     private static PickUpShipmentLogic logic;
 
@@ -38,12 +38,12 @@ public class PickUpShipmentLogic extends CommonLogic{
         super(context, module, timestamp);
     }
 
-    public static PickUpShipmentLogic getInstance(Context context, String module, String timestamp){
+    public static PickUpShipmentLogic getInstance(Context context, String module, String timestamp) {
         logic = new PickUpShipmentLogic(context, module, timestamp);
         return logic;
     }
 
-    public interface GetSearchListDataListener{
+    public interface GetSearchListDataListener {
 
         void onSuccess(List<FilterResultOrderBean> list);
 
@@ -52,13 +52,14 @@ public class PickUpShipmentLogic extends CommonLogic{
 
     /**
      * 出货过账扫描获取列表数据
+     *
      * @param filterBean
      */
-    public void getSearchListData(final FilterBean filterBean, final GetSearchListDataListener listener){
+    public void getSearchListData(final FilterBean filterBean, final GetSearchListDataListener listener) {
         ThreadPoolManager.getInstance().executeTask(new Runnable() {
             @Override
             public void run() {
-                try{
+                try {
                     String createJson = JsonReqForERP.objCreateJson(mModule, "als.d003.list.get", mTimestamp, filterBean);
                     OkhttpRequest.getInstance(mContext).post(createJson, new IRequestCallbackImp() {
                         @Override
@@ -66,7 +67,7 @@ public class PickUpShipmentLogic extends CommonLogic{
                             String error = mContext.getString(R.string.unknow_error);
                             if (null != s) {
                                 if (ReqTypeName.SUCCCESSCODE.equals(JsonResp.getCode(s))) {
-                                    List<FilterResultOrderBean> showBeanList = JsonResp.getParaDatas(s,"list",FilterResultOrderBean.class);
+                                    List<FilterResultOrderBean> showBeanList = JsonResp.getParaDatas(s, "list", FilterResultOrderBean.class);
                                     listener.onSuccess(showBeanList);
                                     return;
                                 } else {
@@ -76,19 +77,19 @@ public class PickUpShipmentLogic extends CommonLogic{
                             listener.onFailed(error);
                         }
                     });
-                }catch (Exception e){
+                } catch (Exception e) {
                     listener.onFailed(mContext.getString(R.string.unknow_error));
                     LogUtils.e(TAG, "getSum--->" + e);
                 }
             }
-        },null);
+        }, null);
     }
 
     /**
      * 获取出货过账汇总数据监听
      */
 
-    public interface GetSumDataListener{
+    public interface GetSumDataListener {
 
         void onSuccess(List<ListSumBean> list);
 
@@ -97,14 +98,15 @@ public class PickUpShipmentLogic extends CommonLogic{
 
     /**
      * 出货过账扫描 获取汇总数据
+     *
      * @param
      * @param listener
      */
-    public void getSOLSumData(final HashMap<String,String> map, final GetSumDataListener listener){
+    public void getSOLSumData(final HashMap<String, String> map, final GetSumDataListener listener) {
         ThreadPoolManager.getInstance().executeTask(new Runnable() {
             @Override
             public void run() {
-                try{
+                try {
                     String createJson = JsonReqForERP.mapCreateJson(mModule, "als.d003.list.detail.get", mTimestamp, map);
                     OkhttpRequest.getInstance(mContext).post(createJson, new IRequestCallbackImp() {
                         @Override
@@ -112,7 +114,7 @@ public class PickUpShipmentLogic extends CommonLogic{
                             String error = mContext.getString(R.string.unknow_error);
                             if (null != string) {
                                 if (ReqTypeName.SUCCCESSCODE.equals(JsonResp.getCode(string))) {
-                                    List<ListSumBean> showBeanList = JsonResp.getParaDatas(string,"list_detail",ListSumBean.class);
+                                    List<ListSumBean> showBeanList = JsonResp.getParaDatas(string, "list_detail", ListSumBean.class);
                                     listener.onSuccess(showBeanList);
                                     return;
                                 } else {
@@ -122,17 +124,18 @@ public class PickUpShipmentLogic extends CommonLogic{
                             listener.onFailed(error);
                         }
                     });
-                }catch (Exception e){
+                } catch (Exception e) {
                     listener.onFailed(mContext.getString(R.string.unknow_error));
                     LogUtils.e(TAG, "getSum--->" + e);
                 }
             }
-        },null);
+        }, null);
     }
 
 
     /**
      * 提交
+     *
      * @param map map可以直接为空
      */
     public void commitSOLData(final Map<String, String> map, final CommitListener listener) {
@@ -140,16 +143,16 @@ public class PickUpShipmentLogic extends CommonLogic{
             @Override
             public void run() {
                 try {
-                    String createJson = JsonReqForERP.mapCreateJson(mModule, "als.d001.submit", mTimestamp, map);
+                    String createJson = JsonReqForERP.mapCreateJson(mModule, "als.d003.submit", mTimestamp, map);
                     OkhttpRequest.getInstance(mContext).post(createJson, new IRequestCallbackImp() {
                         @Override
                         public void onResponse(String string) {
                             String error = mContext.getString(R.string.unknow_error);
                             if (null != string) {
                                 if (ReqTypeName.SUCCCESSCODE.equals(JsonResp.getCode(string))) {
-                                    String doc_no = JsonResp.getParaString(string,"doc_no");
-                                    if(null != doc_no){
-                                        listener.onSuccess(JsonResp.getParaString(string,"doc_no"));
+                                    String doc_no = JsonResp.getParaString(string, "doc_no");
+                                    if (null != doc_no) {
+                                        listener.onSuccess(JsonResp.getParaString(string, "doc_no"));
                                     }
                                     return;
                                 } else {
@@ -166,6 +169,7 @@ public class PickUpShipmentLogic extends CommonLogic{
             }
         }, null);
     }
+
     /**
      * 出货过账 获取FIFO  json
      */
@@ -175,19 +179,20 @@ public class PickUpShipmentLogic extends CommonLogic{
 
         public void onFailed(String error);
     }
+
     public void getFifoInfo(final Map<String, String> map, final SaleOutLetLogic.FIFOInfoGETListener listener) {
         ThreadPoolManager.getInstance().executeTask(new Runnable() {
             @Override
             public void run() {
-                String createJson = JsonReqForERP.mapCreateJson(mModule, "als.d001.fifo.get", mTimestamp, map);
+                String createJson = JsonReqForERP.mapCreateJson(mModule, "als.d003.fifo.get", mTimestamp, map);
                 OkhttpRequest.getInstance(mContext).post(createJson, new IRequestCallbackImp() {
                     @Override
                     public void onResponse(String string) {
                         String error = mContext.getString(R.string.unknow_error);
                         if (null != string) {
-                            LogUtils.e(TAG,string);
+                            LogUtils.e(TAG, string);
                             if (ReqTypeName.SUCCCESSCODE.equals(JsonResp.getCode(string))) {
-                                List<FifoCheckBean> fiFoBeanList = JsonResp.getParaDatas(string,"list",FifoCheckBean.class);
+                                List<FifoCheckBean> fiFoBeanList = JsonResp.getParaDatas(string, "list", FifoCheckBean.class);
                                 if (null != fiFoBeanList && fiFoBeanList.size() > 0) {
                                     for (int i = 0; i < fiFoBeanList.size(); i++) {
                                         FifoCheckBean fifoBean = fiFoBeanList.get(i);

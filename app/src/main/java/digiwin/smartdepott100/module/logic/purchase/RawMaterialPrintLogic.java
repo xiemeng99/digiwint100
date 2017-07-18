@@ -17,9 +17,9 @@ import digiwin.library.utils.LogUtils;
 import digiwin.library.utils.ThreadPoolManager;
 
 /**
- * @des  原材料标签打印
- * @date 2017/6/8
  * @author xiemeng
+ * @des 原材料标签打印
+ * @date 2017/6/8
  */
 public class RawMaterialPrintLogic extends CommonLogic {
     public static RawMaterialPrintLogic logic;
@@ -50,14 +50,14 @@ public class RawMaterialPrintLogic extends CommonLogic {
             @Override
             public void run() {
                 try {
-                    String createJson = JsonReqForERP.mapCreateJson(mModule,"als.a009.print.get", mTimestamp, map);
+                    String createJson = JsonReqForERP.mapCreateJson(mModule, "als.a009.print.get", mTimestamp, map);
                     OkhttpRequest.getInstance(mContext).post(createJson, new IRequestCallbackImp() {
                         @Override
                         public void onResponse(String string) {
                             String error = mContext.getString(R.string.unknow_error);
                             if (null != string) {
                                 if (ReqTypeName.SUCCCESSCODE.equals(JsonResp.getCode(string))) {
-                                    List<RawMaterialPrintBean> sumBeen = JsonResp.getParaDatas(string, "list",RawMaterialPrintBean.class);
+                                    List<RawMaterialPrintBean> sumBeen = JsonResp.getParaDatas(string, "list", RawMaterialPrintBean.class);
                                     if (null != sumBeen) {
                                         listener.onSuccess(sumBeen);
                                         return;

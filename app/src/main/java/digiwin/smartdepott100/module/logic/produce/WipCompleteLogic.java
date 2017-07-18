@@ -12,6 +12,7 @@ import digiwin.smartdepott100.core.json.JsonReqForERP;
 import digiwin.smartdepott100.core.net.IRequestCallbackImp;
 import digiwin.smartdepott100.core.net.OkhttpRequest;
 import digiwin.smartdepott100.module.bean.common.ListSumBean;
+import digiwin.smartdepott100.module.bean.common.ScanPlotNoBackBean;
 import digiwin.smartdepott100.module.logic.common.CommonLogic;
 import digiwin.library.json.JsonResp;
 import digiwin.library.utils.LogUtils;
@@ -35,8 +36,53 @@ public class WipCompleteLogic extends CommonLogic {
         return logic = new WipCompleteLogic(context, module, timestamp);
     }
 
+
     /**
-     * 富钛完工入库汇总展示
+     * 扫描工单号
+     */
+    public interface ScanOrderNoListener {
+        public void onSuccess(ListSumBean barcodeBackBean);
+
+        public void onFailed(String error);
+    }
+
+    /**
+     * 扫描工单号
+     */
+    public void scanOrderNo(final Map<String, String> map, final ScanOrderNoListener listener) {
+        ThreadPoolManager.getInstance().executeTask(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    String createJson = JsonReqForERP.mapCreateJson(mModule,"als.b006.wo.no.get", mTimestamp, map);
+                    OkhttpRequest.getInstance(mContext).post(createJson, new IRequestCallbackImp() {
+                        @Override
+                        public void onResponse(String string) {
+                            String error = mContext.getString(R.string.unknow_error);
+                            if (null != string) {
+                                if (ReqTypeName.SUCCCESSCODE.equals(JsonResp.getCode(string))) {
+                                    ListSumBean barcodeBackBean  = JsonResp.getParaData(string, ListSumBean.class);
+                                    listener.onSuccess(barcodeBackBean);
+                                    return;
+                                } else {
+                                    error = JsonResp.getDescription(string);
+                                }
+                            }
+                            listener.onFailed(error);
+                        }
+                    });
+                } catch (Exception e) {
+                    listener.onFailed(mContext.getString(R.string.unknow_error));
+                    LogUtils.e(TAG, "scanBarcode--->" + e);
+                }
+            }
+        }, null);
+    }
+
+
+
+    /**
+     * 完工入库汇总展示
      */
     public void getSumWipComplete(final Map<String, String> map, final GetZSumListener listener) {
         ThreadPoolManager.getInstance().executeTask(new Runnable() {
@@ -70,6 +116,7 @@ public class WipCompleteLogic extends CommonLogic {
 
     /**
      * 提交
+     *
      * @param map map可以直接为空
      */
     public void commit(final Map<String, String> map, final CommitListener listener) {

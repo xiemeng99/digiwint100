@@ -23,7 +23,7 @@ import digiwin.smartdepott100.module.logic.common.CommonLogic;
 
 /**
  * @author 唐孟宇
- * 工单退料Logic
+ *         工单退料Logic
  */
 
 public class WorkOrderReturnLogic extends CommonLogic {
@@ -54,7 +54,7 @@ public class WorkOrderReturnLogic extends CommonLogic {
                             String error = mContext.getString(R.string.unknow_error);
                             if (null != string) {
                                 if (ReqTypeName.SUCCCESSCODE.equals(JsonResp.getCode(string))) {
-                                    List<FilterResultOrderBean> showBeanList = JsonResp.getParaDatas(string,"list",FilterResultOrderBean.class);
+                                    List<FilterResultOrderBean> showBeanList = JsonResp.getParaDatas(string, "list", FilterResultOrderBean.class);
                                     listener.onSuccess(showBeanList);
                                     return;
                                 } else {
@@ -107,6 +107,7 @@ public class WorkOrderReturnLogic extends CommonLogic {
 
     /**
      * 提交
+     *
      * @param map map可以直接为空
      */
     public void commit(final Map<String, String> map, final CommitListener listener) {

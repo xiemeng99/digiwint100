@@ -21,6 +21,7 @@ import butterknife.OnCheckedChanged;
 import butterknife.OnClick;
 import butterknife.OnFocusChange;
 import butterknife.OnTextChanged;
+import digiwin.library.utils.WeakRefHandler;
 import digiwin.smartdepott100.core.base.BaseFirstModuldeActivity;
 import digiwin.smartdepott100.core.coreutil.CommonUtils;
 import digiwin.smartdepott100.module.bean.common.FilterResultOrderBean;
@@ -229,7 +230,7 @@ public class MiscellaneousIssueInScanFg extends BaseFragment {
 
     FilterResultOrderBean orderBean = new FilterResultOrderBean();
 
-    private Handler mHandler = new Handler(new Handler.Callback() {
+    private Handler.Callback mCallback= new Handler.Callback() {
         @Override
         public boolean handleMessage(Message msg) {
             switch (msg.what) {
@@ -306,7 +307,9 @@ public class MiscellaneousIssueInScanFg extends BaseFragment {
             }
             return false;
         }
-    });
+    };
+
+    private Handler mHandler = new WeakRefHandler(mCallback);
 
     @Override
     protected int bindLayoutId() {
@@ -390,4 +393,9 @@ public class MiscellaneousIssueInScanFg extends BaseFragment {
         });
     }
 
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        mHandler.removeCallbacksAndMessages(null);
+    }
 }

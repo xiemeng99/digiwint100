@@ -34,6 +34,7 @@ import digiwin.library.dialog.OnDialogClickListener;
 import digiwin.library.dialog.OnDialogTwoListener;
 import digiwin.library.utils.ActivityManagerUtils;
 import digiwin.library.utils.StringUtils;
+import digiwin.library.utils.WeakRefHandler;
 import digiwin.smartdepott100.R;
 import digiwin.smartdepott100.core.appcontants.AddressContants;
 import digiwin.smartdepott100.core.appcontants.ModuleCode;
@@ -420,9 +421,9 @@ public class ProcedureCheckoutActivity extends BaseTitleActivity {
     private ProcedureCheckoutCommitBean commitBean;
 
 
-    private Handler mHandler = new Handler(new Handler.Callback() {
+    private Handler.Callback mCallback= new Handler.Callback() {
         @Override
-        public boolean handleMessage(final Message msg) {
+        public boolean handleMessage(Message msg) {
             switch (msg.what) {
                 case PROCEDUREWHAT:
                     HashMap<String, String> procedureMap = new HashMap<>();
@@ -637,7 +638,9 @@ public class ProcedureCheckoutActivity extends BaseTitleActivity {
             }
             return false;
         }
-    });
+    };
+
+    private Handler mHandler = new WeakRefHandler(mCallback);
 
 
     @Override
@@ -806,5 +809,6 @@ public class ProcedureCheckoutActivity extends BaseTitleActivity {
     protected void onDestroy() {
         super.onDestroy();
         EventBus.getDefault().unregister(this);
+        mHandler.removeCallbacksAndMessages(null);
     }
 }

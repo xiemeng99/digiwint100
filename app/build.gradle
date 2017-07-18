@@ -1,6 +1,6 @@
 apply plugin: 'com.android.application'
 apply plugin: 'android-apt'
-
+apply plugin: 'com.github.dcendents.android-maven'
 def releaseTime() {
     return new Date().format("yyyy-MM-dd", TimeZone.getTimeZone("UTC"))
 }
@@ -41,8 +41,8 @@ android {
 //    }
     buildTypes {
         release {
-            minifyEnabled true
-            shrinkResources true//去掉不用资源
+            minifyEnabled false
+            shrinkResources false//去掉不用资源
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }

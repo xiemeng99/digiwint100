@@ -64,7 +64,7 @@ public class RawMaterialPrintActivity extends BaseTitleActivity {
 
     @Override
     public String moduleCode() {
-        module = ModuleCode.PRINTFINISHLABEL;
+        module = ModuleCode.RAWMATERAILPRINT;
         return module;
     }
 

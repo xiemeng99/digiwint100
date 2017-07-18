@@ -6,7 +6,6 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -19,6 +18,10 @@ import butterknife.BindView;
 import butterknife.BindViews;
 import butterknife.OnClick;
 import butterknife.OnFocusChange;
+import digiwin.library.datepicker.DatePickerUtils;
+import digiwin.library.utils.ActivityManagerUtils;
+import digiwin.library.utils.LogUtils;
+import digiwin.pulltorefreshlibrary.recyclerviewAdapter.OnItemClickListener;
 import digiwin.smartdepott100.R;
 import digiwin.smartdepott100.core.appcontants.ModuleCode;
 import digiwin.smartdepott100.core.base.BaseTitleActivity;
@@ -28,10 +31,6 @@ import digiwin.smartdepott100.module.bean.common.FilterBean;
 import digiwin.smartdepott100.module.bean.common.FilterResultOrderBean;
 import digiwin.smartdepott100.module.logic.common.CommonLogic;
 import digiwin.smartdepott100.module.logic.purchase.IQCLogic;
-import digiwin.library.datepicker.DatePickerUtils;
-import digiwin.library.utils.ActivityManagerUtils;
-import digiwin.library.utils.LogUtils;
-import digiwin.pulltorefreshlibrary.recyclerviewAdapter.OnItemClickListener;
 
 /**
  * @author xiemeng
@@ -51,19 +50,39 @@ public class IQCListActivity extends BaseTitleActivity {
     EditText etPurchaseOrder;
     @BindView(R.id.ll_purchase_order)
     LinearLayout llPurchaseOrder;
-    @BindView(R.id.tv_supplier)
-    TextView tvSupplier;
-    @BindView(R.id.et_supplier)
-    EditText etSupplier;
-    @BindView(R.id.ll_supplier)
-    LinearLayout llSupplier;
+    @BindView(R.id.tv_depart)
+    TextView tvDepart;
+    @BindView(R.id.et_depart)
+    EditText etDepart;
+    @BindView(R.id.ll_depart)
+    LinearLayout llDepart;
 
-    @BindView(R.id.date)
-    ImageView date;
-    @BindView(R.id.btn_search_sure)
-    Button btnSearchSure;
     @BindView(R.id.ll_search_input)
     LinearLayout llSearchInput;
+    @BindView(R.id.tv_check_no)
+    TextView tvCheckNo;
+    @BindView(R.id.et_check_no)
+    EditText etCheckNo;
+    @BindView(R.id.ll_check_no)
+    LinearLayout llCheckNo;
+    @BindView(R.id.tv_item_no)
+    TextView tvItemNo;
+    @BindView(R.id.et_item_no)
+    EditText etItemNo;
+    @BindView(R.id.ll_item_no)
+    LinearLayout llItemNo;
+    @BindView(R.id.tv_barcode_no)
+    TextView tvBarcodeNo;
+    @BindView(R.id.et_barcode_no)
+    EditText etBarcodeNo;
+    @BindView(R.id.ll_barcode_no)
+    LinearLayout llBarcodeNo;
+    @BindView(R.id.tv_check_employ)
+    TextView tvCheckEmploy;
+    @BindView(R.id.et_check_employ)
+    EditText etCheckEmploy;
+    @BindView(R.id.ll_check_employ)
+    LinearLayout llCheckEmploy;
     private IQCLogic logic;
 
     private boolean isSearching;
@@ -121,11 +140,11 @@ public class IQCListActivity extends BaseTitleActivity {
     /**
      * 控件集合
      */
-    @BindViews({R.id.et_purchase_order, R.id.et_supplier, R.id.et_date})
+    @BindViews({R.id.et_purchase_order,R.id.et_check_no, R.id.et_item_no, R.id.et_barcode_no,R.id.et_check_employ, R.id.et_depart, R.id.et_date})
     List<EditText> editTexts;
-    @BindViews({R.id.ll_purchase_order, R.id.ll_supplier, R.id.ll_date})
+    @BindViews({R.id.ll_purchase_order,R.id.ll_check_no, R.id.ll_item_no, R.id.ll_barcode_no,R.id.ll_check_employ,  R.id.ll_depart, R.id.ll_date})
     List<View> views;
-    @BindViews({R.id.tv_purchase_order, R.id.tv_supplier, R.id.tv_date})
+    @BindViews({R.id.tv_purchase_order,R.id.tv_check_no, R.id.tv_item_no, R.id.tv_barcode_no,R.id.tv_check_employ,  R.id.tv_depart, R.id.tv_date})
     List<TextView> textViews;
 
     /**
@@ -137,13 +156,36 @@ public class IQCListActivity extends BaseTitleActivity {
         ModuleUtils.etChange(activity, etPurchaseOrder, editTexts);
         ModuleUtils.tvChange(activity, tvPurchaseOrder, textViews);
     }
+    @OnFocusChange(R.id.et_check_no)
+    void checkNoFocusChange() {
+        ModuleUtils.viewChange(llCheckNo, views);
+        ModuleUtils.etChange(activity, etCheckNo, editTexts);
+        ModuleUtils.tvChange(activity, tvCheckNo, textViews);
+    }
+    @OnFocusChange(R.id.et_item_no)
+    void itemNoFocusChange() {
+        ModuleUtils.viewChange(llItemNo, views);
+        ModuleUtils.etChange(activity, etItemNo, editTexts);
+        ModuleUtils.tvChange(activity, tvItemNo, textViews);
+    }
+    @OnFocusChange(R.id.et_barcode_no)
+    void barcodeNoFocusChange() {
+        ModuleUtils.viewChange(llBarcodeNo, views);
+        ModuleUtils.etChange(activity, etBarcodeNo, editTexts);
+        ModuleUtils.tvChange(activity, tvBarcodeNo, textViews);
+    }
+    @OnFocusChange(R.id.et_check_employ)
+    void checkEmployFocusChange() {
+        ModuleUtils.viewChange(llCheckEmploy, views);
+        ModuleUtils.etChange(activity, etCheckEmploy, editTexts);
+        ModuleUtils.tvChange(activity, tvCheckEmploy, textViews);
+    }
 
-
-    @OnFocusChange(R.id.et_supplier)
-    void supplierFocusChange() {
-        ModuleUtils.viewChange(llSupplier, views);
-        ModuleUtils.etChange(activity, etSupplier, editTexts);
-        ModuleUtils.tvChange(activity, tvSupplier, textViews);
+    @OnFocusChange(R.id.et_depart)
+    void departFocusChange() {
+        ModuleUtils.viewChange(llDepart, views);
+        ModuleUtils.etChange(activity, etDepart, editTexts);
+        ModuleUtils.tvChange(activity, tvDepart, textViews);
     }
 
 
@@ -184,7 +226,7 @@ public class IQCListActivity extends BaseTitleActivity {
     @Override
     protected void initNavigationTitle() {
         super.initNavigationTitle();
-        mName.setText(getString(R.string.iqc_check)+getString(R.string.list));
+        mName.setText(getString(R.string.iqc_check) + getString(R.string.list));
         search.setVisibility(View.VISIBLE);
         search.setImageResource(R.drawable.search);
         isSearching = true;
@@ -221,9 +263,13 @@ public class IQCListActivity extends BaseTitleActivity {
         ryList.setAdapter(adapter);
         showLoadingDialog();
         FilterBean filterBean = new FilterBean();
-      //  filterBean.setWarehouse_in_no(LoginLogic.getWare());
-        filterBean.setDoc_no(etPurchaseOrder.getText().toString());
-        filterBean.setSupplier_no(etSupplier.getText().toString());
+        //  filterBean.setWarehouse_in_no(LoginLogic.getWare());
+        filterBean.setReceipt_no(etPurchaseOrder.getText().toString());
+        filterBean.setDoc_no(etCheckNo.getText().toString());
+        filterBean.setItem_no(etItemNo.getText().toString());
+        filterBean.setBarcode_no(etBarcodeNo.getText().toString());
+        filterBean.setEmployee_no(etCheckEmploy.getText().toString());
+        filterBean.setDepartment_no(etDepart.getText().toString());
         filterBean.setDate_begin(startDate);
         filterBean.setDate_end(endDate);
         logic.getIqcList(filterBean, new CommonLogic.GetDataListListener() {
@@ -276,6 +322,5 @@ public class IQCListActivity extends BaseTitleActivity {
             }
         });
     }
-
 
 }

@@ -29,7 +29,7 @@ import digiwin.smartdepott100.module.logic.common.CommonLogic;
  * @date 2017/6/16
  */
 
-public class QuickStorageLogic extends CommonLogic{
+public class QuickStorageLogic extends CommonLogic {
 
     private static final String TAG = "QuickStorageLogic";
 
@@ -88,18 +88,18 @@ public class QuickStorageLogic extends CommonLogic{
             public void run() {
                 try {
                     Map<String, String> map = ObjectAndMapUtils.getValueMap(clickItemPutBean);
-                    final String createJson = JsonReqForERP.mapCreateJson(mModule, ReqTypeName.QUICKSTORAGESUMDATA, mTimestamp,map);
+                    final String createJson = JsonReqForERP.mapCreateJson(mModule, ReqTypeName.QUICKSTORAGESUMDATA, mTimestamp, map);
                     OkhttpRequest.getInstance(mContext).post(createJson, new IRequestCallbackImp() {
                         @Override
                         public void onResponse(String string) {
                             String error = mContext.getString(R.string.unknow_error);
                             if (null != string) {
                                 if (ReqTypeName.SUCCCESSCODE.equals(JsonResp.getCode(string))) {
-                                    List<ListSumBean> showBeanList = JsonResp.getParaDatas(string,"list_detail", ListSumBean.class);
+                                    List<ListSumBean> showBeanList = JsonResp.getParaDatas(string, "list_detail", ListSumBean.class);
                                     listener.onSuccess(showBeanList);
                                     return;
                                 } else {
-                                    error =JsonResp.getDescription(string);
+                                    error = JsonResp.getDescription(string);
                                 }
                             }
                             listener.onFailed(error);
@@ -123,7 +123,7 @@ public class QuickStorageLogic extends CommonLogic{
             public void run() {
                 try {
                     HashMap<String, Object> map = new HashMap<>();
-                    map.put("data",listMap);
+                    map.put("data", listMap);
                     String createJson = JsonReqForERP.dataCreateJson(mModule, ReqTypeName.QUICKSTORAGE_COMMIT, mTimestamp.toString(), map);
                     OkhttpRequest.getInstance(mContext).post(createJson, new IRequestCallbackImp() {
                         @Override

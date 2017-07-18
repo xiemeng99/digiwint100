@@ -138,8 +138,10 @@ public class WipStorageSumFg  extends BaseFragment {
         final SumShowBean sumShowBean = new SumShowBean();
         sumShowBean.setItem_name(listSumBean.getItem_name());
         sumShowBean.setItem_no(listSumBean.getItem_no());
-        sumShowBean.setAvailable_in_qty(listSumBean.getAvailable_in_qty());
+        sumShowBean.setWo_no(listSumBean.getWo_no());
+        sumShowBean.setAvailable_in_qty(listSumBean.getApply_qty());
         map.put(AddressContants.ITEM_NO, sumShowBean.getItem_no());
+        map.put(AddressContants.WO_NO, sumShowBean.getWo_no());
         wipCompleteLogic.getDetail(map, new CommonLogic.GetDetailListener() {
             @Override
             public void onSuccess(List<DetailShowBean> detailShowBeen) {

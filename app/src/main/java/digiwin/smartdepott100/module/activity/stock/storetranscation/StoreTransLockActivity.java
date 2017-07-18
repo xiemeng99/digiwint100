@@ -21,6 +21,7 @@ import digiwin.library.constant.SharePreKey;
 import digiwin.library.dialog.OnDialogTwoListener;
 import digiwin.library.utils.SharedPreferencesUtils;
 import digiwin.library.utils.StringUtils;
+import digiwin.library.utils.WeakRefHandler;
 import digiwin.library.voiceutils.VoiceUtils;
 import digiwin.smartdepott100.R;
 import digiwin.smartdepott100.core.appcontants.AddressContants;
@@ -213,10 +214,9 @@ public class StoreTransLockActivity extends BaseTitleActivity{
     /**
      * Handler
      */
-    private Handler mHandler = new Handler(){
+    private Handler.Callback mCallback= new Handler.Callback() {
         @Override
-        public void handleMessage(Message msg) {
-            super.handleMessage(msg);
+        public boolean handleMessage(Message msg) {
             if(msg.what == ITEMWHAT){
                 HashMap<String,String> map = new HashMap<>();
                 String str = (String) msg.obj;
@@ -279,8 +279,12 @@ public class StoreTransLockActivity extends BaseTitleActivity{
                     }
                 });
             }
+            return false;
         }
     };
+
+    private Handler mHandler = new WeakRefHandler(mCallback);
+
     @OnTextChanged(value = R.id.et_materiel_barcode, callback = OnTextChanged.Callback.AFTER_TEXT_CHANGED)
     void barcodeChange(CharSequence s) {
         if (!StringUtils.isBlank(s.toString())) {
@@ -398,5 +402,11 @@ public class StoreTransLockActivity extends BaseTitleActivity{
     protected void doBusiness() {
         transLogic = StoreTransLogic.getInstance(activity,module,mTimestamp.toString());
         commonLogic = CommonLogic.getInstance(activity,module,mTimestamp.toString());
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        mHandler.removeCallbacksAndMessages(null);
     }
 }

@@ -89,7 +89,6 @@ public class PickUpShipmentSumFg extends BaseFragment {
         tv_shipping_order.setText(localData.getDoc_no());
         tv_apply_date.setText(localData.getShipment_date());
         tv_custom.setText(localData.getCustomer_name());
-
     }
 
     public void upDateList() {
@@ -144,16 +143,15 @@ public class PickUpShipmentSumFg extends BaseFragment {
         final SumShowBean sumShowBean = new SumShowBean();
         sumShowBean.setItem_no(orderSumData.getItem_no());
         sumShowBean.setItem_name(orderSumData.getItem_name());
-        float numb1 = StringUtils.string2Float(orderSumData.getReq_qty());
+        float numb1 = StringUtils.string2Float(orderSumData.getApply_qty());
         float numb2 = StringUtils.string2Float(orderSumData.getStock_qty());
         if(numb1 > numb2){
             sumShowBean.setAvailable_in_qty(orderSumData.getStock_qty());
         }else if(numb1 < numb2){
-            sumShowBean.setAvailable_in_qty(orderSumData.getReq_qty());
+            sumShowBean.setAvailable_in_qty(orderSumData.getApply_qty());
         }else if(numb1 == numb2){
-            sumShowBean.setAvailable_in_qty(orderSumData.getReq_qty());
+            sumShowBean.setAvailable_in_qty(orderSumData.getApply_qty());
         }
-
         logic.getDetail(map, new CommonLogic.GetDetailListener() {
             @Override
             public void onSuccess(List<DetailShowBean> detailShowBeen) {
@@ -184,7 +182,8 @@ public class PickUpShipmentSumFg extends BaseFragment {
             public void onCallback1() {
                 showLoadingDialog();
                 HashMap<String, String> map = new HashMap<>();
-                logic.commit(map, new CommonLogic.CommitListener() {
+                map.put(AddressContants.DOC_NO,localData.getDoc_no());
+                logic.commitSOLData(map, new CommonLogic.CommitListener() {
                     @Override
                     public void onSuccess(String msg) {
                         dismissLoadingDialog();

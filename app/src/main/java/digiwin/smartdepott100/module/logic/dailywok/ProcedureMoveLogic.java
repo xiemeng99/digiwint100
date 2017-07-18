@@ -40,7 +40,7 @@ public class ProcedureMoveLogic {
     private static ProcedureMoveLogic logic;
 
     private ProcedureMoveLogic(Context context, String module, String timestamp) {
-        mContext = context;
+        mContext = context.getApplicationContext();
         mModule = module;
         mTimestamp = timestamp;
     }

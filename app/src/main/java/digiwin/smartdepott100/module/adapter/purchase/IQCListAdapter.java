@@ -28,8 +28,9 @@ public class IQCListAdapter   extends BaseRecyclerAdapter<FilterResultOrderBean>
 
     @Override
     protected void bindData(RecyclerViewHolder holder, int position, final FilterResultOrderBean item) {
-        holder.setText(R.id.tv_purchase_order, item.getDoc_no());
+        holder.setText(R.id.tv_check_no, item.getDoc_no());
         holder.setText(R.id.tv_item_date,item.getCreate_date());
-        holder.setText(R.id.tv_supplier,item.getSupplier_name());
+        holder.setText(R.id.tv_check_employee,item.getEmployee_name());
+        holder.setText(R.id.tv_check_depart,item.getDepartment_name());
     }
 }

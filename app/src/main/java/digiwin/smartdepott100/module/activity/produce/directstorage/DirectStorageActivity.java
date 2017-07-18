@@ -22,6 +22,7 @@ import digiwin.library.dialog.OnDialogClickListener;
 import digiwin.library.dialog.OnDialogTwoListener;
 import digiwin.library.utils.ObjectAndMapUtils;
 import digiwin.library.utils.StringUtils;
+import digiwin.library.utils.WeakRefHandler;
 import digiwin.smartdepott100.R;
 import digiwin.smartdepott100.core.appcontants.AddressContants;
 import digiwin.smartdepott100.core.appcontants.ModuleCode;
@@ -209,41 +210,43 @@ public class DirectStorageActivity extends BaseFirstModuldeActivity {
         });
     }
 
-    private Handler mHandler = new Handler(new Handler.Callback() {
+    private Handler.Callback mCallback= new Handler.Callback() {
         @Override
         public boolean handleMessage(Message msg) {
             switch (msg.what) {
                 case WORKORDER:
-            Map<String,String> map = new HashMap<>();
-            saveBean.setWo_no(StringUtils.objToString(msg.obj));
-            map.put(AddressContants.WO_NO,StringUtils.objToString(msg.obj));
-            logic.scanOrder(map, new DirectStorageLogic.ScanOrderListener() {
-                @Override
-                public void onSuccess(ListSumBean sumBean) {
-                    workOrderShow = sumBean.getShowing();
-                    workOrderFlag = true;
-                    show();
-                    tvWarehouse.setText(sumBean.getWarehouse_no());
-                    etInputNum.setText(StringUtils.deleteZero(sumBean.getQty()));
-                    etInputNum.requestFocus();
-                }
-
-                @Override
-                public void onFailed(String error) {
-                    workOrderFlag = false;
-                    showFailedDialog(error, new OnDialogClickListener() {
+                    Map<String,String> map = new HashMap<>();
+                    saveBean.setWo_no(StringUtils.objToString(msg.obj));
+                    map.put(AddressContants.WO_NO,StringUtils.objToString(msg.obj));
+                    logic.scanOrder(map, new DirectStorageLogic.ScanOrderListener() {
                         @Override
-                        public void onCallback() {
-                            etWorkOrder.setText("");
+                        public void onSuccess(ListSumBean sumBean) {
+                            workOrderShow = sumBean.getShowing();
+                            workOrderFlag = true;
+                            show();
+                            tvWarehouse.setText(sumBean.getWarehouse_no());
+                            etInputNum.setText(StringUtils.deleteZero(sumBean.getQty()));
+                            etInputNum.requestFocus();
+                        }
+
+                        @Override
+                        public void onFailed(String error) {
+                            workOrderFlag = false;
+                            showFailedDialog(error, new OnDialogClickListener() {
+                                @Override
+                                public void onCallback() {
+                                    etWorkOrder.setText("");
+                                }
+                            });
                         }
                     });
-                }
-            });
-            break;
-        }
+                    break;
+            }
             return false;
         }
-    });
+    };
+
+    private Handler mHandler = new WeakRefHandler(mCallback);
 
     /**
      * 提交完成之后的操作
@@ -284,5 +287,11 @@ public class DirectStorageActivity extends BaseFirstModuldeActivity {
     @Override
     public ExitMode exitOrDel() {
         return ExitMode.EXITD;
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        mHandler.removeCallbacksAndMessages(null);
     }
 }

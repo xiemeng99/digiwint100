@@ -19,6 +19,7 @@ import butterknife.BindView;
 import butterknife.BindViews;
 import butterknife.OnClick;
 import butterknife.OnFocusChange;
+import digiwin.smartdepott100.login.loginlogic.LoginLogic;
 import digiwin.smartdepott100.module.logic.sale.saleoutlet.SaleOutLetLogic;
 import digiwin.library.constant.SharePreKey;
 import digiwin.library.datepicker.DatePickerUtils;
@@ -272,6 +273,7 @@ public class SaleOutletListActivity extends BaseTitleActivity {
         ryList.setAdapter(adapter);
         showLoadingDialog();
         FilterBean filterBean = new FilterBean();
+        filterBean.setWarehouse_no(LoginLogic.getWare());
         filterBean.setDoc_no(etGeneralNumber.getText().toString());
         filterBean.setItem_name(tvItemName.getText().toString());
         filterBean.setPagesize((String)SharedPreferencesUtils.get(activity, SharePreKey.PAGE_SETTING,"10"));
@@ -330,6 +332,4 @@ public class SaleOutletListActivity extends BaseTitleActivity {
             }
         });
     }
-
-
 }

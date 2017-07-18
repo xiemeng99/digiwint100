@@ -241,13 +241,11 @@ public class MiscellaneousissuesInListActivity extends BaseTitleActivity {
         if (ll_search_dialog.getVisibility() == View.VISIBLE) {
             if (null != sumShowBeanList && sumShowBeanList.size() > 0) {
                 ivScan.setVisibility(View.INVISIBLE);
-                mName.setText(R.string.filter_result_list);
                 ll_search_dialog.setVisibility(View.GONE);
                 scrollview.setVisibility(View.VISIBLE);
             }
         } else {
             ivScan.setVisibility(View.VISIBLE);
-            mName.setText(getString(R.string.miscellaneous_issues_in)+getString(R.string.condition_filter));
             ll_search_dialog.setVisibility(View.VISIBLE);
             scrollview.setVisibility(View.GONE);
         }
@@ -271,7 +269,7 @@ public class MiscellaneousissuesInListActivity extends BaseTitleActivity {
     @Override
     protected void initNavigationTitle() {
         super.initNavigationTitle();
-        mName.setText(getString(R.string.miscellaneous_issues_in)+getString(R.string.condition_filter));
+        mName.setText(getString(R.string.miscellaneous_issues_in)+getString(R.string.list));
         iv_title_setting.setVisibility(View.VISIBLE);
         iv_title_setting.setImageResource(R.drawable.search);
     }
@@ -338,7 +336,6 @@ public class MiscellaneousissuesInListActivity extends BaseTitleActivity {
         try {
             //查询成功隐藏筛选界面，展示清单信息
             ivScan.setVisibility(View.INVISIBLE);
-            mName.setText(getString(R.string.filter_result_list));
             ll_search_dialog.setVisibility(View.GONE);
             scrollview.setVisibility(View.VISIBLE);
             iv_title_setting.setVisibility(View.VISIBLE);

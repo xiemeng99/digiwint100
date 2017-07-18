@@ -2,6 +2,7 @@ package digiwin.smartdepott100.module.fragment.produce.wipstorage;
 
 import android.os.Handler;
 import android.os.Message;
+import android.text.method.TextKeyListener;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.LinearLayout;
@@ -15,15 +16,16 @@ import butterknife.BindViews;
 import butterknife.OnClick;
 import butterknife.OnFocusChange;
 import butterknife.OnTextChanged;
+import digiwin.library.utils.WeakRefHandler;
 import digiwin.smartdepott100.R;
 import digiwin.smartdepott100.core.appcontants.AddressContants;
 import digiwin.smartdepott100.core.base.BaseFragment;
 import digiwin.smartdepott100.core.modulecommon.ModuleUtils;
 import digiwin.smartdepott100.login.loginlogic.LoginLogic;
 import digiwin.smartdepott100.module.activity.produce.finishstorage.WipStorageActivity;
+import digiwin.smartdepott100.module.bean.common.ListSumBean;
 import digiwin.smartdepott100.module.bean.common.SaveBackBean;
 import digiwin.smartdepott100.module.bean.common.SaveBean;
-import digiwin.smartdepott100.module.bean.common.ScanPlotNoBackBean;
 import digiwin.smartdepott100.module.logic.common.CommonLogic;
 import digiwin.smartdepott100.module.logic.produce.WipCompleteLogic;
 import digiwin.library.dialog.OnDialogClickListener;
@@ -37,12 +39,12 @@ import digiwin.library.utils.StringUtils;
 
 public class WipStorageScanFg extends BaseFragment {
 
-    @BindView(R.id.tv_plot_no)
-    TextView tvPlotNo;
-    @BindView(R.id.et_plot_no)
-    EditText etPlotNo;
-    @BindView(R.id.ll_plot_no)
-    LinearLayout llPlotNo;
+    @BindView(R.id.tv_order_no)
+    TextView tvOrderNo;
+    @BindView(R.id.et_order_no)
+    EditText etOrderNo;
+    @BindView(R.id.ll_order_no)
+    LinearLayout llOrderNo;
     @BindView(R.id.tv_number)
     TextView tvNumber;
     @BindView(R.id.et_input_num)
@@ -59,19 +61,19 @@ public class WipStorageScanFg extends BaseFragment {
     @BindView(R.id.tv_scan_hasScan)
     TextView tvScanHasScan;
 
-    @BindViews({R.id.et_plot_no, R.id.et_input_num})
+    @BindViews({R.id.et_order_no, R.id.et_input_num})
     List<EditText> editTexts;
-    @BindViews({R.id.ll_plot_no, R.id.ll_input_num})
+    @BindViews({R.id.ll_order_no, R.id.ll_input_num})
     List<View> views;
-    @BindViews({R.id.tv_plot_no, R.id.tv_number})
+    @BindViews({R.id.tv_order_no, R.id.tv_number})
     List<TextView> textViews;
 
 
-    @OnFocusChange(R.id.et_plot_no)
+    @OnFocusChange(R.id.et_order_no)
     void barcodeFocusChanage() {
-        ModuleUtils.viewChange(llPlotNo, views);
-        ModuleUtils.etChange(activity, etPlotNo, editTexts);
-        ModuleUtils.tvChange(activity, tvPlotNo, textViews);
+        ModuleUtils.viewChange(llOrderNo, views);
+        ModuleUtils.etChange(activity, etOrderNo, editTexts);
+        ModuleUtils.tvChange(activity, tvOrderNo, textViews);
     }
 
     @OnFocusChange(R.id.et_input_num)
@@ -81,19 +83,19 @@ public class WipStorageScanFg extends BaseFragment {
         ModuleUtils.tvChange(activity, tvNumber, textViews);
     }
 
-    @OnTextChanged(value = R.id.et_plot_no, callback = OnTextChanged.Callback.AFTER_TEXT_CHANGED)
+    @OnTextChanged(value = R.id.et_order_no, callback = OnTextChanged.Callback.AFTER_TEXT_CHANGED)
     void plotNoChange(CharSequence s) {
         if (!StringUtils.isBlank(s.toString())) {
-            mHandler.removeMessages(PLOTNOWHAT);
-            mHandler.sendMessageDelayed(mHandler.obtainMessage(PLOTNOWHAT, s.toString()), AddressContants.DELAYTIME);
+            mHandler.removeMessages(ORDERNOWHAT);
+            mHandler.sendMessageDelayed(mHandler.obtainMessage(ORDERNOWHAT, s.toString()), AddressContants.DELAYTIME);
         }
     }
 
 
     @OnClick(R.id.save)
     void save() {
-        if (!plotNoFlag) {
-            showFailedDialog(R.string.scan_circulation);
+        if (!orderNoFlag) {
+            showFailedDialog(R.string.please_scan_job_number);
             return;
         }
         if (StringUtils.isBlank(etInputNum.getText().toString())) {
@@ -103,7 +105,7 @@ public class WipStorageScanFg extends BaseFragment {
         showLoadingDialog();
         saveBean.setWarehouse_in_no(LoginLogic.getWare());
         saveBean.setQty(etInputNum.getText().toString());
-        commonLogic.scanSave(saveBean, new CommonLogic.SaveListener() {
+        wipCompleteLogic.scanSave(saveBean, new CommonLogic.SaveListener() {
             @Override
             public void onSuccess(SaveBackBean saveBackBean) {
                 tvScanHasScan.setText(saveBackBean.getScan_sumqty());
@@ -121,55 +123,59 @@ public class WipStorageScanFg extends BaseFragment {
     }
 
     /**
-     * 物料条码
+     * 工单号
      */
-    final int PLOTNOWHAT = 1001;
+    final int ORDERNOWHAT = 1001;
 
     WipStorageActivity pactivity;
 
 
-    WipCompleteLogic commonLogic;
+    WipCompleteLogic wipCompleteLogic;
     /**
      * 条码展示
      */
-    String barcodeShow;
+    String orderShow;
     /**
      * 条码扫描
      */
-    boolean plotNoFlag;
+    boolean orderNoFlag;
 
     SaveBean saveBean;
 
-    private Handler mHandler = new Handler(new Handler.Callback() {
+    private Handler.Callback mCallback= new Handler.Callback() {
         @Override
         public boolean handleMessage(Message msg) {
             switch (msg.what) {
-                case PLOTNOWHAT:
+                case ORDERNOWHAT:
                     HashMap<String, String> barcodeMap = new HashMap<>();
-                    barcodeMap.put(AddressContants.PLOTNO, String.valueOf(msg.obj));
-                    commonLogic.scanPlotNo(barcodeMap, new CommonLogic.ScanPoltNoListener() {
+                    barcodeMap.put(AddressContants.DOC_NO, String.valueOf(msg.obj));
+                    etOrderNo.setKeyListener(null);
+                    wipCompleteLogic.scanOrderNo(barcodeMap, new WipCompleteLogic.ScanOrderNoListener() {
                         @Override
-                        public void onSuccess(ScanPlotNoBackBean barcodeBackBean) {
-                            barcodeShow = barcodeBackBean.getShowing();
-                            etInputNum.setText(StringUtils.deleteZero(barcodeBackBean.getAvailable_in_qty()));
+                        public void onSuccess(ListSumBean barcodeBackBean) {
+                            etOrderNo.setKeyListener(new TextKeyListener(TextKeyListener.Capitalize.CHARACTERS, true));
+                            orderShow = barcodeBackBean.getShowing();
+                            etInputNum.setText(StringUtils.deleteZero(barcodeBackBean.getBarcode_qty()));
                             tvScanHasScan.setText(barcodeBackBean.getScan_sumqty());
-                            plotNoFlag = true;
+                            orderNoFlag = true;
                             show();
-                            saveBean.setBarcode_no(etPlotNo.getText().toString());
+                            saveBean.setBarcode_no(barcodeBackBean.getItem_no());
                             saveBean.setAvailable_in_qty(barcodeBackBean.getAvailable_in_qty());
                             saveBean.setItem_no(barcodeBackBean.getItem_no());
                             saveBean.setUnit_no(barcodeBackBean.getUnit_no());
                             saveBean.setWo_no(barcodeBackBean.getWo_no());
+                            etInputNum.selectAll();
                             etInputNum.requestFocus();
                         }
 
                         @Override
                         public void onFailed(String error) {
-                            plotNoFlag =false;
+                            etOrderNo.setKeyListener(new TextKeyListener(TextKeyListener.Capitalize.CHARACTERS, true));
+                            orderNoFlag =false;
                             showFailedDialog(error, new OnDialogClickListener() {
                                 @Override
                                 public void onCallback() {
-                                    etPlotNo.setText("");
+                                    etOrderNo.setText("");
                                 }
                             });
                         }
@@ -178,7 +184,9 @@ public class WipStorageScanFg extends BaseFragment {
             }
             return false;
         }
-    });
+    };
+
+    private Handler mHandler = new WeakRefHandler(mCallback);
 
     @Override
     protected int bindLayoutId() {
@@ -196,7 +204,7 @@ public class WipStorageScanFg extends BaseFragment {
      * 公共区域展示
      */
     private void show() {
-        tvDetailShow.setText(StringUtils.lineChange(barcodeShow));
+        tvDetailShow.setText(StringUtils.lineChange(orderShow));
         if (!StringUtils.isBlank(tvDetailShow.getText().toString())) {
             includeDetail.setVisibility(View.VISIBLE);
         } else {
@@ -210,10 +218,10 @@ public class WipStorageScanFg extends BaseFragment {
      */
     private void clear() {
         etInputNum.setText("");
-        plotNoFlag = false;
-        etPlotNo.setText("");
-        barcodeShow = "";
-        etPlotNo.requestFocus();
+        orderNoFlag = false;
+        etOrderNo.setText("");
+        orderShow = "";
+        etOrderNo.requestFocus();
         show();
     }
 
@@ -221,10 +229,16 @@ public class WipStorageScanFg extends BaseFragment {
      * 初始化一些变量
      */
     public void initData() {
-        barcodeShow = "";
-        plotNoFlag = false;
+        orderShow = "";
+        orderNoFlag = false;
+        tvScanHasScan.setText("");
         saveBean = new SaveBean();
-        commonLogic = WipCompleteLogic.getInstance(context, pactivity.module, pactivity.mTimestamp.toString());
+        wipCompleteLogic = WipCompleteLogic.getInstance(context, pactivity.module, pactivity.mTimestamp.toString());
     }
 
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        mHandler.removeCallbacksAndMessages(null);
+    }
 }

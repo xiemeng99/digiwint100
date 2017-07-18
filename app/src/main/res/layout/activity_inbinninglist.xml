@@ -8,8 +8,7 @@
     android:orientation="vertical"
     tools:context="digiwin.smartdepott100.module.activity.produce.distribute.DistributeActivity">
 
-    <include  layout="@layout/activity_title_toolbar_bar"
-        android:id="@+id/include2" />
+    <include layout="@layout/activity_title_toolbar_bar"></include>
 
     <LinearLayout
         android:id="@+id/ll_search_dialog"
@@ -21,7 +20,7 @@
         android:background="@drawable/yellow_scandetail_bg"
         style="@style/itemstyle"
         android:visibility="visible"
-        android:layout_below="@+id/include2"
+        android:layout_below="@+id/toolbar_title"
         android:layout_centerHorizontal="true">
 
         <LinearLayout

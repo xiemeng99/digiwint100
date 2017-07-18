@@ -44,7 +44,7 @@
                         android:layout_width="@dimen/layout_60dp"
                         android:layout_height="wrap_content"
                         android:gravity="center_vertical"
-                        android:text="@string/purchase_no" />
+                        android:text="@string/send_goods_order" />
 
                     <TextView
                         android:id="@+id/tv_head_post_order"

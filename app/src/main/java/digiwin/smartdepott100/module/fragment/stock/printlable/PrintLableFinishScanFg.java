@@ -20,6 +20,7 @@ import butterknife.BindViews;
 import butterknife.OnClick;
 import butterknife.OnFocusChange;
 import butterknife.OnTextChanged;
+import digiwin.library.utils.WeakRefHandler;
 import digiwin.smartdepott100.R;
 import digiwin.smartdepott100.core.appcontants.AddressContants;
 import digiwin.smartdepott100.core.appcontants.SharePreferenceKey;
@@ -208,10 +209,9 @@ public class PrintLableFinishScanFg extends BaseFragment {
         }
     }
 
-    private Handler mHandler = new Handler(){
+    private Handler.Callback mCallback= new Handler.Callback() {
         @Override
-        public void handleMessage(Message msg) {
-            super.handleMessage(msg);
+        public boolean handleMessage(Message msg) {
             switch(msg.what){
                 case BARCODE://工单单号
                     HashMap<String,String> map=new HashMap<>();
@@ -251,8 +251,10 @@ public class PrintLableFinishScanFg extends BaseFragment {
                     });
                     break;
             }
+            return false;
         }
     };
+    private Handler mHandler = new WeakRefHandler(mCallback);
     /**
      * 料号
      */
@@ -377,5 +379,11 @@ public class PrintLableFinishScanFg extends BaseFragment {
         } else {
             includeDetail.setVisibility(View.GONE);
         }
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        mHandler.removeCallbacksAndMessages(null);
     }
 }

@@ -62,7 +62,7 @@ public class CommonLogic {
 
     protected CommonLogic(Context context, String module, String timestamp) {
         mTimestamp = timestamp;
-        mContext = context;
+        mContext = context.getApplicationContext();
         mModule = module;
 
     }
@@ -71,6 +71,14 @@ public class CommonLogic {
 
         return logic = new CommonLogic(context, module, timestamp);
     }
+
+
+    /**
+     * 该数组中模组无需判断库位是否存在于设置中的仓库
+     */
+    private String[] inStores = {ModuleCode.PUTINSTORE,
+
+    };
 
     /**
      * 扫描物料条码
@@ -89,7 +97,7 @@ public class CommonLogic {
             @Override
             public void run() {
                 try {
-                    map.put(AddressContants.WAREHOUSE_NO,LoginLogic.getWare());
+                    map.put(AddressContants.WAREHOUSE_NO, LoginLogic.getWare());
                     String createJson = JsonReqForERP.mapCreateJson(mModule, ReqTypeName.BARCODE, mTimestamp, map);
                     OkhttpRequest.getInstance(mContext).post(createJson, new IRequestCallbackImp() {
                         @Override
@@ -140,8 +148,8 @@ public class CommonLogic {
                             String error = mContext.getString(R.string.unknow_error);
                             if (null != string) {
                                 if (ReqTypeName.SUCCCESSCODE.equals(JsonResp.getCode(string))) {
-                                    ScanPlotNoBackBean barcodeBackBean  = JsonResp.getParaData(string, ScanPlotNoBackBean.class);
-                                        listener.onSuccess(barcodeBackBean);
+                                    ScanPlotNoBackBean barcodeBackBean = JsonResp.getParaData(string, ScanPlotNoBackBean.class);
+                                    listener.onSuccess(barcodeBackBean);
                                     return;
                                 } else {
                                     error = JsonResp.getDescription(string);
@@ -183,10 +191,14 @@ public class CommonLogic {
                             if (null != string) {
                                 if (ReqTypeName.SUCCCESSCODE.equals(JsonResp.getCode(string))) {
                                     ScanLocatorBackBean locatorBackBean = JsonResp.getParaData(string, ScanLocatorBackBean.class);
-                                    if (!ModuleCode.NOCOMESTOREALLOT.equals(mModule) &&
-                                            !ModuleCode.TRANSFERS_TO_REVIEW.equals(mModule) &&
-                                            !ModuleCode.POSTALLOCATE.equals(mModule)
-                                            && !locatorBackBean.getWarehouse_no().equals(LoginLogic.getWare())) {
+                                    boolean store = false;
+                                    for (String s : inStores) {
+                                        if (s.equals(mModule)) {
+                                            store = true;
+                                            break;
+                                        }
+                                    }
+                                    if (!store && !locatorBackBean.getWarehouse_no().equals(LoginLogic.getWare())) {
                                         error = mContext.getString(R.string.ware_error);
                                     } else {
                                         listener.onSuccess(locatorBackBean);
@@ -231,7 +243,7 @@ public class CommonLogic {
                             String error = mContext.getString(R.string.unknow_error);
                             if (null != string) {
                                 if (ReqTypeName.SUCCCESSCODE.equals(JsonResp.getCode(string))) {
-                                    SaveBackBean saveBackBean = JsonResp.getParaData(string,SaveBackBean.class);
+                                    SaveBackBean saveBackBean = JsonResp.getParaData(string, SaveBackBean.class);
                                     saveBackBean.setScan_sumqty(StringUtils.deleteZero(saveBackBean.getScan_sumqty()));
                                     listener.onSuccess(saveBackBean);
                                     return;
@@ -320,7 +332,7 @@ public class CommonLogic {
                             String error = mContext.getString(R.string.unknow_error);
                             if (null != string) {
                                 if (ReqTypeName.SUCCCESSCODE.equals(JsonResp.getCode(string))) {
-                                    listener.onSuccess(JsonResp.getParaString(string,""));
+                                    listener.onSuccess(JsonResp.getParaString(string, ""));
                                     return;
                                 } else {
                                     error = JsonResp.getDescription(string);
@@ -434,7 +446,7 @@ public class CommonLogic {
             @Override
             public void run() {
                 HashMap<String, Object> map = new HashMap<>();
-                map.put("data",list);
+                map.put("data", list);
                 String createJson = JsonReqForERP.dataCreateJson(mModule, ReqTypeName.UPDATEDELETE, mTimestamp.toString(), map);
                 OkhttpRequest.getInstance(mContext).post(createJson, new IRequestCallbackImp() {
                     @Override
@@ -508,14 +520,14 @@ public class CommonLogic {
         ThreadPoolManager.getInstance().executeTask(new Runnable() {
             @Override
             public void run() {
-                String xml = JsonReqForERP.mapCreateJson(mModule, ReqTypeName.UNCOMGET, mTimestamp,map);
+                String xml = JsonReqForERP.mapCreateJson(mModule, ReqTypeName.UNCOMGET, mTimestamp, map);
                 OkhttpRequest.getInstance(mContext).post(xml, new IRequestCallbackImp() {
                     @Override
                     public void onResponse(String string) {
                         String error = mContext.getString(R.string.unknow_error);
                         if (null != string) {
                             if (ReqTypeName.SUCCCESSCODE.equals(JsonResp.getCode(string))) {
-                                List<UnCompleteBean> unCompleteList = JsonResp.getParaDatas(string,"uncomlist",UnCompleteBean.class);
+                                List<UnCompleteBean> unCompleteList = JsonResp.getParaDatas(string, "uncomlist", UnCompleteBean.class);
                                 listener.onSuccess(unCompleteList);
                                 return;
                             } else {
@@ -747,15 +759,15 @@ public class CommonLogic {
                         String error = mContext.getString(R.string.unknow_error);
                         if (null != string) {
                             if (ReqTypeName.SUCCCESSCODE.equals(JsonResp.getCode(string))) {
-                                List<FifoCheckBean> fiFoBeanList =JsonResp.getParaDatas(string,"list_fifo",FifoCheckBean.class);
-                                if(null != fiFoBeanList && fiFoBeanList.size() > 0){
+                                List<FifoCheckBean> fiFoBeanList = JsonResp.getParaDatas(string, "list_fifo", FifoCheckBean.class);
+                                if (null != fiFoBeanList && fiFoBeanList.size() > 0) {
                                     for (int i = 0; i < fiFoBeanList.size(); i++) {
                                         FifoCheckBean fifoBean = fiFoBeanList.get(i);
                                         fifoBean.setRecommended_qty(StringUtils.deleteZero(fifoBean.getRecommended_qty()));
                                         fifoBean.setScan_sumqty(StringUtils.deleteZero(fifoBean.getScan_sumqty()));
                                     }
                                     listener.onSuccess(fiFoBeanList);
-                                }else{
+                                } else {
                                     List<FifoCheckBean> list = new ArrayList<FifoCheckBean>();
                                     listener.onSuccess(list);
                                 }
@@ -794,7 +806,7 @@ public class CommonLogic {
                         String error = mContext.getString(R.string.unknow_error);
                         if (null != string) {
                             if (ReqTypeName.SUCCCESSCODE.equals(JsonResp.getCode(string))) {
-                                List<FifoCheckBean> fiFoBeanList = JsonResp.getParaDatas(string,"list_fifo",FifoCheckBean.class);
+                                List<FifoCheckBean> fiFoBeanList = JsonResp.getParaDatas(string, "list_fifo", FifoCheckBean.class);
                                 if (null != fiFoBeanList && fiFoBeanList.size() > 0) {
                                     for (int i = 0; i < fiFoBeanList.size(); i++) {
                                         FifoCheckBean fifoBean = fiFoBeanList.get(i);
@@ -818,6 +830,7 @@ public class CommonLogic {
             }
         }, null);
     }
+
     /**
      * 根据料号获取FIFO_NEW(一般用不到)
      */
@@ -834,22 +847,22 @@ public class CommonLogic {
         ThreadPoolManager.getInstance().executeTask(new Runnable() {
             @Override
             public void run() {
-                String json = JsonReqForERP.mapCreateJson(mModule, ReqTypeName.GETACCORDINGFIFO, mTimestamp,map);
+                String json = JsonReqForERP.mapCreateJson(mModule, ReqTypeName.GETACCORDINGFIFO, mTimestamp, map);
                 OkhttpRequest.getInstance(mContext).post(json, new IRequestCallbackImp() {
                     @Override
                     public void onResponse(String string) {
                         String error = mContext.getString(R.string.unknow_error);
                         if (null != string) {
                             if (ReqTypeName.SUCCCESSCODE.equals(JsonResp.getCode(string))) {
-                                List<FifoCheckBean> fiFoBeanList = JsonResp.getParaDatas(string,"list_fifo",FifoCheckBean.class);
-                                if(null != fiFoBeanList && fiFoBeanList.size() >0){
+                                List<FifoCheckBean> fiFoBeanList = JsonResp.getParaDatas(string, "list_fifo", FifoCheckBean.class);
+                                if (null != fiFoBeanList && fiFoBeanList.size() > 0) {
                                     for (int i = 0; i < fiFoBeanList.size(); i++) {
                                         FifoCheckBean fifoBean = fiFoBeanList.get(i);
                                         fifoBean.setRecommended_qty(StringUtils.deleteZero(fifoBean.getRecommended_qty()));
                                         fifoBean.setScan_sumqty(StringUtils.deleteZero(fifoBean.getScan_sumqty()));
                                     }
                                     listener.onSuccess(fiFoBeanList);
-                                }else {
+                                } else {
                                     List<FifoCheckBean> list = new ArrayList<FifoCheckBean>();
                                     listener.onSuccess(fiFoBeanList);
                                 }
@@ -902,17 +915,17 @@ public class CommonLogic {
                             String error = mContext.getString(R.string.unknow_error);
                             if (null != string) {
                                 if (ReqTypeName.SUCCCESSCODE.equals(JsonResp.getCode(string))) {
-                                   List<ScanReasonCodeBackBean> list = JsonResp.getParaDatas(string, "list", ScanReasonCodeBackBean.class);
-                                   if(list.size()>0){
-                                   ScanReasonCodeBackBean reasonBackBean = list.get(0);
-                                   reasonBackBean.setReason_code_name(StringUtils.deleteZero(reasonBackBean.getReason_code_name()));
-                                   reasonBackBean.setReason_code_no(StringUtils.deleteZero(reasonBackBean.getReason_code_no()));
-                                   reasonBackBean.setShow(StringUtils.deleteZero(reasonBackBean.getShow()));
-                                   listener.onSuccess(reasonBackBean);
-                                    return;
-                                   }else {
-                                       error = mContext.getString(R.string.data_null);
-                                   }
+                                    List<ScanReasonCodeBackBean> list = JsonResp.getParaDatas(string, "list", ScanReasonCodeBackBean.class);
+                                    if (list.size() > 0) {
+                                        ScanReasonCodeBackBean reasonBackBean = list.get(0);
+                                        reasonBackBean.setReason_code_name(StringUtils.deleteZero(reasonBackBean.getReason_code_name()));
+                                        reasonBackBean.setReason_code_no(StringUtils.deleteZero(reasonBackBean.getReason_code_no()));
+                                        reasonBackBean.setShow(StringUtils.deleteZero(reasonBackBean.getShow()));
+                                        listener.onSuccess(reasonBackBean);
+                                        return;
+                                    } else {
+                                        error = mContext.getString(R.string.data_null);
+                                    }
                                 } else {
                                     error = JsonResp.getDescription(string);
                                 }
@@ -946,19 +959,19 @@ public class CommonLogic {
             @Override
             public void run() {
                 try {
-                    String createJson = JsonReqForERP.mapCreateJson(mModule,"", mTimestamp, map);
+                    String createJson = JsonReqForERP.mapCreateJson(mModule, "", mTimestamp, map);
                     OkhttpRequest.getInstance(mContext).post(createJson, new IRequestCallbackImp() {
                         @Override
                         public void onResponse(String string) {
                             String error = mContext.getString(R.string.unknow_error);
                             if (null != string) {
                                 if (ReqTypeName.SUCCCESSCODE.equals(JsonResp.getCode(string))) {
-                                    List<ScanEmployeeBackBean> list  = JsonResp.getParaDatas(string, "list",ScanEmployeeBackBean.class);
-                                    if(list.size()>0) {
+                                    List<ScanEmployeeBackBean> list = JsonResp.getParaDatas(string, "list", ScanEmployeeBackBean.class);
+                                    if (list.size() > 0) {
                                         ScanEmployeeBackBean locatorBackBeen = list.get(0);
                                         listener.onSuccess(locatorBackBeen);
                                         return;
-                                    }else {
+                                    } else {
                                         error = mContext.getString(R.string.data_null);
                                     }
                                 } else {
@@ -1115,7 +1128,7 @@ public class CommonLogic {
     }
 
     /**
-     *汇总展示统一接口
+     * 汇总展示统一接口
      */
     public interface GetZSumListener {
         public void onSuccess(List<ListSumBean> list);

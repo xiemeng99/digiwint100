@@ -107,7 +107,7 @@ public class PrinterFlowLogic extends CommonLogic {
                             String error = mContext.getString(R.string.unknow_error);
                             if (null != string) {
                                 if (ReqTypeName.SUCCCESSCODE.equals(JsonResp.getCode(string))) {
-                                    String resource = JsonResp.getParaString(string,"showing");
+                                    String resource = JsonResp.getParaString(string, "showing");
                                     if (null != resource) {
                                         listener.onSuccess(resource);
                                         return;
@@ -126,6 +126,7 @@ public class PrinterFlowLogic extends CommonLogic {
             }
         }, null);
     }
+
     /**
      * 扫描工作人员
      */
@@ -153,7 +154,7 @@ public class PrinterFlowLogic extends CommonLogic {
                             String error = mContext.getString(R.string.unknow_error);
                             if (null != string) {
                                 if (ReqTypeName.SUCCCESSCODE.equals(JsonResp.getCode(string))) {
-                                    String resource = JsonResp.getParaString(string,"employee_name");
+                                    String resource = JsonResp.getParaString(string, "employee_name");
                                     if (null != resource) {
                                         listener.onSuccess(resource);
                                         return;
@@ -172,6 +173,7 @@ public class PrinterFlowLogic extends CommonLogic {
             }
         }, null);
     }
+
     /**
      * 查询
      */
@@ -197,7 +199,7 @@ public class PrinterFlowLogic extends CommonLogic {
                             String error = mContext.getString(R.string.unknow_error);
                             if (null != string) {
                                 if (ReqTypeName.SUCCCESSCODE.equals(JsonResp.getCode(string))) {
-                                    List<PrintLabelFlowBean> datas =JsonResp.getParaDatas(string,"list",PrintLabelFlowBean.class);
+                                    List<PrintLabelFlowBean> datas = JsonResp.getParaDatas(string, "list", PrintLabelFlowBean.class);
                                     if (null != datas) {
                                         listener.onSuccess(datas);
                                         return;
@@ -216,6 +218,7 @@ public class PrinterFlowLogic extends CommonLogic {
             }
         }, null);
     }
+
     /**
      * 查询(成品标签补打)
      */
@@ -231,7 +234,7 @@ public class PrinterFlowLogic extends CommonLogic {
                             String error = mContext.getString(R.string.unknow_error);
                             if (null != string) {
                                 if (ReqTypeName.SUCCCESSCODE.equals(JsonResp.getCode(string))) {
-                                    List<PrintLabelFlowBean> datas =JsonResp.getParaDatas(string,"list",PrintLabelFlowBean.class);
+                                    List<PrintLabelFlowBean> datas = JsonResp.getParaDatas(string, "list", PrintLabelFlowBean.class);
                                     if (null != datas) {
                                         listener.onSuccess(datas);
                                         return;

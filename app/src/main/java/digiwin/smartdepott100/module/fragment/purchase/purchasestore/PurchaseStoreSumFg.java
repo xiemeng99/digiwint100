@@ -19,6 +19,7 @@ import butterknife.OnClick;
 import digiwin.smartdepott100.R;
 import digiwin.smartdepott100.core.appcontants.AddressContants;
 import digiwin.smartdepott100.core.base.BaseFragment;
+import digiwin.smartdepott100.login.loginlogic.LoginLogic;
 import digiwin.smartdepott100.module.activity.common.CommonDetailActivity;
 import digiwin.smartdepott100.module.activity.purchase.purchasestore.PurchaseStoreActivity;
 import digiwin.smartdepott100.module.adapter.stock.store.StoreReturnMaterialSumAdapter;
@@ -72,8 +73,7 @@ public class PurchaseStoreSumFg extends BaseFragment {
     /**
      * 单头数据
      */
-//    ClickItemPutBean mPutBean;
-    HashMap<String,String> heardMap;
+    HashMap<String,String> headMap;
 
     @OnClick(R.id.commit)
     void commit() {
@@ -156,9 +156,10 @@ public class PurchaseStoreSumFg extends BaseFragment {
             adapter = new StoreReturnMaterialSumAdapter(rmActivity,list);
             ryList.setAdapter(adapter);
             showLoadingDialog();
-            heardMap=new HashMap<>();
-            heardMap.put(AddressContants.DOC_NO,extras.getString(AddressContants.DOC_NO));
-            commonLogic.getSumDatas(heardMap, new PurchaseStoreLogic.GetSumDataListener() {
+            headMap =new HashMap<>();
+            headMap.put(AddressContants.DOC_NO,extras.getString(AddressContants.DOC_NO));
+            headMap.put(AddressContants.WAREHOUSE_NO, LoginLogic.getWare());
+            commonLogic.getSumDatas(headMap, new PurchaseStoreLogic.GetSumDataListener() {
                 @Override
                 public void onSuccess(List<ListSumBean> datas) {
                     dismissLoadingDialog();

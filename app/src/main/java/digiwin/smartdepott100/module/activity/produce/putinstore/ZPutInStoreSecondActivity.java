@@ -21,7 +21,7 @@ import digiwin.library.utils.LogUtils;
 
 /**
  * @author xiemeng
- * @des 富钛入库上架
+ * @des 入库上架
  * @date 2017/5/26 14:11
  */
 

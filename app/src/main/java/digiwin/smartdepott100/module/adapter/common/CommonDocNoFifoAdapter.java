@@ -45,6 +45,8 @@ public class CommonDocNoFifoAdapter extends BaseRecyclerAdapter<FifoCheckBean> {
 //        holder.setTextColor(R.id.tv_feeding_amount, R.color.green1b);
         if(position == fifoList.size() -1){
             holder.setVisibility(R.id.fifo_bottom_line, View.GONE);
+        }else{
+            holder.setVisibility(R.id.fifo_bottom_line, View.VISIBLE);
         }
     }
 }

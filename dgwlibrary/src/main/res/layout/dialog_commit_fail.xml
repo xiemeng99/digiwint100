@@ -33,6 +33,7 @@
             android:layout_below="@id/img_commit_fail_text"
             android:layout_centerHorizontal="true"
             android:layout_marginLeft="@dimen/layout_20dp"
+            android:scrollbars="vertical"
             android:layout_marginRight="@dimen/layout_20dp"
             android:textColor="@color/WHITE"
             android:textSize="@dimen/textSize_15sp" />

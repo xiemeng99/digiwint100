@@ -23,6 +23,7 @@ import digiwin.library.dialog.OnDialogClickListener;
 import digiwin.library.dialog.OnDialogTwoListener;
 import digiwin.library.utils.ObjectAndMapUtils;
 import digiwin.library.utils.StringUtils;
+import digiwin.library.utils.WeakRefHandler;
 import digiwin.smartdepott100.R;
 import digiwin.smartdepott100.core.appcontants.AddressContants;
 import digiwin.smartdepott100.core.appcontants.ModuleCode;
@@ -290,10 +291,9 @@ public class ProcessReportingActivity extends BaseTitleActivity {
         });
     }
 
-    public Handler mHandler = new Handler(new Handler.Callback() {
+    private Handler.Callback mCallback= new Handler.Callback() {
         @Override
         public boolean handleMessage(Message msg) {
-
             if (msg.what == WO_NO) {
                 Map<String, String> map = new HashMap<String, String>();
                 map.put(AddressContants.WO_NO, String.valueOf(msg.obj));
@@ -373,10 +373,11 @@ public class ProcessReportingActivity extends BaseTitleActivity {
                     }
                 });
             }
-
             return false;
         }
-    });
+    };
+
+    private Handler mHandler = new WeakRefHandler(mCallback);
 
     public void clear() {
         tv_item_name.setText("");
@@ -435,5 +436,12 @@ public class ProcessReportingActivity extends BaseTitleActivity {
         super.initNavigationTitle();
         activity = this;
         mName.setText(getResources().getString(R.string.title_pallet_report));
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        mHandler.removeCallbacksAndMessages(null);
+
     }
 }

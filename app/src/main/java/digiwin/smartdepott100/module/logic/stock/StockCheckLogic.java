@@ -38,7 +38,7 @@ public class StockCheckLogic extends CommonLogic {
     /**
      * 盘点获取列表数据
      */
-    public void getStockCheckList(final Map<String,String> map, final GetDataListListener listener) {
+    public void getStockCheckList(final Map<String, String> map, final GetDataListListener listener) {
         ThreadPoolManager.getInstance().executeTask(new Runnable() {
             @Override
             public void run() {
@@ -50,7 +50,7 @@ public class StockCheckLogic extends CommonLogic {
                             String error = mContext.getString(R.string.unknow_error);
                             if (null != string) {
                                 if (ReqTypeName.SUCCCESSCODE.equals(JsonResp.getCode(string))) {
-                                    List<FilterResultOrderBean> showBeanList = JsonResp.getParaDatas(string,"list",FilterResultOrderBean.class);
+                                    List<FilterResultOrderBean> showBeanList = JsonResp.getParaDatas(string, "list", FilterResultOrderBean.class);
                                     listener.onSuccess(showBeanList);
                                     return;
                                 } else {
@@ -70,6 +70,7 @@ public class StockCheckLogic extends CommonLogic {
 
     /**
      * 提交
+     *
      * @param map map可以直接为空
      */
     public void commit(final Map<String, String> map, final CommitListener listener) {
@@ -84,7 +85,7 @@ public class StockCheckLogic extends CommonLogic {
                             String error = mContext.getString(R.string.unknow_error);
                             if (null != string) {
                                 if (ReqTypeName.SUCCCESSCODE.equals(JsonResp.getCode(string))) {
-                                    listener.onSuccess(JsonResp.getParaString(string,AddressContants.DOC_NO));
+                                    listener.onSuccess(JsonResp.getParaString(string, AddressContants.DOC_NO));
                                     return;
                                 } else {
                                     error = JsonResp.getDescription(string);

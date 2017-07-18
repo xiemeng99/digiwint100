@@ -19,6 +19,7 @@ import java.util.Map;
 
 import butterknife.BindView;
 import butterknife.OnClick;
+import digiwin.smartdepott100.login.loginlogic.LoginLogic;
 import digiwin.smartdepott100.module.logic.sale.saleoutlet.SaleOutLetLogic;
 import digiwin.library.dialog.OnDialogClickListener;
 import digiwin.library.dialog.OnDialogTwoListener;
@@ -47,6 +48,8 @@ import digiwin.smartdepott100.module.logic.common.CommonLogic;
 public class SaleOutletSumFg extends BaseFragment {
     @BindView(R.id.tv_head_post_order)
     TextView tvHeadPostOrder;
+    @BindView(R.id.tv_item_date)
+    TextView tvItemDate;
     @BindView(R.id.tv_custom)
     TextView tvCustom;
     @BindView(R.id.ry_list)
@@ -126,6 +129,7 @@ public class SaleOutletSumFg extends BaseFragment {
         showLoadingDialog();
         HashMap<String,String> map = new HashMap<>();
         map.put(AddressContants.DOC_NO,mPutBean.getNotice_no());
+        map.put(AddressContants.WAREHOUSE_NO, LoginLogic.getWare());
         logic.getSOLSumData(map, new CommonLogic.GetZSumListener() {
             @Override
             public void onSuccess(List<ListSumBean> list) {
@@ -136,6 +140,7 @@ public class SaleOutletSumFg extends BaseFragment {
                 if (null!=list&&list.size()>0){
                     upDateFlag=true;
                     toDetail();
+                    tvItemDate.setText(list.get(0).getCreate_date());
                     tvHeadPostOrder.setText(list.get(0).getDoc_no());
                     tvCustom.setText(list.get(0).getCustomer_name());
                 }
@@ -222,7 +227,6 @@ public class SaleOutletSumFg extends BaseFragment {
         }
         showLoadingDialog();
         HashMap<String, String> map = new HashMap<>();
-        map.put(AddressContants.DOC_NO,mPutBean.getNotice_no());
         logic.commitSOLData(map, new CommonLogic.CommitListener() {
             @Override
             public void onSuccess(String msg) {
@@ -231,6 +235,7 @@ public class SaleOutletSumFg extends BaseFragment {
                     @Override
                     public void onCallback() {
                         tvCustom.setText("");
+                        tvItemDate.setText("");
                         tvHeadPostOrder.setText("");
                         pactivity.scanFg.initData();
                         pactivity.finish();

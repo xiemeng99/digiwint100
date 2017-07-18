@@ -176,7 +176,7 @@ public class PickUpShipmentActivity extends BaseFirstModuldeActivity{
         super.initNavigationTitle();
         pactivity = (PickUpShipmentActivity) activity;
         mName.setText(getResources().getString(R.string.title_pickupshipment));
-        unCom.setVisibility(View.VISIBLE);
+//        unCom.setVisibility(View.VISIBLE);
     }
 
     @Override

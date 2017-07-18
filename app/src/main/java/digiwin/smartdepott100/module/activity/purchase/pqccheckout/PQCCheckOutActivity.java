@@ -108,6 +108,13 @@ public class PQCCheckOutActivity extends BaseTitleActivity {
     }
 
     @Override
+    protected void initNavigationTitle() {
+        super.initNavigationTitle();
+        mName.setText(R.string.pqc_check);
+    }
+
+
+    @Override
     protected int bindLayoutId() {
         return R.layout.activity_pqc_checkout;
     }

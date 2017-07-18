@@ -29,9 +29,10 @@ import digiwin.smartdepott100.module.logic.common.CommonLogic;
  * @date 2017/5/28 11:01
  */
 
-public class FinishedStorageLogic extends CommonLogic{
+public class FinishedStorageLogic extends CommonLogic {
 
     public static FinishedStorageLogic logic;
+
     protected FinishedStorageLogic(Context context, String module, String timestamp) {
         super(context, module, timestamp);
     }
@@ -43,7 +44,7 @@ public class FinishedStorageLogic extends CommonLogic{
     /**
      * 依成品入库获取汇总列表
      */
-    public void getFinishStorageSum(final Map<String,String> map, final GetSumListener listener) {
+    public void getFinishStorageSum(final Map<String, String> map, final GetSumListener listener) {
         ThreadPoolManager.getInstance().executeTask(new Runnable() {
             @Override
             public void run() {
@@ -55,7 +56,7 @@ public class FinishedStorageLogic extends CommonLogic{
                             String error = mContext.getString(R.string.unknow_error);
                             if (null != string) {
                                 if (ReqTypeName.SUCCCESSCODE.equals(JsonResp.getCode(string))) {
-                                    List<SumShowBean> showBeanList = JsonResp.getParaDatas(string,"list_detail",SumShowBean.class);
+                                    List<SumShowBean> showBeanList = JsonResp.getParaDatas(string, "list_detail", SumShowBean.class);
                                     listener.onSuccess(showBeanList);
                                     return;
                                 } else {
@@ -76,6 +77,7 @@ public class FinishedStorageLogic extends CommonLogic{
 
     /**
      * 提交
+     *
      * @param map map可以直接为空
      */
     public void commit(final Map<String, String> map, final CommitListener listener) {
@@ -90,7 +92,7 @@ public class FinishedStorageLogic extends CommonLogic{
                             String error = mContext.getString(R.string.unknow_error);
                             if (null != string) {
                                 if (ReqTypeName.SUCCCESSCODE.equals(JsonResp.getCode(string))) {
-                                    listener.onSuccess(JsonResp.getParaString(string,AddressContants.DOC_NO));
+                                    listener.onSuccess(JsonResp.getParaString(string, AddressContants.DOC_NO));
                                     return;
                                 } else {
                                     error = JsonResp.getDescription(string);

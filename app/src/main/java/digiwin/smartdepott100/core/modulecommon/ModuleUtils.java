@@ -53,6 +53,7 @@ public class ModuleUtils {
         }
         et.setTextColor(activity.getResources().getColor(R.color.textfous_yellow));
         et.setSelectAllOnFocus(true);
+        et.selectAll();
     }
 
 

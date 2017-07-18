@@ -25,6 +25,7 @@ import butterknife.OnFocusChange;
 import butterknife.OnTextChanged;
 import digiwin.library.dialog.OnDialogClickListener;
 import digiwin.library.utils.StringUtils;
+import digiwin.library.utils.WeakRefHandler;
 import digiwin.pulltorefreshlibrary.recyclerview.FullyLinearLayoutManager;
 import digiwin.smartdepott100.R;
 import digiwin.smartdepott100.core.appcontants.AddressContants;
@@ -230,7 +231,7 @@ public class DistributeScanActivity extends BaseTitleActivity {
         }
     }
 
-    private Handler mHandler = new Handler(new Handler.Callback() {
+    private Handler.Callback mCallback= new Handler.Callback() {
         @Override
         public boolean handleMessage(Message msg) {
             switch (msg.what) {
@@ -248,9 +249,9 @@ public class DistributeScanActivity extends BaseTitleActivity {
                                     for (int i = 0;i<fiFoList.size();i++){
                                         if(barcodeBackBean.getBarcode_no().equals(fiFoList.get(i).getBarcode_no())){
                                             if(locatorFlag){
-                                                    if(saveBean.getStorage_spaces_out_no().equals(fiFoList.get(i).getStorage_spaces_no())){
-                                                        n++;
-                                                    }
+                                                if(saveBean.getStorage_spaces_out_no().equals(fiFoList.get(i).getStorage_spaces_no())){
+                                                    n++;
+                                                }
                                             }
                                         }
                                     }
@@ -261,7 +262,10 @@ public class DistributeScanActivity extends BaseTitleActivity {
                                 }
                             }
                             barcodeShow = barcodeBackBean.getShowing();
-                            if(!StringUtils.isBlank(barcodeBackBean.getBarcode_qty())){
+                            if(StringUtils.isBlank(et_scan_locator.getText().toString())){
+                                et_scan_locator.requestFocus();
+                            }
+                            else if(!StringUtils.isBlank(barcodeBackBean.getBarcode_qty())){
                                 et_input_num.setText(StringUtils.deleteZero(barcodeBackBean.getBarcode_qty()));
                             }
                             barcodeFlag = true;
@@ -272,7 +276,6 @@ public class DistributeScanActivity extends BaseTitleActivity {
                             saveBean.setUnit_no(barcodeBackBean.getUnit_no());
                             saveBean.setLot_no(barcodeBackBean.getLot_no());
                             saveBean.setItem_barcode_type(barcodeBackBean.getItem_barcode_type());
-                            et_input_num.requestFocus();
                             if (CommonUtils.isAutoSave(saveBean)){
                                 Save();
                             }
@@ -297,24 +300,28 @@ public class DistributeScanActivity extends BaseTitleActivity {
                         @Override
                         public void onSuccess(ScanLocatorBackBean locatorBackBean) {
                             //管控建议
-                                if(null != fiFoList && fiFoList.size()>0){
-                                    int n = 0;
-                                    for (int i = 0;i<fiFoList.size();i++){
-                                        if(locatorBackBean.getStorage_spaces_no().equals(fiFoList.get(i).getStorage_spaces_no())){
-                                            n++;
-                                        }
-                                    }
-                                    if(n ==0){
-                                        showFailedDialog(pactivity.getResources().getString(R.string.locator_not_in_fifo));
-                                        return;
+                            if(null != fiFoList && fiFoList.size()>0){
+                                int n = 0;
+                                for (int i = 0;i<fiFoList.size();i++){
+                                    if(locatorBackBean.getStorage_spaces_no().equals(fiFoList.get(i).getStorage_spaces_no())){
+                                        n++;
                                     }
                                 }
+                                if(n ==0){
+                                    showFailedDialog(pactivity.getResources().getString(R.string.locator_not_in_fifo));
+                                    return;
+                                }
+                            }
                             locatorShow = locatorBackBean.getShowing();
                             locatorFlag = true;
 //                            show();
                             saveBean.setStorage_spaces_out_no(locatorBackBean.getStorage_spaces_no());
                             saveBean.setWarehouse_out_no(locatorBackBean.getWarehouse_no());
-                            et_scan_barocde.requestFocus();
+                            if (StringUtils.isBlank(et_scan_barocde.getText().toString())){
+                                et_scan_barocde.requestFocus();
+                            }else {
+                                et_input_num.requestFocus();
+                            }
                             if (CommonUtils.isAutoSave(saveBean)){
                                 Save();
                             }
@@ -335,7 +342,9 @@ public class DistributeScanActivity extends BaseTitleActivity {
             }
             return false;
         }
-    });
+    };
+
+    private Handler mHandler = new WeakRefHandler(mCallback);
 
     private void getFIFO(DistributeSumShowBean sumshoubean ){
         HashMap<String,String> map = new HashMap<String,String>();
@@ -387,7 +396,7 @@ public class DistributeScanActivity extends BaseTitleActivity {
 
     @Override
     protected int bindLayoutId() {
-        return R.layout.fg_distribute_scan;
+        return R.layout.activity_distribute_scan;
     }
 
     @Override
@@ -510,4 +519,9 @@ public class DistributeScanActivity extends BaseTitleActivity {
         saveBean.setDepartment_no(headData.getDepartment_no());
     }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        mHandler.removeCallbacksAndMessages(null);
+    }
 }

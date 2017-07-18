@@ -41,7 +41,7 @@ public class MaterialReceiptLogic {
     private static MaterialReceiptLogic logic;
 
     private MaterialReceiptLogic(Context context, String module, String timestamp) {
-        mContext = context;
+        mContext = context.getApplicationContext();
         mModule = module;
         mTimestamp = timestamp;
     }
@@ -63,7 +63,7 @@ public class MaterialReceiptLogic {
     /**
      * 扫描入库单请求
      */
-    public void scanDeliveryNote(final HashMap<String,String> map, final scanDeliveryNoteListener listener) {
+    public void scanDeliveryNote(final HashMap<String, String> map, final scanDeliveryNoteListener listener) {
         ThreadPoolManager.getInstance().executeTask(new Runnable() {
             @Override
             public void run() {
@@ -122,28 +122,28 @@ public class MaterialReceiptLogic {
         ThreadPoolManager.getInstance().executeTask(new Runnable() {
             @Override
             public void run() {
-            try {
-                String xml = CreateParaXmlReqIm.getInstance(listMap, mModule, ReqTypeName.MATERIALRECEIPTCOMMIT, mTimestamp).toXml();
-                OkhttpRequest.getInstance(mContext).post(xml, new IRequestCallbackImp() {
-                    @Override
-                    public void onResponse(String string) {
-                        ParseXmlResp xmlResp = ParseXmlResp.fromXml(ReqTypeName.MATERIALRECEIPTCOMMIT, string);
-                        String error = mContext.getString(R.string.unknow_error);
-                        if (null != xmlResp) {
-                            if (ReqTypeName.SUCCCESSCODE.equals(xmlResp.getCode())) {
-                                listener.onSuccess(xmlResp.getFieldString());
-                                return;
-                            } else {
-                                error = xmlResp.getDescription();
+                try {
+                    String xml = CreateParaXmlReqIm.getInstance(listMap, mModule, ReqTypeName.MATERIALRECEIPTCOMMIT, mTimestamp).toXml();
+                    OkhttpRequest.getInstance(mContext).post(xml, new IRequestCallbackImp() {
+                        @Override
+                        public void onResponse(String string) {
+                            ParseXmlResp xmlResp = ParseXmlResp.fromXml(ReqTypeName.MATERIALRECEIPTCOMMIT, string);
+                            String error = mContext.getString(R.string.unknow_error);
+                            if (null != xmlResp) {
+                                if (ReqTypeName.SUCCCESSCODE.equals(xmlResp.getCode())) {
+                                    listener.onSuccess(xmlResp.getFieldString());
+                                    return;
+                                } else {
+                                    error = xmlResp.getDescription();
+                                }
                             }
+                            listener.onFailed(error);
                         }
-                        listener.onFailed(error);
-                    }
-                });
-            } catch (Exception e) {
-                listener.onFailed(mContext.getString(R.string.unknow_error));
-                LogUtils.e(TAG, "scanBarcode--->" + e);
-            }
+                    });
+                } catch (Exception e) {
+                    listener.onFailed(mContext.getString(R.string.unknow_error));
+                    LogUtils.e(TAG, "scanBarcode--->" + e);
+                }
             }
         }, null);
     }

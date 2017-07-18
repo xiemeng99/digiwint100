@@ -18,7 +18,7 @@
             style="@style/app_text_inwhite"
             android:layout_width="@dimen/layout_60dp"
             android:layout_height="wrap_content"
-            android:text="@string/purchase_no" />
+            android:text="@string/send_goods_order" />
 
         <TextView
             android:id="@+id/tv_item_delivery_note_no"

@@ -15,10 +15,11 @@ import digiwin.smartdepott100.module.logic.common.CommonLogic;
 import digiwin.library.json.JsonResp;
 import digiwin.library.utils.LogUtils;
 import digiwin.library.utils.ThreadPoolManager;
+
 /**
- * @des  库存查询
- * @date 2017/6/8  
  * @author xiemeng
+ * @des 库存查询
+ * @date 2017/6/8
  */
 public class StoreQueryLogic extends CommonLogic {
     public static StoreQueryLogic logic;
@@ -32,14 +33,15 @@ public class StoreQueryLogic extends CommonLogic {
         return logic = new StoreQueryLogic(context, module, timestamp);
     }
 
-    public interface GetStoreListListener{
-        public  void onSuccess(List<ListSumBean> showNoBarcodeList,List<ListSumBean> showHasBarocdeList);
-        public void  onFailed(String error);
+    public interface GetStoreListListener {
+        public void onSuccess(List<ListSumBean> showNoBarcodeList, List<ListSumBean> showHasBarocdeList);
+
+        public void onFailed(String error);
 
     }
 
     /**
-     *库存查询
+     * 库存查询
      */
     public void getStoreList(final ClickItemPutBean clickItemPutBean, final GetStoreListListener listener) {
         ThreadPoolManager.getInstance().executeTask(new Runnable() {
@@ -53,9 +55,9 @@ public class StoreQueryLogic extends CommonLogic {
                             String error = mContext.getString(R.string.unknow_error);
                             if (null != string) {
                                 if (ReqTypeName.SUCCCESSCODE.equals(JsonResp.getCode(string))) {
-                                    List<ListSumBean> showNoBarcodeList = JsonResp.getParaDatas(string,"list",ListSumBean.class);
-                                    List<ListSumBean> showHasBarocdeList = JsonResp.getParaDatas(string,"list1",ListSumBean.class);
-                                    listener.onSuccess(showNoBarcodeList,showHasBarocdeList);
+                                    List<ListSumBean> showNoBarcodeList = JsonResp.getParaDatas(string, "list", ListSumBean.class);
+                                    List<ListSumBean> showHasBarocdeList = JsonResp.getParaDatas(string, "list1", ListSumBean.class);
+                                    listener.onSuccess(showNoBarcodeList, showHasBarocdeList);
                                     return;
                                 } else {
                                     error = JsonResp.getDescription(string);

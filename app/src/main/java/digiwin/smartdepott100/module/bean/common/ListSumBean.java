@@ -272,6 +272,14 @@ public class ListSumBean implements Serializable {
      * 允收数量
      */
     private String ac_qty;
+    /**
+     * 条码量
+     */
+    private String barcode_qty;
+    /**
+     * 质检数
+     */
+    private String qc_qty;
 
     public String getEmployee_no() {
         return employee_no;
@@ -763,6 +771,22 @@ public class ListSumBean implements Serializable {
 
     public void setAc_qty(String ac_qty) {
         this.ac_qty = ac_qty;
+    }
+
+    public String getBarcode_qty() {
+        return barcode_qty;
+    }
+
+    public void setBarcode_qty(String barcode_qty) {
+        this.barcode_qty = barcode_qty;
+    }
+
+    public String getQc_qty() {
+        return qc_qty;
+    }
+
+    public void setQc_qty(String qc_qty) {
+        this.qc_qty = qc_qty;
     }
 
     @Override

@@ -41,7 +41,7 @@ public class DistributeLogic {
     private String mTimestamp = "";
 
     private DistributeLogic(Context context, String module, String timestamp) {
-        mContext = context;
+        mContext = context.getApplicationContext();
         mModule = module;
         mTimestamp = timestamp;
 

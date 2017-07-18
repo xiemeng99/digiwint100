@@ -1,23 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
-<digiwin.pulltorefreshlibrary.recyclerview.ScrollViewForRecycler
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:paddingBottom="@dimen/layout_60dp">
 
-    <LinearLayout
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/ry_list"
+        style="@style/ry_style"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:paddingBottom="@dimen/layout_60dp">
-
-        <android.support.v7.widget.RecyclerView
-            style="@style/ry_style"
-            android:background="@drawable/green_scandetail_bg"
-            android:layout_marginTop="@dimen/layout_6dp"
-            android:layout_marginRight="@dimen/layout_10dp"
-            android:layout_marginLeft="@dimen/layout_10dp"
-            android:id="@+id/ry_list"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" />
-    </LinearLayout>
-</digiwin.pulltorefreshlibrary.recyclerview.ScrollViewForRecycler>
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/layout_10dp"
+        android:layout_marginRight="@dimen/layout_10dp"
+        android:layout_marginTop="@dimen/layout_6dp"
+        android:background="@drawable/green_scandetail_bg" />
+</LinearLayout>

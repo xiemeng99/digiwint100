@@ -12,6 +12,11 @@
 	替换为android.intent.action.客户简称.xxxActivity统一查找替换即可
 	清单文件中TODO地方统一修改为客户简称
 
+引用git上面的库文件： compile 'com.github.xiemeng99.digiwint100:dgwlibrary:1.4'
+	                   compile 'com.github.xiemeng99.digiwint100:pulltorefreshlibrary:1.4'
+	文档地址： https://jitpack.io/com/github/xiemeng99/digiwint100/app/1.4/javadoc/
+	          https://jitpack.io/com/github/xiemeng99/digiwint100/dgwlibrary/1.4/javadoc/
+	          https://jitpack.io/com/github/xiemeng99/digiwint100/pulltorefreshlibrary/1.4/javadoc/
 1.okhttp网络请求示例:
           HashMap<String, String> loginMap = new HashMap<String, String>();
                 loginMap.put("employee_no", "tiptop");

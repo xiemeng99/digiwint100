@@ -16,10 +16,10 @@
             style="@style/app_text_inwhite"
             android:layout_width="@dimen/layout_60dp"
             android:layout_height="wrap_content"
-            android:text="@string/purchase_order" />
+            android:text="@string/check_no" />
 
         <TextView
-            android:id="@+id/tv_purchase_order"
+            android:id="@+id/tv_check_no"
             style="@style/ser_text_inwhite"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
@@ -56,10 +56,22 @@
             style="@style/app_text_inwhite"
             android:layout_width="@dimen/layout_60dp"
             android:layout_height="wrap_content"
-            android:text="@string/supplier" />
+            android:text="@string/check_employee" />
 
         <TextView
-            android:id="@+id/tv_supplier"
+            android:id="@+id/tv_check_employee"
+            style="@style/ser_text_inwhite"
+            android:layout_width="@dimen/layout_0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content" />
+        <TextView
+            style="@style/app_text_inwhite"
+            android:layout_width="@dimen/layout_60dp"
+            android:layout_height="wrap_content"
+            android:text="@string/check_depart" />
+
+        <TextView
+            android:id="@+id/tv_check_depart"
             style="@style/ser_text_inwhite"
             android:layout_width="@dimen/layout_0dp"
             android:layout_weight="1"

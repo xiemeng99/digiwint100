@@ -24,6 +24,7 @@ import butterknife.OnFocusChange;
 import butterknife.OnTextChanged;
 import digiwin.library.dialog.OnDialogClickListener;
 import digiwin.library.utils.StringUtils;
+import digiwin.library.utils.WeakRefHandler;
 import digiwin.smartdepott100.R;
 import digiwin.smartdepott100.core.appcontants.AddressContants;
 import digiwin.smartdepott100.core.base.BaseFragment;
@@ -40,6 +41,8 @@ import digiwin.smartdepott100.module.bean.common.SaveBean;
 import digiwin.smartdepott100.module.bean.common.ScanBarcodeBackBean;
 import digiwin.smartdepott100.module.bean.common.ScanLocatorBackBean;
 import digiwin.smartdepott100.module.logic.common.CommonLogic;
+import digiwin.smartdepott100.module.logic.sale.pickupshipment.PickUpShipmentLogic;
+import digiwin.smartdepott100.module.logic.sale.saleoutlet.SaleOutLetLogic;
 
 import static digiwin.smartdepott100.R.id.et_barcode;
 import static digiwin.smartdepott100.R.id.et_input_num;
@@ -73,7 +76,7 @@ public class PickUpShipmentScanFg extends BaseFragment {
 
     FilterResultOrderBean localData;
 
-    CommonLogic commonLogic;
+    PickUpShipmentLogic logic;
     /**
      * 条码扫描
      */
@@ -206,7 +209,7 @@ public class PickUpShipmentScanFg extends BaseFragment {
             return;
         }
         showLoadingDialog();
-        commonLogic.scanSave(saveBean, new CommonLogic.SaveListener() {
+        logic.scanSave(saveBean, new CommonLogic.SaveListener() {
             @Override
             public void onSuccess(SaveBackBean saveBackBean) {
                 dismissLoadingDialog();
@@ -249,7 +252,7 @@ public class PickUpShipmentScanFg extends BaseFragment {
         }
     }
 
-    private Handler mHandler = new Handler(new Handler.Callback() {
+    private Handler mHandler = new WeakRefHandler(new Handler.Callback() {
         @Override
         public boolean handleMessage(Message msg) {
         switch (msg.what){
@@ -257,7 +260,7 @@ public class PickUpShipmentScanFg extends BaseFragment {
             case LOCATORWHAT:
                 HashMap<String, String> locatorMap = new HashMap<>();
                 locatorMap.put(AddressContants.STORAGE_SPACES_BARCODE, String.valueOf(msg.obj));
-                commonLogic.scanLocator(locatorMap, new CommonLogic.ScanLocatorListener() {
+                logic.scanLocator(locatorMap, new CommonLogic.ScanLocatorListener() {
                     @Override
                     public void onSuccess(ScanLocatorBackBean locatorBackBean) {
                         dismissLoadingDialog();
@@ -293,30 +296,30 @@ public class PickUpShipmentScanFg extends BaseFragment {
                 barcodeMap.put(AddressContants.DOC_NO, localData.getDoc_no());
                 barcodeMap.put(AddressContants.WAREHOUSE_NO,LoginLogic.getWare());
                 barcodeMap.put(AddressContants.STORAGE_SPACES_NO,saveBean.getStorage_spaces_out_no());
-                commonLogic.scanBarcode(barcodeMap, new CommonLogic.ScanBarcodeListener() {
-                    @Override
-                    public void onSuccess(ScanBarcodeBackBean barcodeBackBean) {
-                        dismissLoadingDialog();
-                        showBarcode(barcodeBackBean);
-                    }
-                    @Override
-                    public void onFailed(String error) {
-                        barcodeFlag = false;
-                        showFailedDialog(error, new OnDialogClickListener() {
-                            @Override
-                            public void onCallback() {
-                                etScanBarocde.setText("");
-                            }
-                        });
-                    }
-                });
+                logic.scanBarcode(barcodeMap, new CommonLogic.ScanBarcodeListener() {
+                @Override
+                public void onSuccess(ScanBarcodeBackBean barcodeBackBean) {
+                    dismissLoadingDialog();
+                    showBarcode(barcodeBackBean);
+                }
+                @Override
+                public void onFailed(String error) {
+                    barcodeFlag = false;
+                    showFailedDialog(error, new OnDialogClickListener() {
+                        @Override
+                        public void onCallback() {
+                            etScanBarocde.setText("");
+                        }
+                    });
+                }
+            });
                 break;
 
             case FIFOWHAT:
                 Map<String,String> map = new HashMap<String,String>();
-                map.put(AddressContants.ISSUING_NO,String.valueOf(msg.obj));
+                map.put(AddressContants.DOC_NO,String.valueOf(msg.obj));
                 map.put(AddressContants.WAREHOUSE_NO, LoginLogic.getWare());
-                commonLogic.docNoFIFO(map, new CommonLogic.PostMaterialFIFOListener() {
+                logic.getFifoInfo(map, new SaleOutLetLogic.FIFOInfoGETListener() {
                     @Override
                     public void onSuccess(List<FifoCheckBean> fiFoBeanList) {
                         if(null != fiFoBeanList && fiFoBeanList.size() > 0){
@@ -332,7 +335,7 @@ public class PickUpShipmentScanFg extends BaseFragment {
 
                     @Override
                     public void onFailed(String error) {
-                        showFailedDialog(error);
+//                        showFailedDialog(error);
                     }
                 });
                 break;
@@ -360,6 +363,7 @@ public class PickUpShipmentScanFg extends BaseFragment {
         saveBean.setFifo_check(barcodeBackBean.getFifo_check());
         saveBean.setItem_barcode_type(barcodeBackBean.getItem_barcode_type());
         etInputNum.requestFocus();
+        tv_swept_volume.setText(barcodeBackBean.getScan_sumqty());
         if (CommonUtils.isAutoSave(saveBean)){
             save();
         }
@@ -374,7 +378,7 @@ public class PickUpShipmentScanFg extends BaseFragment {
     protected void doBusiness() {
         initData();
         pactivity = (PickUpShipmentActivity) activity;
-        commonLogic = CommonLogic.getInstance(context, pactivity.module, pactivity.mTimestamp.toString());
+        logic = PickUpShipmentLogic.getInstance(context, pactivity.module, pactivity.mTimestamp.toString());
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(pactivity);
         mRy_list.setLayoutManager(linearLayoutManager);
 

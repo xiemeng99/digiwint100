@@ -30,24 +30,6 @@
     </item>
     <item
         is-multidex="true"
-        jar="G:\DigiSvn2\t100\App\DGWSmartDepotT100\dgwlibrary\build\intermediates\bundles\default\libs\jmessage-android-2.0.0.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.0"
-        sha1="21c024d01452fc088e82280a2eb57a5958524c91">
-        <dex dex="G:\DigiSvn2\t100\App\DGWSmartDepotT100\app\build\intermediates\transforms\dex\dev\debug\folders\1000\8\jmessage-android-2.0.0_bd504a97c40507c2d8498288096624d3ed28d3cc\classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="G:\DigiSvn2\t100\App\DGWSmartDepotT100\app\build\intermediates\incremental-classes\dev\debug\instant-run-bootstrap.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.0"
-        sha1="e99e3990a05bd89542e6ecc98590ec06ff640e1e">
-        <dex dex="G:\DigiSvn2\t100\App\DGWSmartDepotT100\app\build\intermediates\transforms\dex\dev\debug\folders\1000\10000\instant-run-bootstrap_bcc6a3adfcb1e787e61912d9c336ef42724a4c38\classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
         jar="G:\DigiSvn2\t100\App\DGWSmartDepotT100\dgwlibrary\build\intermediates\bundles\default\libs\gestureimageview.jar"
         jumboMode="true"
         optimize="true"
@@ -75,21 +57,39 @@
     </item>
     <item
         is-multidex="true"
-        jar="G:\DigiSvn2\t100\App\DGWSmartDepotT100\dgwlibrary\build\intermediates\bundles\default\libs\commons-io-1.4.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.0"
-        sha1="450f8e4dbf7f00db647c240673fe6e6905aa6401">
-        <dex dex="G:\DigiSvn2\t100\App\DGWSmartDepotT100\app\build\intermediates\transforms\dex\dev\debug\folders\1000\8\commons-io-1.4_9edaa0b270b5a58410c1bcf36d523a8a6c94bdf9\classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
         jar="G:\DigiSvn2\t100\App\DGWSmartDepotT100\dgwlibrary\build\intermediates\bundles\default\libs\xstream-1.4.7.jar"
         jumboMode="true"
         optimize="true"
         revision="25.0.0"
         sha1="d082e12b8e94c834dbf5e686b751d6c377d1ac53">
         <dex dex="G:\DigiSvn2\t100\App\DGWSmartDepotT100\app\build\intermediates\transforms\dex\dev\debug\folders\1000\8\xstream-1.4.7_fc62f6d0c1cd2637dfa8210046e5d401648b4436\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="G:\DigiSvn2\t100\App\DGWSmartDepotT100\dgwlibrary\build\intermediates\bundles\default\libs\jmessage-android-2.0.0.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.0"
+        sha1="21c024d01452fc088e82280a2eb57a5958524c91">
+        <dex dex="G:\DigiSvn2\t100\App\DGWSmartDepotT100\app\build\intermediates\transforms\dex\dev\debug\folders\1000\8\jmessage-android-2.0.0_bd504a97c40507c2d8498288096624d3ed28d3cc\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="G:\DigiSvn2\t100\App\DGWSmartDepotT100\app\build\intermediates\incremental-classes\dev\debug\instant-run-bootstrap.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.0"
+        sha1="c53fb440ec89f89150b12cffe5708ba3f9ffc153">
+        <dex dex="G:\DigiSvn2\t100\App\DGWSmartDepotT100\app\build\intermediates\transforms\dex\dev\debug\folders\1000\10000\instant-run-bootstrap_bcc6a3adfcb1e787e61912d9c336ef42724a4c38\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="G:\DigiSvn2\t100\App\DGWSmartDepotT100\dgwlibrary\build\intermediates\bundles\default\libs\commons-io-1.4.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.0"
+        sha1="450f8e4dbf7f00db647c240673fe6e6905aa6401">
+        <dex dex="G:\DigiSvn2\t100\App\DGWSmartDepotT100\app\build\intermediates\transforms\dex\dev\debug\folders\1000\8\commons-io-1.4_9edaa0b270b5a58410c1bcf36d523a8a6c94bdf9\classes.dex" />
     </item>
 
 </items>

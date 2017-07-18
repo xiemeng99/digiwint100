@@ -35,6 +35,7 @@ public class StoreReturnMaterialSumAdapter extends BaseRecyclerAdapter<ListSumBe
         holder.setText(R.id.tv_unit,item.getUnit_no());
         holder.setText(R.id.tv_apply_numb, StringUtils.deleteZero(String.valueOf(numb1)));
         holder.setText(R.id.tv_scaned_numb, StringUtils.deleteZero(String.valueOf(numb2)));
+        holder.setText(R.id.tv_stock_qty,item.getStock_qty());
         if (numb2 == 0) {
             holder.setBackground(R.id.item_ll,R.drawable.red_scandetail_bg);
             holder.setTextColor(R.id.tv_item_name, mContext.getResources().getColor(R.color.red));
@@ -43,6 +44,7 @@ public class StoreReturnMaterialSumAdapter extends BaseRecyclerAdapter<ListSumBe
             holder.setTextColor(R.id.tv_unit, mContext.getResources().getColor(R.color.red));
             holder.setTextColor(R.id.tv_apply_numb, mContext.getResources().getColor(R.color.red));
             holder.setTextColor(R.id.tv_scaned_numb, mContext.getResources().getColor(R.color.red));
+            holder.setTextColor(R.id.tv_stock_qty, mContext.getResources().getColor(R.color.red));
         } else if (numb1 > numb2) {
             holder.setBackground(R.id.item_ll,R.drawable.yellow_scandetail_bg);
             holder.setTextColor(R.id.tv_item_name,mContext.getResources().getColor( R.color.outside_yellow));
@@ -51,14 +53,16 @@ public class StoreReturnMaterialSumAdapter extends BaseRecyclerAdapter<ListSumBe
             holder.setTextColor(R.id.tv_unit,mContext.getResources().getColor( R.color.outside_yellow));
             holder.setTextColor(R.id.tv_apply_numb, mContext.getResources().getColor(R.color.outside_yellow));
             holder.setTextColor(R.id.tv_scaned_numb, mContext.getResources().getColor(R.color.outside_yellow));
+            holder.setTextColor(R.id.tv_stock_qty, mContext.getResources().getColor(R.color.outside_yellow));
         } else if (numb1 ==numb2) {
             holder.setBackground(R.id.item_ll,R.drawable.green_scandetail_bg);
-            holder.setTextColor(R.id.tv_item_name, mContext.getResources().getColor(R.color.Base_color));
-            holder.setTextColor(R.id.tv_item_spec, mContext.getResources().getColor(R.color.Base_color));
-            holder.setTextColor(R.id.tv_item_no, mContext.getResources().getColor(R.color.Base_color));
-            holder.setTextColor(R.id.tv_unit, mContext.getResources().getColor(R.color.Base_color));
-            holder.setTextColor(R.id.tv_apply_numb,mContext.getResources().getColor( R.color.Base_color));
-            holder.setTextColor(R.id.tv_scaned_numb,mContext.getResources().getColor( R.color.Base_color));
+            holder.setTextColor(R.id.tv_item_name, mContext.getResources().getColor(R.color.green1b));
+            holder.setTextColor(R.id.tv_item_spec, mContext.getResources().getColor(R.color.green1b));
+            holder.setTextColor(R.id.tv_item_no, mContext.getResources().getColor(R.color.green1b));
+            holder.setTextColor(R.id.tv_unit, mContext.getResources().getColor(R.color.green1b));
+            holder.setTextColor(R.id.tv_apply_numb,mContext.getResources().getColor( R.color.green1b));
+            holder.setTextColor(R.id.tv_scaned_numb,mContext.getResources().getColor( R.color.green1b));
+            holder.setTextColor(R.id.tv_stock_qty, mContext.getResources().getColor(R.color.green1b));
         }
     }
 }

@@ -19,6 +19,7 @@ import butterknife.OnCheckedChanged;
 import butterknife.OnClick;
 import butterknife.OnFocusChange;
 import butterknife.OnTextChanged;
+import digiwin.library.utils.WeakRefHandler;
 import digiwin.smartdepott100.R;
 import digiwin.smartdepott100.core.appcontants.AddressContants;
 import digiwin.smartdepott100.core.base.BaseFirstModuldeActivity;
@@ -30,8 +31,8 @@ import digiwin.smartdepott100.module.activity.produce.putinstore.ZPutInStoreSeco
 import digiwin.smartdepott100.module.bean.common.FilterResultOrderBean;
 import digiwin.smartdepott100.module.bean.common.SaveBackBean;
 import digiwin.smartdepott100.module.bean.common.SaveBean;
+import digiwin.smartdepott100.module.bean.common.ScanBarcodeBackBean;
 import digiwin.smartdepott100.module.bean.common.ScanLocatorBackBean;
-import digiwin.smartdepott100.module.bean.common.ScanPlotNoBackBean;
 import digiwin.smartdepott100.module.logic.common.CommonLogic;
 import digiwin.smartdepott100.module.logic.produce.ZPutInStoreLogic;
 import digiwin.library.dialog.OnDialogClickListener;
@@ -39,18 +40,18 @@ import digiwin.library.utils.StringUtils;
 
 /**
  * @author xiemeng
- * @des
+ * @des 入库上架
  * @date 2017/5/26 14:30
  */
 
 public class ZPutInStoreScanFg extends BaseFragment {
 
-    @BindView(R.id.tv_plot_no)
-    TextView tvPlotNo;
-    @BindView(R.id.et_plot_no)
-    EditText etPlotNo;
-    @BindView(R.id.ll_plot_no)
-    LinearLayout llPlotNo;
+    @BindView(R.id.tv_barcode_no)
+    TextView tvBarcodeNo;
+    @BindView(R.id.et_barcode_no)
+    EditText etBarcodeNo;
+    @BindView(R.id.ll_barcode_no)
+    LinearLayout llBarcodeNo;
     @BindView(R.id.tv_locator)
     TextView tvLocator;
     @BindView(R.id.et_scan_locator)
@@ -70,14 +71,16 @@ public class ZPutInStoreScanFg extends BaseFragment {
     @BindView(R.id.includedetail)
     View includeDetail;
 
-    @BindViews({R.id.et_plot_no, R.id.et_scan_locator, R.id.et_input_num})
+    @BindViews({R.id.et_barcode_no, R.id.et_scan_locator, R.id.et_input_num})
     List<EditText> editTexts;
-    @BindViews({R.id.ll_plot_no,R.id.ll_scan_locator, R.id.ll_input_num})
+    @BindViews({R.id.ll_barcode_no,R.id.ll_scan_locator, R.id.ll_input_num})
     List<View> views;
-    @BindViews({R.id.tv_plot_no, R.id.tv_locator, R.id.tv_number})
+    @BindViews({R.id.tv_barcode_no, R.id.tv_locator, R.id.tv_number})
     List<TextView> textViews;
     @BindView(R.id.cb_locatorlock2)
     CheckBox cb_locatorlock2;
+
+    FilterResultOrderBean orderData;
 
     /**
      * 已扫描量
@@ -94,12 +97,11 @@ public class ZPutInStoreScanFg extends BaseFragment {
         }
     }
 
-    @OnFocusChange(R.id.et_plot_no)
-
-    void plotNoFocusChanage() {
-        ModuleUtils.viewChange(llPlotNo, views);
-        ModuleUtils.etChange(activity, etPlotNo, editTexts);
-        ModuleUtils.tvChange(activity, tvPlotNo, textViews);
+    @OnFocusChange(R.id.et_barcode_no)
+    void barcdoeNoFocusChanage() {
+        ModuleUtils.viewChange(llBarcodeNo, views);
+        ModuleUtils.etChange(activity, etBarcodeNo, editTexts);
+        ModuleUtils.tvChange(activity, tvBarcodeNo, textViews);
     }
     @OnFocusChange(R.id.et_scan_locator)
     void locatorFocusChanage() {
@@ -115,11 +117,11 @@ public class ZPutInStoreScanFg extends BaseFragment {
         ModuleUtils.tvChange(activity, tvNumber, textViews);
     }
 
-    @OnTextChanged(value = R.id.et_plot_no, callback = OnTextChanged.Callback.AFTER_TEXT_CHANGED)
-    void plotNoChange(CharSequence s) {
+    @OnTextChanged(value = R.id.et_barcode_no, callback = OnTextChanged.Callback.AFTER_TEXT_CHANGED)
+    void barcodeNoNoChange(CharSequence s) {
         if (!StringUtils.isBlank(s.toString())) {
-            mHandler.removeMessages(PLOTWHAT);
-            mHandler.sendMessageDelayed(mHandler.obtainMessage(PLOTWHAT, s.toString()), AddressContants.DELAYTIME);
+            mHandler.removeMessages(BARCODEWHAT);
+            mHandler.sendMessageDelayed(mHandler.obtainMessage(BARCODEWHAT, s.toString()), AddressContants.DELAYTIME);
         }
     }
 
@@ -133,8 +135,8 @@ public class ZPutInStoreScanFg extends BaseFragment {
 
     @OnClick(R.id.save)
     void save() {
-        if (!plotFlag) {
-            showFailedDialog(R.string.scan_circulation);
+        if (!barcodeNoFlag) {
+            showFailedDialog(R.string.scan_barcode);
             return;
         }
         if (!locatorFlag) {
@@ -166,9 +168,9 @@ public class ZPutInStoreScanFg extends BaseFragment {
     }
 
     /**
-     * 物料批号
+     * 条码
      */
-    final int PLOTWHAT = 1001;
+    final int BARCODEWHAT = 1001;
     /**
      * 储位
      */
@@ -188,7 +190,7 @@ public class ZPutInStoreScanFg extends BaseFragment {
     /**
      * 条码扫描
      */
-    boolean plotFlag;
+    boolean barcodeNoFlag;
     /**
      * 储位扫描
      */
@@ -197,39 +199,49 @@ public class ZPutInStoreScanFg extends BaseFragment {
     SaveBean saveBean;
 
     FilterResultOrderBean orderBean = new FilterResultOrderBean();
-    private Handler mHandler = new Handler(new Handler.Callback() {
+    private Handler.Callback mCallback= new Handler.Callback() {
         @Override
         public boolean handleMessage(Message msg) {
             switch (msg.what) {
-                case PLOTWHAT:
+                case BARCODEWHAT:
                     HashMap<String, String> barcodeMap = new HashMap<>();
-                    barcodeMap.put(AddressContants.PLOTNO, String.valueOf(msg.obj));
+                    barcodeMap.put(AddressContants.BARCODE_NO, String.valueOf(msg.obj));
                     barcodeMap.put(AddressContants.DOC_NO,orderBean.getStock_in_no());
                     barcodeMap.put(AddressContants.WAREHOUSE_NO, LoginLogic.getWare());
-                    zPutInStoreLogic.scanPlotNo(barcodeMap, new CommonLogic.ScanPoltNoListener() {
+                    barcodeMap.put(AddressContants.STORAGE_SPACES_BARCODE,saveBean.getStorage_spaces_in_no());
+                    etBarcodeNo.setKeyListener(null);
+                    zPutInStoreLogic.scanBarcode(barcodeMap, new CommonLogic.ScanBarcodeListener() {
                         @Override
-                        public void onSuccess(ScanPlotNoBackBean plotNoBackBean) {
-                            barcodeShow = plotNoBackBean.getShowing();
-                            etInputNum.setText(StringUtils.deleteZero(plotNoBackBean.getAvailable_in_qty()));
-                            tvScanHasScan.setText(plotNoBackBean.getScan_sumqty());
-                            plotFlag = true;
+                        public void onSuccess(ScanBarcodeBackBean barcodeBackBean) {
+                            etBarcodeNo.setKeyListener(new TextKeyListener(TextKeyListener.Capitalize.CHARACTERS, true));
+                            barcodeShow = barcodeBackBean.getShowing();
+                            etInputNum.setText(StringUtils.deleteZero(barcodeBackBean.getAvailable_in_qty()));
+                            tvScanHasScan.setText(barcodeBackBean.getScan_sumqty());
+                            barcodeNoFlag = true;
                             show();
-                            saveBean.setAvailable_in_qty(plotNoBackBean.getAvailable_in_qty());
-                            saveBean.setBarcode_no(etPlotNo.getText().toString());
-                            saveBean.setItem_no(plotNoBackBean.getItem_no());
-                            saveBean.setUnit_no(plotNoBackBean.getUnit_no());
-                            saveBean.setWo_no(plotNoBackBean.getWo_no());
-                            saveBean.setScan_sumqty(plotNoBackBean.getScan_sumqty());
+                            saveBean.setAvailable_in_qty(barcodeBackBean.getAvailable_in_qty());
+                            saveBean.setBarcode_no(barcodeBackBean.getBarcode_no());
+                            saveBean.setItem_no(barcodeBackBean.getItem_no());
+                            saveBean.setUnit_no(barcodeBackBean.getUnit_no());
+                            saveBean.setDoc_no(orderData.getStock_in_no());
+                            saveBean.setLot_no(barcodeBackBean.getLot_no());
+                           // saveBean.setWo_no(barcodeBackBean.getWo_no());
+                            saveBean.setScan_sumqty(barcodeBackBean.getScan_sumqty());
+                            saveBean.setItem_barcode_type(barcodeBackBean.getItem_barcode_type());
                             etInputNum.requestFocus();
+                            if (CommonUtils.isAutoSave(saveBean)){
+                                save();
+                            }
                         }
 
                         @Override
                         public void onFailed(String error) {
-                            plotFlag = false;
+                            etBarcodeNo.setKeyListener(new TextKeyListener(TextKeyListener.Capitalize.CHARACTERS, true));
+                            barcodeNoFlag = false;
                             showFailedDialog(error, new OnDialogClickListener() {
                                 @Override
                                 public void onCallback() {
-                                    etPlotNo.setText("");
+                                    etBarcodeNo.setText("");
                                 }
                             });
                         }
@@ -238,22 +250,22 @@ public class ZPutInStoreScanFg extends BaseFragment {
                 case LOCATORWHAT:
                     HashMap<String, String> locatorMap = new HashMap<>();
                     locatorMap.put(AddressContants.STORAGE_SPACES_BARCODE, String.valueOf(msg.obj));
+                    etScanLocator.setKeyListener(null);
                     zPutInStoreLogic.scanLocator(locatorMap, new CommonLogic.ScanLocatorListener() {
                         @Override
                         public void onSuccess(ScanLocatorBackBean locatorBackBean) {
+                            etScanLocator.setKeyListener(new TextKeyListener(TextKeyListener.Capitalize.CHARACTERS, true));
                             locatorShow = locatorBackBean.getShowing();
                             locatorFlag = true;
                             show();
                             saveBean.setStorage_spaces_in_no(locatorBackBean.getStorage_spaces_no());
                             saveBean.setWarehouse_in_no(locatorBackBean.getWarehouse_no());
-                            etPlotNo.requestFocus();
-                            if (CommonUtils.isAutoSave(saveBean)){
-                                save();
-                            }
+                            etBarcodeNo.requestFocus();
                         }
 
                         @Override
                         public void onFailed(String error) {
+                            etScanLocator.setKeyListener(new TextKeyListener(TextKeyListener.Capitalize.CHARACTERS, true));
                             showFailedDialog(error, new OnDialogClickListener() {
                                 @Override
                                 public void onCallback() {
@@ -268,7 +280,9 @@ public class ZPutInStoreScanFg extends BaseFragment {
             }
             return false;
         }
-    });
+    };
+
+    private Handler mHandler = new WeakRefHandler(mCallback);
 
     @Override
     protected int bindLayoutId() {
@@ -297,8 +311,8 @@ public class ZPutInStoreScanFg extends BaseFragment {
      */
     private void clear() {
         etInputNum.setText("");
-        plotFlag =false;
-        etPlotNo.setText("");
+        barcodeNoFlag =false;
+        etBarcodeNo.setText("");
         barcodeShow="";
         if (!cb_locatorlock2.isChecked()){
             locatorFlag=false;
@@ -306,7 +320,7 @@ public class ZPutInStoreScanFg extends BaseFragment {
             locatorShow="";
             etScanLocator.requestFocus();
         }else{
-            etPlotNo.requestFocus();
+            etBarcodeNo.requestFocus();
         }
         show();
     }
@@ -315,36 +329,23 @@ public class ZPutInStoreScanFg extends BaseFragment {
      * 初始化一些变量
      */
     public void initData() {
-        etPlotNo.setText("");
+        etBarcodeNo.setText("");
         etScanLocator.setText("");
         barcodeShow = "";
         locatorShow = "";
         show();
         cb_locatorlock2.setChecked(false);
-        plotFlag = false;
+        barcodeNoFlag = false;
         locatorFlag = false;
         saveBean = new SaveBean();
         orderBean = (FilterResultOrderBean) pactivity.getIntent().getExtras().getSerializable(AddressContants.ORDERDATA);
         zPutInStoreLogic = ZPutInStoreLogic.getInstance(context, pactivity.module, pactivity.mTimestamp.toString());
-        delete();
+        orderData = (FilterResultOrderBean) getActivity().getIntent().getExtras().getSerializable("orderData");
     }
 
-    /**
-     * 进入界面先清空后台存的表
-     */
-    private void delete() {
-        Map<String,String> map = new HashMap<>();
-        map.put(AddressContants.FLAG, BaseFirstModuldeActivity.ExitMode.EXITD.getName());
-        zPutInStoreLogic.exit(map, new CommonLogic.ExitListener() {
-            @Override
-            public void onSuccess(String msg) {
-
-            }
-
-            @Override
-            public void onFailed(String error) {
-
-            }
-        });
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        mHandler.removeCallbacksAndMessages(null);
     }
 }

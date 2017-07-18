@@ -43,12 +43,12 @@ import digiwin.smartdepott100.module.logic.common.CommonLogic;
 
 
 /**
- * @des  条码移库扫描
- * @author  xiemeng
- * @date    2017/3/23
+ * @author xiemeng
+ * @des 条码移库扫描
+ * @date 2017/3/23
  */
 public class MoveStoreSumFg extends BaseFragment {
-    @BindViews({ R.id.et_scan_moveinlocator})
+    @BindViews({R.id.et_scan_moveinlocator})
     List<EditText> editTexts;
     @BindViews({R.id.ll_scan_inlocator})
     List<View> views;
@@ -61,12 +61,14 @@ public class MoveStoreSumFg extends BaseFragment {
     EditText etScanMoveinlocator;
     @BindView(R.id.ll_scan_inlocator)
     LinearLayout llScanInlocator;
+
     @BindView(R.id.tv_storage)
     TextView tvStorage;
     @BindView(R.id.tv_locator)
     TextView tvLocator;
     @BindView(R.id.ry_list)
     RecyclerView ryList;
+
     @OnTextChanged(value = R.id.et_scan_moveinlocator, callback = OnTextChanged.Callback.AFTER_TEXT_CHANGED)
     void locatorChange(CharSequence s) {
         if (!StringUtils.isBlank(s.toString())) {
@@ -74,6 +76,7 @@ public class MoveStoreSumFg extends BaseFragment {
             mHandler.sendMessageDelayed(mHandler.obtainMessage(LOCATORWHAT, s.toString()), AddressContants.DELAYTIME);
         }
     }
+
     @OnClick(R.id.commit)
     void commit() {
         showCommitSureDialog(new OnDialogTwoListener() {
@@ -81,13 +84,15 @@ public class MoveStoreSumFg extends BaseFragment {
             public void onCallback1() {
                 sureCommit();
             }
+
             @Override
             public void onCallback2() {
 
             }
         });
     }
-   boolean locatorFlag;
+
+    boolean locatorFlag;
     MoveStoreActivity pactivity;
 
 
@@ -110,7 +115,7 @@ public class MoveStoreSumFg extends BaseFragment {
                         public void onSuccess(ScanLocatorBackBean locatorBackBean) {
                             tvLocator.setText(locatorBackBean.getStorage_spaces_no());
                             tvStorage.setText(locatorBackBean.getWarehouse_name());
-                            locatorFlag=true;
+                            locatorFlag = true;
                         }
 
                         @Override
@@ -133,6 +138,7 @@ public class MoveStoreSumFg extends BaseFragment {
      * 库位
      */
     final int LOCATORWHAT = 1003;
+
     @Override
     protected int bindLayoutId() {
         return R.layout.fg_movestore_sum;
@@ -145,6 +151,7 @@ public class MoveStoreSumFg extends BaseFragment {
         ryList.setLayoutManager(linearLayoutManager);
         initData();
     }
+
     /**
      * 汇总展示
      */
@@ -209,7 +216,7 @@ public class MoveStoreSumFg extends BaseFragment {
     private void getDetail(final ListSumBean listSumBean) {
         Map<String, String> map = new HashMap<>();
         showLoadingDialog();
-       final SumShowBean showBean = new SumShowBean();
+        final SumShowBean showBean = new SumShowBean();
         showBean.setItem_no(listSumBean.getItem_no());
         map.put(AddressContants.ITEM_NO, showBean.getItem_no());
         moveStoreLogic.getDetail(map, new CommonLogic.GetDetailListener() {
@@ -217,7 +224,7 @@ public class MoveStoreSumFg extends BaseFragment {
             public void onSuccess(List<DetailShowBean> detailShowBeen) {
                 Bundle bundle = new Bundle();
                 bundle.putString(AddressContants.MODULEID_INTENT, pactivity.mTimestamp.toString());
-                bundle.putString(CommonDetailActivity.MODULECODE,pactivity.module);
+                bundle.putString(CommonDetailActivity.MODULECODE, pactivity.module);
                 bundle.putSerializable(CommonDetailActivity.ONESUM, showBean);
                 bundle.putSerializable(CommonDetailActivity.DETAIL, (Serializable) detailShowBeen);
                 dismissLoadingDialog();
@@ -236,8 +243,8 @@ public class MoveStoreSumFg extends BaseFragment {
     /**
      * 提交
      */
-    private void sureCommit(){
-        if (!locatorFlag||StringUtils.isBlank(tvLocator.getText().toString().trim())) {
+    private void sureCommit() {
+        if (!locatorFlag || StringUtils.isBlank(tvLocator.getText().toString().trim())) {
             showFailedDialog(R.string.scan_in_movelocator);
             return;
         }
@@ -247,7 +254,7 @@ public class MoveStoreSumFg extends BaseFragment {
         }
         showLoadingDialog();
         HashMap<String, String> map = new HashMap<>();
-        map.put("storage_spaces_in_no",tvLocator.getText().toString());
+        map.put("storage_spaces_in_no", tvLocator.getText().toString());
         moveStoreLogic.commit(map, new CommonLogic.CommitListener() {
             @Override
             public void onSuccess(String msg) {
@@ -272,10 +279,10 @@ public class MoveStoreSumFg extends BaseFragment {
 
     }
 
-    private void initData(){
-        sumShowBeanList=new ArrayList<>();
+    private void initData() {
+        sumShowBeanList = new ArrayList<>();
         moveStoreLogic = MoveStoreLogic.getInstance(activity, pactivity.module, pactivity.mTimestamp.toString());
-        locatorFlag=false;
+        locatorFlag = false;
         upDateFlag = false;
         etScanMoveinlocator.setText("");
         tvLocator.setText("");

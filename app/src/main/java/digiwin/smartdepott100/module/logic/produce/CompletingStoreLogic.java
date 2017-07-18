@@ -39,7 +39,7 @@ public class CompletingStoreLogic {
     private static CompletingStoreLogic logic;
 
     private CompletingStoreLogic(Context context, String module, String timestamp) {
-        mContext = context;
+        mContext = context.getApplicationContext();
         mModule = module;
         mTimestamp = timestamp;
 

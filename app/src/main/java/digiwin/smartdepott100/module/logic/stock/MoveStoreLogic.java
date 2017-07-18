@@ -18,9 +18,9 @@ import digiwin.library.utils.LogUtils;
 import digiwin.library.utils.ThreadPoolManager;
 
 /**
- * @des  移动储位
- * @date 2017/6/8  
  * @author xiemeng
+ * @des 移动储位
+ * @date 2017/6/8
  */
 public class MoveStoreLogic extends CommonLogic {
     public static MoveStoreLogic logic;
@@ -35,9 +35,9 @@ public class MoveStoreLogic extends CommonLogic {
     }
 
     /**
-     *汇总查询
+     * 汇总查询
      */
-    public void getMoveStoreList(final Map<String,String> map, final GetZSumListener listener) {
+    public void getMoveStoreList(final Map<String, String> map, final GetZSumListener listener) {
         ThreadPoolManager.getInstance().executeTask(new Runnable() {
             @Override
             public void run() {
@@ -49,7 +49,7 @@ public class MoveStoreLogic extends CommonLogic {
                             String error = mContext.getString(R.string.unknow_error);
                             if (null != string) {
                                 if (ReqTypeName.SUCCCESSCODE.equals(JsonResp.getCode(string))) {
-                                    List<ListSumBean> showBeanList = JsonResp.getParaDatas(string,"list",ListSumBean.class);
+                                    List<ListSumBean> showBeanList = JsonResp.getParaDatas(string, "list", ListSumBean.class);
                                     listener.onSuccess(showBeanList);
                                     return;
                                 } else {
@@ -66,8 +66,10 @@ public class MoveStoreLogic extends CommonLogic {
             }
         }, null);
     }
+
     /**
      * 提交
+     *
      * @param map map可以直接为空
      */
     public void commit(final Map<String, String> map, final CommitListener listener) {

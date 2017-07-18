@@ -23,8 +23,10 @@ import butterknife.OnCheckedChanged;
 import butterknife.OnClick;
 import butterknife.OnFocusChange;
 import butterknife.OnTextChanged;
+import digiwin.library.utils.WeakRefHandler;
 import digiwin.smartdepott100.core.coreutil.CommonUtils;
 import digiwin.smartdepott100.core.coreutil.FiFoCheckUtils;
+import digiwin.smartdepott100.module.adapter.common.CommonDocNoFifoAdapter;
 import digiwin.smartdepott100.module.logic.sale.saleoutlet.SaleOutLetLogic;
 import digiwin.library.dialog.OnDialogClickListener;
 import digiwin.library.utils.LogUtils;
@@ -38,7 +40,6 @@ import digiwin.smartdepott100.core.modulecommon.ModuleUtils;
 import digiwin.smartdepott100.login.bean.AccoutBean;
 import digiwin.smartdepott100.login.loginlogic.LoginLogic;
 import digiwin.smartdepott100.module.activity.sale.saleoutlet.SaleOutletActivity;
-import digiwin.smartdepott100.module.adapter.sale.SaleOutletFiFoAdapter;
 import digiwin.smartdepott100.module.bean.common.ClickItemPutBean;
 import digiwin.smartdepott100.module.bean.common.FifoCheckBean;
 import digiwin.smartdepott100.module.bean.common.FilterResultOrderBean;
@@ -249,7 +250,7 @@ public class SaleOutletScanFg extends BaseFragment {
      */
     String date;
 
-    private Handler mHandler = new Handler(new Handler.Callback() {
+    private Handler.Callback mCallback= new Handler.Callback() {
         @Override
         public boolean handleMessage(Message msg) {
             switch (msg.what) {
@@ -268,7 +269,7 @@ public class SaleOutletScanFg extends BaseFragment {
                             fiFoList.clear();
                             fiFoList = fiFoBeanList;
                             saleFlag = true;
-                            adapter = new SaleOutletFiFoAdapter(pactivity, fiFoList);
+                            adapter = new CommonDocNoFifoAdapter(pactivity, fiFoList);
                             ryList.setAdapter(adapter);
                             if (!cbLocatorlock.isChecked()) {
                                 etScanLocator.requestFocus();
@@ -281,7 +282,7 @@ public class SaleOutletScanFg extends BaseFragment {
                         public void onFailed(String error) {
                             saleFlag = false;
                             fiFoList.clear();
-                            adapter = new SaleOutletFiFoAdapter(pactivity, fiFoList);
+                            adapter = new CommonDocNoFifoAdapter(pactivity, fiFoList);
                             ryList.setAdapter(adapter);
                         }
                     });
@@ -292,9 +293,11 @@ public class SaleOutletScanFg extends BaseFragment {
                     barcodeMap.put(AddressContants.WAREHOUSE_NO, ware);
                     barcodeMap.put(AddressContants.BARCODE_NO, String.valueOf(msg.obj));
                     barcodeMap.put(AddressContants.STORAGE_SPACES_NO,saveBean.getStorage_spaces_out_no());
+                    etScanBarocde.setKeyListener(null);
                     logic.scanBarcode(barcodeMap, new CommonLogic.ScanBarcodeListener() {
                         @Override
                         public void onSuccess(ScanBarcodeBackBean barcodeBackBean) {
+                            etScanBarocde.setKeyListener(new TextKeyListener(TextKeyListener.Capitalize.CHARACTERS, true));
                             etInputNum.setText(StringUtils.deleteZero(barcodeBackBean.getBarcode_qty()));
                             barcodeFlag = true;
                             saveBean.setAvailable_in_qty(barcodeBackBean.getAvailable_in_qty());
@@ -313,6 +316,7 @@ public class SaleOutletScanFg extends BaseFragment {
 
                         @Override
                         public void onFailed(String error) {
+                            etScanBarocde.setKeyListener(new TextKeyListener(TextKeyListener.Capitalize.CHARACTERS, true));
                             barcodeFlag = false;
                             showFailedDialog(error, new OnDialogClickListener() {
                                 @Override
@@ -326,9 +330,11 @@ public class SaleOutletScanFg extends BaseFragment {
                 case LOCATORWHAT:
                     HashMap<String, String> locatorMap = new HashMap<>();
                     locatorMap.put(AddressContants.STORAGE_SPACES_BARCODE, String.valueOf(msg.obj));
+                    etScanLocator.setKeyListener(null);
                     logic.scanLocator(locatorMap, new CommonLogic.ScanLocatorListener() {
                         @Override
                         public void onSuccess(ScanLocatorBackBean locatorBackBean) {
+                            etScanLocator.setKeyListener(new TextKeyListener(TextKeyListener.Capitalize.CHARACTERS, true));
                             locatorFlag = true;
                             saveBean.setStorage_spaces_out_no(locatorBackBean.getStorage_spaces_no());
                             saveBean.setWarehouse_out_no(locatorBackBean.getWarehouse_no());
@@ -341,6 +347,7 @@ public class SaleOutletScanFg extends BaseFragment {
 
                         @Override
                         public void onFailed(String error) {
+                            etScanLocator.setKeyListener(new TextKeyListener(TextKeyListener.Capitalize.CHARACTERS, true));
                             showFailedDialog(error, new OnDialogClickListener() {
                                 @Override
                                 public void onCallback() {
@@ -354,7 +361,9 @@ public class SaleOutletScanFg extends BaseFragment {
             }
             return false;
         }
-    });
+    };
+
+    private Handler mHandler = new WeakRefHandler(mCallback);
 
     @Override
     protected int bindLayoutId() {
@@ -422,6 +431,10 @@ public class SaleOutletScanFg extends BaseFragment {
         }
     }
 
-
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        mHandler.removeCallbacksAndMessages(null);
+    }
 }
 

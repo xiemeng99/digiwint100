@@ -19,6 +19,7 @@ import butterknife.OnCheckedChanged;
 import butterknife.OnClick;
 import butterknife.OnFocusChange;
 import butterknife.OnTextChanged;
+import digiwin.library.utils.WeakRefHandler;
 import digiwin.smartdepott100.core.coreutil.CommonUtils;
 import digiwin.smartdepott100.module.logic.produce.productionleader.ProductionLeaderLogic;
 import digiwin.library.dialog.OnDialogClickListener;
@@ -241,75 +242,76 @@ public class ProductionLeaderScanFg extends BaseFragment {
         show();
     }
 
-    private Handler mHandler = new Handler(new Handler.Callback() {
+    private Handler.Callback mCallback= new Handler.Callback() {
         @Override
         public boolean handleMessage(Message msg) {
-        switch (msg.what){
-
-            case LOCATORWHAT:
-                HashMap<String, String> locatorMap = new HashMap<>();
-                locatorMap.put(AddressContants.STORAGE_SPACES_BARCODE, String.valueOf(msg.obj));
-                commonLogic.scanLocator(locatorMap, new CommonLogic.ScanLocatorListener() {
-                    @Override
-                    public void onSuccess(ScanLocatorBackBean locatorBackBean) {
-                        locatorFlag = true;
-                        saveBean.setStorage_spaces_out_no(locatorBackBean.getStorage_spaces_no());
-                        saveBean.setWarehouse_out_no(locatorBackBean.getWarehouse_no());
-                        et_barcode_no.requestFocus();
-                        locatorShow = locatorBackBean.getShowing();
-                        show();
-                        if (CommonUtils.isAutoSave(saveBean)){
-                            save();
-                        }
-                    }
-
-                    @Override
-                    public void onFailed(String error) {
-                        showFailedDialog(error, new OnDialogClickListener() {
-                            @Override
-                            public void onCallback() {
-                                etScanLocator.setText("");
-                                etScanLocator.requestFocus();
+            switch (msg.what){
+                case LOCATORWHAT:
+                    HashMap<String, String> locatorMap = new HashMap<>();
+                    locatorMap.put(AddressContants.STORAGE_SPACES_BARCODE, String.valueOf(msg.obj));
+                    commonLogic.scanLocator(locatorMap, new CommonLogic.ScanLocatorListener() {
+                        @Override
+                        public void onSuccess(ScanLocatorBackBean locatorBackBean) {
+                            locatorFlag = true;
+                            saveBean.setStorage_spaces_out_no(locatorBackBean.getStorage_spaces_no());
+                            saveBean.setWarehouse_out_no(locatorBackBean.getWarehouse_no());
+                            et_barcode_no.requestFocus();
+                            locatorShow = locatorBackBean.getShowing();
+                            show();
+                            if (CommonUtils.isAutoSave(saveBean)){
+                                save();
                             }
-                        });
-                        locatorFlag = false;
-                    }
-                });
-                break;
-
-            case BARCODEWHAT:
-                HashMap<String, String> barcodeMap = new HashMap<>();
-                barcodeMap.put(AddressContants.BARCODE_NO, String.valueOf(msg.obj));
-                barcodeMap.put(AddressContants.DOC_NO, localData.getDoc_no());
-                barcodeMap.put(AddressContants.WAREHOUSE_NO, LoginLogic.getWare());
-                barcodeMap.put(AddressContants.STORAGE_SPACES_NO,saveBean.getStorage_spaces_out_no());
-                commonLogic.scanBarcode(barcodeMap, new CommonLogic.ScanBarcodeListener() {
-                    @Override
-                    public void onSuccess(ScanBarcodeBackBean barcodeBackBean) {
-                        if(StringUtils.isBlank(etScanLocator.getText().toString())){
-                            showFailedDialog(getResources().getString(R.string.scan_locator));
-                            return;
                         }
-                        showBarcode(barcodeBackBean);
-                    }
 
-                    @Override
-                    public void onFailed(String error) {
-                        barcodeFlag = false;
-                        showFailedDialog(error, new OnDialogClickListener() {
-                            @Override
-                            public void onCallback() {
-                                et_barcode_no.setText("");
-                                et_barcode_no.requestFocus();
+                        @Override
+                        public void onFailed(String error) {
+                            showFailedDialog(error, new OnDialogClickListener() {
+                                @Override
+                                public void onCallback() {
+                                    etScanLocator.setText("");
+                                    etScanLocator.requestFocus();
+                                }
+                            });
+                            locatorFlag = false;
+                        }
+                    });
+                    break;
+
+                case BARCODEWHAT:
+                    HashMap<String, String> barcodeMap = new HashMap<>();
+                    barcodeMap.put(AddressContants.BARCODE_NO, String.valueOf(msg.obj));
+                    barcodeMap.put(AddressContants.DOC_NO, localData.getDoc_no());
+                    barcodeMap.put(AddressContants.WAREHOUSE_NO, LoginLogic.getWare());
+                    barcodeMap.put(AddressContants.STORAGE_SPACES_NO,saveBean.getStorage_spaces_out_no());
+                    commonLogic.scanBarcode(barcodeMap, new CommonLogic.ScanBarcodeListener() {
+                        @Override
+                        public void onSuccess(ScanBarcodeBackBean barcodeBackBean) {
+                            if(StringUtils.isBlank(etScanLocator.getText().toString())){
+                                showFailedDialog(getResources().getString(R.string.scan_locator));
+                                return;
                             }
-                        });
-                    }
-                });
-                break;
+                            showBarcode(barcodeBackBean);
+                        }
+
+                        @Override
+                        public void onFailed(String error) {
+                            barcodeFlag = false;
+                            showFailedDialog(error, new OnDialogClickListener() {
+                                @Override
+                                public void onCallback() {
+                                    et_barcode_no.setText("");
+                                    et_barcode_no.requestFocus();
+                                }
+                            });
+                        }
+                    });
+                    break;
+            }
+            return false;
         }
-        return false;
-        }
-    });
+    };
+
+    private Handler mHandler = new WeakRefHandler(mCallback);
 
     /**
      * 对比物料条码
@@ -391,6 +393,12 @@ public class ProductionLeaderScanFg extends BaseFragment {
         } else {
             includeDetail.setVisibility(View.GONE);
         }
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        mHandler.removeCallbacksAndMessages(null);
     }
 }
 

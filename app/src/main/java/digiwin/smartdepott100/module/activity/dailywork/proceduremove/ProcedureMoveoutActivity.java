@@ -23,6 +23,7 @@ import butterknife.OnTextChanged;
 import digiwin.library.dialog.OnDialogClickListener;
 import digiwin.library.dialog.OnDialogTwoListener;
 import digiwin.library.utils.StringUtils;
+import digiwin.library.utils.WeakRefHandler;
 import digiwin.smartdepott100.R;
 import digiwin.smartdepott100.core.appcontants.AddressContants;
 import digiwin.smartdepott100.core.appcontants.ModuleCode;
@@ -217,9 +218,9 @@ public class ProcedureMoveoutActivity extends BaseTitleActivity{
     ProcedureMoveCommitBean commitBean;
 
 
-    private Handler mHandler = new Handler(new Handler.Callback() {
+    private Handler.Callback mCallback= new Handler.Callback() {
         @Override
-        public boolean handleMessage(final Message msg) {
+        public boolean handleMessage(Message msg) {
             switch (msg.what) {
                 case DOCKINGPERWHAT:
                     HashMap<String, String> dockingperMap = new HashMap<>();
@@ -302,7 +303,9 @@ public class ProcedureMoveoutActivity extends BaseTitleActivity{
             }
             return false;
         }
-    });
+    };
+
+    private Handler mHandler = new WeakRefHandler(mCallback);
 
 
     @Override
@@ -450,5 +453,11 @@ public class ProcedureMoveoutActivity extends BaseTitleActivity{
             tvAcceptPer.setText(userInfo.getEmployee_no());
             tvName.setText(userInfo.getEmployee_name());
         }
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        mHandler.removeCallbacksAndMessages(null);
     }
 }

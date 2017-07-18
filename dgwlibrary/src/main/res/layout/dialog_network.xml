@@ -7,11 +7,16 @@
     android:layout_marginRight="@dimen/layout_20dp"
      >
 
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/layout_114dp"
+        android:layout_gravity="center_horizontal"
+        android:src="@drawable/commit_success_person" />
+
     <RelativeLayout
-        android:id="@+id/rl_bg_dialog"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/layout_110dp"
-        android:layout_marginLeft="@dimen/layout_60dp"
+        android:layout_height="140dp"
+        android:layout_marginTop="@dimen/layout_70dp"
         android:background="@drawable/bg_dialog"
        >
         <TextView
@@ -41,12 +46,5 @@
             android:id="@+id/button_sure" />
 
     </RelativeLayout>
-
-    <ImageView
-        android:id="@+id/iv_network_dialog"
-        android:layout_width="wrap_content"
-        android:layout_height="@dimen/layout_114dp"
-        android:src="@drawable/commit_ok"
-        />
 
 </FrameLayout>

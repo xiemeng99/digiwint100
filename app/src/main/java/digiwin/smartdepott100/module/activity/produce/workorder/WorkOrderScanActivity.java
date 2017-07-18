@@ -1,6 +1,7 @@
 package digiwin.smartdepott100.module.activity.produce.workorder;
 
 import android.content.Context;
+import android.os.Handler;
 import android.os.Message;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
@@ -31,6 +32,7 @@ import digiwin.library.dialog.OnDialogClickListener;
 import digiwin.library.utils.LogUtils;
 import digiwin.library.utils.StringUtils;
 import digiwin.library.utils.ViewUtils;
+import digiwin.library.utils.WeakRefHandler;
 import digiwin.pulltorefreshlibrary.recyclerview.FullyLinearLayoutManager;
 import digiwin.smartdepott100.R;
 import digiwin.smartdepott100.core.appcontants.AddressContants;
@@ -334,7 +336,7 @@ public class WorkOrderScanActivity extends BaseTitleActivity {
         }
     }
 
-    private android.os.Handler mHandler = new android.os.Handler(new android.os.Handler.Callback() {
+    private Handler.Callback mCallback= new Handler.Callback() {
         @Override
         public boolean handleMessage(Message msg) {
             switch (msg.what) {
@@ -356,7 +358,6 @@ public class WorkOrderScanActivity extends BaseTitleActivity {
                             if (CommonUtils.isAutoSave(saveBean)){
                                 saveData();
                             }
-
                         }
 
                         @Override
@@ -439,7 +440,9 @@ public class WorkOrderScanActivity extends BaseTitleActivity {
             }
             return false;
         }
-    });
+    };
+
+    private Handler mHandler = new WeakRefHandler(mCallback);
 
     @Override
     protected int bindLayoutId() {
@@ -527,6 +530,7 @@ public class WorkOrderScanActivity extends BaseTitleActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
+        mHandler.removeCallbacksAndMessages(null);
     }
 
     @Override
@@ -544,4 +548,5 @@ public class WorkOrderScanActivity extends BaseTitleActivity {
         module = ModuleCode.WORKORDERCODE;
         return module;
     }
+
 }

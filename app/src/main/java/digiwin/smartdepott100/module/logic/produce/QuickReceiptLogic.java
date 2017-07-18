@@ -31,18 +31,18 @@ public class QuickReceiptLogic extends CommonLogic {
     private static final String TAG = "ProductionLeaderLogic";
 
     private QuickReceiptLogic(Context context, String module, String timestamp) {
-        super(context,module,timestamp);
+        super(context, module, timestamp);
     }
 
-    public static QuickReceiptLogic getInstance(Context context, String module, String timestamp){
-        logic = new QuickReceiptLogic(context,module,timestamp);
+    public static QuickReceiptLogic getInstance(Context context, String module, String timestamp) {
+        logic = new QuickReceiptLogic(context, module, timestamp);
         return logic;
     }
 
     /**
      * 快速收货获取汇总列表
      */
-    public void getMRSumData(final Map<String,String> map, final GetOrderSumListener listener) {
+    public void getMRSumData(final Map<String, String> map, final GetOrderSumListener listener) {
         ThreadPoolManager.getInstance().executeTask(new Runnable() {
             @Override
             public void run() {
@@ -54,7 +54,7 @@ public class QuickReceiptLogic extends CommonLogic {
                             String error = mContext.getString(R.string.unknow_error);
                             if (null != string) {
                                 if (ReqTypeName.SUCCCESSCODE.equals(JsonResp.getCode(string))) {
-                                    List<ListSumBean> showBeanList = JsonResp.getParaDatas(string,"list_detail",ListSumBean.class);
+                                    List<ListSumBean> showBeanList = JsonResp.getParaDatas(string, "list_detail", ListSumBean.class);
                                     listener.onSuccess(showBeanList);
                                     return;
                                 } else {
@@ -77,7 +77,7 @@ public class QuickReceiptLogic extends CommonLogic {
      *
      * @param map map可以直接为空
      */
-    public void commitMRData(final Map<String,Object> map, final CommitListener listener) {
+    public void commitMRData(final Map<String, Object> map, final CommitListener listener) {
         ThreadPoolManager.getInstance().executeTask(new Runnable() {
             @Override
             public void run() {
@@ -89,10 +89,10 @@ public class QuickReceiptLogic extends CommonLogic {
                             String error = mContext.getString(R.string.unknow_error);
                             if (null != string) {
                                 if (ReqTypeName.SUCCCESSCODE.equals(JsonResp.getCode(string))) {
-                                    String doc_no = JsonResp.getParaString(string,"doc_no");
-                                    if(null != doc_no){
-                                        listener.onSuccess(JsonResp.getParaString(string,"doc_no"));
-                                    }else{
+                                    String doc_no = JsonResp.getParaString(string, "doc_no");
+                                    if (null != doc_no) {
+                                        listener.onSuccess(JsonResp.getParaString(string, "doc_no"));
+                                    } else {
                                         listener.onSuccess("");
                                     }
                                     return;

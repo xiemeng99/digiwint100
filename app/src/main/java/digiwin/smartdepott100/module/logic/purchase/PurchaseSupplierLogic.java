@@ -21,32 +21,34 @@ import digiwin.smartdepott100.module.bean.common.ListSumBean;
 import digiwin.smartdepott100.module.logic.common.CommonLogic;
 
 /**
- * @des   供应商扫码收货
- * @date 2017/6/13
  * @author xiemeng
+ * @des 供应商扫码收货
+ * @date 2017/6/13
  */
 public class PurchaseSupplierLogic extends CommonLogic {
     private static PurchaseSupplierLogic logic;
 
     private String TAG = "PurchaseGoodScanLogic";
+
     protected PurchaseSupplierLogic(Context context, String module, String timestamp) {
         super(context, module, timestamp);
     }
 
-    public static PurchaseSupplierLogic getInstance(Context context, String module, String timestamp){
+    public static PurchaseSupplierLogic getInstance(Context context, String module, String timestamp) {
         logic = new PurchaseSupplierLogic(context, module, timestamp);
         return logic;
     }
 
     /**
-     *  供应商收货扫描获取列表数据
+     * 供应商收货扫描获取列表数据
+     *
      * @param filterBean
      */
-    public void getPSList(final FilterBean filterBean, final GetDataListListener listener){
+    public void getPSList(final FilterBean filterBean, final GetDataListListener listener) {
         ThreadPoolManager.getInstance().executeTask(new Runnable() {
             @Override
             public void run() {
-                try{
+                try {
                     String createJson = JsonReqForERP.objCreateJson(mModule, "als.a003.list.get", mTimestamp, filterBean);
                     OkhttpRequest.getInstance(mContext).post(createJson, new IRequestCallbackImp() {
                         @Override
@@ -54,7 +56,7 @@ public class PurchaseSupplierLogic extends CommonLogic {
                             String error = mContext.getString(R.string.unknow_error);
                             if (null != s) {
                                 if (ReqTypeName.SUCCCESSCODE.equals(JsonResp.getCode(s))) {
-                                    List<FilterResultOrderBean> showBeanList = JsonResp.getParaDatas(s,"list",FilterResultOrderBean.class);
+                                    List<FilterResultOrderBean> showBeanList = JsonResp.getParaDatas(s, "list", FilterResultOrderBean.class);
                                     listener.onSuccess(showBeanList);
                                     return;
                                 } else {
@@ -64,24 +66,25 @@ public class PurchaseSupplierLogic extends CommonLogic {
                             listener.onFailed(error);
                         }
                     });
-                }catch (Exception e){
+                } catch (Exception e) {
                     listener.onFailed(mContext.getString(R.string.unknow_error));
                     LogUtils.e(TAG, "getSum--->" + e);
                 }
             }
-        },null);
+        }, null);
     }
 
     /**
-     *  供应商收货扫描 获取汇总数据
+     * 供应商收货扫描 获取汇总数据
+     *
      * @param clickItemPutBean
      * @param listener
      */
-    public void getPGSSumData(final ClickItemPutBean clickItemPutBean, final GetZSumListener listener){
+    public void getPGSSumData(final ClickItemPutBean clickItemPutBean, final GetZSumListener listener) {
         ThreadPoolManager.getInstance().executeTask(new Runnable() {
             @Override
             public void run() {
-                try{
+                try {
                     String createJson = JsonReqForERP.objCreateJson(mModule, "als.a003.list.detail.get", mTimestamp, clickItemPutBean);
                     OkhttpRequest.getInstance(mContext).post(createJson, new IRequestCallbackImp() {
                         @Override
@@ -89,7 +92,7 @@ public class PurchaseSupplierLogic extends CommonLogic {
                             String error = mContext.getString(R.string.unknow_error);
                             if (null != string) {
                                 if (ReqTypeName.SUCCCESSCODE.equals(JsonResp.getCode(string))) {
-                                    List<ListSumBean> showBeanList = JsonResp.getParaDatas(string,"list_detail",ListSumBean.class);
+                                    List<ListSumBean> showBeanList = JsonResp.getParaDatas(string, "list_detail", ListSumBean.class);
                                     listener.onSuccess(showBeanList);
                                     return;
                                 } else {
@@ -99,16 +102,17 @@ public class PurchaseSupplierLogic extends CommonLogic {
                             listener.onFailed(error);
                         }
                     });
-                }catch (Exception e){
+                } catch (Exception e) {
                     listener.onFailed(mContext.getString(R.string.unknow_error));
                     LogUtils.e(TAG, "getSum--->" + e);
                 }
             }
-        },null);
+        }, null);
     }
 
     /**
      * 提交
+     *
      * @param map map可以直接为空
      */
     public void commitPGSData(final Map<String, String> map, final CommitListener listener) {
@@ -124,7 +128,7 @@ public class PurchaseSupplierLogic extends CommonLogic {
                             if (null != string) {
                                 if (ReqTypeName.SUCCCESSCODE.equals(JsonResp.getCode(string))) {
                                     String doc_no = JsonResp.getParaString(string, AddressContants.DOC_NO);
-                                    if(null != doc_no){
+                                    if (null != doc_no) {
                                         listener.onSuccess(JsonResp.getParaString(string, AddressContants.DOC_NO));
                                     }
                                     return;

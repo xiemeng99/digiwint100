@@ -47,7 +47,7 @@ public class LoginLogic {
     private static LoginLogic logic;
 
     private LoginLogic(Context context, String module, String timestamp) {
-        mContext = context;
+        mContext = context.getApplicationContext();
         mModule = module;
         mTimestamp = timestamp;
     }
@@ -184,13 +184,14 @@ public class LoginLogic {
             OkhttpRequest.getInstance(mContext).post(createJson, new IRequestCallbackImp() {
                 @Override
                 public void onResponse(String string) {
-                    LogUtils.i(TAG,"login---onResponse>"+string);
                     String error = mContext.getString(R.string.login_error);
                     if (null != string) {
                         if (ReqTypeName.SUCCCESSCODE.equals(JsonResp.getCode(string))) {
                             AccoutBean accoutBeen = JsonResp.getParaData(string, AccoutBean.class);
-                            listener.onSuccess(accoutBeen);
-                            return;
+                            if (null!=accoutBeen) {
+                                listener.onSuccess(accoutBeen);
+                                return;
+                            }
                         } else {
                             error = JsonResp.getDescription(string);
                         }
