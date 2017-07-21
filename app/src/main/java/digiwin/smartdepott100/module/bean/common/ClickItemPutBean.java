@@ -70,6 +70,10 @@ public class ClickItemPutBean {
      */
     private String storage_space;
     /**
+     * 储位编码
+     */
+    private String storage_space_no;
+    /**
      * 员工编号
      */
     private String employee_no;
@@ -240,5 +244,13 @@ public class ClickItemPutBean {
 
     public void setStock_in_no(String stock_in_no) {
         this.stock_in_no = stock_in_no;
+    }
+
+    public String getStorage_space_no() {
+        return storage_space_no;
+    }
+
+    public void setStorage_space_no(String storage_space_no) {
+        this.storage_space_no = storage_space_no;
     }
 }

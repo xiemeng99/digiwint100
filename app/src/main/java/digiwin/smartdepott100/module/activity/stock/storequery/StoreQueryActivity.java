@@ -153,7 +153,7 @@ public class StoreQueryActivity extends BaseTitleHActivity {
         clickItemPutBean.setItem_no(etItemNo.getText().toString());
         clickItemPutBean.setItem_name(etItemName.getText().toString());
         clickItemPutBean.setWarehouse_no(etStorage.getText().toString());
-        clickItemPutBean.setStorage_space(etLocator.getText().toString());
+        clickItemPutBean.setStorage_space_no(etLocator.getText().toString());
         showLoadingDialog();
         logic.getStoreList(clickItemPutBean, new StoreQueryLogic.GetStoreListListener() {
             @Override
