@@ -3,6 +3,7 @@ package digiwin.smartdepott100.module.activity.produce.directstorage;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v7.widget.Toolbar;
+import android.text.method.TextKeyListener;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.LinearLayout;
@@ -218,9 +219,11 @@ public class DirectStorageActivity extends BaseFirstModuldeActivity {
                     Map<String,String> map = new HashMap<>();
                     saveBean.setWo_no(StringUtils.objToString(msg.obj));
                     map.put(AddressContants.WO_NO,StringUtils.objToString(msg.obj));
+                    etWorkOrder.setKeyListener(null);
                     logic.scanOrder(map, new DirectStorageLogic.ScanOrderListener() {
                         @Override
                         public void onSuccess(ListSumBean sumBean) {
+                            etWorkOrder.setKeyListener(new TextKeyListener(TextKeyListener.Capitalize.CHARACTERS, true));
                             workOrderShow = sumBean.getShowing();
                             workOrderFlag = true;
                             show();
@@ -231,6 +234,7 @@ public class DirectStorageActivity extends BaseFirstModuldeActivity {
 
                         @Override
                         public void onFailed(String error) {
+                            etWorkOrder.setKeyListener(new TextKeyListener(TextKeyListener.Capitalize.CHARACTERS, true));
                             workOrderFlag = false;
                             showFailedDialog(error, new OnDialogClickListener() {
                                 @Override

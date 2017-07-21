@@ -166,8 +166,12 @@ public class StoreQueryActivity extends BaseTitleHActivity {
                 llTaylayout.setVisibility(View.VISIBLE);
                 llSearchInput.setVisibility(View.GONE);
                 isSearching = false;
-                barcodeFg.onSubscribe(showNoBarcodeList);
-                itemNoFg.upDateList(showHasBarcodeList);
+                if (null!=showNoBarcodeList){
+                    barcodeFg.onSubscribe(showNoBarcodeList);
+                }
+                if (null!=showHasBarcodeList) {
+                    itemNoFg.upDateList(showHasBarcodeList);
+                }
 
             }
 

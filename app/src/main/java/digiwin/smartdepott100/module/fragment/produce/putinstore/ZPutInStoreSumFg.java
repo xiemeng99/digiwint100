@@ -119,7 +119,6 @@ public class ZPutInStoreSumFg extends BaseFragment {
             ryList.setAdapter(adapter);
             ClickItemPutBean clickItemPutData = new ClickItemPutBean();
             clickItemPutData.setStock_in_no(orderData.getStock_in_no());
-            clickItemPutData.setWarehouse_in_no(LoginLogic.getWare());
             showLoadingDialog();
             zPutInStoreLogic.getPutInStoreSum(clickItemPutData, new CommonLogic.GetZSumListener() {
                 @Override

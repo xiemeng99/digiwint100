@@ -2,9 +2,11 @@ package digiwin.smartdepott100.module.logic.produce;
 
 import android.content.Context;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import digiwin.library.utils.StringUtils;
 import digiwin.smartdepott100.R;
 import digiwin.smartdepott100.core.appcontants.AddressContants;
 import digiwin.smartdepott100.core.appcontants.ReqTypeName;
@@ -12,6 +14,7 @@ import digiwin.smartdepott100.core.json.JsonReqForERP;
 import digiwin.smartdepott100.core.net.IRequestCallbackImp;
 import digiwin.smartdepott100.core.net.OkhttpRequest;
 import digiwin.smartdepott100.module.bean.common.ClickItemPutBean;
+import digiwin.smartdepott100.module.bean.common.FifoCheckBean;
 import digiwin.smartdepott100.module.bean.common.FilterBean;
 import digiwin.smartdepott100.module.bean.common.FilterResultOrderBean;
 import digiwin.smartdepott100.module.bean.common.ListSumBean;
@@ -139,6 +142,45 @@ public class SuitPickingHalfLogic extends CommonLogic {
                     listener.onFailed(mContext.getString(R.string.unknow_error));
                     LogUtils.e(TAG, "getSum--->" + e);
                 }
+            }
+        }, null);
+    }
+
+    /**
+     * 根据单号获取FIFO
+     */
+    public void docNoFIFO(final Map<String, String> map, final PostMaterialFIFOListener listener) {
+        ThreadPoolManager.getInstance().executeTask(new Runnable() {
+            @Override
+            public void run() {
+                String json = JsonReqForERP.mapCreateJson(mModule, "als.b016.fifo.get", mTimestamp, map);
+                OkhttpRequest.getInstance(mContext).post(json, new IRequestCallbackImp() {
+                    @Override
+                    public void onResponse(String string) {
+                        String error = mContext.getString(R.string.unknow_error);
+                        if (null != string) {
+                            if (ReqTypeName.SUCCCESSCODE.equals(JsonResp.getCode(string))) {
+                                List<FifoCheckBean> fiFoBeanList = JsonResp.getParaDatas(string, "list_fifo", FifoCheckBean.class);
+                                if (null != fiFoBeanList && fiFoBeanList.size() > 0) {
+                                    for (int i = 0; i < fiFoBeanList.size(); i++) {
+                                        FifoCheckBean fifoBean = fiFoBeanList.get(i);
+                                        fifoBean.setRecommended_qty(StringUtils.deleteZero(fifoBean.getRecommended_qty()));
+                                        fifoBean.setScan_sumqty(StringUtils.deleteZero(fifoBean.getScan_sumqty()));
+                                    }
+                                    listener.onSuccess(fiFoBeanList);
+                                } else {
+                                    List<FifoCheckBean> list = new ArrayList<FifoCheckBean>();
+                                    listener.onSuccess(list);
+                                }
+
+                                return;
+                            } else {
+                                error = JsonResp.getDescription(string);
+                            }
+                        }
+                        listener.onFailed(error);
+                    }
+                });
             }
         }, null);
     }

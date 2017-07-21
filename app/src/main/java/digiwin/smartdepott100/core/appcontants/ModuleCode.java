@@ -134,6 +134,10 @@ public interface ModuleCode {
      */
     public final String INBINNING="B028";
     /**
+     * 标签打印
+     */
+    public final String LABLEPRINTING="C001";
+    /**
      * 调拨过账
      */
     public final String POSTALLOCATE="C002";

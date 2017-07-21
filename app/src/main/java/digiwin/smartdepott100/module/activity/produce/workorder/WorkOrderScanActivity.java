@@ -1,19 +1,14 @@
 package digiwin.smartdepott100.module.activity.produce.workorder;
 
-import android.content.Context;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.text.method.TextKeyListener;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.WindowManager;
 import android.widget.Button;
-import android.widget.CheckBox;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -23,7 +18,6 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.BindViews;
-import butterknife.OnCheckedChanged;
 import butterknife.OnClick;
 import butterknife.OnFocusChange;
 import butterknife.OnTextChanged;
@@ -96,13 +90,11 @@ public class WorkOrderScanActivity extends BaseTitleActivity {
 
 
     @BindView(R.id.ry_list)
-    RecyclerView mRc_list;
+    RecyclerView mRcList;
 
-    @BindView(R.id.iv_scan)
-    ImageView iv_sacn;
 
     @BindView(R.id.tv_scaned_numb)
-    TextView tv_scaned_numb;
+    TextView tvScanedNumb;
 
 
     /**
@@ -135,11 +127,26 @@ public class WorkOrderScanActivity extends BaseTitleActivity {
     @BindView(R.id.ll_input_num)
     LinearLayout llInputNum;
 
-    @BindViews({R.id.et_scan_barocde, R.id.et_scan_locator, R.id.et_input_num})
+    @BindView(R.id.tv_tray)
+    TextView tvTray;
+    @BindView(R.id.et_tray)
+    EditText etTray;
+    @BindView(R.id.ll_tray)
+    LinearLayout llTray;
+    @BindView(R.id.line_tray)
+    View lineTray;
+    @OnFocusChange(R.id.et_tray)
+    void trayFocusChanage() {
+        ModuleUtils.viewChange(llTray, views);
+        ModuleUtils.etChange(activity, etTray, editTexts);
+        ModuleUtils.tvChange(activity, tvTray, textViews);
+    }
+
+    @BindViews({R.id.et_tray,R.id.et_scan_barocde, R.id.et_scan_locator, R.id.et_input_num})
     List<EditText> editTexts;
-    @BindViews({R.id.ll_scan_barcode, R.id.ll_scan_locator, R.id.ll_input_num})
+    @BindViews({R.id.ll_tray,R.id.ll_scan_barcode, R.id.ll_scan_locator, R.id.ll_input_num})
     List<View> views;
-    @BindViews({R.id.tv_barcode, R.id.tv_locator, R.id.tv_number})
+    @BindViews({R.id.tv_tray,R.id.tv_barcode, R.id.tv_locator, R.id.tv_number})
     List<TextView> textViews;
 
 
@@ -272,7 +279,7 @@ public class WorkOrderScanActivity extends BaseTitleActivity {
             public void onSuccess(SaveBackBean saveBackBean) {
                 dismissLoadingDialog();
                 scan_sumqty = saveBackBean.getScan_sumqty();
-                tv_scaned_numb.setText(scan_sumqty);
+                tvScanedNumb.setText(scan_sumqty);
                 if (null != localFifoList) {
                     if (localFifoList.size() > 0 && AddressContants.FIFOY.equals(saveBean.getFifo_check())) {
                         getFifo();
@@ -343,9 +350,11 @@ public class WorkOrderScanActivity extends BaseTitleActivity {
                 case LOCATORWHAT:
                     HashMap<String, String> locatorMap = new HashMap<>();
                     locatorMap.put(AddressContants.STORAGE_SPACES_BARCODE, String.valueOf(msg.obj));
+                    etScanLocator.setKeyListener(null);
                     commonLogic.scanLocator(locatorMap, new CommonLogic.ScanLocatorListener() {
                         @Override
                         public void onSuccess(ScanLocatorBackBean locatorBackBean) {
+                            etScanLocator.setKeyListener(new TextKeyListener(TextKeyListener.Capitalize.CHARACTERS, true));
                             locatorFlag = true;
                             saveBean.setStorage_spaces_out_no(locatorBackBean.getStorage_spaces_no());
                             saveBean.setWarehouse_out_no(locatorBackBean.getWarehouse_no());
@@ -362,6 +371,7 @@ public class WorkOrderScanActivity extends BaseTitleActivity {
 
                         @Override
                         public void onFailed(String error) {
+                            etScanLocator.setKeyListener(new TextKeyListener(TextKeyListener.Capitalize.CHARACTERS, true));
                             showFailedDialog(error, new OnDialogClickListener() {
                                 @Override
                                 public void onCallback() {
@@ -379,9 +389,11 @@ public class WorkOrderScanActivity extends BaseTitleActivity {
                     barcodeMap.put(AddressContants.BARCODE_NO, String.valueOf(msg.obj));
                     barcodeMap.put(AddressContants.DOC_NO, work_no);
                     barcodeMap.put(AddressContants.STORAGE_SPACES_NO,saveBean.getStorage_spaces_out_no());
+                    etScanBarocde.setKeyListener(null);
                     commonLogic.scanBarcode(barcodeMap, new CommonLogic.ScanBarcodeListener() {
                         @Override
                         public void onSuccess(ScanBarcodeBackBean barcodeBackBean) {
+                            etScanBarocde.setKeyListener(new TextKeyListener(TextKeyListener.Capitalize.CHARACTERS, true));
                             try {
                                 if (!localData.getLow_order_item_no().equals(barcodeBackBean.getItem_no())) {
                                     barcodeFlag = false;
@@ -407,6 +419,7 @@ public class WorkOrderScanActivity extends BaseTitleActivity {
 
                         @Override
                         public void onFailed(String error) {
+                            etScanBarocde.setKeyListener(new TextKeyListener(TextKeyListener.Capitalize.CHARACTERS, true));
                             barcodeFlag = false;
                             showFailedDialog(error, new OnDialogClickListener() {
                                 @Override
@@ -426,7 +439,7 @@ public class WorkOrderScanActivity extends BaseTitleActivity {
                             localFifoList = new ArrayList<FifoCheckBean>();
                             localFifoList = fiFoBeanList;
                             adapter = new CommonItemNoFiFoAdapter(activity, fiFoBeanList);
-                            mRc_list.setAdapter(adapter);
+                            mRcList.setAdapter(adapter);
                         }
 
                         @Override
@@ -465,7 +478,7 @@ public class WorkOrderScanActivity extends BaseTitleActivity {
 
         commonLogic = WorkOrderlLogic.getInstance(context, module, mTimestamp.toString());
         FullyLinearLayoutManager fullyLinearLayoutManager = new FullyLinearLayoutManager(activity);
-        mRc_list.setLayoutManager(fullyLinearLayoutManager);
+        mRcList.setLayoutManager(fullyLinearLayoutManager);
         getFifo();
     }
 
@@ -474,8 +487,8 @@ public class WorkOrderScanActivity extends BaseTitleActivity {
         map.put(AddressContants.QTY, localData.getApply_qty());
         LogUtils.d("QTY", String.valueOf(StringUtils.sub(localData.getApply_qty(), localData.getScan_sumqty())));
         map.put(AddressContants.ITEM_NO, localData.getLow_order_item_no());
-        map.put(AddressContants.WAREHOUSE_NO, LoginLogic.getUserInfo().getWare());
-        map.put("lot_no ", "");
+        map.put(AddressContants.WAREHOUSE_NO, LoginLogic.getWare());
+        map.put("lot_no", "");
         mHandler.removeMessages(FIFOWHAT);
         mHandler.sendMessageDelayed(mHandler.obtainMessage(FIFOWHAT, map), AddressContants.DELAYTIME);
     }
@@ -519,12 +532,20 @@ public class WorkOrderScanActivity extends BaseTitleActivity {
      * 初始化一些变量
      */
     private void initData() {
+        scan_sumqty="0";
         etScanBarocde.setText("");
         etScanLocator.setText("");
         barcodeFlag = false;
         locatorFlag = false;
         saveBean = new SaveBean();
         etScanLocator.requestFocus();
+        if (CommonUtils.isUseTray()){
+            llTray.setVisibility(View.VISIBLE);
+            lineTray.setVisibility(View.VISIBLE);
+        }else {
+            llTray.setVisibility(View.GONE);
+            lineTray.setVisibility(View.GONE);
+        }
     }
 
     @Override
@@ -536,7 +557,6 @@ public class WorkOrderScanActivity extends BaseTitleActivity {
     @Override
     protected void initNavigationTitle() {
         super.initNavigationTitle();
-        iv_sacn.setVisibility(View.VISIBLE);
         iv_title_setting.setVisibility(View.VISIBLE);
         iv_title_setting.setImageResource(R.drawable.dankeliao);
         activity = this;

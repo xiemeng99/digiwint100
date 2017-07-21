@@ -34,9 +34,7 @@
             android:paddingRight="@dimen/layout_10dp" />
     </LinearLayout>
 
-    <View
-        android:id="@+id/line_1"
-        style="@style/ry_line_style" />
+    <View style="@style/ry_line_style" />
 
     <LinearLayout
         style="@style/ry_sum_itemstyle"
@@ -58,9 +56,7 @@
             android:layout_height="wrap_content" />
     </LinearLayout>
 
-    <View
-        android:id="@+id/line_2"
-        style="@style/ry_line_style" />
+    <View style="@style/ry_line_style" />
 
     <LinearLayout
         style="@style/ry_sum_itemstyle"
@@ -82,9 +78,7 @@
             android:layout_height="wrap_content" />
     </LinearLayout>
 
-    <View
-        android:id="@+id/line_3"
-        style="@style/ry_line_style" />
+    <View style="@style/ry_line_style" />
 
     <LinearLayout
         style="@style/ry_sum_itemstyle"
@@ -108,16 +102,13 @@
             android:layout_weight="1" />
 
         <TextView
-            android:id="@+id/tv_stock_balance_string"
             style="@style/app_text_inwhite"
             android:layout_width="@dimen/layout_60dp"
             android:layout_height="wrap_content"
-            android:text="@string/stock_balance"
-            android:textColor="@color/MAIN_BELOW"
-            android:textSize="@dimen/textSize_14sp" />
+            android:text="@string/actual_yield" />
 
         <TextView
-            android:id="@+id/tv_material_return_big"
+            android:id="@+id/tv_feeding_amount"
             style="@style/ry_ser_text_inwhite"
             android:layout_width="@dimen/layout_0dp"
             android:layout_height="wrap_content"
@@ -141,17 +132,18 @@
             android:layout_weight="5">
 
             <TextView
-                android:id="@+id/tv_actual_yield_string"
                 style="@style/app_text_inwhite"
                 android:layout_width="@dimen/layout_60dp"
-                android:layout_height="match_parent"
-                android:text="@string/actual_yield" />
+                android:layout_height="wrap_content"
+                android:text="@string/stock_balance" />
 
             <TextView
-                android:id="@+id/tv_feeding_amount"
+                android:id="@+id/tv_material_return_big"
                 style="@style/ry_ser_text_inwhite"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_width="@dimen/layout_0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1" />
+
         </LinearLayout>
 
         <ImageView

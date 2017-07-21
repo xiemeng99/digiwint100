@@ -58,11 +58,11 @@ import digiwin.smartdepott100.module.logic.sale.saleoutlet.SaleOutLetLogic;
  */
 public class SaleOutletScanFg extends BaseFragment {
 
-    @BindViews({R.id.et_scan_locator, R.id.et_scan_barocde, R.id.et_input_num})
+    @BindViews({R.id.et_tray,R.id.et_scan_locator, R.id.et_scan_barocde, R.id.et_input_num})
     List<EditText> editTexts;
-    @BindViews({R.id.ll_scan_barcode, R.id.ll_scan_locator, R.id.ll_input_num})
+    @BindViews({R.id.ll_tray,R.id.ll_scan_barcode, R.id.ll_scan_locator, R.id.ll_input_num})
     List<View> views;
-    @BindViews({R.id.tv_barcode, R.id.tv_locator, R.id.tv_number})
+    @BindViews({R.id.tv_tray,R.id.tv_barcode, R.id.tv_locator, R.id.tv_number})
     List<TextView> textViews;
 
     @BindView(R.id.tv_locator)
@@ -89,6 +89,22 @@ public class SaleOutletScanFg extends BaseFragment {
     LinearLayout llZxInput;
     @BindView(R.id.ry_list)
     RecyclerView ryList;
+
+
+    @BindView(R.id.tv_tray)
+    TextView tvTray;
+    @BindView(R.id.et_tray)
+    EditText etTray;
+    @BindView(R.id.ll_tray)
+    LinearLayout llTray;
+    @BindView(R.id.line_tray)
+    View lineTray;
+    @OnFocusChange(R.id.et_tray)
+    void trayFocusChanage() {
+        ModuleUtils.viewChange(llTray, views);
+        ModuleUtils.etChange(activity, etTray, editTexts);
+        ModuleUtils.tvChange(activity, tvTray, textViews);
+    }
 
     /**
      * 出通单号
@@ -373,6 +389,13 @@ public class SaleOutletScanFg extends BaseFragment {
     @Override
     protected void doBusiness() {
         pactivity = (SaleOutletActivity) activity;
+        if (CommonUtils.isUseTray()){
+            llTray.setVisibility(View.VISIBLE);
+            lineTray.setVisibility(View.VISIBLE);
+        }else {
+            llTray.setVisibility(View.GONE);
+            lineTray.setVisibility(View.GONE);
+        }
         initData();
         getFIFo();
     }

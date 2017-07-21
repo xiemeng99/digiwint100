@@ -60,7 +60,7 @@ public class EndProductAllotScanActivity extends BaseTitleActivity {
     Toolbar toolbarTitle;
 
     @BindView(R.id.ry_list)
-    RecyclerView mRc_list;
+    RecyclerView mRcList;
 
     /**
      * 物料条码
@@ -97,21 +97,30 @@ public class EndProductAllotScanActivity extends BaseTitleActivity {
      */
     @BindView(R.id.tv_scan_hasScan)
     TextView tvScanHasScan;
+    @BindView(R.id.tv_tray)
+    TextView tvTray;
+    @BindView(R.id.et_tray)
+    EditText etTray;
+    @BindView(R.id.ll_tray)
+    LinearLayout llTray;
+    @BindView(R.id.line_tray)
+    View lineTray;
+    @OnFocusChange(R.id.et_tray)
+    void trayFocusChanage() {
+        ModuleUtils.viewChange(llTray, views);
+        ModuleUtils.etChange(activity, etTray, editTexts);
+        ModuleUtils.tvChange(activity, tvTray, textViews);
+    }
 
-    @BindViews({R.id.et_scan_barocde, R.id.et_scan_locator,R.id. et_input_num})
+    @BindViews({R.id.et_tray,R.id.et_scan_barocde, R.id.et_scan_locator,R.id. et_input_num})
     List<EditText> editTexts;
-    @BindViews({R.id.ll_scan_barcode, R.id.ll_scan_locator, R.id.ll_input_num})
+    @BindViews({R.id.ll_tray,R.id.ll_scan_barcode, R.id.ll_scan_locator, R.id.ll_input_num})
     List<View> views;
-    @BindViews({R.id.tv_barcode, R.id.tv_locator, R.id.tv_number})
+    @BindViews({R.id.tv_tray,R.id.tv_barcode, R.id.tv_locator, R.id.tv_number})
     List<TextView> textViews;
     @BindView(R.id.cb_locatorlock)
     CheckBox cbLocatorlock;
 
-    /**
-     * 保存按钮
-     */
-    @BindView(R.id.save)
-    Button mBtn_save;
 
     /**
      * 条码类型 料号类型
@@ -188,7 +197,6 @@ public class EndProductAllotScanActivity extends BaseTitleActivity {
         saveBean.setAvailable_in_qty(localData.getApply_qty());
         saveBean.setStorage_spaces_in_no(localData.getWarehouse_in_no());
         saveBean.setWarehouse_in_no(localData.getWarehouse_in_no());
-        //fifo check
         String fifoCheck = FiFoCheckUtils.fifoCheck(saveBean,localFifoList);
         if(!StringUtils.isBlank(fifoCheck)){
             showFailedDialog(fifoCheck);
@@ -278,13 +286,14 @@ public class EndProductAllotScanActivity extends BaseTitleActivity {
         @Override
         public boolean handleMessage(Message msg) {
             switch (msg.what) {
-                //储位 出库储位
                 case LOCATORWHAT:
                     HashMap<String, String> locatorMap = new HashMap<>();
                     locatorMap.put(AddressContants.STORAGE_SPACES_BARCODE, String.valueOf(msg.obj));
+                    etScanLocator.setKeyListener(null);
                     commonLogic.scanLocator(locatorMap, new CommonLogic.ScanLocatorListener() {
                         @Override
                         public void onSuccess(ScanLocatorBackBean locatorBackBean) {
+                            etScanLocator.setKeyListener(new TextKeyListener(TextKeyListener.Capitalize.CHARACTERS, true));
                             dismissLoadingDialog();
                             locatorFlag = true;
                             saveBean.setStorage_spaces_out_no(locatorBackBean.getStorage_spaces_no());
@@ -303,6 +312,7 @@ public class EndProductAllotScanActivity extends BaseTitleActivity {
 
                         @Override
                         public void onFailed(String error) {
+                            etScanLocator.setKeyListener(new TextKeyListener(TextKeyListener.Capitalize.CHARACTERS, true));
                             dismissLoadingDialog();
                             showFailedDialog(error, new OnDialogClickListener() {
                                 @Override
@@ -319,9 +329,11 @@ public class EndProductAllotScanActivity extends BaseTitleActivity {
                     HashMap<String, String> barcodeMap = new HashMap<>();
                     barcodeMap.put(AddressContants.BARCODE_NO, String.valueOf(msg.obj));
                     barcodeMap.put(AddressContants.STORAGE_SPACES_NO,saveBean.getStorage_spaces_out_no());
+                    etScanBarocde.setKeyListener(null);
                     commonLogic.scanBarcode(barcodeMap, new CommonLogic.ScanBarcodeListener() {
                         @Override
                         public void onSuccess(ScanBarcodeBackBean barcodeBackBean) {
+                            etScanBarocde.setKeyListener(new TextKeyListener(TextKeyListener.Capitalize.CHARACTERS, true));
                             try {
                                 if (!localData.getLow_order_item_no().equals(barcodeBackBean.getItem_no())) {
                                     barcodeFlag = false;
@@ -347,6 +359,7 @@ public class EndProductAllotScanActivity extends BaseTitleActivity {
 
                         @Override
                         public void onFailed(String error) {
+                            etScanBarocde.setKeyListener(new TextKeyListener(TextKeyListener.Capitalize.CHARACTERS, true));
                             barcodeFlag = false;
                             showFailedDialog(error, new OnDialogClickListener() {
                                 @Override
@@ -368,11 +381,11 @@ public class EndProductAllotScanActivity extends BaseTitleActivity {
                                 localFifoList = new ArrayList<FifoCheckBean>();
                                 localFifoList = fiFoBeanList;
                                 adapter = new CommonItemNoFiFoAdapter(activity,fiFoBeanList);
-                                mRc_list.setAdapter(adapter);
+                                mRcList.setAdapter(adapter);
                             }else {
                                 localFifoList = new ArrayList<FifoCheckBean>();
                                 adapter = new CommonItemNoFiFoAdapter(activity,fiFoBeanList);
-                                mRc_list.setAdapter(adapter);
+                                mRcList.setAdapter(adapter);
                             }
                         }
 
@@ -411,6 +424,13 @@ public class EndProductAllotScanActivity extends BaseTitleActivity {
 
     @Override
     protected void doBusiness() {
+        if (CommonUtils.isUseTray()){
+            llTray.setVisibility(View.VISIBLE);
+            lineTray.setVisibility(View.VISIBLE);
+        }else {
+            llTray.setVisibility(View.GONE);
+            lineTray.setVisibility(View.GONE);
+        }
         initData();
         localData = new ListSumBean();
         ListSumBean data = (ListSumBean) getIntent().getSerializableExtra("sumdata");
@@ -419,10 +439,9 @@ public class EndProductAllotScanActivity extends BaseTitleActivity {
         if(type.equals(codetype)){
             etScanBarocde.setText(data.getLow_order_item_no());
         }
-
         commonLogic = CommonLogic.getInstance(context, module, mTimestamp.toString());
         FullyLinearLayoutManager fullyLinearLayoutManager = new FullyLinearLayoutManager(activity);
-        mRc_list.setLayoutManager(fullyLinearLayoutManager);
+        mRcList.setLayoutManager(fullyLinearLayoutManager);
         getFifo();
     }
 
@@ -476,7 +495,6 @@ public class EndProductAllotScanActivity extends BaseTitleActivity {
     public void showBarcode(ScanBarcodeBackBean barcodeBackBean){
         etInputNum.setText(StringUtils.deleteZero(barcodeBackBean.getBarcode_qty()));
         barcodeFlag = true;
-
         saveBean.setFifo_check(barcodeBackBean.getFifo_check());
         saveBean.setBarcode_no(barcodeBackBean.getBarcode_no());
         saveBean.setItem_no(barcodeBackBean.getItem_no());

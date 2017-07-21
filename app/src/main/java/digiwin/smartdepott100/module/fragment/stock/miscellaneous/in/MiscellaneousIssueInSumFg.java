@@ -117,11 +117,8 @@ public class MiscellaneousIssueInSumFg extends BaseFragment {
     public void upDateList() {
         try {
             Map<String,String> map = new HashMap<>();
-            ClickItemPutBean clickItemPutData = new ClickItemPutBean();
-            clickItemPutData.setDoc_no(orderData.getDoc_no());
-            clickItemPutData.setWarehouse_no(LoginLogic.getWare());
-            clickItemPutData.setCreate_date(orderData.getCreate_date());
-            map= ObjectAndMapUtils.getValueMap(clickItemPutData);
+            map.put(AddressContants.DOC_NO,orderData.getDoc_no());
+            map.put(AddressContants.WAREHOUSE_NO,LoginLogic.getWare());
             showLoadingDialog();
             commonLogic.getMIISumData(map, new CommonLogic.GetZSumListener() {
                 @Override
@@ -229,6 +226,7 @@ public class MiscellaneousIssueInSumFg extends BaseFragment {
                         mactivity.mZXVp.setCurrentItem(0);
                         mactivity.scanFg.initData();
                         initData();
+                        mactivity.finish();
                     }
                 });
             }

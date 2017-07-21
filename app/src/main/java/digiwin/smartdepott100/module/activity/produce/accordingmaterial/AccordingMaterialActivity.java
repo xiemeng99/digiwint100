@@ -6,9 +6,11 @@ import android.os.Handler;
 import android.os.Message;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.text.method.TextKeyListener;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import java.io.Serializable;
@@ -33,11 +35,11 @@ import digiwin.smartdepott100.R;
 import digiwin.smartdepott100.core.appcontants.AddressContants;
 import digiwin.smartdepott100.core.appcontants.ModuleCode;
 import digiwin.smartdepott100.core.base.BaseFirstModuldeActivity;
+import digiwin.smartdepott100.core.coreutil.CommonUtils;
 import digiwin.smartdepott100.core.modulecommon.ModuleUtils;
 import digiwin.smartdepott100.login.loginlogic.LoginLogic;
 import digiwin.smartdepott100.module.activity.common.CommonDetailActivity;
 import digiwin.smartdepott100.module.adapter.produce.AccordingMaterialSumAdapter;
-import digiwin.smartdepott100.module.bean.common.ClickItemPutBean;
 import digiwin.smartdepott100.module.bean.common.DetailShowBean;
 import digiwin.smartdepott100.module.bean.common.ListSumBean;
 import digiwin.smartdepott100.module.bean.common.SumShowBean;
@@ -69,13 +71,13 @@ public class AccordingMaterialActivity extends BaseFirstModuldeActivity {
      * 料号条码
      */
     @BindView(R.id.et_item_no_scan)
-    EditText mEt_barcode_scan;
+    EditText etItemNoScan;
 
     /**
      * 品名
      */
     @BindView(R.id.tv_item_name)
-    TextView mTv_item_name;
+    TextView mTvItemName;
 
     @BindView(R.id.ry_list)
     RecyclerView ryList;
@@ -94,10 +96,27 @@ public class AccordingMaterialActivity extends BaseFirstModuldeActivity {
 
     AccordingMaterialLogic commonLogic;
 
-    @BindViews({R.id.et_item_no_scan})
+    @BindViews({R.id.et_tray,R.id.et_item_no_scan})
     List<EditText> editTexts;
-    @BindViews({R.id.tv_item_no})
+    @BindViews({R.id.tv_tray,R.id.tv_item_no})
     List<TextView> textViews;
+    @BindViews({R.id.ll_tray,R.id.ll_item_no})
+    List<View> views;
+
+    @BindView(R.id.tv_tray)
+    TextView tvTray;
+    @BindView(R.id.et_tray)
+    EditText etTray;
+    @BindView(R.id.ll_tray)
+    LinearLayout llTray;
+    @BindView(R.id.line_tray)
+    View lineTray;
+    @OnFocusChange(R.id.et_tray)
+    void trayFocusChanage() {
+        ModuleUtils.viewChange(llTray, views);
+        ModuleUtils.etChange(activity, etTray, editTexts);
+        ModuleUtils.tvChange(activity, tvTray, textViews);
+    }
 
     /**
      * 页面展示的数据
@@ -116,7 +135,7 @@ public class AccordingMaterialActivity extends BaseFirstModuldeActivity {
         showCommitSureDialog(new OnDialogTwoListener() {
             @Override
             public void onCallback1() {
-                if(StringUtils.isBlank(mEt_barcode_scan.getText().toString().trim())){
+                if(StringUtils.isBlank(etItemNoScan.getText().toString().trim())){
                     showFailedDialog(getResources().getString(R.string.please_scan_item_no));
                     return;
                 }
@@ -136,7 +155,7 @@ public class AccordingMaterialActivity extends BaseFirstModuldeActivity {
 
     @OnFocusChange(R.id.et_item_no_scan)
     void barcodeFocusChange() {
-        ModuleUtils.etChange(activity, mEt_barcode_scan, editTexts);
+        ModuleUtils.etChange(activity, etItemNoScan, editTexts);
     }
 
     @OnTextChanged(value = R.id.et_item_no_scan, callback = OnTextChanged.Callback.AFTER_TEXT_CHANGED)
@@ -195,18 +214,25 @@ public class AccordingMaterialActivity extends BaseFirstModuldeActivity {
         commonLogic = AccordingMaterialLogic.getInstance(activity,activity.module,activity.mTimestamp.toString());
         FullyLinearLayoutManager fullyLinearLayoutManager = new FullyLinearLayoutManager(activity);
         ryList.setLayoutManager(fullyLinearLayoutManager);
+        if (CommonUtils.isUseTray()){
+            llTray.setVisibility(View.VISIBLE);
+            lineTray.setVisibility(View.VISIBLE);
+        }else {
+            llTray.setVisibility(View.GONE);
+            lineTray.setVisibility(View.GONE);
+        }
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if(requestCode == SCANCODE){
-            if(!StringUtils.isBlank(mEt_barcode_scan.getText().toString().trim())){
+            if(!StringUtils.isBlank(etItemNoScan.getText().toString().trim())){
                 List<ListSumBean> list = new ArrayList<ListSumBean>();
                 adapter = new AccordingMaterialSumAdapter(activity,list);
                 ryList.setAdapter(adapter);
                 showLoadingDialog();
-                updateList(mEt_barcode_scan.getText().toString().trim());
+                updateList(etItemNoScan.getText().toString().trim());
             }
         }
     }
@@ -215,9 +241,9 @@ public class AccordingMaterialActivity extends BaseFirstModuldeActivity {
      * 清楚栏位
      */
     public  void clearData(){
-        mTv_item_name.setText("");
-        mEt_barcode_scan.setText("");
-        mEt_barcode_scan.requestFocus();
+        mTvItemName.setText("");
+        etItemNoScan.setText("");
+        etItemNoScan.requestFocus();
         List<ListSumBean> list = new ArrayList<ListSumBean>();
         adapter = new AccordingMaterialSumAdapter(activity,list);
         ryList.setAdapter(adapter);
@@ -231,10 +257,12 @@ public class AccordingMaterialActivity extends BaseFirstModuldeActivity {
         Map<String, String> map = new HashMap<>();
         map.put(AddressContants.ITEM_NO,item_no);
         map.put(AddressContants.WAREHOUSE_NO,LoginLogic.getWare());
+        etItemNoScan.setKeyListener(null);
         commonLogic.getSum(map, new CommonLogic.GetZSumListener() {
             @Override
             public void onSuccess(final List<ListSumBean> list) {
-                mTv_item_name.setText(list.get(0).getItem_name());
+                etItemNoScan.setKeyListener(new TextKeyListener(TextKeyListener.Capitalize.CHARACTERS, true));
+                mTvItemName.setText(list.get(0).getItem_name());
                 showList=list;
                 adapter = new AccordingMaterialSumAdapter(activity,list);
                 ryList.setAdapter(adapter);
@@ -247,14 +275,13 @@ public class AccordingMaterialActivity extends BaseFirstModuldeActivity {
                         bundle.putSerializable("sumdata", data);
                         bundle.putString(AddressContants.MODULEID_INTENT,mTimestamp.toString());
                         ActivityManagerUtils.startActivityBundleForResult(activity,AccordingMaterialScanActivity.class,bundle,SCANCODE);
-                        //调用新的FIFO
-//                        ActivityManagerUtils.startActivityBundleForResult(activity,AccordingMaterialScanNewActivity.class,bundle,SCANCODE);
                     }
                 });
             }
 
             @Override
             public void onFailed(String error) {
+                etItemNoScan.setKeyListener(new TextKeyListener(TextKeyListener.Capitalize.CHARACTERS, true));
                 dismissLoadingDialog();
                 showFailedDialog(error, new OnDialogClickListener() {
                     @Override

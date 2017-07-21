@@ -1,6 +1,8 @@
 package digiwin.smartdepott100.core.coreutil;
 
 
+import digiwin.library.constant.SharePreKey;
+import digiwin.library.utils.SharedPreferencesUtils;
 import digiwin.smartdepott100.core.base.BaseApplication;
 import digiwin.smartdepott100.module.bean.common.SaveBean;
 
@@ -26,5 +28,16 @@ public class CommonUtils {
             }
         }
         return  isAutoSave;
+    }
+
+
+    /**
+     * 是否启用托盘
+     * @return
+     */
+    public static boolean isUseTray(){
+        BaseApplication instance = BaseApplication.getInstance();
+        boolean tray = (boolean) SharedPreferencesUtils.get(instance, SharePreKey.TRAY_SETTING, false);
+        return  tray;
     }
 }

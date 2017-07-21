@@ -403,7 +403,8 @@
         </activity>
         <activity
             android:name=".module.activity.stock.storequery.StoreQueryActivity"
-            android:windowSoftInputMode="stateAlwaysHidden|adjustPan">
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:windowSoftInputMode="stateAlwaysHidden">
             <intent-filter>
                 <action android:name="android.intent.actiont100.smartdepot.StoreQueryActivity" />
 
@@ -859,15 +860,6 @@
             android:name=".module.activity.purchase.iqc.IQCommitActivity"
             android:windowSoftInputMode="stateAlwaysHidden|adjustPan" />
         <!-- 原材料标签打印 -->
-        <activity
-            android:name=".module.activity.purchase.rawmaterial.RawMaterialPrintActivity"
-            android:windowSoftInputMode="stateAlwaysHidden|adjustPan">
-            <intent-filter>
-                <action android:name="android.intent.actiont100.smartdepot.RawMaterialPrintActivity" />
-
-                <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
-        </activity>
 
         <!--扫码收货供应商 -->
         <activity

@@ -27,6 +27,7 @@ import java.util.Map;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import digiwin.library.constant.SystemConstant;
 import digiwin.smartdepott100.R;
 import digiwin.smartdepott100.core.appcontants.AddressContants;
 import digiwin.smartdepott100.core.appcontants.ModuleCode;
@@ -108,56 +109,57 @@ public class SettingActivity extends BaseTitleActivity {
      * 集团
      */
     @BindView(R.id.tv_ent_setting)
-    TextView tv_ent_setting;
+    TextView tvEntSetting;
     /**
      * 据点
      */
     @BindView(R.id.tv_site)
-    TextView tv_site;
+    TextView tvSite;
     /**
      * 仓库
      */
     @BindView(R.id.tv_storageSetting)
-    TextView tv_storageSetting;
+    TextView tvStorageSetting;
     /**
      * 发音人选择
      */
     @BindView(R.id.tv_voicerSetting)
-    TextView tv_voicerSetting;
+    TextView tvVoicerSetting;
 
     /**
      * 分页设置
      */
     @BindView(R.id.tv_pageSetting)
-    TextView tv_pageSetting;
+    TextView tvPageSetting;
 
     /**
      * 震动提醒
      */
-    @BindView(R.id.tv_vibrateSetting)
-    TextView tv_vibrateSetting;
     @BindView(R.id.tb_vibrateSetting)
-    ToggleButton tb_vibrateSetting;
+    ToggleButton tbVibrateSetting;
+
+    @BindView(R.id.tb_tray)
+    ToggleButton tbTray;
 
 
     /**
      * 蓝牙
      */
     @BindView(R.id.tv_blueToothSetting)
-    TextView tv_blueToothSetting;
+    TextView tvBlueToothSetting;
     @BindView(R.id.tb_blueToothSetting)
-    ToggleButton tb_blueToothSetting;
+    ToggleButton tbBlueToothSetting;
     /**
      * 版本信息
      */
     @BindView(R.id.tv_versionsSetting)
-    TextView tv_versionsSetting;
+    TextView tvVersionsSetting;
 
     /**
      * new图标
      */
     @BindView(R.id.tv_versions_new)
-    TextView tv_versions_new;
+    TextView tvVersionsNew;
     /**
      * 轮播时间
      */
@@ -208,7 +210,7 @@ public class SettingActivity extends BaseTitleActivity {
             @Override
             public void onSuccess(List<EntSiteBean> entIds) {
                 dismissLoadingDialog();
-                EntIdDialog.showEntDialog(activity, tv_ent_setting.getText().toString(), entIds);
+                EntIdDialog.showEntDialog(activity, tvEntSetting.getText().toString(), entIds);
             }
 
             @Override
@@ -248,10 +250,10 @@ public class SettingActivity extends BaseTitleActivity {
      */
     @OnClick(R.id.ll_voicerSetting)
     void VoicerSetting() {
-        VoicerChooseDialog.showVoicerChooseDialog(activity, tv_voicerSetting.getText().toString(), voicersList);
+        VoicerChooseDialog.showVoicerChooseDialog(activity, tvVoicerSetting.getText().toString(), voicersList);
         VoicerChooseDialog.setCallBack(new VoicerChooseDialog.VoicerChooseCallBack() {
             public void VoicerChooseCallBack(String voicerType) {
-                tv_voicerSetting.setText(voicerType);
+                tvVoicerSetting.setText(voicerType);
                 SharedPreferencesUtils.put(activity, VOICER_SELECTED, voicerType);
                 voice(voicerType);
             }
@@ -263,10 +265,10 @@ public class SettingActivity extends BaseTitleActivity {
      */
     @OnClick(R.id.ll_pageSetting)
     void showPageSetting() {
-        AlertDialogUtils.showNumDialog(activity, 1, 100, tv_pageSetting.getText().toString(), new OnDialogClickgetTextListener() {
+        AlertDialogUtils.showNumDialog(activity, 1, 100, tvPageSetting.getText().toString(), new OnDialogClickgetTextListener() {
             @Override
             public void onCallback(CustomDialog dialog, String text) {
-                tv_pageSetting.setText(text);
+                tvPageSetting.setText(text);
                 SharedPreferencesUtils.put(context, SharePreKey.PAGE_SETTING, text);
             }
         });
@@ -338,15 +340,15 @@ public class SettingActivity extends BaseTitleActivity {
 //                Pattern compile = Pattern.compile(match);
 //                Matcher matcher = compile.matcher(ip);
 //                if (matcher.matches()) {
-                    tvPrinterIp.setText(ip);
-                    SharedPreferencesUtils.put(SettingActivity.this, SharePreferenceKey.PRINTER_IP, ip);
-                   final WiFiPrintManager manager = WiFiPrintManager.getManager();
-                    manager.openWiFi(tvPrinterIp.getText().toString(), new WiFiPrintManager.OpenWiFiPrintListener() {
-                        @Override
-                        public void isOpen(boolean isOpen) {
-                            manager.printText3("ff");
-                        }
-                    });
+                tvPrinterIp.setText(ip);
+                SharedPreferencesUtils.put(SettingActivity.this, SharePreferenceKey.PRINTER_IP, ip);
+                final WiFiPrintManager manager = WiFiPrintManager.getManager();
+                manager.openWiFi(tvPrinterIp.getText().toString(), new WiFiPrintManager.OpenWiFiPrintListener() {
+                    @Override
+                    public void isOpen(boolean isOpen) {
+                        manager.printText3("ff");
+                    }
+                });
 //                } else {
 //                    showFailedDialog(getString(R.string.ip_matcher_no));
 //                }
@@ -389,11 +391,6 @@ public class SettingActivity extends BaseTitleActivity {
     }
 
     @Override
-    protected void onResume() {
-        super.onResume();
-    }
-
-    @Override
     protected void doBusiness() {
         boolean open = BlueToothManager.getManager(activity).isOpen();
         loginlogic = LoginLogic.getInstance(context, module, mTimestamp.toString());
@@ -407,6 +404,7 @@ public class SettingActivity extends BaseTitleActivity {
         UpdateVer();
         //初始化打印机ip
         tvPrinterIp.setText(SharedPreferencesUtils.get(SettingActivity.this, SharePreferenceKey.PRINTER_IP, "").toString());
+        initTray();
     }
 
     /**
@@ -422,7 +420,7 @@ public class SettingActivity extends BaseTitleActivity {
      */
     private void updatePage() {
         String str = (String) SharedPreferencesUtils.get(context, SharePreKey.PAGE_SETTING, AddressContants.PAGE_NUM);
-        tv_pageSetting.setText(str);
+        tvPageSetting.setText(str);
     }
 
     /**
@@ -435,19 +433,28 @@ public class SettingActivity extends BaseTitleActivity {
                 voicersList.add(stringArray[i]);
             }
             String voicer = (String) SharedPreferencesUtils.get(activity, SharePreKey.VOICER_SELECTED, activity.getString(R.string.voicer_not));
-            tv_voicerSetting.setText(voicer);
+            tvVoicerSetting.setText(voicer);
 
             String vibrate = (String) SharedPreferencesUtils.get(activity, SharePreKey.VIBRATE_SETTING, VIBRATEMETION);
             if (vibrate.equals(VIBRATEMETION)) {
-                tb_vibrateSetting.setChecked(true);
+                tbVibrateSetting.setChecked(true);
             } else {
-                tb_vibrateSetting.setChecked(false);
+                tbVibrateSetting.setChecked(false);
             }
         } catch (Exception e) {
             e.printStackTrace();
             LogUtils.e(TAG, "initVoicerVibrate----Exception" + e);
         }
     }
+
+    /**
+     * 初始化托盘
+     */
+    private void initTray() {
+        boolean vibrate = (boolean) SharedPreferencesUtils.get(activity, SharePreKey.TRAY_SETTING, false);
+        tbTray.setChecked(vibrate);
+    }
+
 
     /**
      * 人员信息显示
@@ -457,8 +464,8 @@ public class SettingActivity extends BaseTitleActivity {
         accoutBean = LoginLogic.getUserInfo();
         if (null != accoutBean) {
             tvUsername.setText(accoutBean.getEmployee_name());
-            tv_ent_setting.setText(accoutBean.getEnterpriseShow());
-            tv_site.setText(accoutBean.getSiteShow());
+            tvEntSetting.setText(accoutBean.getEnterpriseShow());
+            tvSite.setText(accoutBean.getSiteShow());
 
             EntIdDialog.setCallBack(new EntIdDialog.EntIdCallBack() {
                 @Override
@@ -468,7 +475,7 @@ public class SettingActivity extends BaseTitleActivity {
                             Connector.getDatabase();
                             accoutBean.setEnterprise_no(chooseEntId);
                             accoutBean.setEnterpriseShow(chooseEntShow);
-                            tv_ent_setting.setText(chooseEntShow);
+                            tvEntSetting.setText(chooseEntShow);
                             accoutBean.update(accoutBean.getId());
                             getSite(chooseEntId, true);
                         }
@@ -485,7 +492,7 @@ public class SettingActivity extends BaseTitleActivity {
                             Connector.getDatabase();
                             accoutBean.setSiteShow(siteShow);
                             accoutBean.setSite_no(chooseSiteno);
-                            tv_site.setText(siteShow);
+                            tvSite.setText(siteShow);
                             accoutBean.update(accoutBean.getId());
                             getDefaultStorage(false);
                         }
@@ -495,13 +502,13 @@ public class SettingActivity extends BaseTitleActivity {
                 }
             });
 
-            tv_storageSetting.setText(accoutBean.getWare());
+            tvStorageSetting.setText(accoutBean.getWare());
             StorageDialog.setCallBack(new StorageDialog.StorageCallBack() {
                 @Override
                 public void storageCallBack(String chooseStorage) {
                     Connector.getDatabase();
                     accoutBean.setWare(chooseStorage);
-                    tv_storageSetting.setText(accoutBean.getWare());
+                    tvStorageSetting.setText(accoutBean.getWare());
                     accoutBean.update(accoutBean.getId());
                 }
             });
@@ -522,12 +529,12 @@ public class SettingActivity extends BaseTitleActivity {
                         Connector.getDatabase();
                         accoutBean.setSite_no(siteBeen.get(0).getSite_no());
                         accoutBean.setSiteShow(siteBeen.get(0).getSite_show());
-                        tv_site.setText(siteBeen.get(0).getSite_show());
+                        tvSite.setText(siteBeen.get(0).getSite_show());
                         accoutBean.update(accoutBean.getId());
                         //无论何种情况，改变据点时仓库都要刷新
                         getDefaultStorage(false);
                     } else {
-                        SiteDialog.showSiteDialog(activity, tv_site.getText().toString(), siteBeen);
+                        SiteDialog.showSiteDialog(activity, tvSite.getText().toString(), siteBeen);
                     }
                 }
             }
@@ -558,18 +565,18 @@ public class SettingActivity extends BaseTitleActivity {
                 LogUtils.i(TAG, "wares-->" + wares.toString());
                 if (wares.size() > 0) {
                     if (flag) {
-                        StorageDialog.showStorageDialog(activity, tv_storageSetting.getText().toString(), wares);
+                        StorageDialog.showStorageDialog(activity, tvStorageSetting.getText().toString(), wares);
                     } else {
                         String chooseStorage = wares.get(0);
                         Connector.getDatabase();
                         accoutBean.setWare(chooseStorage);
-                        tv_storageSetting.setText(accoutBean.getWare());
+                        tvStorageSetting.setText(accoutBean.getWare());
                         accoutBean.update(accoutBean.getId());
                     }
                 } else {
                     Connector.getDatabase();
                     accoutBean.setWare("");
-                    tv_storageSetting.setText(accoutBean.getWare());
+                    tvStorageSetting.setText(accoutBean.getWare());
                     accoutBean.update(accoutBean.getId());
                 }
             }
@@ -586,14 +593,14 @@ public class SettingActivity extends BaseTitleActivity {
      * 点击选择蓝牙开关
      */
     private void changeTooth() {
-        tb_blueToothSetting.setOnClickListener(new View.OnClickListener() {
+        tbBlueToothSetting.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (tb_blueToothSetting.isChecked()) {
+                if (tbBlueToothSetting.isChecked()) {
                     bluetooth();
                 } else {
                     BlueToothManager.getManager(activity).close();
-                    tv_blueToothSetting.setText("");
+                    tvBlueToothSetting.setText("");
                 }
             }
         });
@@ -615,7 +622,7 @@ public class SettingActivity extends BaseTitleActivity {
     @OnClick(R.id.tb_vibrateSetting)
     void vibrateSetting() {
         String VIBRATE = "";
-        if (tb_vibrateSetting.isChecked()) {
+        if (tbVibrateSetting.isChecked()) {
             VIBRATE = VIBRATEMETION;
         } else {
             VIBRATE = VIBRATEMETIONNOT;
@@ -628,17 +635,25 @@ public class SettingActivity extends BaseTitleActivity {
     }
 
     /**
+     * 托盘
+     */
+    @OnClick(R.id.tb_tray)
+    void traySetting() {
+        SharedPreferencesUtils.put(activity, SharePreKey.TRAY_SETTING, tbTray.isChecked());
+    }
+
+    /**
      * 更新蓝牙显示的UI
      *
      * @param isConnected
      */
     private void setBlueToothUI(final boolean isConnected) {
         if (isConnected) {
-            tb_blueToothSetting.setChecked(isConnected);
-            tv_blueToothSetting.setText(BlueToothManager.getManager(activity).getDeviceName());
+            tbBlueToothSetting.setChecked(isConnected);
+            tvBlueToothSetting.setText(BlueToothManager.getManager(activity).getDeviceName());
         } else {
-            tb_blueToothSetting.setChecked(false);
-            tv_blueToothSetting.setText("");
+            tbBlueToothSetting.setChecked(false);
+            tvBlueToothSetting.setText("");
         }
     }
 
@@ -680,7 +695,7 @@ public class SettingActivity extends BaseTitleActivity {
      * 检测更新
      */
     private void UpdateVer() {
-        tv_versionsSetting.setText(String.valueOf(TelephonyUtils.getMAppVersion(context)));
+        tvVersionsSetting.setText(String.valueOf(TelephonyUtils.getMAppVersion(context)));
         Map<String, String> map = new HashMap<>();
         AppVersionLogic.getInstance(context, module, mTimestamp.toString()).getNewVersion(map, new AppVersionLogic.GetNewVersionListener() {
             @Override
@@ -689,7 +704,7 @@ public class SettingActivity extends BaseTitleActivity {
                     versionBean = bean;
                     float vernum = StringUtils.string2Float(bean.getVernum());
                     if (vernum > TelephonyUtils.getMAppVersion(context)) {
-                        tv_versions_new.setVisibility(View.VISIBLE);
+                        tvVersionsNew.setVisibility(View.VISIBLE);
                         rlVersionsSetting.setEnabled(true);
                     } else {
                         rlVersionsSetting.setEnabled(false);

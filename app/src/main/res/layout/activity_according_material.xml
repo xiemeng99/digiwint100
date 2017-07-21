@@ -27,17 +27,46 @@
                 android:background="@drawable/accordingmaterialtop_pink_sharp"
                 android:orientation="vertical"
                 android:padding="@dimen/layout_5dp">
-
                 <LinearLayout
+                    android:id="@+id/ll_tray"
+                    style="@style/search_scan_style"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:visibility="gone">
+
+                    <TextView
+                        android:id="@+id/tv_tray"
+                        style="@style/app_text_ingreen"
+                        android:layout_width="@dimen/layout_60dp"
+                        android:layout_height="wrap_content"
+                        android:text="@string/tray" />
+
+                    <EditText
+                        android:id="@+id/et_tray"
+                        android:layout_width="@dimen/layout_0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:background="@null"
+                        android:singleLine="true"
+                        android:textColor="@color/materialText_color"
+                        android:textCursorDrawable="@drawable/et_cursor_yellow"
+                        android:textSize="@dimen/textSize_14sp" />
+                </LinearLayout>
+
+                <View
+                    android:id="@+id/line_tray"
+                    style="@style/ry_line_style"
+                    android:visibility="gone" />
+                <LinearLayout
+                    android:id="@+id/ll_item_no"
                     style="@style/itemstyle"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
 
                     <TextView
                         android:id="@+id/tv_item_no"
-                        android:layout_width="@dimen/layout_70dp"
+                        android:layout_width="@dimen/layout_60dp"
                         android:layout_height="wrap_content"
-                        android:gravity="center_vertical"
                         android:text="@string/item_no"
                         style="@style/app_text_ingreen" />
 
@@ -45,7 +74,6 @@
                         android:id="@+id/et_item_no_scan"
                         android:layout_width="@dimen/layout_0dp"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="@dimen/layout_10dp"
                         android:layout_weight="1"
                         android:background="@null"
                         android:selectAllOnFocus="true"
@@ -63,9 +91,8 @@
                     android:layout_height="wrap_content">
 
                     <TextView
-                        android:layout_width="@dimen/layout_70dp"
+                        android:layout_width="@dimen/layout_60dp"
                         android:layout_height="wrap_content"
-                        android:gravity="center_vertical"
                         android:text="@string/item_name"
                         style="@style/app_text_ingreen" />
 
@@ -73,7 +100,6 @@
                         android:id="@+id/tv_item_name"
                         android:layout_width="@dimen/layout_0dp"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="@dimen/layout_10dp"
                         android:layout_weight="1"
                         android:background="@null"
                         style="@style/ser_text_ingreen"/>
@@ -84,5 +110,5 @@
         </LinearLayout>
     </ScrollView>
 
-    <include layout="@layout/inclu_commit"></include>
+    <include layout="@layout/inclu_commit"/>
 </RelativeLayout>

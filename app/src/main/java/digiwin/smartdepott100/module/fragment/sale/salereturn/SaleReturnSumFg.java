@@ -49,17 +49,17 @@ public class SaleReturnSumFg extends BaseFragment {
      * 单号
      */
     @BindView(R.id.tv_head_return_order_no)
-    TextView tv_head_return_order_no;
+    TextView tvHeadReturnOrderNo;
     /**
      * 日期
      */
     @BindView(R.id.tv_head_plan_date)
-    TextView tv_head_plan_date;
+    TextView tvHeadPlanDate;
     /**
      * 客户
      */
     @BindView(R.id.tv_head_custom)
-    TextView tv_head_custom;
+    TextView tvHeadCustom;
 
     @OnClick(R.id.commit)
     void commit() {
@@ -88,7 +88,7 @@ public class SaleReturnSumFg extends BaseFragment {
     FilterResultOrderBean orderData;
     @Override
     protected int bindLayoutId() {
-        return R.layout.activity_sale_return_sum;
+        return R.layout.fg_sale_return_sum;
     }
 
     @Override
@@ -100,9 +100,9 @@ public class SaleReturnSumFg extends BaseFragment {
         upDateFlag = false;
         Bundle bundle = getActivity().getIntent().getExtras();
         orderData = (FilterResultOrderBean) bundle.getSerializable(AddressContants.ORDERDATA);
-        tv_head_plan_date.setText(orderData.getCreate_date());
-        tv_head_return_order_no.setText(orderData.getDoc_no());
-        tv_head_custom.setText(orderData.getCustomer_name());
+        tvHeadPlanDate.setText(orderData.getCreate_date());
+        tvHeadReturnOrderNo.setText(orderData.getDoc_no());
+        tvHeadCustom.setText(orderData.getCustomer_name());
     }
 
     /**
@@ -110,16 +110,10 @@ public class SaleReturnSumFg extends BaseFragment {
      */
     public void upDateList() {
         try {
-            ClickItemPutBean clickItemPutData = new ClickItemPutBean();
-            clickItemPutData.setDoc_no(orderData.getDoc_no());
-            AccoutBean accoutBean = LoginLogic.getUserInfo();
-            if(null != accoutBean){
-                clickItemPutData.setWarehouse_in_no(accoutBean.getWare());
-            }
-            clickItemPutData.setReceipt_date(orderData.getCreate_date());
             showLoadingDialog();
             HashMap<String,String> map = new HashMap<>();
-            map.put(AddressContants.DOC_NO,clickItemPutData.getDoc_no());
+            map.put(AddressContants.DOC_NO,orderData.getDoc_no());
+            map.put(AddressContants.WAREHOUSE_NO,LoginLogic.getWare());
             logic.getSOLSumData(map, new CommonLogic.GetZSumListener() {
                 @Override
                 public void onSuccess(List<ListSumBean> list) {
@@ -207,7 +201,6 @@ public class SaleReturnSumFg extends BaseFragment {
         }
         showLoadingDialog();
         HashMap<String, String> map = new HashMap<>();
-        map.put(AddressContants.DOC_NO,orderData.getDoc_no());
         logic.commitSOLData(map, new CommonLogic.CommitListener() {
             @Override
             public void onSuccess(String msg) {
@@ -218,9 +211,9 @@ public class SaleReturnSumFg extends BaseFragment {
                     public void onCallback() {
                         pactivity.createNewModuleId(pactivity.module);
                         pactivity.mZXVp.setCurrentItem(0);
-                        tv_head_plan_date.setText("");
-                        tv_head_custom.setText("");
-                        tv_head_return_order_no.setText("");
+                        tvHeadPlanDate.setText("");
+                        tvHeadCustom.setText("");
+                        tvHeadReturnOrderNo.setText("");
                         pactivity.scanFg.initData();
                         pactivity.finish();
                     }

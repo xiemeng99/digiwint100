@@ -35,6 +35,7 @@ import digiwin.smartdepott100.module.bean.common.ScanBarcodeBackBean;
 import digiwin.smartdepott100.module.bean.common.ScanEmployeeBackBean;
 import digiwin.smartdepott100.module.bean.common.ScanLocatorBackBean;
 import digiwin.smartdepott100.module.bean.common.ScanReasonCodeBackBean;
+import digiwin.smartdepott100.module.bean.common.ScanTrayBackBean;
 import digiwin.smartdepott100.module.bean.common.SumShowBean;
 import digiwin.smartdepott100.module.bean.common.UnCompleteBean;
 import digiwin.smartdepott100.module.bean.produce.InBinningBean;
@@ -77,6 +78,7 @@ public class CommonLogic {
      * 该数组中模组无需判断库位是否存在于设置中的仓库
      */
     private String[] inStores = {ModuleCode.PUTINSTORE,
+            ModuleCode.SALERETURN,ModuleCode.MISCELLANEOUSISSUESIN
 
     };
 
@@ -122,7 +124,47 @@ public class CommonLogic {
             }
         }, null);
     }
+    /**
+     * 扫描托盘
+     */
+    public interface ScanTrayListener {
+        public void onSuccess(ScanTrayBackBean barcodeBackBean);
 
+        public void onFailed(String error);
+    }
+
+    /**
+     * 扫描托盘
+     */
+    public void scanTray(final Map<String, String> map, final ScanTrayListener listener) {
+        ThreadPoolManager.getInstance().executeTask(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    String createJson = JsonReqForERP.mapCreateJson(mModule, ReqTypeName.TRAY, mTimestamp, map);
+                    OkhttpRequest.getInstance(mContext).post(createJson, new IRequestCallbackImp() {
+                        @Override
+                        public void onResponse(String string) {
+                            String error = mContext.getString(R.string.unknow_error);
+                            if (null != string) {
+                                if (ReqTypeName.SUCCCESSCODE.equals(JsonResp.getCode(string))) {
+                                    ScanTrayBackBean barcodeBackBean = JsonResp.getParaData(string, ScanTrayBackBean.class);
+                                    listener.onSuccess(barcodeBackBean);
+                                    return;
+                                } else {
+                                    error = JsonResp.getDescription(string);
+                                }
+                            }
+                            listener.onFailed(error);
+                        }
+                    });
+                } catch (Exception e) {
+                    listener.onFailed(mContext.getString(R.string.unknow_error));
+                    LogUtils.e(TAG, "scanTray--->" + e);
+                }
+            }
+        }, null);
+    }
 
     /**
      * 扫描物料批次

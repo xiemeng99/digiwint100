@@ -14,6 +14,7 @@ import java.util.Map;
 
 import butterknife.BindView;
 import butterknife.OnClick;
+import digiwin.smartdepott100.login.loginlogic.LoginLogic;
 import digiwin.smartdepott100.module.logic.stock.PostAllocateLogic;
 import digiwin.library.dialog.OnDialogClickListener;
 import digiwin.library.dialog.OnDialogTwoListener;
@@ -122,9 +123,7 @@ public class PostAllocateSumFg extends BaseFragment {
         try {
             ClickItemPutBean clickItemPutData = new ClickItemPutBean();
             clickItemPutData.setDoc_no(orderData.getDoc_no());
-            clickItemPutData.setEmployee_no(orderData.getEmployee_no());
-            clickItemPutData.setDepartment_no(orderData.getDepartment_no());
-            clickItemPutData.setCreate_date(orderData.getCreate_date());
+            clickItemPutData.setWarehouse_no(LoginLogic.getWare());
             showLoadingDialog();
             commonLogic.getPostAllocateSum(clickItemPutData, new CommonLogic.GetZSumListener() {
                 @Override

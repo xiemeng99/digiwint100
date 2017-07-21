@@ -22,6 +22,7 @@ import butterknife.OnClick;
 import digiwin.smartdepott100.R;
 import digiwin.smartdepott100.core.appcontants.AddressContants;
 import digiwin.smartdepott100.core.base.BaseFragment;
+import digiwin.smartdepott100.login.loginlogic.LoginLogic;
 import digiwin.smartdepott100.module.activity.common.CommonDetailActivity;
 import digiwin.smartdepott100.module.activity.produce.suitpicking.SuitPickingActivity;
 import digiwin.smartdepott100.module.adapter.produce.SuitPickingSumAdapter;
@@ -131,6 +132,7 @@ public class SuitPickingSumFg extends BaseFragment {
             });
             return;
         }
+        mPutBean.setWarehouse_no(LoginLogic.getWare());
         showLoadingDialog();
         suitPickingLogic.getSuitPickingSum(mPutBean, new CommonLogic.GetZSumListener() {
             @Override

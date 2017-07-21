@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v7.widget.RecyclerView;
+import android.text.method.TextKeyListener;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.LinearLayout;
@@ -110,9 +111,11 @@ public class MoveStoreSumFg extends BaseFragment {
                 case LOCATORWHAT:
                     HashMap<String, String> locatorMap = new HashMap<>();
                     locatorMap.put(AddressContants.STORAGE_SPACES_BARCODE, String.valueOf(msg.obj));
+                    etScanMoveinlocator.setKeyListener(null);
                     moveStoreLogic.scanLocator(locatorMap, new CommonLogic.ScanLocatorListener() {
                         @Override
                         public void onSuccess(ScanLocatorBackBean locatorBackBean) {
+                            etScanMoveinlocator.setKeyListener(new TextKeyListener(TextKeyListener.Capitalize.CHARACTERS, true));
                             tvLocator.setText(locatorBackBean.getStorage_spaces_no());
                             tvStorage.setText(locatorBackBean.getWarehouse_name());
                             locatorFlag = true;
@@ -120,6 +123,7 @@ public class MoveStoreSumFg extends BaseFragment {
 
                         @Override
                         public void onFailed(String error) {
+                            etScanMoveinlocator.setKeyListener(new TextKeyListener(TextKeyListener.Capitalize.CHARACTERS, true));
                             showFailedDialog(error, new OnDialogClickListener() {
                                 @Override
                                 public void onCallback() {

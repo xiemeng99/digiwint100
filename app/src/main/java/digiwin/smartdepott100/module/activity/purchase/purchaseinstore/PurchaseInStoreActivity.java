@@ -21,7 +21,7 @@ import digiwin.smartdepott100.module.fragment.purchase.purchaseinstore.PurchaseI
 
 /**
  * @author 唐孟宇
- * @des 采购入库 扫描/汇总页面
+ * @des 扫码入库扫描/汇总页面
  */
 public class PurchaseInStoreActivity extends BaseFirstModuldeActivity {
     /**

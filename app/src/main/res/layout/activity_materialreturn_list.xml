@@ -17,7 +17,7 @@
         android:layout_marginBottom="@dimen/layout_6dp"
         android:background="@drawable/yellow_scandetail_bg"
         android:orientation="vertical"
-        android:padding="@dimen/layout_7dp">
+        android:padding="@dimen/layout_5dp">
 
         <LinearLayout
             android:id="@+id/ll_mateialreturn_list"
@@ -141,10 +141,7 @@
             android:id="@+id/btn_search_sure"
             android:layout_width="match_parent"
             android:layout_height="@dimen/layout_40dp"
-            android:layout_marginTop="@dimen/layout_10dp"
-            android:layout_marginBottom="@dimen/layout_10dp"
-            android:layout_marginLeft="@dimen/layout_10dp"
-            android:layout_marginRight="@dimen/layout_10dp"
+            android:layout_margin="@dimen/layout_10dp"
             android:background="@drawable/accordingmaterialtop_sharp"
             android:text="@string/label_sure"
             android:textColor="@color/WHITE"

@@ -6,6 +6,7 @@ import android.os.Handler;
 import android.os.Message;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.text.method.TextKeyListener;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -232,14 +233,14 @@ public class WorkOrderActivity extends BaseFirstModuldeActivity {
      * @param item_no
      */
     void updateList(String item_no){
-        ClickItemPutBean putBean = new ClickItemPutBean();
-        putBean.setDoc_no(item_no);
-        putBean.setWarehouse_no(LoginLogic.getUserInfo().getWare());
         Map<String,String> map=new HashMap<>();
-        map= ObjectAndMapUtils.getValueMap(putBean);
+        map.put(AddressContants.ITEM_NO,item_no);
+        map.put(AddressContants.WAREHOUSE_NO,LoginLogic.getWare());
+        et_job_number_scan.setKeyListener(null);
         commonLogic.scanCode(map, new WorkOrderlLogic.ScanCodeListener() {
             @Override
             public void onSuccess(final List<ListSumBean> list) {
+                et_job_number_scan.setKeyListener(new TextKeyListener(TextKeyListener.Capitalize.CHARACTERS, true));
                 if (list.size() > 0) {
                     mTv_item_name.setText(list.get(0).getItem_name());
                 }
@@ -261,6 +262,7 @@ public class WorkOrderActivity extends BaseFirstModuldeActivity {
 
             @Override
             public void onFailed(String error) {
+                et_job_number_scan.setKeyListener(new TextKeyListener(TextKeyListener.Capitalize.CHARACTERS, true));
                 dismissLoadingDialog();
                 showFailedDialog(error, new OnDialogClickListener() {
                     @Override

@@ -38,8 +38,8 @@ public class PickUpShipmentSumAdapter extends BaseRecyclerAdapter<ListSumBean> {
         holder.setText(R.id.tv_item_name, item.getItem_name());
         holder.setText(R.id.tv_item_format, item.getItem_spec());
         holder.setText(R.id.tv_material_return, StringUtils.deleteZero(item.getApply_qty()));
-        holder.setText(R.id.tv_material_return_big, StringUtils.deleteZero(item.getStock_qty()));
         holder.setText(R.id.tv_feeding_amount, StringUtils.deleteZero(item.getScan_sumqty()));
+        holder.setText(R.id.tv_material_return_big, StringUtils.deleteZero(item.getStock_qty()));
 
         if (numb2 == 0) {
             holder.setBackground(R.id.item_ll,R.drawable.red_scandetail_bg);

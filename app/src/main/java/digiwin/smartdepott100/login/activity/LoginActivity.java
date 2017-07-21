@@ -2,7 +2,9 @@ package digiwin.smartdepott100.login.activity;
 
 
 import android.database.sqlite.SQLiteDatabase;
-import android.graphics.drawable.AnimationDrawable;
+import android.graphics.Color;
+import android.media.MediaPlayer;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.CheckBox;
@@ -27,17 +29,17 @@ import digiwin.library.utils.AlertDialogUtils;
 import digiwin.library.utils.LogUtils;
 import digiwin.library.utils.StringUtils;
 import digiwin.library.utils.TelephonyUtils;
-import digiwin.pulltorefreshlibrary.recyclerview.RecyclerImageView;
 import digiwin.smartdepott100.R;
 import digiwin.smartdepott100.core.appcontants.AddressContants;
 import digiwin.smartdepott100.core.appcontants.ModuleCode;
 import digiwin.smartdepott100.core.base.BaseActivity;
 import digiwin.smartdepott100.core.coreutil.MD5Utils;
 import digiwin.smartdepott100.core.coreutil.PermissionUtils;
+import digiwin.smartdepott100.core.customview.CustomVideoView;
 import digiwin.smartdepott100.core.jpush.JPushManager;
 import digiwin.smartdepott100.core.printer.WiFiPrintManager;
-import digiwin.smartdepott100.login.activity.entIdcom.SiteDialog;
 import digiwin.smartdepott100.login.activity.entIdcom.EntIdDialog;
+import digiwin.smartdepott100.login.activity.entIdcom.SiteDialog;
 import digiwin.smartdepott100.login.activity.setting_dialog.SettingDialog;
 import digiwin.smartdepott100.login.bean.AccoutBean;
 import digiwin.smartdepott100.login.bean.AppVersionBean;
@@ -55,8 +57,10 @@ public class LoginActivity extends BaseActivity {
     /**
      * 设置背景动画
      */
-    @BindView(R.id.iv_login_bg)
-    RecyclerImageView iv_login_bg;
+//    @BindView(R.id.iv_login_bg)
+//    RecyclerImageView iv_login_bg;
+
+
     /**
      * 系统设置
      */
@@ -96,6 +100,8 @@ public class LoginActivity extends BaseActivity {
     ImageView ivEntid;
     @BindView(R.id.iv_site)
     ImageView ivSite;
+    @BindView(R.id.videoview)
+    CustomVideoView videoView;
 
     @OnClick(R.id.et_login_user)
     void loginUserColorChange() {
@@ -121,8 +127,8 @@ public class LoginActivity extends BaseActivity {
      */
     @OnClick(R.id.rl_entid)
     void showEntId() {
-        if (StringUtils.isBlank(et_login_user.getText().toString())||
-                StringUtils.isBlank(et_login_lock.getText().toString())){
+        if (StringUtils.isBlank(et_login_user.getText().toString()) ||
+                StringUtils.isBlank(et_login_lock.getText().toString())) {
             showFailedDialog(R.string.username_pwd_not_null);
             return;
         }
@@ -136,8 +142,8 @@ public class LoginActivity extends BaseActivity {
      */
     @OnClick(R.id.rl_site)
     void showSite() {
-        if (StringUtils.isBlank(et_login_user.getText().toString())||
-                StringUtils.isBlank(et_login_lock.getText().toString())  ){
+        if (StringUtils.isBlank(et_login_user.getText().toString()) ||
+                StringUtils.isBlank(et_login_lock.getText().toString())) {
             showFailedDialog(R.string.username_pwd_not_null);
             return;
         }
@@ -149,7 +155,7 @@ public class LoginActivity extends BaseActivity {
     /**
      * 背景动画
      */
-    private AnimationDrawable animationDrawable;
+//    private AnimationDrawable animationDrawable;
 
     /**
      * LoginActivity是否是结束状态,开机启动用到
@@ -214,12 +220,13 @@ public class LoginActivity extends BaseActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        animationDrawable = (AnimationDrawable) iv_login_bg.getBackground();
-        animationDrawable.start();
+//        animationDrawable = (AnimationDrawable) iv_login_bg.getBackground();
+//        animationDrawable.start();
     }
 
     @Override
     protected void doBusiness() {
+        initView();
         PermissionUtils.verifyStoragePermissions(this);
         final WiFiPrintManager wiFiPrintManager = WiFiPrintManager.getManager();
         wiFiPrintManager.openWiFi("", 0, new WiFiPrintManager.OpenWiFiPrintListener() {
@@ -240,6 +247,7 @@ public class LoginActivity extends BaseActivity {
         getUserInfo();
         updateEntIdSite();
         getVersion();
+
     }
 
 
@@ -252,7 +260,7 @@ public class LoginActivity extends BaseActivity {
             public void entIdCallBack(String chooseEntShow, String chooseEntIdno) {
                 tv_entid.setText(chooseEntShow);
                 entId = chooseEntIdno;
-                getSite(entId,true);
+                getSite(entId, true);
             }
         });
         SiteDialog.setCallBack(new SiteDialog.SiteCallBack() {
@@ -260,7 +268,7 @@ public class LoginActivity extends BaseActivity {
             public void siteCallBack(String chooseSiteShow, String chooseSiteno) {
                 tvSite.setText(chooseSiteShow);
                 site = chooseSiteno;
-                LogUtils.i(TAG,site+"site--"+site);
+                LogUtils.i(TAG, site + "site--" + site);
             }
         });
     }
@@ -317,36 +325,36 @@ public class LoginActivity extends BaseActivity {
                     dismissLoadingDialog();
                     matchVersion(versionBean);
                 } else {
-                //传入权限
-                Bundle bundle = new Bundle();
-                bundle.putString("access", accoutBean.getAccess());
-                accoutBean.setPassword(et_login_lock.getText().toString());
-                if (cb_remeber_password.isChecked()) {
-                    accoutBean.setIsRemeberPassWord("Y");
-                } else {
-                    accoutBean.setIsRemeberPassWord("N");
-                }
-                List<String> split = StringUtils.split(accoutBean.getWare());
-                ArrayList<StorageBean> storageList = new ArrayList<>();
-                for (int i = 0; i < split.size(); i++) {
-                    StorageBean storageBean = new StorageBean();
-                    storageBean.setWarehouse_no(split.get(i));
-                    storageList.add(storageBean);
-                }
-                if (storageList.size() > 0) {
-                    accoutBean.setWare(storageList.get(0).getWarehouse_no());
-                }
-                accoutBean.setEnterpriseShow(tv_entid.getText().toString());
-                accoutBean.setSiteShow(tvSite.getText().toString());
-                SQLiteDatabase db = Connector.getDatabase();
-                DataSupport.deleteAll(StorageBean.class);
-                DataSupport.deleteAll(AccoutBean.class);
-                DataSupport.saveAll(storageList);
-                accoutBean.save();
-                ActivityManagerUtils.startActivityForBundleDataFinish(activity, MainActivity.class, bundle);
-                JPushManager.login(TelephonyUtils.getDeviceId(activity), TelephonyUtils.getDeviceId(activity));
+                    //传入权限
+                    Bundle bundle = new Bundle();
+                    bundle.putString("access", accoutBean.getAccess());
+                    accoutBean.setPassword(et_login_lock.getText().toString());
+                    if (cb_remeber_password.isChecked()) {
+                        accoutBean.setIsRemeberPassWord("Y");
+                    } else {
+                        accoutBean.setIsRemeberPassWord("N");
+                    }
+                    List<String> split = StringUtils.split(accoutBean.getWare());
+                    ArrayList<StorageBean> storageList = new ArrayList<>();
+                    for (int i = 0; i < split.size(); i++) {
+                        StorageBean storageBean = new StorageBean();
+                        storageBean.setWarehouse_no(split.get(i));
+                        storageList.add(storageBean);
+                    }
+                    if (storageList.size() > 0) {
+                        accoutBean.setWare(storageList.get(0).getWarehouse_no());
+                    }
+                    accoutBean.setEnterpriseShow(tv_entid.getText().toString());
+                    accoutBean.setSiteShow(tvSite.getText().toString());
+                    SQLiteDatabase db = Connector.getDatabase();
+                    DataSupport.deleteAll(StorageBean.class);
+                    DataSupport.deleteAll(AccoutBean.class);
+                    DataSupport.saveAll(storageList);
+                    accoutBean.save();
+                    ActivityManagerUtils.startActivityForBundleDataFinish(activity, MainActivity.class, bundle);
+                    JPushManager.login(TelephonyUtils.getDeviceId(activity), TelephonyUtils.getDeviceId(activity));
 //                    dismissLoadingDialog();
-            }
+                }
             }
 
             @Override
@@ -401,8 +409,8 @@ public class LoginActivity extends BaseActivity {
                 changeColor(1);
             }
             if (!hasFocus && !StringUtils.isBlank(userName)) {
-                AddressContants.ACCTFIRSTLOGIN=  userName;
-                getEntId(userName,true);
+                AddressContants.ACCTFIRSTLOGIN = userName;
+                getEntId(userName, true);
             }
         }
     };
@@ -418,11 +426,11 @@ public class LoginActivity extends BaseActivity {
             public void onSuccess(List<EntSiteBean> plants) {
                 try {
                     mEntIds = plants;
-                    if (flag&&mEntIds.size() > 0) {
+                    if (flag && mEntIds.size() > 0) {
                         tv_entid.setText(mEntIds.get(0).getEnterprise_show());
                         entId = mEntIds.get(0).getEnterprise_no();
                     }
-                    getSite(entId,flag);
+                    getSite(entId, flag);
                 } catch (Exception e) {
                     LogUtils.e(TAG, "getEntId:" + e);
                 }
@@ -441,7 +449,8 @@ public class LoginActivity extends BaseActivity {
 
     /**
      * 获取据点
-     *flag----true刷新----false不刷新
+     * flag----true刷新----false不刷新
+     *
      * @param chooseEntId
      */
     private void getSite(String chooseEntId, final boolean flag) {
@@ -450,7 +459,7 @@ public class LoginActivity extends BaseActivity {
             public void onSuccess(List<EntSiteBean> plants) {
                 try {
                     mSites = plants;
-                    if (flag&&mSites.size() > 0)  {
+                    if (flag && mSites.size() > 0) {
                         tvSite.setText(mSites.get(0).getSite_show());
                         site = mSites.get(0).getSite_no();
                     }
@@ -504,7 +513,7 @@ public class LoginActivity extends BaseActivity {
             tv_entid.setText(accoutBean.getEnterpriseShow());
             tvSite.setText(accoutBean.getSiteShow());
             et_login_user.requestFocus();
-            getEntId(accoutBean.getAccount(),false);
+            getEntId(accoutBean.getAccount(), false);
         }
     }
 
@@ -561,6 +570,50 @@ public class LoginActivity extends BaseActivity {
         }
 
 
+    }
+
+
+    private void initView() {
+        //设置播放加载路径
+        videoView.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
+            @Override
+            public void onPrepared(MediaPlayer mp) {
+                mp.setVolume(0f,0f);
+                videoView.start();
+                mp.setOnInfoListener(new MediaPlayer.OnInfoListener() {
+                    @Override
+                    public boolean onInfo(MediaPlayer mp, int what, int extra) {
+                        if (what == MediaPlayer.MEDIA_INFO_VIDEO_RENDERING_START) {
+                            videoView.setBackgroundColor(Color.TRANSPARENT);
+                        }
+                        return true;
+                    }
+                });
+            }
+        });
+        videoView.setVideoURI(Uri.parse("android.resource://" + getPackageName() + "/" + R.raw.test1));
+        //循环播放
+        videoView.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+            @Override
+            public void onCompletion(MediaPlayer mediaPlayer) {
+                videoView.start();
+            }
+        });
+
+    }
+
+    //返回重启加载
+    @Override
+    protected void onRestart() {
+        initView();
+        super.onRestart();
+    }
+
+    //防止锁屏或者切出的时候，音乐在播放
+    @Override
+    protected void onStop() {
+        videoView.stopPlayback();
+        super.onStop();
     }
 
 }

@@ -1,6 +1,7 @@
 package digiwin.smartdepott100.module.fragment.stock.storequery;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -9,6 +10,8 @@ import org.greenrobot.eventbus.ThreadMode;
 import java.util.List;
 
 import butterknife.BindView;
+import digiwin.library.json.JsonResp;
+import digiwin.library.utils.LogUtils;
 import digiwin.smartdepott100.R;
 import digiwin.smartdepott100.core.base.BaseFragment;
 import digiwin.smartdepott100.module.activity.stock.storequery.StoreQueryActivity;
@@ -33,6 +36,7 @@ public class StoreQueryBarcodeFg extends BaseFragment {
     protected void doBusiness() {
         ryList.setLayoutManager(new LinearLayoutManager(activity));
         pactivity = (StoreQueryActivity) activity;
+        LogUtils.e(TAG,"doBusiness");
     }
 
     /**
@@ -40,8 +44,13 @@ public class StoreQueryBarcodeFg extends BaseFragment {
      * @param sumBeen
      */
     public void onSubscribe(List<ListSumBean> sumBeen) {
-        StoreQueryBacodeAdapter adapter = new StoreQueryBacodeAdapter(activity, sumBeen);
-        ryList.setAdapter(adapter);
+        try {
+            StoreQueryBacodeAdapter adapter = new StoreQueryBacodeAdapter(pactivity, sumBeen);
+            ryList.setAdapter(adapter);
+        }catch (Exception e){
+            LogUtils.e(TAG,"onSubscribe"+e);
+        }
+
     }
 
 }

@@ -40,16 +40,17 @@ public abstract class BaseTitleHActivity extends BaseActivity {
      */
     @BindView(R.id.iv_scan)
     public ImageView ivScan;
+
     @OnClick(R.id.iv_scan)
-    public void cameraScan(){
+    public void cameraScan() {
         MipcaActivityCapture.startCameraActivity(activity, new GetBarCodeListener() {
             @Override
             public void onSuccess(String msg) {
                 View focusView = ViewUtils.getFocusView(activity);
-                if (focusView instanceof EditText){
-                    EditText et= (EditText) focusView;
+                if (focusView instanceof EditText) {
+                    EditText et = (EditText) focusView;
                     KeyListener listener = et.getKeyListener();
-                    if (null!=listener){
+                    if (null != listener) {
                         et.setText(msg);
                         et.setSelection(msg.length());
                     }
@@ -60,18 +61,19 @@ public abstract class BaseTitleHActivity extends BaseActivity {
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
-        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
         super.onCreate(savedInstanceState);
+        // 竖屏
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
     }
 
     @OnClick(R.id.iv_back)
     public void goBack() {
-       onBackPressed();
+        onBackPressed();
     }
 
     @OnClick(R.id.tv_title_name)
     public void goBack2() {
-       onBackPressed();
+        onBackPressed();
     }
 
     @OnClick(R.id.iv_title_setting)
@@ -84,7 +86,7 @@ public abstract class BaseTitleHActivity extends BaseActivity {
         toolbar().setBackgroundResource(R.color.toolBar_color);
         setSupportActionBar(toolbar());
         getSupportActionBar().setDisplayShowTitleEnabled(false);
-            ivScan.setVisibility(View.GONE);
+        ivScan.setVisibility(View.VISIBLE);
     }
 
     /**

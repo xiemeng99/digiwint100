@@ -8,8 +8,6 @@
 
     <LinearLayout
         style="@style/ry_sum_itemstyle"
-        android:paddingLeft="@dimen/layout_0dp"
-        android:paddingRight="@dimen/layout_2dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
@@ -37,16 +35,12 @@
     </LinearLayout>
 
 
-    <View
-        android:id="@+id/line_2"
-        style="@style/ry_line_style" />
+    <View style="@style/ry_line_style" />
 
     <LinearLayout
         style="@style/ry_sum_itemstyle"
-        android:paddingLeft="@dimen/layout_0dp"
-        android:paddingRight="@dimen/layout_0dp"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:orientation="horizontal">
 
         <TextView
@@ -64,15 +58,12 @@
             android:textSize="@dimen/textSize_14sp" />
     </LinearLayout>
 
-    <View
-        android:id="@+id/line_3"
-        style="@style/ry_line_style" />
+    <View style="@style/ry_line_style" />
+
     <LinearLayout
         style="@style/ry_sum_itemstyle"
-        android:paddingLeft="@dimen/layout_0dp"
-        android:paddingRight="@dimen/layout_0dp"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:orientation="horizontal">
 
         <TextView
@@ -90,14 +81,10 @@
             android:textSize="@dimen/textSize_14sp" />
     </LinearLayout>
 
-    <View
-        android:id="@+id/line_4"
-        style="@style/ry_line_style" />
+    <View style="@style/ry_line_style" />
 
     <LinearLayout
         style="@style/ry_sum_itemstyle"
-        android:paddingLeft="@dimen/layout_0dp"
-        android:paddingRight="@dimen/layout_0dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
@@ -117,23 +104,21 @@
             android:layout_weight="1" />
 
         <TextView
-            android:id="@+id/tv_stock_balance_string"
+            android:id="@+id/tv_match_number_string"
             style="@style/app_text_inwhite"
             android:layout_width="@dimen/layout_60dp"
-            android:layout_height="wrap_content"
-            android:text="@string/stock_balance" />
+            android:layout_height="match_parent"
+            android:text="@string/match_number" />
 
         <TextView
-            android:id="@+id/tv_stock_qty"
+            android:id="@+id/tv_match_number"
             style="@style/ry_ser_text_inwhite"
             android:layout_width="@dimen/layout_0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1" />
     </LinearLayout>
 
-    <View
-        android:id="@+id/line_5"
-        style="@style/ry_line_style" />
+    <View style="@style/ry_line_style" />
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -142,24 +127,25 @@
 
         <LinearLayout
             style="@style/ry_sum_itemstyle"
-            android:paddingLeft="@dimen/layout_0dp"
-            android:paddingRight="@dimen/layout_0dp"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:paddingLeft="@dimen/layout_0dp"
+            android:paddingRight="@dimen/layout_0dp">
 
             <TextView
-                android:id="@+id/tv_match_number_string"
+                android:id="@+id/tv_stock_balance_string"
                 style="@style/app_text_inwhite"
                 android:layout_width="@dimen/layout_60dp"
-                android:layout_height="match_parent"
-                android:text="@string/match_number" />
+                android:layout_height="wrap_content"
+                android:text="@string/stock_balance" />
 
             <TextView
-                android:id="@+id/tv_match_number"
+                android:id="@+id/tv_stock_qty"
                 style="@style/ry_ser_text_inwhite"
                 android:layout_width="@dimen/layout_0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1" />
+
 
             <TextView
                 android:id="@+id/tv_line_store_string"
@@ -182,7 +168,7 @@
             android:layout_height="@dimen/layout_28dp"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
-            android:src="@mipmap/detail001"
-            android:minWidth="0dp"/>
+            android:minWidth="0dp"
+            android:src="@mipmap/detail001" />
     </RelativeLayout>
 </LinearLayout>

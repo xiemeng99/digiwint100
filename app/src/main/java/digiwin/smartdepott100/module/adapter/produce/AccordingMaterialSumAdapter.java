@@ -36,7 +36,6 @@ public class AccordingMaterialSumAdapter extends BaseRecyclerAdapter<ListSumBean
         final float numb1 = StringUtils.string2Float(item.getShortage_qty());
         final float numb2 = StringUtils.string2Float(item.getScan_sumqty());
         final float numb3 = StringUtils.string2Float(item.getStock_qty());
-
         holder.setText(R.id.tv_item_no, item.getLow_order_item_no());
         holder.setText(R.id.tv_unit,item.getUnit_no());
         holder.setText(R.id.tv_item_name, item.getLow_order_item_name());

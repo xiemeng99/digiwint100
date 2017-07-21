@@ -98,9 +98,7 @@ public class ProductionLeaderSumFg extends BaseFragment {
             ClickItemPutBean putBean = new ClickItemPutBean();
             putBean.setDoc_no(localData.getDoc_no());
             putBean.setWarehouse_no(LoginLogic.getWare());
-
             commonLogic = ProductionLeaderLogic.getInstance(pactivity, pactivity.module, pactivity.mTimestamp.toString());
-
             showLoadingDialog();
             commonLogic.getPLSumData(putBean, new ProductionLeaderLogic.GetZSumListener() {
                 @Override
@@ -161,7 +159,6 @@ public class ProductionLeaderSumFg extends BaseFragment {
                 bundle.putString(CommonDetailActivity.MODULECODE, pactivity.module);
                 bundle.putSerializable(CommonDetailActivity.ONESUM, sumShowBean);
                 bundle.putSerializable(CommonDetailActivity.DETAIL, (Serializable) detailShowBeen);
-//                bundle.putSerializable(CommonDetailActivity.A,);
                 dismissLoadingDialog();
                 ActivityManagerUtils.startActivityBundleForResult(activity, CommonDetailActivity.class, bundle, pactivity.DETAILCODE);
             }
@@ -179,7 +176,6 @@ public class ProductionLeaderSumFg extends BaseFragment {
             showFailedDialog(R.string.nodate);
             return;
         }
-
         showCommitSureDialog(new OnDialogTwoListener() {
             @Override
             public void onCallback1() {

@@ -54,11 +54,11 @@ import digiwin.smartdepott100.module.logic.produce.SuitPickingHalfLogic;
  */
 
 public class SuitPickingHalfScanFg extends BaseFragment {
-    @BindViews({R.id.et_scan_locator, R.id.et_scan_barocde, R.id.et_input_num})
+    @BindViews({R.id.et_tray,R.id.et_scan_locator, R.id.et_scan_barocde, R.id.et_input_num})
     List<EditText> editTexts;
-    @BindViews({R.id.ll_scan_barcode, R.id.ll_scan_locator, R.id.ll_input_num})
+    @BindViews({R.id.ll_tray,R.id.ll_scan_barcode, R.id.ll_scan_locator, R.id.ll_input_num})
     List<View> views;
-    @BindViews({R.id.tv_barcode, R.id.tv_locator, R.id.tv_number})
+    @BindViews({R.id.tv_tray,R.id.tv_barcode, R.id.tv_locator, R.id.tv_number})
     List<TextView> textViews;
 
     @BindView(R.id.tv_locator)
@@ -85,6 +85,20 @@ public class SuitPickingHalfScanFg extends BaseFragment {
     LinearLayout llZxInput;
     @BindView(R.id.ry_list)
     RecyclerView ryList;
+    @BindView(R.id.tv_tray)
+    TextView tvTray;
+    @BindView(R.id.et_tray)
+    EditText etTray;
+    @BindView(R.id.ll_tray)
+    LinearLayout llTray;
+    @BindView(R.id.line_tray)
+    View lineTray;
+    @OnFocusChange(R.id.et_tray)
+    void trayFocusChanage() {
+        ModuleUtils.viewChange(llTray, views);
+        ModuleUtils.etChange(activity, etTray, editTexts);
+        ModuleUtils.tvChange(activity, tvTray, textViews);
+    }
 
     @OnCheckedChanged(R.id.cb_locatorlock)
     void isLock(boolean checked) {
@@ -241,13 +255,13 @@ public class SuitPickingHalfScanFg extends BaseFragment {
         public boolean handleMessage(Message msg) {
             switch (msg.what) {
                 case PICKINGWHAT:
-                    //TODO:fifo待完善
                     HashMap<String, String> map = new HashMap<String, String>();
                     map.put(AddressContants.DOC_NO, String.valueOf(msg.obj));
                     map.put(AddressContants.WAREHOUSE_NO, ware);
                     ClickItemPutBean itemPutBean = new ClickItemPutBean();
-                    itemPutBean.setNotice_no(issuingNo);
-                    itemPutBean.setWarehouse_no(ware);
+                    itemPutBean.setIssuing_no(issuingNo);
+                    itemPutBean.setWarehouse_in_no(ware);
+                    itemPutBean.setDoc_no(issuingNo);
                     EventBus.getDefault().post(itemPutBean);
                     suitPickingHalfLogic.docNoFIFO(map, new CommonLogic.PostMaterialFIFOListener() {
                         @Override
@@ -279,9 +293,11 @@ public class SuitPickingHalfScanFg extends BaseFragment {
                     barcodeMap.put(AddressContants.WAREHOUSE_NO, ware);
                     barcodeMap.put(AddressContants.BARCODE_NO, String.valueOf(msg.obj));
                     barcodeMap.put(AddressContants.STORAGE_SPACES_NO,saveBean.getStorage_spaces_out_no());
+                    etScanBarocde.setKeyListener(null);
                     suitPickingHalfLogic.scanBarcode(barcodeMap, new CommonLogic.ScanBarcodeListener() {
                         @Override
                         public void onSuccess(ScanBarcodeBackBean barcodeBackBean) {
+                            etScanBarocde.setKeyListener(new TextKeyListener(TextKeyListener.Capitalize.CHARACTERS, true));
                             etInputNum.setText(StringUtils.deleteZero(barcodeBackBean.getBarcode_qty()));
                             barcodeFlag = true;
                             saveBean.setAvailable_in_qty(barcodeBackBean.getAvailable_in_qty());
@@ -300,6 +316,7 @@ public class SuitPickingHalfScanFg extends BaseFragment {
 
                         @Override
                         public void onFailed(String error) {
+                            etScanBarocde.setKeyListener(new TextKeyListener(TextKeyListener.Capitalize.CHARACTERS, true));
                             barcodeFlag = false;
                             showFailedDialog(error, new OnDialogClickListener() {
                                 @Override
@@ -313,9 +330,11 @@ public class SuitPickingHalfScanFg extends BaseFragment {
                 case LOCATORWHAT:
                     HashMap<String, String> locatorMap = new HashMap<>();
                     locatorMap.put(AddressContants.STORAGE_SPACES_BARCODE, String.valueOf(msg.obj));
+                    etScanLocator.setKeyListener(null);
                     suitPickingHalfLogic.scanLocator(locatorMap, new CommonLogic.ScanLocatorListener() {
                         @Override
                         public void onSuccess(ScanLocatorBackBean locatorBackBean) {
+                            etScanLocator.setKeyListener(new TextKeyListener(TextKeyListener.Capitalize.CHARACTERS, true));
                             locatorFlag = true;
                             saveBean.setStorage_spaces_out_no(locatorBackBean.getStorage_spaces_no());
                             saveBean.setWarehouse_out_no(locatorBackBean.getWarehouse_no());
@@ -328,6 +347,7 @@ public class SuitPickingHalfScanFg extends BaseFragment {
 
                         @Override
                         public void onFailed(String error) {
+                            etScanLocator.setKeyListener(new TextKeyListener(TextKeyListener.Capitalize.CHARACTERS, true));
                             showFailedDialog(error, new OnDialogClickListener() {
                                 @Override
                                 public void onCallback() {
@@ -402,6 +422,13 @@ public class SuitPickingHalfScanFg extends BaseFragment {
         suitPickingHalfLogic = SuitPickingHalfLogic.getInstance(context, pactivity.module, pactivity.mTimestamp.toString());
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(pactivity);
         ryList.setLayoutManager(linearLayoutManager);
+        if (CommonUtils.isUseTray()){
+            llTray.setVisibility(View.VISIBLE);
+            lineTray.setVisibility(View.VISIBLE);
+        }else {
+            llTray.setVisibility(View.GONE);
+            lineTray.setVisibility(View.GONE);
+        }
     }
 
     @Override

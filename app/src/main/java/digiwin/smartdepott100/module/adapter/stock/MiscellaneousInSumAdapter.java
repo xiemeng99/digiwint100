@@ -24,7 +24,7 @@ public class MiscellaneousInSumAdapter extends BaseRecyclerAdapter<ListSumBean> 
 
     @Override
     protected int getItemLayout(int viewType) {
-        return R.layout.ryitem_miscellaneous_sum;
+        return R.layout.ryitem_miscellaneous_in_sum;
     }
 
     @Override

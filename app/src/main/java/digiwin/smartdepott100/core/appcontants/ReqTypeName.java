@@ -44,6 +44,10 @@ public interface ReqTypeName {
      */
     static final String BARCODE = "als.barcode.no.get";
     /**
+     * 扫描托盘
+     */
+    static final String TRAY = "als.tray.no.get";
+    /**
      * 扫描库位
      */
     static final String STORAGE = "als.ware.storage.get";

@@ -271,7 +271,7 @@ public class MiscellaneousissuesOutListActivity extends BaseTitleActivity {
     @Override
     protected void initNavigationTitle() {
         super.initNavigationTitle();
-        mName.setText(getString(R.string.miscellaneous_issues_out_list));
+        mName.setText(getString(R.string.miscellaneous_issues_out_list)+getString(R.string.list));
         iv_title_setting.setVisibility(View.VISIBLE);
         iv_title_setting.setImageResource(R.drawable.search);
         ivScan.setVisibility(View.VISIBLE);

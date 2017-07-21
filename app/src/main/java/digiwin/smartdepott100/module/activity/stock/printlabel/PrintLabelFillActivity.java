@@ -261,7 +261,7 @@ public class PrintLabelFillActivity extends BaseTitleActivity {
 
     @Override
     public String moduleCode() {
-        module = ModuleCode.PRINTLABEL;
+        module = ModuleCode.LABLEPRINTING;
         return module;
     }
 
@@ -363,20 +363,21 @@ public class PrintLabelFillActivity extends BaseTitleActivity {
      */
     @OnClick(R.id.btn_print)
     void print(){
-        if(StringUtils.isBlank(et_resource_barcode.getText().toString())){
-            showFailedDialog(R.string.please_scan_barcode_first);
-            return;
-        }
-        if(StringUtils.isBlank(et_single_package_num.getText().toString())){
-            showFailedDialog(R.string.input_num);
-            return;
-        }
+//        if(StringUtils.isBlank(et_resource_barcode.getText().toString())){
+//            showFailedDialog(R.string.please_scan_barcode_first);
+//            return;
+//        }
+//        if(StringUtils.isBlank(et_single_package_num.getText().toString())){
+//            showFailedDialog(R.string.input_num);
+//            return;
+//        }
         boolean isOpen = BlueToothManager.getManager(activity).isOpen();
         if (!isOpen){
             ToSettingLogic.showToSetdialog(activity,R.string.title_set_bluttooth);
             return;
         }else {
-            BlueToothManager.getManager(activity).printMaterialCode(printBarcodeBean,StringUtils.parseInt(printBarcodeBean.getSum_qty()));
+//            BlueToothManager.getManager(activity).printMaterialCode(printBarcodeBean,StringUtils.parseInt(printBarcodeBean.getSum_qty()));
+            BlueToothManager.getManager(activity).printSmartLable(new PrintBarcodeBean(),10);
         }
         printBarcodeBean = new PrintBarcodeBean();
         initData();

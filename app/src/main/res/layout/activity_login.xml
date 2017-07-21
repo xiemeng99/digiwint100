@@ -1,31 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
+    android:background="@color/white_ff"
     android:layout_height="match_parent">
 
-    <digiwin.pulltorefreshlibrary.recyclerview.RecyclerImageView
-        android:id="@+id/iv_login_bg"
+    <!--<digiwin.pulltorefreshlibrary.recyclerview.RecyclerImageView-->
+        <!--android:id="@+id/iv_login_bg"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="match_parent"-->
+        <!--android:layout_alignParentStart="true"-->
+        <!--android:layout_alignParentTop="true"-->
+        <!--android:background="@drawable/login_bg"-->
+        <!--android:scaleType="fitXY" />-->
+    <digiwin.smartdepott100.core.customview.CustomVideoView
+        android:id="@+id/videoview"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:background="@drawable/login_bg"
-        android:scaleType="fitXY" />
+        android:layout_alignParentTop="true" />
 
-    <ImageView
-        android:id="@+id/iv_digiwin_logo"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="@dimen/layout_60dp"
-        android:src="@drawable/loginlogo2" />
-
+    <!--<ImageView-->
+        <!--android:id="@+id/iv_digiwin_logo"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_centerHorizontal="true"-->
+        <!--android:layout_marginTop="@dimen/layout_60dp"-->
+        <!--android:src="@drawable/loginlogo2" />-->
+    <!--android:layout_below="@+id/iv_digiwin_logo"-->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="140dp"
         android:orientation="vertical"
-        android:layout_below="@+id/iv_digiwin_logo"
         android:layout_alignParentStart="true">
 
         <RelativeLayout

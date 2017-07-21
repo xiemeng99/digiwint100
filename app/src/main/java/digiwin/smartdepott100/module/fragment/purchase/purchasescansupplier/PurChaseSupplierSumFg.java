@@ -116,7 +116,6 @@ public class PurChaseSupplierSumFg extends BaseFragment {
             ClickItemPutBean clickItemPutData = new ClickItemPutBean();
             clickItemPutData.setDoc_no(orderData.getDoc_no());
             //clickItemPutData.setWarehouse_no(LoginLogic.getWare());
-            clickItemPutData.setCreate_date(orderData.getCreate_date());
             showLoadingDialog();
             supplierLogic.getPGSSumData(clickItemPutData, new PurchaseGoodScanLogic.GetZSumListener() {
                 @Override

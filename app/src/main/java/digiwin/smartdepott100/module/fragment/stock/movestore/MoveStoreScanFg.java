@@ -40,11 +40,11 @@ import digiwin.smartdepott100.module.logic.common.CommonLogic;
  * @date 2017/3/23
  */
 public class MoveStoreScanFg extends BaseFragment {
-    @BindViews({R.id.et_scan_barocde, R.id.et_scan_moveoutlocator, R.id.et_input_num})
+    @BindViews({R.id.et_tray,R.id.et_scan_barocde, R.id.et_scan_moveoutlocator, R.id.et_input_num})
     List<EditText> editTexts;
-    @BindViews({R.id.ll_scan_barcode, R.id.ll_scan_outlocator, R.id.ll_input_num})
+    @BindViews({R.id.ll_tray,R.id.ll_scan_barcode, R.id.ll_scan_outlocator, R.id.ll_input_num})
     List<View> views;
-    @BindViews({R.id.tv_barcode, R.id.tv_moveoutlocator, R.id.tv_number})
+    @BindViews({R.id.tv_tray,R.id.tv_barcode, R.id.tv_moveoutlocator, R.id.tv_number})
     List<TextView> textViews;
 
     @BindView(R.id.tv_barcode)
@@ -78,7 +78,23 @@ public class MoveStoreScanFg extends BaseFragment {
      * 已扫描量
      */
     @BindView(R.id.tv_scaned_num)
-    TextView tv_scaned_num;
+    TextView tvScanedNum;
+
+    @BindView(R.id.tv_tray)
+    TextView tvTray;
+    @BindView(R.id.et_tray)
+    EditText etTray;
+    @BindView(R.id.ll_tray)
+    LinearLayout llTray;
+    @BindView(R.id.line_tray)
+    View lineTray;
+    @OnFocusChange(R.id.et_tray)
+    void trayFocusChanage() {
+        ModuleUtils.viewChange(llTray, views);
+        ModuleUtils.etChange(activity, etTray, editTexts);
+        ModuleUtils.tvChange(activity, tvTray, textViews);
+    }
+
 
     @OnFocusChange(R.id.et_scan_barocde)
     void barcodeFocusChanage() {
@@ -200,11 +216,13 @@ public class MoveStoreScanFg extends BaseFragment {
                     barcodeMap.put(AddressContants.BARCODE_NO, String.valueOf(msg.obj));
                     barcodeMap.put(AddressContants.STORAGE_SPACES_BARCODE, saveBean.getStorage_spaces_no());
                     barcodeMap.put(AddressContants.STORAGE_SPACES_NO,saveBean.getStorage_spaces_out_no());
+                    etScanBarocde.setKeyListener(null);
                     moveStoreLogic.scanBarcode(barcodeMap, new CommonLogic.ScanBarcodeListener() {
                         @Override
                         public void onSuccess(ScanBarcodeBackBean barcodeBackBean) {
+                            etScanBarocde.setKeyListener(new TextKeyListener(TextKeyListener.Capitalize.CHARACTERS, true));
                             etInputNum.setText(StringUtils.deleteZero(barcodeBackBean.getBarcode_qty()));
-                            tv_scaned_num.setText(barcodeBackBean.getScan_sumqty());
+                            tvScanedNum.setText(barcodeBackBean.getScan_sumqty());
                             barcodeFlag = true;
                             saveBean.setAvailable_in_qty(barcodeBackBean.getAvailable_in_qty());
                             saveBean.setBarcode_no(barcodeBackBean.getBarcode_no());
@@ -223,6 +241,7 @@ public class MoveStoreScanFg extends BaseFragment {
 
                         @Override
                         public void onFailed(String error) {
+                            etScanBarocde.setKeyListener(new TextKeyListener(TextKeyListener.Capitalize.CHARACTERS, true));
                             barcodeFlag = false;
                             showFailedDialog(error, new OnDialogClickListener() {
                                 @Override
@@ -236,9 +255,11 @@ public class MoveStoreScanFg extends BaseFragment {
                 case LOCATORWHAT:
                     HashMap<String, String> locatorMap = new HashMap<>();
                     locatorMap.put(AddressContants.STORAGE_SPACES_BARCODE, String.valueOf(msg.obj));
+                    etScanMoveOutlocator.setKeyListener(null);
                     moveStoreLogic.scanLocator(locatorMap, new CommonLogic.ScanLocatorListener() {
                         @Override
                         public void onSuccess(ScanLocatorBackBean locatorBackBean) {
+                            etScanMoveOutlocator.setKeyListener(new TextKeyListener(TextKeyListener.Capitalize.CHARACTERS, true));
                             locatorFlag = true;
                             saveBean.setStorage_spaces_out_no(locatorBackBean.getStorage_spaces_no());
                             saveBean.setWarehouse_out_no(locatorBackBean.getWarehouse_no());
@@ -252,6 +273,7 @@ public class MoveStoreScanFg extends BaseFragment {
 
                         @Override
                         public void onFailed(String error) {
+                            etScanMoveOutlocator.setKeyListener(new TextKeyListener(TextKeyListener.Capitalize.CHARACTERS, true));
                             showFailedDialog(error, new OnDialogClickListener() {
                                 @Override
                                 public void onCallback() {
@@ -275,6 +297,13 @@ public class MoveStoreScanFg extends BaseFragment {
     @Override
     protected void doBusiness() {
         pactivity = (MoveStoreActivity) activity;
+        if (CommonUtils.isUseTray()){
+            llTray.setVisibility(View.VISIBLE);
+            lineTray.setVisibility(View.VISIBLE);
+        }else {
+            llTray.setVisibility(View.GONE);
+            lineTray.setVisibility(View.GONE);
+        }
         initData();
     }
 
@@ -283,7 +312,7 @@ public class MoveStoreScanFg extends BaseFragment {
      * 保存完成之后的操作
      */
     private void clear() {
-        tv_scaned_num.setText(saveBean.getScan_sumqty());
+        tvScanedNum.setText(saveBean.getScan_sumqty());
         etInputNum.setText("");
         barcodeFlag = false;
         barcodeShow = "";
@@ -314,7 +343,7 @@ public class MoveStoreScanFg extends BaseFragment {
      * 初始化一些变量
      */
     public  void initData() {
-        tv_scaned_num.setText("");
+        tvScanedNum.setText("");
         barcodeFlag = false;
         locatorFlag = false;
         saveBean = new SaveBean();

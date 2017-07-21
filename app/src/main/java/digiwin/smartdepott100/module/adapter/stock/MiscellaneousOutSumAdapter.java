@@ -24,7 +24,7 @@ public class MiscellaneousOutSumAdapter extends BaseRecyclerAdapter<ListSumBean>
 
     @Override
     protected int getItemLayout(int viewType) {
-        return R.layout.ryitem_miscellaneous_sum;
+        return R.layout.ryitem_miscellaneous_out_sum;
     }
 
     @Override
@@ -37,6 +37,7 @@ public class MiscellaneousOutSumAdapter extends BaseRecyclerAdapter<ListSumBean>
         holder.setText(R.id.tv_item_model,item.getItem_spec());
         holder.setText(R.id.tv_match_number, StringUtils.deleteZero(String.valueOf(numb2)));
         holder.setText(R.id.tv_in_storage_number, StringUtils.deleteZero(String.valueOf(numb1)));
+        holder.setText(R.id.tv_material_return_big,StringUtils.deleteZero(item.getStock_qty()));
         if (numb2 == 0) {
             holder.setBackground(R.id.item_ll,R.drawable.red_scandetail_bg);
             holder.setTextColor(R.id.tv_item_no, mContext.getResources().getColor(R.color.Base_color));
@@ -45,6 +46,7 @@ public class MiscellaneousOutSumAdapter extends BaseRecyclerAdapter<ListSumBean>
             holder.setTextColor(R.id.tv_item_model, mContext.getResources().getColor(R.color.Base_color));
             holder.setTextColor(R.id.tv_match_number, mContext.getResources().getColor(R.color.Base_color));
             holder.setTextColor(R.id.tv_in_storage_number, mContext.getResources().getColor(R.color.Base_color));
+            holder.setTextColor(R.id.tv_material_return_big, mContext.getResources().getColor(R.color.Base_color));
         } else if (numb1 > numb2) {
             holder.setBackground(R.id.item_ll,R.drawable.yellow_scandetail_bg);
             holder.setTextColor(R.id.tv_item_no,mContext.getResources().getColor( R.color.textfous_yellow));
@@ -53,6 +55,7 @@ public class MiscellaneousOutSumAdapter extends BaseRecyclerAdapter<ListSumBean>
             holder.setTextColor(R.id.tv_item_model, mContext.getResources().getColor(R.color.textfous_yellow));
             holder.setTextColor(R.id.tv_match_number, mContext.getResources().getColor(R.color.textfous_yellow));
             holder.setTextColor(R.id.tv_in_storage_number, mContext.getResources().getColor(R.color.textfous_yellow));
+            holder.setTextColor(R.id.tv_material_return_big, mContext.getResources().getColor(R.color.textfous_yellow));
         } else if (numb1 ==numb2) {
             holder.setBackground(R.id.item_ll,R.drawable.green_scandetail_bg);
             holder.setTextColor(R.id.tv_item_no, mContext.getResources().getColor(R.color.green1b));
@@ -61,6 +64,7 @@ public class MiscellaneousOutSumAdapter extends BaseRecyclerAdapter<ListSumBean>
             holder.setTextColor(R.id.tv_item_model, mContext.getResources().getColor(R.color.green1b));
             holder.setTextColor(R.id.tv_match_number, mContext.getResources().getColor(R.color.green1b));
             holder.setTextColor(R.id.tv_in_storage_number, mContext.getResources().getColor(R.color.green1b));
+            holder.setTextColor(R.id.tv_material_return_big, mContext.getResources().getColor(R.color.green1b));
         }
     }
 }

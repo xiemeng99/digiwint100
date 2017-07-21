@@ -81,11 +81,11 @@ public class StoreAllotScanFg extends BaseFragment {
     @BindView(R.id.tv_scaned_num)
     TextView tv_scaned_num;
 
-    @BindViews({R.id.et_scan_barocde, R.id.et_scan_inlocator, R.id.et_scan_outlocator, R.id.et_input_num})
+    @BindViews({R.id.et_tray,R.id.et_scan_barocde, R.id.et_scan_inlocator, R.id.et_scan_outlocator, R.id.et_input_num})
     List<EditText> editTexts;
-    @BindViews({R.id.ll_scan_barcode, R.id.ll_scan_inlocator, R.id.ll_scan_outlocator, R.id.ll_input_num})
+    @BindViews({R.id.ll_tray,R.id.ll_scan_barcode, R.id.ll_scan_inlocator, R.id.ll_scan_outlocator, R.id.ll_input_num})
     List<View> views;
-    @BindViews({R.id.tv_barcode, R.id.tv_inlocator, R.id.tv_outlocator, R.id.tv_number})
+    @BindViews({R.id.tv_tray,R.id.tv_barcode, R.id.tv_inlocator, R.id.tv_outlocator, R.id.tv_number})
     List<TextView> textViews;
     @BindView(R.id.cb_inlocatorlock)
     CheckBox cbInLocatorlock;
@@ -110,7 +110,20 @@ public class StoreAllotScanFg extends BaseFragment {
             etScanOutLocator.setKeyListener(new TextKeyListener(TextKeyListener.Capitalize.CHARACTERS, true));
         }
     }
-
+    @BindView(R.id.tv_tray)
+    TextView tvTray;
+    @BindView(R.id.et_tray)
+    EditText etTray;
+    @BindView(R.id.ll_tray)
+    LinearLayout llTray;
+    @BindView(R.id.line_tray)
+    View lineTray;
+    @OnFocusChange(R.id.et_tray)
+    void trayFocusChanage() {
+        ModuleUtils.viewChange(llTray, views);
+        ModuleUtils.etChange(activity, etTray, editTexts);
+        ModuleUtils.tvChange(activity, tvTray, textViews);
+    }
     @OnFocusChange(R.id.et_scan_barocde)
     void barcodeFocusChanage() {
         ModuleUtils.viewChange(llScanBarcode, views);
@@ -250,9 +263,11 @@ public class StoreAllotScanFg extends BaseFragment {
                 case INLOCATORWHAT:
                     HashMap<String, String> locatorMap = new HashMap<>();
                     locatorMap.put(AddressContants.STORAGE_SPACES_BARCODE, String.valueOf(msg.obj));
+                    etScanInLocator.setKeyListener(null);
                     storeAllotLogic.scanLocator(locatorMap, new CommonLogic.ScanLocatorListener() {
                         @Override
                         public void onSuccess(ScanLocatorBackBean locatorBackBean) {
+                            etScanInLocator.setKeyListener(new TextKeyListener(TextKeyListener.Capitalize.CHARACTERS, true));
                             inlocatorShow = locatorBackBean.getShowing();
                             inlocatorFlag = true;
                             show();
@@ -274,6 +289,7 @@ public class StoreAllotScanFg extends BaseFragment {
 
                         @Override
                         public void onFailed(String error) {
+                            etScanInLocator.setKeyListener(new TextKeyListener(TextKeyListener.Capitalize.CHARACTERS, true));
                             showFailedDialog(error, new OnDialogClickListener() {
                                 @Override
                                 public void onCallback() {
@@ -287,9 +303,11 @@ public class StoreAllotScanFg extends BaseFragment {
                 case OUTLOCATORWHAT:
                     HashMap<String, String> outlocatorMap = new HashMap<>();
                     outlocatorMap.put(AddressContants.STORAGE_SPACES_BARCODE, String.valueOf(msg.obj));
+                    etScanOutLocator.setKeyListener(null);
                     storeAllotLogic.scanLocator(outlocatorMap, new CommonLogic.ScanLocatorListener() {
                         @Override
                         public void onSuccess(ScanLocatorBackBean locatorBackBean) {
+                            etScanOutLocator.setKeyListener(new TextKeyListener(TextKeyListener.Capitalize.CHARACTERS, true));
                             outlocatorShow = locatorBackBean.getShowing();
                             outlocatorFlag = true;
                             show();
@@ -307,6 +325,7 @@ public class StoreAllotScanFg extends BaseFragment {
 
                         @Override
                         public void onFailed(String error) {
+                            etScanOutLocator.setKeyListener(new TextKeyListener(TextKeyListener.Capitalize.CHARACTERS, true));
                             showFailedDialog(error, new OnDialogClickListener() {
                                 @Override
                                 public void onCallback() {
@@ -320,9 +339,11 @@ public class StoreAllotScanFg extends BaseFragment {
                 case BARCODEWHAT:
                     HashMap<String, String> barcodeMap = new HashMap<>();
                     barcodeMap.put(AddressContants.BARCODE_NO, String.valueOf(msg.obj));
+                    etScanBarocde.setKeyListener(null);
                     storeAllotLogic.scanBarcode(barcodeMap, new CommonLogic.ScanBarcodeListener() {
                         @Override
                         public void onSuccess(ScanBarcodeBackBean barcodeBackBean) {
+                            etScanBarocde.setKeyListener(new TextKeyListener(TextKeyListener.Capitalize.CHARACTERS, true));
                             barcodeShow = barcodeBackBean.getShowing();
                             etInputNum.setText(StringUtils.deleteZero(barcodeBackBean.getBarcode_qty()));
                             tv_scaned_num.setText(barcodeBackBean.getScan_sumqty());
@@ -342,6 +363,7 @@ public class StoreAllotScanFg extends BaseFragment {
 
                         @Override
                         public void onFailed(String error) {
+                            etScanBarocde.setKeyListener(new TextKeyListener(TextKeyListener.Capitalize.CHARACTERS, true));
                             barcodeFlag = false;
                             showFailedDialog(error, new OnDialogClickListener() {
                                 @Override
@@ -367,6 +389,13 @@ public class StoreAllotScanFg extends BaseFragment {
     @Override
     protected void doBusiness() {
         pactivity = (StoreAllotActivity) activity;
+        if (CommonUtils.isUseTray()){
+            llTray.setVisibility(View.VISIBLE);
+            lineTray.setVisibility(View.VISIBLE);
+        }else {
+            llTray.setVisibility(View.GONE);
+            lineTray.setVisibility(View.GONE);
+        }
         initData();
     }
 

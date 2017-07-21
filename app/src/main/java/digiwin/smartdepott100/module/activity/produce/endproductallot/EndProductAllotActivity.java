@@ -170,7 +170,6 @@ public class EndProductAllotActivity extends BaseFirstModuldeActivity {
             return;
         } else {
             isSearching = true;
-            mName.setText(getString(R.string.endproduct_allot)+getString(R.string.condition_filter));
             ivScan.setVisibility(View.VISIBLE);
             commit.setVisibility(View.GONE);
             scrollView.setVisibility(View.GONE);
@@ -239,7 +238,7 @@ public class EndProductAllotActivity extends BaseFirstModuldeActivity {
     @Override
     protected void initNavigationTitle() {
         super.initNavigationTitle();
-        mName.setText(getString(R.string.endproduct_allot)+getString(R.string.condition_filter));
+        mName.setText(getString(R.string.endproduct_allot)+getString(R.string.SumData));
         search.setVisibility(View.VISIBLE);
         search.setImageResource(R.drawable.search);
         isSearching = true;
@@ -320,7 +319,6 @@ public class EndProductAllotActivity extends BaseFirstModuldeActivity {
     private void showData() {
         try {
             isSearching = true;
-            mName.setText(getString(R.string.endproduct_allot)+getString(R.string.SumData));
             ivScan.setVisibility(View.GONE);
             llSearchInput.setVisibility(View.GONE);
             scrollView.setVisibility(View.VISIBLE);

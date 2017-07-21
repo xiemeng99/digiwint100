@@ -131,7 +131,7 @@
                 android:id="@+id/tv_feeding_amount_string"
                 style="@style/app_text_inwhite"
                 android:layout_width="@dimen/layout_60dp"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:text="@string/feeding_amount" />
 
             <TextView

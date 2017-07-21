@@ -14,6 +14,7 @@ import java.util.Map;
 
 import butterknife.BindView;
 import butterknife.OnClick;
+import digiwin.smartdepott100.login.loginlogic.LoginLogic;
 import digiwin.smartdepott100.module.activity.purchase.purchasegoodsscan.PurchaseGoodsScanActivity;
 import digiwin.smartdepott100.module.logic.purchase.PurchaseGoodScanLogic;
 import digiwin.library.dialog.OnDialogClickListener;
@@ -37,7 +38,7 @@ import digiwin.smartdepott100.module.logic.common.CommonLogic;
 
 /**
  * @author 唐孟宇
- * @des 采购收货扫描 数据汇总界面
+ * @des 扫码收货 数据汇总界面
  */
 public class PurchaseGoodsSumFg extends BaseFragment {
     @BindView(R.id.ry_list)
@@ -107,8 +108,7 @@ public class PurchaseGoodsSumFg extends BaseFragment {
         try {
             ClickItemPutBean clickItemPutData = new ClickItemPutBean();
             clickItemPutData.setDoc_no(orderData.getDoc_no());
-            //clickItemPutData.setWarehouse_no(LoginLogic.getWare());
-            clickItemPutData.setCreate_date(orderData.getCreate_date());
+            clickItemPutData.setWarehouse_no(LoginLogic.getWare());
             showLoadingDialog();
             commonLogic.getPGSSumData(clickItemPutData, new PurchaseGoodScanLogic.GetZSumListener() {
                 @Override

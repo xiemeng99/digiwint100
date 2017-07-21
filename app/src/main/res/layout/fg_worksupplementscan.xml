@@ -29,7 +29,7 @@
 
                 <LinearLayout
                     android:id="@+id/ll_scan_locator"
-                    style="@style/search_scan_style"
+                    style="@style/itemstyle"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
 
@@ -45,7 +45,6 @@
                         android:id="@+id/et_scan_locator"
                         android:layout_width="@dimen/layout_0dp"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="@dimen/layout_10dp"
                         android:layout_weight="1"
                         android:background="@null"
                         android:singleLine="true"
@@ -61,12 +60,42 @@
                 </LinearLayout>
 
                 <View style="@style/ry_line_style" />
+                <LinearLayout
+                    android:id="@+id/ll_tray"
+                    style="@style/search_scan_style"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:visibility="gone">
+
+                    <TextView
+                        android:id="@+id/tv_tray"
+                        style="@style/app_text_inwhite"
+                        android:layout_width="@dimen/layout_60dp"
+                        android:layout_height="wrap_content"
+                        android:text="@string/tray" />
+
+                    <EditText
+                        android:id="@+id/et_tray"
+                        android:layout_width="@dimen/layout_0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:background="@null"
+                        android:singleLine="true"
+                        android:textColor="@color/black_32"
+                        android:textCursorDrawable="@drawable/et_cursor_yellow"
+                        android:textSize="@dimen/textSize_14sp" />
+                </LinearLayout>
+
+                <View
+                    android:id="@+id/line_tray"
+                    style="@style/ry_line_style"
+                    android:visibility="gone" />
 
                 <LinearLayout
                     android:id="@+id/ll_barcode"
-                    style="@style/search_scan_style"
+                    style="@style/itemstyle"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent">
+                    android:layout_height="wrap_content">
 
                     <TextView
                         android:id="@+id/tv_barcode_string"
@@ -80,7 +109,6 @@
                         android:id="@+id/et_barcode"
                         android:layout_width="@dimen/layout_0dp"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="@dimen/layout_10dp"
                         android:layout_weight="1"
                         android:background="@null"
                         android:singleLine="true"
@@ -93,9 +121,9 @@
 
                 <LinearLayout
                     android:id="@+id/ll_input_num"
-                    style="@style/search_scan_style"
+                    style="@style/itemstyle"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent">
+                    android:layout_height="wrap_content">
 
                     <TextView
                         android:id="@+id/tv_number"
@@ -110,7 +138,6 @@
                         style="@style/text_hint_style"
                         android:layout_width="@dimen/layout_0dp"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="@dimen/layout_10dp"
                         android:layout_weight="1"
                         android:background="@null"
                         android:hint="@string/input_num"

@@ -35,7 +35,7 @@ public class SuitPickingHalfSumAdapter extends BaseRecyclerAdapter<ListSumBean> 
         holder.setText(R.id.tv_item_no, item.getItem_no());
         holder.setText(R.id.tv_item_name,item.getItem_name());
         holder.setText(R.id.tv_item_model,item.getItem_spec());
-       // holder.setText(R.id.tv_unit_no,item.getUnit_no());
+        holder.setText(R.id.tv_unit_no,item.getUnit_no());
         holder.setText(R.id.tv_in_apply_number,StringUtils.deleteZero(String.valueOf(numb1)));
         holder.setText(R.id.tv_match_number, StringUtils.deleteZero(String.valueOf(numb2)));
         holder.setText(R.id.tv_material_return_big,StringUtils.deleteZero(item.getStock_qty()));

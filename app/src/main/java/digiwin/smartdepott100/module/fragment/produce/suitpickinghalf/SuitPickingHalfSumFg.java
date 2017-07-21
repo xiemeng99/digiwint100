@@ -23,6 +23,7 @@ import butterknife.Unbinder;
 import digiwin.smartdepott100.R;
 import digiwin.smartdepott100.core.appcontants.AddressContants;
 import digiwin.smartdepott100.core.base.BaseFragment;
+import digiwin.smartdepott100.login.loginlogic.LoginLogic;
 import digiwin.smartdepott100.module.activity.common.CommonDetailActivity;
 import digiwin.smartdepott100.module.activity.produce.suitpickinghalf.SuitPickingHalfActivity;
 import digiwin.smartdepott100.module.adapter.produce.SuitPickingSumAdapter;
@@ -133,6 +134,7 @@ public class SuitPickingHalfSumFg extends BaseFragment {
             });
             return;
         }
+        mPutBean.setWarehouse_no(LoginLogic.getWare());
         showLoadingDialog();
         suitPickingHalfLogic.getSuitPickingSum(mPutBean, new CommonLogic.GetZSumListener() {
             @Override
@@ -189,7 +191,6 @@ public class SuitPickingHalfSumFg extends BaseFragment {
         showLoadingDialog();
         map.put(AddressContants.ITEM_NO, orderSumData.getItem_no());
         final SumShowBean sumShowBean = new SumShowBean();
-
         float numb1 = StringUtils.string2Float(orderSumData.getApply_qty());
         float numb2 = StringUtils.string2Float(orderSumData.getScan_sumqty());
         sumShowBean.setItem_no(orderSumData.getItem_no());

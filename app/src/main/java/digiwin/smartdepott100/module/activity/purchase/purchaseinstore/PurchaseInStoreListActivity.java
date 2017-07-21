@@ -36,7 +36,7 @@ import digiwin.pulltorefreshlibrary.recyclerview.FullyLinearLayoutManager;
 import digiwin.pulltorefreshlibrary.recyclerviewAdapter.OnItemClickListener;
 
 /**
- * 采购入库 筛选界面
+ * 扫码入库 筛选界面
  *
  * @author 唐孟宇
  */

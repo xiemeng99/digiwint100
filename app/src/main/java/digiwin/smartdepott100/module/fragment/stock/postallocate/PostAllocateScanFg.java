@@ -4,7 +4,6 @@ import android.os.Handler;
 import android.os.Message;
 import android.text.method.TextKeyListener;
 import android.view.View;
-import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.LinearLayout;
@@ -56,66 +55,61 @@ public class PostAllocateScanFg extends BaseFragment {
      * 条码
      */
     @BindView(R.id.et_scan_barocde)
-    EditText et_scan_barocde;
+    EditText etScanBarocde;
 
     /**
      * 拨出库位
      */
     @BindView(R.id.tv_locator_out)
-    TextView tv_locator_out;
+    TextView tvLocatorOut;
     /**
      * 拨出库位
      */
     @BindView(R.id.et_scan_locator_out)
-    EditText et_scan_locator_out;
+    EditText etScanLocatorOut;
     /**
      * 锁定拨出库位
      */
     @BindView(R.id.cb_locatorlock_out)
-    CheckBox cb_locatorlock_out;
+    CheckBox cbLocatorlockOut;
     /**
      * 拨入库位
      */
     @BindView(R.id.tv_locator_in)
-    TextView tv_locator_in;
+    TextView tvLocatorIn;
     /**
      * 拨入库位
      */
     @BindView(R.id.et_scan_locator_in)
-    EditText et_scan_locator_in;
+    EditText etScanLocatorIn;
     /**
      * 锁定拨入库位
      */
     @BindView(R.id.cb_locatorlock_in)
-    CheckBox cb_locatorlock_in;
+    CheckBox cbLocatorlockIn;
     /**
      * 数量
      */
     @BindView(R.id.et_input_num)
-    EditText et_input_num;
+    EditText etInputNum;
 
-    /**
-     * 保存按钮
-     */
-    @BindView( R.id.save)
-    Button save;
 
     @BindView(R.id.ll_scan_barcode)
-    LinearLayout ll_scan_barcode;
+    LinearLayout llScanBarcode;
     @BindView(R.id.ll_scan_locator_in)
-    LinearLayout ll_scan_locator_in;
+    LinearLayout llScanLocatorIn;
     @BindView(R.id.ll_scan_locator_out)
-    LinearLayout ll_scan_locator_out;
+    LinearLayout llScanLocatorOut;
     @BindView(R.id.tv_number)
     TextView tvNumber;
     @BindView(R.id.ll_input_num)
     LinearLayout llInputNum;
 
-    @BindViews({R.id.et_scan_barocde, R.id.et_scan_locator_in,R.id.et_scan_locator_out, R.id.et_input_num})
+    @BindViews({R.id.et_tray,R.id.et_scan_barocde, R.id.et_scan_locator_in,R.id.et_scan_locator_out, R.id.et_input_num})
     List<EditText> editTexts;
-    @BindViews({R.id.ll_scan_barcode, R.id.ll_scan_locator_in, R.id.ll_scan_locator_out, R.id.ll_input_num})
+    @BindViews({R.id.ll_tray,R.id.ll_scan_barcode, R.id.ll_scan_locator_in, R.id.ll_scan_locator_out, R.id.ll_input_num})
     List<View> views;
-    @BindViews({R.id.tv_barcode, R.id.tv_locator_in, R.id.tv_locator_out, R.id.tv_number})
+    @BindViews({R.id.tv_tray,R.id.tv_barcode, R.id.tv_locator_in, R.id.tv_locator_out, R.id.tv_number})
     List<TextView> textViews;
 
     /**
@@ -127,11 +121,26 @@ public class PostAllocateScanFg extends BaseFragment {
     @BindView(R.id.includedetail)
     RelativeLayout includeDetail;
 
+    @BindView(R.id.tv_tray)
+    TextView tvTray;
+    @BindView(R.id.et_tray)
+    EditText etTray;
+    @BindView(R.id.ll_tray)
+    LinearLayout llTray;
+    @BindView(R.id.line_tray)
+    View lineTray;
+    @OnFocusChange(R.id.et_tray)
+    void trayFocusChanage() {
+        ModuleUtils.viewChange(llTray, views);
+        ModuleUtils.etChange(activity, etTray, editTexts);
+        ModuleUtils.tvChange(activity, tvTray, textViews);
+    }
+
     /**
      * 已扫描量
      */
     @BindView(R.id.tv_scaned_num)
-    TextView  tv_scaned_num;
+    TextView tvScanedNum;
     /**
      * 条码展示
      */
@@ -177,44 +186,44 @@ public class PostAllocateScanFg extends BaseFragment {
     @OnCheckedChanged(R.id.cb_locatorlock_in)
     void isLock_in(boolean checked) {
         if (checked) {
-            et_scan_locator_in.setKeyListener(null);
+            etScanLocatorIn.setKeyListener(null);
         } else {
-            et_scan_locator_in.setKeyListener(new TextKeyListener(TextKeyListener.Capitalize.CHARACTERS, true));
+            etScanLocatorIn.setKeyListener(new TextKeyListener(TextKeyListener.Capitalize.CHARACTERS, true));
         }
     }
     @OnCheckedChanged(R.id.cb_locatorlock_out)
     void isLock_out(boolean checked) {
         if (checked) {
-            et_scan_locator_out.setKeyListener(null);
+            etScanLocatorOut.setKeyListener(null);
         } else {
-            et_scan_locator_out.setKeyListener(new TextKeyListener(TextKeyListener.Capitalize.CHARACTERS, true));
+            etScanLocatorOut.setKeyListener(new TextKeyListener(TextKeyListener.Capitalize.CHARACTERS, true));
         }
     }
 
     @OnFocusChange(R.id.et_scan_barocde)
     void barcodeFocusChanage() {
-        ModuleUtils.viewChange(ll_scan_barcode, views);
-        ModuleUtils.etChange(activity, et_scan_barocde, editTexts);
+        ModuleUtils.viewChange(llScanBarcode, views);
+        ModuleUtils.etChange(activity, etScanBarocde, editTexts);
         ModuleUtils.tvChange(activity, tvBarcode, textViews);
     }
 
     @OnFocusChange(R.id.et_scan_locator_in)
     void inLocatorFocusChanage() {
-        ModuleUtils.viewChange(ll_scan_locator_in, views);
-        ModuleUtils.etChange(activity, et_scan_locator_in, editTexts);
-        ModuleUtils.tvChange(activity, tv_locator_in, textViews);
+        ModuleUtils.viewChange(llScanLocatorIn, views);
+        ModuleUtils.etChange(activity, etScanLocatorIn, editTexts);
+        ModuleUtils.tvChange(activity, tvLocatorIn, textViews);
     }
     @OnFocusChange(R.id.et_scan_locator_out)
     void outLocatorFocusChanage() {
-        ModuleUtils.viewChange(ll_scan_locator_out, views);
-        ModuleUtils.etChange(activity, et_scan_locator_out, editTexts);
-        ModuleUtils.tvChange(activity, tv_locator_out, textViews);
+        ModuleUtils.viewChange(llScanLocatorOut, views);
+        ModuleUtils.etChange(activity, etScanLocatorOut, editTexts);
+        ModuleUtils.tvChange(activity, tvLocatorOut, textViews);
     }
 
     @OnFocusChange(R.id.et_input_num)
     void numFocusChanage() {
         ModuleUtils.viewChange(llInputNum, views);
-        ModuleUtils.etChange(activity, et_input_num, editTexts);
+        ModuleUtils.etChange(activity, etInputNum, editTexts);
         ModuleUtils.tvChange(activity, tvNumber, textViews);
     }
 
@@ -255,12 +264,12 @@ public class PostAllocateScanFg extends BaseFragment {
             showFailedDialog(R.string.scan_inlocator);
             return;
         }
-        if (StringUtils.isBlank(et_input_num.getText().toString())) {
+        if (StringUtils.isBlank(etInputNum.getText().toString())) {
             showFailedDialog(R.string.input_num);
             return;
         }
         saveBean.setDoc_no(orderBean.getDoc_no());
-        saveBean.setQty(et_input_num.getText().toString());
+        saveBean.setQty(etInputNum.getText().toString());
         showLoadingDialog();
         commonLogic.scanSave(saveBean, new CommonLogic.SaveListener() {
             @Override
@@ -292,15 +301,17 @@ public class PostAllocateScanFg extends BaseFragment {
                     barcodeMap.put(AddressContants.BARCODE_NO, String.valueOf(msg.obj));
                     barcodeMap.put(AddressContants.WAREHOUSE_NO,LoginLogic.getWare());
                     barcodeMap.put(AddressContants.DOC_NO,orderBean.getDoc_no());
+                    etScanBarocde.setKeyListener(null);
                     commonLogic.scanBarcode(barcodeMap, new CommonLogic.ScanBarcodeListener() {
                         @Override
                         public void onSuccess(ScanBarcodeBackBean barcodeBackBean) {
+                            etScanBarocde.setKeyListener(new TextKeyListener(TextKeyListener.Capitalize.CHARACTERS, true));
                             barcodeShow = barcodeBackBean.getShowing();
                             if(!StringUtils.isBlank(barcodeBackBean.getBarcode_qty())){
-                                et_input_num.setText(StringUtils.deleteZero(barcodeBackBean.getBarcode_qty()));
+                                etInputNum.setText(StringUtils.deleteZero(barcodeBackBean.getBarcode_qty()));
                             }
                             if(!StringUtils.isBlank(barcodeBackBean.getScan_sumqty())){
-                                tv_scaned_num.setText(StringUtils.deleteZero(barcodeBackBean.getScan_sumqty()));
+                                tvScanedNum.setText(StringUtils.deleteZero(barcodeBackBean.getScan_sumqty()));
                             }
                             barcodeFlag = true;
                             show();
@@ -312,7 +323,7 @@ public class PostAllocateScanFg extends BaseFragment {
                             saveBean.setScan_sumqty(barcodeBackBean.getScan_sumqty());
                             saveBean.setAvailable_in_qty(barcodeBackBean.getAvailable_in_qty());
                             saveBean.setItem_barcode_type(barcodeBackBean.getItem_barcode_type());
-                            et_input_num.requestFocus();
+                            etInputNum.requestFocus();
                             if (CommonUtils.isAutoSave(saveBean)){
                                 Save();
                             }
@@ -320,11 +331,12 @@ public class PostAllocateScanFg extends BaseFragment {
 
                         @Override
                         public void onFailed(String error) {
+                            etScanBarocde.setKeyListener(new TextKeyListener(TextKeyListener.Capitalize.CHARACTERS, true));
                             barcodeFlag = false;
                             showFailedDialog(error, new OnDialogClickListener() {
                                 @Override
                                 public void onCallback() {
-                                    et_scan_barocde.setText("");
+                                    etScanBarocde.setText("");
                                 }
                             });
                         }
@@ -333,15 +345,17 @@ public class PostAllocateScanFg extends BaseFragment {
                 case LOCATORWHATIN:
                     HashMap<String, String> locatorMap = new HashMap<>();
                     locatorMap.put(AddressContants.STORAGE_SPACES_BARCODE, String.valueOf(msg.obj));
+                    etScanLocatorIn.setKeyListener(null);
                     commonLogic.scanLocator(locatorMap, new CommonLogic.ScanLocatorListener() {
                         @Override
                         public void onSuccess(ScanLocatorBackBean locatorBackBean) {
+                            etScanLocatorIn.setKeyListener(new TextKeyListener(TextKeyListener.Capitalize.CHARACTERS, true));
                             inLocatorShow = locatorBackBean.getShowing();
                             inLocatorFlag = true;
                             show();
                             saveBean.setStorage_spaces_in_no(locatorBackBean.getStorage_spaces_no());
                             saveBean.setWarehouse_in_no(locatorBackBean.getWarehouse_no());
-                            et_scan_barocde.requestFocus();
+                            etScanBarocde.requestFocus();
                             if (CommonUtils.isAutoSave(saveBean)){
                                 Save();
                             }
@@ -349,10 +363,11 @@ public class PostAllocateScanFg extends BaseFragment {
 
                         @Override
                         public void onFailed(String error) {
+                            etScanLocatorIn.setKeyListener(new TextKeyListener(TextKeyListener.Capitalize.CHARACTERS, true));
                             showFailedDialog(error, new OnDialogClickListener() {
                                 @Override
                                 public void onCallback() {
-                                    et_scan_locator_in.setText("");
+                                    etScanLocatorIn.setText("");
                                 }
                             });
                             inLocatorFlag = false;
@@ -362,18 +377,20 @@ public class PostAllocateScanFg extends BaseFragment {
                 case LOCATORWHATOUT:
                     HashMap<String, String> locatorMap1 = new HashMap<>();
                     locatorMap1.put(AddressContants.STORAGE_SPACES_BARCODE, String.valueOf(msg.obj));
+                    etScanLocatorOut.setKeyListener(null);
                     commonLogic.scanLocator(locatorMap1, new CommonLogic.ScanLocatorListener() {
                         @Override
                         public void onSuccess(ScanLocatorBackBean locatorBackBean) {
+                            etScanLocatorOut.setKeyListener(new TextKeyListener(TextKeyListener.Capitalize.CHARACTERS, true));
                             outLocatorShow = locatorBackBean.getShowing();
                             outLocatorFlag = true;
                             show();
                             saveBean.setStorage_spaces_out_no(locatorBackBean.getStorage_spaces_no());
                             saveBean.setWarehouse_out_no(locatorBackBean.getWarehouse_no());
-                            if(cb_locatorlock_in.isChecked()){
-                                et_scan_barocde.requestFocus();
+                            if(cbLocatorlockIn.isChecked()){
+                                etScanBarocde.requestFocus();
                             }else{
-                                et_scan_locator_in.requestFocus();
+                                etScanLocatorIn.requestFocus();
                             }
                             if (CommonUtils.isAutoSave(saveBean)){
                                 Save();
@@ -382,10 +399,11 @@ public class PostAllocateScanFg extends BaseFragment {
 
                         @Override
                         public void onFailed(String error) {
+                            etScanLocatorOut.setKeyListener(new TextKeyListener(TextKeyListener.Capitalize.CHARACTERS, true));
                             showFailedDialog(error, new OnDialogClickListener() {
                                 @Override
                                 public void onCallback() {
-                                    et_scan_locator_out.setText("");
+                                    etScanLocatorOut.setText("");
                                 }
                             });
                             outLocatorFlag = false;
@@ -408,6 +426,13 @@ public class PostAllocateScanFg extends BaseFragment {
     @Override
     protected void doBusiness() {
         pactivity = (PostAllocateScanActivity) activity;
+        if (CommonUtils.isUseTray()){
+            llTray.setVisibility(View.VISIBLE);
+            lineTray.setVisibility(View.VISIBLE);
+        }else {
+            llTray.setVisibility(View.GONE);
+            lineTray.setVisibility(View.GONE);
+        }
         initData();
     }
 
@@ -432,24 +457,24 @@ public class PostAllocateScanFg extends BaseFragment {
      * 保存完成之后的操作
      */
     private void clear() {
-        tv_scaned_num.setText(saveBean.getScan_sumqty());
-        et_scan_barocde.setText("");
-        et_input_num.setText("");
+        tvScanedNum.setText(saveBean.getScan_sumqty());
+        etScanBarocde.setText("");
+        etInputNum.setText("");
         barcodeFlag = false;
-        if (!cb_locatorlock_out.isChecked())
+        if (!cbLocatorlockOut.isChecked())
         {
             outLocatorShow = "";
             outLocatorFlag = false;
-            et_scan_locator_out.setText("");
-            et_scan_locator_out.requestFocus();
+            etScanLocatorOut.setText("");
+            etScanLocatorOut.requestFocus();
         }
-        if(cb_locatorlock_in.isChecked()){
-            et_scan_barocde.requestFocus();
+        if(cbLocatorlockIn.isChecked()){
+            etScanBarocde.requestFocus();
         }else{
             inLocatorShow = "";
             inLocatorFlag = false;
-            et_scan_locator_in.setText("");
-            et_scan_locator_in.requestFocus();
+            etScanLocatorIn.setText("");
+            etScanLocatorIn.requestFocus();
         }
         barcodeShow = "";
         show();
@@ -459,11 +484,11 @@ public class PostAllocateScanFg extends BaseFragment {
      * 初始化一些变量
      */
     public void initData() {
-        et_scan_barocde.setText("");
-        et_scan_locator_in.setText("");
-        et_scan_locator_out.setText("");
-        et_input_num.setText("");
-        tv_scaned_num.setText("");
+        etScanBarocde.setText("");
+        etScanLocatorIn.setText("");
+        etScanLocatorOut.setText("");
+        etInputNum.setText("");
+        tvScanedNum.setText("");
         barcodeShow = "";
         inLocatorShow = "";
         outLocatorShow = "";
@@ -471,12 +496,12 @@ public class PostAllocateScanFg extends BaseFragment {
         barcodeFlag = false;
         outLocatorFlag = false;
         inLocatorFlag = false;
-        cb_locatorlock_in.setChecked(false);
-        cb_locatorlock_out.setChecked(false);
+        cbLocatorlockIn.setChecked(false);
+        cbLocatorlockOut.setChecked(false);
         saveBean = new SaveBean();
         commonLogic = PostAllocateLogic.getInstance(context, pactivity.module, pactivity.mTimestamp.toString());
         orderBean = (FilterResultOrderBean) pactivity.getIntent().getExtras().getSerializable(AddressContants.ORDERDATA);
-        et_scan_locator_out.requestFocus();
+        etScanLocatorOut.requestFocus();
         }
 
     @Override

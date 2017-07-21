@@ -71,11 +71,11 @@ public class ZPutInStoreScanFg extends BaseFragment {
     @BindView(R.id.includedetail)
     View includeDetail;
 
-    @BindViews({R.id.et_barcode_no, R.id.et_scan_locator, R.id.et_input_num})
+    @BindViews({R.id.et_tray,R.id.et_barcode_no, R.id.et_scan_locator, R.id.et_input_num})
     List<EditText> editTexts;
-    @BindViews({R.id.ll_barcode_no,R.id.ll_scan_locator, R.id.ll_input_num})
+    @BindViews({R.id.ll_tray,R.id.ll_barcode_no,R.id.ll_scan_locator, R.id.ll_input_num})
     List<View> views;
-    @BindViews({R.id.tv_barcode_no, R.id.tv_locator, R.id.tv_number})
+    @BindViews({R.id.tv_tray,R.id.tv_barcode_no, R.id.tv_locator, R.id.tv_number})
     List<TextView> textViews;
     @BindView(R.id.cb_locatorlock2)
     CheckBox cb_locatorlock2;
@@ -95,6 +95,20 @@ public class ZPutInStoreScanFg extends BaseFragment {
         } else {
             etScanLocator.setKeyListener(new TextKeyListener(TextKeyListener.Capitalize.CHARACTERS, true));
         }
+    }
+    @BindView(R.id.tv_tray)
+    TextView tvTray;
+    @BindView(R.id.et_tray)
+    EditText etTray;
+    @BindView(R.id.ll_tray)
+    LinearLayout llTray;
+    @BindView(R.id.line_tray)
+    View lineTray;
+    @OnFocusChange(R.id.et_tray)
+    void trayFocusChanage() {
+        ModuleUtils.viewChange(llTray, views);
+        ModuleUtils.etChange(activity, etTray, editTexts);
+        ModuleUtils.tvChange(activity, tvTray, textViews);
     }
 
     @OnFocusChange(R.id.et_barcode_no)
@@ -135,12 +149,12 @@ public class ZPutInStoreScanFg extends BaseFragment {
 
     @OnClick(R.id.save)
     void save() {
-        if (!barcodeNoFlag) {
-            showFailedDialog(R.string.scan_barcode);
-            return;
-        }
         if (!locatorFlag) {
             showFailedDialog(R.string.scan_locator);
+            return;
+        }
+        if (!barcodeNoFlag) {
+            showFailedDialog(R.string.scan_barcode);
             return;
         }
         if (StringUtils.isBlank(etInputNum.getText().toString())) {
@@ -198,7 +212,7 @@ public class ZPutInStoreScanFg extends BaseFragment {
 
     SaveBean saveBean;
 
-    FilterResultOrderBean orderBean = new FilterResultOrderBean();
+    FilterResultOrderBean orderBean ;
     private Handler.Callback mCallback= new Handler.Callback() {
         @Override
         public boolean handleMessage(Message msg) {
@@ -292,6 +306,13 @@ public class ZPutInStoreScanFg extends BaseFragment {
     @Override
     protected void doBusiness() {
         pactivity = (ZPutInStoreSecondActivity) activity;
+        if (CommonUtils.isUseTray()){
+            llTray.setVisibility(View.VISIBLE);
+            lineTray.setVisibility(View.VISIBLE);
+        }else {
+            llTray.setVisibility(View.GONE);
+            lineTray.setVisibility(View.GONE);
+        }
         initData();
     }
 
@@ -329,6 +350,7 @@ public class ZPutInStoreScanFg extends BaseFragment {
      * 初始化一些变量
      */
     public void initData() {
+        orderBean= new FilterResultOrderBean();
         etBarcodeNo.setText("");
         etScanLocator.setText("");
         barcodeShow = "";

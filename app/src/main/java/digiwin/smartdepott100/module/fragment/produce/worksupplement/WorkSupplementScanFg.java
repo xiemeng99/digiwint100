@@ -46,7 +46,7 @@ import digiwin.smartdepott100.module.logic.produce.WorkSupplementLogic;
 
 /**
  * @author 赵浩然
- * @des 依工单补料 扫描页
+ * @des 依退料补料 扫描页
  * @date 2017/3/23
  */
 public class WorkSupplementScanFg extends BaseFragment {
@@ -116,20 +116,30 @@ public class WorkSupplementScanFg extends BaseFragment {
     @BindView(R.id.ll_input_num)
     LinearLayout llInputNum;
 
-    @BindViews({R.id.et_barcode, R.id.et_scan_locator, R.id.et_input_num})
+    @BindViews({R.id.et_tray,R.id.et_barcode, R.id.et_scan_locator, R.id.et_input_num})
     List<EditText> editTexts;
-    @BindViews({R.id.ll_barcode, R.id.ll_scan_locator, R.id.ll_input_num})
+    @BindViews({R.id.ll_tray,R.id.ll_barcode, R.id.ll_scan_locator, R.id.ll_input_num})
     List<View> views;
-    @BindViews({R.id.tv_barcode_string, R.id.tv_locator, R.id.tv_number})
+    @BindViews({R.id.tv_tray,R.id.tv_barcode_string, R.id.tv_locator, R.id.tv_number})
     List<TextView> textViews;
     @BindView(R.id.cb_locatorlock)
     CheckBox cbLocatorlock;
 
-//    @BindView(R.id.tv_item_name)
-//    TextView tv_item_name;
-//
-//    @BindView(R.id.tv_item_format)
-    TextView tv_item_format;
+    @BindView(R.id.tv_tray)
+    TextView tvTray;
+    @BindView(R.id.et_tray)
+    EditText etTray;
+    @BindView(R.id.ll_tray)
+    LinearLayout llTray;
+    @BindView(R.id.line_tray)
+    View lineTray;
+    @OnFocusChange(R.id.et_tray)
+    void trayFocusChanage() {
+        ModuleUtils.viewChange(llTray, views);
+        ModuleUtils.etChange(activity, etTray, editTexts);
+        ModuleUtils.tvChange(activity, tvTray, textViews);
+    }
+
 
 /*    *//**
      * 可发量
@@ -241,7 +251,6 @@ public class WorkSupplementScanFg extends BaseFragment {
     public void clear(){
         etInputNum.setText("");
         etScanBarocde.setText("");
-
         if(cbLocatorlock.isChecked()){
             if(StringUtils.isBlank(etScanLocator.getText().toString().trim())){
                 locatorFlag = false;
@@ -262,9 +271,11 @@ public class WorkSupplementScanFg extends BaseFragment {
                 case LOCATORWHAT:
                     HashMap<String, String> locatorMap = new HashMap<>();
                     locatorMap.put(AddressContants.STORAGE_SPACES_BARCODE, String.valueOf(msg.obj));
+                    etScanLocator.setKeyListener(null);
                     commonLogic.scanLocator(locatorMap, new CommonLogic.ScanLocatorListener() {
                         @Override
                         public void onSuccess(ScanLocatorBackBean locatorBackBean) {
+                            etScanLocator.setKeyListener(new TextKeyListener(TextKeyListener.Capitalize.CHARACTERS, true));
                             locatorFlag = true;
                             saveBean.setStorage_spaces_out_no(locatorBackBean.getStorage_spaces_no());
                             saveBean.setWarehouse_out_no(locatorBackBean.getWarehouse_no());
@@ -277,6 +288,7 @@ public class WorkSupplementScanFg extends BaseFragment {
 
                         @Override
                         public void onFailed(String error) {
+                            etScanLocator.setKeyListener(new TextKeyListener(TextKeyListener.Capitalize.CHARACTERS, true));
                             showFailedDialog(error, new OnDialogClickListener() {
                                 @Override
                                 public void onCallback() {
@@ -294,18 +306,17 @@ public class WorkSupplementScanFg extends BaseFragment {
                     barcodeMap.put(AddressContants.DOC_NO, localData.getDoc_no());
                     barcodeMap.put(AddressContants.WAREHOUSE_NO, LoginLogic.getWare());
                     barcodeMap.put(AddressContants.STORAGE_SPACES_NO,saveBean.getStorage_spaces_out_no());
+                    etScanBarocde.setKeyListener(null);
                     commonLogic.scanBarcode(barcodeMap, new CommonLogic.ScanBarcodeListener() {
                         @Override
                         public void onSuccess(final ScanBarcodeBackBean barcodeBackBean) {
+                            etScanBarocde.setKeyListener(new TextKeyListener(TextKeyListener.Capitalize.CHARACTERS, true));
                             showBarcode(barcodeBackBean);
-
-//                        tv_item_format.setText(barcodeBackBean.getItem_spec());
-//                        tv_item_name.setText(barcodeBackBean.getItem_name());
-//                        tv_available_quantity.setText(barcodeBackBean.getAvailable_in_qty());
                         }
 
                         @Override
                         public void onFailed(String error) {
+                            etScanBarocde.setKeyListener(new TextKeyListener(TextKeyListener.Capitalize.CHARACTERS, true));
                             barcodeFlag = false;
                             showFailedDialog(error, new OnDialogClickListener() {
                                 @Override
@@ -325,7 +336,6 @@ public class WorkSupplementScanFg extends BaseFragment {
                     commonLogic.getWSFIFO(map, new CommonLogic.PostMaterialFIFOListener() {
                         @Override
                         public void onSuccess(List<FifoCheckBean> fiFoBeanList) {
-                            dismissLoadingDialog();
                             fiFoList = fiFoBeanList;
                             adapter = new CommonDocNoFifoAdapter(context,fiFoBeanList);
                             mRy_list.setAdapter(adapter);
@@ -333,7 +343,6 @@ public class WorkSupplementScanFg extends BaseFragment {
 
                         @Override
                         public void onFailed(String error) {
-                            dismissLoadingDialog();
 //                        showFailedDialog(error);
                         }
                     });
@@ -392,6 +401,13 @@ public class WorkSupplementScanFg extends BaseFragment {
         commonLogic = WorkSupplementLogic.getInstance(context, pactivity.module, pactivity.mTimestamp.toString());
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(pactivity);
         mRy_list.setLayoutManager(linearLayoutManager);
+        if (CommonUtils.isUseTray()){
+            llTray.setVisibility(View.VISIBLE);
+            lineTray.setVisibility(View.VISIBLE);
+        }else {
+            llTray.setVisibility(View.GONE);
+            lineTray.setVisibility(View.GONE);
+        }
         initData();
     }
     /**

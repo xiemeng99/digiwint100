@@ -189,6 +189,6 @@
         android:orientation="vertical"
         android:visibility="invisible">
 
-        <include layout="@layout/tablayout_layout"></include>
+        <include layout="@layout/tablayout_layout"/>
     </LinearLayout>
 </LinearLayout>

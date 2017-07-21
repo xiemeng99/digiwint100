@@ -68,6 +68,7 @@ public class PostMaterialSumFg extends BaseFragment {
             public void onCallback1() {
                 sureCommit();
             }
+
             @Override
             public void onCallback2() {
 
@@ -89,6 +90,7 @@ public class PostMaterialSumFg extends BaseFragment {
      * 从汇总界面带入的单头数据
      */
     FilterResultOrderBean orderData;
+
     @Override
     protected int bindLayoutId() {
         return R.layout.fg_putinstore_sum;
@@ -109,10 +111,7 @@ public class PostMaterialSumFg extends BaseFragment {
         try {
             ClickItemPutBean clickItemPutBean = new ClickItemPutBean();
             clickItemPutBean.setDoc_no(orderData.getDoc_no());
-            AccoutBean accoutBean = LoginLogic.getUserInfo();
-            if(null != accoutBean){
-                clickItemPutBean.setWarehouse_out_no(accoutBean.getWare());
-            }
+            clickItemPutBean.setWarehouse_no(LoginLogic.getWare());
             showLoadingDialog();
             commonLogic.getOrderSumData(clickItemPutBean, new CommonLogic.GetOrderSumListener() {
                 @Override
@@ -221,7 +220,7 @@ public class PostMaterialSumFg extends BaseFragment {
         });
     }
 
-    private void sureCommit(){
+    private void sureCommit() {
         if (!upDateFlag) {
             showFailedDialog(R.string.nodate);
             return;
@@ -251,10 +250,11 @@ public class PostMaterialSumFg extends BaseFragment {
         });
 
     }
-public void initData(){
-    commonLogic = CommonLogic.getInstance(pactivity, pactivity.module, pactivity.mTimestamp.toString());
-    upDateFlag = false;
-    orderData = (FilterResultOrderBean) pactivity.getIntent().getExtras().getSerializable("orderData");
-}
+
+    public void initData() {
+        commonLogic = CommonLogic.getInstance(pactivity, pactivity.module, pactivity.mTimestamp.toString());
+        upDateFlag = false;
+        orderData = (FilterResultOrderBean) pactivity.getIntent().getExtras().getSerializable("orderData");
+    }
 
 }

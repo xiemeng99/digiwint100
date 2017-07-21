@@ -194,6 +194,7 @@
     <string name="waitnumber">待入数量</string>
     <string name="statu">状态</string>
     <string name="supplier">供应商</string>
+    <string name="vendor">厂商</string>
     <string name="supplier_no">供应商编码</string>
     <string name="waithour">等待小时</string>
     <string name="delivery_uncheck_board">收货待检货看板</string>
@@ -383,7 +384,7 @@
     <string name="can_return_num">可退量</string>
     <string name="actual_return_num">实退量</string>
 
-    <string name="print_label">标签补打</string>
+    <string name="print_label">标签打印</string>
     <string name="print">打印</string>
     <string name="print_rawmaterial">原材料标签打印</string>
     <string name="print_label_flow">流转标签打印</string>
@@ -755,8 +756,15 @@
     <string name="title_work_order_scan">工单发条码扫描</string>
 
     <string name="condition_filter">条件筛选</string>
-    <string name="miscellaneous_issues_out_list">杂项发料列表</string>
+    <string name="miscellaneous_issues_out_list">杂项发料</string>
 
     <string name="scan_big_storenum">实发量大于库存量</string>
     <string name="scan_byfifo_order">请按照fifo顺序进行扫描</string>
+
+    <string name="tray_statu">托盘状态</string>
+    <string name="tray">托盘</string>
+
+
+    <string name="lable_printing">标签打印</string>
+
 </resources>

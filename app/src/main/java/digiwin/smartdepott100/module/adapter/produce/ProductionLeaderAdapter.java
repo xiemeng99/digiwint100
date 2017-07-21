@@ -32,7 +32,6 @@ public class ProductionLeaderAdapter  extends BaseRecyclerAdapter<ListSumBean> {
         //判断实发量 和 欠料量
         float numb1 = StringUtils.string2Float(item.getApply_qty());
         float numb2 = StringUtils.string2Float(item.getScan_sumqty());
-
         holder.setText(R.id.tv_item_name, item.getItem_name());
         holder.setText(R.id.tv_unit,item.getUnit_no());
         holder.setText(R.id.tv_item_no, item.getItem_no());

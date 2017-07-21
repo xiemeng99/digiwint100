@@ -36,7 +36,7 @@ import digiwin.smartdepott100.module.logic.produce.WorkSupplementLogic;
 
 /**
  * @author 赵浩然
- * @des 依工单补料 汇总页
+ * @des 依退料补料 汇总页
  * @date 2017/3/23
  */
 public class WorkSupplementSumFg extends BaseFragment {
@@ -75,7 +75,7 @@ public class WorkSupplementSumFg extends BaseFragment {
         sureCommit();
     }
 
-    FilterResultOrderBean localData = new FilterResultOrderBean();
+    FilterResultOrderBean localData;
 
     WorkSupplementActivity pactivity;
     WorkSupplementLogic commonLogic;
@@ -86,6 +86,7 @@ public class WorkSupplementSumFg extends BaseFragment {
 
     @Override
     protected void doBusiness() {
+        localData = new FilterResultOrderBean();
         pactivity = (WorkSupplementActivity) activity;
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(pactivity);
         ryList.setLayoutManager(linearLayoutManager);
@@ -103,10 +104,8 @@ public class WorkSupplementSumFg extends BaseFragment {
         try {
             ClickItemPutBean putBean = new ClickItemPutBean();
             putBean.setDoc_no(localData.getDoc_no());
-            putBean.setWarehouse_no(LoginLogic.getUserInfo().getWare());
-
+            putBean.setWarehouse_no(LoginLogic.getWare());
             commonLogic = WorkSupplementLogic.getInstance(pactivity, pactivity.module, pactivity.mTimestamp.toString());
-
             showLoadingDialog();
             commonLogic.getWSSum(putBean, new CommonLogic.GetZSumListener() {
                 @Override

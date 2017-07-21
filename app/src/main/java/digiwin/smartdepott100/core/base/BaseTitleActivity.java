@@ -1,8 +1,6 @@
 package digiwin.smartdepott100.core.base;
 
 import android.content.pm.ActivityInfo;
-import android.content.pm.ConfigurationInfo;
-import android.content.res.Resources;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.text.method.KeyListener;
@@ -42,16 +40,17 @@ public abstract class BaseTitleActivity extends BaseActivity {
      */
     @BindView(R.id.iv_scan)
     public ImageView ivScan;
+
     @OnClick(R.id.iv_scan)
-    public void cameraScan(){
+    public void cameraScan() {
         MipcaActivityCapture.startCameraActivity(activity, new GetBarCodeListener() {
             @Override
             public void onSuccess(String msg) {
                 View focusView = ViewUtils.getFocusView(activity);
-                if (focusView instanceof EditText){
-                   EditText et= (EditText) focusView;
+                if (focusView instanceof EditText) {
+                    EditText et = (EditText) focusView;
                     KeyListener listener = et.getKeyListener();
-                    if (null!=listener){
+                    if (null != listener) {
                         et.setText(msg);
                         et.setSelection(msg.length());
                     }
@@ -69,12 +68,12 @@ public abstract class BaseTitleActivity extends BaseActivity {
 
     @OnClick(R.id.iv_back)
     public void goBack() {
-       onBackPressed();
+        onBackPressed();
     }
 
     @OnClick(R.id.tv_title_name)
     public void goBack2() {
-       onBackPressed();
+        onBackPressed();
     }
 
     @OnClick(R.id.iv_title_setting)
@@ -87,7 +86,7 @@ public abstract class BaseTitleActivity extends BaseActivity {
         toolbar().setBackgroundResource(R.color.toolBar_color);
         setSupportActionBar(toolbar());
         getSupportActionBar().setDisplayShowTitleEnabled(false);
-            ivScan.setVisibility(View.VISIBLE);
+        ivScan.setVisibility(View.VISIBLE);
     }
 
     /**

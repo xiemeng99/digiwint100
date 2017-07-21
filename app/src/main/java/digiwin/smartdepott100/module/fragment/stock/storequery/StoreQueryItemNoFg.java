@@ -45,8 +45,13 @@ public class StoreQueryItemNoFg extends BaseFragment {
     }
 
     public void upDateList(List<ListSumBean> list) {
-        StoreQueryItemNoAdapter adapter = new StoreQueryItemNoAdapter(context, list);
-        ryList.setAdapter(adapter);
+        try {
+            StoreQueryItemNoAdapter adapter = new StoreQueryItemNoAdapter(context, list);
+            ryList.setAdapter(adapter);
+        }catch (Exception e){
+            LogUtils.e(TAG,"upDateList"+e);
+        }
+
     }
 
 }

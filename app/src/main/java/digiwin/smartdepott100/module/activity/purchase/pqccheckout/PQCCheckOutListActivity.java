@@ -209,18 +209,6 @@ public class PQCCheckOutListActivity extends BaseTitleActivity {
                             return false;
                         }
                     });
-//                    expandableListView.setOnGroupClickListener(new ExpandableListView.OnGroupClickListener() {
-//                        @Override
-//                        public boolean onGroupClick(ExpandableListView parent, View view, int groupPosition, long l) {
-//                            if(parent.isGroupExpanded(groupPosition)){
-//                                parent.collapseGroup(groupPosition);
-//                            }else{
-//                                //第二个参数false表示展开时是否触发默认滚动动画
-//                                parent.expandGroup(groupPosition,false);
-//                            }
-//                            return false;
-//                        }
-//                    });
                 } else {
                     showFailedDialog(getResources().getString(R.string.nodate));
                 }

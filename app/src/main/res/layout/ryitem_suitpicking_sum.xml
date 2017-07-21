@@ -119,8 +119,6 @@
 
     <View style="@style/ry_line_style" />
 
-    <View style="@style/ry_line_style" />
-
     <LinearLayout
         style="@style/ry_sum_itemstyle"
         android:layout_width="match_parent"

@@ -28,7 +28,7 @@ import digiwin.smartdepott100.module.fragment.produce.worksupplement.WorkSupplem
 
 /**
  * @author 赵浩然
- * @module 依工单补料
+ * @module 依退料补料
  * @date 2017/3/27
  */
 

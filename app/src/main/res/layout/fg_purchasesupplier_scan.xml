@@ -12,7 +12,7 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:orientation="vertical"
             android:paddingBottom="@dimen/layout_20dp">
 
@@ -27,7 +27,36 @@
                 android:background="@drawable/allscanedit_bg"
                 android:orientation="vertical"
                 android:padding="@dimen/layout_5dp">
+                <LinearLayout
+                    android:id="@+id/ll_tray"
+                    style="@style/search_scan_style"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:visibility="gone">
 
+                    <TextView
+                        android:id="@+id/tv_tray"
+                        style="@style/app_text_inwhite"
+                        android:layout_width="@dimen/layout_50dp"
+                        android:layout_height="wrap_content"
+                        android:text="@string/tray" />
+
+                    <EditText
+                        android:id="@+id/et_tray"
+                        android:layout_width="@dimen/layout_0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:background="@null"
+                        android:singleLine="true"
+                        android:textColor="@color/black_32"
+                        android:textCursorDrawable="@drawable/et_cursor_yellow"
+                        android:textSize="@dimen/textSize_14sp" />
+                </LinearLayout>
+
+                <View
+                    android:id="@+id/line_tray"
+                    style="@style/ry_line_style"
+                    android:visibility="gone" />
                 <LinearLayout
                     android:id="@+id/ll_scan_barcode"
                     style="@style/itemstyle"
@@ -39,14 +68,12 @@
                         style="@style/app_text_inwhite"
                         android:layout_width="@dimen/layout_50dp"
                         android:layout_height="wrap_content"
-                        android:layout_centerVertical="true"
                         android:text="@string/barcode_no" />
 
                     <EditText
                         android:id="@+id/et_scan_barocde"
                         android:layout_width="@dimen/layout_0dp"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="@dimen/layout_10dp"
                         android:layout_weight="1"
                         android:background="@null"
                         android:singleLine="true"
@@ -68,7 +95,6 @@
                         style="@style/app_text_inwhite"
                         android:layout_width="@dimen/layout_50dp"
                         android:layout_height="wrap_content"
-                        android:layout_centerVertical="true"
                         android:text="@string/num" />
 
                     <EditText
@@ -76,7 +102,6 @@
                         style="@style/text_hint_style"
                         android:layout_width="@dimen/layout_0dp"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="@dimen/layout_10dp"
                         android:layout_weight="1"
                         android:background="@null"
                         android:hint="@string/input_num"
@@ -115,7 +140,7 @@
             <include
                 android:id="@+id/includedetail"
                 layout="@layout/show_playdetail_layout"
-                android:visibility="gone"></include>
+                android:visibility="gone"/>
         </LinearLayout>
     </ScrollView>
 

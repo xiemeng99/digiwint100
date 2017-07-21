@@ -31,5 +31,7 @@ public class SaleReturnAdapter extends BaseRecyclerAdapter<FilterResultOrderBean
         holder.setText(R.id.tv_item_return_order_no, item.getDoc_no());
         holder.setText(R.id.tv_item_date,item.getCreate_date());
         holder.setText(R.id.tv_item_custom,item.getCustomer_name());
+        holder.setText(R.id.tv_apply_branch, item.getDepartment_name());
+        holder.setText(R.id.tv_applicant, item.getEmployee_name());
     }
 }

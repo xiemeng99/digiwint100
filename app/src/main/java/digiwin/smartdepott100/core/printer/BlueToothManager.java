@@ -237,4 +237,61 @@ public class BlueToothManager {
         }
         return flag;
     }
+
+    /**
+     * 打印标准条码
+     *
+     * @see [类、类#方法、类#成员]
+     */
+    public boolean printSmartLable(PrintBarcodeBean printBarcodeBean,int sumnum) {
+        boolean flag = false;
+        if (null == mBTDevice) {
+            AlertDialogUtils.showFailedDialog(mContext, mContext.getString(R.string.connect_bluedevice));
+            flag = false;
+            return flag;
+        }
+
+        if (null == mPrintSend) {
+            AlertDialogUtils.showFailedDialog(mContext, mContext.getString(R.string.blue_connected_failed));
+            flag = false;
+            return flag;
+        }
+//        int num = Integer.valueOf(printBarcodeBean.getQty());
+        int num = 10;
+        String barcode = "A01A01A01A01";
+        String encoding2 = "A\n" + "PS\n"
+                + "%0H0040V0050L0101P02C9B" +mContext.getResources().getString(R.string.vendor)+": "+ "厂商" + "\n"
+                + "%0H0040V0120L0101P02C9B" +mContext.getResources().getString(R.string.data)+": "+ "日期" + "\n"
+                + "%0H0040V0190L0101P02C9B" +mContext.getResources().getString(R.string.item_no)+": "+ "料号" + "\n"
+                + "%0H0280V00402D30,M,06,1,0DN"+barcode.length()+","+barcode
+                + "%0H0040V0260L0101P02C9B" +mContext.getResources().getString(R.string.item_name)+": "+ "品名" + "\n"
+                + "%0H0040V0330L0101P02C9B" +mContext.getResources().getString(R.string.model)+": "+ "规格" + "\n"
+                + "%0H0040V0400L0101P02C9B" +mContext.getResources().getString(R.string.batch_no)+": "+ "批号" + "\n"
+                + "%0H0040V0470L0101P02C9B" +mContext.getResources().getString(R.string.num)+": "+num
+//                + "  "+ unit+"\n"
+                + "Q1\n" + "Z\n";
+        mPrintSend.sendBtMessage(encoding2);
+//        if(num != 0){
+//            if(sumnum%num == 0){
+//                for (int i = 0; i < StringUtils.string2Float(printBarcodeBean.getPrint_num()); i++) {
+//                    mPrintSend.sendBtMessage(encoding2);
+//                }
+//            }else{
+//                for (int i = 0; i < StringUtils.string2Float(printBarcodeBean.getPrint_num())-1; i++) {
+//                    mPrintSend.sendBtMessage(encoding2);
+//                }
+//                num = sumnum%num;
+//                encoding2 = "A\n" + "PS\n"
+//                        + "%0H0040V0070L0101P02C9B" +mContext.getResources().getString(R.string.item_name)+": "+ printBarcodeBean.getItem_name() + "\n"
+//                        + "%0H0040V0140L0101P02C9B" +mContext.getResources().getString(R.string.model)+": "+ printBarcodeBean.getItem_spec() + "\n"
+//                        + "%0H0150V02102D30,M,05,1,0DN"+printBarcodeBean.getBarcode().length()+","+printBarcodeBean.getBarcode()
+//                        + "%0H0040V0380L0101P02C9B" + printBarcodeBean.getBarcode() + "\n"
+//                        + "%0H0040V0450L0101P02C9B" +mContext.getResources().getString(R.string.num)+": "+num
+////                + "  "+ unit+"\n"
+//                        + "Q1\n" + "Z\n";
+//                mPrintSend.sendBtMessage(encoding2);
+//            }
+//        }
+        return flag;
+    }
 }

@@ -7,12 +7,12 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true">
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true">
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:paddingBottom="@dimen/layout_60dp">
 
             <LinearLayout
@@ -27,7 +27,6 @@
                 android:orientation="vertical"
                 android:padding="@dimen/layout_5dp">
 
-
                 <LinearLayout
                     android:id="@+id/ll_scan_locator"
                     style="@style/itemstyle"
@@ -37,16 +36,14 @@
                     <TextView
                         android:id="@+id/tv_locator"
                         style="@style/app_text_inwhite"
-                        android:layout_width="@dimen/layout_70dp"
+                        android:layout_width="@dimen/layout_60dp"
                         android:layout_height="wrap_content"
-                        android:layout_centerVertical="true"
                         android:text="@string/locator" />
 
                     <EditText
                         android:id="@+id/et_scan_locator"
                         android:layout_width="@dimen/layout_0dp"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="@dimen/layout_10dp"
                         android:layout_weight="1"
                         android:background="@null"
                         android:singleLine="true"
@@ -62,7 +59,36 @@
                 </LinearLayout>
 
                 <View style="@style/fg_line_style" />
+                <LinearLayout
+                    android:id="@+id/ll_tray"
+                    style="@style/search_scan_style"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:visibility="gone">
 
+                    <TextView
+                        android:id="@+id/tv_tray"
+                        style="@style/app_text_inwhite"
+                        android:layout_width="@dimen/layout_60dp"
+                        android:layout_height="wrap_content"
+                        android:text="@string/tray" />
+
+                    <EditText
+                        android:id="@+id/et_tray"
+                        android:layout_width="@dimen/layout_0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:background="@null"
+                        android:singleLine="true"
+                        android:textColor="@color/black_32"
+                        android:textCursorDrawable="@drawable/et_cursor_yellow"
+                        android:textSize="@dimen/textSize_14sp" />
+                </LinearLayout>
+
+                <View
+                    android:id="@+id/line_tray"
+                    style="@style/ry_line_style"
+                    android:visibility="gone" />
                 <LinearLayout
                     android:id="@+id/ll_barcode_no"
                     style="@style/itemstyle"
@@ -72,16 +98,14 @@
                     <TextView
                         android:id="@+id/tv_barcode_no"
                         style="@style/app_text_inwhite"
-                        android:layout_width="@dimen/layout_70dp"
+                        android:layout_width="@dimen/layout_60dp"
                         android:layout_height="wrap_content"
-                        android:layout_centerVertical="true"
                         android:text="@string/barcode" />
 
                     <EditText
                         android:id="@+id/et_barcode_no"
                         android:layout_width="@dimen/layout_0dp"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="@dimen/layout_10dp"
                         android:layout_weight="1"
                         android:background="@null"
                         android:singleLine="true"
@@ -101,9 +125,8 @@
                     <TextView
                         android:id="@+id/tv_number"
                         style="@style/app_text_inwhite"
-                        android:layout_width="@dimen/layout_70dp"
+                        android:layout_width="@dimen/layout_60dp"
                         android:layout_height="wrap_content"
-                        android:layout_centerVertical="true"
                         android:text="@string/num" />
 
                     <EditText
@@ -111,7 +134,6 @@
                         style="@style/text_hint_style"
                         android:layout_width="@dimen/layout_0dp"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="@dimen/layout_10dp"
                         android:layout_weight="1"
                         android:background="@null"
                         android:hint="@string/input_num"
@@ -132,9 +154,8 @@
                     <TextView
                         android:id="@+id/tv_hasScan"
                         style="@style/app_text_inwhite"
-                        android:layout_width="@dimen/layout_70dp"
+                        android:layout_width="@dimen/layout_60dp"
                         android:layout_height="wrap_content"
-                        android:layout_centerVertical="true"
                         android:text="@string/scaned_numb" />
 
                     <TextView
@@ -142,7 +163,6 @@
                         style="@style/ser_text_inwhite"
                         android:layout_width="@dimen/layout_0dp"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="@dimen/layout_10dp"
                         android:layout_weight="1" />
 
                 </LinearLayout>

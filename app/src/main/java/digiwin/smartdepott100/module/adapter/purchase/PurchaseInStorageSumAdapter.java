@@ -11,7 +11,7 @@ import digiwin.smartdepott100.R;
 import digiwin.smartdepott100.module.bean.common.ListSumBean;
 
 /**
- * @des      生产完配货汇总adapter
+ * @des      扫码入库汇总adapter
  * @author  唐孟宇
  * @date    2017/3/02
  */

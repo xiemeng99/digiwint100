@@ -101,7 +101,6 @@ public class QuickStorageActivity extends BaseFirstModuldeActivity {
                     @Override
                     public void onCallback1() {
                         showLoadingDialog();
-                        LogUtils.e(TAG,"快速入库---------"+checkedList.size());
                         List<ListSumBean> commitList = new ArrayList<ListSumBean>();
                         for (int i = 0; i < checkedList.size(); i++) {
                             if (!StringUtils.isBlank(checkedList.get(i).getScan_sumqty()) ||
@@ -165,6 +164,7 @@ public class QuickStorageActivity extends BaseFirstModuldeActivity {
                 showLoadingDialog();
                 ClickItemPutBean putBean = new ClickItemPutBean();
                 putBean.setDoc_no(String.valueOf(msg.obj));
+
 //                putBean.setWarehouse_in_no(LoginLogic.getWare());
                 quickStorageLogic.getQuickStorageOrderSumData(putBean, new CommonLogic.GetOrderSumListener() {
                     @Override

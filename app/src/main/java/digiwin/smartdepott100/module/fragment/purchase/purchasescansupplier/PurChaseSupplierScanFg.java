@@ -2,6 +2,7 @@ package digiwin.smartdepott100.module.fragment.purchase.purchasescansupplier;
 
 import android.os.Handler;
 import android.os.Message;
+import android.text.method.TextKeyListener;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -55,14 +56,14 @@ public class PurChaseSupplierScanFg extends BaseFragment {
      * 条码
      */
     @BindView(R.id.et_scan_barocde)
-    EditText et_scan_barocde;
+    EditText etScanBarocde;
 
 
     /**
      * 数量
      */
     @BindView(R.id.et_input_num)
-    EditText et_input_num;
+    EditText etInputNum;
 
     /**
      * 保存按钮
@@ -71,7 +72,7 @@ public class PurChaseSupplierScanFg extends BaseFragment {
     Button save;
 
     @BindView(R.id.ll_scan_barcode)
-    LinearLayout ll_scan_barcode;
+    LinearLayout llScanBarcode;
     @BindView(R.id.tv_number)
     TextView tvNumber;
     @BindView(R.id.ll_input_num)
@@ -97,7 +98,17 @@ public class PurChaseSupplierScanFg extends BaseFragment {
      * 已扫描量
      */
     @BindView(R.id.tv_scaned_num)
-    TextView tv_scaned_num;
+    TextView tvScanedNum;
+
+    @BindView(R.id.tv_tray)
+    TextView tvTray;
+    @BindView(R.id.et_tray)
+    EditText etTray;
+    @BindView(R.id.ll_tray)
+    LinearLayout llTray;
+    @BindView(R.id.line_tray)
+    View lineTray;
+
 
     /**
      * 条码展示
@@ -117,10 +128,16 @@ public class PurChaseSupplierScanFg extends BaseFragment {
 
     PurchaseSupplierLogic supplierLogic;
 
+    @OnFocusChange(R.id.et_tray)
+    void trayFocusChanage() {
+        ModuleUtils.viewChange(llTray, views);
+        ModuleUtils.etChange(activity, etTray, editTexts);
+        ModuleUtils.tvChange(activity, tvTray, textViews);
+    }
     @OnFocusChange(R.id.et_scan_barocde)
     void barcodeFocusChanage() {
-        ModuleUtils.viewChange(ll_scan_barcode, views);
-        ModuleUtils.etChange(activity, et_scan_barocde, editTexts);
+        ModuleUtils.viewChange(llScanBarcode, views);
+        ModuleUtils.etChange(activity, etScanBarocde, editTexts);
         ModuleUtils.tvChange(activity, tvBarcode, textViews);
     }
 
@@ -128,7 +145,7 @@ public class PurChaseSupplierScanFg extends BaseFragment {
     @OnFocusChange(R.id.et_input_num)
     void numFocusChanage() {
         ModuleUtils.viewChange(llInputNum, views);
-        ModuleUtils.etChange(activity, et_input_num, editTexts);
+        ModuleUtils.etChange(activity, etInputNum, editTexts);
         ModuleUtils.tvChange(activity, tvNumber, textViews);
     }
 
@@ -146,13 +163,13 @@ public class PurChaseSupplierScanFg extends BaseFragment {
             showFailedDialog(R.string.scan_barcode);
             return;
         }
-        if (StringUtils.isBlank(et_input_num.getText().toString())) {
+        if (StringUtils.isBlank(etInputNum.getText().toString())) {
             showFailedDialog(R.string.input_num);
             return;
         }
         saveBean.setDoc_no(orderBean.getDoc_no());
         saveBean.setWarehouse_in_no(LoginLogic.getWare());
-        saveBean.setQty(et_input_num.getText().toString());
+        saveBean.setQty(etInputNum.getText().toString());
         showLoadingDialog();
         supplierLogic.scanSave(saveBean, new CommonLogic.SaveListener() {
             @Override
@@ -185,14 +202,16 @@ public class PurChaseSupplierScanFg extends BaseFragment {
                     barcodeMap.put(AddressContants.WAREHOUSE_NO,LoginLogic.getWare());
                     barcodeMap.put(AddressContants.DOC_NO,orderBean.getDoc_no());
                     barcodeMap.put(AddressContants.STORAGE_SPACES_NO,saveBean.getStorage_spaces_no());
+                    etScanBarocde.setKeyListener(null);
                     supplierLogic.scanBarcode(barcodeMap, new CommonLogic.ScanBarcodeListener() {
                         @Override
                         public void onSuccess(ScanBarcodeBackBean barcodeBackBean) {
+                            etScanBarocde.setKeyListener(new TextKeyListener(TextKeyListener.Capitalize.CHARACTERS, true));
                             barcodeShow = barcodeBackBean.getShowing();
                             if(!StringUtils.isBlank(barcodeBackBean.getBarcode_qty())){
-                                et_input_num.setText(StringUtils.deleteZero(barcodeBackBean.getBarcode_qty()));
+                                etInputNum.setText(StringUtils.deleteZero(barcodeBackBean.getBarcode_qty()));
                             }
-                            tv_scaned_num.setText(barcodeBackBean.getScan_sumqty());
+                            tvScanedNum.setText(barcodeBackBean.getScan_sumqty());
                             barcodeFlag = true;
                             show();
                             saveBean.setQty(barcodeBackBean.getBarcode_qty());
@@ -203,7 +222,7 @@ public class PurChaseSupplierScanFg extends BaseFragment {
                             saveBean.setScan_sumqty(barcodeBackBean.getScan_sumqty());
                             saveBean.setAvailable_in_qty(barcodeBackBean.getAvailable_in_qty());
                             saveBean.setItem_barcode_type(barcodeBackBean.getItem_barcode_type());
-                            et_input_num.requestFocus();
+                            etInputNum.requestFocus();
                             if (CommonUtils.isAutoSave(saveBean)){
                                 save();
                             }
@@ -211,11 +230,12 @@ public class PurChaseSupplierScanFg extends BaseFragment {
 
                         @Override
                         public void onFailed(String error) {
+                            etScanBarocde.setKeyListener(new TextKeyListener(TextKeyListener.Capitalize.CHARACTERS, true));
                             barcodeFlag = false;
                             showFailedDialog(error, new OnDialogClickListener() {
                                 @Override
                                 public void onCallback() {
-                                    et_scan_barocde.setText("");
+                                    etScanBarocde.setText("");
                                 }
                             });
                         }
@@ -255,10 +275,10 @@ public class PurChaseSupplierScanFg extends BaseFragment {
      * 保存完成之后的操作
      */
     private void clear() {
-        tv_scaned_num.setText(saveBean.getScan_sumqty());
-        et_scan_barocde.setText("");
-        et_scan_barocde.requestFocus();
-        et_input_num.setText("");
+        tvScanedNum.setText(saveBean.getScan_sumqty());
+        etScanBarocde.setText("");
+        etScanBarocde.requestFocus();
+        etInputNum.setText("");
         barcodeShow = "";
         show();
     }
@@ -267,36 +287,25 @@ public class PurChaseSupplierScanFg extends BaseFragment {
      * 初始化一些变量
      */
     public void initData() {
-        tv_scaned_num.setText("");
-        et_scan_barocde.setText("");
+        tvScanedNum.setText("");
+        etScanBarocde.setText("");
         barcodeShow = "";
         show();
         barcodeFlag = false;
         saveBean = new SaveBean();
         supplierLogic = PurchaseSupplierLogic.getInstance(context, pactivity.module, pactivity.mTimestamp.toString());
         orderBean = (FilterResultOrderBean) pactivity.getIntent().getExtras().getSerializable(AddressContants.ORDERDATA);
-        et_scan_barocde.requestFocus();
-        delete();
+        etScanBarocde.requestFocus();
+        if (CommonUtils.isUseTray()){
+            llTray.setVisibility(View.VISIBLE);
+            lineTray.setVisibility(View.VISIBLE);
+            etTray.requestFocus();
+        }else {
+            llTray.setVisibility(View.GONE);
+            lineTray.setVisibility(View.GONE);
+        }
     }
 
-    /**
-     * 进入界面先清空后台存的表
-     */
-    private void delete() {
-        Map<String,String> map = new HashMap<>();
-        map.put(AddressContants.FLAG, BaseFirstModuldeActivity.ExitMode.EXITD.getName());
-        supplierLogic.exit(map, new PurchaseGoodScanLogic.ExitListener() {
-            @Override
-            public void onSuccess(String msg) {
-
-            }
-
-            @Override
-            public void onFailed(String error) {
-
-            }
-        });
-    }
 
     @Override
     public void onDestroy() {

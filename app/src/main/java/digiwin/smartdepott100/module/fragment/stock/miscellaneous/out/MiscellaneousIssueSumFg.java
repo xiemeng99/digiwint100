@@ -114,12 +114,8 @@ public class MiscellaneousIssueSumFg extends BaseFragment {
     public void upDateList() {
         try {
             HashMap<String,String> map = new HashMap<>();
-            map.put("doc_no",orderData.getDoc_no());
-            AccoutBean accoutBean= LoginLogic.getUserInfo();
-            if (accoutBean!=null) {
-                map.put("warehouse_no", accoutBean.getWare());
-            }
-            map.put("create_date",orderData.getCreate_date());
+            map.put(AddressContants.DOC_NO,orderData.getDoc_no());
+            map.put(AddressContants.WAREHOUSE_NO, LoginLogic.getWare());
             showLoadingDialog();
             commonLogic.getMIISumData(map, new CommonLogic.GetZSumListener() {
                 @Override
@@ -218,7 +214,6 @@ public class MiscellaneousIssueSumFg extends BaseFragment {
                     public void onCallback() {
                         sumShowBeanList = new ArrayList<ListSumBean>();
                         adapter = new MiscellaneousOutSumAdapter(mactivity,sumShowBeanList);
-
                         ryList.setAdapter(adapter);
                         mactivity.createNewModuleId(mactivity.module);
                         tv_head_plan_date.setText("");
@@ -228,6 +223,7 @@ public class MiscellaneousIssueSumFg extends BaseFragment {
                         mactivity.mZXVp.setCurrentItem(0);
                         mactivity.scanFg.initData();
                         initData();
+                        mactivity.finish();
                     }
                 });
             }

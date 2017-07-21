@@ -17,7 +17,6 @@ import butterknife.OnClick;
 import digiwin.smartdepott100.R;
 import digiwin.smartdepott100.core.appcontants.AddressContants;
 import digiwin.smartdepott100.core.base.BaseFragment;
-import digiwin.smartdepott100.login.bean.AccoutBean;
 import digiwin.smartdepott100.login.loginlogic.LoginLogic;
 import digiwin.smartdepott100.module.activity.common.CommonDetailActivity;
 import digiwin.smartdepott100.module.activity.purchase.purchaseinstore.PurchaseInStoreActivity;
@@ -67,6 +66,7 @@ public class PurchaseInStoreSumFg extends BaseFragment {
             public void onCallback1() {
                 sureCommit();
             }
+
             @Override
             public void onCallback2() {
 
@@ -85,9 +85,10 @@ public class PurchaseInStoreSumFg extends BaseFragment {
     List<ListSumBean> sumShowBeanList;
 
     FilterResultOrderBean orderData;
+
     @Override
     protected int bindLayoutId() {
-        return R.layout.activity_purchase_in_store_sum;
+        return R.layout.fg_purchase_in_store_sum;
     }
 
     @Override
@@ -111,18 +112,14 @@ public class PurchaseInStoreSumFg extends BaseFragment {
         try {
             ClickItemPutBean clickItemPutData = new ClickItemPutBean();
             clickItemPutData.setDoc_no(orderData.getDoc_no());
-            AccoutBean accoutBean = LoginLogic.getUserInfo();
-            if(null != accoutBean){
-                clickItemPutData.setWarehouse_in_no(accoutBean.getWare());
-            }
-            clickItemPutData.setReceipt_date(orderData.getCreate_date());
+            clickItemPutData.setWarehouse_in_no(LoginLogic.getWare());
             showLoadingDialog();
             commonLogic.getPISSumData(clickItemPutData, new PurchaseInStoreLogic.GetZSumListener() {
                 @Override
                 public void onSuccess(List<ListSumBean> list) {
                     dismissLoadingDialog();
                     sumShowBeanList = list;
-                    if(list.size()>0){
+                    if (list.size() > 0) {
                         tv_head_plan_date.setText(list.get(0).getCreate_date());
                         tv_head_post_order.setText(list.get(0).getDoc_no());
                         tv_head_provider.setText(list.get(0).getSupplier_name());
@@ -135,7 +132,7 @@ public class PurchaseInStoreSumFg extends BaseFragment {
 
                 @Override
                 public void onFailed(String error) {
-                   dismissLoadingDialog();
+                    dismissLoadingDialog();
                     upDateFlag = false;
                     try {
                         showFailedDialog(error);
@@ -151,6 +148,7 @@ public class PurchaseInStoreSumFg extends BaseFragment {
             LogUtils.e(TAG, "updateList--getSum--Exception" + e);
         }
     }
+
     /**
      * 查看单笔料明细
      */
@@ -199,7 +197,7 @@ public class PurchaseInStoreSumFg extends BaseFragment {
         });
     }
 
-    private void sureCommit(){
+    private void sureCommit() {
         if (!upDateFlag) {
             showFailedDialog(R.string.nodate);
             return;

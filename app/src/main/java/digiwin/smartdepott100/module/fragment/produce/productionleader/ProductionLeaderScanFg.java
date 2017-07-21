@@ -86,24 +86,24 @@ public class ProductionLeaderScanFg extends BaseFragment {
      * 已扫量
      */
     @BindView(R.id.tv_swept_volume)
-    TextView tv_swept_volume;
+    TextView tvSweptVolume;
 
-    @BindViews({R.id.et_barcode_no, R.id.et_scan_locator, R.id.et_input_num})
+    @BindViews({R.id.et_tray,R.id.et_barcode_no, R.id.et_scan_locator, R.id.et_input_num})
     List<EditText> editTexts;
-    @BindViews({R.id.ll_barcode_no, R.id.ll_scan_locator, R.id.ll_input_num})
+    @BindViews({R.id.ll_tray,R.id.ll_barcode_no, R.id.ll_scan_locator, R.id.ll_input_num})
     List<View> views;
-    @BindViews({R.id.tv_barcode_no_string, R.id.tv_locator, R.id.tv_number})
+    @BindViews({R.id.tv_tray,R.id.tv_barcode_no_string, R.id.tv_locator, R.id.tv_number})
     List<TextView> textViews;
 
     /**
      * 物料条码
      */
     @BindView(R.id.tv_barcode_no_string)
-    TextView tv_barcode_no_string;
+    TextView tvBarcodeNoString;
     @BindView(R.id.et_barcode_no)
-    EditText et_barcode_no;
+    EditText etBarcodeNo;
     @BindView(R.id.ll_barcode_no)
-    LinearLayout ll_barcode_no;
+    LinearLayout llBarcodeNo;
 
     /**
      * 库位
@@ -124,14 +124,24 @@ public class ProductionLeaderScanFg extends BaseFragment {
     @BindView(R.id.ll_input_num)
     LinearLayout llInputNum;
 
+    @BindView(R.id.tv_tray)
+    TextView tvTray;
+    @BindView(R.id.et_tray)
+    EditText etTray;
+    @BindView(R.id.ll_tray)
+    LinearLayout llTray;
+    @BindView(R.id.line_tray)
+    View lineTray;
+
+
     @BindView(R.id.cb_locatorlock)
     CheckBox cbLocatorlock;
 
     @OnFocusChange(R.id.et_barcode_no)
     void barcodeFocusChanage() {
-        ModuleUtils.viewChange(ll_barcode_no, views);
-        ModuleUtils.etChange(activity, et_barcode_no, editTexts);
-        ModuleUtils.tvChange(activity, tv_barcode_no_string, textViews);
+        ModuleUtils.viewChange(llBarcodeNo, views);
+        ModuleUtils.etChange(activity, etBarcodeNo, editTexts);
+        ModuleUtils.tvChange(activity, tvBarcodeNoString, textViews);
     }
 
     @OnCheckedChanged(R.id.cb_locatorlock)
@@ -141,6 +151,13 @@ public class ProductionLeaderScanFg extends BaseFragment {
         } else {
             etScanLocator.setKeyListener(new TextKeyListener(TextKeyListener.Capitalize.CHARACTERS, true));
         }
+    }
+
+    @OnFocusChange(R.id.et_tray)
+    void trayFocusChanage() {
+        ModuleUtils.viewChange(llTray, views);
+        ModuleUtils.etChange(activity, etTray, editTexts);
+        ModuleUtils.tvChange(activity, tvTray, textViews);
     }
 
     @OnFocusChange(R.id.et_scan_locator)
@@ -196,7 +213,7 @@ public class ProductionLeaderScanFg extends BaseFragment {
             @Override
             public void onSuccess(SaveBackBean saveBackBean) {
                 dismissLoadingDialog();
-                tv_swept_volume.setText(saveBackBean.getScan_sumqty());
+                tvSweptVolume.setText(saveBackBean.getScan_sumqty());
                 clear();
             }
 
@@ -224,7 +241,7 @@ public class ProductionLeaderScanFg extends BaseFragment {
         barcodeShow = "";
         locatorShow = "";
         etInputNum.setText("");
-        et_barcode_no.setText("");
+        etBarcodeNo.setText("");
 
         if(cbLocatorlock.isChecked()){
             if(StringUtils.isBlank(etScanLocator.getText().toString().trim())){
@@ -232,7 +249,7 @@ public class ProductionLeaderScanFg extends BaseFragment {
             }
 
             barcodeFlag = false;
-            et_barcode_no.requestFocus();
+            etBarcodeNo.requestFocus();
         }else if(!cbLocatorlock.isChecked()){
             locatorFlag = false;
             barcodeFlag = false;
@@ -249,13 +266,15 @@ public class ProductionLeaderScanFg extends BaseFragment {
                 case LOCATORWHAT:
                     HashMap<String, String> locatorMap = new HashMap<>();
                     locatorMap.put(AddressContants.STORAGE_SPACES_BARCODE, String.valueOf(msg.obj));
+                    etScanLocator.setKeyListener(null);
                     commonLogic.scanLocator(locatorMap, new CommonLogic.ScanLocatorListener() {
                         @Override
                         public void onSuccess(ScanLocatorBackBean locatorBackBean) {
+                            etScanLocator.setKeyListener(new TextKeyListener(TextKeyListener.Capitalize.CHARACTERS, true));
                             locatorFlag = true;
                             saveBean.setStorage_spaces_out_no(locatorBackBean.getStorage_spaces_no());
                             saveBean.setWarehouse_out_no(locatorBackBean.getWarehouse_no());
-                            et_barcode_no.requestFocus();
+                            etBarcodeNo.requestFocus();
                             locatorShow = locatorBackBean.getShowing();
                             show();
                             if (CommonUtils.isAutoSave(saveBean)){
@@ -265,6 +284,7 @@ public class ProductionLeaderScanFg extends BaseFragment {
 
                         @Override
                         public void onFailed(String error) {
+                            etScanLocator.setKeyListener(new TextKeyListener(TextKeyListener.Capitalize.CHARACTERS, true));
                             showFailedDialog(error, new OnDialogClickListener() {
                                 @Override
                                 public void onCallback() {
@@ -283,9 +303,11 @@ public class ProductionLeaderScanFg extends BaseFragment {
                     barcodeMap.put(AddressContants.DOC_NO, localData.getDoc_no());
                     barcodeMap.put(AddressContants.WAREHOUSE_NO, LoginLogic.getWare());
                     barcodeMap.put(AddressContants.STORAGE_SPACES_NO,saveBean.getStorage_spaces_out_no());
+                    etBarcodeNo.setKeyListener(null);
                     commonLogic.scanBarcode(barcodeMap, new CommonLogic.ScanBarcodeListener() {
                         @Override
                         public void onSuccess(ScanBarcodeBackBean barcodeBackBean) {
+                            etBarcodeNo.setKeyListener(new TextKeyListener(TextKeyListener.Capitalize.CHARACTERS, true));
                             if(StringUtils.isBlank(etScanLocator.getText().toString())){
                                 showFailedDialog(getResources().getString(R.string.scan_locator));
                                 return;
@@ -295,12 +317,13 @@ public class ProductionLeaderScanFg extends BaseFragment {
 
                         @Override
                         public void onFailed(String error) {
+                            etBarcodeNo.setKeyListener(new TextKeyListener(TextKeyListener.Capitalize.CHARACTERS, true));
                             barcodeFlag = false;
                             showFailedDialog(error, new OnDialogClickListener() {
                                 @Override
                                 public void onCallback() {
-                                    et_barcode_no.setText("");
-                                    et_barcode_no.requestFocus();
+                                    etBarcodeNo.setText("");
+                                    etBarcodeNo.requestFocus();
                                 }
                             });
                         }
@@ -320,7 +343,7 @@ public class ProductionLeaderScanFg extends BaseFragment {
     public void showBarcode(ScanBarcodeBackBean barcodeBackBean){
         barcodeShow = barcodeBackBean.getShowing();
 
-        tv_swept_volume.setText(StringUtils.deleteZero(barcodeBackBean.getScan_sumqty()));
+        tvSweptVolume.setText(StringUtils.deleteZero(barcodeBackBean.getScan_sumqty()));
         etInputNum.setText(StringUtils.deleteZero(barcodeBackBean.getBarcode_qty()));
         barcodeFlag = true;
         saveBean.setAvailable_in_qty(barcodeBackBean.getAvailable_in_qty());
@@ -352,26 +375,26 @@ public class ProductionLeaderScanFg extends BaseFragment {
 
     public void upDateList() {
         if(cbLocatorlock.isChecked()){
-            et_barcode_no.requestFocus();
+            etBarcodeNo.requestFocus();
         }
         if(!cbLocatorlock.isChecked() && StringUtils.isBlank(etScanLocator.getText().toString())){
             etScanLocator.requestFocus();
-        }else if(StringUtils.isBlank(et_barcode_no.getText().toString().trim())){
-            et_barcode_no.requestFocus();
+        }else if(StringUtils.isBlank(etBarcodeNo.getText().toString().trim())){
+            etBarcodeNo.requestFocus();
         }else if(StringUtils.isBlank(etInputNum.getText().toString().trim())){
             etInputNum.requestFocus();
         }
-        tv_swept_volume.setText("");
+        tvSweptVolume.setText("");
     }
 
     /**
      * 初始化一些变量
      */
     private void initData() {
-        et_barcode_no.setText("");
+        etBarcodeNo.setText("");
         etScanLocator.setText("");
         tvDetailShow.setText("");
-        tv_swept_volume.setText("");
+        tvSweptVolume.setText("");
 
         barcodeFlag = false;
         locatorFlag = false;
@@ -381,6 +404,14 @@ public class ProductionLeaderScanFg extends BaseFragment {
         FilterResultOrderBean data = (FilterResultOrderBean) getActivity().getIntent().getSerializableExtra("data");
         localData = new FilterResultOrderBean();
         localData = data;
+        if (CommonUtils.isUseTray()){
+            llTray.setVisibility(View.VISIBLE);
+            lineTray.setVisibility(View.VISIBLE);
+        }else {
+            llTray.setVisibility(View.GONE);
+            lineTray.setVisibility(View.GONE);
+        }
+
     }
 
     /**
