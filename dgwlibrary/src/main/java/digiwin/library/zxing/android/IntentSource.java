@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2009 ZXing authors
+ * Copyright (C) 2011 ZXing authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,21 +14,13 @@
  * limitations under the License.
  */
 
-package digiwin.library.zxing.view;
+package digiwin.library.zxing.android;
 
-import com.google.zxing.ResultPoint;
-import com.google.zxing.ResultPointCallback;
+public enum IntentSource {
 
-public final class ViewfinderResultPointCallback implements ResultPointCallback {
-
-  private final ViewfinderView viewfinderView;
-
-  public ViewfinderResultPointCallback(ViewfinderView viewfinderView) {
-    this.viewfinderView = viewfinderView;
-  }
-
-  public void foundPossibleResultPoint(ResultPoint point) {
-    viewfinderView.addPossibleResultPoint(point);
-  }
+  NATIVE_APP_INTENT,
+  PRODUCT_SEARCH_LINK,
+  ZXING_LINK,
+  NONE
 
 }

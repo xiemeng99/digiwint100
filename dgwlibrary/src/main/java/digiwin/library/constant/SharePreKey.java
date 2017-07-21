@@ -45,8 +45,10 @@ public interface SharePreKey {
     * 轮播时间
     */
    static final  String REPEATTIME="repeattime";
-
-
+   /**
+    * 托盘key值
+    */
+   static final String TRAY_SETTING="tray_setting";
 
 
 }

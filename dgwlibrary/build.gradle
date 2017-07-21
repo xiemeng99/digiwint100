@@ -36,7 +36,6 @@ dependencies {
     compile 'com.squareup.okio:okio:1.5.0'
     //    /*butterknife 7.0.1*/
     //    compile 'com.jakewharton:butterknife:7.0.1'
-    compile files('libs/zxing.jar')
     compile files('libs/xstream-1.4.7.jar')
     /*友盟统计*/
     compile 'com.umeng.analytics:analytics:latest.integration'
@@ -56,6 +55,7 @@ dependencies {
     //eventbus
     compile 'org.greenrobot:eventbus:3.0.0'
     compile files('libs/gestureimageview.jar')
+    compile files('libs/core-3.1.0.jar')
 }
 //指定编码
 tasks.withType(JavaCompile) {
