@@ -29,7 +29,7 @@ public class StoreQueryBacodeAdapter extends BaseRecyclerAdapter<ListSumBean>{
     @Override
     protected void bindData(RecyclerViewHolder holder, int position, ListSumBean item) {
         holder.setText(R.id.tv_item_no,item.getItem_no());
-        holder.setText(R.id.tv_item_name_unit_no,item.getItem_name()+"/"+item.getStock_unit_no());
+        holder.setText(R.id.tv_item_name_unit_no,item.getItem_name());
         holder.setText(R.id.tv_item_spec,item.getItem_spec());
         holder.setText(R.id.tv_barcode_no,item.getBarcode_no());
         holder.setText(R.id.tv_store_locator,item.getWarehouse_storage());

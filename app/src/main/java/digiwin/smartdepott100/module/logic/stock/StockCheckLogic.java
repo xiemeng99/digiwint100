@@ -12,6 +12,7 @@ import digiwin.smartdepott100.core.json.JsonReqForERP;
 import digiwin.smartdepott100.core.net.IRequestCallbackImp;
 import digiwin.smartdepott100.core.net.OkhttpRequest;
 import digiwin.smartdepott100.module.bean.common.FilterResultOrderBean;
+import digiwin.smartdepott100.module.bean.produce.InBinningBean;
 import digiwin.smartdepott100.module.logic.common.CommonLogic;
 import digiwin.library.json.JsonResp;
 import digiwin.library.utils.LogUtils;
@@ -38,12 +39,12 @@ public class StockCheckLogic extends CommonLogic {
     /**
      * 盘点获取列表数据
      */
-    public void getStockCheckList(final Map<String, String> map, final GetDataListListener listener) {
+    public void getStockCheckList(final InBinningBean filterBean, final GetDataListListener listener) {
         ThreadPoolManager.getInstance().executeTask(new Runnable() {
             @Override
             public void run() {
                 try {
-                    String createJson = JsonReqForERP.mapCreateJson(mModule, "als.c005.list.get", mTimestamp, map);
+                    String createJson = JsonReqForERP.objCreateJson(mModule, "als.c005.list.get", mTimestamp, filterBean);
                     OkhttpRequest.getInstance(mContext).post(createJson, new IRequestCallbackImp() {
                         @Override
                         public void onResponse(String string) {

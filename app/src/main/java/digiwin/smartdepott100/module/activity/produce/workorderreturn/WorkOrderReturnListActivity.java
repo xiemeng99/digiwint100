@@ -296,7 +296,16 @@ public class WorkOrderReturnListActivity extends BaseTitleActivity {
             llSearchInput.setVisibility(View.GONE);
             adapter = new WorkOrderReturnListAdapter(activity, list);
             ryList.setAdapter(adapter);
-            itemClick();
+            adapter.setOnItemClickListener(new OnItemClickListener() {
+                @Override
+                public void onItemClick(View itemView, final int position) {
+                    itemClick(list,position);
+                }
+            });
+            if (autoSkip&&list.size() == 1) {
+                itemClick(list, 0);
+            }
+            autoSkip=true;
         } catch (Exception e) {
             LogUtils.e(TAG, "showDatas---Exception>" + e);
         }
@@ -305,19 +314,14 @@ public class WorkOrderReturnListActivity extends BaseTitleActivity {
     /**
      * 点击条目
      */
-    private void itemClick() {
-        adapter.setOnItemClickListener(new OnItemClickListener() {
-            @Override
-            public void onItemClick(View itemView, final int position) {
-                try {
-                    Bundle bundle = new Bundle();
-                    bundle.putSerializable(WorkOrderReturnListActivity.filterBean, list.get(position));
-                    ActivityManagerUtils.startActivityBundleForResult(activity, WorkOrderReturnActivity.class, bundle, TOCOMMIT);
-                    dismissLoadingDialog();
-                } catch (Exception e) {
-                    LogUtils.e(TAG, "itemClick" + e);
-                }
-            }
-        });
+    private void itemClick(List<FilterResultOrderBean> clickBeen, int position) {
+        try {
+            Bundle bundle = new Bundle();
+            bundle.putSerializable(WorkOrderReturnListActivity.filterBean, clickBeen.get(position));
+            ActivityManagerUtils.startActivityBundleForResult(activity, WorkOrderReturnActivity.class, bundle, TOCOMMIT);
+            dismissLoadingDialog();
+        } catch (Exception e) {
+            LogUtils.e(TAG, "itemClick" + e);
+        }
     }
 }

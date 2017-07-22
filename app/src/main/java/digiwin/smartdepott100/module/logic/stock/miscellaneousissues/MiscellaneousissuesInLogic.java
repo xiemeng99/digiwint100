@@ -10,6 +10,7 @@ import digiwin.smartdepott100.core.appcontants.ReqTypeName;
 import digiwin.smartdepott100.core.json.JsonReqForERP;
 import digiwin.smartdepott100.core.net.IRequestCallbackImp;
 import digiwin.smartdepott100.core.net.OkhttpRequest;
+import digiwin.smartdepott100.module.bean.common.FilterBean;
 import digiwin.smartdepott100.module.bean.common.FilterResultOrderBean;
 import digiwin.smartdepott100.module.bean.common.ListSumBean;
 import digiwin.smartdepott100.module.logic.common.CommonLogic;
@@ -39,12 +40,12 @@ public class MiscellaneousissuesInLogic extends CommonLogic {
      *
      * @param map
      */
-    public void getMIIListData(final Map<String, String> map, final GetDataListListener listener) {
+    public void getMIIListData(final FilterBean bean, final GetDataListListener listener) {
         ThreadPoolManager.getInstance().executeTask(new Runnable() {
             @Override
             public void run() {
                 try {
-                    String createJson = JsonReqForERP.mapCreateJson(mModule, "als.c008.list.get", mTimestamp, map);
+                    String createJson = JsonReqForERP.objCreateJson(mModule, "als.c008.list.get", mTimestamp, bean);
                     OkhttpRequest.getInstance(mContext).post(createJson, new IRequestCallbackImp() {
                         @Override
                         public void onResponse(String s) {

@@ -38,11 +38,11 @@ import digiwin.pulltorefreshlibrary.recyclerviewAdapter.OnItemClickListener;
 
 /**
  * @author xiemeng
- * @des  入库上架
+ * @des 入库上架
  * @date 2017/5/26 14:09
  */
 
-public class ZPutInStoreActivity  extends BaseTitleActivity {
+public class ZPutInStoreActivity extends BaseTitleActivity {
 
     /**
      * 标题
@@ -50,11 +50,11 @@ public class ZPutInStoreActivity  extends BaseTitleActivity {
     @BindView(R.id.toolbar_title)
     Toolbar toolbarTitle;
 
-    @BindViews({R.id.et_plan_date,R.id.et_instore_order,R.id.et_department,R.id.et_employee_no})
+    @BindViews({R.id.et_plan_date, R.id.et_instore_order, R.id.et_department, R.id.et_employee_no})
     List<EditText> editTexts;
-    @BindViews({R.id.ll_plan_date,R.id.ll_in_store_order,R.id.ll_department,R.id.ll_employee_no})
+    @BindViews({R.id.ll_plan_date, R.id.ll_in_store_order, R.id.ll_department, R.id.ll_employee_no})
     List<View> views;
-    @BindViews({R.id.tv_plan_date,R.id.tv_in_store_order,R.id.tv_department,R.id.tv_employee_no})
+    @BindViews({R.id.tv_plan_date, R.id.tv_in_store_order, R.id.tv_department, R.id.tv_employee_no})
     List<TextView> textViews;
 
     /**
@@ -80,6 +80,7 @@ public class ZPutInStoreActivity  extends BaseTitleActivity {
         ModuleUtils.etChange(activity, et_instore_order, editTexts);
         ModuleUtils.tvChange(activity, tv_in_store_order, textViews);
     }
+
     /**
      * 筛选框 人员
      */
@@ -103,6 +104,7 @@ public class ZPutInStoreActivity  extends BaseTitleActivity {
         ModuleUtils.etChange(activity, et_employee_no, editTexts);
         ModuleUtils.tvChange(activity, tv_employee_no, textViews);
     }
+
     /**
      * 筛选框 部门
      */
@@ -154,7 +156,7 @@ public class ZPutInStoreActivity  extends BaseTitleActivity {
     String endDate = "";
 
     @OnClick(R.id.iv_plan_date)
-    void dateClick(){
+    void dateClick() {
         DatePickerUtils.getDoubleDate(pactivity, new DatePickerUtils.GetDoubleDateListener() {
             @Override
             public void getTime(String mStartDate, String mEndDate, String showDate) {
@@ -192,7 +194,7 @@ public class ZPutInStoreActivity  extends BaseTitleActivity {
     @Override
     protected void initNavigationTitle() {
         super.initNavigationTitle();
-        mName.setText(getString(R.string.put_in_store)+getString(R.string.list));
+        mName.setText(getString(R.string.put_in_store) + getString(R.string.list));
         iv_title_setting.setVisibility(View.VISIBLE);
         iv_title_setting.setImageResource(R.drawable.search);
     }
@@ -201,16 +203,13 @@ public class ZPutInStoreActivity  extends BaseTitleActivity {
      * 弹出筛选对话框
      */
     @OnClick(R.id.iv_title_setting)
-    void SearchDialog(){
-        if(ll_search_dialog.getVisibility() == View.VISIBLE){
-            if(null != dataList && dataList.size()>0){
+    void searchDialog() {
+        if (ll_search_dialog.getVisibility() == View.VISIBLE) {
+            if (null != dataList && dataList.size() > 0) {
                 ll_search_dialog.setVisibility(View.GONE);
                 scrollview.setVisibility(View.VISIBLE);
-                adapter = new ZPutInStoreFilterResultAdapter(pactivity,dataList);
-                ryList.setAdapter(adapter);
-                onItemClick();
             }
-        }else{
+        } else {
             ll_search_dialog.setVisibility(View.VISIBLE);
             scrollview.setVisibility(View.GONE);
         }
@@ -220,7 +219,7 @@ public class ZPutInStoreActivity  extends BaseTitleActivity {
      * 点击确定，筛选
      */
     @OnClick(R.id.btn_search_sure)
-    void Search(){
+    void Search() {
         upDateList();
     }
 
@@ -248,22 +247,17 @@ public class ZPutInStoreActivity  extends BaseTitleActivity {
         logic = ZPutInStoreLogic.getInstance(pactivity, module, mTimestamp.toString());
         FullyLinearLayoutManager linearLayoutManager = new FullyLinearLayoutManager(activity);
         ryList.setLayoutManager(linearLayoutManager);
-        SearchDialog();
+        searchDialog();
     }
 
     /**
      * 点击item跳转到汇总界面
      */
-    private void onItemClick(){
-        adapter.setOnItemClickListener(new OnItemClickListener() {
-            @Override
-            public void onItemClick(View itemView, int position) {
-                final FilterResultOrderBean orderData = dataList.get(position);
-                Bundle bundle = new Bundle();
-                bundle.putSerializable(AddressContants.ORDERDATA,orderData);
-                ActivityManagerUtils.startActivityBundleForResult(pactivity,ZPutInStoreSecondActivity.class,bundle,SUMCODE);
-            }
-        });
+    private void itemClick(List<FilterResultOrderBean> clickBeen, int position) {
+        final FilterResultOrderBean orderData = clickBeen.get(position);
+        Bundle bundle = new Bundle();
+        bundle.putSerializable(AddressContants.ORDERDATA, orderData);
+        ActivityManagerUtils.startActivityBundleForResult(pactivity, ZPutInStoreSecondActivity.class, bundle, SUMCODE);
     }
 
     private List<FilterResultOrderBean> dataList;
@@ -271,6 +265,7 @@ public class ZPutInStoreActivity  extends BaseTitleActivity {
     ZPutInStoreFilterResultAdapter adapter;
 
     ZPutInStoreLogic logic;
+
     /**
      * 汇总展示
      */
@@ -283,38 +278,45 @@ public class ZPutInStoreActivity  extends BaseTitleActivity {
             //仓库
             filterBean.setWarehouse_in_no(LoginLogic.getWare());
             //入库单号
-            if(!StringUtils.isBlank(et_instore_order.getText().toString())){
+            if (!StringUtils.isBlank(et_instore_order.getText().toString())) {
                 filterBean.setDoc_no(et_instore_order.getText().toString());
             }
             //品名
-            if(!StringUtils.isBlank(et_department.getText().toString())){
+            if (!StringUtils.isBlank(et_department.getText().toString())) {
                 filterBean.setDepartment_no(et_department.getText().toString());
             }
             //人员
-            if(!StringUtils.isBlank(et_employee_no.getText().toString())){
+            if (!StringUtils.isBlank(et_employee_no.getText().toString())) {
                 filterBean.setEmployee_no(et_employee_no.getText().toString());
             }
             //计划日
-            if(!StringUtils.isBlank(et_plan_date.getText().toString())){
+            if (!StringUtils.isBlank(et_plan_date.getText().toString())) {
                 filterBean.setDate_begin(startDate);
                 filterBean.setDate_end(endDate);
             }
             showLoadingDialog();
-            logic.getPutInStoreList(filterBean, new CommonLogic.GetDataListListener(){
+            logic.getPutInStoreList(filterBean, new CommonLogic.GetDataListListener() {
                 @Override
                 public void onSuccess(List<FilterResultOrderBean> list) {
-                    if(null != list && list.size()>0){
+                    if (null != list && list.size() > 0) {
                         dismissLoadingDialog();
-                        //查询成功隐藏筛选界面，展示汇总信息
                         ll_search_dialog.setVisibility(View.GONE);
                         scrollview.setVisibility(View.VISIBLE);
                         iv_title_setting.setVisibility(View.VISIBLE);
-                        //TODO setAdapter
                         dataList.clear();
                         dataList = list;
-                        adapter = new ZPutInStoreFilterResultAdapter(pactivity,dataList);
+                        adapter = new ZPutInStoreFilterResultAdapter(pactivity, dataList);
                         ryList.setAdapter(adapter);
-                        onItemClick();
+                        adapter.setOnItemClickListener(new OnItemClickListener() {
+                            @Override
+                            public void onItemClick(View itemView, int position) {
+                                itemClick(dataList, position);
+                            }
+                        });
+                        if (autoSkip && list.size() == 1) {
+                            itemClick(dataList, 0);
+                        }
+                        autoSkip = true;
                     }
                 }
 
@@ -325,7 +327,7 @@ public class ZPutInStoreActivity  extends BaseTitleActivity {
                         showFailedDialog(error);
                         //TODO setAdapter
                         dataList = new ArrayList<FilterResultOrderBean>();
-                        adapter = new ZPutInStoreFilterResultAdapter(pactivity,dataList);
+                        adapter = new ZPutInStoreFilterResultAdapter(pactivity, dataList);
                     } catch (Exception e) {
                         LogUtils.e(TAG, "updateList--getSum--onFailed" + e);
                     }
@@ -340,13 +342,13 @@ public class ZPutInStoreActivity  extends BaseTitleActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        try{
-            if(requestCode == SUMCODE){
-                adapter = new ZPutInStoreFilterResultAdapter(pactivity,new ArrayList<FilterResultOrderBean>());
+        try {
+            if (requestCode == SUMCODE) {
+                adapter = new ZPutInStoreFilterResultAdapter(pactivity, new ArrayList<FilterResultOrderBean>());
                 ryList.setAdapter(adapter);
                 upDateList();
             }
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }

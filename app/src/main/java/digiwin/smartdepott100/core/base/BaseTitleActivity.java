@@ -1,5 +1,6 @@
 package digiwin.smartdepott100.core.base;
 
+import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -59,10 +60,14 @@ public abstract class BaseTitleActivity extends BaseActivity {
         });
     }
 
+
+    public  boolean autoSkip;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         // 竖屏
+        autoSkip=true;
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
     }
 
@@ -94,4 +99,10 @@ public abstract class BaseTitleActivity extends BaseActivity {
      */
     protected abstract Toolbar toolbar();
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        autoSkip=false;
+
+    }
 }

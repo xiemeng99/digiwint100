@@ -199,7 +199,7 @@ public class SuitPickingHalfListAcitivity extends BaseTitleActivity {
     @Override
     protected void initNavigationTitle() {
         super.initNavigationTitle();
-        mName.setText(getString(R.string.suitpickinghalf)+getString(R.string.list));
+        mName.setText(getString(R.string.suitpickinghalf) + getString(R.string.list));
         search.setVisibility(View.VISIBLE);
         search.setImageResource(R.drawable.search);
         isSearching = true;
@@ -261,35 +261,35 @@ public class SuitPickingHalfListAcitivity extends BaseTitleActivity {
      * 展示数据
      */
     private void showData() {
-        try {
-            isSearching = true;
-            ryList.setVisibility(View.VISIBLE);
-            llSearchInput.setVisibility(View.GONE);
-            adapter = new SuitPickingHalfListAdapter(activity, list);
-            ryList.setAdapter(adapter);
-            itemClick();
-        } catch (Exception e) {
-            LogUtils.e(TAG, "showDates---Exception>" + e);
+        isSearching = true;
+        ryList.setVisibility(View.VISIBLE);
+        llSearchInput.setVisibility(View.GONE);
+        adapter = new SuitPickingHalfListAdapter(activity, list);
+        ryList.setAdapter(adapter);
+        adapter.setOnItemClickListener(new OnItemClickListener() {
+            @Override
+            public void onItemClick(View itemView, final int position) {
+                itemClick(list,position);
+            }
+        });
+        if (autoSkip&&list.size() == 1) {
+            itemClick(list, 0);
         }
+        autoSkip=true;
     }
 
     /**
      * 点击条目
      */
-    private void itemClick() {
-        adapter.setOnItemClickListener(new OnItemClickListener() {
-            @Override
-            public void onItemClick(View itemView, final int position) {
-                try {
-                    Bundle bundle = new Bundle();
-                    bundle.putSerializable(SuitPickingHalfActivity.filterBean, list.get(position));
-                    ActivityManagerUtils.startActivityBundleForResult(activity, SuitPickingHalfActivity.class, bundle, TOCOMMIT);
-                    dismissLoadingDialog();
-                } catch (Exception e) {
-                    LogUtils.e(TAG, "itemClick" + e);
-                }
-            }
-        });
+    private void itemClick(List<FilterResultOrderBean> clickBeen, int position) {
+        try {
+            Bundle bundle = new Bundle();
+            bundle.putSerializable(SuitPickingHalfActivity.filterBean, clickBeen.get(position));
+            ActivityManagerUtils.startActivityBundleForResult(activity, SuitPickingHalfActivity.class, bundle, TOCOMMIT);
+            dismissLoadingDialog();
+        } catch (Exception e) {
+            LogUtils.e(TAG, "itemClick" + e);
+        }
     }
 
 

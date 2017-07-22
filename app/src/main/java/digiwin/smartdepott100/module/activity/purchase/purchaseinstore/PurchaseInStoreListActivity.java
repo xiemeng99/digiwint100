@@ -73,18 +73,21 @@ public class PurchaseInStoreListActivity extends BaseTitleActivity {
     EditText etPurchaseOrder;
     @BindView(R.id.ll_purchase_order)
     LinearLayout llPurchaseOrder;
+
     @OnFocusChange(R.id.et_purchase_order)
     void pruchaseFocusChanage() {
         ModuleUtils.viewChange(llPurchaseOrder, views);
         ModuleUtils.etChange(activity, etPurchaseOrder, editTexts);
         ModuleUtils.tvChange(activity, tvPurchaseOrder, textViews);
     }
+
     @OnFocusChange(R.id.et_provider)
     void prividerFocusChanage() {
         ModuleUtils.viewChange(ll_provider, views);
         ModuleUtils.etChange(activity, et_provider, editTexts);
         ModuleUtils.tvChange(activity, tv_provider, textViews);
     }
+
     @OnFocusChange(R.id.et_date)
     void planDateFocusChanage() {
         ModuleUtils.viewChange(ll_date, views);
@@ -150,18 +153,16 @@ public class PurchaseInStoreListActivity extends BaseTitleActivity {
 
     PurchaseInStoreListActivity pactivity;
 
+
     /**
      * 弹出筛选对话框
      */
     @OnClick(R.id.iv_title_setting)
-    void SearchDialog() {
+    void searchDialog() {
         if (ll_search_dialog.getVisibility() == View.VISIBLE) {
             if (null != sumShowBeanList && sumShowBeanList.size() > 0) {
                 ll_search_dialog.setVisibility(View.GONE);
                 scrollview.setVisibility(View.VISIBLE);
-                adapter = new PurchaseInStorageAdapter(pactivity, sumShowBeanList);
-                ryList.setAdapter(adapter);
-                onItemClick();
             }
         } else {
             ll_search_dialog.setVisibility(View.VISIBLE);
@@ -173,8 +174,7 @@ public class PurchaseInStoreListActivity extends BaseTitleActivity {
      * 点击确定，筛选
      */
     @OnClick(R.id.btn_search_sure)
-    void Search() {
-        //TODO
+    void search() {
         upDateList();
     }
 
@@ -201,29 +201,26 @@ public class PurchaseInStoreListActivity extends BaseTitleActivity {
         commonLogic = PurchaseInStoreLogic.getInstance(pactivity, module, mTimestamp.toString());
         FullyLinearLayoutManager linearLayoutManager = new FullyLinearLayoutManager(activity);
         ryList.setLayoutManager(linearLayoutManager);
-        SearchDialog();
+        searchDialog();
     }
 
+
     /**
-     * 点击item跳转到汇总界面
+     * 只有一笔时自动跳入
+     * 跳转到扫描页面
      */
-    private void onItemClick() {
-        adapter.setOnItemClickListener(new OnItemClickListener() {
-            @Override
-            public void onItemClick(View itemView, int position) {
-                final FilterResultOrderBean orderData = sumShowBeanList.get(position);
-                Bundle bundle = new Bundle();
-                bundle.putSerializable(AddressContants.ORDERDATA, orderData);
-                ActivityManagerUtils.startActivityBundleForResult(pactivity,
-                        PurchaseInStoreActivity.class, bundle, SUMCODE);
-            }
-        });
+    private void itemClick(List<FilterResultOrderBean> clickBeen, int position) {
+        final FilterResultOrderBean orderData = clickBeen.get(position);
+        Bundle bundle = new Bundle();
+        bundle.putSerializable(AddressContants.ORDERDATA, orderData);
+        ActivityManagerUtils.startActivityBundleForResult(pactivity,
+                PurchaseInStoreActivity.class, bundle, SUMCODE);
     }
 
     @Override
     protected void initNavigationTitle() {
         super.initNavigationTitle();
-        mName.setText(getString(R.string.purchase_in_store)+""+getString(R.string.list));
+        mName.setText(getString(R.string.purchase_in_store) + "" + getString(R.string.list));
         iv_title_setting.setVisibility(View.VISIBLE);
         iv_title_setting.setImageResource(R.drawable.search);
     }
@@ -264,7 +261,16 @@ public class PurchaseInStoreListActivity extends BaseTitleActivity {
                         sumShowBeanList = list;
                         adapter = new PurchaseInStorageAdapter(pactivity, sumShowBeanList);
                         ryList.setAdapter(adapter);
-                        onItemClick();
+                        adapter.setOnItemClickListener(new OnItemClickListener() {
+                            @Override
+                            public void onItemClick(View itemView, int position) {
+                                itemClick(sumShowBeanList,position);
+                            }
+                        });
+                        if (autoSkip&&sumShowBeanList.size()==1){
+                            itemClick(sumShowBeanList,0);
+                        }
+                        autoSkip=true;
                     }
                 }
 
@@ -296,7 +302,6 @@ public class PurchaseInStoreListActivity extends BaseTitleActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         try {
-
             if (requestCode == SUMCODE) {
                 adapter = new PurchaseInStorageAdapter(pactivity, new ArrayList<FilterResultOrderBean>());
                 ryList.setAdapter(adapter);

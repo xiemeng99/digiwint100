@@ -42,7 +42,7 @@ import digiwin.smartdepott100.module.logic.produce.WorkSupplementLogic;
  * @date 2017/3/27
  */
 
-public class WorkSupplementListActivity extends BaseTitleActivity{
+public class WorkSupplementListActivity extends BaseTitleActivity {
     private WorkSupplementListActivity activity;
 
     @BindView(R.id.toolbar_title)
@@ -66,14 +66,14 @@ public class WorkSupplementListActivity extends BaseTitleActivity{
 
     WorkSupplementLogic commonLogic;
 
-    @BindViews({R.id.ll_material_returning_number,R.id.ll_returning_item_no,R.id.ll_applicant,
-            R.id.ll_apply_branch,R.id.ll_plan_date})
+    @BindViews({R.id.ll_material_returning_number, R.id.ll_returning_item_no, R.id.ll_applicant,
+            R.id.ll_apply_branch, R.id.ll_plan_date})
     List<View> views;
-    @BindViews({R.id.tv_material_returning_number,R.id.tv_returning_item_no,R.id.tv_applicant,
-            R.id.tv_apply_branch,R.id.tv_plan_date})
+    @BindViews({R.id.tv_material_returning_number, R.id.tv_returning_item_no, R.id.tv_applicant,
+            R.id.tv_apply_branch, R.id.tv_plan_date})
     List<TextView> textViews;
-    @BindViews({R.id.et_material_returning_number,R.id.et_returning_item_no,R.id.et_applicant,
-            R.id.et_apply_branch,R.id.et_plan_date})
+    @BindViews({R.id.et_material_returning_number, R.id.et_returning_item_no, R.id.et_applicant,
+            R.id.et_apply_branch, R.id.et_plan_date})
     List<EditText> editTexts;
 
     /**
@@ -155,6 +155,7 @@ public class WorkSupplementListActivity extends BaseTitleActivity{
     TextView tv_plan_date;
     @BindView(R.id.et_plan_date)
     EditText et_plan_date;
+
     @OnFocusChange(R.id.et_plan_date)
     void plan_dateFocusChanage() {
         ModuleUtils.viewChange(ll_plan_date, views);
@@ -167,7 +168,7 @@ public class WorkSupplementListActivity extends BaseTitleActivity{
     String endDate = "";
 
     @OnClick(R.id.iv_plan_date)
-    void dateClick(){
+    void dateClick() {
         DatePickerUtils.getDoubleDate(activity, new DatePickerUtils.GetDoubleDateListener() {
             @Override
             public void getTime(String mStartDate, String mEndDate, String showDate) {
@@ -185,65 +186,56 @@ public class WorkSupplementListActivity extends BaseTitleActivity{
 
     @BindView(R.id.btn_search_sure)
     Button btn_search_sure;
+
     @OnClick(R.id.btn_search_sure)
-    void search(){
+    void search() {
         //待办事项展示
-        FilterBean FilterBean = new FilterBean();
-        try {
-            showLoadingDialog();
-
-            AccoutBean accoutBean = LoginLogic.getUserInfo();
-            if(null == accoutBean){
-                return;
-            }
-            FilterBean.setWarehouse_no(accoutBean.getWare());
-
-            if(!StringUtils.isBlank(et_material_returning_number.getText().toString().trim())){
-                FilterBean.setDoc_no(et_material_returning_number.getText().toString().trim());
-            }
-
-            if(!StringUtils.isBlank(et_returning_item_no.getText().toString().trim())){
-                FilterBean.setBarcode_no(et_returning_item_no.getText().toString().trim());
-            }
-
-            if(!StringUtils.isBlank(et_applicant.getText().toString().trim())){
-                FilterBean.setEmployee_no(et_applicant.getText().toString().trim());
-            }
-
-            if(!StringUtils.isBlank(et_apply_branch.getText().toString().trim())){
-                FilterBean.setDepartment_no(et_apply_branch.getText().toString().trim());
-            }
-
-            if(!StringUtils.isBlank(et_plan_date.getText().toString())){
-                FilterBean.setDate_begin(startDate);
-                FilterBean.setDate_end(endDate);
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
+        FilterBean filterBean = new FilterBean();
+        showLoadingDialog();
+        filterBean.setWarehouse_no(LoginLogic.getWare());
+        if (!StringUtils.isBlank(et_material_returning_number.getText().toString().trim())) {
+            filterBean.setDoc_no(et_material_returning_number.getText().toString().trim());
         }
 
-        commonLogic.getWSList(FilterBean, new CommonLogic.GetDataListListener() {
+        if (!StringUtils.isBlank(et_returning_item_no.getText().toString().trim())) {
+            filterBean.setBarcode_no(et_returning_item_no.getText().toString().trim());
+        }
+
+        if (!StringUtils.isBlank(et_applicant.getText().toString().trim())) {
+            filterBean.setEmployee_no(et_applicant.getText().toString().trim());
+        }
+
+        if (!StringUtils.isBlank(et_apply_branch.getText().toString().trim())) {
+            filterBean.setDepartment_no(et_apply_branch.getText().toString().trim());
+        }
+
+        if (!StringUtils.isBlank(et_plan_date.getText().toString())) {
+            filterBean.setDate_begin(startDate);
+            filterBean.setDate_end(endDate);
+        }
+
+        commonLogic.getWSList(filterBean, new CommonLogic.GetDataListListener() {
             @Override
             public void onSuccess(final List<FilterResultOrderBean> list) {
                 dismissLoadingDialog();
-                if(list.size() > 0){
+                if (list.size() > 0) {
                     ll_search_dialog.setVisibility(View.GONE);
                     scrollview.setVisibility(View.VISIBLE);
                     dataList = new ArrayList<FilterResultOrderBean>();
                     dataList = list;
-                    adapter = new WorkSupplementListAdapter(activity,list);
+                    adapter = new WorkSupplementListAdapter(activity, list);
                     ry_list.setAdapter(adapter);
-
                     adapter.setOnItemClickListener(new OnItemClickListener() {
                         @Override
                         public void onItemClick(View itemView, int position) {
-                            Bundle bundle = new Bundle();
-                            FilterResultOrderBean data = list.get(position);
-                            bundle.putSerializable("data",data);
-                            ActivityManagerUtils.startActivityBundleForResult(activity,WorkSupplementActivity.class,bundle,SCANCODE);
+                            itemClick(list,position);
                         }
                     });
-                }else{
+                    if (autoSkip&&list.size() == 1) {
+                        itemClick(dataList, 0);
+                    }
+                    autoSkip=true;
+                } else {
                     showFailedDialog(getResources().getString(R.string.nodate));
                 }
             }
@@ -253,16 +245,23 @@ public class WorkSupplementListActivity extends BaseTitleActivity{
                 dismissLoadingDialog();
                 showFailedDialog(error);
                 ArrayList dataList = new ArrayList<FilterResultOrderBean>();
-                adapter = new WorkSupplementListAdapter(activity,dataList);
+                adapter = new WorkSupplementListAdapter(activity, dataList);
                 ry_list.setAdapter(adapter);
             }
         });
     }
 
+    private void itemClick(List<FilterResultOrderBean> clickBeen, int position) {
+        Bundle bundle = new Bundle();
+        FilterResultOrderBean data = clickBeen.get(position);
+        bundle.putSerializable("data", data);
+        ActivityManagerUtils.startActivityBundleForResult(activity, WorkSupplementActivity.class, bundle, SCANCODE);
+    }
+
     @Override
     protected void doBusiness() {
         et_plan_date.setKeyListener(null);
-        commonLogic = WorkSupplementLogic.getInstance(activity,module,mTimestamp.toString());
+        commonLogic = WorkSupplementLogic.getInstance(activity, module, mTimestamp.toString());
         FullyLinearLayoutManager linearLayoutManager = new FullyLinearLayoutManager(activity);
         ry_list.setLayoutManager(linearLayoutManager);
     }
@@ -271,13 +270,13 @@ public class WorkSupplementListActivity extends BaseTitleActivity{
      * 弹出筛选对话框
      */
     @OnClick(R.id.iv_title_setting)
-    void SearchDialog(){
-        if(ll_search_dialog.getVisibility() == View.VISIBLE){
-            if(null != dataList && dataList.size()>0){
+    void SearchDialog() {
+        if (ll_search_dialog.getVisibility() == View.VISIBLE) {
+            if (null != dataList && dataList.size() > 0) {
                 ll_search_dialog.setVisibility(View.GONE);
                 scrollview.setVisibility(View.VISIBLE);
             }
-        }else{
+        } else {
             ll_search_dialog.setVisibility(View.VISIBLE);
             scrollview.setVisibility(View.GONE);
         }
@@ -308,7 +307,7 @@ public class WorkSupplementListActivity extends BaseTitleActivity{
     protected void initNavigationTitle() {
         super.initNavigationTitle();
         activity = this;
-        mName.setText(getString(R.string.title_worksupplement)+""+getString(R.string.list));
+        mName.setText(getString(R.string.title_worksupplement) + "" + getString(R.string.list));
         iv_title_setting.setVisibility(View.VISIBLE);
         iv_title_setting.setImageResource(R.drawable.search);
     }
@@ -316,14 +315,14 @@ public class WorkSupplementListActivity extends BaseTitleActivity{
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        try{
-            if(requestCode == SCANCODE){
+        try {
+            if (requestCode == SCANCODE) {
                 dataList.clear();
-                adapter = new WorkSupplementListAdapter(activity,dataList);
+                adapter = new WorkSupplementListAdapter(activity, dataList);
                 ry_list.setAdapter(adapter);
                 search();
             }
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }

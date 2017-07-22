@@ -7,8 +7,8 @@
     android:orientation="vertical"
     tools:context="digiwin.smartdepott100.module.activity.produce.finishstorage.WipStorageActivity">
 
-    <include layout="@layout/activity_title_toolbar_bar"></include>
+    <include layout="@layout/activity_title_toolbar_bar"/>
 
-    <include layout="@layout/tablayout_layout"></include>
+    <include layout="@layout/tablayout_layout"/>
 
 </LinearLayout>

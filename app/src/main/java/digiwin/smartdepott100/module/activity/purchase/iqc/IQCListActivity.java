@@ -298,7 +298,16 @@ public class IQCListActivity extends BaseTitleActivity {
             llSearchInput.setVisibility(View.GONE);
             adapter = new IQCListAdapter(activity, list);
             ryList.setAdapter(adapter);
-            itemClick();
+            adapter.setOnItemClickListener(new OnItemClickListener() {
+                @Override
+                public void onItemClick(View itemView, final int position) {
+                    itemClick(list,position);
+                }
+            });
+            if (autoSkip&&list.size() == 1) {
+                itemClick(list, 0);
+            }
+            autoSkip=true;
         } catch (Exception e) {
             LogUtils.e(TAG, "showDates---Exception>" + e);
         }
@@ -307,20 +316,15 @@ public class IQCListActivity extends BaseTitleActivity {
     /**
      * 点击条目
      */
-    private void itemClick() {
-        adapter.setOnItemClickListener(new OnItemClickListener() {
-            @Override
-            public void onItemClick(View itemView, final int position) {
-                try {
-                    Bundle bundle = new Bundle();
-                    bundle.putSerializable(IQCommitActivity.filterBean, list.get(position));
-                    ActivityManagerUtils.startActivityBundleForResult(activity, IQCommitActivity.class, bundle, TOCOMMIT);
-                    dismissLoadingDialog();
-                } catch (Exception e) {
-                    LogUtils.e(TAG, "itemClick" + e);
-                }
-            }
-        });
+    private void itemClick(List<FilterResultOrderBean> clickBeen, int position) {
+        try {
+            Bundle bundle = new Bundle();
+            bundle.putSerializable(IQCommitActivity.filterBean, clickBeen.get(position));
+            ActivityManagerUtils.startActivityBundleForResult(activity, IQCommitActivity.class, bundle, TOCOMMIT);
+            dismissLoadingDialog();
+        } catch (Exception e) {
+            LogUtils.e(TAG, "itemClick" + e);
+        }
     }
 
 }

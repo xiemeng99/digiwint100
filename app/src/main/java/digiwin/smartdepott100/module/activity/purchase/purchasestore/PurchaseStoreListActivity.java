@@ -299,23 +299,27 @@ public class PurchaseStoreListActivity extends BaseTitleActivity {
         adapter = new StoreReturnMaterialListAdapter(activity,list);
         ryList.setLayoutManager(new LinearLayoutManager(activity));
         ryList.setAdapter(adapter);
-        itemClick();
+        adapter.setOnItemClickListener(new OnItemClickListener() {
+            @Override
+            public void onItemClick(View itemView, int position) {
+                itemClick(list,position);
+            }
+        });
+        if (autoSkip&&list.size() == 1) {
+            itemClick(list, 0);
+        }
+        autoSkip=true;
     }
 
     /**
      * 条目点击
      */
-    private void itemClick() {
-        adapter.setOnItemClickListener(new OnItemClickListener() {
-            @Override
-            public void onItemClick(View itemView, int position) {
-                Bundle bundle = new Bundle();
-                bundle.putString(AddressContants.DOC_NO,list.get(position).getDoc_no());
-                bundle.putString(AddressContants.DATE,list.get(position).getCreate_date());
-                bundle.putString(AddressContants.SUPPLIER,list.get(position).getSupplier_name());
-                ActivityManagerUtils.startActivityBundleForResult(activity,PurchaseStoreActivity.class,bundle,TOCOMMIT);
-            }
-        });
+    private void itemClick(List<FilterResultOrderBean> clickBeen, int position) {
+        Bundle bundle = new Bundle();
+        bundle.putString(AddressContants.DOC_NO,clickBeen.get(position).getDoc_no());
+        bundle.putString(AddressContants.DATE,clickBeen.get(position).getCreate_date());
+        bundle.putString(AddressContants.SUPPLIER,clickBeen.get(position).getSupplier_name());
+        ActivityManagerUtils.startActivityBundleForResult(activity,PurchaseStoreActivity.class,bundle,TOCOMMIT);
     }
 
     @Override

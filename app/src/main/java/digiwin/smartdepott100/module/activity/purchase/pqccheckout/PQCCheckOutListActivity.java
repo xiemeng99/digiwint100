@@ -20,6 +20,8 @@ import butterknife.BindView;
 import butterknife.BindViews;
 import butterknife.OnClick;
 import butterknife.OnFocusChange;
+import digiwin.library.constant.SharePreKey;
+import digiwin.library.utils.SharedPreferencesUtils;
 import digiwin.smartdepott100.R;
 import digiwin.smartdepott100.core.appcontants.AddressContants;
 import digiwin.smartdepott100.core.appcontants.ModuleCode;
@@ -176,6 +178,7 @@ public class PQCCheckOutListActivity extends BaseTitleActivity {
         map.put(AddressContants.PLOTNO, et_circultion_no.getText().toString().trim());//物料批号
         map.put(AddressContants.DATEBEGIN, startDate);//起始日期
         map.put(AddressContants.DATEEND, endDate);//结束日期
+        map.put(AddressContants.PAGESIZE, (String) SharedPreferencesUtils.get(activity, SharePreKey.PAGE_SETTING,AddressContants.PAGE_NUM));
         commonLogic.getFiltrateDatas(map, new PQCCheckOutLogic.FiltrateListener() {
             @Override
             public void onSuccess(final List<PQCCheckOutBean> list) {
@@ -183,7 +186,6 @@ public class PQCCheckOutListActivity extends BaseTitleActivity {
                 if (list.size() > 0) {
                     ll_search_dialog.setVisibility(View.GONE);
                     expandableListView.setVisibility(View.VISIBLE);
-
                     hashMap=new LinkedHashMap<String, List<PQCCheckOutBean>>();
                     for (PQCCheckOutBean bean : list) {
                         if(hashMap.containsKey(bean.getQc_type())){//包含

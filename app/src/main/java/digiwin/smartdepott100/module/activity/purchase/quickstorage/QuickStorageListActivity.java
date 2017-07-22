@@ -1,7 +1,6 @@
 package digiwin.smartdepott100.module.activity.purchase.quickstorage;
 
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
@@ -29,10 +28,8 @@ import digiwin.pulltorefreshlibrary.recyclerview.FullyLinearLayoutManager;
 import digiwin.pulltorefreshlibrary.recyclerviewAdapter.OnItemClickListener;
 import digiwin.smartdepott100.R;
 import digiwin.smartdepott100.core.appcontants.ModuleCode;
-import digiwin.smartdepott100.core.appcontants.SharePreferenceKey;
 import digiwin.smartdepott100.core.base.BaseTitleActivity;
 import digiwin.smartdepott100.core.modulecommon.ModuleUtils;
-import digiwin.smartdepott100.login.loginlogic.LoginLogic;
 import digiwin.smartdepott100.module.adapter.stock.QuickStorageListAdapter;
 import digiwin.smartdepott100.module.bean.common.FilterBean;
 import digiwin.smartdepott100.module.bean.common.FilterResultOrderBean;
@@ -45,7 +42,7 @@ import digiwin.smartdepott100.module.logic.produce.QuickStorageLogic;
  * @date 2017/6/15
  */
 
-public class QuickStorageListActivity extends BaseTitleActivity{
+public class QuickStorageListActivity extends BaseTitleActivity {
     private QuickStorageListActivity activity;
 
     QuickStorageListAdapter adapter;
@@ -69,11 +66,11 @@ public class QuickStorageListActivity extends BaseTitleActivity{
     @BindView(R.id.scrollview)
     ScrollView scrollview;
 
-    @BindViews({R.id.ll_provider_code,R.id.ll_barcode_no,R.id.ll_item_name,R.id.ll_plan_date})
+    @BindViews({R.id.ll_provider_code, R.id.ll_barcode_no, R.id.ll_item_name, R.id.ll_plan_date})
     List<View> views;
-    @BindViews({R.id.tv_provider_code,R.id.tv_barcode_no,R.id.tv_item_name,R.id.tv_plan_date})
+    @BindViews({R.id.tv_provider_code, R.id.tv_barcode_no, R.id.tv_item_name, R.id.tv_plan_date})
     List<TextView> textViews;
-    @BindViews({R.id.et_provider_code,R.id.et_barcode_no, R.id.et_item_name,R.id.et_plan_date})
+    @BindViews({R.id.et_provider_code, R.id.et_barcode_no, R.id.et_item_name, R.id.et_plan_date})
     List<EditText> editTexts;
 
     /**
@@ -139,17 +136,19 @@ public class QuickStorageListActivity extends BaseTitleActivity{
     TextView tv_plan_date;
     @BindView(R.id.et_plan_date)
     EditText et_plan_date;
+
     @OnFocusChange(R.id.et_plan_date)
     void plan_dateFocusChanage() {
         ModuleUtils.viewChange(ll_plan_date, views);
         ModuleUtils.tvChange(activity, tv_plan_date, textViews);
         ModuleUtils.etChange(activity, et_plan_date, editTexts);
     }
+
     String startDate = "";
     String endDate = "";
 
     @OnClick(R.id.iv_plan_date)
-    void dateClick(){
+    void dateClick() {
         DatePickerUtils.getDoubleDate(activity, new DatePickerUtils.GetDoubleDateListener() {
             @Override
             public void getTime(String mStartDate, String mEndDate, String showDate) {
@@ -169,29 +168,28 @@ public class QuickStorageListActivity extends BaseTitleActivity{
 
     @BindView(R.id.btn_search_sure)
     Button btn_search_sure;
+
     @OnClick(R.id.btn_search_sure)
-    void search(){
-        //待办事项展示
+    void search() {
         FilterBean FilterBean = new FilterBean();
         try {
             showLoadingDialog();
-
 //            FilterBean.setWarehouse_in_no(LoginLogic.getWare());
-            FilterBean.setPagesize((String)SharedPreferencesUtils.get(this, SharePreKey.PAGE_SETTING,"10"));
+            FilterBean.setPagesize((String) SharedPreferencesUtils.get(this, SharePreKey.PAGE_SETTING, "10"));
 
-            if(!StringUtils.isBlank(et_provider_code.getText().toString().trim())){
+            if (!StringUtils.isBlank(et_provider_code.getText().toString().trim())) {
                 FilterBean.setSupplier_no(et_provider_code.getText().toString().trim());//供应商
             }
 
-            if(!StringUtils.isBlank(et_barcode_no.getText().toString().trim())){
+            if (!StringUtils.isBlank(et_barcode_no.getText().toString().trim())) {
                 FilterBean.setItem_no(et_barcode_no.getText().toString().trim());//料号
             }
 
-            if(!StringUtils.isBlank(et_item_name.getText().toString().trim())){
+            if (!StringUtils.isBlank(et_item_name.getText().toString().trim())) {
                 FilterBean.setItem_name(et_item_name.getText().toString().trim());
             }
 
-            if(!StringUtils.isBlank(et_plan_date.getText().toString())){
+            if (!StringUtils.isBlank(et_plan_date.getText().toString())) {
                 FilterBean.setDate_begin(startDate);
                 FilterBean.setDate_end(endDate);
             }
@@ -203,24 +201,24 @@ public class QuickStorageListActivity extends BaseTitleActivity{
             @Override
             public void onSuccess(final List<FilterResultOrderBean> list) {
                 dismissLoadingDialog();
-                if(list.size() > 0){
+                if (list.size() > 0) {
                     ll_search_dialog.setVisibility(View.GONE);
                     scrollview.setVisibility(View.VISIBLE);
                     dataList = new ArrayList<FilterResultOrderBean>();
                     dataList = list;
-                    adapter = new QuickStorageListAdapter(activity,list);
+                    adapter = new QuickStorageListAdapter(activity, list);
                     ry_list.setAdapter(adapter);
-
                     adapter.setOnItemClickListener(new OnItemClickListener() {
                         @Override
                         public void onItemClick(View itemView, int position) {
-                            Bundle bundle = new Bundle();
-                            FilterResultOrderBean data = list.get(position);
-                            bundle.putSerializable(DATA,data);
-                            ActivityManagerUtils.startActivityBundleForResult(activity,QuickStorageActivity.class,bundle,SCANCODE);
+                            itemClick(dataList, position);
                         }
                     });
-                }else{
+                    if (autoSkip&&list.size() == 1) {
+                        itemClick(dataList, 0);
+                    }
+                    autoSkip=true;
+                } else {
                     showFailedDialog(getResources().getString(R.string.nodate));
                 }
             }
@@ -230,16 +228,29 @@ public class QuickStorageListActivity extends BaseTitleActivity{
                 dismissLoadingDialog();
                 showFailedDialog(error);
                 ArrayList dataList = new ArrayList<FilterResultOrderBean>();
-                adapter = new QuickStorageListAdapter(activity,dataList);
+                adapter = new QuickStorageListAdapter(activity, dataList);
                 ry_list.setAdapter(adapter);
             }
         });
     }
 
+    /**
+     * 只有一笔时自动跳入
+     * 跳转到扫描页面
+     */
+    private void itemClick(List<FilterResultOrderBean> clickBeen, int position) {
+        Bundle bundle = new Bundle();
+        FilterResultOrderBean data = clickBeen.get(position);
+        bundle.putSerializable(DATA, data);
+        ActivityManagerUtils.startActivityBundleForResult(activity, QuickStorageActivity.class, bundle, SCANCODE);
+    }
+
     @Override
     protected void doBusiness() {
+        startDate = "";
+        endDate = "";
         et_plan_date.setKeyListener(null);
-        quickStorageLogic = QuickStorageLogic.getInstance(activity,module,mTimestamp.toString());
+        quickStorageLogic = QuickStorageLogic.getInstance(activity, module, mTimestamp.toString());
         FullyLinearLayoutManager linearLayoutManager = new FullyLinearLayoutManager(activity);
         ry_list.setLayoutManager(linearLayoutManager);
 
@@ -249,16 +260,13 @@ public class QuickStorageListActivity extends BaseTitleActivity{
      * 弹出筛选对话框
      */
     @OnClick(R.id.iv_title_setting)
-    void SearchDialog(){
-        if(ll_search_dialog.getVisibility() == View.VISIBLE){
-            if(null != dataList && dataList.size()>0){
+    void SearchDialog() {
+        if (ll_search_dialog.getVisibility() == View.VISIBLE) {
+            if (null != dataList && dataList.size() > 0) {
                 ll_search_dialog.setVisibility(View.GONE);
                 scrollview.setVisibility(View.VISIBLE);
-//                adapter = new PickUpShipmentListAdapter(activity,dataList);
-//                ryList.setAdapter(adapter);
-//                onItemClick(dataList);
             }
-        }else{
+        } else {
             ll_search_dialog.setVisibility(View.VISIBLE);
             scrollview.setVisibility(View.GONE);
         }
@@ -267,14 +275,14 @@ public class QuickStorageListActivity extends BaseTitleActivity{
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        try{
-            if(requestCode == SCANCODE){
+        try {
+            if (requestCode == SCANCODE) {
                 dataList.clear();
-                adapter = new QuickStorageListAdapter(activity,dataList);
+                adapter = new QuickStorageListAdapter(activity, dataList);
                 ry_list.setAdapter(adapter);
                 search();
             }
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
@@ -298,7 +306,7 @@ public class QuickStorageListActivity extends BaseTitleActivity{
     @Override
     protected void initNavigationTitle() {
         super.initNavigationTitle();
-        mName.setText(getString(R.string.title_quickstorage)+getString(R.string.list));
+        mName.setText(getString(R.string.title_quickstorage) + getString(R.string.list));
         activity = this;
         iv_title_setting.setVisibility(View.VISIBLE);
         iv_title_setting.setImageResource(R.drawable.search);

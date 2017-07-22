@@ -201,7 +201,7 @@ public class MaterialReturnListActivity extends BaseTitleActivity {
     protected void initNavigationTitle() {
         super.initNavigationTitle();
         search.setVisibility(View.VISIBLE);
-        mName.setText(getString(R.string.mataerial_returning)+""+getString(R.string.list));
+        mName.setText(getString(R.string.mataerial_returning) + "" + getString(R.string.list));
         search.setImageResource(R.drawable.search);
         isSearching = true;
     }
@@ -257,8 +257,8 @@ public class MaterialReturnListActivity extends BaseTitleActivity {
                     showFailedDialog(error);
                 }
             });
-        }catch (Exception e){
-            LogUtils.e(TAG,"onUpdate"+e);
+        } catch (Exception e) {
+            LogUtils.e(TAG, "onUpdate" + e);
         }
 
     }
@@ -267,35 +267,35 @@ public class MaterialReturnListActivity extends BaseTitleActivity {
      * 展示数据
      */
     private void showData() {
-        try {
-            isSearching = true;
-            ryList.setVisibility(View.VISIBLE);
-            llSearchInput.setVisibility(View.GONE);
-            adapter = new MaterialReturnListAdapter(activity, list);
-            ryList.setAdapter(adapter);
-            itemClick();
-        } catch (Exception e) {
-            LogUtils.e(TAG, "showDates---Exception>" + e);
+        isSearching = true;
+        ryList.setVisibility(View.VISIBLE);
+        llSearchInput.setVisibility(View.GONE);
+        adapter = new MaterialReturnListAdapter(activity, list);
+        ryList.setAdapter(adapter);
+        adapter.setOnItemClickListener(new OnItemClickListener() {
+            @Override
+            public void onItemClick(View itemView, final int position) {
+                itemClick(list,position);
+            }
+        });
+        if (autoSkip&&list.size() == 1) {
+            itemClick(list, 0);
         }
+        autoSkip=true;
     }
 
     /**
      * 点击条目
      */
-    private void itemClick() {
-        adapter.setOnItemClickListener(new OnItemClickListener() {
-            @Override
-            public void onItemClick(View itemView, final int position) {
-                try {
-                    Bundle bundle = new Bundle();
-                    bundle.putSerializable(MaterialReturnActivity.filterBean, list.get(position));
-                    ActivityManagerUtils.startActivityBundleForResult(activity, MaterialReturnActivity.class, bundle, TOCOMMIT);
-                    dismissLoadingDialog();
-                } catch (Exception e) {
-                    LogUtils.e(TAG, "itemClick" + e);
-                }
-            }
-        });
+    private void itemClick(List<FilterResultOrderBean> clickBeen, int position) {
+        try {
+            Bundle bundle = new Bundle();
+            bundle.putSerializable(MaterialReturnActivity.filterBean, clickBeen.get(position));
+            ActivityManagerUtils.startActivityBundleForResult(activity, MaterialReturnActivity.class, bundle, TOCOMMIT);
+            dismissLoadingDialog();
+        } catch (Exception e) {
+            LogUtils.e(TAG, "itemClick" + e);
+        }
     }
 
 

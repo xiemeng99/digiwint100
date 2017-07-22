@@ -76,8 +76,6 @@ public class SuitPickingListAcitivity extends BaseTitleActivity {
     private boolean isSearching;
 
 
-
-
     /**
      * 日期
      */
@@ -100,8 +98,6 @@ public class SuitPickingListAcitivity extends BaseTitleActivity {
             }
         });
     }
-
-
 
 
     @OnClick(R.id.btn_search_sure)
@@ -133,11 +129,11 @@ public class SuitPickingListAcitivity extends BaseTitleActivity {
     /**
      * 控件集合
      */
-    @BindViews({R.id.et_picking_no, R.id.et_department, R.id.et_person,  R.id.et_date})
+    @BindViews({R.id.et_picking_no, R.id.et_department, R.id.et_person, R.id.et_date})
     List<EditText> editTexts;
-    @BindViews({R.id.ll_picking_no,  R.id.ll_department, R.id.ll_person, R.id.ll_date})
+    @BindViews({R.id.ll_picking_no, R.id.ll_department, R.id.ll_person, R.id.ll_date})
     List<View> views;
-    @BindViews({R.id.tv_picking_no,  R.id.tv_department, R.id.tv_person, R.id.tv_date})
+    @BindViews({R.id.tv_picking_no, R.id.tv_department, R.id.tv_person, R.id.tv_date})
     List<TextView> textViews;
 
     /**
@@ -203,7 +199,7 @@ public class SuitPickingListAcitivity extends BaseTitleActivity {
     @Override
     protected void initNavigationTitle() {
         super.initNavigationTitle();
-        mName.setText(getString(R.string.suitpicking)+getString(R.string.list));
+        mName.setText(getString(R.string.suitpicking) + getString(R.string.list));
         search.setVisibility(View.VISIBLE);
         search.setImageResource(R.drawable.search);
         isSearching = true;
@@ -266,35 +262,35 @@ public class SuitPickingListAcitivity extends BaseTitleActivity {
      * 展示数据
      */
     private void showData() {
-        try {
-            isSearching = true;
-            ryList.setVisibility(View.VISIBLE);
-            llSearchInput.setVisibility(View.GONE);
-            adapter = new SuitPickingListAdapter(activity, list);
-            ryList.setAdapter(adapter);
-            itemClick();
-        } catch (Exception e) {
-            LogUtils.e(TAG, "showDates---Exception>" + e);
+        isSearching = true;
+        ryList.setVisibility(View.VISIBLE);
+        llSearchInput.setVisibility(View.GONE);
+        adapter = new SuitPickingListAdapter(activity, list);
+        ryList.setAdapter(adapter);
+        adapter.setOnItemClickListener(new OnItemClickListener() {
+            @Override
+            public void onItemClick(View itemView, final int position) {
+                itemClick(list, position);
+            }
+        });
+        if (autoSkip && list.size() == 1) {
+            itemClick(list, 0);
         }
+        autoSkip = true;
     }
 
     /**
      * 点击条目
      */
-    private void itemClick() {
-        adapter.setOnItemClickListener(new OnItemClickListener() {
-            @Override
-            public void onItemClick(View itemView, final int position) {
-                try {
-                    Bundle bundle = new Bundle();
-                    bundle.putSerializable(SuitPickingActivity.filterBean,list.get(position));
-                    ActivityManagerUtils.startActivityBundleForResult(activity, SuitPickingActivity.class, bundle, TOCOMMIT);
-                    dismissLoadingDialog();
-                } catch (Exception e) {
-                    LogUtils.e(TAG, "itemClick" + e);
-                }
-            }
-        });
+    private void itemClick(List<FilterResultOrderBean> clickBeen, int position) {
+        try {
+            Bundle bundle = new Bundle();
+            bundle.putSerializable(SuitPickingActivity.filterBean, clickBeen.get(position));
+            ActivityManagerUtils.startActivityBundleForResult(activity, SuitPickingActivity.class, bundle, TOCOMMIT);
+            dismissLoadingDialog();
+        } catch (Exception e) {
+            LogUtils.e(TAG, "itemClick" + e);
+        }
     }
 
 

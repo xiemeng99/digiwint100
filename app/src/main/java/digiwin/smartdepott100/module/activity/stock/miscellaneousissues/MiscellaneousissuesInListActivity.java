@@ -25,7 +25,6 @@ import digiwin.smartdepott100.core.appcontants.AddressContants;
 import digiwin.smartdepott100.core.appcontants.ModuleCode;
 import digiwin.smartdepott100.core.base.BaseTitleActivity;
 import digiwin.smartdepott100.core.modulecommon.ModuleUtils;
-import digiwin.smartdepott100.login.bean.AccoutBean;
 import digiwin.smartdepott100.login.loginlogic.LoginLogic;
 import digiwin.smartdepott100.module.adapter.stock.miscellaneousissues.MiscellaneousissuesInAdapter;
 import digiwin.smartdepott100.module.bean.common.FilterBean;
@@ -38,11 +37,8 @@ import digiwin.library.utils.ActivityManagerUtils;
 import digiwin.library.utils.LogUtils;
 import digiwin.library.utils.ObjectAndMapUtils;
 import digiwin.library.utils.SharedPreferencesUtils;
-import digiwin.library.utils.StringUtils;
 import digiwin.pulltorefreshlibrary.recyclerview.FullyLinearLayoutManager;
 import digiwin.pulltorefreshlibrary.recyclerviewAdapter.OnItemClickListener;
-
-import static digiwin.smartdepott100.login.loginlogic.LoginLogic.getUserInfo;
 
 /**
  * 杂项收料  前置页面
@@ -66,93 +62,93 @@ public class MiscellaneousissuesInListActivity extends BaseTitleActivity {
      * 筛选框 杂收单号
      */
     @BindView(R.id.et_miscellaneous_in_no)
-    EditText et_miscellaneous_in_no;
+    EditText etMiscellaneousInNo;
     /**
      * 筛选框 杂收单号
      */
     @BindView(R.id.ll_miscellaneous_in_no)
-    LinearLayout ll_miscellaneous_in_no;
+    LinearLayout llMiscellaneousInNo;
     /**
      * 筛选框 杂收单号
      */
     @BindView(R.id.tv_miscellaneous_in_no)
-    TextView tv_miscellaneous_in_no;
+    TextView tvMiscellaneousInNo;
 
     @OnFocusChange(R.id.et_miscellaneous_in_no)
     void workOrderFocusChange() {
-        ModuleUtils.viewChange(ll_miscellaneous_in_no, views);
-        ModuleUtils.etChange(activity, et_miscellaneous_in_no, editTexts);
-        ModuleUtils.tvChange(activity, tv_miscellaneous_in_no, textViews);
+        ModuleUtils.viewChange(llMiscellaneousInNo, views);
+        ModuleUtils.etChange(activity, etMiscellaneousInNo, editTexts);
+        ModuleUtils.tvChange(activity, tvMiscellaneousInNo, textViews);
     }
 
     /**
      * 筛选框 人员
      */
     @BindView(R.id.et_person)
-    EditText et_person;
+    EditText etPerson;
     /**
      * 筛选框 人员
      */
     @BindView(R.id.ll_person)
-    LinearLayout ll_person;
+    LinearLayout llPerson;
     /**
      * 筛选框 人员
      */
     @BindView(R.id.tv_person)
-    TextView tv_person;
+    TextView tvPerson;
 
     @OnFocusChange(R.id.et_person)
     void personFocusChange() {
-        ModuleUtils.viewChange(ll_person, views);
-        ModuleUtils.etChange(activity, et_person, editTexts);
-        ModuleUtils.tvChange(activity, tv_person, textViews);
+        ModuleUtils.viewChange(llPerson, views);
+        ModuleUtils.etChange(activity, etPerson, editTexts);
+        ModuleUtils.tvChange(activity, tvPerson, textViews);
     }
 
     /**
      * 筛选框 部门
      */
     @BindView(R.id.et_department)
-    EditText et_department;
+    EditText etDepartment;
     /**
      * 筛选框 部门
      */
     @BindView(R.id.ll_department)
-    LinearLayout ll_department;
+    LinearLayout llDepartment;
     /**
      * 筛选框 部门
      */
     @BindView(R.id.tv_department)
-    TextView tv_department;
+    TextView tvDepartment;
 
     @OnFocusChange(R.id.et_department)
     void departmentFocusChange() {
-        ModuleUtils.viewChange(ll_department, views);
-        ModuleUtils.etChange(activity, et_department, editTexts);
-        ModuleUtils.tvChange(activity, tv_department, textViews);
+        ModuleUtils.viewChange(llDepartment, views);
+        ModuleUtils.etChange(activity, etDepartment, editTexts);
+        ModuleUtils.tvChange(activity, tvDepartment, textViews);
     }
 
     /**
      * 筛选框 日期
      */
     @BindView(R.id.et_date)
-    EditText et_date;
+    EditText etDate;
 
     /**
      * 筛选框 日期
      */
     @BindView(R.id.ll_date)
-    LinearLayout ll_date;
+    LinearLayout llDate;
     /**
      * 筛选框 日期
      */
     @BindView(R.id.tv_date)
-    TextView tv_date;
+    TextView tvDate;
 
     /**
      * 筛选框 日期
      */
     @BindView(R.id.iv_date)
-    ImageView iv_date;
+    ImageView ivDate;
 
     String startDate = "";
     String endDate = "";
@@ -162,19 +158,19 @@ public class MiscellaneousissuesInListActivity extends BaseTitleActivity {
         DatePickerUtils.getDoubleDate(mactivity, new DatePickerUtils.GetDoubleDateListener() {
             @Override
             public void getTime(String mStartDate, String mEndDate, String showDate) {
-                et_date.requestFocus();
+                etDate.requestFocus();
                 startDate = mStartDate;
                 endDate = mEndDate;
-                et_date.setText(showDate);
+                etDate.setText(showDate);
             }
         });
     }
 
     @OnFocusChange(R.id.et_date)
     void planDateFocusChange() {
-        ModuleUtils.viewChange(ll_date, views);
-        ModuleUtils.etChange(activity, et_date, editTexts);
-        ModuleUtils.tvChange(activity, tv_date, textViews);
+        ModuleUtils.viewChange(llDate, views);
+        ModuleUtils.etChange(activity, etDate, editTexts);
+        ModuleUtils.tvChange(activity, tvDate, textViews);
     }
 
     @BindView(R.id.ry_list)
@@ -205,7 +201,7 @@ public class MiscellaneousissuesInListActivity extends BaseTitleActivity {
 
     @Override
     protected void doBusiness() {
-        et_date.setKeyListener(null);
+        etDate.setKeyListener(null);
         sumShowBeanList=new ArrayList<>();
         mactivity = (MiscellaneousissuesInListActivity) activity;
         commonLogic = MiscellaneousissuesInLogic.getInstance(mactivity, module, mTimestamp.toString());
@@ -254,16 +250,11 @@ public class MiscellaneousissuesInListActivity extends BaseTitleActivity {
     /**
      * 点击item跳转到汇总界面
      */
-    private void onItemClick() {
-        adapter.setOnItemClickListener(new OnItemClickListener() {
-            @Override
-            public void onItemClick(View itemView, int position) {
-                final FilterResultOrderBean orderData = sumShowBeanList.get(position);
-                Bundle bundle = new Bundle();
-                bundle.putSerializable(AddressContants.ORDERDATA, orderData);
-                ActivityManagerUtils.startActivityBundleForResult(mactivity,MiscellaneousissuesInActivity.class, bundle, SUMCODE);
-            }
-        });
+    private void itemClick(List<FilterResultOrderBean> clickBeen, int position) {
+        FilterResultOrderBean orderData = clickBeen.get(position);
+        Bundle bundle = new Bundle();
+        bundle.putSerializable(AddressContants.ORDERDATA, orderData);
+        ActivityManagerUtils.startActivityBundleForResult(mactivity,MiscellaneousissuesInActivity.class, bundle, SUMCODE);
     }
 
     @Override
@@ -283,7 +274,6 @@ public class MiscellaneousissuesInListActivity extends BaseTitleActivity {
         ryList.setAdapter(adapter);
         showLoadingDialog();
         FilterBean filterBean = new FilterBean();
-        Map<String,String> map=new HashMap<>();
         try {
             //仓库
             filterBean.setWarehouse_no(LoginLogic.getWare());
@@ -291,17 +281,16 @@ public class MiscellaneousissuesInListActivity extends BaseTitleActivity {
             String o = (String) SharedPreferencesUtils.get(activity, SharePreKey.PAGE_SETTING, "10");
             filterBean.setPagesize(o);
             //杂收单号
-            filterBean.setDoc_no(et_miscellaneous_in_no.getText().toString());
+            filterBean.setDoc_no(etMiscellaneousInNo.getText().toString());
             //日期
             filterBean.setDate_begin(startDate);
             filterBean.setDate_end(endDate);
             //申请人
-            filterBean.setEmployee_no(et_person.getText().toString());
+            filterBean.setEmployee_no(etPerson.getText().toString());
             //部门
-            filterBean.setDepartment_no(et_department.getText().toString());
-            map = ObjectAndMapUtils.getValueMap(filterBean);
+            filterBean.setDepartment_no(etDepartment.getText().toString());
             showLoadingDialog();
-            commonLogic.getMIIListData(map, new CommonLogic.GetDataListListener() {
+            commonLogic.getMIIListData(filterBean, new CommonLogic.GetDataListListener() {
                 @Override
                 public void onSuccess(List<FilterResultOrderBean> list) {
                     if (null != list && list.size() > 0) {
@@ -341,7 +330,16 @@ public class MiscellaneousissuesInListActivity extends BaseTitleActivity {
             iv_title_setting.setVisibility(View.VISIBLE);
             adapter = new MiscellaneousissuesInAdapter(mactivity, sumShowBeanList);
             ryList.setAdapter(adapter);
-            onItemClick();
+            adapter.setOnItemClickListener(new OnItemClickListener() {
+                @Override
+                public void onItemClick(View itemView, int position) {
+                    itemClick(sumShowBeanList,position);
+                }
+            });
+            if (autoSkip&&sumShowBeanList.size() == 1) {
+                itemClick(sumShowBeanList, 0);
+            }
+            autoSkip=true;
         } catch (Exception e) {
             LogUtils.e(TAG, "showDates---Exception>" + e);
         }

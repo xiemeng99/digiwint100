@@ -308,7 +308,16 @@ public class SaleOutletListActivity extends BaseTitleActivity {
             llSearchInput.setVisibility(View.GONE);
             adapter = new SaleOutletListAdapter(activity, datas);
             ryList.setAdapter(adapter);
-            itemClick();
+            adapter.setOnItemClickListener(new OnItemClickListener() {
+                @Override
+                public void onItemClick(View itemView, int position) {
+                    itemClick(datas, position);
+                }
+            });
+            if (autoSkip&&datas.size() == 1) {
+                itemClick(datas, 0);
+            }
+            autoSkip=true;
         } catch (Exception e) {
             LogUtils.e(TAG, "showDates---Exception>" + e);
         }
@@ -317,19 +326,14 @@ public class SaleOutletListActivity extends BaseTitleActivity {
     /**
      * 点击条目
      */
-    private void itemClick() {
-        adapter.setOnItemClickListener(new OnItemClickListener() {
-            @Override
-            public void onItemClick(View itemView, final int position) {
-                try {
-                    Bundle bundle = new Bundle();
-                    bundle.putSerializable(SaleOutletActivity.filterBean, datas.get(position));
-                    ActivityManagerUtils.startActivityBundleForResult(activity, SaleOutletActivity.class, bundle, TOCOMMIT);
-                    dismissLoadingDialog();
-                } catch (Exception e) {
-                    LogUtils.e(TAG, "itemClick" + e);
-                }
-            }
-        });
+    private void itemClick(List<FilterResultOrderBean> clickBeen, int position) {
+        try {
+            Bundle bundle = new Bundle();
+            bundle.putSerializable(SaleOutletActivity.filterBean, clickBeen.get(position));
+            ActivityManagerUtils.startActivityBundleForResult(activity, SaleOutletActivity.class, bundle, TOCOMMIT);
+            dismissLoadingDialog();
+        } catch (Exception e) {
+            LogUtils.e(TAG, "itemClick" + e);
+        }
     }
 }

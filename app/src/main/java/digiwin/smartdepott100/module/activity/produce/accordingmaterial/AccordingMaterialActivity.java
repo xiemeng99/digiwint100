@@ -111,12 +111,6 @@ public class AccordingMaterialActivity extends BaseFirstModuldeActivity {
     LinearLayout llTray;
     @BindView(R.id.line_tray)
     View lineTray;
-    @OnFocusChange(R.id.et_tray)
-    void trayFocusChanage() {
-        ModuleUtils.viewChange(llTray, views);
-        ModuleUtils.etChange(activity, etTray, editTexts);
-        ModuleUtils.tvChange(activity, tvTray, textViews);
-    }
 
     /**
      * 页面展示的数据

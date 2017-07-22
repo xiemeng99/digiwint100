@@ -48,7 +48,7 @@ public class StoreQueryLogic extends CommonLogic {
             @Override
             public void run() {
                 try {
-                    String createJson = JsonReqForERP.objCreateJson(mModule, "als.c005.list.get", mTimestamp, clickItemPutBean);
+                    String createJson = JsonReqForERP.objCreateJson(mModule, "als.c004.list.get", mTimestamp, clickItemPutBean);
                     OkhttpRequest.getInstance(mContext).post(createJson, new IRequestCallbackImp() {
                         @Override
                         public void onResponse(String string) {

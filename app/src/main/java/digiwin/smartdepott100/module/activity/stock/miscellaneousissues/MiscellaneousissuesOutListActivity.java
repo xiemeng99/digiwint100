@@ -211,7 +211,7 @@ public class MiscellaneousissuesOutListActivity extends BaseTitleActivity {
         FullyLinearLayoutManager linearLayoutManager = new FullyLinearLayoutManager(activity);
         ryList.setLayoutManager(linearLayoutManager);
 
-        SearchDialog();
+        searchDialog();
     }
 
     /**
@@ -237,14 +237,11 @@ public class MiscellaneousissuesOutListActivity extends BaseTitleActivity {
      * 弹出筛选对话框
      */
     @OnClick(R.id.iv_title_setting)
-    void SearchDialog() {
+    void searchDialog() {
         if (ll_search_dialog.getVisibility() == View.VISIBLE) {
             if (null != sumShowBeanList && sumShowBeanList.size() > 0) {
                 ll_search_dialog.setVisibility(View.GONE);
                 scrollview.setVisibility(View.VISIBLE);
-                adapter = new MiscellaneousissuesOutAdapter(mactivity, sumShowBeanList);
-                ryList.setAdapter(adapter);
-                onItemClick();
             }
         } else {
             ivScan.setVisibility(View.VISIBLE);
@@ -256,16 +253,11 @@ public class MiscellaneousissuesOutListActivity extends BaseTitleActivity {
     /**
      * 点击item跳转到汇总界面
      */
-    private void onItemClick() {
-        adapter.setOnItemClickListener(new OnItemClickListener() {
-            @Override
-            public void onItemClick(View itemView, int position) {
-                final FilterResultOrderBean orderData = sumShowBeanList.get(position);
-                Bundle bundle = new Bundle();
-                bundle.putSerializable(AddressContants.ORDERDATA, orderData);
-                ActivityManagerUtils.startActivityBundleForResult(mactivity,MiscellaneousissuesOutActivity.class, bundle, SUMCODE);
-            }
-        });
+    private void itemClick(List<FilterResultOrderBean> clickBeen, int position) {
+        final FilterResultOrderBean orderData = clickBeen.get(position);
+        Bundle bundle = new Bundle();
+        bundle.putSerializable(AddressContants.ORDERDATA, orderData);
+        ActivityManagerUtils.startActivityBundleForResult(mactivity,MiscellaneousissuesOutActivity.class, bundle, SUMCODE);
     }
 
     @Override
@@ -325,7 +317,16 @@ public class MiscellaneousissuesOutListActivity extends BaseTitleActivity {
                         sumShowBeanList = list;
                         adapter = new MiscellaneousissuesOutAdapter(mactivity, sumShowBeanList);
                         ryList.setAdapter(adapter);
-                        onItemClick();
+                        adapter.setOnItemClickListener(new OnItemClickListener() {
+                            @Override
+                            public void onItemClick(View itemView, int position) {
+                                itemClick(sumShowBeanList, position);
+                            }
+                        });
+                        if (autoSkip&&list.size() == 1) {
+                            itemClick(sumShowBeanList, 0);
+                        }
+                        autoSkip=true;
                     }
                 }
 

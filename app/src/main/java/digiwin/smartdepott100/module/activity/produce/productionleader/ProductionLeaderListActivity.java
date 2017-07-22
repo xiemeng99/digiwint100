@@ -20,6 +20,9 @@ import butterknife.BindView;
 import butterknife.BindViews;
 import butterknife.OnClick;
 import butterknife.OnFocusChange;
+import digiwin.library.constant.SharePreKey;
+import digiwin.library.utils.SharedPreferencesUtils;
+import digiwin.smartdepott100.core.appcontants.AddressContants;
 import digiwin.smartdepott100.module.logic.produce.productionleader.ProductionLeaderLogic;
 import digiwin.library.datepicker.DatePickerUtils;
 import digiwin.library.dialog.OnDialogClickListener;
@@ -30,7 +33,6 @@ import digiwin.smartdepott100.R;
 import digiwin.smartdepott100.core.appcontants.ModuleCode;
 import digiwin.smartdepott100.core.base.BaseTitleActivity;
 import digiwin.smartdepott100.core.modulecommon.ModuleUtils;
-import digiwin.smartdepott100.login.bean.AccoutBean;
 import digiwin.smartdepott100.login.loginlogic.LoginLogic;
 import digiwin.smartdepott100.module.adapter.produce.ProductionLeaderListAdapter;
 import digiwin.smartdepott100.module.bean.common.FilterBean;
@@ -67,14 +69,14 @@ public class ProductionLeaderListActivity extends BaseTitleActivity {
 
     ProductionLeaderLogic commonLogic;
 
-    @BindViews({R.id.ll_super_number,R.id.ll_applicant,
-            R.id.ll_department,R.id.ll_plan_date})
+    @BindViews({R.id.ll_super_number, R.id.ll_applicant,
+            R.id.ll_department, R.id.ll_plan_date})
     List<View> views;
-    @BindViews({R.id.tv_super_number,R.id.tv_applicant,
-            R.id.tv_department,R.id.tv_plan_date})
+    @BindViews({R.id.tv_super_number, R.id.tv_applicant,
+            R.id.tv_department, R.id.tv_plan_date})
     List<TextView> textViews;
-    @BindViews({R.id.et_super_number,R.id.et_applicant,
-            R.id.et_department,R.id.et_plan_date})
+    @BindViews({R.id.et_super_number, R.id.et_applicant,
+            R.id.et_department, R.id.et_plan_date})
     List<EditText> editTexts;
 
     /**
@@ -85,31 +87,15 @@ public class ProductionLeaderListActivity extends BaseTitleActivity {
     @BindView(R.id.tv_super_number)
     TextView tv_super_number;
     @BindView(R.id.et_super_number)
-    EditText et_super_number;
+    EditText etSuperNumber;
 
     @OnFocusChange(R.id.et_super_number)
     void shipping_orderFocusChanage() {
         ModuleUtils.viewChange(ll_super_number, views);
         ModuleUtils.tvChange(activity, tv_super_number, textViews);
-        ModuleUtils.etChange(activity, et_super_number, editTexts);
+        ModuleUtils.etChange(activity, etSuperNumber, editTexts);
     }
 
-//    /**
-//     * 工单号
-//     */
-//    @BindView(R.id.ll_order_number)
-//    LinearLayout ll_order_number;
-//    @BindView(R.id.tv_order_number)
-//    TextView tv_order_number;
-//    @BindView(R.id.et_order_number)
-//    EditText et_order_number;
-//
-//    @OnFocusChange(R.id.et_order_number)
-//    void item_noFocusChanage() {
-//        ModuleUtils.viewChange(ll_order_number, views);
-//        ModuleUtils.tvChange(activity, tv_order_number, textViews);
-//        ModuleUtils.etChange(activity, et_order_number, editTexts);
-//    }
 
     /**
      * 申请人
@@ -119,13 +105,13 @@ public class ProductionLeaderListActivity extends BaseTitleActivity {
     @BindView(R.id.tv_applicant)
     TextView tv_applicant;
     @BindView(R.id.et_applicant)
-    EditText et_applicant;
+    EditText etApplicant;
 
     @OnFocusChange(R.id.et_applicant)
     void customFocusChanage() {
         ModuleUtils.viewChange(ll_applicant, views);
         ModuleUtils.tvChange(activity, tv_applicant, textViews);
-        ModuleUtils.etChange(activity, et_applicant, editTexts);
+        ModuleUtils.etChange(activity, etApplicant, editTexts);
     }
 
     /**
@@ -136,13 +122,13 @@ public class ProductionLeaderListActivity extends BaseTitleActivity {
     @BindView(R.id.tv_department)
     TextView tv_department;
     @BindView(R.id.et_department)
-    EditText et_department;
+    EditText etDepartment;
 
     @OnFocusChange(R.id.et_department)
     void salesmanFocusChanage() {
         ModuleUtils.viewChange(ll_department, views);
         ModuleUtils.tvChange(activity, tv_department, textViews);
-        ModuleUtils.etChange(activity, et_department, editTexts);
+        ModuleUtils.etChange(activity, etDepartment, editTexts);
     }
 
     /**
@@ -155,12 +141,13 @@ public class ProductionLeaderListActivity extends BaseTitleActivity {
     @BindView(R.id.ll_plan_date)
     LinearLayout ll_plan_date;
     @BindView(R.id.et_plan_date)
-    EditText et_plan_date;
+    EditText etPlanDate;
+
     @OnFocusChange(R.id.et_plan_date)
     void plan_dateFocusChanage() {
         ModuleUtils.viewChange(ll_plan_date, views);
         ModuleUtils.tvChange(activity, tv_plan_date, textViews);
-        ModuleUtils.etChange(activity, et_plan_date, editTexts);
+        ModuleUtils.etChange(activity, etPlanDate, editTexts);
     }
 
 
@@ -168,14 +155,14 @@ public class ProductionLeaderListActivity extends BaseTitleActivity {
     String endDate = "";
 
     @OnClick(R.id.iv_plan_date)
-    void dateClick(){
+    void dateClick() {
         DatePickerUtils.getDoubleDate(activity, new DatePickerUtils.GetDoubleDateListener() {
             @Override
             public void getTime(String mStartDate, String mEndDate, String showDate) {
-                et_plan_date.requestFocus();
+                etPlanDate.requestFocus();
                 startDate = mStartDate;
                 endDate = mEndDate;
-                et_plan_date.setText(showDate);
+                etPlanDate.setText(showDate);
             }
         });
     }
@@ -188,60 +175,51 @@ public class ProductionLeaderListActivity extends BaseTitleActivity {
 
     @BindView(R.id.btn_search_sure)
     Button btn_search_sure;
+
     @OnClick(R.id.btn_search_sure)
-    void search(){
+    void search() {
         //待办事项展示
-        FilterBean FilterBean = new FilterBean();
-        try {
-            showLoadingDialog();
-
-            AccoutBean accoutBean = LoginLogic.getUserInfo();
-            if(null == accoutBean){
-                return;
-            }
-            FilterBean.setWarehouse_no(accoutBean.getWare());
-
-            if(!StringUtils.isBlank(et_super_number.getText().toString().trim())){
-                FilterBean.setDoc_no(et_super_number.getText().toString().trim());
-            }
-            if(!StringUtils.isBlank(et_applicant.getText().toString().trim())){
-                FilterBean.setEmployee_no(et_applicant.getText().toString().trim());
-            }
-
-            if(!StringUtils.isBlank(et_department.getText().toString().trim())){
-                FilterBean.setDepartment_no(et_department.getText().toString().trim());
-            }
-
-            if(!StringUtils.isBlank(et_plan_date.getText().toString())){
-                FilterBean.setDate_begin(startDate);
-                FilterBean.setDate_end(endDate);
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
+        FilterBean filterBean = new FilterBean();
+        showLoadingDialog();
+        filterBean.setWarehouse_no(LoginLogic.getWare());
+        if (!StringUtils.isBlank(etSuperNumber.getText().toString().trim())) {
+            filterBean.setDoc_no(etSuperNumber.getText().toString().trim());
+        }
+        if (!StringUtils.isBlank(etApplicant.getText().toString().trim())) {
+            filterBean.setEmployee_no(etApplicant.getText().toString().trim());
         }
 
-        commonLogic.getPLListData(FilterBean, new ProductionLeaderLogic.GetDataListListener() {
+        if (!StringUtils.isBlank(etDepartment.getText().toString().trim())) {
+            filterBean.setDepartment_no(etDepartment.getText().toString().trim());
+        }
+
+        if (!StringUtils.isBlank(etPlanDate.getText().toString())) {
+            filterBean.setDate_begin(startDate);
+            filterBean.setDate_end(endDate);
+        }
+        filterBean.setPagesize((String) SharedPreferencesUtils.get(context, SharePreKey.PAGE_SETTING, AddressContants.PAGE_NUM));
+        commonLogic.getPLListData(filterBean, new ProductionLeaderLogic.GetDataListListener() {
             @Override
             public void onSuccess(final List<FilterResultOrderBean> list) {
                 dismissLoadingDialog();
-                if(list.size() > 0){
+                if (list.size() > 0) {
                     ll_search_dialog.setVisibility(View.GONE);
                     scrollview.setVisibility(View.VISIBLE);
                     dataList = new ArrayList<FilterResultOrderBean>();
                     dataList = list;
-                    adapter = new ProductionLeaderListAdapter(activity,list);
+                    adapter = new ProductionLeaderListAdapter(activity, list);
                     ry_list.setAdapter(adapter);
-
                     adapter.setOnItemClickListener(new OnItemClickListener() {
                         @Override
                         public void onItemClick(View itemView, int position) {
-                            Bundle bundle = new Bundle();
-                            FilterResultOrderBean data = list.get(position);
-                            bundle.putSerializable(DATA,data);
-                            ActivityManagerUtils.startActivityBundleForResult(activity,ProductionLeaderActivity.class,bundle,SCANCODE);
+                            itemClick(list,position);
                         }
                     });
-                }else{
+                    if (autoSkip&&list.size() == 1) {
+                        itemClick(dataList, 0);
+                    }
+                    autoSkip=true;
+                } else {
                     showFailedDialog(getResources().getString(R.string.nodate));
                 }
             }
@@ -256,23 +234,28 @@ public class ProductionLeaderListActivity extends BaseTitleActivity {
                     }
                 });
                 ArrayList dataList = new ArrayList<FilterResultOrderBean>();
-                adapter = new ProductionLeaderListAdapter(activity,dataList);
+                adapter = new ProductionLeaderListAdapter(activity, dataList);
                 ry_list.setAdapter(adapter);
             }
         });
     }
-
+private void  itemClick(List<FilterResultOrderBean> clickBeen, int position){
+    Bundle bundle = new Bundle();
+    FilterResultOrderBean data = clickBeen.get(position);
+    bundle.putSerializable(DATA, data);
+    ActivityManagerUtils.startActivityBundleForResult(activity, ProductionLeaderActivity.class, bundle, SCANCODE);
+}
     /**
      * 弹出筛选对话框
      */
     @OnClick(R.id.iv_title_setting)
-    void SearchDialog(){
-        if(ll_search_dialog.getVisibility() == View.VISIBLE){
-            if(null != dataList && dataList.size()>0){
+    void SearchDialog() {
+        if (ll_search_dialog.getVisibility() == View.VISIBLE) {
+            if (null != dataList && dataList.size() > 0) {
                 ll_search_dialog.setVisibility(View.GONE);
                 scrollview.setVisibility(View.VISIBLE);
             }
-        }else{
+        } else {
             ll_search_dialog.setVisibility(View.VISIBLE);
             scrollview.setVisibility(View.GONE);
         }
@@ -280,8 +263,8 @@ public class ProductionLeaderListActivity extends BaseTitleActivity {
 
     @Override
     protected void doBusiness() {
-        et_plan_date.setKeyListener(null);
-        commonLogic =  ProductionLeaderLogic.getInstance(activity,ModuleCode.PRODUCTIONLEADER,mTimestamp.toString());
+        etPlanDate.setKeyListener(null);
+        commonLogic = ProductionLeaderLogic.getInstance(activity, ModuleCode.PRODUCTIONLEADER, mTimestamp.toString());
         LinearLayoutManager linearlayoutmanager = new LinearLayoutManager(activity);
         ry_list.setLayoutManager(linearlayoutmanager);
     }
@@ -289,11 +272,11 @@ public class ProductionLeaderListActivity extends BaseTitleActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        try{
-            if(requestCode == SCANCODE){
+        try {
+            if (requestCode == SCANCODE) {
                 search();
             }
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
@@ -307,7 +290,7 @@ public class ProductionLeaderListActivity extends BaseTitleActivity {
     protected void initNavigationTitle() {
         super.initNavigationTitle();
         activity = this;
-        mName.setText(getString(R.string.title_production_leader)+""+getString(R.string.list));
+        mName.setText(getString(R.string.title_production_leader) + "" + getString(R.string.list));
         iv_title_setting.setVisibility(View.VISIBLE);
         iv_title_setting.setImageResource(R.drawable.search);
     }

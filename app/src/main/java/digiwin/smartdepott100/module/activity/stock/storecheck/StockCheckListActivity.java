@@ -152,8 +152,7 @@ public class StockCheckListActivity extends BaseTitleActivity {
             filterBean.setEmployee_no(et_person.getText().toString().trim());//人员
         }
         showLoadingDialog();
-        Map<String, String> map = ObjectAndMapUtils.getValueMap(filterBean);
-        stockCheckLogic.getStockCheckList(map, new CommonLogic.GetDataListListener() {
+        stockCheckLogic.getStockCheckList(filterBean, new CommonLogic.GetDataListListener() {
             @Override
             public void onSuccess(final List<FilterResultOrderBean> list) {
                 dismissLoadingDialog();
@@ -165,12 +164,13 @@ public class StockCheckListActivity extends BaseTitleActivity {
                     adapter.setOnItemClickListener(new OnItemClickListener() {
                         @Override
                         public void onItemClick(View itemView, int position) {
-                            Bundle bundle = new Bundle();
-                            FilterResultOrderBean data = list.get(position);
-                            bundle.putSerializable("data", data);
-                            ActivityManagerUtils.startActivityBundleForResult(activity, StockCheckActivity.class, bundle, SCANCODE);
+                        itemClick(dataList,position);
                         }
                     });
+                    if (autoSkip&&list.size() == 1) {
+                        itemClick(dataList, 0);
+                    }
+                    autoSkip=true;
                 } else {
                     showFailedDialog(getResources().getString(R.string.nodate));
                 }
@@ -185,6 +185,13 @@ public class StockCheckListActivity extends BaseTitleActivity {
     }
 
     boolean isVis = true;
+
+    private void itemClick(List<FilterResultOrderBean> clickBeen, int position){
+        Bundle bundle = new Bundle();
+        FilterResultOrderBean data = clickBeen.get(position);
+        bundle.putSerializable("data", data);
+        ActivityManagerUtils.startActivityBundleForResult(activity, StockCheckActivity.class, bundle, SCANCODE);
+    }
 
     /**
      * 弹出筛选对话框

@@ -62,71 +62,71 @@ public class PostAllocateActivity extends BaseTitleActivity {
      * 筛选框 调拨单号
      */
     @BindView(R.id.et_transfers_list_no)
-    EditText et_transfers_list_no;
+    EditText etTransfersListNo;
     /**
      * 筛选框 调拨单号
      */
     @BindView(R.id.ll_transfers_list_no)
-    LinearLayout ll_transfers_list_no;
+    LinearLayout llTransfersListNo;
     /**
      * 筛选框 调拨单号
      */
     @BindView(R.id.tv_transfers_list_no)
-    TextView tv_transfers_list_no;
+    TextView tvTransfersListNo;
 
     @OnFocusChange(R.id.et_transfers_list_no)
     void allocateOrderFocusChanage() {
-        ModuleUtils.viewChange(ll_transfers_list_no, views);
-        ModuleUtils.etChange(activity, et_transfers_list_no, editTexts);
-        ModuleUtils.tvChange(activity, tv_transfers_list_no, textViews);
+        ModuleUtils.viewChange(llTransfersListNo, views);
+        ModuleUtils.etChange(activity, etTransfersListNo, editTexts);
+        ModuleUtils.tvChange(activity, tvTransfersListNo, textViews);
     }
 
     /**
      * 筛选框 申请人
      */
     @BindView(R.id.et_applicant)
-    EditText et_applicant;
+    EditText etApplicant;
 
     /**
      * 筛选框 申请人
      */
     @BindView(R.id.ll_applicant)
-    LinearLayout ll_applicant;
+    LinearLayout llApplicant;
     /**
      * 筛选框 申请人
      */
     @BindView(R.id.tv_applicant)
-    TextView tv_applicant;
+    TextView tvApplicant;
 
     @OnFocusChange(R.id.et_applicant)
     void applicantFocusChanage() {
-        ModuleUtils.viewChange(ll_applicant, views);
-        ModuleUtils.etChange(activity, et_applicant, editTexts);
-        ModuleUtils.tvChange(activity, tv_applicant, textViews);
+        ModuleUtils.viewChange(llApplicant, views);
+        ModuleUtils.etChange(activity, etApplicant, editTexts);
+        ModuleUtils.tvChange(activity, tvApplicant, textViews);
     }
 
     /**
      * 筛选框 部门
      */
     @BindView(R.id.et_department)
-    EditText et_department;
+    EditText etDepartment;
 
     /**
      * 筛选框 部门
      */
     @BindView(R.id.ll_department)
-    LinearLayout ll_department;
+    LinearLayout llDepartment;
     /**
      * 筛选框 部门
      */
     @BindView(R.id.tv_department)
-    TextView tv_department;
+    TextView tvDepartment;
 
     @OnFocusChange(R.id.et_department)
     void departmentFocusChanage() {
-        ModuleUtils.viewChange(ll_department, views);
-        ModuleUtils.etChange(activity, et_department, editTexts);
-        ModuleUtils.tvChange(activity, tv_department, textViews);
+        ModuleUtils.viewChange(llDepartment, views);
+        ModuleUtils.etChange(activity, etDepartment, editTexts);
+        ModuleUtils.tvChange(activity, tvDepartment, textViews);
     }
 
 
@@ -134,24 +134,24 @@ public class PostAllocateActivity extends BaseTitleActivity {
      * 筛选框 日期
      */
     @BindView(R.id.et_date)
-    EditText et_date;
+    EditText etDate;
 
     /**
      * 筛选框 日期
      */
     @BindView(R.id.ll_date)
-    LinearLayout ll_date;
+    LinearLayout llDate;
     /**
      * 筛选框 日期
      */
     @BindView(R.id.tv_date)
-    TextView tv_date;
+    TextView tvDate;
 
     /**
      * 筛选框 日期
      */
     @BindView(R.id.iv_date)
-    ImageView iv_date;
+    ImageView ivDate;
 
     String startDate = "";
     String endDate = "";
@@ -161,19 +161,19 @@ public class PostAllocateActivity extends BaseTitleActivity {
         DatePickerUtils.getDoubleDate(pactivity, new DatePickerUtils.GetDoubleDateListener() {
             @Override
             public void getTime(String mStartDate, String mEndDate, String showDate) {
-                et_date.requestFocus();
+                etDate.requestFocus();
                 startDate = mStartDate;
                 endDate = mEndDate;
-                et_date.setText(showDate);
+                etDate.setText(showDate);
             }
         });
     }
 
     @OnFocusChange(R.id.et_date)
     void planDateFocusChanage() {
-        ModuleUtils.viewChange(ll_date, views);
-        ModuleUtils.etChange(activity, et_date, editTexts);
-        ModuleUtils.tvChange(activity, tv_date, textViews);
+        ModuleUtils.viewChange(llDate, views);
+        ModuleUtils.etChange(activity, etDate, editTexts);
+        ModuleUtils.tvChange(activity, tvDate, textViews);
     }
 
     @BindView(R.id.ry_list)
@@ -202,14 +202,12 @@ public class PostAllocateActivity extends BaseTitleActivity {
      * 弹出筛选对话框
      */
     @OnClick(R.id.iv_title_setting)
-    void SearchDialog() {
+    void searchDialog() {
         if (ll_search_dialog.getVisibility() == View.VISIBLE) {
             if (null != sumShowBeanList && sumShowBeanList.size() > 0) {
                 ll_search_dialog.setVisibility(View.GONE);
                 scrollview.setVisibility(View.VISIBLE);
-                adapter = new PostAllocateOrderAdapter(pactivity, sumShowBeanList);
-                ryList.setAdapter(adapter);
-                onItemClick();
+
             }
         } else {
             ll_search_dialog.setVisibility(View.VISIBLE);
@@ -243,8 +241,10 @@ public class PostAllocateActivity extends BaseTitleActivity {
 
     @Override
     protected void doBusiness() {
+        startDate="";
+        endDate="";
         doc_stus = "N";//默认拨出
-        et_date.setKeyListener(null);
+        etDate.setKeyListener(null);
         pactivity = (PostAllocateActivity) activity;
         commonLogic = PostAllocateLogic.getInstance(pactivity, module, mTimestamp.toString());
         FullyLinearLayoutManager linearLayoutManager = new FullyLinearLayoutManager(activity);
@@ -274,17 +274,12 @@ public class PostAllocateActivity extends BaseTitleActivity {
     /**
      * 点击item跳转到汇总界面
      */
-    private void onItemClick() {
-        adapter.setOnItemClickListener(new OnItemClickListener() {
-            @Override
-            public void onItemClick(View itemView, int position) {
-                final FilterResultOrderBean orderData = sumShowBeanList.get(position);
-                Bundle bundle = new Bundle();
-                bundle.putString(AddressContants.DOC_NO, doc_stus);
-                bundle.putSerializable(AddressContants.ORDERDATA, orderData);
-                ActivityManagerUtils.startActivityBundleForResult(pactivity, PostAllocateScanActivity.class, bundle, SUMCODE);
-            }
-        });
+    private void itemClick(List<FilterResultOrderBean> clickBeen, int position) {
+        FilterResultOrderBean orderData = clickBeen.get(position);
+        Bundle bundle = new Bundle();
+        bundle.putString(AddressContants.DOC_NO, doc_stus);
+        bundle.putSerializable(AddressContants.ORDERDATA, orderData);
+        ActivityManagerUtils.startActivityBundleForResult(pactivity, PostAllocateScanActivity.class, bundle, SUMCODE);
     }
 
     @Override
@@ -312,19 +307,19 @@ public class PostAllocateActivity extends BaseTitleActivity {
             //仓库
             filterBean.setWarehouse_in_no(LoginLogic.getWare());
             //调拨单号
-            if (!StringUtils.isBlank(et_transfers_list_no.getText().toString())) {
-                filterBean.setDoc_no(et_transfers_list_no.getText().toString());
+            if (!StringUtils.isBlank(etTransfersListNo.getText().toString())) {
+                filterBean.setDoc_no(etTransfersListNo.getText().toString());
             }
             //申请人
-            if (!StringUtils.isBlank(et_applicant.getText().toString())) {
-                filterBean.setEmployee_no(et_applicant.getText().toString());
+            if (!StringUtils.isBlank(etApplicant.getText().toString())) {
+                filterBean.setEmployee_no(etApplicant.getText().toString());
             }
             //部门
-            if (!StringUtils.isBlank(et_department.getText().toString())) {
-                filterBean.setDepartment_no(et_department.getText().toString());
+            if (!StringUtils.isBlank(etDepartment.getText().toString())) {
+                filterBean.setDepartment_no(etDepartment.getText().toString());
             }
             //日期
-            if (!StringUtils.isBlank(et_date.getText().toString())) {
+            if (!StringUtils.isBlank(etDate.getText().toString())) {
                 filterBean.setDate_begin(startDate);
                 filterBean.setDate_end(endDate);
             }
@@ -343,7 +338,16 @@ public class PostAllocateActivity extends BaseTitleActivity {
                         sumShowBeanList = list;
                         adapter = new PostAllocateOrderAdapter(pactivity, sumShowBeanList);
                         ryList.setAdapter(adapter);
-                        onItemClick();
+                        adapter.setOnItemClickListener(new OnItemClickListener() {
+                            @Override
+                            public void onItemClick(View itemView, int position) {
+                                itemClick(sumShowBeanList, position);
+                            }
+                        });
+                        if (autoSkip&&sumShowBeanList.size() == 1) {
+                            itemClick(sumShowBeanList, 0);
+                        }
+                        autoSkip=true;
                     }
                 }
 
