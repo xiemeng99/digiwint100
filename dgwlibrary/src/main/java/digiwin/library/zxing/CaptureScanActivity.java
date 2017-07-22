@@ -222,6 +222,7 @@ public final class CaptureScanActivity extends Activity implements
     @Override
     public void surfaceChanged(SurfaceHolder holder, int format, int width,
                                int height) {
+        cameraManager.setCameraDisplayOrientation(this,0);
 
     }
 
