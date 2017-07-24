@@ -51,6 +51,11 @@
                         android:textColor="@color/black_32"
                         android:textCursorDrawable="@drawable/et_cursor_yellow"
                         android:textSize="@dimen/textSize_14sp" />
+                    <CheckBox
+                        android:id="@+id/cb_locatorlock"
+                        android:layout_width="wrap_content"
+                        android:layout_height="@dimen/layout_20dp"
+                        android:button="@drawable/lock_checkbox" />
 
                 </LinearLayout>
 

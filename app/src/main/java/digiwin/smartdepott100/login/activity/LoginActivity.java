@@ -3,6 +3,7 @@ package digiwin.smartdepott100.login.activity;
 
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Color;
+import android.graphics.drawable.AnimationDrawable;
 import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Bundle;
@@ -29,6 +30,7 @@ import digiwin.library.utils.AlertDialogUtils;
 import digiwin.library.utils.LogUtils;
 import digiwin.library.utils.StringUtils;
 import digiwin.library.utils.TelephonyUtils;
+import digiwin.pulltorefreshlibrary.recyclerview.RecyclerImageView;
 import digiwin.smartdepott100.R;
 import digiwin.smartdepott100.core.appcontants.AddressContants;
 import digiwin.smartdepott100.core.appcontants.ModuleCode;
@@ -57,8 +59,8 @@ public class LoginActivity extends BaseActivity {
     /**
      * 设置背景动画
      */
-//    @BindView(R.id.iv_login_bg)
-//    RecyclerImageView iv_login_bg;
+    @BindView(R.id.iv_login_bg)
+    RecyclerImageView iv_login_bg;
 
 
     /**
@@ -100,8 +102,8 @@ public class LoginActivity extends BaseActivity {
     ImageView ivEntid;
     @BindView(R.id.iv_site)
     ImageView ivSite;
-    @BindView(R.id.videoview)
-    CustomVideoView videoView;
+//    @BindView(R.id.videoview)
+//    CustomVideoView videoView;
 
     @OnClick(R.id.et_login_user)
     void loginUserColorChange() {
@@ -155,7 +157,7 @@ public class LoginActivity extends BaseActivity {
     /**
      * 背景动画
      */
-//    private AnimationDrawable animationDrawable;
+    private AnimationDrawable animationDrawable;
 
     /**
      * LoginActivity是否是结束状态,开机启动用到
@@ -220,13 +222,13 @@ public class LoginActivity extends BaseActivity {
     @Override
     protected void onResume() {
         super.onResume();
-//        animationDrawable = (AnimationDrawable) iv_login_bg.getBackground();
-//        animationDrawable.start();
+        animationDrawable = (AnimationDrawable) iv_login_bg.getBackground();
+        animationDrawable.start();
     }
 
     @Override
     protected void doBusiness() {
-        initView();
+//        initView();
         PermissionUtils.verifyStoragePermissions(this);
         final WiFiPrintManager wiFiPrintManager = WiFiPrintManager.getManager();
         wiFiPrintManager.openWiFi("", 0, new WiFiPrintManager.OpenWiFiPrintListener() {
@@ -573,47 +575,47 @@ public class LoginActivity extends BaseActivity {
     }
 
 
-    private void initView() {
-        //设置播放加载路径
-        videoView.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
-            @Override
-            public void onPrepared(MediaPlayer mp) {
-                mp.setVolume(0f,0f);
-                videoView.start();
-                mp.setOnInfoListener(new MediaPlayer.OnInfoListener() {
-                    @Override
-                    public boolean onInfo(MediaPlayer mp, int what, int extra) {
-                        if (what == MediaPlayer.MEDIA_INFO_VIDEO_RENDERING_START) {
-                            videoView.setBackgroundColor(Color.TRANSPARENT);
-                        }
-                        return true;
-                    }
-                });
-            }
-        });
-        videoView.setVideoURI(Uri.parse("android.resource://" + getPackageName() + "/" + R.raw.test1));
-        //循环播放
-        videoView.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
-            @Override
-            public void onCompletion(MediaPlayer mediaPlayer) {
-                videoView.start();
-            }
-        });
-
-    }
+//    private void initView() {
+//        //设置播放加载路径
+//        videoView.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
+//            @Override
+//            public void onPrepared(MediaPlayer mp) {
+//                mp.setVolume(0f,0f);
+//                videoView.start();
+//                mp.setOnInfoListener(new MediaPlayer.OnInfoListener() {
+//                    @Override
+//                    public boolean onInfo(MediaPlayer mp, int what, int extra) {
+//                        if (what == MediaPlayer.MEDIA_INFO_VIDEO_RENDERING_START) {
+//                            videoView.setBackgroundColor(Color.TRANSPARENT);
+//                        }
+//                        return true;
+//                    }
+//                });
+//            }
+//        });
+//        videoView.setVideoURI(Uri.parse("android.resource://" + getPackageName() + "/" + R.raw.test1));
+//        //循环播放
+//        videoView.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+//            @Override
+//            public void onCompletion(MediaPlayer mediaPlayer) {
+//                videoView.start();
+//            }
+//        });
+//
+//    }
 
     //返回重启加载
-    @Override
-    protected void onRestart() {
-        initView();
-        super.onRestart();
-    }
-
-    //防止锁屏或者切出的时候，音乐在播放
-    @Override
-    protected void onStop() {
-        videoView.stopPlayback();
-        super.onStop();
-    }
+//    @Override
+//    protected void onRestart() {
+//        initView();
+//        super.onRestart();
+//    }
+//
+//    //防止锁屏或者切出的时候，音乐在播放
+//    @Override
+//    protected void onStop() {
+//        videoView.stopPlayback();
+//        super.onStop();
+//    }
 
 }

@@ -214,8 +214,8 @@ public class MoveStoreScanFg extends BaseFragment {
                 case BARCODEWHAT:
                     HashMap<String, String> barcodeMap = new HashMap<>();
                     barcodeMap.put(AddressContants.BARCODE_NO, String.valueOf(msg.obj));
-                    barcodeMap.put(AddressContants.STORAGE_SPACES_BARCODE, saveBean.getStorage_spaces_no());
                     barcodeMap.put(AddressContants.STORAGE_SPACES_NO,saveBean.getStorage_spaces_out_no());
+                    barcodeMap.put(AddressContants.WAREHOUSE_NO,saveBean.getWarehouse_out_no());
                     etScanBarocde.setKeyListener(null);
                     moveStoreLogic.scanBarcode(barcodeMap, new CommonLogic.ScanBarcodeListener() {
                         @Override

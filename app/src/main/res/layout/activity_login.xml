@@ -4,34 +4,33 @@
     android:background="@color/white_ff"
     android:layout_height="match_parent">
 
-    <!--<digiwin.pulltorefreshlibrary.recyclerview.RecyclerImageView-->
-        <!--android:id="@+id/iv_login_bg"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="match_parent"-->
-        <!--android:layout_alignParentStart="true"-->
-        <!--android:layout_alignParentTop="true"-->
-        <!--android:background="@drawable/login_bg"-->
-        <!--android:scaleType="fitXY" />-->
-    <digiwin.smartdepott100.core.customview.CustomVideoView
-        android:id="@+id/videoview"
+    <digiwin.pulltorefreshlibrary.recyclerview.RecyclerImageView
+        android:id="@+id/iv_login_bg"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true" />
+        android:layout_alignParentTop="true"
+        android:background="@drawable/login_bg"
+        android:scaleType="fitXY" />
+    <!--<digiwin.smartdepott100.core.customview.CustomVideoView-->
+        <!--android:id="@+id/videoview"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="match_parent"-->
+        <!--android:layout_alignParentLeft="true"-->
+        <!--android:layout_alignParentStart="true"-->
+        <!--android:layout_alignParentTop="true" />-->
 
-    <!--<ImageView-->
-        <!--android:id="@+id/iv_digiwin_logo"-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:layout_centerHorizontal="true"-->
-        <!--android:layout_marginTop="@dimen/layout_60dp"-->
-        <!--android:src="@drawable/loginlogo2" />-->
-    <!--android:layout_below="@+id/iv_digiwin_logo"-->
+    <ImageView
+        android:id="@+id/iv_digiwin_logo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="@dimen/layout_60dp"
+        android:src="@drawable/loginlogo2" />
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
+        android:layout_below="@+id/iv_digiwin_logo"
         android:orientation="vertical"
         android:layout_alignParentStart="true">
 

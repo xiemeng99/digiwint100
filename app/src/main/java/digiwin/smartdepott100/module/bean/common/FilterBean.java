@@ -1,10 +1,20 @@
 package digiwin.smartdepott100.module.bean.common;
 
+import digiwin.library.constant.SharePreKey;
+import digiwin.library.utils.SharedPreferencesUtils;
+import digiwin.smartdepott100.core.appcontants.AddressContants;
+import digiwin.smartdepott100.core.base.BaseApplication;
+
 /**
  * @author 唐孟宇
  * @des 筛选条件Bean
  */
 public class FilterBean {
+
+    public FilterBean(){
+       BaseApplication instance = BaseApplication.getInstance();
+        this.pagesize = (String) SharedPreferencesUtils.get(instance, SharePreKey.PAGE_SETTING, AddressContants.PAGE_NUM);
+    }
     /**
      * 每页笔数
      */
@@ -106,7 +116,7 @@ public class FilterBean {
     }
 
     public void setPagesize(String pagesize) {
-        this.pagesize = pagesize;
+     this.pagesize=pagesize;
     }
 
     public String getWo_no() {

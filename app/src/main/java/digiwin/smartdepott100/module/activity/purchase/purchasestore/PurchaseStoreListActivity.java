@@ -192,8 +192,10 @@ public class PurchaseStoreListActivity extends BaseTitleActivity {
     }
 
     private void searchData() {
-        updateUI();
         showLoadingDialog();
+        list.clear();
+        adapter = new StoreReturnMaterialListAdapter(activity,list);
+        ryList.setAdapter(adapter);
         FilterBean bean = new FilterBean();
         bean.setDoc_no(etReturnMaterial.getText().toString().trim());
         bean.setEmployee_no(etApplicant.getText().toString().trim());
@@ -290,14 +292,13 @@ public class PurchaseStoreListActivity extends BaseTitleActivity {
         etDate.setKeyListener(null);
         commonLogic = PurchaseStoreLogic.getInstance(activity,module,mTimestamp.toString());
         list = new ArrayList<>();
-        updateUI();
+        ryList.setLayoutManager(new LinearLayoutManager(activity));
     }
     /**
      * 更新界面
      */
     private void updateUI() {
         adapter = new StoreReturnMaterialListAdapter(activity,list);
-        ryList.setLayoutManager(new LinearLayoutManager(activity));
         ryList.setAdapter(adapter);
         adapter.setOnItemClickListener(new OnItemClickListener() {
             @Override

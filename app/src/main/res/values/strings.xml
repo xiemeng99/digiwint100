@@ -305,7 +305,7 @@
     <string name="receipt_address">收货地址</string>
     <string name="purchase_goods_scan">采购收货扫描</string>
     <string name="purchase_receiving">采购收货</string>
-    <string name="title_purchase_goods_scan">扫码收货</string>
+    <string name="title_purchase_goods_scan">采购收货</string>
     <string name="purchase_scan_supplier">扫码收货(供)</string>
     <string name="send_goods_num">发货量</string>
 
@@ -761,10 +761,10 @@
     <string name="scan_big_storenum">实发量大于库存量</string>
     <string name="scan_byfifo_order">请按照fifo顺序进行扫描</string>
 
-    <string name="tray_statu">托盘状态</string>
-    <string name="tray">托盘</string>
+    <string name="tray_statu">托板状态</string>
+    <string name="tray">托板</string>
 
 
     <string name="lable_printing">标签打印</string>
-
+    <string name="speech_input">语音输入</string>
 </resources>

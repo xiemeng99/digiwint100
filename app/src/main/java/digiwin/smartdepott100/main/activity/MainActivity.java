@@ -49,7 +49,7 @@ public class MainActivity extends BaseTitleActivity {
      */
     @BindView(R.id.un_com)
     ImageView iv_un_com;
-//    @BindView(R.id.tv_title)
+    //    @BindView(R.id.tv_title)
 //    public TextView mTitleName;
     //两秒内按返回键两次退出程序
     private long exitTime;
@@ -65,25 +65,29 @@ public class MainActivity extends BaseTitleActivity {
     @BindView(R.id.tv_title_operation)
     TextView tv_title_operation;
 
-    String command ="";
+    String command = "";
+
+    @BindView(R.id.voice_guide)
+    ImageView voiceGuide;
+
     /**
      * 语音按钮
      */
     @OnClick(R.id.voice_guide)
-    void voiceTest(){
-        String voicer = (String)SharedPreferencesUtils.get(this, SharePreKey.VOICER_SELECTED,"voicer");
+    void voiceTest() {
+        String voicer = (String) SharedPreferencesUtils.get(this, SharePreKey.VOICER_SELECTED, "voicer");
         final List<ModuleBean> list = MainLogic.ModuleList;
-        VoiceUtils voiceUtils = VoiceUtils.getInstance(this,voicer);
+        VoiceUtils voiceUtils = VoiceUtils.getInstance(this, voicer);
         voiceUtils.voiceToText(new VoiceUtils.GetVoiceTextListener() {
             @Override
             public String getVoiceText(String str) {
                 command = str;
-                if(list.size()>0){
-                    for (int i = 0;i<list.size();i++){
-                        if(command.contains(getResources().getString(list.get(i).getNameRes()))){
+                if (list.size() > 0) {
+                    for (int i = 0; i < list.size(); i++) {
+                        if (command.contains(getResources().getString(list.get(i).getNameRes()))) {
                             //
-                            voice(getResources().getString(R.string.openning)+getResources().getString(list.get(i).getNameRes()));
-                            ActivityManagerUtils.startActivity(MainActivity.this,list.get(i).getIntent());
+                            voice(getResources().getString(R.string.openning) + getResources().getString(list.get(i).getNameRes()));
+                            ActivityManagerUtils.startActivity(MainActivity.this, list.get(i).getIntent());
                         }
                     }
                 }
@@ -92,6 +96,7 @@ public class MainActivity extends BaseTitleActivity {
         });
 
     }
+
     /**
      * 用户权限
      */
@@ -153,7 +158,7 @@ public class MainActivity extends BaseTitleActivity {
     }
 
 
-     @Override
+    @Override
     protected Toolbar toolbar() {
         return toolbar;
     }
@@ -162,7 +167,7 @@ public class MainActivity extends BaseTitleActivity {
     @Override
     protected void doBusiness() {
         exitTime = 0;
-        mainLogic=new MainLogic(this);
+        mainLogic = new MainLogic(this);
         initModule();
     }
 
@@ -182,9 +187,9 @@ public class MainActivity extends BaseTitleActivity {
         storageItems = new ArrayList<>();
         salesItems = new ArrayList<>();
         dailyworkItems = new ArrayList<>();
-        boardItems=new ArrayList<>();
+        boardItems = new ArrayList<>();
         //初始化各个模块数据
-        mainLogic.initModule(activity,powerItems, purchaseItems, produceItems, storageItems, salesItems, dailyworkItems,boardItems);
+        mainLogic.initModule(activity, powerItems, purchaseItems, produceItems, storageItems, salesItems, dailyworkItems, boardItems);
         showTitle();
     }
 
@@ -192,17 +197,22 @@ public class MainActivity extends BaseTitleActivity {
      * 显示标题栏
      */
     public void showTitle() {
-        mainLogic.showTitle(totalModes,titles);
+        mainLogic.showTitle(totalModes, titles);
         initDatas();
         mainLogic.setCustomTab(context, tablayout, titles);
-        mainLogic.initListener(context,points,viewPager,tablayout);
+        mainLogic.initListener(context, points, viewPager, tablayout);
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-       // MainLogic.setTitle(tvPersonName, tv_title_operation);
+        // MainLogic.setTitle(tvPersonName, tv_title_operation);
+        boolean speechInput = (boolean) SharedPreferencesUtils.get(activity, SharePreKey.SPEECH_INPUT, true);
+        if (!speechInput) {
+            voiceGuide.setVisibility(View.GONE);
+        }
     }
+
     /**
      * 用户信息界面跳转
      */

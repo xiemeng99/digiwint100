@@ -71,7 +71,7 @@
                 <ImageView
                     android:layout_width="@dimen/layout_20dp"
                     android:layout_height="@dimen/layout_20dp"
-                    android:src="@mipmap/center" />
+                    android:src="@drawable/login_entid_on" />
 
                 <TextView
                     android:layout_width="0dp"
@@ -107,7 +107,7 @@
                 <ImageView
                     android:layout_width="@dimen/layout_20dp"
                     android:layout_height="@dimen/layout_20dp"
-                    android:src="@mipmap/center" />
+                    android:src="@drawable/login_site_on" />
 
                 <TextView
                     android:layout_width="0dp"
@@ -169,7 +169,6 @@
                 android:background="@color/gray_f0"/>
 
             <LinearLayout
-                android:id="@+id/ll_vibrateSetting"
                 style="@style/SettingLinearLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -178,7 +177,7 @@
                 <ImageView
                     android:layout_width="@dimen/layout_20dp"
                     android:layout_height="@dimen/layout_20dp"
-                    android:src="@mipmap/shouji_00" />
+                    android:src="@mipmap/tray" />
 
                 <TextView
                     android:layout_width="0dp"
@@ -238,6 +237,43 @@
                     android:textSize="@dimen/textSize_14sp" />
 
             </LinearLayout>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/layout_0.5dp"
+                android:background="@color/gray_f0"/>
+
+            <LinearLayout
+                style="@style/SettingLinearLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="@dimen/layout_20dp"
+                    android:layout_height="@dimen/layout_20dp"
+                    android:src="@mipmap/speechinput" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/layout_5dp"
+                    android:layout_weight="1"
+                    android:gravity="left"
+                    android:text="@string/speech_input"
+                    android:textColor="@color/black_32"
+                    android:textSize="@dimen/textSize_14sp" />
+                <ToggleButton
+                    android:id="@+id/tb_speechinput"
+                    android:layout_width="@dimen/layout_50dp"
+                    android:layout_height="@dimen/layout_20dp"
+                    android:background="@android:color/transparent"
+                    android:button="@drawable/togglebutton_bg"
+                    android:checked="true"
+                    android:text=""
+                    android:textOff=""
+                    android:textOn="" />
+
+            </LinearLayout>
 
             <View
                 android:layout_width="match_parent"
@@ -280,7 +316,7 @@
             <View
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/layout_0.5dp"
-                android:background="@color/gray_f0"></View>
+                android:background="@color/gray_f0"/>
 
             <LinearLayout
                 android:id="@+id/ll_voicerSetting"

@@ -99,7 +99,7 @@ public class ListSumBean implements Serializable {
     /**
      * 物料条码类型
      */
-    private String item_barcode_type;
+    private String item_barcode_type="";
     /**
      * 先进先出管控否
      */

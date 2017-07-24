@@ -26,8 +26,6 @@ import butterknife.OnTextChanged;
 import digiwin.library.dialog.OnDialogClickListener;
 import digiwin.library.dialog.OnDialogTwoListener;
 import digiwin.library.utils.ActivityManagerUtils;
-import digiwin.library.utils.LogUtils;
-import digiwin.library.utils.ObjectAndMapUtils;
 import digiwin.library.utils.StringUtils;
 import digiwin.library.utils.WeakRefHandler;
 import digiwin.pulltorefreshlibrary.recyclerview.FullyLinearLayoutManager;
@@ -40,11 +38,9 @@ import digiwin.smartdepott100.core.modulecommon.ModuleUtils;
 import digiwin.smartdepott100.login.loginlogic.LoginLogic;
 import digiwin.smartdepott100.module.activity.common.CommonDetailActivity;
 import digiwin.smartdepott100.module.adapter.produce.WorkOrderSumAdapter;
-import digiwin.smartdepott100.module.bean.common.ClickItemPutBean;
 import digiwin.smartdepott100.module.bean.common.DetailShowBean;
 import digiwin.smartdepott100.module.bean.common.ListSumBean;
 import digiwin.smartdepott100.module.bean.common.SumShowBean;
-import digiwin.smartdepott100.module.bean.produce.AccordingMaterialSumBean;
 import digiwin.smartdepott100.module.logic.common.CommonLogic;
 import digiwin.smartdepott100.module.logic.produce.WorkOrderlLogic;
 
@@ -74,16 +70,16 @@ public class WorkOrderActivity extends BaseFirstModuldeActivity {
      * 工单号
      */
     @BindView(R.id.et_job_number_scan)
-    EditText et_job_number_scan;
+    EditText etJobNumberScan;
 
     /**
      * 品名
      */
     @BindView(R.id.tv_item_name)
-    TextView mTv_item_name;
+    TextView mTvItemName;
 
     @BindView(R.id.ry_list)
-    RecyclerView mRc_list;
+    RecyclerView mRcList;
 
     WorkOrderSumAdapter adapter;
 
@@ -118,7 +114,7 @@ public class WorkOrderActivity extends BaseFirstModuldeActivity {
             @Override
             public void onCallback1() {
                 showLoadingDialog();
-                if(StringUtils.isBlank(et_job_number_scan.getText().toString().trim())){
+                if(StringUtils.isBlank(etJobNumberScan.getText().toString().trim())){
                     dismissLoadingDialog();
                     showFailedDialog(getResources().getString(R.string.please_scan_job_number));
                     return;
@@ -140,7 +136,7 @@ public class WorkOrderActivity extends BaseFirstModuldeActivity {
 
     @OnFocusChange(R.id.et_job_number_scan)
     void barcodeFocusChange() {
-        ModuleUtils.etChange(activity, et_job_number_scan, editTexts);
+        ModuleUtils.etChange(activity, etJobNumberScan, editTexts);
     }
 
     @OnTextChanged(value = R.id.et_job_number_scan, callback = OnTextChanged.Callback.AFTER_TEXT_CHANGED)
@@ -199,19 +195,19 @@ public class WorkOrderActivity extends BaseFirstModuldeActivity {
     protected void doBusiness() {
         commonLogic = WorkOrderlLogic.getInstance(activity,activity.module,activity.mTimestamp.toString());
         FullyLinearLayoutManager fullyLinearLayoutManager = new FullyLinearLayoutManager(activity);
-        mRc_list.setLayoutManager(fullyLinearLayoutManager);
+        mRcList.setLayoutManager(fullyLinearLayoutManager);
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if(requestCode == SCANCODE){
-            if(!StringUtils.isBlank(et_job_number_scan.getText().toString().trim())){
+            if(!StringUtils.isBlank(etJobNumberScan.getText().toString().trim())){
                 List<ListSumBean> list = new ArrayList<ListSumBean>();
                 adapter = new WorkOrderSumAdapter(activity,list);
-                mRc_list.setAdapter(adapter);
+                mRcList.setAdapter(adapter);
                 showLoadingDialog();
-                updateList(et_job_number_scan.getText().toString().trim());
+                updateList(etJobNumberScan.getText().toString().trim());
             }
         }
     }
@@ -220,32 +216,32 @@ public class WorkOrderActivity extends BaseFirstModuldeActivity {
      * 清楚栏位
      */
     public  void clearData(){
-        mTv_item_name.setText("");
-        et_job_number_scan.setText("");
-        et_job_number_scan.requestFocus();
+        mTvItemName.setText("");
+        etJobNumberScan.setText("");
+        etJobNumberScan.requestFocus();
         List<ListSumBean> list = new ArrayList<ListSumBean>();
         adapter = new WorkOrderSumAdapter(activity,list);
-        mRc_list.setAdapter(adapter);
+        mRcList.setAdapter(adapter);
     }
 
     /**
      * 根据工单号跟新汇总数据
-     * @param item_no
+     * @param wo_no
      */
-    void updateList(String item_no){
+    void updateList(String wo_no){
         Map<String,String> map=new HashMap<>();
-        map.put(AddressContants.ITEM_NO,item_no);
+        map.put(AddressContants.WO_NO,wo_no);
         map.put(AddressContants.WAREHOUSE_NO,LoginLogic.getWare());
-        et_job_number_scan.setKeyListener(null);
+        etJobNumberScan.setKeyListener(null);
         commonLogic.scanCode(map, new WorkOrderlLogic.ScanCodeListener() {
             @Override
             public void onSuccess(final List<ListSumBean> list) {
-                et_job_number_scan.setKeyListener(new TextKeyListener(TextKeyListener.Capitalize.CHARACTERS, true));
+                etJobNumberScan.setKeyListener(new TextKeyListener(TextKeyListener.Capitalize.CHARACTERS, true));
                 if (list.size() > 0) {
-                    mTv_item_name.setText(list.get(0).getItem_name());
+                    mTvItemName.setText(list.get(0).getItem_name());
                 }
                 adapter = new WorkOrderSumAdapter(activity,list);
-                mRc_list.setAdapter(adapter);
+                mRcList.setAdapter(adapter);
                 dismissLoadingDialog();
                 adapter.setOnItemClickListener(new OnItemClickListener() {
                     @Override
@@ -253,7 +249,7 @@ public class WorkOrderActivity extends BaseFirstModuldeActivity {
                         Bundle bundle = new Bundle();
                         ListSumBean data = list.get(position);
                         bundle.putSerializable(SUMDATA, data);
-                        bundle.putString(AddressContants.WORKNO,et_job_number_scan.getText().toString().trim());
+                        bundle.putString(AddressContants.WORKNO, etJobNumberScan.getText().toString().trim());
                         bundle.putString(AddressContants.MODULEID_INTENT,mTimestamp.toString());
                         ActivityManagerUtils.startActivityBundleForResult(activity,WorkOrderScanActivity.class,bundle,SCANCODE);
                     }
@@ -262,7 +258,7 @@ public class WorkOrderActivity extends BaseFirstModuldeActivity {
 
             @Override
             public void onFailed(String error) {
-                et_job_number_scan.setKeyListener(new TextKeyListener(TextKeyListener.Capitalize.CHARACTERS, true));
+                etJobNumberScan.setKeyListener(new TextKeyListener(TextKeyListener.Capitalize.CHARACTERS, true));
                 dismissLoadingDialog();
                 showFailedDialog(error, new OnDialogClickListener() {
                     @Override

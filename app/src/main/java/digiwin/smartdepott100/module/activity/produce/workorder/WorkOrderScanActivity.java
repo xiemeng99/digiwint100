@@ -8,6 +8,7 @@ import android.text.method.TextKeyListener;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -18,6 +19,7 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.BindViews;
+import butterknife.OnCheckedChanged;
 import butterknife.OnClick;
 import butterknife.OnFocusChange;
 import butterknife.OnTextChanged;
@@ -149,7 +151,17 @@ public class WorkOrderScanActivity extends BaseTitleActivity {
     @BindViews({R.id.tv_tray,R.id.tv_barcode, R.id.tv_locator, R.id.tv_number})
     List<TextView> textViews;
 
+    @BindView(R.id.cb_locatorlock)
+    CheckBox cbLocatorlock;
 
+    @OnCheckedChanged(R.id.cb_locatorlock)
+    void isLock(boolean checked) {
+        if (checked) {
+            etScanLocator.setKeyListener(null);
+        } else {
+            etScanLocator.setKeyListener(new TextKeyListener(TextKeyListener.Capitalize.CHARACTERS, true));
+        }
+    }
 
     CommonItemNoFiFoAdapter adapter;
 
@@ -180,7 +192,7 @@ public class WorkOrderScanActivity extends BaseTitleActivity {
     /**
      * 物料类型
      */
-    String type = null;
+    String type = "";
 
     /**
      * 条码类型 料号类型
@@ -291,12 +303,7 @@ public class WorkOrderScanActivity extends BaseTitleActivity {
             @Override
             public void onFailed(String error) {
                 dismissLoadingDialog();
-                showFailedDialog(error, new OnDialogClickListener() {
-                    @Override
-                    public void onCallback() {
-                        clearData(type);
-                    }
-                });
+                showFailedDialog(error);
             }
         });
     }
@@ -475,7 +482,6 @@ public class WorkOrderScanActivity extends BaseTitleActivity {
             etScanBarocde.setText(data.getLow_order_item_no());
             etScanLocator.requestFocus();
         }
-
         commonLogic = WorkOrderlLogic.getInstance(context, module, mTimestamp.toString());
         FullyLinearLayoutManager fullyLinearLayoutManager = new FullyLinearLayoutManager(activity);
         mRcList.setLayoutManager(fullyLinearLayoutManager);
@@ -504,6 +510,12 @@ public class WorkOrderScanActivity extends BaseTitleActivity {
             etScanBarocde.setText("");
             etScanBarocde.requestFocus();
         }
+        if (!cbLocatorlock.isChecked()) {
+            locatorFlag = false;
+            etScanLocator.setText("");
+            etScanLocator.requestFocus();
+        }
+
     }
 
     /**
@@ -514,7 +526,6 @@ public class WorkOrderScanActivity extends BaseTitleActivity {
     public void showBarcode(ScanBarcodeBackBean barcodeBackBean) {
         etInputNum.setText(StringUtils.deleteZero(barcodeBackBean.getBarcode_qty()));
         barcodeFlag = true;
-
         saveBean.setAvailable_in_qty(barcodeBackBean.getAvailable_in_qty());
         saveBean.setBarcode_no(barcodeBackBean.getBarcode_no());
         saveBean.setItem_no(barcodeBackBean.getItem_no());

@@ -137,9 +137,17 @@ public class SettingActivity extends BaseTitleActivity {
      */
     @BindView(R.id.tb_vibrateSetting)
     ToggleButton tbVibrateSetting;
-
+    /**
+     * 托板状态
+     */
     @BindView(R.id.tb_tray)
     ToggleButton tbTray;
+    /**
+     * 语音输入
+     */
+    @BindView(R.id.tb_speechinput)
+    ToggleButton tbSpeechinput;
+
 
 
     /**
@@ -424,6 +432,7 @@ public class SettingActivity extends BaseTitleActivity {
     }
 
     /**
+     * 语音输入
      * 设置界面发音人/震动提醒  初始化
      */
     public void initVoicerVibrate() {
@@ -441,6 +450,8 @@ public class SettingActivity extends BaseTitleActivity {
             } else {
                 tbVibrateSetting.setChecked(false);
             }
+            boolean speechInput = (boolean) SharedPreferencesUtils.get(activity, SharePreKey.SPEECH_INPUT, true);
+            tbSpeechinput.setChecked(speechInput);
         } catch (Exception e) {
             e.printStackTrace();
             LogUtils.e(TAG, "initVoicerVibrate----Exception" + e);
@@ -632,6 +643,14 @@ public class SettingActivity extends BaseTitleActivity {
             VibratorUtil.Vibrate(BaseApplication.getContext(), VibratorUtil.VIBRATETIME);
         }
 
+    }
+
+    /**
+     * 语音输入
+     */
+    @OnClick(R.id.tb_speechinput)
+    void speechInputSetting() {
+        SharedPreferencesUtils.put(activity, SharePreKey.SPEECH_INPUT, tbTray.isChecked());
     }
 
     /**

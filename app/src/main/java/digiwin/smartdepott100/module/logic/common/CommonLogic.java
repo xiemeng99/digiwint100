@@ -78,7 +78,7 @@ public class CommonLogic {
      * 该数组中模组无需判断库位是否存在于设置中的仓库
      */
     private String[] inStores = {ModuleCode.PUTINSTORE,
-            ModuleCode.SALERETURN,ModuleCode.MISCELLANEOUSISSUESIN,ModuleCode.MOVESTORE
+            ModuleCode.SALERETURN,ModuleCode.MISCELLANEOUSISSUESIN
 
     };
 

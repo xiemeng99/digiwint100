@@ -246,7 +246,7 @@ public class AccordingMaterialScanActivity extends BaseTitleActivity {
         if (checked) {
             etScanLocator.setKeyListener(null);
         } else {
-            etScanBarocde.requestFocus();
+            etScanLocator.requestFocus();
             etScanLocator.setKeyListener(new TextKeyListener(TextKeyListener.Capitalize.CHARACTERS, true));
         }
     }
