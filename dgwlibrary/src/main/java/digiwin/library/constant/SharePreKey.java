@@ -49,6 +49,10 @@ public interface SharePreKey {
     * 托盘key值
     */
    static final String TRAY_SETTING="tray_setting";
+   /**
+    * 语音输入key值
+    */
+   static final String SPEECH_INPUT="speech_input";
 
 
 }
