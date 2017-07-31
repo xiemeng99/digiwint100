@@ -96,6 +96,11 @@
             android:name=".module.activity.common.CommonDetailActivity"
             android:windowSoftInputMode="stateAlwaysHidden|adjustPan" />
         <activity
+            android:name=".module.activity.produce.distribute.DistributeScanActivity"
+            android:configChanges="keyboardHidden|screenSize"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustPan" >
+        </activity>
+        <activity
             android:name=".module.activity.common.NoComeUnComActivity"
             android:windowSoftInputMode="stateAlwaysHidden|adjustPan" />
         <activity
@@ -875,6 +880,53 @@
         <activity
             android:name="digiwin.smartdepott100.module.activity.purchase.purchasesupplier.PurchaseSupplierActivity"
             android:windowSoftInputMode="stateAlwaysHidden|adjustPan" />
+        <!-- 杂项收料 -->
+        <activity
+            android:name=".module.activity.stock.miscellaneousissues.MiscellaneousissuesInListActivity"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustPan">
+            <intent-filter>
+                <action android:name="android.intent.actiont100.smartdepot.MiscellaneousissuesInListActivity" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <!-- 杂项发料 -->
+        <activity
+            android:name=".module.activity.stock.miscellaneousissues.MiscellaneousissuesOutListActivity"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustPan">
+            <intent-filter>
+                <action android:name="android.intent.actiont100.smartdepot.MiscellaneousissuesOutListActivity" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <!-- 标签补打 -->
+        <activity
+            android:name=".module.activity.stock.printlabel.PrintLabelFillActivity"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustPan">
+            <intent-filter>
+                <action android:name="android.intent.actiont100.smartdepot.PrintLabelFillActivity" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".module.activity.stock.miscellaneousissues.MiscellaneousNocomeInActivity"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustPan">
+            <intent-filter>
+                <action android:name="android.intent.actiont100.smartdepot.MiscellaneousNocomeInActivity" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity><activity
+        android:name=".module.activity.stock.miscellaneousissues.MiscellaneousNocomeOutActivity"
+        android:windowSoftInputMode="stateAlwaysHidden|adjustPan">
+        <intent-filter>
+            <action android:name="android.intent.actiont100.smartdepot.MiscellaneousNocomeOutActivity" />
+
+            <category android:name="android.intent.category.DEFAULT" />
+        </intent-filter>
+    </activity>
 
         <!-- Required SDK 核心功能极光推送需要 -->
         <!-- 可配置android:process参数将PushService放在其他进程中 -->
@@ -969,36 +1021,7 @@
         <meta-data
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
-        <!-- 杂项收料 -->
-        <activity
-            android:name=".module.activity.stock.miscellaneousissues.MiscellaneousissuesInListActivity"
-            android:windowSoftInputMode="stateAlwaysHidden|adjustPan">
-            <intent-filter>
-                <action android:name="android.intent.actiont100.smartdepot.MiscellaneousissuesInListActivity" />
 
-                <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
-        </activity>
-        <!-- 杂项发料 -->
-        <activity
-            android:name=".module.activity.stock.miscellaneousissues.MiscellaneousissuesOutListActivity"
-            android:windowSoftInputMode="stateAlwaysHidden|adjustPan">
-            <intent-filter>
-                <action android:name="android.intent.actiont100.smartdepot.MiscellaneousissuesOutListActivity" />
-
-                <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
-        </activity>
-        <!-- 标签补打 -->
-        <activity
-            android:name=".module.activity.stock.printlabel.PrintLabelFillActivity"
-            android:windowSoftInputMode="stateAlwaysHidden|adjustPan">
-            <intent-filter>
-                <action android:name="android.intent.actiont100.smartdepot.PrintLabelFillActivity" />
-
-                <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
-        </activity>
     </application>
 
 </manifest>

@@ -2,6 +2,7 @@ package digiwin.smartdepott100.core.net;
 
 import android.content.Context;
 
+import digiwin.library.utils.LogUtils;
 import digiwin.smartdepott100.core.appcontants.AddressContants;
 import digiwin.library.constant.SharePreKey;
 import digiwin.library.net.IRequestManager;

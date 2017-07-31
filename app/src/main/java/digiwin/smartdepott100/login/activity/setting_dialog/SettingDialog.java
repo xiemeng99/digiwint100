@@ -219,15 +219,14 @@ public class SettingDialog {
             @Override
             public void onClick(View view) {
                 //存储当前的
+                SharedPreferencesUtils.put(context,SharePreKey.LANGUAGE,preRb.getText().toString().trim());
+                SharedPreferencesUtils.put(context,SharePreKey.FORMAL_ADDRESS,setup_formal_et.getText().toString().trim());
+                SharedPreferencesUtils.put(context,SharePreKey.TEST_ADDRESS,setup_test_et.getText().toString().trim());
                 if(setup_formal_rb.isChecked()){
                     SharedPreferencesUtils.put(context,SharePreKey.CURRENT_ADDRESS, AddressContants.FORMAL_FLAG);
                 }else {
                     SharedPreferencesUtils.put(context,SharePreKey.CURRENT_ADDRESS, AddressContants.TEST_FLAG);
                 }
-
-                SharedPreferencesUtils.put(context,SharePreKey.LANGUAGE,preRb.getText().toString().trim());
-                SharedPreferencesUtils.put(context,SharePreKey.FORMAL_ADDRESS,setup_formal_et.getText().toString().trim());
-                SharedPreferencesUtils.put(context,SharePreKey.TEST_ADDRESS,setup_test_et.getText().toString().trim());
                 mDialog.dismissDialog();
                 String language = (String) SharedPreferencesUtils.get(context,SharePreKey.LANGUAGE, "");
                 if(AddressContants.EASY_CHINESE.equals(language)){

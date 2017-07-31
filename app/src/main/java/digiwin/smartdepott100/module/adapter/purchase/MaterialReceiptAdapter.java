@@ -56,7 +56,6 @@ import digiwin.smartdepott100.module.bean.common.ListSumBean;
         holder.setText(R.id.tv_unit, item.getUnit_no());
         holder.setText(R.id.tv_item_name,item.getItem_name());
         holder.setText(R.id.tv_item_format, item.getItem_spec());
-        holder.setText(R.id.tv_locator, item.getStorage_spaces_no());
         holder.setText(R.id.tv_delivery_quantity, StringUtils.deleteZero(item.getApply_qty()));
         holder.setText(R.id.tv_actual_yield_num, StringUtils.deleteZero(item.getScan_sumqty()));
         final EditText inputNum = holder.findViewById(R.id.tv_actual_yield_num);

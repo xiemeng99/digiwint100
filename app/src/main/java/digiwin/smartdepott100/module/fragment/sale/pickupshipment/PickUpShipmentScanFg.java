@@ -119,7 +119,7 @@ public class PickUpShipmentScanFg extends BaseFragment {
     @BindView(R.id.ll_input_num)
     LinearLayout llInputNum;
 
-    @BindViews({et_barcode, R.id.et_scan_locator, et_input_num})
+    @BindViews({R.id.et_barcode, R.id.et_scan_locator, et_input_num})
     List<EditText> editTexts;
     @BindViews({R.id.ll_barcode, R.id.ll_scan_locator, R.id.ll_input_num})
     List<View> views;
@@ -176,7 +176,7 @@ public class PickUpShipmentScanFg extends BaseFragment {
         ModuleUtils.tvChange(activity, tvNumber, textViews);
     }
 
-    @OnTextChanged(value = et_barcode, callback = OnTextChanged.Callback.AFTER_TEXT_CHANGED)
+    @OnTextChanged(value = R.id.et_barcode, callback = OnTextChanged.Callback.AFTER_TEXT_CHANGED)
     void barcodeChange(CharSequence s) {
         if (!StringUtils.isBlank(s.toString())) {
             mHandler.removeMessages(BARCODEWHAT);
@@ -219,7 +219,7 @@ public class PickUpShipmentScanFg extends BaseFragment {
             @Override
             public void onSuccess(SaveBackBean saveBackBean) {
                 dismissLoadingDialog();
-                tvSweptVolume.setText(StringUtils.deleteZero(saveBackBean.getScan_sumqty()));
+                saveBean.setScan_sumqty(saveBackBean.getScan_sumqty());
                 if (AddressContants.FIFOY.equals(saveBean.getFifo_check())) {
                     upDateList();
                 }
@@ -236,7 +236,7 @@ public class PickUpShipmentScanFg extends BaseFragment {
     }
 
     public void clear() {
-        tvSweptVolume.setText("");
+        tvSweptVolume.setText(saveBean.getScan_sumqty());
         etInputNum.setText("");
         etScanBarocde.setText("");
         if (cbLocatorlock.isChecked()) {
@@ -253,7 +253,7 @@ public class PickUpShipmentScanFg extends BaseFragment {
         }
     }
 
-    private Handler mHandler = new WeakRefHandler(new Handler.Callback() {
+    private Handler.Callback mCallback= new Handler.Callback() {
         @Override
         public boolean handleMessage(Message msg) {
             switch (msg.what) {
@@ -348,8 +348,9 @@ public class PickUpShipmentScanFg extends BaseFragment {
             }
             return false;
         }
-    });
+    };
 
+    private Handler mHandler = new WeakRefHandler(mCallback);
     /**
      * 对比物料条码
      *
@@ -414,6 +415,12 @@ public class PickUpShipmentScanFg extends BaseFragment {
 
     public void upDateList() {
         mHandler.sendMessageDelayed(mHandler.obtainMessage(FIFOWHAT, localData.getDoc_no()), AddressContants.DELAYTIME);
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        mHandler.removeCallbacksAndMessages(null);
     }
 }
 

@@ -6,6 +6,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.View;
@@ -13,11 +14,15 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.iflytek.cloud.util.UserWords;
+
 import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
 import butterknife.OnClick;
+import digiwin.library.utils.StringUtils;
+import digiwin.smartdepott100.main.bean.VoiceWord;
 import digiwin.smartdepott100.main.logic.MainLogic;
 import digiwin.library.constant.SharePreKey;
 import digiwin.library.utils.ActivityManagerUtils;
@@ -81,13 +86,19 @@ public class MainActivity extends BaseTitleActivity {
         voiceUtils.voiceToText(new VoiceUtils.GetVoiceTextListener() {
             @Override
             public String getVoiceText(String str) {
-                command = str;
+                command = str.toUpperCase();
+                Log.d(TAG,"command:"+command);
                 if (list.size() > 0) {
                     for (int i = 0; i < list.size(); i++) {
-                        if (command.contains(getResources().getString(list.get(i).getNameRes()))) {
-                            //
-                            voice(getResources().getString(R.string.openning) + getResources().getString(list.get(i).getNameRes()));
-                            ActivityManagerUtils.startActivity(MainActivity.this, list.get(i).getIntent());
+                        String name = getResources().getString(list.get(i).getNameRes()).toUpperCase();
+                        if(command.length() == name.length()) {
+                            if (command.equals(name)) {
+                                ActivityManagerUtils.startActivity(MainActivity.this, list.get(i).getIntent());
+                            }else{
+                                if(StringUtils.getPingYin(command).equals(StringUtils.getPingYin(name))){
+                                    ActivityManagerUtils.startActivity(MainActivity.this, list.get(i).getIntent());
+                                }
+                            }
                         }
                     }
                 }
@@ -169,6 +180,36 @@ public class MainActivity extends BaseTitleActivity {
         exitTime = 0;
         mainLogic = new MainLogic(this);
         initModule();
+        submitUserWords();
+    }
+
+    /**
+     * 上传用户此表，用于精准识别语音录入
+     */
+    private void submitUserWords() {
+        List<ModuleBean> modlueList = mainLogic.ModuleList;
+        Log.d(TAG,"moduleList.size():"+modlueList.size());
+        List<String> voiceWordList = new ArrayList<>();
+        VoiceWord defaultWord = new VoiceWord();
+        defaultWord.setName("default");
+        defaultWord.setWord(getResources().getString(R.string.purchase_check));
+        voiceWordList.add(defaultWord.toString());
+        if(modlueList.size()>0){
+            for (ModuleBean module:modlueList) {
+                String moduleName = getResources().getString(module.getNameRes());
+                VoiceWord voiceWord = new VoiceWord();
+                voiceWord.setName(moduleName);
+                voiceWord.setWord(moduleName);
+                voiceWordList.add(voiceWord.toString());
+            }
+            StringBuffer userword = new StringBuffer();
+            String head =  "{"+"\"" + "userword" +"\"" + ":";
+            userword.append(head);
+            userword.append(voiceWordList.toString());
+            userword.append("}");
+            Log.d(TAG,"voiceWord.toArray():"+userword.toString());
+            VoiceUtils.getInstance(getApplicationContext(), SharePreKey.VOICER_SELECTED).submitUserWords(userword.toString());
+        }
     }
 
     //初始化各个模块
@@ -208,7 +249,9 @@ public class MainActivity extends BaseTitleActivity {
         super.onResume();
         // MainLogic.setTitle(tvPersonName, tv_title_operation);
         boolean speechInput = (boolean) SharedPreferencesUtils.get(activity, SharePreKey.SPEECH_INPUT, true);
-        if (!speechInput) {
+        if (speechInput) {
+            voiceGuide.setVisibility(View.VISIBLE);
+        }else {
             voiceGuide.setVisibility(View.GONE);
         }
     }

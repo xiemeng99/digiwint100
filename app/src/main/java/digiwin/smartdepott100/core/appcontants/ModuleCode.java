@@ -158,6 +158,14 @@ public interface ModuleCode {
      */
     public final String MISCELLANEOUSISSUESOUT="C007";
     /**
+     * 杂项发料
+     */
+    public final String MISCELLANEOUSNOCOMEOUT="C011";
+    /**
+     * 杂项收料
+     */
+    public final String MISCELLANEOUSNOCOMEIN="C012";
+    /**
      * 调拨，无来源
      */
     public final String NOCOMESTOREALLOT ="C010";

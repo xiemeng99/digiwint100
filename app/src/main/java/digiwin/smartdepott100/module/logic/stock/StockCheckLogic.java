@@ -86,7 +86,7 @@ public class StockCheckLogic extends CommonLogic {
                             String error = mContext.getString(R.string.unknow_error);
                             if (null != string) {
                                 if (ReqTypeName.SUCCCESSCODE.equals(JsonResp.getCode(string))) {
-                                    listener.onSuccess(JsonResp.getParaString(string, AddressContants.DOC_NO));
+                                    listener.onSuccess(JsonResp.getParaString(string, "scan_sumqty"));
                                     return;
                                 } else {
                                     error = JsonResp.getDescription(string);

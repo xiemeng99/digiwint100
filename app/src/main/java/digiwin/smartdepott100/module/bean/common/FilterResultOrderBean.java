@@ -13,6 +13,10 @@ public class FilterResultOrderBean implements Serializable {
      */
     private String warehouse_name;
     /**
+     * 仓库名称
+     */
+    private String warehouse_no;
+    /**
      * 备注
      */
     private String remark;
@@ -255,5 +259,11 @@ public class FilterResultOrderBean implements Serializable {
         this.issuing_no = issuing_no;
     }
 
+    public String getWarehouse_no() {
+        return warehouse_no;
+    }
 
+    public void setWarehouse_no(String warehouse_no) {
+        this.warehouse_no = warehouse_no;
+    }
 }

@@ -78,7 +78,8 @@ public class CommonLogic {
      * 该数组中模组无需判断库位是否存在于设置中的仓库
      */
     private String[] inStores = {ModuleCode.PUTINSTORE,
-            ModuleCode.SALERETURN,ModuleCode.MISCELLANEOUSISSUESIN
+            ModuleCode.SALERETURN, ModuleCode.MISCELLANEOUSISSUESIN,
+            ModuleCode.MISCELLANEOUSNOCOMEIN, ModuleCode.PURCHASEINSTORE,ModuleCode.STORECHECK,
 
     };
 
@@ -99,7 +100,9 @@ public class CommonLogic {
             @Override
             public void run() {
                 try {
-                    map.put(AddressContants.WAREHOUSE_NO, LoginLogic.getWare());
+                    if (!ModuleCode.STORECHECK.equals(mModule)){
+                        map.put(AddressContants.WAREHOUSE_NO, LoginLogic.getWare());
+                    }
                     String createJson = JsonReqForERP.mapCreateJson(mModule, ReqTypeName.BARCODE, mTimestamp, map);
                     OkhttpRequest.getInstance(mContext).post(createJson, new IRequestCallbackImp() {
                         @Override
@@ -124,6 +127,7 @@ public class CommonLogic {
             }
         }, null);
     }
+
     /**
      * 扫描托盘
      */
@@ -938,36 +942,16 @@ public class CommonLogic {
             @Override
             public void run() {
                 try {
-//                    String s = JsonText.readAssertResource();
-//                    LogUtils.e(TAG,s);
-//                    if(!s.equals("")){
-//                        List<ScanReasonCodeBackBean> list = JsonResp.getParaDatas(s, "list", ScanReasonCodeBackBean.class);
-//                        ScanReasonCodeBackBean reasonBackBean = list.get(0);
-//                        reasonBackBean.setReason_code_name(StringUtils.deleteZero(reasonBackBean.getReason_code_name()));
-//                        reasonBackBean.setReason_code_no(StringUtils.deleteZero(reasonBackBean.getReason_code_no()));
-//                        reasonBackBean.setShow(StringUtils.deleteZero(reasonBackBean.getShow()));
-//                        listener.onSuccess(reasonBackBean);
-//                    }else {
-//                        listener.onFailed("error");
-//                    }
-                    String createJson = JsonReqForERP.mapCreateJson(mModule, "", mTimestamp, map);
+                    String createJson = JsonReqForERP.mapCreateJson(mModule, "als.c011.reason.get", mTimestamp, map);
                     OkhttpRequest.getInstance(mContext).post(createJson, new IRequestCallbackImp() {
                         @Override
                         public void onResponse(String string) {
                             String error = mContext.getString(R.string.unknow_error);
                             if (null != string) {
                                 if (ReqTypeName.SUCCCESSCODE.equals(JsonResp.getCode(string))) {
-                                    List<ScanReasonCodeBackBean> list = JsonResp.getParaDatas(string, "list", ScanReasonCodeBackBean.class);
-                                    if (list.size() > 0) {
-                                        ScanReasonCodeBackBean reasonBackBean = list.get(0);
-                                        reasonBackBean.setReason_code_name(StringUtils.deleteZero(reasonBackBean.getReason_code_name()));
-                                        reasonBackBean.setReason_code_no(StringUtils.deleteZero(reasonBackBean.getReason_code_no()));
-                                        reasonBackBean.setShow(StringUtils.deleteZero(reasonBackBean.getShow()));
-                                        listener.onSuccess(reasonBackBean);
-                                        return;
-                                    } else {
-                                        error = mContext.getString(R.string.data_null);
-                                    }
+                                    ScanReasonCodeBackBean reasonBackBean = JsonResp.getParaData(string, ScanReasonCodeBackBean.class);
+                                    listener.onSuccess(reasonBackBean);
+                                    return;
                                 } else {
                                     error = JsonResp.getDescription(string);
                                 }
@@ -1001,21 +985,16 @@ public class CommonLogic {
             @Override
             public void run() {
                 try {
-                    String createJson = JsonReqForERP.mapCreateJson(mModule, "", mTimestamp, map);
+                    String createJson = JsonReqForERP.mapCreateJson(mModule, "als.employee.department.get", mTimestamp, map);
                     OkhttpRequest.getInstance(mContext).post(createJson, new IRequestCallbackImp() {
                         @Override
                         public void onResponse(String string) {
                             String error = mContext.getString(R.string.unknow_error);
                             if (null != string) {
                                 if (ReqTypeName.SUCCCESSCODE.equals(JsonResp.getCode(string))) {
-                                    List<ScanEmployeeBackBean> list = JsonResp.getParaDatas(string, "list", ScanEmployeeBackBean.class);
-                                    if (list.size() > 0) {
-                                        ScanEmployeeBackBean locatorBackBeen = list.get(0);
-                                        listener.onSuccess(locatorBackBeen);
-                                        return;
-                                    } else {
-                                        error = mContext.getString(R.string.data_null);
-                                    }
+                                    ScanEmployeeBackBean employeeBackBean = JsonResp.getParaData(string, ScanEmployeeBackBean.class);
+                                    listener.onSuccess(employeeBackBean);
+                                    return;
                                 } else {
                                     error = JsonResp.getDescription(string);
                                 }

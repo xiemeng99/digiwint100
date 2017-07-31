@@ -35,8 +35,8 @@ import digiwin.smartdepott100.module.bean.common.SaveBean;
 import digiwin.smartdepott100.module.bean.common.ScanBarcodeBackBean;
 import digiwin.smartdepott100.module.bean.common.ScanLocatorBackBean;
 import digiwin.smartdepott100.module.logic.common.CommonLogic;
+import digiwin.smartdepott100.module.logic.stock.StockCheckLogic;
 
-import static digiwin.smartdepott100.R.id.tv_material_checknumber;
 
 /**
  * @author 孙长权
@@ -128,7 +128,7 @@ public class StockCheckActivity extends BaseFirstModuldeActivity {
     /**
      * 盘点笔数
      */
-    @BindView(tv_material_checknumber)
+    @BindView(R.id.tv_material_checknumber)
     TextView tvCheckNumber;
 
     //show界面
@@ -143,7 +143,7 @@ public class StockCheckActivity extends BaseFirstModuldeActivity {
 
     SaveBean saveBean;
 
-    CommonLogic commonLogic;
+    StockCheckLogic stockCheckLogic;
 
     private int number;
 
@@ -185,10 +185,10 @@ public class StockCheckActivity extends BaseFirstModuldeActivity {
                     HashMap<String, String> barcodeMap = new HashMap<>();
                     barcodeMap.put(AddressContants.DOC_NO, data.getDoc_no());
                     barcodeMap.put(AddressContants.BARCODE_NO, String.valueOf(msg.obj));
-                    barcodeMap.put(AddressContants.WAREHOUSE_NO, LoginLogic.getWare());
+                    barcodeMap.put(AddressContants.WAREHOUSE_NO, saveBean.getWarehouse_no());
                     barcodeMap.put(AddressContants.STORAGE_SPACES_NO,saveBean.getStorage_spaces_no());
                     etBarcodeSp.setKeyListener(null);
-                    commonLogic.scanBarcode(barcodeMap, new CommonLogic.ScanBarcodeListener() {
+                    stockCheckLogic.scanBarcode(barcodeMap, new CommonLogic.ScanBarcodeListener() {
                         @Override
                         public void onSuccess(ScanBarcodeBackBean barcodeBackBean) {
                             etBarcodeSp.setKeyListener(new TextKeyListener(TextKeyListener.Capitalize.CHARACTERS, true));
@@ -225,7 +225,7 @@ public class StockCheckActivity extends BaseFirstModuldeActivity {
                     locatorMap.put(AddressContants.DOC_NO, data.getDoc_no());
                     locatorMap.put(AddressContants.STORAGE_SPACES_BARCODE, msg.obj.toString());
                     etScanLocator.setKeyListener(null);
-                    commonLogic.scanLocator(locatorMap, new CommonLogic.ScanLocatorListener() {
+                    stockCheckLogic.scanLocator(locatorMap, new CommonLogic.ScanLocatorListener() {
                         @Override
                         public void onSuccess(ScanLocatorBackBean locatorBackBean) {
                             etScanLocator.setKeyListener(new TextKeyListener(TextKeyListener.Capitalize.CHARACTERS, true));
@@ -275,7 +275,7 @@ public class StockCheckActivity extends BaseFirstModuldeActivity {
         }
         showLoadingDialog();
         Map<String, String> map = ObjectAndMapUtils.getValueMap(saveBean);
-        commonLogic.commit(map, new CommonLogic.CommitListener() {
+        stockCheckLogic.commit(map, new CommonLogic.CommitListener() {
             @Override
             public void onSuccess(String msg) {
                 dismissLoadingDialog();
@@ -363,7 +363,7 @@ public class StockCheckActivity extends BaseFirstModuldeActivity {
         tvDetailShow.setText("");
         show();
 
-        commonLogic = CommonLogic.getInstance(activity, moduleCode(), mTimestamp.toString());
+        stockCheckLogic = StockCheckLogic.getInstance(activity, moduleCode(), mTimestamp.toString());
     }
 
     /**

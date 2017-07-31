@@ -14,7 +14,7 @@
 
         <TextView
             style="@style/app_text_inwhite"
-            android:layout_width="@dimen/layout_70dp"
+            android:layout_width="@dimen/layout_60dp"
             android:layout_height="wrap_content"
             android:text="@string/check_order" />
 
@@ -25,34 +25,17 @@
             android:layout_height="wrap_content"
             android:layout_weight="1" />
 
-    </LinearLayout>
-
-    <View
-        android:id="@+id/line_2"
-        style="@style/ry_line_style" />
-
-    <LinearLayout
-        style="@style/ry_sum_itemstyle"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-
-        <TextView
-            style="@style/app_text_inwhite"
-            android:layout_width="@dimen/layout_70dp"
-            android:layout_height="wrap_content"
-            android:text="@string/plan_data" />
-
         <TextView
             android:id="@+id/tv_plan_data"
             style="@style/ser_text_inwhite"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
     </LinearLayout>
 
 
+
+
     <View
-        android:id="@+id/line_1"
         style="@style/ry_line_style" />
 
     <LinearLayout
@@ -63,7 +46,7 @@
         <TextView
             android:id="@+id/textView"
             style="@style/app_text_inwhite"
-            android:layout_width="@dimen/layout_70dp"
+            android:layout_width="@dimen/layout_60dp"
             android:layout_height="match_parent"
             android:text="@string/chcek_warehouse" />
 
@@ -74,10 +57,18 @@
             android:layout_height="wrap_content"
             android:layout_weight="1.5" />
 
+    </LinearLayout>
+    <View
+        style="@style/ry_line_style" />
+
+    <LinearLayout
+        style="@style/ry_sum_itemstyle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
         <TextView
             style="@style/app_text_inwhite"
-            android:layout_width="@dimen/layout_40dp"
-            android:layout_height="match_parent"
+            android:layout_width="@dimen/layout_60dp"
+            android:layout_height="wrap_content"
             android:text="@string/person" />
 
         <TextView
@@ -87,7 +78,6 @@
             android:layout_height="wrap_content"
             android:layout_weight="1" />
     </LinearLayout>
-
     <View style="@style/ry_line_style" />
 
     <LinearLayout
@@ -99,7 +89,7 @@
 
         <TextView
             style="@style/app_text_inwhite"
-            android:layout_width="@dimen/layout_70dp"
+            android:layout_width="@dimen/layout_60dp"
             android:layout_height="wrap_content"
             android:text="@string/remark" />
 

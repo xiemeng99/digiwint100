@@ -650,7 +650,7 @@ public class SettingActivity extends BaseTitleActivity {
      */
     @OnClick(R.id.tb_speechinput)
     void speechInputSetting() {
-        SharedPreferencesUtils.put(activity, SharePreKey.SPEECH_INPUT, tbTray.isChecked());
+        SharedPreferencesUtils.put(activity, SharePreKey.SPEECH_INPUT, tbSpeechinput.isChecked());
     }
 
     /**

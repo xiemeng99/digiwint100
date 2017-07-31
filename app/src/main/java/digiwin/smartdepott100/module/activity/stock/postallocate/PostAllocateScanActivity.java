@@ -79,12 +79,13 @@ public class PostAllocateScanActivity extends BaseFirstModuldeActivity {
     protected void initNavigationTitle() {
         super.initNavigationTitle();
         Bundle bundle = getIntent().getExtras();
-        String doc_stus = bundle.getString(AddressContants.DOC_NO);
-        if ("N".equals(doc_stus)){
-            mName.setText(R.string.allocate_out);
-        }else {
-            mName.setText(R.string.allocate_in);
-        }
+//        String doc_stus = bundle.getString(AddressContants.DOC_NO);
+//        if ("N".equals(doc_stus)){
+//            mName.setText(R.string.allocate_out);
+//        }else {
+//            mName.setText(R.string.allocate_in);
+//        }
+        mName.setText(R.string.title_post_allocate);
 
     }
 

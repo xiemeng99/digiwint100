@@ -23,6 +23,7 @@ import digiwin.pulltorefreshlibrary.recyclerviewAdapter.OnItemClickListener;
 import digiwin.smartdepott100.R;
 import digiwin.smartdepott100.core.appcontants.AddressContants;
 import digiwin.smartdepott100.core.base.BaseFragment;
+import digiwin.smartdepott100.login.loginlogic.LoginLogic;
 import digiwin.smartdepott100.module.activity.common.CommonDetailActivity;
 import digiwin.smartdepott100.module.activity.stock.storeallot.StoreAllotActivity;
 import digiwin.smartdepott100.module.adapter.stock.storeallot.StoreAllotSumAdapter;
@@ -88,6 +89,7 @@ public class StoreAllotSumFg extends BaseFragment {
             adapter = new StoreAllotSumAdapter(activity, sumShowBeanList);
             ryList.setAdapter(adapter);
             Map<String, String> map = new HashMap<>();
+            map.put(AddressContants.WAREHOUSEOUTNO, LoginLogic.getWare());
             showLoadingDialog();
             storeAllotLogic.getStoreList(map, new CommonLogic.GetZSumListener() {
                 @Override
@@ -144,7 +146,7 @@ public class StoreAllotSumFg extends BaseFragment {
         showLoadingDialog();
         final SumShowBean toDetailBean = new SumShowBean();
         toDetailBean.setItem_no(sumShowBean.getItem_no());
-        toDetailBean.setAvailable_in_qty(sumShowBean.getAvailable_in_qty());
+        toDetailBean.setAvailable_in_qty("0");
         map.put(AddressContants.ITEM_NO, sumShowBean.getItem_no());
         storeAllotLogic.getDetail(map, new CommonLogic.GetDetailListener() {
             @Override

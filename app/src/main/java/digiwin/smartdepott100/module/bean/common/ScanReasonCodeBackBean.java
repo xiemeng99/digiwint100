@@ -9,7 +9,7 @@ package digiwin.smartdepott100.module.bean.common;
 public class ScanReasonCodeBackBean {
 //    reason_code_no	           String		理由码编号
 //    reason_code_name	       String		理由码名称
-//    show                       string    app显示
+//    showing                       string    app显示
 
 
     /**
@@ -23,7 +23,7 @@ public class ScanReasonCodeBackBean {
     /**
      * 展示
      */
-    private String show;
+    private String showing;
 
     public String getReason_code_no() {
         return reason_code_no;
@@ -41,11 +41,11 @@ public class ScanReasonCodeBackBean {
         this.reason_code_name = reason_code_name;
     }
 
-    public String getShow() {
-        return show;
+    public String getShowing() {
+        return showing;
     }
 
-    public void setShow(String show) {
-        this.show = show;
+    public void setShowing(String showing) {
+        this.showing = showing;
     }
 }

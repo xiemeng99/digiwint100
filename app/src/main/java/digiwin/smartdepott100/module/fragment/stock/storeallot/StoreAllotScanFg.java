@@ -349,7 +349,7 @@ public class StoreAllotScanFg extends BaseFragment {
                             tv_scaned_num.setText(barcodeBackBean.getScan_sumqty());
                             barcodeFlag = true;
                             show();
-                            saveBean.setAvailable_in_qty(barcodeBackBean.getAvailable_in_qty());
+                            saveBean.setAvailable_in_qty("0");
                             saveBean.setBarcode_no(barcodeBackBean.getBarcode_no());
                             saveBean.setItem_no(barcodeBackBean.getItem_no());
                             saveBean.setUnit_no(barcodeBackBean.getUnit_no());

@@ -15,15 +15,24 @@
         <TextView
             android:id="@+id/tv_item_name_string"
             style="@style/app_text_inwhite"
-            android:layout_width="@dimen/layout_60dp"
+            android:layout_width="@dimen/layout_50dp"
             android:layout_height="wrap_content"
             android:text="@string/item_name" />
 
         <TextView
             android:id="@+id/tv_item_name"
             style="@style/ser_text_inwhite"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_width="@dimen/layout_0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" />
+
+        <TextView
+            android:id="@+id/tv_unit"
+            style="@style/ser_text_inwhite"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/layout_10dp"
+            android:layout_toRightOf="@id/tv_scaned_numb" />
     </LinearLayout>
 
     <View style="@style/ry_line_style" />
@@ -36,7 +45,7 @@
 
         <TextView
             style="@style/app_text_inwhite"
-            android:layout_width="@dimen/layout_60dp"
+            android:layout_width="@dimen/layout_50dp"
             android:layout_height="wrap_content"
             android:text="@string/model" />
 
@@ -58,7 +67,7 @@
         <TextView
             android:id="@+id/tv_item_no_string"
             style="@style/app_text_inwhite"
-            android:layout_width="@dimen/layout_60dp"
+            android:layout_width="@dimen/layout_50dp"
             android:layout_height="wrap_content"
             android:text="@string/item_no" />
 
@@ -71,32 +80,37 @@
 
     <View style="@style/ry_line_style" />
 
-    <RelativeLayout
+    <LinearLayout
         style="@style/ry_sum_itemstyle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
+        <TextView
+            style="@style/app_text_inwhite"
+            android:layout_width="@dimen/layout_50dp"
+            android:layout_height="wrap_content"
+            android:text="@string/locator_num_" />
 
         <TextView
-            android:id="@+id/tv_plan_numb_string"
+            android:id="@+id/tv_stock_qty"
+            style="@style/ser_text_inwhite"
+            android:layout_width="@dimen/layout_0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            />
+        <TextView
             style="@style/app_text_inwhite"
-            android:layout_width="@dimen/layout_60dp"
+            android:layout_width="@dimen/layout_50dp"
             android:layout_height="wrap_content"
             android:text="@string/scaned_numb" />
 
         <TextView
             android:id="@+id/tv_scaned_numb"
             style="@style/ser_text_inwhite"
-            android:layout_width="wrap_content"
+            android:layout_width="@dimen/layout_0dp"
+            android:layout_weight="1"
             android:layout_height="wrap_content"
-            android:layout_toRightOf="@id/tv_plan_numb_string" />
+          />
 
-        <TextView
-            android:id="@+id/tv_unit"
-            style="@style/ser_text_inwhite"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/layout_10dp"
-            android:layout_toRightOf="@id/tv_scaned_numb" />
-    </RelativeLayout>
+    </LinearLayout>
 </LinearLayout>

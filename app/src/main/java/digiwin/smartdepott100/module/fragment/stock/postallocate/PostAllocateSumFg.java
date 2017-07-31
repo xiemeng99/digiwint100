@@ -91,7 +91,7 @@ public class PostAllocateSumFg extends BaseFragment {
 
     FilterResultOrderBean orderData;
 
-    private String doc_stus;
+//    private String doc_stus;
     @Override
     protected int bindLayoutId() {
         return R.layout.activity_post_allocate_sum;
@@ -110,7 +110,7 @@ public class PostAllocateSumFg extends BaseFragment {
         tv_head_plan_date.setText(orderData.getCreate_date());
         tv_applicant.setText(orderData.getEmployee_name());
         tv_department.setText(orderData.getDepartment_name());
-        doc_stus=bundle.getString(AddressContants.DOC_NO);
+//        doc_stus=bundle.getString(AddressContants.DOC_NO);
     }
 
     /**
@@ -183,7 +183,7 @@ public class PostAllocateSumFg extends BaseFragment {
         final SumShowBean sumShowBean = new SumShowBean();
         sumShowBean.setItem_name(orderSumData.getItem_name());
         sumShowBean.setItem_no(orderSumData.getItem_no());
-        sumShowBean.setAvailable_in_qty(orderSumData.getReceipt_qty());
+        sumShowBean.setAvailable_in_qty(orderSumData.getApply_qty());
         commonLogic.getDetail(map, new CommonLogic.GetDetailListener() {
             @Override
             public void onSuccess(List<DetailShowBean> detailShowBeen) {
@@ -211,7 +211,7 @@ public class PostAllocateSumFg extends BaseFragment {
         }
         showLoadingDialog();
         HashMap<String, String> map = new HashMap<>();
-        map.put("doc_stus",doc_stus);
+//        map.put("doc_stus",doc_stus);
         commonLogic.commit(map, new CommonLogic.CommitListener() {
             @Override
             public void onSuccess(String msg) {

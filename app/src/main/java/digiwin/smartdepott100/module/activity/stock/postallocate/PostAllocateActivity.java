@@ -196,7 +196,7 @@ public class PostAllocateActivity extends BaseTitleActivity {
     /**
      * 拨入拨出状态
      */
-    private String doc_stus;
+    //private String doc_stus;
 
     /**
      * 弹出筛选对话框
@@ -243,32 +243,30 @@ public class PostAllocateActivity extends BaseTitleActivity {
     protected void doBusiness() {
         startDate="";
         endDate="";
-        doc_stus = "N";//默认拨出
+        //doc_stus = "N";//默认拨出
         etDate.setKeyListener(null);
         pactivity = (PostAllocateActivity) activity;
         commonLogic = PostAllocateLogic.getInstance(pactivity, module, mTimestamp.toString());
         FullyLinearLayoutManager linearLayoutManager = new FullyLinearLayoutManager(activity);
         ryList.setLayoutManager(linearLayoutManager);
-        showOutOrIn();
+      //  showOutOrIn();
     }
 
-    private void showOutOrIn() {
-        ChooseAllotDailog.showChooseAllotDailog(context, new OnDialogTwoListener() {
-            @Override
-            public void onCallback1() {
-                doc_stus = "O";
-                initNavigationTitle();
-            }
-
-            @Override
-            public void onCallback2() {
-                doc_stus = "N";
-                initNavigationTitle();
-            }
-        });
-
-
-    }
+//    private void showOutOrIn() {
+//        ChooseAllotDailog.showChooseAllotDailog(context, new OnDialogTwoListener() {
+//            @Override
+//            public void onCallback1() {
+//                doc_stus = "O";
+//                initNavigationTitle();
+//            }
+//
+//            @Override
+//            public void onCallback2() {
+//                doc_stus = "N";
+//                initNavigationTitle();
+//            }
+//        });
+//    }
 
 
     /**
@@ -277,7 +275,7 @@ public class PostAllocateActivity extends BaseTitleActivity {
     private void itemClick(List<FilterResultOrderBean> clickBeen, int position) {
         FilterResultOrderBean orderData = clickBeen.get(position);
         Bundle bundle = new Bundle();
-        bundle.putString(AddressContants.DOC_NO, doc_stus);
+//        bundle.putString(AddressContants.DOC_NO, doc_stus);
         bundle.putSerializable(AddressContants.ORDERDATA, orderData);
         ActivityManagerUtils.startActivityBundleForResult(pactivity, PostAllocateScanActivity.class, bundle, SUMCODE);
     }
@@ -285,11 +283,12 @@ public class PostAllocateActivity extends BaseTitleActivity {
     @Override
     protected void initNavigationTitle() {
         super.initNavigationTitle();
-        if ("N".equals(doc_stus)) {
-            mName.setText(getString(R.string.allocate_out) + getString(R.string.list));
-        } else {
-            mName.setText(getString(R.string.allocate_in) + getString(R.string.list));
-        }
+//        if ("N".equals(doc_stus)) {
+//            mName.setText(getString(R.string.allocate_out) + getString(R.string.list));
+//        } else {
+//            mName.setText(getString(R.string.allocate_in) + getString(R.string.list));
+//        }
+        mName.setText(getString(R.string.title_post_allocate) + getString(R.string.list));
         iv_title_setting.setVisibility(View.VISIBLE);
         iv_title_setting.setImageResource(R.drawable.search);
     }
@@ -323,7 +322,7 @@ public class PostAllocateActivity extends BaseTitleActivity {
                 filterBean.setDate_begin(startDate);
                 filterBean.setDate_end(endDate);
             }
-            filterBean.setDoc_stus(doc_stus);
+//            filterBean.setDoc_stus(doc_stus);
             showLoadingDialog();
             commonLogic.getPostAllocateList(filterBean, new CommonLogic.GetDataListListener() {
                 @Override

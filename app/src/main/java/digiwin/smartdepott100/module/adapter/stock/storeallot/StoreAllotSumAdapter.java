@@ -33,6 +33,7 @@ public class StoreAllotSumAdapter extends BaseRecyclerAdapter<ListSumBean> {
         holder.setText(R.id.tv_item_spec,item.getItem_spec());
         holder.setText(R.id.tv_item_no, item.getItem_no());
         holder.setText(R.id.tv_scaned_numb, StringUtils.deleteZero(item.getScan_sumqty()));
+        holder.setText(R.id.tv_stock_qty,StringUtils.deleteZero(item.getStock_qty()));
         holder.setText(R.id.tv_unit, item.getUnit_no());
     }
 }

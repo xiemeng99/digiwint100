@@ -30,7 +30,7 @@ public class StockCheckListAdapter extends BaseRecyclerAdapter<FilterResultOrder
     protected void bindData(RecyclerViewHolder holder, int position, final FilterResultOrderBean item) {
         holder.setText(R.id.tv_check_order, item.getDoc_no());//盘点单号
         holder.setText(R.id.tv_plan_data, item.getCreate_date());//计划日期
-        holder.setText(R.id.tv_chcek_warehouse,item.getWarehouse_name());//盘点仓库
+        holder.setText(R.id.tv_chcek_warehouse,item.getWarehouse_no());//盘点仓库
         holder.setText(R.id.tv_person, item.getEmployee_name());//人员
         holder.setText(R.id.tv_remark, item.getRemark());//备注
 

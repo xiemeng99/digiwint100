@@ -53,6 +53,7 @@ public class MainLogic {
      * 销售管理
      */
     private List<ModuleBean> salesItems;
+
     /**
      * 报工管理
      */
@@ -102,15 +103,15 @@ public class MainLogic {
 //        ModuleBean quickstorage = new ModuleBean(R.string.title_quickstorage, R.mipmap.quickly_storage, ModuleCode.QUICKSTORAGE, "android.intent.actiont100.smartdepot.QuickStorageListActivity");
         ModuleBean materialreceipt = new ModuleBean(R.string.title_material_receipt, R.mipmap.material_receipt, ModuleCode.MATERIALRECEIPTCODE, "android.intent.actiont100.smartdepot.MaterialReceiptActivity");
         ModuleBean quickstorage = new ModuleBean(R.string.title_quickstorage, R.mipmap.quickly_storage, ModuleCode.QUICKSTORAGE, "android.intent.actiont100.smartdepot.QuickStorageListActivity");
-        ModuleBean purchaseGoodsScan = new ModuleBean(R.string.title_purchase_goods_scan, R.mipmap.scan_inapection, ModuleCode.PURCHASEGOODSSCAN, "android.intent.actiont100.smartdepot.PurchaseGoodsScanListActivity");
+        ModuleBean purchaseGoodsScan = new ModuleBean(R.string.title_purchase_goods_scan, R.mipmap.migo, ModuleCode.PURCHASEGOODSSCAN, "android.intent.actiont100.smartdepot.PurchaseGoodsScanListActivity");
         ModuleBean purchasesupplier = new ModuleBean(R.string.purchase_scan_supplier, R.mipmap.scan_inapection, ModuleCode.PURCHASESUPPLIERSCAN, "android.intent.actiont100.smartdepot.PurhcaseSupplierListActivity");
         ModuleBean purchaseInStore = new ModuleBean(R.string.purchase_in_store, R.mipmap.saomaruku, ModuleCode.PURCHASEINSTORE, "android.intent.actiont100.smartdepot.PurchaseInStoreListActivity");
         ModuleBean iqcCheck = new ModuleBean(R.string.iqc_check, R.mipmap.inspection_tests, ModuleCode.PURCHASECHECK, "android.intent.actiont100.smartdepot.IQCListActivity");
         ModuleBean purchasestore = new ModuleBean(R.string.purchase_store, R.mipmap.warehouse_return, ModuleCode.STORERETURNMATERIAL, "android.intent.actiont100.smartdepot.PurchaseStoreListActivity");
-//        purchaseItems.add(materialreceipt);
+        purchaseItems.add(materialreceipt);
 //        purchaseItems.add(quickstorage);
         purchaseItems.add(purchaseGoodsScan);
-      //  purchaseItems.add(purchasesupplier);
+        purchaseItems.add(purchasesupplier);
         purchaseItems.add(purchaseInStore);
         purchaseItems.add(iqcCheck);
         purchaseItems.add(purchasestore);
@@ -146,7 +147,7 @@ public class MainLogic {
 //        produceItems.add(suitpickinghalf);
 //        produceItems.add(worksupplementlist);
 //        produceItems.add(materialReturning);
-//        produceItems.add(workorderreturnlistactivity);
+        produceItems.add(workorderreturnlistactivity);
 //        produceItems.add(driectStorage);
         produceItems.add(wipstorage);
         produceItems.add(zputInStoreft);
@@ -161,16 +162,20 @@ public class MainLogic {
 //        ModuleBean productbinning = new ModuleBean(R.string.product_binning, R.drawable.encasement, ModuleCode.PRODUCTBINNING, "android.intent.actiont100.smartdepot.ProductBinningActivity");
 //        ModuleBean productoutbox = new ModuleBean(R.string.product_outbox, R.mipmap.outbox, ModuleCode.PRODUCTOUTBOX, "android.intent.actiont100.smartdepot.ProductOutBoxActivity");
         ModuleBean storeallotactivity = new ModuleBean(R.string.nocome_allot, R.mipmap.nocome_alllot, ModuleCode.NOCOMESTOREALLOT, "android.intent.actiont100.smartdepot.StoreAllotActivity");
-        ModuleBean miscellaneousoutactivity = new ModuleBean(R.string.miscellaneous_issues_out, R.mipmap.receiptout, ModuleCode.MISCELLANEOUSISSUESOUT, "android.intent.actiont100.smartdepot.MiscellaneousissuesOutListActivity");
-        ModuleBean miscellaneousainctivity = new ModuleBean(R.string.miscellaneous_issues_in, R.mipmap.shouliao, ModuleCode.MISCELLANEOUSISSUESIN, "android.intent.actiont100.smartdepot.MiscellaneousissuesInListActivity");
+        ModuleBean miscellaneousoutactivity = new ModuleBean(R.string.miscellaneous_issues_out, R.mipmap.youyuanfaliao, ModuleCode.MISCELLANEOUSISSUESOUT, "android.intent.actiont100.smartdepot.MiscellaneousissuesOutListActivity");
+        ModuleBean miscellaneousainctivity = new ModuleBean(R.string.miscellaneous_issues_in, R.mipmap.youyuanshouliao, ModuleCode.MISCELLANEOUSISSUESIN, "android.intent.actiont100.smartdepot.MiscellaneousissuesInListActivity");
+        ModuleBean miscellaneousNocomeoutactivity = new ModuleBean(R.string.miscellaneous_nocome_out, R.mipmap.receiptout, ModuleCode.MISCELLANEOUSNOCOMEOUT, "android.intent.actiont100.smartdepot.MiscellaneousNocomeOutActivity");
+        ModuleBean miscellaneousNocomeinctivity = new ModuleBean(R.string.miscellaneous_nocome_in, R.mipmap.shouliao, ModuleCode.MISCELLANEOUSNOCOMEIN, "android.intent.actiont100.smartdepot.MiscellaneousNocomeInActivity");
         ModuleBean storeQueryActivity = new ModuleBean(R.string.store_query, R.mipmap.store_query, ModuleCode.STOREQUERY, "android.intent.actiont100.smartdepot.StoreQueryActivity");
         ModuleBean movestoreactivity = new ModuleBean(R.string.movestore, R.mipmap.movestore, ModuleCode.MOVESTORE, "android.intent.actiont100.smartdepot.MoveStoreActivity");
         ModuleBean stockcheck = new ModuleBean(R.string.check_stock, R.mipmap.kucunpandian, ModuleCode.STORECHECK, "android.intent.actiont100.smartdepot.StockCheckListActivity");
         ModuleBean postallocateactivity = new ModuleBean(R.string.title_post_allocate, R.mipmap.allot_post, ModuleCode.POSTALLOCATE, "android.intent.actiont100.smartdepot.PostAllocateActivity");
         ModuleBean printLabelFillActivity = new ModuleBean(R.string.print_label, R.mipmap.finished_product_print, ModuleCode.LABLEPRINTING, "android.intent.actiont100.smartdepot.PrintLabelFillActivity");
-//        storageItems.add(storeallotactivity);
+        storageItems.add(storeallotactivity);
         storageItems.add(miscellaneousoutactivity);
         storageItems.add(miscellaneousainctivity);
+        storageItems.add(miscellaneousNocomeoutactivity);
+        storageItems.add(miscellaneousNocomeinctivity);
         storageItems.add(storeQueryActivity);
 //        storageItems.add(movestoreactivity);
 //        storageItems.add(stockcheck);

@@ -88,38 +88,6 @@
         android:id="@+id/line_3"
         style="@style/ry_line_style" />
 
-
-    <LinearLayout
-        style="@style/ry_sum_itemstyle"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-
-        <LinearLayout
-            android:layout_width="@dimen/layout_0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:orientation="horizontal">
-        <TextView
-            android:id="@+id/tv_locator_string"
-            style="@style/app_text_inwhite"
-            android:layout_width="@dimen/layout_60dp"
-            android:layout_height="wrap_content"
-            android:text="@string/locator" />
-
-        <TextView
-            android:id="@+id/tv_locator"
-            style="@style/ser_text_inwhite"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
-            </LinearLayout>
-
-    </LinearLayout>
-
-    <View
-        android:id="@+id/line_4"
-        style="@style/ry_line_style" />
-
     <LinearLayout
         style="@style/ry_sum_itemstyle"
         android:layout_width="match_parent"

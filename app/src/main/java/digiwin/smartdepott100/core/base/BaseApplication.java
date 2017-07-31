@@ -75,7 +75,7 @@ public class BaseApplication extends LitePalApplication {
 
         //安装讯飞语音组件
         SpeechUtility.createUtility(instance, SpeechConstant.APPID + "=5868adcb");
-        VoiceUtils.getInstance(getApplicationContext(), SharePreKey.VOICER_SELECTED).submitUserWords();
+//        VoiceUtils.getInstance(getApplicationContext(), SharePreKey.VOICER_SELECTED).submitUserWords();
         //全局异常捕捉
 //        initUnExceptionCatch();
     }

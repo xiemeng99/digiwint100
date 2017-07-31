@@ -7,22 +7,6 @@ package digiwin.smartdepott100.module.bean.common;
  * @date 2017/2/23
  */
 public class ScanEmployeeBackBean {
-//    employee_name               string       姓名
-//    department_no                string       部门编号
-//    department_name             string        部门名称
-//    show                        string       app展示
-
-
-
-
-    /**
-     * 部门编号
-     */
-    private String department_no;
-
-    public void setDepartment_name(String department_name) {
-        this.department_name = department_name;
-    }
 
     /**
      *  部门名称
@@ -39,7 +23,15 @@ public class ScanEmployeeBackBean {
     /**
      * 展示
      */
-    private String show;
+    private String showing;
+    /**
+     * 部门编号
+     */
+    private String department_no;
+
+    public void setDepartment_name(String department_name) {
+        this.department_name = department_name;
+    }
 
     public String getDepartment_no() {
         return department_no;
@@ -69,11 +61,11 @@ public class ScanEmployeeBackBean {
         this.employee_no = employee_no;
     }
 
-    public String getShow() {
-        return show;
+    public String getShowing() {
+        return showing;
     }
 
-    public void setShow(String show) {
-        this.show = show;
+    public void setShowing(String showing) {
+        this.showing = showing;
     }
 }

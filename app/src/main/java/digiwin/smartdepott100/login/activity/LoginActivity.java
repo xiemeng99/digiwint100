@@ -30,7 +30,6 @@ import digiwin.library.utils.AlertDialogUtils;
 import digiwin.library.utils.LogUtils;
 import digiwin.library.utils.StringUtils;
 import digiwin.library.utils.TelephonyUtils;
-import digiwin.pulltorefreshlibrary.recyclerview.RecyclerImageView;
 import digiwin.smartdepott100.R;
 import digiwin.smartdepott100.core.appcontants.AddressContants;
 import digiwin.smartdepott100.core.appcontants.ModuleCode;
@@ -59,8 +58,8 @@ public class LoginActivity extends BaseActivity {
     /**
      * 设置背景动画
      */
-    @BindView(R.id.iv_login_bg)
-    RecyclerImageView iv_login_bg;
+//    @BindView(R.id.iv_login_bg)
+//    RecyclerImageView iv_login_bg;
 
 
     /**
@@ -68,15 +67,15 @@ public class LoginActivity extends BaseActivity {
      */
     @BindView(R.id.tv_setup_systemSettings)
     TextView tv_setup_systemSettings;
-    @BindView(R.id.iv_setup_systemSettings)
-    ImageView iv_setup_systemSettings;
+//    @BindView(R.id.iv_setup_systemSettings)
+//    ImageView iv_setup_systemSettings;
     /**
      * 集团
      */
     @BindView(R.id.rl_entid)
-    RelativeLayout rl_entid;
+    RelativeLayout rlEntid;
     @BindView(R.id.tv_entid)
-    TextView tv_entid;
+    TextView tvEntid;
 
     /**
      * 据点
@@ -96,30 +95,30 @@ public class LoginActivity extends BaseActivity {
     View lineSite;
     @BindView(R.id.iv_login_user)
     ImageView ivLoginUser;
-    @BindView(R.id.iv_login_lock)
-    ImageView ivLoginLock;
+//    @BindView(R.id.iv_login_lock)
+//    ImageView ivLoginLock;
     @BindView(R.id.iv_entid)
     ImageView ivEntid;
     @BindView(R.id.iv_site)
     ImageView ivSite;
-//    @BindView(R.id.videoview)
-//    CustomVideoView videoView;
+    @BindView(R.id.videoview)
+    CustomVideoView videoView;
 
     @OnClick(R.id.et_login_user)
     void loginUserColorChange() {
-        if (et_login_user.hasFocus()) changeColor(1);
+        if (etLoginUser.hasFocus()) changeColor(1);
     }
 
     @OnClick(R.id.et_login_lock)
     void loginLockColorChange() {
-        if (et_login_lock.hasFocus()) {
+        if (etLoginLock.hasFocus()) {
             changeColor(2);
         }
     }
 
     @OnFocusChange(R.id.et_login_lock)
     void loginLockFocusChange() {
-        if (et_login_lock.hasFocus()) {
+        if (etLoginLock.hasFocus()) {
             changeColor(2);
         }
     }
@@ -129,12 +128,12 @@ public class LoginActivity extends BaseActivity {
      */
     @OnClick(R.id.rl_entid)
     void showEntId() {
-        if (StringUtils.isBlank(et_login_user.getText().toString()) ||
-                StringUtils.isBlank(et_login_lock.getText().toString())) {
+        if (StringUtils.isBlank(etLoginUser.getText().toString()) ||
+                StringUtils.isBlank(etLoginLock.getText().toString())) {
             showFailedDialog(R.string.username_pwd_not_null);
             return;
         }
-        String entid = tv_entid.getText().toString();
+        String entid = tvEntid.getText().toString();
         changeColor(3);
         EntIdDialog.showEntDialog(activity, entid, mEntIds);
     }
@@ -144,8 +143,8 @@ public class LoginActivity extends BaseActivity {
      */
     @OnClick(R.id.rl_site)
     void showSite() {
-        if (StringUtils.isBlank(et_login_user.getText().toString()) ||
-                StringUtils.isBlank(et_login_lock.getText().toString())) {
+        if (StringUtils.isBlank(etLoginUser.getText().toString()) ||
+                StringUtils.isBlank(etLoginLock.getText().toString())) {
             showFailedDialog(R.string.username_pwd_not_null);
             return;
         }
@@ -167,22 +166,22 @@ public class LoginActivity extends BaseActivity {
      * 账号
      */
     @BindView(R.id.et_login_user)
-    EditText et_login_user;
+    EditText etLoginUser;
     /**
      * 密码
      */
     @BindView(R.id.et_login_lock)
-    EditText et_login_lock;
+    EditText etLoginLock;
     /**
      * 登入
      */
     @BindView(R.id.tv_login_rightNow)
-    View tv_login_rightNow;
+    View tvLoginRightNow;
     /**
      * 记住密码
      */
     @BindView(R.id.cb_remeber_password)
-    CheckBox cb_remeber_password;
+    CheckBox cbRemeberPassword;
 
     /**
      * 版本对象传入到bundle的key值
@@ -222,13 +221,13 @@ public class LoginActivity extends BaseActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        animationDrawable = (AnimationDrawable) iv_login_bg.getBackground();
-        animationDrawable.start();
+//        animationDrawable = (AnimationDrawable) iv_login_bg.getBackground();
+//        animationDrawable.start();
     }
 
     @Override
     protected void doBusiness() {
-//        initView();
+        initView();
         PermissionUtils.verifyStoragePermissions(this);
         final WiFiPrintManager wiFiPrintManager = WiFiPrintManager.getManager();
         wiFiPrintManager.openWiFi("", 0, new WiFiPrintManager.OpenWiFiPrintListener() {
@@ -242,7 +241,7 @@ public class LoginActivity extends BaseActivity {
         mSites = new ArrayList<>();
         entId = "";
         site = "";
-        et_login_user.setOnFocusChangeListener(focusChangeListener);
+        etLoginUser.setOnFocusChangeListener(focusChangeListener);
         isFinished = false;
         transparentStatusBar();
         logic = LoginLogic.getInstance(activity, module, mTimestamp.toString());
@@ -260,7 +259,7 @@ public class LoginActivity extends BaseActivity {
         EntIdDialog.setCallBack(new EntIdDialog.EntIdCallBack() {
             @Override
             public void entIdCallBack(String chooseEntShow, String chooseEntIdno) {
-                tv_entid.setText(chooseEntShow);
+                tvEntid.setText(chooseEntShow);
                 entId = chooseEntIdno;
                 getSite(entId, true);
             }
@@ -283,25 +282,25 @@ public class LoginActivity extends BaseActivity {
         SettingDialog.showSettingDialog(activity);
     }
 
-    @OnClick(R.id.iv_setup_systemSettings)
-    void showSetting1() {
-        SettingDialog.showSettingDialog(activity);
-    }
+//    @OnClick(R.id.iv_setup_systemSettings)
+//    void showSetting1() {
+//        SettingDialog.showSettingDialog(activity);
+//    }
 
     /**
      * 跳转主界面
      */
     @OnClick(R.id.tv_login_rightNow)
     void login() {
-        if (StringUtils.isBlank(et_login_user.getText().toString())) {
+        if (StringUtils.isBlank(etLoginUser.getText().toString())) {
             AlertDialogUtils.showFailedDialog(context, R.string.username_not_null);
             return;
         }
-        if (StringUtils.isBlank(et_login_lock.getText().toString())) {
+        if (StringUtils.isBlank(etLoginLock.getText().toString())) {
             AlertDialogUtils.showFailedDialog(context, R.string.password_not_null);
             return;
         }
-        if (StringUtils.isBlank(tv_entid.getText().toString())) {
+        if (StringUtils.isBlank(tvEntid.getText().toString())) {
             AlertDialogUtils.showFailedDialog(context, R.string.ent_not_null);
             return;
         }
@@ -309,13 +308,13 @@ public class LoginActivity extends BaseActivity {
             AlertDialogUtils.showFailedDialog(context, R.string.site_not_null);
             return;
         }
-        AddressContants.ACCTFIRSTLOGIN = et_login_user.getText().toString().trim();
+        AddressContants.ACCTFIRSTLOGIN = etLoginUser.getText().toString().trim();
         AddressContants.ENTERPRISEFIRSTLOGIN = entId;
         AddressContants.SITEFIRSTLOGIN = site;
         Map<String, String> map = new HashMap<>();
-        map.put(AddressContants.HASHKEY, MD5Utils.md5Encode(et_login_lock.getText().toString()));
+        map.put(AddressContants.HASHKEY, MD5Utils.md5Encode(etLoginLock.getText().toString()));
         showLoadingDialog();
-        logic.login(map, tv_entid.getText().toString(), new LoginLogic.LoginListener() {
+        logic.login(map, tvEntid.getText().toString(), new LoginLogic.LoginListener() {
             @Override
             public void onSuccess(AccoutBean accoutBean) {
                 String vernum = accoutBean.getVernum();
@@ -330,8 +329,8 @@ public class LoginActivity extends BaseActivity {
                     //传入权限
                     Bundle bundle = new Bundle();
                     bundle.putString("access", accoutBean.getAccess());
-                    accoutBean.setPassword(et_login_lock.getText().toString());
-                    if (cb_remeber_password.isChecked()) {
+                    accoutBean.setPassword(etLoginLock.getText().toString());
+                    if (cbRemeberPassword.isChecked()) {
                         accoutBean.setIsRemeberPassWord("Y");
                     } else {
                         accoutBean.setIsRemeberPassWord("N");
@@ -346,7 +345,7 @@ public class LoginActivity extends BaseActivity {
                     if (storageList.size() > 0) {
                         accoutBean.setWare(storageList.get(0).getWarehouse_no());
                     }
-                    accoutBean.setEnterpriseShow(tv_entid.getText().toString());
+                    accoutBean.setEnterpriseShow(tvEntid.getText().toString());
                     accoutBean.setSiteShow(tvSite.getText().toString());
                     SQLiteDatabase db = Connector.getDatabase();
                     DataSupport.deleteAll(StorageBean.class);
@@ -406,7 +405,7 @@ public class LoginActivity extends BaseActivity {
     private View.OnFocusChangeListener focusChangeListener = new View.OnFocusChangeListener() {
         @Override
         public void onFocusChange(View v, boolean hasFocus) {
-            String userName = et_login_user.getText().toString();
+            String userName = etLoginUser.getText().toString();
             if (hasFocus) {
                 changeColor(1);
             }
@@ -429,7 +428,7 @@ public class LoginActivity extends BaseActivity {
                 try {
                     mEntIds = plants;
                     if (flag && mEntIds.size() > 0) {
-                        tv_entid.setText(mEntIds.get(0).getEnterprise_show());
+                        tvEntid.setText(mEntIds.get(0).getEnterprise_show());
                         entId = mEntIds.get(0).getEnterprise_no();
                     }
                     getSite(entId, flag);
@@ -441,7 +440,7 @@ public class LoginActivity extends BaseActivity {
             @Override
             public void onFailed(String msg) {
                 if (mEntIds.size() > 0) {
-                    tv_entid.setText(mEntIds.get(0).getEnterprise_show());
+                    tvEntid.setText(mEntIds.get(0).getEnterprise_show());
                     entId = mEntIds.get(0).getEnterprise_no();
                 }
                 AlertDialogUtils.showFailedDialog(context, msg);
@@ -501,20 +500,20 @@ public class LoginActivity extends BaseActivity {
         List<AccoutBean> accoutBeen = DataSupport.findAll(AccoutBean.class);
         if (accoutBeen.size() > 0) {
             AccoutBean accoutBean = accoutBeen.get(0);
-            et_login_user.setText(accoutBean.getAccount());
-            tv_entid.setText(accoutBean.getEnterprise_no());
+            etLoginUser.setText(accoutBean.getAccount());
+            tvEntid.setText(accoutBean.getEnterprise_no());
             tvSite.setText(accoutBean.getEnterprise_no());
             if ("Y".equals(accoutBean.getIsRemeberPassWord())) {
-                et_login_lock.setText(accoutBean.getPassword());
-                cb_remeber_password.setChecked(true);
+                etLoginLock.setText(accoutBean.getPassword());
+                cbRemeberPassword.setChecked(true);
             } else {
-                cb_remeber_password.setChecked(false);
+                cbRemeberPassword.setChecked(false);
             }
             entId = accoutBean.getEnterprise_no();
             site = accoutBean.getSite_no();
-            tv_entid.setText(accoutBean.getEnterpriseShow());
+            tvEntid.setText(accoutBean.getEnterpriseShow());
             tvSite.setText(accoutBean.getSiteShow());
-            et_login_user.requestFocus();
+            etLoginUser.requestFocus();
             getEntId(accoutBean.getAccount(), false);
         }
     }
@@ -534,32 +533,32 @@ public class LoginActivity extends BaseActivity {
     private void changeColor(int type) {
         try {
             ivLoginUser.setImageResource(R.drawable.login_user_off);
-            ivLoginLock.setImageResource(R.drawable.login_lock_off);
+//            ivLoginLock.setImageResource(R.drawable.login_lock_off);
             ivEntid.setImageResource(R.drawable.login_entid_off);
             ivSite.setImageResource(R.drawable.login_site_off);
-            lineLoginUser.setBackgroundColor(getResources().getColor(R.color.Login_line_color));
-            lineLoginLock.setBackgroundColor(getResources().getColor(R.color.Login_line_color));
-            lineEntid.setBackgroundColor(getResources().getColor(R.color.Login_line_color));
-            lineSite.setBackgroundColor(getResources().getColor(R.color.Login_line_color));
-            et_login_user.setTextColor(getResources().getColor(R.color.Text_color));
-            et_login_lock.setTextColor(getResources().getColor(R.color.Text_color));
-            tv_entid.setTextColor(getResources().getColor(R.color.Text_color));
-            tvSite.setTextColor(getResources().getColor(R.color.Text_color));
+            lineLoginUser.setBackgroundColor(getResources().getColor(R.color.login_color_line));
+            lineLoginLock.setBackgroundColor(getResources().getColor(R.color.login_color_line));
+            lineEntid.setBackgroundColor(getResources().getColor(R.color.login_color_line));
+            lineSite.setBackgroundColor(getResources().getColor(R.color.login_color_line));
+            etLoginUser.setTextColor(getResources().getColor(R.color.white_ff));
+            etLoginLock.setTextColor(getResources().getColor(R.color.white_ff));
+            tvEntid.setTextColor(getResources().getColor(R.color.white_ff));
+            tvSite.setTextColor(getResources().getColor(R.color.white_ff));
             switch (type) {
                 case 1:
                     ivLoginUser.setImageResource(R.drawable.login_user_on);
                     lineLoginUser.setBackgroundColor(getResources().getColor(R.color.login_color_t));
-                    et_login_user.setTextColor(getResources().getColor(R.color.login_color_t));
+                    etLoginUser.setTextColor(getResources().getColor(R.color.login_color_t));
                     break;
                 case 2:
-                    ivLoginLock.setImageResource(R.drawable.login_lock_on);
+                    //ivLoginLock.setImageResource(R.drawable.login_lock_on);
                     lineLoginLock.setBackgroundColor(getResources().getColor(R.color.login_color_t));
-                    et_login_lock.setTextColor(getResources().getColor(R.color.login_color_t));
+                    etLoginLock.setTextColor(getResources().getColor(R.color.login_color_t));
                     break;
                 case 3:
                     ivEntid.setImageResource(R.drawable.login_entid_on);
                     lineEntid.setBackgroundColor(getResources().getColor(R.color.login_color_t));
-                    tv_entid.setTextColor(getResources().getColor(R.color.login_color_t));
+                    tvEntid.setTextColor(getResources().getColor(R.color.login_color_t));
                     break;
                 case 4:
                     ivSite.setImageResource(R.drawable.login_site_on);
@@ -575,47 +574,47 @@ public class LoginActivity extends BaseActivity {
     }
 
 
-//    private void initView() {
-//        //设置播放加载路径
-//        videoView.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
-//            @Override
-//            public void onPrepared(MediaPlayer mp) {
-//                mp.setVolume(0f,0f);
-//                videoView.start();
-//                mp.setOnInfoListener(new MediaPlayer.OnInfoListener() {
-//                    @Override
-//                    public boolean onInfo(MediaPlayer mp, int what, int extra) {
-//                        if (what == MediaPlayer.MEDIA_INFO_VIDEO_RENDERING_START) {
-//                            videoView.setBackgroundColor(Color.TRANSPARENT);
-//                        }
-//                        return true;
-//                    }
-//                });
-//            }
-//        });
-//        videoView.setVideoURI(Uri.parse("android.resource://" + getPackageName() + "/" + R.raw.test1));
-//        //循环播放
-//        videoView.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
-//            @Override
-//            public void onCompletion(MediaPlayer mediaPlayer) {
-//                videoView.start();
-//            }
-//        });
-//
-//    }
+    private void initView() {
+        //设置播放加载路径
+        videoView.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
+            @Override
+            public void onPrepared(MediaPlayer mp) {
+                mp.setVolume(0f,0f);
+                videoView.start();
+                mp.setOnInfoListener(new MediaPlayer.OnInfoListener() {
+                    @Override
+                    public boolean onInfo(MediaPlayer mp, int what, int extra) {
+                        if (what == MediaPlayer.MEDIA_INFO_VIDEO_RENDERING_START) {
+                            videoView.setBackgroundColor(Color.TRANSPARENT);
+                        }
+                        return true;
+                    }
+                });
+            }
+        });
+        videoView.setVideoURI(Uri.parse("android.resource://" + getPackageName() + "/" + R.raw.test1));
+        //循环播放
+        videoView.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+            @Override
+            public void onCompletion(MediaPlayer mediaPlayer) {
+                videoView.start();
+            }
+        });
 
-    //返回重启加载
-//    @Override
-//    protected void onRestart() {
-//        initView();
-//        super.onRestart();
-//    }
-//
-//    //防止锁屏或者切出的时候，音乐在播放
-//    @Override
-//    protected void onStop() {
-//        videoView.stopPlayback();
-//        super.onStop();
-//    }
+    }
+
+//    返回重启加载
+    @Override
+    protected void onRestart() {
+        initView();
+        super.onRestart();
+    }
+
+    //防止锁屏或者切出的时候，音乐在播放
+    @Override
+    protected void onStop() {
+        videoView.stopPlayback();
+        super.onStop();
+    }
 
 }

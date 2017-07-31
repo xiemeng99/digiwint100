@@ -1,39 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:background="@color/white_ff"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/white_ff">
 
-    <digiwin.pulltorefreshlibrary.recyclerview.RecyclerImageView
-        android:id="@+id/iv_login_bg"
+    <!--<digiwin.pulltorefreshlibrary.recyclerview.RecyclerImageView-->
+    <!--android:id="@+id/iv_login_bg"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="match_parent"-->
+    <!--android:layout_alignParentStart="true"-->
+    <!--android:layout_alignParentTop="true"-->
+    <!--android:background="@drawable/login_bg"-->
+    <!--android:scaleType="fitXY" />-->
+    <digiwin.smartdepott100.core.customview.CustomVideoView
+        android:id="@+id/videoview"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:background="@drawable/login_bg"
-        android:scaleType="fitXY" />
-    <!--<digiwin.smartdepott100.core.customview.CustomVideoView-->
-        <!--android:id="@+id/videoview"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="match_parent"-->
-        <!--android:layout_alignParentLeft="true"-->
-        <!--android:layout_alignParentStart="true"-->
-        <!--android:layout_alignParentTop="true" />-->
+        android:layout_alignParentTop="true" />
 
-    <ImageView
-        android:id="@+id/iv_digiwin_logo"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="@dimen/layout_60dp"
-        android:src="@drawable/loginlogo2" />
+    <!--<ImageView-->
+    <!--android:id="@+id/iv_digiwin_logo"-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_centerHorizontal="true"-->
+    <!--android:layout_marginTop="@dimen/layout_60dp"-->
+    <!--android:src="@drawable/loginlogo2" />-->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/iv_digiwin_logo"
-        android:orientation="vertical"
-        android:layout_alignParentStart="true">
-
+        android:layout_centerInParent="true"
+        android:orientation="vertical">
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -48,8 +46,8 @@
                     android:id="@+id/iv_login_user"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:layout_marginLeft="@dimen/layout_50dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="@dimen/layout_50dp"
                     android:src="@drawable/login_user_on" />
 
                 <EditText
@@ -57,13 +55,13 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_centerHorizontal="true"
-                    android:layout_marginLeft="@dimen/layout_20dp"
-                    android:layout_toRightOf="@id/iv_login_user"
+                    android:layout_marginLeft="@dimen/layout_50dp"
+                    android:layout_toLeftOf="@id/iv_login_user"
                     android:background="@null"
                     android:gravity="bottom"
-                    android:textColor="@color/login_color_t"
                     android:imeOptions="actionNext"
                     android:singleLine="true"
+                    android:textColor="@color/login_color_t"
                     android:textCursorDrawable="@drawable/et_cursor_color"
                     android:textSize="@dimen/textSize_14sp" />
             </RelativeLayout>
@@ -76,7 +74,7 @@
                 android:layout_marginLeft="@dimen/layout_25dp"
                 android:layout_marginRight="@dimen/layout_25dp"
                 android:layout_marginTop="@dimen/layout_5dp"
-                android:background="@color/login_color_t"/>
+                android:background="@color/login_color_t" />
         </RelativeLayout>
 
         <RelativeLayout
@@ -88,27 +86,31 @@
                 android:id="@+id/rl_login_lock"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
-
-                <ImageView
-                    android:id="@+id/iv_login_lock"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:layout_marginLeft="@dimen/layout_50dp"
-                    android:src="@drawable/login_lock_off" />
+                <CheckBox
+                android:id="@+id/cb_remeber_password"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:button="@drawable/login_rp_checkbox_bg"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="@dimen/layout_50dp" />
+                <!--<ImageView-->
+                <!--android:id="@+id/iv_login_lock"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!---->
+                <!--android:src="@drawable/login_lock_off" />-->
 
                 <EditText
                     android:id="@+id/et_login_lock"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_centerHorizontal="true"
-                    android:layout_marginLeft="@dimen/layout_20dp"
-                    android:layout_toRightOf="@id/iv_login_lock"
+                    android:layout_marginLeft="@dimen/layout_50dp"
+                    android:layout_toLeftOf="@id/cb_remeber_password"
                     android:background="@null"
                     android:focusableInTouchMode="true"
-                    android:gravity="bottom"
-                    android:textColor="@color/Text_color"
                     android:inputType="textPassword"
+                    android:textColor="@color/white_ff"
                     android:textCursorDrawable="@drawable/et_cursor_color"
                     android:textSize="@dimen/textSize_14sp" />
             </RelativeLayout>
@@ -121,7 +123,7 @@
                 android:layout_marginLeft="@dimen/layout_25dp"
                 android:layout_marginRight="@dimen/layout_25dp"
                 android:layout_marginTop="@dimen/layout_5dp"
-                android:background="@color/Login_line_color"/>
+                android:background="@color/login_color_line" />
         </RelativeLayout>
 
         <RelativeLayout
@@ -138,19 +140,18 @@
                     android:id="@+id/iv_entid"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:layout_marginLeft="@dimen/layout_50dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="@dimen/layout_50dp"
                     android:src="@drawable/login_entid_off" />
 
                 <TextView
                     android:id="@+id/tv_entid"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_centerHorizontal="true"
-                    android:layout_marginLeft="@dimen/layout_20dp"
-                    android:layout_toRightOf="@id/iv_entid"
+                    android:layout_marginLeft="@dimen/layout_50dp"
+                    android:layout_toLeftOf="@id/iv_entid"
                     android:gravity="bottom"
-                    android:textColor="@color/Text_color"
+                    android:textColor="@color/white_ff"
                     android:textSize="@dimen/textSize_14sp" />
             </RelativeLayout>
 
@@ -162,10 +163,11 @@
                 android:layout_marginLeft="@dimen/layout_25dp"
                 android:layout_marginRight="@dimen/layout_25dp"
                 android:layout_marginTop="@dimen/layout_5dp"
-                android:background="@color/Login_line_color"/>
+                android:background="@color/login_color_line" />
 
 
         </RelativeLayout>
+
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -180,19 +182,17 @@
                     android:id="@+id/iv_site"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:layout_marginLeft="@dimen/layout_50dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="@dimen/layout_50dp"
                     android:src="@drawable/login_site_off" />
 
                 <TextView
                     android:id="@+id/tv_site"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_centerHorizontal="true"
-                    android:layout_marginLeft="@dimen/layout_20dp"
-                    android:layout_toRightOf="@id/iv_site"
-                    android:gravity="bottom"
-                    android:textColor="@color/Text_color"
+                    android:layout_marginLeft="@dimen/layout_50dp"
+                    android:layout_toLeftOf="@id/iv_site"
+                    android:textColor="@color/white_ff"
                     android:textSize="@dimen/textSize_14sp" />
             </RelativeLayout>
 
@@ -204,47 +204,47 @@
                 android:layout_marginLeft="@dimen/layout_25dp"
                 android:layout_marginRight="@dimen/layout_25dp"
                 android:layout_marginTop="@dimen/layout_5dp"
-                android:background="@color/Login_line_color"/>
+                android:background="@color/login_color_line" />
 
         </RelativeLayout>
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/layout_50dp"
-            android:layout_marginLeft="@dimen/layout_25dp"
-            android:layout_marginRight="@dimen/layout_25dp"
-            android:gravity="center_vertical"
-            android:orientation="horizontal">
+        <!--<LinearLayout-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="@dimen/layout_50dp"-->
+        <!--android:layout_marginLeft="@dimen/layout_25dp"-->
+        <!--android:layout_marginRight="@dimen/layout_25dp"-->
+        <!--android:gravity="center_vertical"-->
+        <!--android:orientation="horizontal">-->
 
-            <ImageView
-                android:id="@+id/iv_setup_systemSettings"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/login_set" />
+        <!--<ImageView-->
+        <!--android:id="@+id/iv_setup_systemSettings"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:src="@drawable/login_set" />-->
 
-            <TextView
-                android:id="@+id/tv_setup_systemSettings"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/layout_5dp"
-                android:text="@string/system_setting"
-                android:textColor="@color/Text_color"
-                android:textSize="@dimen/textSize_16sp" />
+        <!--<TextView-->
+        <!--android:id="@+id/tv_setup_systemSettings"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_marginLeft="@dimen/layout_5dp"-->
+        <!--android:text="@string/system_setting"-->
+        <!--android:textColor="@color/Text_color"-->
+        <!--android:textSize="@dimen/textSize_16sp" />-->
 
-            <View
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"></View>
+        <!--<View-->
+        <!--android:layout_width="0dp"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_weight="1"/>-->
 
-            <CheckBox
-                android:id="@+id/cb_remeber_password"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:button="@drawable/login_rp_checkbox_bg"
-                android:paddingLeft="@dimen/layout_5dp"
-                android:text="@string/remember_password"
-                android:textColor="@color/Text_color"
-                android:textSize="@dimen/textSize_16sp" />
-        </LinearLayout>
+        <!--<CheckBox-->
+        <!--android:id="@+id/cb_remeber_password"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:button="@drawable/login_rp_checkbox_bg"-->
+        <!--android:paddingLeft="@dimen/layout_5dp"-->
+        <!--android:text="@string/remember_password"-->
+        <!--android:textColor="@color/Text_color"-->
+        <!--android:textSize="@dimen/textSize_16sp" />-->
+        <!--</LinearLayout>-->
 
         <TextView
             android:id="@+id/tv_login_rightNow"
@@ -253,22 +253,32 @@
             android:layout_marginLeft="@dimen/layout_25dp"
             android:layout_marginRight="@dimen/layout_25dp"
             android:layout_marginTop="@dimen/layout_20dp"
-            android:background="@drawable/login_determine_bg"
+            android:background="@drawable/accordingmaterialtop_sharp"
             android:gravity="center"
             android:padding="@dimen/layout_10dp"
             android:text="@string/login_rightNow"
-            android:textColor="@color/toolBar_color"
+            android:textColor="@color/white_ff"
             android:textSize="@dimen/textSize_18sp" />
+
+        <TextView
+            android:id="@+id/tv_setup_systemSettings"
+            android:layout_width="match_parent"
+            android:layout_marginTop="@dimen/layout_20dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/layout_5dp"
+            android:gravity="center"
+            android:text="@string/system_setting"
+            android:textColor="@color/login_color_t"
+            android:textSize="@dimen/textSize_14sp" />
     </LinearLayout>
     <TextView
         android:id="@+id/ll_litle_text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
         android:layout_marginBottom="@dimen/layout_5dp"
+        android:layout_alignParentBottom="true"
         android:gravity="center"
         android:text="@string/little_text"
         android:textColor="@color/Login_littleText_color"
         android:textSize="@dimen/little_textSize" />
-
 </RelativeLayout>

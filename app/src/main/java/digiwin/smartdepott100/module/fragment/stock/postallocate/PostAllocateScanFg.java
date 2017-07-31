@@ -290,7 +290,7 @@ public class PostAllocateScanFg extends BaseFragment {
 
     PostAllocateScanActivity pactivity;
 
-    FilterResultOrderBean orderBean = new FilterResultOrderBean();
+    FilterResultOrderBean orderBean;
 
     private Handler.Callback mCallback= new Handler.Callback() {
         @Override
@@ -425,6 +425,7 @@ public class PostAllocateScanFg extends BaseFragment {
 
     @Override
     protected void doBusiness() {
+        orderBean= new FilterResultOrderBean();
         pactivity = (PostAllocateScanActivity) activity;
         if (CommonUtils.isUseTray()){
             llTray.setVisibility(View.VISIBLE);
