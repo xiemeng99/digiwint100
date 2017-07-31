@@ -202,7 +202,7 @@
     <color name="Base_color">#e50150</color><!--主色调-->
     <color name="Assist_color">#ffc400 </color><!--辅助色调-->
     <color name="Text_color">#323232 </color><!--主字体颜色-->
-    <color name="Login_line_color">#515252 </color><!--主字体颜色-->
+    <color name="Login_line_color">#515252 </color>
     <color name="Login_littleText_color">#90908f</color><!--主字体颜色-->
 
     <color name="red_normal">#FF0000</color>
@@ -257,5 +257,5 @@
     <color name="line_gray_f0">#f0f0f0</color>
 
     <color name="login_color_t">#e50150</color>
-
+    <color name="login_color_line">#c8c8c8</color>
 </resources>

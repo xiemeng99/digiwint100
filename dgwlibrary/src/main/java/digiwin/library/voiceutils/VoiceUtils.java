@@ -387,6 +387,28 @@ public class VoiceUtils {
         }
 
     }
+
+    /**
+     * 上传用户词表
+     * @param userwords 用户词表，在app的string文件中
+     */
+    public void submitUserWords(String userwords){
+        SpeechRecognizer mIat = SpeechRecognizer.createRecognizer( mContext, null);
+        UserWords userword = new UserWords(userwords);
+        String contents = userword.toString();
+        Log.d(TAG,"contents:"+contents);
+        mIat.setParameter(SpeechConstant.TEXT_ENCODING, "utf-8");
+        // 指定引擎类型
+         mIat.setParameter(SpeechConstant.ENGINE_TYPE, SpeechConstant.TYPE_CLOUD);
+        int ret = mIat.updateLexicon("userword", contents, lexiconListener);
+        if(ret != ErrorCode.SUCCESS)
+        {
+            Log.d(TAG,"上传用户词表失败：" + ret);
+        }else{
+            Log.d(TAG,"上传用户词表成功：" + ret);
+        }
+
+    }
     // 上传用户词表监听器。
     private LexiconListener lexiconListener = new LexiconListener()
     {
