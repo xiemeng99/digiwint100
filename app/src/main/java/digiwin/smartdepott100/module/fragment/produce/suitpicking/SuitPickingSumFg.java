@@ -42,7 +42,7 @@ import digiwin.pulltorefreshlibrary.recyclerviewAdapter.OnItemClickListener;
 
 /**
  * @author xiemeng
- * @des 生产成套领料汇总页面
+ * @des 更名领料过账汇总页面
  * @date 2017/5/28 16:25
  */
 
@@ -189,9 +189,6 @@ public class SuitPickingSumFg extends BaseFragment {
         showLoadingDialog();
         map.put(AddressContants.ITEM_NO, orderSumData.getItem_no());
         final SumShowBean sumShowBean = new SumShowBean();
-
-        float numb1 = StringUtils.string2Float(orderSumData.getApply_qty());
-        float numb2 = StringUtils.string2Float(orderSumData.getScan_sumqty());
         sumShowBean.setItem_no(orderSumData.getItem_no());
         sumShowBean.setItem_name(orderSumData.getItem_name());
         sumShowBean.setAvailable_in_qty(orderSumData.getApply_qty());

@@ -5,6 +5,7 @@ import android.os.Message;
 import android.text.method.TextKeyListener;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -14,9 +15,12 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.BindViews;
+import butterknife.OnCheckedChanged;
 import butterknife.OnClick;
 import butterknife.OnFocusChange;
 import butterknife.OnTextChanged;
+import digiwin.library.dialog.OnDialogClickListener;
+import digiwin.library.utils.StringUtils;
 import digiwin.library.utils.WeakRefHandler;
 import digiwin.smartdepott100.R;
 import digiwin.smartdepott100.core.appcontants.AddressContants;
@@ -30,8 +34,6 @@ import digiwin.smartdepott100.module.bean.common.ScanBarcodeBackBean;
 import digiwin.smartdepott100.module.bean.common.ScanLocatorBackBean;
 import digiwin.smartdepott100.module.logic.common.CommonLogic;
 import digiwin.smartdepott100.module.logic.purchase.PurchaseStoreLogic;
-import digiwin.library.dialog.OnDialogClickListener;
-import digiwin.library.utils.StringUtils;
 
 /**
  * sunchangquan
@@ -71,6 +73,17 @@ public class PurchaseStoreScanFg extends BaseFragment {
 
     private PurchaseStoreLogic commonLogic;
 
+    @BindView(R.id.cb_locatorlock)
+    CheckBox cbLocatorlock;
+
+    @OnCheckedChanged(R.id.cb_locatorlock)
+    void isLock(boolean checked) {
+        if (checked) {
+            etScanLocator.setKeyListener(null);
+        } else {
+            etScanLocator.setKeyListener(new TextKeyListener(TextKeyListener.Capitalize.CHARACTERS, true));
+        }
+    }
     private Handler.Callback mCallback= new Handler.Callback() {
         @Override
         public boolean handleMessage(Message msg) {
@@ -332,10 +345,12 @@ public class PurchaseStoreScanFg extends BaseFragment {
         etInputNum.setText("");
         barcodeFlag = false;
         etScanBarocde.setText("");
-        locatorFlag = false;
-        etScanLocator.setText("");
-        etScanLocator.requestFocus();
-        locatorShow = "";
+        if (!cbLocatorlock.isChecked()) {
+            locatorShow="";
+            locatorFlag=false;
+            etScanLocator.setText("");
+            etScanLocator.requestFocus();
+        }
         barcodeShow = "";
         show();
     }

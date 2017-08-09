@@ -143,15 +143,7 @@ public class PickUpShipmentSumFg extends BaseFragment {
         final SumShowBean sumShowBean = new SumShowBean();
         sumShowBean.setItem_no(orderSumData.getItem_no());
         sumShowBean.setItem_name(orderSumData.getItem_name());
-        float numb1 = StringUtils.string2Float(orderSumData.getApply_qty());
-        float numb2 = StringUtils.string2Float(orderSumData.getStock_qty());
-        if(numb1 > numb2){
-            sumShowBean.setAvailable_in_qty(orderSumData.getStock_qty());
-        }else if(numb1 < numb2){
-            sumShowBean.setAvailable_in_qty(orderSumData.getApply_qty());
-        }else if(numb1 == numb2){
-            sumShowBean.setAvailable_in_qty(orderSumData.getApply_qty());
-        }
+        sumShowBean.setItem_name(orderSumData.getApply_qty());
         logic.getDetail(map, new CommonLogic.GetDetailListener() {
             @Override
             public void onSuccess(List<DetailShowBean> detailShowBeen) {

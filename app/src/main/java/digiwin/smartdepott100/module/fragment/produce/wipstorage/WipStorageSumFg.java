@@ -84,10 +84,10 @@ public class WipStorageSumFg  extends BaseFragment {
      */
     public void upDateList() {
         try {
-            Map<String, String> map = new HashMap<>();
             sumShowBeanList.clear();
             adapter = new WipCompleteSumAdapter(activity, sumShowBeanList);
             ryList.setAdapter(adapter);
+            Map<String, String> map = new HashMap<>();
             showLoadingDialog();
             wipCompleteLogic.getSumWipComplete(map, new CommonLogic.GetZSumListener() {
                 @Override

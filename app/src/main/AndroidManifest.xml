@@ -57,17 +57,6 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".main.activity.MainActivity" />
-        <!-- <activity -->
-        <!-- android:name="digiwin.futai.main.activity.MainActivity" -->
-        <!-- android:theme="@style/SplashTheme"> -->
-        <!-- <intent-filter> -->
-        <!-- <action android:name="android.intent.action.MAIN" /> -->
-
-
-        <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
-        <!-- </intent-filter> -->
-        <!-- </activity> -->
         <activity
             android:name=".login.activity.WelcomeGuideActivity"
             android:theme="@style/SplashTheme">
@@ -77,11 +66,13 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".main.activity.MainActivity" />
+        <activity
+            android:name=".login.activity.LoginActivity"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustPan" />
         <activity android:name=".main.activity.UserInfoActivity" />
         <activity android:name=".main.activity.SettingActivity" />
-        <activity
-            android:name=".module.test.TestModuleActivity"
-            android:windowSoftInputMode="stateAlwaysHidden|adjustPan" />
+
         <activity
             android:name=".module.activity.produce.finishstorage.FinishedStorageActivity"
             android:configChanges="keyboardHidden|screenSize"
@@ -106,9 +97,7 @@
         <activity
             android:name=".module.activity.common.CommonTwoCommitActivity"
             android:windowSoftInputMode="stateAlwaysHidden|adjustPan" />
-        <activity
-            android:name=".login.activity.LoginActivity"
-            android:windowSoftInputMode="stateAlwaysHidden|adjustPan" />
+
         <activity
             android:name=".module.activity.produce.transtersreview.TransfersToReviewActivity"
             android:windowSoftInputMode="stateAlwaysHidden|adjustPan">
@@ -130,10 +119,6 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".module.activity.produce.distribute.DistributeScanActivity"
-            android:configChanges="keyboardHidden|screenSize"
-            android:windowSoftInputMode="stateAlwaysHidden|adjustPan"/>
 
         <!-- 退料过账 -->
         <activity

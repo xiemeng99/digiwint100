@@ -35,7 +35,7 @@
     <string name="connect_device_now">正在连接设备</string>
     <string name="connect_device_failed">连接失败</string>
     <string name="connect_device_ok">连接成功</string>
-    <string name="data_null">返回集合为空</string>
+    <string name="data_null">无符合条件资料</string>
     <!--<string name="user_exit">确定要退出吗</string>-->
     <string name="app_exit"> 再按一次退出程序</string>
     <string name="username_pwd_not_null">用户名和密码不能为空</string>

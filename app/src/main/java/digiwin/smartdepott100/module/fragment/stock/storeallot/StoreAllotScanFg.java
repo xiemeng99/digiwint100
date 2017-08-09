@@ -263,6 +263,7 @@ public class StoreAllotScanFg extends BaseFragment {
                 case INLOCATORWHAT:
                     HashMap<String, String> locatorMap = new HashMap<>();
                     locatorMap.put(AddressContants.STORAGE_SPACES_BARCODE, String.valueOf(msg.obj));
+                    locatorMap.put("statu","in");
                     etScanInLocator.setKeyListener(null);
                     storeAllotLogic.scanLocator(locatorMap, new CommonLogic.ScanLocatorListener() {
                         @Override
@@ -303,6 +304,7 @@ public class StoreAllotScanFg extends BaseFragment {
                 case OUTLOCATORWHAT:
                     HashMap<String, String> outlocatorMap = new HashMap<>();
                     outlocatorMap.put(AddressContants.STORAGE_SPACES_BARCODE, String.valueOf(msg.obj));
+                    outlocatorMap.put("statu","out");
                     etScanOutLocator.setKeyListener(null);
                     storeAllotLogic.scanLocator(outlocatorMap, new CommonLogic.ScanLocatorListener() {
                         @Override

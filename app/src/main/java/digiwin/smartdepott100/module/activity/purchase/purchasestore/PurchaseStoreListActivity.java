@@ -73,12 +73,14 @@ public class PurchaseStoreListActivity extends BaseTitleActivity {
     TextView tvReturnMaterial;
     @BindView(R.id.et_return_material)
     EditText etReturnMaterial;
+
     @OnFocusChange(R.id.et_return_material)
     void storeReturnMaterialFocusChange() {
         ModuleUtils.viewChange(llReturnMaterial, views);
         ModuleUtils.etChange(activity, etReturnMaterial, editTexts);
         ModuleUtils.tvChange(activity, tvReturnMaterial, textViews);
     }
+
     @BindView(R.id.ll_return_material)
     LinearLayout llReturnMaterial;
 
@@ -89,15 +91,16 @@ public class PurchaseStoreListActivity extends BaseTitleActivity {
     TextView tvSupplierNo;
     @BindView(R.id.et_supplier_no)
     EditText etSupplierNo;
+
     @OnFocusChange(R.id.et_supplier_no)
     void supplierNoFocusChange() {
         ModuleUtils.viewChange(llSupplierNo, views);
         ModuleUtils.etChange(activity, etSupplierNo, editTexts);
         ModuleUtils.tvChange(activity, tvSupplierNo, textViews);
     }
+
     @BindView(R.id.ll_supplier_no)
     LinearLayout llSupplierNo;
-
     /**
      * 申请人
      */
@@ -105,12 +108,14 @@ public class PurchaseStoreListActivity extends BaseTitleActivity {
     TextView tvApplicant;
     @BindView(R.id.et_applicant)
     EditText etApplicant;
+
     @OnFocusChange(R.id.et_applicant)
     void applicationFocusChange() {
         ModuleUtils.viewChange(llApplicant, views);
         ModuleUtils.etChange(activity, etApplicant, editTexts);
         ModuleUtils.tvChange(activity, tvApplicant, textViews);
     }
+
     @BindView(R.id.ll_applicant)
     LinearLayout llApplicant;
 
@@ -121,12 +126,14 @@ public class PurchaseStoreListActivity extends BaseTitleActivity {
     TextView tvDepartment;
     @BindView(R.id.et_department)
     EditText etDepartment;
+
     @OnFocusChange(R.id.et_department)
     void departmentFocusChange() {
         ModuleUtils.viewChange(llDepartment, views);
         ModuleUtils.etChange(activity, etDepartment, editTexts);
         ModuleUtils.tvChange(activity, tvDepartment, textViews);
     }
+
     @BindView(R.id.ll_department)
     LinearLayout llDepartment;
 
@@ -146,26 +153,30 @@ public class PurchaseStoreListActivity extends BaseTitleActivity {
     TextView tvDate;
     @BindView(R.id.et_date)
     EditText etDate;
+
     @OnFocusChange(R.id.et_date)
     void dateFocusChange() {
         ModuleUtils.viewChange(llDate, views);
         ModuleUtils.etChange(activity, etDate, editTexts);
         ModuleUtils.tvChange(activity, tvDate, textViews);
     }
+
     @BindView(R.id.date)
     ImageView date;
+
     @OnClick(R.id.date)
-    void getDate(){
+    void getDate() {
         DatePickerUtils.getDoubleDate(activity, new DatePickerUtils.GetDoubleDateListener() {
             @Override
-            public void getTime(String mStartDate, String mEndDate,String mShowDate) {
-                startDate=mStartDate;
-                endDate=mEndDate;
+            public void getTime(String mStartDate, String mEndDate, String mShowDate) {
+                startDate = mStartDate;
+                endDate = mEndDate;
                 etDate.setText(mShowDate);
                 etDate.requestFocus();
             }
         });
     }
+
     @BindView(R.id.ll_date)
     LinearLayout llDate;
 
@@ -178,12 +189,13 @@ public class PurchaseStoreListActivity extends BaseTitleActivity {
 
     @BindView(R.id.btn_search_sure)
     Button btnSearchSure;
+
     @OnClick(R.id.btn_search_sure)
-    void searchSure(){
+    void searchSure() {
         searchData();
     }
 
-    private void clearDialogText(){
+    private void clearDialogText() {
         etReturnMaterial.setText("");
         etApplicant.setText("");
         etDepartment.setText("");
@@ -194,14 +206,14 @@ public class PurchaseStoreListActivity extends BaseTitleActivity {
     private void searchData() {
         showLoadingDialog();
         list.clear();
-        adapter = new StoreReturnMaterialListAdapter(activity,list);
+        adapter = new StoreReturnMaterialListAdapter(activity, list);
         ryList.setAdapter(adapter);
         FilterBean bean = new FilterBean();
         bean.setDoc_no(etReturnMaterial.getText().toString().trim());
         bean.setEmployee_no(etApplicant.getText().toString().trim());
         bean.setDepartment_no(etDepartment.getText().toString().trim());
         bean.setSupplier_no(etSupplierNo.getText().toString().trim());
-        bean.setPagesize((String) SharedPreferencesUtils.get(this, SharePreKey.PAGE_SETTING,AddressContants.PAGE_NUM));
+        bean.setPagesize((String) SharedPreferencesUtils.get(this, SharePreKey.PAGE_SETTING, AddressContants.PAGE_NUM));
         bean.setDate_begin(startDate);
         bean.setDate_end(endDate);
         bean.setWarehouse_no(LoginLogic.getWare());
@@ -233,27 +245,29 @@ public class PurchaseStoreListActivity extends BaseTitleActivity {
      */
     private void showData() {
         try {
-            isSearching=true;
+            isSearching = true;
             ryList.setVisibility(View.VISIBLE);
             llSearchInput.setVisibility(View.GONE);
         } catch (Exception e) {
             LogUtils.e(TAG, "showDates---Exception>" + e);
         }
     }
+
     /**
      * 筛选按钮
      */
     @BindView(R.id.iv_title_setting)
     ImageView search;
+
     @OnClick(R.id.iv_title_setting)
-    void search(){
+    void search() {
         if (isSearching) {
-            isSearching=false;
+            isSearching = false;
             ryList.setVisibility(View.VISIBLE);
             llSearchInput.setVisibility(View.GONE);
             return;
         } else {
-            isSearching=true;
+            isSearching = true;
             ryList.setVisibility(View.GONE);
             llSearchInput.setVisibility(View.VISIBLE);
         }
@@ -269,11 +283,10 @@ public class PurchaseStoreListActivity extends BaseTitleActivity {
     protected void initNavigationTitle() {
         super.initNavigationTitle();
         activity = this;
-        mName.setText(getString(R.string.store_returnmaterial)+getString(R.string.list));
-        ivScan.setVisibility(View.GONE);
+        mName.setText(getString(R.string.store_returnmaterial) + getString(R.string.list));
         search.setVisibility(View.VISIBLE);
         search.setImageResource(R.drawable.search);
-        isSearching=true;
+        isSearching = true;
     }
 
     @Override
@@ -290,26 +303,27 @@ public class PurchaseStoreListActivity extends BaseTitleActivity {
     @Override
     protected void doBusiness() {
         etDate.setKeyListener(null);
-        commonLogic = PurchaseStoreLogic.getInstance(activity,module,mTimestamp.toString());
+        commonLogic = PurchaseStoreLogic.getInstance(activity, module, mTimestamp.toString());
         list = new ArrayList<>();
         ryList.setLayoutManager(new LinearLayoutManager(activity));
     }
+
     /**
      * 更新界面
      */
     private void updateUI() {
-        adapter = new StoreReturnMaterialListAdapter(activity,list);
+        adapter = new StoreReturnMaterialListAdapter(activity, list);
         ryList.setAdapter(adapter);
         adapter.setOnItemClickListener(new OnItemClickListener() {
             @Override
             public void onItemClick(View itemView, int position) {
-                itemClick(list,position);
+                itemClick(list, position);
             }
         });
-        if (autoSkip&&list.size() == 1) {
+        if (autoSkip && list.size() == 1) {
             itemClick(list, 0);
         }
-        autoSkip=true;
+        autoSkip = true;
     }
 
     /**
@@ -317,16 +331,16 @@ public class PurchaseStoreListActivity extends BaseTitleActivity {
      */
     private void itemClick(List<FilterResultOrderBean> clickBeen, int position) {
         Bundle bundle = new Bundle();
-        bundle.putString(AddressContants.DOC_NO,clickBeen.get(position).getDoc_no());
-        bundle.putString(AddressContants.DATE,clickBeen.get(position).getCreate_date());
-        bundle.putString(AddressContants.SUPPLIER,clickBeen.get(position).getSupplier_name());
-        ActivityManagerUtils.startActivityBundleForResult(activity,PurchaseStoreActivity.class,bundle,TOCOMMIT);
+        bundle.putString(AddressContants.DOC_NO, clickBeen.get(position).getDoc_no());
+        bundle.putString(AddressContants.DATE, clickBeen.get(position).getCreate_date());
+        bundle.putString(AddressContants.SUPPLIER, clickBeen.get(position).getSupplier_name());
+        ActivityManagerUtils.startActivityBundleForResult(activity, PurchaseStoreActivity.class, bundle, TOCOMMIT);
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if(requestCode == TOCOMMIT){
+        if (requestCode == TOCOMMIT) {
             list.clear();
             searchData();
         }

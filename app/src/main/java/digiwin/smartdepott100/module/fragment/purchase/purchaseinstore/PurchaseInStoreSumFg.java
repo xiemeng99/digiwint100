@@ -47,17 +47,17 @@ public class PurchaseInStoreSumFg extends BaseFragment {
      * 单号
      */
     @BindView(R.id.tv_head_post_order)
-    TextView tv_head_post_order;
+    TextView tvHeadPostOrder;
     /**
      * 日期
      */
     @BindView(R.id.tv_head_plan_date)
-    TextView tv_head_plan_date;
+    TextView tvHeadPlanDate;
     /**
      * 部门
      */
     @BindView(R.id.tv_head_provider)
-    TextView tv_head_provider;
+    TextView tvHeadProvider;
 
     @OnClick(R.id.commit)
     void commit() {
@@ -100,9 +100,9 @@ public class PurchaseInStoreSumFg extends BaseFragment {
         upDateFlag = false;
         Bundle bundle = getActivity().getIntent().getExtras();
         orderData = (FilterResultOrderBean) bundle.getSerializable("orderData");
-        tv_head_plan_date.setText("");
-        tv_head_post_order.setText("");
-        tv_head_provider.setText("");
+        tvHeadPlanDate.setText("");
+        tvHeadPostOrder.setText("");
+        tvHeadProvider.setText("");
     }
 
     /**
@@ -120,9 +120,9 @@ public class PurchaseInStoreSumFg extends BaseFragment {
                     dismissLoadingDialog();
                     sumShowBeanList = list;
                     if (list.size() > 0) {
-                        tv_head_plan_date.setText(list.get(0).getCreate_date());
-                        tv_head_post_order.setText(list.get(0).getDoc_no());
-                        tv_head_provider.setText(list.get(0).getSupplier_name());
+                        tvHeadPlanDate.setText(list.get(0).getCreate_date());
+                        tvHeadPostOrder.setText(list.get(0).getDoc_no());
+                        tvHeadProvider.setText(list.get(0).getSupplier_name());
                         adapter = new PurchaseInStorageSumAdapter(pactivity, sumShowBeanList);
                         ryList.setAdapter(adapter);
                         upDateFlag = true;
@@ -175,7 +175,7 @@ public class PurchaseInStoreSumFg extends BaseFragment {
         final SumShowBean sumShowBean = new SumShowBean();
         sumShowBean.setItem_name(orderSumData.getItem_name());
         sumShowBean.setItem_no(orderSumData.getItem_no());
-        sumShowBean.setAvailable_in_qty(orderSumData.getReq_qty());
+        sumShowBean.setAvailable_in_qty(orderSumData.getApply_qty());
         commonLogic.getDetail(map, new PurchaseInStoreLogic.GetDetailListener() {
             @Override
             public void onSuccess(List<DetailShowBean> detailShowBeen) {
@@ -212,9 +212,9 @@ public class PurchaseInStoreSumFg extends BaseFragment {
                     @Override
                     public void onCallback() {
                         pactivity.mZXVp.setCurrentItem(0);
-                        tv_head_plan_date.setText("");
-                        tv_head_post_order.setText("");
-                        tv_head_provider.setText("");
+                        tvHeadPlanDate.setText("");
+                        tvHeadPostOrder.setText("");
+                        tvHeadProvider.setText("");
                         pactivity.scanFg.initData();
                         activity.finish();
                     }

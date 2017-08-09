@@ -96,7 +96,7 @@ public class PickUpShipmentScanFg extends BaseFragment {
      */
     @BindView(R.id.tv_barcode_string)
     TextView tvBarcode;
-    @BindView(et_barcode)
+    @BindView(R.id.et_barcode)
     EditText etScanBarocde;
     @BindView(R.id.ll_barcode)
     LinearLayout llScanBarcode;

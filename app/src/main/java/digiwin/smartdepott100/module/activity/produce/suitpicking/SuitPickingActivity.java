@@ -21,7 +21,7 @@ import digiwin.library.utils.LogUtils;
 
 /**
  * @author xiemeng
- * @des 生产成套领料
+ * @des 生产成套领料 更名领料过账
  * @date 2017/5/28 15:37
  */
 public class SuitPickingActivity extends BaseFirstModuldeActivity {

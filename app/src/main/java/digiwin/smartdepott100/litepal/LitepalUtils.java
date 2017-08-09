@@ -44,7 +44,7 @@ public class LitepalUtils {
 //        DataSupport.update(TEST.class, values, 2);//修改id为2的数据
 //        DataSupport.updateAll(TEST.class, values);//修改所有
         DataSupport.updateAll(Test.class, values, "destId = ?", "xxx");
-//      DataSupport.updateAll(News.class, values, "title = ? and commentcount > ?", "今日iPhone6发布", "0");
+//      DataSupport.updateAll(News.class, values, "title_bg = ? and commentcount > ?", "今日iPhone6发布", "0");
     }
 
     //-------------------删
@@ -53,7 +53,7 @@ public class LitepalUtils {
 
         }
         DataSupport.deleteAll(Test.class);
-        DataSupport.deleteAll(Test.class, "title = ? and commentcount = ?", "今日iPhone6发布", "0");
+        DataSupport.deleteAll(Test.class, "title_bg = ? and commentcount = ?", "今日iPhone6发布", "0");
         //或者
         Test test = new Test();
         test.delete();

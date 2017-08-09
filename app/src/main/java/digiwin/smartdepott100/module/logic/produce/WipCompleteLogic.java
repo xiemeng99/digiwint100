@@ -78,9 +78,6 @@ public class WipCompleteLogic extends CommonLogic {
             }
         }, null);
     }
-
-
-
     /**
      * 完工入库汇总展示
      */

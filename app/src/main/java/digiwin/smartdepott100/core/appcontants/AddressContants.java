@@ -5,7 +5,7 @@ import digiwin.smartdepott100.R;
 import digiwin.smartdepott100.core.base.BaseApplication;
 
 /**
- * Created by Administrator on 2017/1/10 0010.
+ * Created by Administrator on 2017/1/10
  */
 
 public class AddressContants {
@@ -27,6 +27,7 @@ public class AddressContants {
     /**
      *  默认测试区地址
      */
+//    public static String TEST_ADDRESS = "http://172.16.100.7/wtopprd/ws/r/awsp920";
     public static String TEST_ADDRESS = "http://172.16.100.7/wstopprd/ws/r/awsp920";
     /**
      * 测试区地址标记

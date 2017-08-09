@@ -72,6 +72,7 @@ public class MiscellaneousissuesInActivity extends BaseFirstModuldeActivity {
      * 清空扫描界面信息
      */
     public final int CLEAR = 1005;
+
     @Override
     protected Toolbar toolbar() {
         return toolbarTitle;
@@ -83,7 +84,7 @@ public class MiscellaneousissuesInActivity extends BaseFirstModuldeActivity {
         return module;
     }
 
-  /**
+    /**
      * 未完事项
      */
  /* @OnClick(R.id.un_com)
@@ -93,12 +94,11 @@ public class MiscellaneousissuesInActivity extends BaseFirstModuldeActivity {
         bundle.putString(NoComeUnComActivity.MODULECODE, module);
         ActivityManagerUtils.startActivityForBundleData(activity, NoComeUnComActivity.class, bundle);
     }*/
-
     @Override
     protected void initNavigationTitle() {
         super.initNavigationTitle();
         mName.setText(R.string.miscellaneous_issues_in);
-     //   iv_un_com.setVisibility(View.INVISIBLE);
+        //   iv_un_com.setVisibility(View.INVISIBLE);
     }
 
     @Override
@@ -115,7 +115,6 @@ public class MiscellaneousissuesInActivity extends BaseFirstModuldeActivity {
      * 初始化Fragment
      */
     private void initFragment() {
-
         scanFg = new MiscellaneousIssueInScanFg();
         sumFg = new MiscellaneousIssueInSumFg();
         fragments = new ArrayList<>();
@@ -150,10 +149,9 @@ public class MiscellaneousissuesInActivity extends BaseFirstModuldeActivity {
                 if (position == 1) {
                     sumFg.upDateList();
                     ivScan.setVisibility(View.INVISIBLE);
-                }
-                else{
+                } else {
                     ivScan.setVisibility(View.VISIBLE);
-                   // scanFg.initFocus();
+                    // scanFg.initFocus();
                 }
             }
 

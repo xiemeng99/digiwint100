@@ -1,4 +1,5 @@
 package digiwin.smartdepott100.module.activity.produce.workorderreturn;
+
 import android.content.Intent;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
@@ -19,8 +20,8 @@ import digiwin.smartdepott100.module.fragment.produce.workorderreturn.WorkOrderR
 import digiwin.smartdepott100.module.fragment.produce.workorderreturn.WorkOrderReturnSumFg;
 
 /**
- * @des      依工单退料
- * @author  唐孟宇
+ * @author 唐孟宇
+ * @des 依工单退料
  */
 
 public class WorkOrderReturnActivity extends BaseFirstModuldeActivity {
@@ -57,11 +58,12 @@ public class WorkOrderReturnActivity extends BaseFirstModuldeActivity {
 
     ModuleViewPagerAdapter adapter;
 
-    public static final String filterBean="filterBean";
+    public static final String filterBean = "filterBean";
     /**
      * 跳转明细使用
      */
     public final int DETAILCODE = 1234;
+
     @Override
     protected Toolbar toolbar() {
         return toolbarTitle;
@@ -126,7 +128,7 @@ public class WorkOrderReturnActivity extends BaseFirstModuldeActivity {
 
             @Override
             public void onPageSelected(int position) {
-                 if (position == 1) {
+                if (position == 1) {
                     sumFg.updatelist();
                 }
             }

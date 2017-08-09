@@ -174,9 +174,7 @@ public class QuickStorageListActivity extends BaseTitleActivity {
         FilterBean FilterBean = new FilterBean();
         try {
             showLoadingDialog();
-//            FilterBean.setWarehouse_in_no(LoginLogic.getWare());
             FilterBean.setPagesize((String) SharedPreferencesUtils.get(this, SharePreKey.PAGE_SETTING, "10"));
-
             if (!StringUtils.isBlank(et_provider_code.getText().toString().trim())) {
                 FilterBean.setSupplier_no(et_provider_code.getText().toString().trim());//供应商
             }

@@ -21,9 +21,9 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.OnClick;
+import digiwin.smartdepott100.main.logic.MainLogic;
 import digiwin.library.utils.StringUtils;
 import digiwin.smartdepott100.main.bean.VoiceWord;
-import digiwin.smartdepott100.main.logic.MainLogic;
 import digiwin.library.constant.SharePreKey;
 import digiwin.library.utils.ActivityManagerUtils;
 import digiwin.library.utils.SharedPreferencesUtils;
@@ -36,6 +36,7 @@ import digiwin.smartdepott100.core.base.BaseTitleActivity;
 import digiwin.smartdepott100.main.bean.ModuleBean;
 import digiwin.smartdepott100.main.bean.TotalMode;
 import digiwin.smartdepott100.main.fragment.DetailFragment;
+import digiwin.smartdepott100.main.logic.MainLogic;
 
 
 public class MainActivity extends BaseTitleActivity {
@@ -107,7 +108,6 @@ public class MainActivity extends BaseTitleActivity {
         });
 
     }
-
     /**
      * 用户权限
      */
@@ -168,12 +168,10 @@ public class MainActivity extends BaseTitleActivity {
 
     }
 
-
     @Override
     protected Toolbar toolbar() {
         return toolbar;
     }
-
 
     @Override
     protected void doBusiness() {
@@ -182,7 +180,6 @@ public class MainActivity extends BaseTitleActivity {
         initModule();
         submitUserWords();
     }
-
     /**
      * 上传用户此表，用于精准识别语音录入
      */
@@ -215,10 +212,10 @@ public class MainActivity extends BaseTitleActivity {
     //初始化各个模块
     private void initModule() {
         //正式发布版本时在解开
-//        access=getIntent().getExtras().getString("access");
-//        powerItems = StringUtils.split(access);
+        access=getIntent().getExtras().getString("access");
+        powerItems = StringUtils.split(access);
         //模拟测试
-        powerItems = new ArrayList<>();
+//        powerItems = new ArrayList<>();
 
         totalModes = new ArrayList<TotalMode>();
 

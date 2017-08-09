@@ -250,8 +250,6 @@ public class LoginActivity extends BaseActivity {
         getVersion();
 
     }
-
-
     /**
      * 对话框点击更新界面集团据点updateEntIdSite
      */
@@ -273,7 +271,6 @@ public class LoginActivity extends BaseActivity {
             }
         });
     }
-
     /**
      * 弹出Dialog
      */
@@ -313,17 +310,17 @@ public class LoginActivity extends BaseActivity {
         AddressContants.SITEFIRSTLOGIN = site;
         Map<String, String> map = new HashMap<>();
         map.put(AddressContants.HASHKEY, MD5Utils.md5Encode(etLoginLock.getText().toString()));
-        showLoadingDialog();
+        showRocketLoadingDialog();
         logic.login(map, tvEntid.getText().toString(), new LoginLogic.LoginListener() {
             @Override
             public void onSuccess(AccoutBean accoutBean) {
+                dismissLoadingDialog();
                 String vernum = accoutBean.getVernum();
                 if (!StringUtils.isBlank(vernum) && StringUtils.string2Float(vernum) > TelephonyUtils.getMAppVersion(context)) {
                     AppVersionBean versionBean = new AppVersionBean();
                     versionBean.setVernum(accoutBean.getVernum());
                     versionBean.setVerurl(accoutBean.getVerurl());
                     versionBean.setVerwhat(accoutBean.getVerwhat());
-                    dismissLoadingDialog();
                     matchVersion(versionBean);
                 } else {
                     //传入权限

@@ -40,6 +40,8 @@ public class SumShowBean implements Serializable{
 
     private String wo_no;
 
+    private String apply_qty="0";
+
     public String getItem_no() {
         return item_no;
     }
@@ -101,5 +103,13 @@ public class SumShowBean implements Serializable{
 
     public void setWo_no(String wo_no) {
         this.wo_no = wo_no;
+    }
+
+    public String getApply_qty() {
+        return apply_qty;
+    }
+
+    public void setApply_qty(String apply_qty) {
+        this.apply_qty = apply_qty;
     }
 }

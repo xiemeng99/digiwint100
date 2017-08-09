@@ -4,7 +4,7 @@
     android:id="@+id/toolbar_title"
     android:layout_width="match_parent"
     android:layout_height="@dimen/welcome_text_margin"
-    android:background="@color/toolBar_color"
+    android:background="@drawable/title_bg"
     android:gravity="center_vertical"
     app:contentInsetStart="@dimen/layout_0dp"
     app:popupTheme="@style/ClubToolbar">

@@ -74,6 +74,7 @@ public class MiscellaneousIssueInSumFg extends BaseFragment {
             public void onCallback1() {
                 sureCommit();
             }
+
             @Override
             public void onCallback2() {
 
@@ -116,7 +117,7 @@ public class MiscellaneousIssueInSumFg extends BaseFragment {
      */
     public void upDateList() {
         try {
-            Map<String,String> map = new HashMap<>();
+            Map<String, String> map = new HashMap<>();
             map.put(AddressContants.DOC_NO,orderData.getDoc_no());
             map.put(AddressContants.WAREHOUSE_NO,LoginLogic.getWare());
             showLoadingDialog();
@@ -196,14 +197,14 @@ public class MiscellaneousIssueInSumFg extends BaseFragment {
             @Override
             public void onFailed(String error) {
                 dismissLoadingDialog();
-                showCommitFailDialog(error);
+                showFailedDialog(error);
             }
         });
     }
 
-    private void sureCommit(){
+    private void sureCommit() {
         if (!upDateFlag) {
-                  showFailedDialog(R.string.nodate);
+            showFailedDialog(R.string.nodate);
             return;
         }
         showLoadingDialog();
@@ -216,7 +217,7 @@ public class MiscellaneousIssueInSumFg extends BaseFragment {
                     @Override
                     public void onCallback() {
                         sumShowBeanList = new ArrayList<ListSumBean>();
-                        adapter = new MiscellaneousInSumAdapter(mactivity,sumShowBeanList);
+                        adapter = new MiscellaneousInSumAdapter(mactivity, sumShowBeanList);
                         ryList.setAdapter(adapter);
                         mactivity.createNewModuleId(mactivity.module);
                         tv_head_plan_date.setText("");
@@ -240,8 +241,8 @@ public class MiscellaneousIssueInSumFg extends BaseFragment {
 
     }
 
-    public void  initData(){
-        commonLogic=MiscellaneousissuesInLogic.getInstance(mactivity,mactivity.module,mactivity.mTimestamp.toString());
+    public void initData() {
+        commonLogic = MiscellaneousissuesInLogic.getInstance(mactivity, mactivity.module, mactivity.mTimestamp.toString());
         upDateFlag = false;
     }
 

@@ -3,9 +3,7 @@ package digiwin.smartdepott100.core.base;
 import android.Manifest;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
-import android.content.pm.ConfigurationInfo;
 import android.content.pm.PackageManager;
-import android.content.res.Resources;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
@@ -48,21 +46,22 @@ public abstract class BaseTitleActivity extends BaseActivity {
      */
     @BindView(R.id.iv_scan)
     public ImageView ivScan;
+
     @OnClick(R.id.iv_scan)
-    public void cameraScan(){
+    public void cameraScan() {
         //检测照相机权限
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA)
                 != PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.CAMERA}, 0);
-        }else {
+        } else {
             MipcaActivityCapture.startCameraActivity(activity, new GetBarCodeListener() {
                 @Override
                 public void onSuccess(String msg) {
                     View focusView = ViewUtils.getFocusView(activity);
-                    if (focusView instanceof EditText){
-                        EditText et= (EditText) focusView;
+                    if (focusView instanceof EditText) {
+                        EditText et = (EditText) focusView;
                         KeyListener listener = et.getKeyListener();
-                        if (null!=listener){
+                        if (null != listener) {
                             et.setText(msg);
                             et.setSelection(msg.length());
                         }
@@ -76,6 +75,7 @@ public abstract class BaseTitleActivity extends BaseActivity {
 
     /**
      * 监听权限选择
+     *
      * @param requestCode
      * @param permissions
      * @param grantResults
@@ -90,10 +90,10 @@ public abstract class BaseTitleActivity extends BaseActivity {
                 @Override
                 public void onSuccess(String msg) {
                     View focusView = ViewUtils.getFocusView(activity);
-                    if (focusView instanceof EditText){
-                        EditText et= (EditText) focusView;
+                    if (focusView instanceof EditText) {
+                        EditText et = (EditText) focusView;
                         KeyListener listener = et.getKeyListener();
-                        if (null!=listener){
+                        if (null != listener) {
                             et.setText(msg);
                             et.setSelection(msg.length());
                         }
@@ -107,24 +107,24 @@ public abstract class BaseTitleActivity extends BaseActivity {
         return;
     }
 
-    public  boolean autoSkip;
+    public boolean autoSkip;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         // 竖屏
-        autoSkip=true;
+        autoSkip = true;
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
     }
 
     @OnClick(R.id.iv_back)
     public void goBack() {
-       onBackPressed();
+        onBackPressed();
     }
 
     @OnClick(R.id.tv_title_name)
     public void goBack2() {
-       onBackPressed();
+        onBackPressed();
     }
 
     @OnClick(R.id.iv_title_setting)
@@ -134,10 +134,10 @@ public abstract class BaseTitleActivity extends BaseActivity {
 
     @Override
     protected void initNavigationTitle() {
-        toolbar().setBackgroundResource(R.color.toolBar_color);
+        toolbar().setBackgroundResource(R.drawable.title_bg);
         setSupportActionBar(toolbar());
         getSupportActionBar().setDisplayShowTitleEnabled(false);
-            ivScan.setVisibility(View.VISIBLE);
+        ivScan.setVisibility(View.VISIBLE);
     }
 
     /**
@@ -148,7 +148,7 @@ public abstract class BaseTitleActivity extends BaseActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        autoSkip=false;
+        autoSkip = false;
 
     }
 

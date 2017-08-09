@@ -31,9 +31,9 @@ public class WorkOrderReturnSumAdapter extends BaseRecyclerAdapter<ListSumBean> 
     protected void bindData(RecyclerViewHolder holder, int position, ListSumBean item) {
         float numb1 = StringUtils.string2Float(item.getApply_qty());
         float numb2 = StringUtils.string2Float(item.getScan_sumqty());
-        holder.setText(R.id.tv_item_no, item.getItem_no());
-        holder.setText(R.id.tv_item_name,item.getItem_name());
-        holder.setText(R.id.tv_item_model,item.getItem_spec());
+        holder.setText(R.id.tv_item_no, item.getLow_order_item_no());
+        holder.setText(R.id.tv_item_name,item.getLow_order_item_name());
+        holder.setText(R.id.tv_item_model,item.getLow_order_item_spec());
         holder.setText(R.id.tv_unit_no,item.getUnit_no());
         holder.setText(R.id.tv_can_return_num, StringUtils.deleteZero(String.valueOf(numb1)));
         holder.setText(R.id.tv_actual_return_num, StringUtils.deleteZero(String.valueOf(numb2)));

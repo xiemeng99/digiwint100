@@ -20,6 +20,10 @@ public class ListSumBean implements Serializable {
      */
     private String create_date;
     /**
+     * 日期
+     */
+    private String date_begin;
+    /**
      * 工单号
      */
     private String wo_no;
@@ -291,6 +295,14 @@ public class ListSumBean implements Serializable {
 
     public String getRemark() {
         return remark;
+    }
+
+    public String getDate_begin() {
+        return date_begin;
+    }
+
+    public void setDate_begin(String date_begin) {
+        this.date_begin = date_begin;
     }
 
     public void setRemark(String remark) {

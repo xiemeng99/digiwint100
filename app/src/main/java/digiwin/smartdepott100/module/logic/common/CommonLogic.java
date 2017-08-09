@@ -76,12 +76,18 @@ public class CommonLogic {
 
     /**
      * 该数组中模组无需判断库位是否存在于设置中的仓库
+     * 无来源调拨和调拨过账单独设置
      */
-    private String[] inStores = {ModuleCode.PUTINSTORE,
-            ModuleCode.SALERETURN, ModuleCode.MISCELLANEOUSISSUESIN,
-            ModuleCode.MISCELLANEOUSNOCOMEIN, ModuleCode.PURCHASEINSTORE,ModuleCode.STORECHECK,
-
+    //    private String[] inStores = {ModuleCode.PUTINSTORE,
+//            ModuleCode.SALERETURN, ModuleCode.MISCELLANEOUSISSUESIN,
+//            ModuleCode.MISCELLANEOUSNOCOMEIN, ModuleCode.PURCHASEINSTORE, ModuleCode.STORECHECK,
+//            ModuleCode.NOCOMESTOREALLOT,ModuleCode.POSTALLOCATE,ModuleCode.WORKORDERRETURN
+//    };
+    private String[] inStores = {
+            ModuleCode.STORECHECK,
+            ModuleCode.NOCOMESTOREALLOT,ModuleCode.POSTALLOCATE
     };
+
 
     /**
      * 扫描物料条码
@@ -243,6 +249,10 @@ public class CommonLogic {
                                             store = true;
                                             break;
                                         }
+                                    }
+                                    String statu = map.get("statu");
+                                    if (null!=statu&&statu.equals("in")){
+                                        store = true;
                                     }
                                     if (!store && !locatorBackBean.getWarehouse_no().equals(LoginLogic.getWare())) {
                                         error = mContext.getString(R.string.ware_error);

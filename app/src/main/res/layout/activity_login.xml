@@ -253,12 +253,12 @@
             android:layout_marginLeft="@dimen/layout_25dp"
             android:layout_marginRight="@dimen/layout_25dp"
             android:layout_marginTop="@dimen/layout_20dp"
-            android:background="@drawable/accordingmaterialtop_sharp"
+            android:background="@mipmap/button"
             android:gravity="center"
-            android:padding="@dimen/layout_10dp"
+            android:padding="@dimen/layout_5dp"
             android:text="@string/login_rightNow"
             android:textColor="@color/white_ff"
-            android:textSize="@dimen/textSize_18sp" />
+            android:textSize="@dimen/textSize_16sp" />
 
         <TextView
             android:id="@+id/tv_setup_systemSettings"

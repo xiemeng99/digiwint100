@@ -151,18 +151,9 @@ public class WorkSupplementSumFg extends BaseFragment {
         map.put(AddressContants.ITEM_NO, orderSumData.getItem_no());
 
         final SumShowBean sumShowBean = new SumShowBean();
-        float numb1 = StringUtils.string2Float(orderSumData.getReturn_qty());
-        float numb2 = StringUtils.string2Float(orderSumData.getIssue_qty());
-        if(numb1 > numb2){
-            sumShowBean.setAvailable_in_qty(orderSumData.getQty());
-        }else if(numb1 < numb2){
-            sumShowBean.setAvailable_in_qty(orderSumData.getReturn_qty());
-        }else if(numb1 == numb2){
-            sumShowBean.setAvailable_in_qty(orderSumData.getReturn_qty());
-        }
         sumShowBean.setItem_no(orderSumData.getItem_no());
         sumShowBean.setItem_name(orderSumData.getItem_name());
-
+        sumShowBean.setAvailable_in_qty(orderSumData.getReturn_qty());
         commonLogic.getDetail(map, new CommonLogic.GetDetailListener() {
             @Override
             public void onSuccess(List<DetailShowBean> detailShowBeen) {

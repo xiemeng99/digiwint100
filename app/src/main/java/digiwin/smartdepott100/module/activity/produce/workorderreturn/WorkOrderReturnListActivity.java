@@ -171,13 +171,13 @@ public class WorkOrderReturnListActivity extends BaseTitleActivity {
     }
     @BindView(R.id.un_com)
     ImageView unCom;
-    @OnClick(R.id.un_com)
-    void toUnCom() {
-        Bundle bundle = new Bundle();
-        bundle.putString(AddressContants.MODULEID_INTENT, mTimestamp.toString());
-        bundle.putString(HaveSourceUnComActivity.MODULECODE, module);
-        ActivityManagerUtils.startActivityForBundleData(activity, HaveSourceUnComActivity.class, bundle);
-    }
+//    @OnClick(R.id.un_com)
+//    void toUnCom() {
+//        Bundle bundle = new Bundle();
+//        bundle.putString(AddressContants.MODULEID_INTENT, mTimestamp.toString());
+//        bundle.putString(HaveSourceUnComActivity.MODULECODE, module);
+//        ActivityManagerUtils.startActivityForBundleData(activity, HaveSourceUnComActivity.class, bundle);
+//    }
 
 
     /**

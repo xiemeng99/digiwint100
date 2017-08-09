@@ -184,22 +184,9 @@ public class SaleOutletSumFg extends BaseFragment {
         showLoadingDialog();
         map.put(AddressContants.ITEM_NO, orderSumData.getItem_no());
         final SumShowBean sumShowBean = new SumShowBean();
-
-        float numb1 = StringUtils.string2Float(orderSumData.getReq_qty());
-        float numb2 = StringUtils.string2Float(orderSumData.getStock_qty());
-        if(numb1 > numb2){
-            sumShowBean.setAvailable_in_qty(orderSumData.getStock_qty());
-        }
-        if(numb1 < numb2){
-            sumShowBean.setAvailable_in_qty(orderSumData.getReq_qty());
-        }
-        if(numb1 == numb2){
-            sumShowBean.setAvailable_in_qty(orderSumData.getStock_qty());
-        }
-
         sumShowBean.setItem_no(orderSumData.getItem_no());
         sumShowBean.setItem_name(orderSumData.getItem_name());
-        sumShowBean.setAvailable_in_qty(StringUtils.getMinQty(orderSumData.getStock_qty(),orderSumData.getReq_qty()));
+        sumShowBean.setAvailable_in_qty(orderSumData.getApply_qty());
         logic.getDetail(map, new CommonLogic.GetDetailListener() {
             @Override
             public void onSuccess(List<DetailShowBean> detailShowBeen) {

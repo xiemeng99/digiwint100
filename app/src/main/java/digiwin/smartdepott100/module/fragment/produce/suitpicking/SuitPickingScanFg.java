@@ -49,7 +49,7 @@ import digiwin.smartdepott100.module.logic.produce.SuitPickingLogic;
 
 /**
  * @author xiemeng
- * @des 生产成套领料扫描页面
+ * @des 更名领料过账
  * @date 2017/5/28 16:25
  */
 

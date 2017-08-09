@@ -102,14 +102,14 @@ public class MainLogic {
 //        ModuleBean purchaseReceiving = new ModuleBean(R.string.purchase_receiving, R.mipmap.material_receipt, ModuleCode.PQCCHECK, "android.intent.actiont100.smartdepot.PurchaseReceivingActivity");
 //        ModuleBean quickstorage = new ModuleBean(R.string.title_quickstorage, R.mipmap.quickly_storage, ModuleCode.QUICKSTORAGE, "android.intent.actiont100.smartdepot.QuickStorageListActivity");
         ModuleBean materialreceipt = new ModuleBean(R.string.title_material_receipt, R.mipmap.material_receipt, ModuleCode.MATERIALRECEIPTCODE, "android.intent.actiont100.smartdepot.MaterialReceiptActivity");
-        ModuleBean quickstorage = new ModuleBean(R.string.title_quickstorage, R.mipmap.quickly_storage, ModuleCode.QUICKSTORAGE, "android.intent.actiont100.smartdepot.QuickStorageListActivity");
-        ModuleBean purchaseGoodsScan = new ModuleBean(R.string.title_purchase_goods_scan, R.mipmap.migo, ModuleCode.PURCHASEGOODSSCAN, "android.intent.actiont100.smartdepot.PurchaseGoodsScanListActivity");
+        ModuleBean quickstorage = new ModuleBean(R.string.title_quickstorage, R.mipmap.migo, ModuleCode.QUICKSTORAGE, "android.intent.actiont100.smartdepot.QuickStorageListActivity");
+        ModuleBean purchaseGoodsScan = new ModuleBean(R.string.title_purchase_goods_scan, R.mipmap.purchase_receipt, ModuleCode.PURCHASEGOODSSCAN, "android.intent.actiont100.smartdepot.PurchaseGoodsScanListActivity");
         ModuleBean purchasesupplier = new ModuleBean(R.string.purchase_scan_supplier, R.mipmap.scan_inapection, ModuleCode.PURCHASESUPPLIERSCAN, "android.intent.actiont100.smartdepot.PurhcaseSupplierListActivity");
         ModuleBean purchaseInStore = new ModuleBean(R.string.purchase_in_store, R.mipmap.saomaruku, ModuleCode.PURCHASEINSTORE, "android.intent.actiont100.smartdepot.PurchaseInStoreListActivity");
         ModuleBean iqcCheck = new ModuleBean(R.string.iqc_check, R.mipmap.inspection_tests, ModuleCode.PURCHASECHECK, "android.intent.actiont100.smartdepot.IQCListActivity");
         ModuleBean purchasestore = new ModuleBean(R.string.purchase_store, R.mipmap.warehouse_return, ModuleCode.STORERETURNMATERIAL, "android.intent.actiont100.smartdepot.PurchaseStoreListActivity");
         purchaseItems.add(materialreceipt);
-//        purchaseItems.add(quickstorage);
+        purchaseItems.add(quickstorage);
         purchaseItems.add(purchaseGoodsScan);
         purchaseItems.add(purchasesupplier);
         purchaseItems.add(purchaseInStore);
@@ -141,19 +141,18 @@ public class MainLogic {
         ModuleBean pqcCheck = new ModuleBean(R.string.pqc_check, R.mipmap.pqc, ModuleCode.PQCCHECKOUT, "android.intent.actiont100.smartdepot.PQCCheckOutListActivity");
 
         produceItems.add(workorder);
-//        produceItems.add(accordingMaterialActivity);
+        produceItems.add(accordingMaterialActivity);
         produceItems.add(productionleaderlist);
         produceItems.add(suitpicking);
-//        produceItems.add(suitpickinghalf);
-//        produceItems.add(worksupplementlist);
-//        produceItems.add(materialReturning);
+        produceItems.add(worksupplementlist);
+        produceItems.add(materialReturning);
         produceItems.add(workorderreturnlistactivity);
-//        produceItems.add(driectStorage);
+        produceItems.add(driectStorage);
         produceItems.add(wipstorage);
         produceItems.add(zputInStoreft);
-//        produceItems.add(finishedStorageActivity);
-//        produceItems.add(endproductAllot);
-//        produceItems.add(pqcCheck);
+        produceItems.add(finishedStorageActivity);
+        produceItems.add(endproductAllot);
+        produceItems.add(pqcCheck);
 
 //        ModuleBean printLabelActivity = new ModuleBean(R.string.print_label_flow, R.mipmap.bar_code, ModuleCode.PRINTLABEL, "android.intent.actiont100.smartdepot.PrintLabelFlowActivity");
 //        ModuleBean printLabelFinishActivity = new ModuleBean(R.string.print_label_finish, R.mipmap.finished_product_print, ModuleCode.PRINTFINISHLABEL, "android.intent.actiont100.smartdepot.PrintLabelFinishActivity");
@@ -177,8 +176,8 @@ public class MainLogic {
         storageItems.add(miscellaneousNocomeoutactivity);
         storageItems.add(miscellaneousNocomeinctivity);
         storageItems.add(storeQueryActivity);
-//        storageItems.add(movestoreactivity);
-//        storageItems.add(stockcheck);
+        storageItems.add(movestoreactivity);
+        storageItems.add(stockcheck);
         storageItems.add(postallocateactivity);
         storageItems.add(printLabelFillActivity);
 

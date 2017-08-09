@@ -222,6 +222,7 @@ public class MoveStoreSumFg extends BaseFragment {
         showLoadingDialog();
         final SumShowBean showBean = new SumShowBean();
         showBean.setItem_no(listSumBean.getItem_no());
+        showBean.setApply_qty("0");
         map.put(AddressContants.ITEM_NO, showBean.getItem_no());
         moveStoreLogic.getDetail(map, new CommonLogic.GetDetailListener() {
             @Override

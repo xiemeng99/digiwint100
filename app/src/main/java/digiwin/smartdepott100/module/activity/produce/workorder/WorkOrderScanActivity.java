@@ -491,7 +491,6 @@ public class WorkOrderScanActivity extends BaseTitleActivity {
     public void getFifo() {
         HashMap<String, String> map = new HashMap<String, String>();
         map.put(AddressContants.QTY, localData.getApply_qty());
-        LogUtils.d("QTY", String.valueOf(StringUtils.sub(localData.getApply_qty(), localData.getScan_sumqty())));
         map.put(AddressContants.ITEM_NO, localData.getLow_order_item_no());
         map.put(AddressContants.WAREHOUSE_NO, LoginLogic.getWare());
         map.put("lot_no", "");

@@ -36,7 +36,7 @@ import digiwin.pulltorefreshlibrary.recyclerviewAdapter.OnItemClickListener;
 
 /**
  * @author xiemeng
- * @des 生产成套领料 列表
+ * @des 生产成套领料 列表 ---更名领料过账
  * @date 2017/5/28 15:34
  */
 

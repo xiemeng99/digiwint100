@@ -90,31 +90,31 @@ public class AccordingMaterialScanActivity extends BaseTitleActivity {
      * 品名
      */
     @BindView(R.id.tv_item_name)
-    TextView mTv_item_name;
+    TextView mTvItemName;
 
     /**
      * 规格
      */
     @BindView(R.id.et_format)
-    TextView et_format;
+    TextView etFormat;
 
     /**
      * 库存量
      */
     @BindView(R.id.tv_material_return_big)
-    TextView tv_stock_balance;
+    TextView tvStockBalance;
 
     /**
      * 欠料量
      */
     @BindView(R.id.tv_material_return)
-    TextView tv_under_feed;
+    TextView tvUnderFeed;
 
     /**
      * 已扫
      */
     @BindView(R.id.tv_feeding_amount)
-    TextView tv_actual_yield;
+    TextView tvActualYield;
 
     @BindView(R.id.ry_list)
     RecyclerView mRc_list;
@@ -212,7 +212,7 @@ public class AccordingMaterialScanActivity extends BaseTitleActivity {
         }
         saveBean.setQty(etInputNum.getText().toString());
         //判断库存 欠料数量  哪个小取哪一个
-        saveBean.setAvailable_in_qty(StringUtils.getMinQty(tv_under_feed.getText().toString(), tv_stock_balance.getText().toString()));
+        saveBean.setAvailable_in_qty(StringUtils.getMinQty(tvUnderFeed.getText().toString(), tvStockBalance.getText().toString()));
         String fifoCheck = FiFoCheckUtils.fifoCheck(saveBean, localFifoList);
         if (!StringUtils.isBlank(fifoCheck)) {
             showFailedDialog(fifoCheck);
@@ -223,7 +223,7 @@ public class AccordingMaterialScanActivity extends BaseTitleActivity {
             @Override
             public void onSuccess(SaveBackBean saveBackBean) {
                 dismissLoadingDialog();
-                tv_actual_yield.setText(StringUtils.deleteZero(String.valueOf(saveBackBean.getScan_sumqty())));
+                tvActualYield.setText(StringUtils.deleteZero(String.valueOf(saveBackBean.getScan_sumqty())));
                 clearData(type);
                 getFifo();
             }
@@ -430,19 +430,16 @@ public class AccordingMaterialScanActivity extends BaseTitleActivity {
         initData();
         localData = new ListSumBean();
         ListSumBean data = (ListSumBean) getIntent().getSerializableExtra("sumdata");
-        mTv_item_name.setText(data.getLow_order_item_name());
-        et_format.setText(data.getLow_order_item_spec());
-        tv_under_feed.setText(StringUtils.deleteZero(data.getShortage_qty()));
-        tv_stock_balance.setText(StringUtils.deleteZero(data.getStock_qty()));
-        tv_actual_yield.setText(StringUtils.deleteZero(data.getScan_sumqty()));
+        mTvItemName.setText(data.getLow_order_item_name());
+        etFormat.setText(data.getLow_order_item_spec());
+        tvUnderFeed.setText(StringUtils.deleteZero(data.getApply_qty()));
+        tvStockBalance.setText(StringUtils.deleteZero(data.getStock_qty()));
+        tvActualYield.setText(StringUtils.deleteZero(data.getScan_sumqty()));
         localData = data;
-
         type = data.getItem_barcode_type();
-
         if (codetype.equals(type)) {
             etScanBarocde.setText(data.getLow_order_item_no());
         }
-
         commonLogic = AccordingMaterialLogic.getInstance(context, module, mTimestamp.toString());
         FullyLinearLayoutManager fullyLinearLayoutManager = new FullyLinearLayoutManager(activity);
         mRc_list.setLayoutManager(fullyLinearLayoutManager);
@@ -453,7 +450,7 @@ public class AccordingMaterialScanActivity extends BaseTitleActivity {
         HashMap<String, String> map = new HashMap<String, String>();
         map.put(AddressContants.ITEM_NO, localData.getLow_order_item_no());
         map.put(AddressContants.WAREHOUSE_NO, LoginLogic.getWare());
-        map.put(AddressContants.QTY, tv_under_feed.getText().toString());
+        map.put(AddressContants.QTY, tvUnderFeed.getText().toString());
         mHandler.removeMessages(FIFOWHAT);
         mHandler.sendMessageDelayed(mHandler.obtainMessage(FIFOWHAT, map), AddressContants.DELAYTIME);
     }

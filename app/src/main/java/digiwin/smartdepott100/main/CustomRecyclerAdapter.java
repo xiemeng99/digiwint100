@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import java.util.List;
 
@@ -77,7 +78,7 @@ public class CustomRecyclerAdapter extends RecyclerView.Adapter<CustomRecyclerAd
      */
     class OCViewHolder extends RecyclerView.ViewHolder{
         @BindView(R.id.tv_gridview_item)
-        public CenterTextView tvTitle;
+        public TextView tvTitle;
         @BindView(R.id.iv_gridview_item)
         public ImageView ivImage;
 

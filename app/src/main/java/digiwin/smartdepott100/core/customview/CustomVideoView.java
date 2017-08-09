@@ -13,7 +13,7 @@ import android.view.KeyEvent;
 import android.widget.VideoView;
 
 /**
- * Created by DaQiE on 2017/2/20 0020.
+ * Created by DaQiE on 2017/2/20 0020
  */
 
 public class CustomVideoView extends VideoView {

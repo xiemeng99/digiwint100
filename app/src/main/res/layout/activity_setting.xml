@@ -12,7 +12,7 @@
     <View
         android:layout_width="match_parent"
         android:layout_height="@dimen/layout_0.5dp"
-        android:background="@color/gray_f0"></View>
+        android:background="@color/gray_da"></View>
 
     <ScrollView
         android:layout_width="match_parent"
@@ -51,7 +51,7 @@
                     android:id="@+id/tv_username"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/red50"
+                    android:textColor="@color/naming"
                     android:textSize="@dimen/textSize_14sp" />
 
             </LinearLayout>
@@ -59,7 +59,7 @@
             <View
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/layout_0.5dp"
-                android:background="@color/gray_f0"></View>
+                android:background="@color/gray_da"/>
 
             <LinearLayout
                 android:id="@+id/ll_ent_setting"
@@ -71,7 +71,7 @@
                 <ImageView
                     android:layout_width="@dimen/layout_20dp"
                     android:layout_height="@dimen/layout_20dp"
-                    android:src="@drawable/login_entid_on" />
+                    android:src="@mipmap/entid" />
 
                 <TextView
                     android:layout_width="0dp"
@@ -87,7 +87,7 @@
                     android:id="@+id/tv_ent_setting"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/red50"
+                    android:textColor="@color/naming"
                     android:textSize="@dimen/textSize_14sp" />
 
             </LinearLayout>
@@ -95,7 +95,7 @@
             <View
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/layout_0.5dp"
-                android:background="@color/gray_f0"/>
+                android:background="@color/gray_da"/>
 
             <LinearLayout
                 android:id="@+id/ll_site"
@@ -107,7 +107,7 @@
                 <ImageView
                     android:layout_width="@dimen/layout_20dp"
                     android:layout_height="@dimen/layout_20dp"
-                    android:src="@drawable/login_site_on" />
+                    android:src="@mipmap/site" />
 
                 <TextView
                     android:layout_width="0dp"
@@ -123,7 +123,7 @@
                     android:id="@+id/tv_site"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/red50"
+                    android:textColor="@color/naming"
                     android:textSize="@dimen/textSize_14sp" />
 
             </LinearLayout>
@@ -131,7 +131,7 @@
             <View
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/layout_0.5dp"
-                android:background="@color/gray_f0"/>
+                android:background="@color/gray_da"/>
 
             <LinearLayout
                 android:id="@+id/ll_storageSetting"
@@ -159,14 +159,14 @@
                     android:id="@+id/tv_storageSetting"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/red50"
+                    android:textColor="@color/naming"
                     android:textSize="@dimen/textSize_14sp" />
 
             </LinearLayout>
             <View
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/layout_0.5dp"
-                android:background="@color/gray_f0"/>
+                android:background="@color/gray_da"/>
 
             <LinearLayout
                 style="@style/SettingLinearLayout"
@@ -192,11 +192,12 @@
 
                 <ToggleButton
                     android:id="@+id/tb_tray"
-                    android:layout_width="@dimen/layout_50dp"
+                    android:layout_width="@dimen/layout_35dp"
                     android:layout_height="@dimen/layout_20dp"
                     android:background="@android:color/transparent"
                     android:button="@drawable/togglebutton_bg"
                     android:checked="false"
+                    android:layout_gravity="right|center_vertical"
                     android:text=""
                     android:textOff=""
                     android:textOn="" />
@@ -205,7 +206,7 @@
             <View
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/layout_0.5dp"
-                android:background="@color/gray_f0"/>
+                android:background="@color/gray_da"/>
 
             <LinearLayout
                 android:id="@+id/ll_pageSetting"
@@ -233,14 +234,14 @@
                     android:id="@+id/tv_pageSetting"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/red50"
+                    android:textColor="@color/naming"
                     android:textSize="@dimen/textSize_14sp" />
 
             </LinearLayout>
             <View
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/layout_0.5dp"
-                android:background="@color/gray_f0"/>
+                android:background="@color/gray_da"/>
 
             <LinearLayout
                 style="@style/SettingLinearLayout"
@@ -262,13 +263,15 @@
                     android:text="@string/speech_input"
                     android:textColor="@color/black_32"
                     android:textSize="@dimen/textSize_14sp" />
+
                 <ToggleButton
                     android:id="@+id/tb_speechinput"
-                    android:layout_width="@dimen/layout_50dp"
+                    android:layout_width="@dimen/layout_35dp"
                     android:layout_height="@dimen/layout_20dp"
                     android:background="@android:color/transparent"
                     android:button="@drawable/togglebutton_bg"
                     android:checked="true"
+                    android:layout_gravity="right|center_vertical"
                     android:text=""
                     android:textOff=""
                     android:textOn="" />
@@ -279,7 +282,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/layout_0.5dp"
                 android:visibility="gone"
-                android:background="@color/gray_f0"/>
+                android:background="@color/gray_da"/>
 
             <LinearLayout
                 android:visibility="gone"
@@ -308,7 +311,7 @@
                     android:id="@+id/tv_repeat_time"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/red50"
+                    android:textColor="@color/naming"
                     android:textSize="@dimen/textSize_14sp" />
 
             </LinearLayout>
@@ -316,7 +319,7 @@
             <View
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/layout_0.5dp"
-                android:background="@color/gray_f0"/>
+                android:background="@color/gray_da"/>
 
             <LinearLayout
                 android:id="@+id/ll_voicerSetting"
@@ -344,7 +347,7 @@
                     android:id="@+id/tv_voicerSetting"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/red50"
+                    android:textColor="@color/naming"
                     android:textSize="@dimen/textSize_14sp" />
 
             </LinearLayout>
@@ -352,7 +355,7 @@
             <View
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/layout_0.5dp"
-                android:background="@color/gray_f0"/>
+                android:background="@color/gray_da"/>
 
             <LinearLayout
                 android:id="@+id/ll_vibrateSetting"
@@ -380,12 +383,12 @@
                     android:id="@+id/tv_vibrateSetting"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/red50"
+                    android:textColor="@color/naming"
                     android:textSize="@dimen/textSize_14sp" />
 
                 <ToggleButton
                     android:id="@+id/tb_vibrateSetting"
-                    android:layout_width="@dimen/layout_50dp"
+                    android:layout_width="@dimen/layout_35dp"
                     android:layout_height="@dimen/layout_20dp"
                     android:background="@android:color/transparent"
                     android:button="@drawable/togglebutton_bg"
@@ -398,7 +401,7 @@
             <View
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/layout_0.5dp"
-                android:background="@color/gray_f0"/>
+                android:background="@color/gray_da"/>
 
             <LinearLayout
                 android:id="@+id/ll_blueToothSetting"
@@ -427,12 +430,12 @@
                     android:id="@+id/tv_blueToothSetting"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/red50"
+                    android:textColor="@color/naming"
                     android:textSize="@dimen/textSize_14sp" />
 
                 <ToggleButton
                     android:id="@+id/tb_blueToothSetting"
-                    android:layout_width="@dimen/layout_50dp"
+                    android:layout_width="@dimen/layout_35dp"
                     android:layout_height="@dimen/layout_20dp"
                     android:background="@android:color/transparent"
                     android:button="@drawable/togglebutton_bg"
@@ -444,7 +447,7 @@
             <View
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/layout_0.5dp"
-                android:background="@color/gray_f0"/>
+                android:background="@color/gray_da"/>
 
             <LinearLayout
                 android:id="@+id/ll_device_unbind"
@@ -472,7 +475,7 @@
                     android:id="@+id/tv_deviceinfo"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/red50"
+                    android:textColor="@color/naming"
                     android:textSize="@dimen/textSize_14sp" />
 
             </LinearLayout>
@@ -480,7 +483,7 @@
             <View
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/layout_0.5dp"
-                android:background="@color/gray_f0" />
+                android:background="@color/gray_da" />
 
             <LinearLayout
                 android:id="@+id/ll_printer_input_ip"
@@ -508,7 +511,7 @@
                     android:id="@+id/tv_printer_ip"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/red50"
+                    android:textColor="@color/naming"
                     android:textSize="@dimen/textSize_14sp" />
 
             </LinearLayout>
@@ -516,7 +519,7 @@
             <View
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/layout_0.5dp"
-                android:background="@color/gray_f0" />
+                android:background="@color/gray_da" />
 
             <RelativeLayout
                 android:id="@+id/rl_versionsSetting"
@@ -573,7 +576,7 @@
             <View
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/layout_0.5dp"
-                android:background="@color/gray_f0"/>
+                android:background="@color/gray_da"/>
 
         </LinearLayout>
     </ScrollView>

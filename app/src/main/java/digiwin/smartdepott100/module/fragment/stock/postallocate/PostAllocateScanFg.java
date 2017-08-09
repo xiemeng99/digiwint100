@@ -345,6 +345,7 @@ public class PostAllocateScanFg extends BaseFragment {
                 case LOCATORWHATIN:
                     HashMap<String, String> locatorMap = new HashMap<>();
                     locatorMap.put(AddressContants.STORAGE_SPACES_BARCODE, String.valueOf(msg.obj));
+                    locatorMap.put("statu","in");
                     etScanLocatorIn.setKeyListener(null);
                     commonLogic.scanLocator(locatorMap, new CommonLogic.ScanLocatorListener() {
                         @Override
@@ -377,6 +378,7 @@ public class PostAllocateScanFg extends BaseFragment {
                 case LOCATORWHATOUT:
                     HashMap<String, String> locatorMap1 = new HashMap<>();
                     locatorMap1.put(AddressContants.STORAGE_SPACES_BARCODE, String.valueOf(msg.obj));
+                    locatorMap1.put("statu","out");
                     etScanLocatorOut.setKeyListener(null);
                     commonLogic.scanLocator(locatorMap1, new CommonLogic.ScanLocatorListener() {
                         @Override

@@ -39,13 +39,15 @@ import digiwin.smartdepott100.module.bean.common.ScanBarcodeBackBean;
 import digiwin.smartdepott100.module.bean.common.ScanLocatorBackBean;
 import digiwin.smartdepott100.module.logic.common.CommonLogic;
 
+import static digiwin.smartdepott100.R.id.cb_locatorlock;
+import static digiwin.smartdepott100.R.id.et_scan_barocde;
+
 
 /**
  * @author 唐孟宇
  * @des 杂项收料 扫码页面
  */
 public class MiscellaneousIssueInScanFg extends BaseFragment {
-
 
     /**
      * 条码
@@ -56,7 +58,7 @@ public class MiscellaneousIssueInScanFg extends BaseFragment {
     /**
      * 条码
      */
-    @BindView(R.id.et_scan_barocde)
+    @BindView(et_scan_barocde)
     EditText etScanBarocde;
 
     /**
@@ -72,7 +74,7 @@ public class MiscellaneousIssueInScanFg extends BaseFragment {
     /**
      * 锁定库位
      */
-    @BindView(R.id.cb_locatorlock)
+    @BindView(cb_locatorlock)
     CheckBox cbLocatorlock;
     /**
      * 数量
@@ -83,7 +85,7 @@ public class MiscellaneousIssueInScanFg extends BaseFragment {
     /**
      * 保存按钮
      */
-    @BindView( R.id.save)
+    @BindView(R.id.save)
     Button save;
 
     @BindView(R.id.ll_scan_barcode)
@@ -111,7 +113,7 @@ public class MiscellaneousIssueInScanFg extends BaseFragment {
     }
 
 
-    @BindViews({R.id.et_tray,R.id.et_scan_barocde, R.id.et_scan_locator, R.id.et_input_num})
+    @BindViews({R.id.et_tray, et_scan_barocde, R.id.et_scan_locator, R.id.et_input_num})
     List<EditText> editTexts;
     @BindViews({R.id.ll_tray,R.id.ll_scan_barcode, R.id.ll_scan_locator, R.id.ll_input_num})
     List<View> views;
@@ -162,7 +164,7 @@ public class MiscellaneousIssueInScanFg extends BaseFragment {
 
     CommonLogic commonLogic;
 
-    @OnCheckedChanged(R.id.cb_locatorlock)
+    @OnCheckedChanged(cb_locatorlock)
     void isLock(boolean checked) {
         if (checked) {
             etScanLocator.setKeyListener(null);
@@ -171,7 +173,7 @@ public class MiscellaneousIssueInScanFg extends BaseFragment {
         }
     }
 
-    @OnFocusChange(R.id.et_scan_barocde)
+    @OnFocusChange(et_scan_barocde)
     void barcodeFocusChange() {
         ModuleUtils.viewChange(llScanBarcode, views);
         ModuleUtils.etChange(activity, etScanBarocde, editTexts);
@@ -192,7 +194,7 @@ public class MiscellaneousIssueInScanFg extends BaseFragment {
         ModuleUtils.tvChange(activity, tvNumber, textViews);
     }
 
-    @OnTextChanged(value = R.id.et_scan_barocde, callback = OnTextChanged.Callback.AFTER_TEXT_CHANGED)
+    @OnTextChanged(value = et_scan_barocde, callback = OnTextChanged.Callback.AFTER_TEXT_CHANGED)
     void barcodeChange(CharSequence s) {
         if (!StringUtils.isBlank(s.toString().trim())) {
             mHandler.removeMessages(BARCODEWHAT);
@@ -243,24 +245,24 @@ public class MiscellaneousIssueInScanFg extends BaseFragment {
 
     MiscellaneousissuesInActivity mactivity;
 
-    FilterResultOrderBean orderBean = new FilterResultOrderBean();
+    FilterResultOrderBean orderBean;
 
-    private Handler.Callback mCallback= new Handler.Callback() {
+    private Handler.Callback mCallback = new Handler.Callback() {
         @Override
         public boolean handleMessage(Message msg) {
             switch (msg.what) {
                 case BARCODEWHAT:
                     HashMap<String, String> barcodeMap = new HashMap<>();
                     barcodeMap.put(AddressContants.BARCODE_NO, String.valueOf(msg.obj));
-                    barcodeMap.put(AddressContants.DOC_NO,orderBean.getDoc_no());
-                    barcodeMap.put(AddressContants.STORAGE_SPACES_NO,saveBean.getStorage_spaces_in_no());
+                    barcodeMap.put(AddressContants.DOC_NO, orderBean.getDoc_no());
+                    barcodeMap.put(AddressContants.STORAGE_SPACES_NO, saveBean.getStorage_spaces_in_no());
                     etScanBarocde.setKeyListener(null);
                     commonLogic.scanBarcode(barcodeMap, new CommonLogic.ScanBarcodeListener() {
                         @Override
                         public void onSuccess(ScanBarcodeBackBean barcodeBackBean) {
                             etScanBarocde.setKeyListener(new TextKeyListener(TextKeyListener.Capitalize.CHARACTERS, true));
                             barcodeShow = barcodeBackBean.getShowing();
-                            if(!StringUtils.isBlank(barcodeBackBean.getBarcode_qty())){
+                            if (!StringUtils.isBlank(barcodeBackBean.getBarcode_qty())) {
                                 etInputNum.setText(StringUtils.deleteZero(barcodeBackBean.getBarcode_qty()));
                             }
                             tvScanedNum.setText(barcodeBackBean.getScan_sumqty());
@@ -275,7 +277,7 @@ public class MiscellaneousIssueInScanFg extends BaseFragment {
                             saveBean.setAvailable_in_qty(barcodeBackBean.getAvailable_in_qty());
                             saveBean.setItem_barcode_type(barcodeBackBean.getItem_barcode_type());
                             etInputNum.requestFocus();
-                            if (CommonUtils.isAutoSave(saveBean)){
+                            if (CommonUtils.isAutoSave(saveBean)) {
                                 Save();
                             }
                         }
@@ -307,7 +309,7 @@ public class MiscellaneousIssueInScanFg extends BaseFragment {
                             saveBean.setStorage_spaces_in_no(locatorBackBean.getStorage_spaces_no());
                             saveBean.setWarehouse_in_no(locatorBackBean.getWarehouse_no());
                             etScanBarocde.requestFocus();
-                            if (CommonUtils.isAutoSave(saveBean)){
+                            if (CommonUtils.isAutoSave(saveBean)) {
                                 Save();
                             }
                         }
@@ -355,9 +357,9 @@ public class MiscellaneousIssueInScanFg extends BaseFragment {
      */
     private void show() {
         tvDetailShow.setText(StringUtils.lineChange(barcodeShow + "\\n" + locatorShow));
-        if(StringUtils.isBlank(tvDetailShow.getText().toString().trim())){
+        if (StringUtils.isBlank(tvDetailShow.getText().toString().trim())) {
             includeDetail.setVisibility(View.GONE);
-        }else{
+        } else {
             includeDetail.setVisibility(View.VISIBLE);
         }
     }
@@ -372,7 +374,7 @@ public class MiscellaneousIssueInScanFg extends BaseFragment {
         barcodeFlag = false;
         if (cbLocatorlock.isChecked()){
             etScanBarocde.requestFocus();
-        }else {
+        } else {
             locatorFlag = false;
             locatorShow = "";
             etScanLocator.setText("");
@@ -396,7 +398,7 @@ public class MiscellaneousIssueInScanFg extends BaseFragment {
         locatorFlag = false;
         cbLocatorlock.setChecked(false);
         saveBean = new SaveBean();
-        commonLogic =CommonLogic.getInstance(mactivity, mactivity.module, mactivity.mTimestamp.toString());
+        commonLogic = CommonLogic.getInstance(mactivity, mactivity.module, mactivity.mTimestamp.toString());
         delete();
         orderBean = (FilterResultOrderBean) mactivity.getIntent().getExtras().getSerializable(AddressContants.ORDERDATA);
         etScanLocator.requestFocus();
@@ -406,7 +408,7 @@ public class MiscellaneousIssueInScanFg extends BaseFragment {
      * 进入界面先清空后台存的表
      */
     private void delete() {
-        Map<String,String> map = new HashMap<>();
+        Map<String, String> map = new HashMap<>();
         map.put(AddressContants.FLAG, BaseFirstModuldeActivity.ExitMode.EXITD.getName());
         commonLogic.exit(map, new CommonLogic.ExitListener() {
             @Override

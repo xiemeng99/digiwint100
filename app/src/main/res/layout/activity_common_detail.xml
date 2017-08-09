@@ -61,5 +61,7 @@
         </LinearLayout>
     </LinearLayout>
 
-    <include layout="@layout/inclu_delete" />
+    <include layout="@layout/inclu_delete"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true" />
 </RelativeLayout>

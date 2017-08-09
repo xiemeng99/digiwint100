@@ -104,12 +104,12 @@ public class WorkOrderReturnSumFg extends BaseFragment {
      * 获取数据
      */
     public void updatelist() {
-        try{
+        try {
             showLoadingDialog();
             sumBeanList.clear();
             adapter = new WorkOrderReturnSumAdapter(context, sumBeanList);
             ryList.setAdapter(adapter);
-            Map<String,String> map = ObjectAndMapUtils.getValueMap(mPutBean);
+            Map<String, String> map = ObjectAndMapUtils.getValueMap(mPutBean);
             commonLogic.getWORSum(map, new CommonLogic.GetZSumListener() {
                 @Override
                 public void onSuccess(List<ListSumBean> list) {
@@ -138,8 +138,8 @@ public class WorkOrderReturnSumFg extends BaseFragment {
                     showFailedDialog(error);
                 }
             });
-        }catch (Exception e){
-            LogUtils.e(TAG,"updatelist"+e);
+        } catch (Exception e) {
+            LogUtils.e(TAG, "updatelist" + e);
         }
     }
 
@@ -166,11 +166,11 @@ public class WorkOrderReturnSumFg extends BaseFragment {
     private void getDetail(final ListSumBean orderSumData) {
         Map<String, String> map = new HashMap<>();
         showLoadingDialog();
-        map.put(AddressContants.ITEM_NO, orderSumData.getItem_no());
+        map.put(AddressContants.ITEM_NO, orderSumData.getLow_order_item_no());
         final SumShowBean sumShowBean = new SumShowBean();
-        sumShowBean.setItem_no(orderSumData.getItem_no());
-        sumShowBean.setItem_name(orderSumData.getItem_name());
-        sumShowBean.setAvailable_in_qty(StringUtils.getMinQty(orderSumData.getStock_qty(), orderSumData.getReq_qty()));
+        sumShowBean.setItem_no(orderSumData.getLow_order_item_no());
+        sumShowBean.setItem_name(orderSumData.getLow_order_item_name());
+        sumShowBean.setAvailable_in_qty(orderSumData.getApply_qty());
         commonLogic.getDetail(map, new CommonLogic.GetDetailListener() {
             @Override
             public void onSuccess(List<DetailShowBean> detailShowBeen) {
@@ -230,11 +230,11 @@ public class WorkOrderReturnSumFg extends BaseFragment {
         sumBeanList = new ArrayList<>();
         try {
             FilterResultOrderBean orderHeadBean = (FilterResultOrderBean) activity.getIntent().getSerializableExtra(WorkOrderReturnListActivity.filterBean);
-            mPutBean=new ClickItemPutBean();
+            mPutBean = new ClickItemPutBean();
             mPutBean.setDoc_no(orderHeadBean.getDoc_no());
             mPutBean.setWarehouse_no(LoginLogic.getWare());
-        }catch (Exception e){
-            LogUtils.e(TAG,"initData()"+ e);
+        } catch (Exception e) {
+            LogUtils.e(TAG, "initData()" + e);
         }
     }
 

@@ -77,13 +77,13 @@ public class PickUpShipmentActivity extends BaseFirstModuldeActivity{
     @BindView(R.id.un_com)
     ImageView unCom;
 
-    @OnClick(R.id.un_com)
-    void toUmcom(){
-        Bundle bundle = new Bundle();
-        bundle.putString(AddressContants.MODULEID_INTENT, mTimestamp.toString());
-        bundle.putString(NoComeUnComActivity.MODULECODE, module);
-        ActivityManagerUtils.startActivityForBundleData(activity, HaveSourceUnComActivity.class, bundle);
-    }
+//    @OnClick(R.id.un_com)
+//    void toUmcom(){
+//        Bundle bundle = new Bundle();
+//        bundle.putString(AddressContants.MODULEID_INTENT, mTimestamp.toString());
+//        bundle.putString(NoComeUnComActivity.MODULECODE, module);
+//        ActivityManagerUtils.startActivityForBundleData(activity, HaveSourceUnComActivity.class, bundle);
+//    }
 
 
     @Override

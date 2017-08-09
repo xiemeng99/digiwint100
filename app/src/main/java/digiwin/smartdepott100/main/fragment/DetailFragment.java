@@ -52,7 +52,7 @@ public class DetailFragment extends BaseFragment {
     @Override
     protected void doBusiness() {
         adapter=new CustomRecyclerAdapter(beanLists,context);
-        GridLayoutManager manager=new GridLayoutManager(context,4);
+        GridLayoutManager manager=new GridLayoutManager(context,3);
         recyclerView.setLayoutManager(manager);
         recyclerView.setAdapter(adapter);
         initRecyclerViewListener();
