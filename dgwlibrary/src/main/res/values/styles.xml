@@ -6,6 +6,13 @@
         <item name="android:windowNoTitle">true</item>
         <item name="android:windowAnimationStyle">@style/DialogAnimation</item>
     </style>
+    <style name="RocketDialog" parent="android:style/Theme.Dialog">
+        <item name="android:background">@android:color/transparent</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:backgroundDimEnabled">true</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowAnimationStyle">@style/RocketDialogAnimation</item>
+    </style>
     <!-- 等待对话框的样式 -->
     <style name="LoadingDialog" parent="@android:style/Theme.Dialog">
         <item name="android:windowFrame">@null</item>
@@ -30,6 +37,11 @@
     <style name="DialogAnimation" parent="@android:style/Animation.Dialog">
         <item name="android:windowEnterAnimation">@anim/dialog_enter</item>
         <item name="android:windowExitAnimation">@anim/dialog_exit</item>
+    </style>
+
+    <style name="RocketDialogAnimation" parent="@android:style/Animation.Dialog">
+        <item name="android:windowEnterAnimation">@anim/dialog_enter</item>
+        <item name="android:windowExitAnimation">@anim/rocket_dialog_exit</item>
     </style>
 
     <!--activity转场动画-->

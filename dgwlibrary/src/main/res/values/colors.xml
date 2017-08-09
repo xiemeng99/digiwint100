@@ -142,8 +142,8 @@
     <color name="contact_btn_text_press">#ff2c84cf</color>
     <color name="reward_text">#ffe07120</color>
     <color name="dialog_button_text">#ff464646</color>
-    <color name="group_1">#ff70d6be</color>
-    <color name="group_2">#ff65addf</color>
+    <color name="group_1">#f82d73</color>
+    <color name="group_2">#e50150</color>
     <color name="group_3">#ffabd255</color>
     <color name="group_4">#ffea7765</color>
     <color name="group_5">#ff9997e0</color>
@@ -176,7 +176,7 @@
     <color name="orange">#ff9900</color>
     <color name="deepcolor">#faaa5f</color>
     <color name="shadowcolor">#333333</color>
-    <color name="naming">#ABABAB</color>
+    <color name="naming">#3a3a3a</color>
     <color name="background">#272727</color>
     <color name="orange_yellow">#9b9ba0</color>
 

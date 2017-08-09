@@ -229,9 +229,11 @@ public final class CameraManager {
             int width = findDesiredDimensionInRange(screenResolution.x, MIN_FRAME_WIDTH, MAX_FRAME_WIDTH);
             int height = findDesiredDimensionInRange(screenResolution.y, MIN_FRAME_HEIGHT, MAX_FRAME_HEIGHT);
 
-            int leftOffset = (screenResolution.x - width) / 2;
-            int topOffset = (screenResolution.y - height) / 2;
-            framingRect = new Rect(leftOffset, topOffset, leftOffset + width, topOffset + height);
+            int min = Math.min(width, height);
+
+            int leftOffset = (screenResolution.x - min) / 2;
+            int topOffset = (screenResolution.y - min) / 2;
+            framingRect = new Rect(leftOffset, topOffset, leftOffset + min, topOffset + min);
             Log.d(TAG, "Calculated framing rect: " + framingRect);
         }
         return framingRect;
@@ -263,6 +265,9 @@ public final class CameraManager {
             Rect rect = new Rect(framingRect);
             Point cameraResolution = configManager.getCameraResolution();
             Point screenResolution = configManager.getScreenResolution();
+            int minX = Math.min(cameraResolution.x, screenResolution.x);
+            int minY = Math.min(cameraResolution.y, screenResolution.y);
+            Point resolution = new Point(minX,minY);
             if (cameraResolution == null || screenResolution == null) {
                 // Called early, before init even finished
                 return null;
@@ -273,10 +278,10 @@ public final class CameraManager {
       rect.top = rect.top * cameraResolution.y / screenResolution.y;
       rect.bottom = rect.bottom * cameraResolution.y / screenResolution.y;*/
             /******************** 竖屏更改1(cameraResolution.x/y互换) ************************/
-            rect.left = rect.left * cameraResolution.y / screenResolution.x;
-            rect.right = rect.right * cameraResolution.y / screenResolution.x;
-            rect.top = rect.top * cameraResolution.x / screenResolution.y;
-            rect.bottom = rect.bottom * cameraResolution.x / screenResolution.y;
+            rect.left = rect.left * resolution.y / resolution.x;
+            rect.right = rect.right * resolution.y / resolution.x;
+            rect.top = rect.top * resolution.x / resolution.y;
+            rect.bottom = rect.bottom * resolution.x / resolution.y;
             framingRectInPreview = rect;
         }
         return framingRectInPreview;
@@ -343,6 +348,23 @@ public final class CameraManager {
                 rect.width(), rect.height(), false);
     }
 
+    public void openFlash() {
+        if (null != camera) {
+            Camera.Parameters mParameters = camera.getParameters();
+            mParameters.setFlashMode(Camera.Parameters.FLASH_MODE_TORCH);
+            camera.setParameters(mParameters);
+        }
+    }
+
+    public void closeFlash() {
+        if (null != camera) {
+            Camera.Parameters mParameters = camera.getParameters();
+            mParameters.setFlashMode(Camera.Parameters.FLASH_MODE_OFF);
+            camera.setParameters(mParameters);
+        }
+    }
+
+
     /**
      *处理 部分机型预览倒立
      */
@@ -381,22 +403,6 @@ public final class CameraManager {
         } catch (Exception e) {
         }
 
-    }
-
-    public void openFlash() {
-        if (null != camera) {
-            Camera.Parameters mParameters = camera.getParameters();
-            mParameters.setFlashMode(Camera.Parameters.FLASH_MODE_TORCH);
-            camera.setParameters(mParameters);
-        }
-    }
-
-    public void closeFlash() {
-        if (null != camera) {
-            Camera.Parameters mParameters = camera.getParameters();
-            mParameters.setFlashMode(Camera.Parameters.FLASH_MODE_OFF);
-            camera.setParameters(mParameters);
-        }
     }
 
 }

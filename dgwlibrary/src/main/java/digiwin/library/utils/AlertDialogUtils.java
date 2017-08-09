@@ -355,6 +355,32 @@ public class AlertDialogUtils {
             LogUtils.e(TAG, "showSureOrQuitDialogAndCall-----Error");
         }
     }
+    /**
+     * 显示火箭加载的dialog
+     */
+    public static void showRocketLoadingDialog(Context context) {
+        try {
+            if (context != null) {
+                CustomDialog.Builder builder = new CustomDialog.Builder(context);
+                if (dialog != null) {
+                    dialog.dismiss();
+                    dialog = null;
+                }
+                dialog = builder.view(R.layout.dialog_rocket_loading)
+                        .style(R.style.RocketDialog)
+                        .cancelTouchout(false)
+                        .widthpx((int) (ViewUtils.getScreenWidth(context)))
+                        .heightpx(ViewGroup.LayoutParams.MATCH_PARENT)
+                        .startViewAnimdrawable(R.id.iv_loading)
+                        .backCancelTouchout(false)
+                        .build();
+                dialog.show();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            LogUtils.e(TAG, "showLoadingDialog-----Error");
+        }
+    }
 
     /**
      * 显示加载等待的dialog

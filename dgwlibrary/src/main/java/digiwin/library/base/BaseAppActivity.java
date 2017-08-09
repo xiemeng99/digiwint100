@@ -27,7 +27,7 @@ import static digiwin.library.constant.SystemConstant.VIBRATEMETION;
 
 
 /**
- * Created by sunchangquan on 2016/12/12.
+ * Created by sunchangquan on 2016/12/12
  */
 
 public abstract class BaseAppActivity extends AppCompatActivity {
@@ -78,6 +78,12 @@ public abstract class BaseAppActivity extends AppCompatActivity {
      */
     protected void showLoadingDialog() {
         AlertDialogUtils.showLoadingDialog(activity);
+    }
+    /**
+     * 等待火箭对话框
+     */
+    protected void showRocketLoadingDialog() {
+        AlertDialogUtils.showRocketLoadingDialog(activity);
     }
 
     /**

@@ -6,9 +6,14 @@ import android.os.Build;
 import android.widget.DatePicker;
 
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 
 import digiwin.library.R;
+import digiwin.library.utils.AlertDialogUtils;
 import digiwin.library.utils.StringUtils;
 
 /**
@@ -104,7 +109,19 @@ public class DatePickerUtils {
                     String mEndDate= endYear + "-" + endMonth + "-" + endDay;
                     String mshowDate=mStartDate
                             +"~"+mEndDate;
-                    listener.getTime(mStartDate, mEndDate,mshowDate);
+                    try {
+                        DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+                        Date dt1 = df.parse(mStartDate);
+                        Date dt2 = df.parse(mEndDate);
+                        if (dt1.getTime() >dt2.getTime()) {
+                            AlertDialogUtils.showFailedDialog(activity,R.string.sdate_before_edate);
+                            return;
+                        }else {
+                            listener.getTime(mStartDate, mEndDate,mshowDate);
+                        }
+                    } catch (ParseException e) {
+                        e.printStackTrace();
+                    }
                 }else {
                     listener.getTime("","","");
                 }

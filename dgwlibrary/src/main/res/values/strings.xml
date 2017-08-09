@@ -202,4 +202,5 @@
     <string name="result_wifi">发现网络配置</string>
     <string name="sbc_name">Google图书搜索</string>
     <string name="wifi_changing_network">请求连接到网络\u2026</string>
+    <string name="sdate_before_edate">开始日期必须在结束日期之前</string>
 </resources>

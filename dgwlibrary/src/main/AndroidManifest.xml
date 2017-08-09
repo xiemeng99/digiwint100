@@ -1,11 +1,17 @@
-<manifest xmlns:android="http://schemas.android.com/apk/res/android" package="digiwin.library">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="digiwin.library">
+
     <uses-permission android:name="android.permission.CAMERA"></uses-permission>
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"></uses-permission>
+
     <uses-feature android:name="android.hardware.camera" />
     <uses-feature android:name="android.hardware.camera.autofocus" />
-    <application android:allowBackup="true" android:label="@string/app_name"
+
+    <application
+        android:allowBackup="true"
+        android:label="@string/app_name"
         android:supportsRtl="true">
-        <activity android:name=".zxing.CaptureScanActivity"></activity>
+        <activity android:name=".zxing.CaptureScanActivity" />
     </application>
 
 </manifest>
