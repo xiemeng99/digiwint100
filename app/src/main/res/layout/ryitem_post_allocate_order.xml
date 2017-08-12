@@ -65,7 +65,6 @@
             style="@style/ser_text_inwhite"
             android:layout_width="@dimen/layout_0dp"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/layout_10dp"
             android:layout_weight="1" />
 
         <TextView

@@ -27,6 +27,7 @@ import digiwin.library.utils.LogUtils;
 import digiwin.library.utils.ObjectAndMapUtils;
 import digiwin.library.utils.StringUtils;
 import digiwin.library.utils.WeakRefHandler;
+import digiwin.pulltorefreshlibrary.recyclerview.FullyLinearLayoutManager;
 import digiwin.pulltorefreshlibrary.recyclerviewAdapter.BaseRecyclerAdapter;
 import digiwin.pulltorefreshlibrary.recyclerviewAdapter.RecyclerViewHolder;
 import digiwin.smartdepott100.R;
@@ -144,8 +145,8 @@ public class QuickStorageActivity extends BaseFirstModuldeActivity {
     protected void doBusiness() {
         checkedList = new ArrayList<ListSumBean>();
         quickStorageLogic = QuickStorageLogic.getInstance(activity, activity.module, activity.mTimestamp.toString());
-//        FullyLinearLayoutManager fullylinearlayoutmanager = new FullyLinearLayoutManager(activity);
-//        recyclerView.setLayoutManager(fullylinearlayoutmanager);
+        FullyLinearLayoutManager fullylinearlayoutmanager = new FullyLinearLayoutManager(activity);
+        recyclerView.setLayoutManager(fullylinearlayoutmanager);
 
         FilterResultOrderBean data = (FilterResultOrderBean) getIntent().getSerializableExtra("data");
         tv_post_material_order.setText(data.getDoc_no());
@@ -164,7 +165,6 @@ public class QuickStorageActivity extends BaseFirstModuldeActivity {
                 showLoadingDialog();
                 ClickItemPutBean putBean = new ClickItemPutBean();
                 putBean.setDoc_no(String.valueOf(msg.obj));
-
 //                putBean.setWarehouse_in_no(LoginLogic.getWare());
                 quickStorageLogic.getQuickStorageOrderSumData(putBean, new CommonLogic.GetOrderSumListener() {
                     @Override
@@ -290,22 +290,13 @@ public class QuickStorageActivity extends BaseFirstModuldeActivity {
             warehouse_img_ll.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    StorageDialog.showStorageDialog(activity, LoginLogic.getWare(), list);
-                }
-            });
-
-//            选择完仓库的回掉
-            StorageDialog.setCallBack(new StorageDialog.StorageCallBack() {
-                @Override
-                public void storageCallBack(final String chooseStorage) {
-                    new Handler(getMainLooper()).postDelayed(new Runnable() {
+                    StorageDialog.showStorageDialog(activity, LoginLogic.getWare(), list, new StorageDialog.StorageCallBack() {
                         @Override
-                        public void run() {
-                            checkedList.get((int) wareHouseTv.getTag()).setWarehouse_no(chooseStorage);
-                            notifyItemChanged(position);
+                        public void storageCallBack(String chooseStorage) {
+                            item.setWarehouse_no(chooseStorage);
+                            holder.setText(R.id.tv_storage, chooseStorage);
                         }
-                    },1000);
-
+                    });
                 }
             });
 

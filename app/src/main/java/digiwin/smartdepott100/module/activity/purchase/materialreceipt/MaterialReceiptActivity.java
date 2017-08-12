@@ -125,32 +125,27 @@ public class MaterialReceiptActivity extends BaseTitleActivity implements
     @OnClick(R.id.commit)
     void commit() {
         final List<ListSumBean> checkedList;
-        try {
-            checkedList = adapter.getCheckData();
-            if (checkedList.size() > 0) {
-                showCommitSureDialog(new OnDialogTwoListener() {
-                    @Override
-                    public void onCallback1() {
-                        showLoadingDialog();
-                        if (StringUtils.isBlank(et_delivery_note.getText().toString())) {
-                            dismissLoadingDialog();
-                            showFailedDialog(getResources().getString(R.string.please_delivery_note));
-                            return;
-                        }
-                        commitData(checkedList);
+        checkedList = adapter.getCheckData();
+        if (checkedList.size() > 0) {
+            showCommitSureDialog(new OnDialogTwoListener() {
+                @Override
+                public void onCallback1() {
+                    showLoadingDialog();
+                    if (StringUtils.isBlank(et_delivery_note.getText().toString())) {
+                        dismissLoadingDialog();
+                        showFailedDialog(getResources().getString(R.string.please_delivery_note));
+                        return;
                     }
+                    commitData(checkedList);
+                }
 
-                    @Override
-                    public void onCallback2() {
+                @Override
+                public void onCallback2() {
 
-                    }
-                });
-            } else {
-                showFailedDialog(getResources().getString(R.string.please_delivery_note_num));
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-            showFailedDialog(getResources().getString(R.string.please_delivery_note));
+                }
+            });
+        } else {
+            showFailedDialog(getResources().getString(R.string.please_delivery_note_num));
         }
     }
 
@@ -241,6 +236,14 @@ public class MaterialReceiptActivity extends BaseTitleActivity implements
     }
 
     public void commitData(final List<ListSumBean> checkedList) {
+        for (int i=0;i<checkedList.size();i++){
+            ListSumBean sumBean = checkedList.get(i);
+            float sub = StringUtils.sub(sumBean.getApply_qty(), sumBean.getScan_sumqty());
+            if (sub<0){
+                showFailedDialog(sumBean.getItem_no()+getString(R.string.scan_big_applynum));
+                return;
+            }
+        }
         final List<Map<String, String>> listMap = ObjectAndMapUtils.getListMap(checkedList);
         Map<String, Object> map = new HashMap<>();
         map.put("data", listMap);

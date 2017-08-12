@@ -128,9 +128,7 @@ public class PurchaseSupplierLogic extends CommonLogic {
                             if (null != string) {
                                 if (ReqTypeName.SUCCCESSCODE.equals(JsonResp.getCode(string))) {
                                     String doc_no = JsonResp.getParaString(string, AddressContants.DOC_NO);
-                                    if (null != doc_no) {
-                                        listener.onSuccess(JsonResp.getParaString(string, AddressContants.DOC_NO));
-                                    }
+                                    listener.onSuccess(JsonResp.getParaString(string, AddressContants.DOC_NO));
                                     return;
                                 } else {
                                     error = JsonResp.getDescription(string);

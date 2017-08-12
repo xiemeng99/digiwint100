@@ -316,8 +316,8 @@ public class AccordingMaterialActivity extends BaseFirstModuldeActivity {
             for (int i=0;i<showList.size();i++){
                 ListSumBean tempBean = showList.get(i);
                 float sub = StringUtils.sub(tempBean.getStock_qty(), tempBean.getScan_sumqty());
-                if (sub>0){
-                    showFailedDialog(tempBean.getItem_no()+getResources().getString(R.string.scan_big_storenum));
+                if (sub<0){
+                    showFailedDialog(tempBean.getLow_order_item_no()+getResources().getString(R.string.scan_big_storenum));
                     return;
                 }
             }

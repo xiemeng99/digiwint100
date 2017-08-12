@@ -88,7 +88,7 @@ public class AccordingMaterialLogic extends CommonLogic {
             @Override
             public void run() {
                 try {
-                    String createJson = JsonReqForERP.mapCreateJson(mModule, "als.b007.submit", mTimestamp, map);   final String xml = CreateParaXmlReqIm.getInstance(map, mModule, ReqTypeName.COMMIT, mTimestamp).toXml();
+                    String createJson = JsonReqForERP.mapCreateJson(mModule, "als.b014.submit", mTimestamp, map);   final String xml = CreateParaXmlReqIm.getInstance(map, mModule, ReqTypeName.COMMIT, mTimestamp).toXml();
                     OkhttpRequest.getInstance(mContext).post(createJson, new IRequestCallbackImp() {
                         @Override
                         public void onResponse(String string) {

@@ -451,7 +451,7 @@ public class WorkOrderScanActivity extends BaseTitleActivity {
 
                         @Override
                         public void onFailed(String error) {
-                            showFailedDialog(error);
+//                            showFailedDialog(error);
                         }
                     });
 
@@ -532,6 +532,7 @@ public class WorkOrderScanActivity extends BaseTitleActivity {
         saveBean.setLot_no(barcodeBackBean.getLot_no());
         saveBean.setFifo_check(barcodeBackBean.getFifo_check());
         saveBean.setItem_barcode_type(barcodeBackBean.getItem_barcode_type());
+        etScanBarocde.requestFocus();
         if (CommonUtils.isAutoSave(saveBean)){
             saveData();
         }

@@ -714,4 +714,5 @@
 
     <string name="miscellaneous_nocome_out">无来源杂发</string>
     <string name="miscellaneous_nocome_in">无来源杂收</string>
+    <string name="scan_big_applynum">实收量大于送货量,请检查</string>
 </resources>
