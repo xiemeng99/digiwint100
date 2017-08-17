@@ -108,9 +108,12 @@ public class StringUtils {
         try {
             intNumber = Integer.parseInt(number.trim());
         } catch (NumberFormatException err) {
+            intNumber = 0;
             err.printStackTrace();
         }
-
+        catch (Exception err) {
+             intNumber = 0;
+        }
         return intNumber;
     }
 
@@ -238,6 +241,12 @@ public class StringUtils {
      * @return
      */
     public static float sum(String str1, String str2) {
+        if (isBlank(str1)){
+            str1="0";
+        }
+        if (isBlank(str2)){
+            str2="0";
+        }
         BigDecimal bd1 = new BigDecimal(str1);
         BigDecimal bd2 = new BigDecimal(str2);
         return bd1.add(bd2).floatValue();
@@ -251,6 +260,12 @@ public class StringUtils {
      * @return
      */
     public static float sub(String d1, String d2) {
+        if (isBlank(d1)){
+            d1="0";
+        }
+        if (isBlank(d2)){
+            d2="0";
+        }
         BigDecimal bd1 = new BigDecimal(d1);
         BigDecimal bd2 = new BigDecimal(d2);
         return bd1.subtract(bd2).floatValue();
