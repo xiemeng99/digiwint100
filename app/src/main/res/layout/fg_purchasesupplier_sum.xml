@@ -55,7 +55,7 @@
                         android:layout_weight="3" />
                 </LinearLayout>
 
-                <View style="@style/act_line_style" />
+                <View style="@style/line_in_pink_style" />
 
                 <LinearLayout
                     style="@style/itemstyle"
@@ -75,7 +75,7 @@
                         style="@style/ser_text_ingreen"
                         android:layout_width="@dimen/layout_0dp"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="@dimen/layout_5dp"
+                        android:layout_marginLeft="@dimen/layout_3dp"
                         android:layout_weight="1" />
 
                     <TextView
@@ -94,7 +94,7 @@
                         android:layout_weight="1" />
                 </LinearLayout>
 
-                <View style="@style/act_line_style" />
+                <View style="@style/line_in_pink_style" />
 
                 <LinearLayout
                     style="@style/itemstyle"
@@ -114,7 +114,7 @@
                         style="@style/ser_text_ingreen"
                         android:layout_width="@dimen/layout_0dp"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="@dimen/layout_5dp"
+                        android:layout_marginLeft="@dimen/layout_3dp"
                         android:layout_weight="1" />
                 </LinearLayout>
 

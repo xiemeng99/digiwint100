@@ -20,7 +20,6 @@
         android:orientation="vertical"
         android:padding="@dimen/layout_5dp">
 
-        <View style="@style/act_line_style"></View>
 
         <LinearLayout
             style="@style/itemstyle"
@@ -42,7 +41,7 @@
                 android:layout_marginLeft="@dimen/layout_10dp"
                 android:layout_weight="1" />
         </LinearLayout>
-
+        <View style="@style/line_in_pink_style"></View>
         <LinearLayout
             style="@style/itemstyle"
             android:layout_width="match_parent"
@@ -61,7 +60,7 @@
                 android:layout_height="wrap_content" />
         </LinearLayout>
 
-        <View style="@style/act_line_style" />
+        <View style="@style/line_in_pink_style" />
 
         <LinearLayout
             style="@style/itemstyle"

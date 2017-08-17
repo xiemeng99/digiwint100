@@ -124,8 +124,7 @@ public class MaterialReceiptActivity extends BaseTitleActivity implements
 
     @OnClick(R.id.commit)
     void commit() {
-        final List<ListSumBean> checkedList;
-        checkedList = adapter.getCheckData();
+        final List<ListSumBean> checkedList = adapter.getCheckData();
         if (checkedList.size() > 0) {
             showCommitSureDialog(new OnDialogTwoListener() {
                 @Override
@@ -211,10 +210,14 @@ public class MaterialReceiptActivity extends BaseTitleActivity implements
 
     @Override
     protected void doBusiness() {
+
         commonLogic = QuickReceiptLogic
                 .getInstance(activity, activity.module, activity.mTimestamp.toString());
         FullyLinearLayoutManager fullyLinearLayoutManager = new FullyLinearLayoutManager(activity);
         ry_list.setLayoutManager(fullyLinearLayoutManager);
+        ArrayList<ListSumBean> list = new ArrayList<ListSumBean>();
+        adapter = new MaterialReceiptAdapter(activity, list);
+        ry_list.setAdapter(adapter);
     }
 
     public void clearData() {

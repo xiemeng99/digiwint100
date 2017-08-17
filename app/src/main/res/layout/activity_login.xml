@@ -32,6 +32,7 @@
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
         android:orientation="vertical">
+
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -86,13 +87,14 @@
                 android:id="@+id/rl_login_lock"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
+
                 <CheckBox
-                android:id="@+id/cb_remeber_password"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:button="@drawable/login_rp_checkbox_bg"
+                    android:id="@+id/cb_remeber_password"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
-                    android:layout_marginRight="@dimen/layout_50dp" />
+                    android:layout_marginRight="@dimen/layout_50dp"
+                    android:button="@drawable/login_rp_checkbox_bg" />
                 <!--<ImageView-->
                 <!--android:id="@+id/iv_login_lock"-->
                 <!--android:layout_width="wrap_content"-->
@@ -263,20 +265,21 @@
         <TextView
             android:id="@+id/tv_setup_systemSettings"
             android:layout_width="match_parent"
-            android:layout_marginTop="@dimen/layout_20dp"
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/layout_5dp"
+            android:layout_marginTop="@dimen/layout_20dp"
             android:gravity="center"
             android:text="@string/system_setting"
             android:textColor="@color/login_color_t"
             android:textSize="@dimen/textSize_14sp" />
     </LinearLayout>
+
     <TextView
         android:id="@+id/ll_litle_text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/layout_5dp"
         android:layout_alignParentBottom="true"
+        android:layout_marginBottom="@dimen/layout_5dp"
         android:gravity="center"
         android:text="@string/little_text"
         android:textColor="@color/Login_littleText_color"

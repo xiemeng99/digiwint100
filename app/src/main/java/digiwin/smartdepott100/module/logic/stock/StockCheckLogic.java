@@ -12,6 +12,7 @@ import digiwin.smartdepott100.core.json.JsonReqForERP;
 import digiwin.smartdepott100.core.net.IRequestCallbackImp;
 import digiwin.smartdepott100.core.net.OkhttpRequest;
 import digiwin.smartdepott100.module.bean.common.FilterResultOrderBean;
+import digiwin.smartdepott100.module.bean.common.ListSumBean;
 import digiwin.smartdepott100.module.bean.produce.InBinningBean;
 import digiwin.smartdepott100.module.logic.common.CommonLogic;
 import digiwin.library.json.JsonResp;
@@ -70,6 +71,39 @@ public class StockCheckLogic extends CommonLogic {
     }
 
     /**
+     * 盘点获取汇总数据
+     */
+    public void getStockCheckSum(final Map<String,String> map, final GetZSumListener listener) {
+        ThreadPoolManager.getInstance().executeTask(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    String createJson = JsonReqForERP.mapCreateJson(mModule, "als.c005.list.detail.get", mTimestamp, map);
+                    OkhttpRequest.getInstance(mContext).post(createJson, new IRequestCallbackImp() {
+                        @Override
+                        public void onResponse(String string) {
+                            String error = mContext.getString(R.string.unknow_error);
+                            if (null != string) {
+                                if (ReqTypeName.SUCCCESSCODE.equals(JsonResp.getCode(string))) {
+                                    List<ListSumBean> showBeanList = JsonResp.getParaDatas(string, "list_detail", ListSumBean.class);
+                                    listener.onSuccess(showBeanList);
+                                    return;
+                                } else {
+                                    error = JsonResp.getDescription(string);
+                                }
+                            }
+                            listener.onFailed(error);
+                        }
+                    });
+                } catch (Exception e) {
+                    listener.onFailed(mContext.getString(R.string.unknow_error));
+                    LogUtils.e(TAG, "getStockCheckSum--->" + e);
+                }
+            }
+        }, null);
+    }
+
+    /**
      * 提交
      *
      * @param map map可以直接为空
@@ -86,7 +120,7 @@ public class StockCheckLogic extends CommonLogic {
                             String error = mContext.getString(R.string.unknow_error);
                             if (null != string) {
                                 if (ReqTypeName.SUCCCESSCODE.equals(JsonResp.getCode(string))) {
-                                    listener.onSuccess(JsonResp.getParaString(string, "scan_sumqty"));
+                                    listener.onSuccess(JsonResp.getParaString(string, AddressContants.DOC_NO));
                                     return;
                                 } else {
                                     error = JsonResp.getDescription(string);

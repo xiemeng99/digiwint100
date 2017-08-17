@@ -23,7 +23,7 @@ import digiwin.smartdepott100.core.screenlistener.ScreenListener;
 public abstract class BaseActivity extends BaseAppActivity {
     private Unbinder unBind;
     private ScreenListener listener;
-    private int finishTime = 5000;
+    private int finishTime = 50000;
     public final int mHandlerWhat = 100;
 
     /**
@@ -55,10 +55,9 @@ public abstract class BaseActivity extends BaseAppActivity {
         createModuleId();
         super.onCreate(savedInstanceState);
         //注册监听屏幕广播
-        listener = new ScreenListener(activity);
+//        listener = new ScreenListener(activity);
         //屏幕监听处理
-        listenerBegin();
-//        EventBus.getDefault().register(this);
+//        listenerBegin();
     }
 
     private void listenerBegin() {
@@ -93,7 +92,7 @@ public abstract class BaseActivity extends BaseAppActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        listener.unregisterListener();
+//        listener.unregisterListener();
     }
 
     /**

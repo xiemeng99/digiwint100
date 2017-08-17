@@ -26,7 +26,7 @@ public class ZPutInStoreFilterResultAdapter extends BaseRecyclerAdapter<FilterRe
 
     @Override
     protected void bindData(RecyclerViewHolder holder, int position, final FilterResultOrderBean item) {
-        holder.setText(R.id.tv_item_post_material_order, item.getStock_in_no());
+        holder.setText(R.id.tv_item_post_material_order, item.getDoc_no());
         holder.setText(R.id.tv_item_plan_date,item.getCreate_date());
         holder.setText(R.id.tv_item_person, item.getEmployee_name());
         holder.setText(R.id.tv_item_department,item.getDepartment_name());

@@ -17,7 +17,6 @@ import digiwin.smartdepott100.login.loginlogic.LoginLogic;
 
 /**
  * 发送Json
- *
  * @author xiemeng
  * @version [V1.00, 2016-8-8]
  * @see [相关类/方法]
@@ -61,7 +60,7 @@ public class JsonReqForERP {
         public String prod = "APP";
 
         @JSONField(name = "ip", ordinal = 2)
-        public String ip = "192.168.10.1";
+        public String ip = TelephonyUtils.getWifiIP(BaseApplication.getContext())+":50";
 
         @JSONField(name = "lang", ordinal = 3)
         public String id = "zh_CN";
@@ -91,7 +90,7 @@ public class JsonReqForERP {
         public String name = "recipe_upload";
 
         @JSONField(name = "ip", ordinal = 1)
-        public String ip = "10.40.40.18";
+        public String ip = TelephonyUtils.getWifiIP(BaseApplication.getContext());
 
         @JSONField(name = "id", ordinal = 2)
         public String id = "topprd";

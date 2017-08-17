@@ -36,7 +36,7 @@
 
                     <TextView
                         style="@style/app_text_ingreen"
-                        android:layout_width="@dimen/layout_70dp"
+                        android:layout_width="@dimen/layout_60dp"
                         android:layout_height="wrap_content"
                         android:gravity="center_vertical"
                         android:text="@string/purchase_order" />
@@ -46,12 +46,11 @@
                         style="@style/ser_text_ingreen"
                         android:layout_width="@dimen/layout_0dp"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="@dimen/layout_10dp"
                         android:layout_weight="1"
                         android:background="@null" />
                 </LinearLayout>
 
-                <View style="@style/act_line_style"></View>
+                <View style="@style/line_in_pink_style"></View>
 
 
                 <LinearLayout
@@ -61,9 +60,8 @@
 
                     <TextView
                         style="@style/app_text_ingreen"
-                        android:layout_width="@dimen/layout_70dp"
+                        android:layout_width="@dimen/layout_60dp"
                         android:layout_height="wrap_content"
-                        android:paddingRight="@dimen/layout_5dp"
                         android:text="@string/supplier" />
 
                     <TextView
@@ -71,10 +69,10 @@
                         style="@style/ser_text_ingreen"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="@dimen/layout_10dp" />
+                       />
                 </LinearLayout>
 
-                <View style="@style/act_line_style"></View>
+                <View style="@style/line_in_pink_style"></View>
 
                 <LinearLayout
                     style="@style/itemstyle"
@@ -83,9 +81,8 @@
 
                     <TextView
                         style="@style/app_text_ingreen"
-                        android:layout_width="@dimen/layout_70dp"
+                        android:layout_width="@dimen/layout_60dp"
                         android:layout_height="wrap_content"
-                        android:paddingRight="@dimen/layout_5dp"
                         android:text="@string/data" />
 
                     <TextView
@@ -93,7 +90,7 @@
                         style="@style/ser_text_ingreen"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="@dimen/layout_10dp" />
+                      />
                 </LinearLayout>
             </LinearLayout>
             <include layout="@layout/ryitem_common" />

@@ -38,6 +38,10 @@ public class InBinningBean {
      * 结束日期
      */
     private String date_end;
+    /**
+     * 仓库
+     */
+    private String warehouse_no;
 
     public String getPagesize() {
         return pagesize;
@@ -101,5 +105,13 @@ public class InBinningBean {
 
     public void setItem_no(String item_no) {
         this.item_no = item_no;
+    }
+
+    public String getWarehouse_no() {
+        return warehouse_no;
+    }
+
+    public void setWarehouse_no(String warehouse_no) {
+        this.warehouse_no = warehouse_no;
     }
 }

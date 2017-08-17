@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white_ff"
+    android:orientation="vertical">
+
+    <include layout="@layout/activity_title_toolbar_bar"></include>
+
+    <LinearLayout
+        android:id="@+id/ll_test_input"
+        style="@style/itemstyle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/layout_6dp"
+        android:layout_marginLeft="@dimen/layout_10dp"
+        android:layout_marginRight="@dimen/layout_10dp"
+        android:layout_marginTop="@dimen/layout_6dp"
+        android:background="@drawable/accordingmaterialtop_pink_sharp"
+        android:orientation="vertical"
+        android:padding="@dimen/layout_5dp">
+
+        <LinearLayout
+            style="@style/itemstyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                style="@style/app_text_ingreen"
+                android:layout_width="@dimen/layout_60dp"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:text="@string/item_no" />
+
+            <TextView
+                android:id="@+id/tv_item_no"
+                style="@style/ser_text_ingreen"
+                android:layout_width="@dimen/layout_0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center_vertical" />
+
+            <TextView
+                style="@style/app_text_ingreen"
+                android:layout_width="@dimen/layout_60dp"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:text="@string/item_name" />
+
+            <TextView
+                android:id="@+id/tv_item_name"
+                style="@style/ser_text_ingreen"
+                android:layout_width="@dimen/layout_0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center_vertical" />
+        </LinearLayout>
+
+        <View style="@style/line_in_pink_style" />
+
+        <LinearLayout
+            style="@style/itemstyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                style="@style/app_text_ingreen"
+                android:layout_width="@dimen/layout_60dp"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:text="@string/check_item" />
+
+            <TextView
+                android:id="@+id/tv_check_item"
+                style="@style/ser_text_ingreen"
+                android:layout_width="@dimen/layout_0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center_vertical" />
+
+            <TextView
+                style="@style/app_text_ingreen"
+                android:layout_width="@dimen/layout_60dp"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:text="@string/sample_num" />
+
+            <TextView
+                android:id="@+id/tv_sample_num"
+                style="@style/ser_text_ingreen"
+                android:layout_width="@dimen/layout_0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center_vertical" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <RelativeLayout
+        android:id="@+id/rl_taylayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="@dimen/layout_5dp"
+        android:layout_marginLeft="@dimen/layout_10dp"
+        android:layout_marginRight="@dimen/layout_10dp"
+        android:background="@drawable/red_scandetail_bg">
+
+        <RadioGroup
+            android:id="@+id/main_rg"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/layout_40dp"
+            android:background="@color/WHITE"
+            android:orientation="horizontal">
+
+            <RadioButton
+                android:id="@+id/iqc_tab1"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@drawable/iqctab_1_bg"
+                android:button="@null"
+                android:gravity="center"
+                android:paddingTop="6dp"
+                android:text="@string/bad_reason_maintenance"
+                android:textColor="@color/iqctext_color_bg"
+                android:textSize="@dimen/textSize_15sp" />
+
+            <RadioButton
+                android:id="@+id/iqc_tab2"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@drawable/iqctab_2_bg"
+                android:button="@null"
+                android:gravity="center"
+                android:paddingTop="6dp"
+                android:text="@string/defect_maintenance"
+                android:textColor="@color/iqctext_color_bg"
+                android:textSize="@dimen/textSize_15sp" />
+        </RadioGroup>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/layout_0.5dp"
+            android:layout_marginTop="@dimen/layout_39.5dp"
+            android:background="@color/tab_divider_color" />
+
+        <android.support.v4.view.ViewPager
+            android:id="@+id/module_vp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/main_rg" />
+    </RelativeLayout>
+
+</LinearLayout>

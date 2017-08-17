@@ -144,7 +144,7 @@ public class SuitPickingSumFg extends BaseFragment {
                 if (null != list && list.size() > 0) {
                     upDateFlag = true;
                     toDetail();
-                    tvHeadPickingNo.setText(list.get(0).getIssuing_no());
+                    tvHeadPickingNo.setText(list.get(0).getDoc_no());
                     tvData.setText(list.get(0).getCreate_date());
                     tvApplicant.setText(list.get(0).getEmployee_name());
                     tvDepart.setText(list.get(0).getDepartment_name());

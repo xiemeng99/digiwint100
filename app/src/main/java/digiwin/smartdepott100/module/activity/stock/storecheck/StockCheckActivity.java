@@ -1,41 +1,24 @@
 package digiwin.smartdepott100.module.activity.stock.storecheck;
 
-import android.os.Handler;
-import android.os.Message;
+import android.content.Intent;
+import android.support.design.widget.TabLayout;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.view.ViewPager;
 import android.support.v7.widget.Toolbar;
-import android.text.method.TextKeyListener;
-import android.view.View;
-import android.widget.CheckBox;
-import android.widget.EditText;
-import android.widget.LinearLayout;
-import android.widget.TextView;
 
-import java.util.HashMap;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 import butterknife.BindView;
-import butterknife.BindViews;
-import butterknife.OnCheckedChanged;
-import butterknife.OnClick;
-import butterknife.OnFocusChange;
-import butterknife.OnTextChanged;
-import digiwin.library.dialog.OnDialogClickListener;
-import digiwin.library.utils.ObjectAndMapUtils;
-import digiwin.library.utils.StringUtils;
-import digiwin.library.utils.WeakRefHandler;
+import digiwin.library.utils.LogUtils;
 import digiwin.smartdepott100.R;
-import digiwin.smartdepott100.core.appcontants.AddressContants;
 import digiwin.smartdepott100.core.appcontants.ModuleCode;
 import digiwin.smartdepott100.core.base.BaseFirstModuldeActivity;
-import digiwin.smartdepott100.core.modulecommon.ModuleUtils;
-import digiwin.smartdepott100.login.loginlogic.LoginLogic;
-import digiwin.smartdepott100.module.bean.common.FilterResultOrderBean;
-import digiwin.smartdepott100.module.bean.common.SaveBean;
-import digiwin.smartdepott100.module.bean.common.ScanBarcodeBackBean;
-import digiwin.smartdepott100.module.bean.common.ScanLocatorBackBean;
-import digiwin.smartdepott100.module.logic.common.CommonLogic;
-import digiwin.smartdepott100.module.logic.stock.StockCheckLogic;
+import digiwin.smartdepott100.core.modulecommon.ModuleViewPagerAdapter;
+import digiwin.smartdepott100.module.fragment.produce.finishedstorage.FinishedStorageSumFg;
+import digiwin.smartdepott100.module.fragment.stock.stockcheck.StockCheckScanFg;
+import digiwin.smartdepott100.module.fragment.stock.stockcheck.StockCheckSumFg;
 
 
 /**
@@ -43,262 +26,42 @@ import digiwin.smartdepott100.module.logic.stock.StockCheckLogic;
  * @des 库存盘点
  */
 public class StockCheckActivity extends BaseFirstModuldeActivity {
+
     /**
      * 标题
      */
     @BindView(R.id.toolbar_title)
     Toolbar toolbarTitle;
-
-    @BindViews({R.id.ll_scan_locator, R.id.ll_barcode_sp, R.id.ll_chcek_number})
-    List<View> views;
-    @BindViews({R.id.tv_scan_locator, R.id.tv_barcode_sp, R.id.tv_chcek_number})
-    List<TextView> textViews;
-    @BindViews({R.id.et_scan_locator, R.id.et_barcode_sp, R.id.et_chcek_number})
-    List<EditText> editTexts;
-
     /**
-     * 库位
+     * tab
      */
-    @BindView(R.id.ll_scan_locator)
-    LinearLayout llScanLocator;
-    @BindView(R.id.tv_scan_locator)
-    TextView tvScanLocator;
-    @BindView(R.id.et_scan_locator)
-    EditText etScanLocator;
-
-    @OnFocusChange(R.id.et_scan_locator)
-    void scanLocatorFocusChanage() {
-        ModuleUtils.viewChange(llScanLocator, views);
-        ModuleUtils.tvChange(activity, tvScanLocator, textViews);
-        ModuleUtils.etChange(activity, etScanLocator, editTexts);
-    }
+    @BindView(R.id.tl_tab)
+    TabLayout tlTab;
     /**
-     * 库位锁定
+     * ViewPager
      */
-    @BindView(R.id.cb_locatorlock)
-    CheckBox cbLocatorlock;
-
-    @OnCheckedChanged(R.id.cb_locatorlock)
-    void isCardNumberLock(boolean checked) {
-        if (checked) {
-            etScanLocator.setKeyListener(null);
-        } else {
-            etScanLocator.setKeyListener(new TextKeyListener(TextKeyListener.Capitalize.CHARACTERS, true));
-        }
-    }
-
+    @BindView(R.id.module_vp)
+    public ViewPager moduleVp;
     /**
-     * 盘点量
+     * Fragment设置
      */
-    @BindView(R.id.ll_chcek_number)
-    LinearLayout llChcekNumber;
-    @BindView(R.id.tv_chcek_number)
-    TextView tvChcekNumber;
-    @BindView(R.id.et_chcek_number)
-    EditText etChcekNumber;
-
-    @OnFocusChange(R.id.et_chcek_number)
-    void checkNumberFocusChanage() {
-        ModuleUtils.viewChange(llChcekNumber, views);
-        ModuleUtils.tvChange(activity, tvChcekNumber, textViews);
-        ModuleUtils.etChange(activity, etChcekNumber, editTexts);
-    }
-
+    private List<Fragment> fragments;
+    private List<String> titles;
+    private FragmentManager fragmentManager;
     /**
-     * 物料
+     * 扫码
      */
-    @BindView(R.id.ll_barcode_sp)
-    LinearLayout llBarcodeSp;
-    @BindView(R.id.tv_barcode_sp)
-    TextView tvBarcodeSp;
-    @BindView(R.id.et_barcode_sp)
-    EditText etBarcodeSp;
-
-    @OnFocusChange(R.id.et_barcode_sp)
-    void barcodeFocusChanage() {
-        ModuleUtils.viewChange(llBarcodeSp, views);
-        ModuleUtils.tvChange(activity, tvBarcodeSp, textViews);
-        ModuleUtils.etChange(activity, etBarcodeSp, editTexts);
-    }
+    public StockCheckScanFg scanFg;
     /**
-     * 物料累积量
+     * 汇总提交
      */
-    @BindView(R.id.tv_material_sumnumber)
-    TextView tvMaterialSumnumber;
+    StockCheckSumFg sumFg;
+
+    ModuleViewPagerAdapter adapter;
     /**
-     * 盘点笔数
+     * 跳转明细使用
      */
-    @BindView(R.id.tv_material_checknumber)
-    TextView tvCheckNumber;
-
-    //show界面
-    @BindView(R.id.includedetail)
-    View includeDetail;
-    @BindView(R.id.tv_detail_show)
-    TextView tvDetailShow;
-    /**
-     * 上个界面传递过来的
-     */
-    FilterResultOrderBean data;
-
-    SaveBean saveBean;
-
-    StockCheckLogic stockCheckLogic;
-
-    private int number;
-
-    private final int LOCATORWHAT = 1000;
-
-    private final int BARCODEWHAT = 1001;
-
-    //库位扫描
-    @OnTextChanged(value = R.id.et_scan_locator, callback = OnTextChanged.Callback.AFTER_TEXT_CHANGED)
-    void locatorChange(CharSequence s) {
-        if (!StringUtils.isBlank(s.toString())) {
-            mHandler.removeMessages(LOCATORWHAT);
-            mHandler.sendMessageDelayed(mHandler.obtainMessage(LOCATORWHAT, s.toString()), AddressContants.DELAYTIME);
-        }
-    }
-
-    //物料
-    @OnTextChanged(value = R.id.et_barcode_sp, callback = OnTextChanged.Callback.AFTER_TEXT_CHANGED)
-    void barcodeChange(CharSequence s) {
-        if (!StringUtils.isBlank(s.toString())) {
-            mHandler.removeMessages(BARCODEWHAT);
-            mHandler.sendMessageDelayed(mHandler.obtainMessage(BARCODEWHAT, s.toString()), AddressContants.DELAYTIME);
-        }
-    }
-
-    //盘点量
-    @OnTextChanged(value = R.id.et_chcek_number, callback = OnTextChanged.Callback.AFTER_TEXT_CHANGED)
-    void checkNumberChange(CharSequence s) {
-        if (!StringUtils.isBlank(s.toString())) {
-            saveBean.setQty(s.toString().trim());//赋值数量
-        }
-    }
-
-    private Handler.Callback mCallback= new Handler.Callback() {
-        @Override
-        public boolean handleMessage(Message msg) {
-            switch (msg.what) {
-                case BARCODEWHAT://物料
-                    HashMap<String, String> barcodeMap = new HashMap<>();
-                    barcodeMap.put(AddressContants.DOC_NO, data.getDoc_no());
-                    barcodeMap.put(AddressContants.BARCODE_NO, String.valueOf(msg.obj));
-                    barcodeMap.put(AddressContants.WAREHOUSE_NO, saveBean.getWarehouse_no());
-                    barcodeMap.put(AddressContants.STORAGE_SPACES_NO,saveBean.getStorage_spaces_no());
-                    etBarcodeSp.setKeyListener(null);
-                    stockCheckLogic.scanBarcode(barcodeMap, new CommonLogic.ScanBarcodeListener() {
-                        @Override
-                        public void onSuccess(ScanBarcodeBackBean barcodeBackBean) {
-                            etBarcodeSp.setKeyListener(new TextKeyListener(TextKeyListener.Capitalize.CHARACTERS, true));
-                            barcodeShow = barcodeBackBean.getShowing();
-                            barcodeFlag = true;
-                            show();
-                            saveBean.setBarcode_no(barcodeBackBean.getBarcode_no());//料号
-                            saveBean.setItem_no(barcodeBackBean.getItem_no());//料号
-                            saveBean.setLot_no(barcodeBackBean.getLot_no());//批号
-                            saveBean.setItem_barcode_type(barcodeBackBean.getItem_barcode_type());
-                            //赋值累积量
-                            tvMaterialSumnumber.setText(barcodeBackBean.getScan_sumqty());
-                            etChcekNumber.requestFocus();
-                        }
-
-                        @Override
-                        public void onFailed(String error) {
-                            etBarcodeSp.setKeyListener(new TextKeyListener(TextKeyListener.Capitalize.CHARACTERS, true));
-                            barcodeFlag = false;
-                            showFailedDialog(error, new OnDialogClickListener() {
-                                @Override
-                                public void onCallback() {
-                                    etBarcodeSp.setText("");
-                                    etBarcodeSp.requestFocus();
-                                }
-                            });
-
-                        }
-                    });
-                    break;
-                case LOCATORWHAT://库位
-                    saveBean.setDoc_no(data.getDoc_no());
-                    HashMap<String, String> locatorMap = new HashMap<>();
-                    locatorMap.put(AddressContants.DOC_NO, data.getDoc_no());
-                    locatorMap.put(AddressContants.STORAGE_SPACES_BARCODE, msg.obj.toString());
-                    etScanLocator.setKeyListener(null);
-                    stockCheckLogic.scanLocator(locatorMap, new CommonLogic.ScanLocatorListener() {
-                        @Override
-                        public void onSuccess(ScanLocatorBackBean locatorBackBean) {
-                            etScanLocator.setKeyListener(new TextKeyListener(TextKeyListener.Capitalize.CHARACTERS, true));
-                            locatorShow = locatorBackBean.getShowing();
-                            locatorFlag = true;
-                            show();
-                            saveBean.setStorage_spaces_no(locatorBackBean.getStorage_spaces_no());//库位
-                            saveBean.setWarehouse_no(locatorBackBean.getWarehouse_no());//仓库
-                            etBarcodeSp.requestFocus();
-                        }
-
-                        @Override
-                        public void onFailed(String error) {
-                            etScanLocator.setKeyListener(new TextKeyListener(TextKeyListener.Capitalize.CHARACTERS, true));
-                            locatorFlag = false;
-                            showFailedDialog(error, new OnDialogClickListener() {
-                                @Override
-                                public void onCallback() {
-                                    etScanLocator.setText("");
-                                    locatorFlag = false;
-                                }
-                            });
-
-                        }
-                    });
-                    break;
-            }
-            return false;
-        }
-    };
-
-    private Handler mHandler = new WeakRefHandler(mCallback);
-
-    @OnClick(R.id.commit)
-    void commit() {
-        if (!locatorFlag) {
-            showFailedDialog(R.string.scan_locator);
-            return;
-        }
-        if (!barcodeFlag) {
-            showFailedDialog(R.string.scan_barcode);
-            return;
-        }
-        if (StringUtils.isBlank(etChcekNumber.getText().toString())) {
-            showFailedDialog(R.string.check_input_num);
-            return;
-        }
-        showLoadingDialog();
-        Map<String, String> map = ObjectAndMapUtils.getValueMap(saveBean);
-        stockCheckLogic.commit(map, new CommonLogic.CommitListener() {
-            @Override
-            public void onSuccess(String msg) {
-                dismissLoadingDialog();
-                showCommitSuccessNoClickDialog(getResources().getString(R.string.material_sum_number)+":" + msg);
-                mHandler.postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                       dismissLoadingDialog();
-                    }
-                },500);
-                //赋值累积量
-                tvMaterialSumnumber.setText(msg);
-                tvCheckNumber.setText(String.valueOf(++number));
-                initData();
-            }
-
-            @Override
-            public void onFailed(String error) {
-                dismissLoadingDialog();
-                showCommitFailDialog(error);
-            }
-        });
-    }
+    public final int DETAILCODE = 1234;
 
     @Override
     protected Toolbar toolbar() {
@@ -314,78 +77,84 @@ public class StockCheckActivity extends BaseFirstModuldeActivity {
     @Override
     protected void initNavigationTitle() {
         super.initNavigationTitle();
-        mName.setText(R.string.check_stock);
+        mName.setText(R.string.store_check);
     }
 
     @Override
     protected int bindLayoutId() {
-        return R.layout.activity_stockcheck;
+        return R.layout.activity_stock_check;
     }
 
     @Override
     protected void doBusiness() {
-        data = (FilterResultOrderBean) getIntent().getExtras().get("data");
-        number = 0;
-        tvCheckNumber.setText(String.valueOf(number));
-        tvMaterialSumnumber.setText("");
-        saveBean = new SaveBean();
-
-        initData();
+        initFragment();
     }
 
-    private boolean locatorFlag;
-    private String locatorShow;
-
-    private boolean barcodeFlag;
-    private String barcodeShow;
 
     /**
-     * 保存完成之后的操作
+     * 初始化Fragment
      */
-    private void initData() {
-        //库位
-        if (!cbLocatorlock.isChecked()) {
-            locatorFlag = false;
-            etScanLocator.setText("");
-            locatorShow = "";
-            etScanLocator.requestFocus();
-        } else {
-            etBarcodeSp.requestFocus();
-        }
-        //重置物料
-        etBarcodeSp.setText("");
-        barcodeFlag = false;
-        barcodeShow = "";
+    private void initFragment() {
 
-        etChcekNumber.setText("");
-
-        //重置show内容
-        tvDetailShow.setText("");
-        show();
-
-        stockCheckLogic = StockCheckLogic.getInstance(activity, moduleCode(), mTimestamp.toString());
+        scanFg = new StockCheckScanFg();
+        sumFg = new StockCheckSumFg();
+        fragments = new ArrayList<>();
+        fragments.add(scanFg);
+        fragments.add(sumFg);
+        titles = new ArrayList<>();
+        titles.add(getResources().getString(R.string.ScanCode));
+        titles.add(getResources().getString(R.string.SumData));
+        fragmentManager = getSupportFragmentManager();
+        adapter = new ModuleViewPagerAdapter(fragmentManager, fragments, titles);
+        moduleVp.setAdapter(adapter);
+        tlTab.addTab(tlTab.newTab().setText(titles.get(0)));
+        tlTab.addTab(tlTab.newTab().setText(titles.get(1)));
+        //Tablayout和ViewPager关联起来
+        tlTab.setupWithViewPager(moduleVp);
+        tlTab.setTabsFromPagerAdapter(adapter);
+        select();
     }
 
     /**
-     * 公共区域展示
+     * 滑动
      */
-    private void show() {
-        tvDetailShow.setText(StringUtils.lineChange(locatorShow + "\\n" + barcodeShow));
-        if (!StringUtils.isBlank(tvDetailShow.getText().toString())) {
-            includeDetail.setVisibility(View.VISIBLE);
-        } else {
-            includeDetail.setVisibility(View.GONE);
+    private void select() {
+        moduleVp.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+                if (position == 1) {
+                    sumFg.upDateList();
+                }
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+
+            }
+        });
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        try {
+            if (requestCode == DETAILCODE) {
+                sumFg.upDateList();
+            }
+        } catch (Exception e) {
+            LogUtils.e(TAG, "onActivityResult-->" + e);
         }
     }
+
 
     @Override
     public ExitMode exitOrDel() {
-        return ExitMode.EXITISD;
+        return ExitMode.EXITD;
     }
 
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        mHandler.removeCallbacksAndMessages(null);
-    }
 }

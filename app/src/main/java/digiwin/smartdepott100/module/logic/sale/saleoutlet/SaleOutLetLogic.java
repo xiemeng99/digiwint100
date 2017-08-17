@@ -179,7 +179,7 @@ public class SaleOutLetLogic extends CommonLogic {
                         if (null != string) {
                             LogUtils.e(TAG, string);
                             if (ReqTypeName.SUCCCESSCODE.equals(JsonResp.getCode(string))) {
-                                List<FifoCheckBean> fiFoBeanList = JsonResp.getParaDatas(string, "list", FifoCheckBean.class);
+                                List<FifoCheckBean> fiFoBeanList = JsonResp.getParaDatas(string, "list_fifo", FifoCheckBean.class);
                                 if (null != fiFoBeanList && fiFoBeanList.size() > 0) {
                                     for (int i = 0; i < fiFoBeanList.size(); i++) {
                                         FifoCheckBean fifoBean = fiFoBeanList.get(i);

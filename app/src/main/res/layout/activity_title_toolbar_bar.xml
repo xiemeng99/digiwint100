@@ -13,8 +13,8 @@
         android:id="@+id/iv_back"
         android:layout_width="@dimen/layout_30dp"
         android:layout_height="@dimen/welcome_text_margin"
-        android:paddingBottom="@dimen/layout_14dp"
-        android:paddingTop="@dimen/layout_14dp"
+        android:paddingBottom="@dimen/layout_12dp"
+        android:paddingTop="@dimen/layout_12dp"
         android:src="@drawable/white_back" />
 
     <ImageView
@@ -22,8 +22,8 @@
         android:layout_width="@dimen/layout_36dp"
         android:layout_height="@dimen/welcome_text_margin"
         android:layout_gravity="right|center_vertical"
-        android:paddingBottom="@dimen/layout_14dp"
-        android:paddingTop="@dimen/layout_14dp"
+        android:paddingBottom="@dimen/layout_12dp"
+        android:paddingTop="@dimen/layout_12dp"
         android:src="@mipmap/setting"
         android:visibility="gone" />
 
@@ -32,8 +32,8 @@
         android:layout_width="@dimen/layout_36dp"
         android:layout_height="@dimen/welcome_text_margin"
         android:layout_gravity="right|center_vertical"
-        android:paddingBottom="@dimen/layout_14dp"
-        android:paddingTop="@dimen/layout_14dp"
+        android:paddingBottom="@dimen/layout_12dp"
+        android:paddingTop="@dimen/layout_12dp"
         android:src="@mipmap/uncom_icon"
         android:visibility="gone" />
 
@@ -88,8 +88,8 @@
         android:layout_width="@dimen/layout_36dp"
         android:layout_height="@dimen/welcome_text_margin"
         android:layout_gravity="right|center_vertical"
-        android:paddingBottom="@dimen/layout_14dp"
-        android:paddingTop="@dimen/layout_14dp"
+        android:paddingBottom="@dimen/layout_12dp"
+        android:paddingTop="@dimen/layout_12dp"
         android:src="@mipmap/scan"
         android:visibility="gone" />
 

@@ -248,7 +248,7 @@ public class SuitPickingHalfScanFg extends BaseFragment {
     /**
      * 出通单号
      */
-    String issuingNo;
+    String docNo;
 
     private Handler.Callback mCallback= new Handler.Callback() {
         @Override
@@ -259,9 +259,8 @@ public class SuitPickingHalfScanFg extends BaseFragment {
                     map.put(AddressContants.DOC_NO, String.valueOf(msg.obj));
                     map.put(AddressContants.WAREHOUSE_NO, ware);
                     ClickItemPutBean itemPutBean = new ClickItemPutBean();
-                    itemPutBean.setIssuing_no(issuingNo);
-                    itemPutBean.setWarehouse_in_no(ware);
-                    itemPutBean.setDoc_no(issuingNo);
+                    itemPutBean.setWarehouse_out_no(ware);
+                    itemPutBean.setDoc_no(docNo);
                     EventBus.getDefault().post(itemPutBean);
                     suitPickingHalfLogic.docNoFIFO(map, new CommonLogic.PostMaterialFIFOListener() {
                         @Override
@@ -289,7 +288,7 @@ public class SuitPickingHalfScanFg extends BaseFragment {
                     break;
                 case BARCODEWHAT:
                     HashMap<String, String> barcodeMap = new HashMap<>();
-                    barcodeMap.put(AddressContants.DOC_NO, issuingNo);
+                    barcodeMap.put(AddressContants.DOC_NO, docNo);
                     barcodeMap.put(AddressContants.WAREHOUSE_NO, ware);
                     barcodeMap.put(AddressContants.BARCODE_NO, String.valueOf(msg.obj));
                     barcodeMap.put(AddressContants.STORAGE_SPACES_NO,saveBean.getStorage_spaces_out_no());
@@ -305,7 +304,7 @@ public class SuitPickingHalfScanFg extends BaseFragment {
                             saveBean.setBarcode_no(barcodeBackBean.getBarcode_no());
                             saveBean.setUnit_no(barcodeBackBean.getUnit_no());
                             saveBean.setLot_no(barcodeBackBean.getLot_no());
-                            saveBean.setDoc_no(issuingNo);
+                            saveBean.setDoc_no(docNo);
                             saveBean.setFifo_check(barcodeBackBean.getFifo_check());
                             saveBean.setItem_barcode_type(barcodeBackBean.getItem_barcode_type());
                             etInputNum.requestFocus();
@@ -383,8 +382,8 @@ public class SuitPickingHalfScanFg extends BaseFragment {
     public void getFIFo() {
         try {
             FilterResultOrderBean filterBean = (FilterResultOrderBean) pactivity.getIntent().getSerializableExtra(pactivity.filterBean);
-            issuingNo = filterBean.getIssuing_no();
-            mHandler.sendMessage(mHandler.obtainMessage(PICKINGWHAT, issuingNo));
+            docNo = filterBean.getDoc_no();
+            mHandler.sendMessage(mHandler.obtainMessage(PICKINGWHAT, docNo));
         } catch (Exception e) {
             LogUtils.e(TAG, "fifo获取" + e);
         }
@@ -418,7 +417,7 @@ public class SuitPickingHalfScanFg extends BaseFragment {
         saveBean = new SaveBean();
         fiFoList = new ArrayList<>();
         ware = LoginLogic.getWare();
-        issuingNo = "";
+        docNo = "";
         suitPickingHalfLogic = SuitPickingHalfLogic.getInstance(context, pactivity.module, pactivity.mTimestamp.toString());
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(pactivity);
         ryList.setLayoutManager(linearLayoutManager);

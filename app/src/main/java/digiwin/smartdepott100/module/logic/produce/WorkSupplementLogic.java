@@ -123,7 +123,7 @@ public class WorkSupplementLogic extends CommonLogic {
                             String error = mContext.getString(R.string.unknow_error);
                             if (null != string) {
                                 if (ReqTypeName.SUCCCESSCODE.equals(JsonResp.getCode(string))) {
-                                    List<FifoCheckBean> showBeanList = JsonResp.getParaDatas(string,"list",FifoCheckBean.class);
+                                    List<FifoCheckBean> showBeanList = JsonResp.getParaDatas(string,"list_fifo",FifoCheckBean.class);
                                     listener.onSuccess(showBeanList);
                                     return;
                                 } else {

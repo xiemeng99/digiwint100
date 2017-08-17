@@ -41,6 +41,10 @@ public interface ModuleCode {
      */
     public final String STORERETURNMATERIAL="A008";
     /**
+     * IQC检验
+     */
+    public final String IQCINSPECT="A009";
+    /**
      * 原材料标签打印
      */
     public final String RAWMATERAILPRINT="A009";

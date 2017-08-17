@@ -76,11 +76,12 @@
         <item name="android:layout_width">match_parent</item>
         <item name="android:background">@color/gray_da</item>
     </style>
+
     <!--列表中线条样式-->
-    <style name="ry_line_style3">
+    <style name="line_in_pink_style">
         <item name="android:layout_height">@dimen/layout_0.5dp</item>
         <item name="android:layout_width">match_parent</item>
-        <item name="android:background">@color/materialDivider_color</item>
+        <item name="android:background">@color/line_in_pink</item>
     </style>
     <!--列表中线条样式2-->
     <style name="ry_line_style2">
@@ -159,7 +160,11 @@
         <item name="android:layout_width">@dimen/layout_0.5dp</item>
         <item name="android:background">@color/gray_f0</item>
     </style>
-
+    <style name="app_ve_line_style">
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:layout_width">@dimen/layout_0.5dp</item>
+        <item name="android:background">@color/line_in_pink_ve</item>
+    </style>
     <!--粉色背景下本地文字样式-->
     <style name="app_text_ingreen">
         <item name="android:textSize">@dimen/digiwin_textsize</item>
@@ -172,7 +177,7 @@
         <item name="android:textColor">@color/materialText_color</item>
     </style>
 
-    <!-- 绿色背景下服务器返回黄色字体样式 -->
+    <!-- 粉色背景下服务器返回黄色字体样式 -->
     <style name="ser_text_ingreen_yellow">
         <item name="android:textSize">@dimen/digiwin_textsize</item>
         <item name="android:textColor">@color/yellow_text</item>

@@ -161,7 +161,7 @@ public class ZPutInStoreScanFg extends BaseFragment {
             showFailedDialog(R.string.input_num);
             return;
         }
-        saveBean.setDoc_no(orderBean.getStock_in_no());
+        saveBean.setDoc_no(orderBean.getDoc_no());
         saveBean.setQty(etInputNum.getText().toString());
         showLoadingDialog();
         zPutInStoreLogic.scanSave(saveBean, new CommonLogic.SaveListener() {
@@ -220,7 +220,7 @@ public class ZPutInStoreScanFg extends BaseFragment {
                 case BARCODEWHAT:
                     HashMap<String, String> barcodeMap = new HashMap<>();
                     barcodeMap.put(AddressContants.BARCODE_NO, String.valueOf(msg.obj));
-                    barcodeMap.put(AddressContants.DOC_NO,orderBean.getStock_in_no());
+                    barcodeMap.put(AddressContants.DOC_NO,orderBean.getDoc_no());
                     barcodeMap.put(AddressContants.WAREHOUSE_NO, LoginLogic.getWare());
                     barcodeMap.put(AddressContants.STORAGE_SPACES_BARCODE,saveBean.getStorage_spaces_in_no());
                     etBarcodeNo.setKeyListener(null);
@@ -237,7 +237,7 @@ public class ZPutInStoreScanFg extends BaseFragment {
                             saveBean.setBarcode_no(barcodeBackBean.getBarcode_no());
                             saveBean.setItem_no(barcodeBackBean.getItem_no());
                             saveBean.setUnit_no(barcodeBackBean.getUnit_no());
-                            saveBean.setDoc_no(orderData.getStock_in_no());
+                            saveBean.setDoc_no(orderData.getDoc_no());
                             saveBean.setLot_no(barcodeBackBean.getLot_no());
                            // saveBean.setWo_no(barcodeBackBean.getWo_no());
                             saveBean.setScan_sumqty(barcodeBackBean.getScan_sumqty());

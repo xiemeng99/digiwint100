@@ -237,7 +237,7 @@ public class SuitPickingListAcitivity extends BaseTitleActivity {
         showLoadingDialog();
         FilterBean filterBean = new FilterBean();
         filterBean.setWarehouse_in_no(LoginLogic.getWare());
-        filterBean.setIssuing_no(etPickingNo.getText().toString());
+        filterBean.setDoc_no(etPickingNo.getText().toString());
         filterBean.setDepartment_no(etDepartment.getText().toString());
         filterBean.setEmployee_no(etPerson.getText().toString());
         filterBean.setDate_begin(startDate);

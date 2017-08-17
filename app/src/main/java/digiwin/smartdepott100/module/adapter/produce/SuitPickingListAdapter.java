@@ -28,7 +28,7 @@ public class SuitPickingListAdapter  extends BaseRecyclerAdapter<FilterResultOrd
 
     @Override
     protected void bindData(RecyclerViewHolder holder, int position, final FilterResultOrderBean item) {
-        holder.setText(R.id.tv_picking_no, item.getIssuing_no());
+        holder.setText(R.id.tv_picking_no, item.getDoc_no());
         holder.setText(R.id.tv_item_date,item.getCreate_date());
         holder.setText(R.id.tv_applicant,item.getEmployee_name());
         holder.setText(R.id.tv_depart,item.getDepartment_name());

@@ -58,7 +58,7 @@
 
                 </LinearLayout>
 
-                <View style="@style/ry_line_style"/>
+                <View style="@style/line_in_pink_style"/>
 
                 <LinearLayout
                     style="@style/ry_sum_itemstyle"
@@ -81,7 +81,7 @@
                         android:layout_weight="1"
                         style="@style/ser_text_ingreen"/>
                 </LinearLayout>
-                <View style="@style/ry_line_style"/>
+                <View style="@style/line_in_pink_style"/>
 
                 <LinearLayout
                     style="@style/ry_sum_itemstyle"

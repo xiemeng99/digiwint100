@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/layout_5dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+        <TextView
+            android:id="@+id/tv_defectrea"
+            style="@style/app_text_inwhite"
+            android:layout_width="@dimen/layout_0dp"
+            android:layout_weight="1"
+            android:text="@string/defectrea"
+            android:gravity="center"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:id="@+id/tv_defectrea_instruction"
+            style="@style/app_text_inwhite"
+            android:layout_width="@dimen/layout_0dp"
+            android:layout_weight="2"
+            android:gravity="center"
+            android:text="@string/defectrea_instruction"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:id="@+id/tv_defect_num"
+            style="@style/app_text_inwhite"
+            android:layout_width="@dimen/layout_0dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="@string/defect_num"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:id="@+id/tv_bad_num"
+            style="@style/app_text_inwhite"
+            android:layout_width="@dimen/layout_0dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="@string/bad_num"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:id="@+id/tv_remark"
+            style="@style/app_text_inwhite"
+            android:layout_width="@dimen/layout_0dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="@string/remark"
+            android:layout_height="wrap_content" />
+        <View
+            android:layout_width="@dimen/layout_30dp"
+            android:layout_height="@dimen/layout_30dp"></View>
+    </LinearLayout>
+
+
+</LinearLayout>

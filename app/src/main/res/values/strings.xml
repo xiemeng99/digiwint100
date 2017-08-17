@@ -5,7 +5,7 @@
     <string name="system_setting">系统设置</string>
     <string name="remember_password">记住密码</string>
     <string name="login_rightNow">立即登入</string>
-    <string name="little_text">鼎捷软件技术支持</string>
+    <string name="little_text">智互联软件技术支持</string>
     <string name="little_voice_text">语音技术由科大讯飞提供</string>
     <string name="formal">正式区</string>
     <string name="test">测试区</string>
@@ -55,7 +55,7 @@
     <string name="version_new">new</string>
 
     <string name="input_beyond">输入越界!!!</string>
-    <string name="digiwin_soft">鼎捷软件</string>
+    <string name="digiwin_soft">智互联软件</string>
 
     <string name="title_getgoods_check">收货检验</string>
     <string name="title_wo_bill">工单领料</string>
@@ -85,7 +85,9 @@
     <string name="apply_branch">申请部门</string>
     <string name="reason_no">理由码</string>
     <string name="num">数量</string>
+    <string name="sample_num">抽检量</string>
     <string name="number">笔数</string>
+    <string name="lineSequence">行序</string>
     <string name="input_num">请手动输入数量</string>
     <string name="check_input_num">请手动输入盘点数量</string>
     <string name="input_num_exceed_iqty">输入数量大于可入库量</string>
@@ -104,6 +106,7 @@
     <string name="out_warehouse">拨出仓</string>
     <string name="data">日期</string>
     <string name="person">人员</string>
+    <string name="create_date">创建日期</string>
 
     <string name="nodate">无数据</string>
     <string name="unknow_error">程序出现异常</string>
@@ -175,7 +178,7 @@
     <string name="filter_condition">筛选条件</string>
     <string name="title_in_binning">装箱入库</string>
 
-    <string name="check_stock">库存盘点</string>
+    <string name="store_check">库存盘点</string>
     <string name="check_person">盘点人员</string>
     <string name="check_order">盘点单号</string>
     <string name="plan_data">计划日期</string>
@@ -225,6 +228,9 @@
     <string name="delivery_quantity">送货量</string>
     <string name="actual_yield_num">实收量</string>
     <string name="allow_yield_num">允收量</string>
+    <string name="allow_num">允收数</string>
+    <string name="reject_num">拒绝数</string>
+    <string name="delivery_num">送检量</string>
     <string name="delivery_date_">送货日期</string>
     <string name="please_delivery_note">请扫描送货单</string>
     <string name="please_delivery_note_num">请确认所有实收数量</string>
@@ -322,6 +328,7 @@
     <string name="ok_num">合格量</string>
     <string name="check_state">判定状态</string>
     <string name="check_item">检验项目</string>
+    <string name="check_item_instruction">检验项目说明</string>
     <string name="aql">AQL</string>
     <string name="select_check_num">抽验量</string>
     <string name="ac">AC</string>
@@ -345,7 +352,9 @@
 
     <string name="re">RE</string>
     <string name="project_check">项目判定</string>
-    <string name="defect_num">缺点数</string>
+    <string name="defect_num">缺点数量</string>
+    <string name="defectNum_not_zero">缺点数量不能为0</string>
+    <string name="defect_maintenance">测量值维护</string>
     <string name="goods_return">退货</string>
     <string name="bad_reason_maintenance">不良原因维护</string>
     <string name="first_letter_search">首字母查询</string>
@@ -577,8 +586,10 @@
     <string name="up_value">上值</string>
     <string name="down_value">下值</string>
     <string name="check_value">测量值</string>
+    <string name="checkValue_notBe_null">测量值不能为空</string>
     <string name="title_check_value">检验测量值维护</string>
     <string name="OK">合格</string>
+    <string name="isOK">合格否</string>
     <string name="unOK">不合格</string>
     <string name="unok_number">不合格量</string>
     <string name="is_ok">是否OK</string>
@@ -645,7 +656,12 @@
     <string name="pending_number">待处理量</string>
 
     <string name="badrea">不良原因</string>
+    <string name="defectrea">缺点原因</string>
+    <string name="choose_defectrea_first">清先选择缺点原因</string>
+    <string name="defectrea_instruction">缺点原因说明</string>
+    <string name="badrea_instruction">不良原因说明</string>
     <string name="bad_num">不良数量</string>
+    <string name="badNum_big_sampleNum">不良数量超过抽检量</string>
     <string name="procedure_badres_title">生产报工不良品维护</string>
     <string name="please_scan_workers">请扫描报工人员</string>
     <string name="please_scan_device">请扫描设备</string>
@@ -669,6 +685,7 @@
     <string name="printer_connect_failed">打印机连接失败</string>
     <string name="ip_setting">当前无线打印机IP为空，是否前往设置界面关联IP</string>
     <string name="iqc_check">IQC检验</string>
+    <string name="iqc_change">IQC维护</string>
     <string name="technics_name">工艺名称</string>
 
     <string name="miscellaneous_in_no">杂收单号</string>
@@ -683,6 +700,7 @@
     <string name="allocate_out">调拨拨出</string>
     <string name="allocate_in">调拨拨入</string>
     <string name="material_num">收货数量</string>
+    <string name="material_date">收货日期</string>
     <string name="write_name">品保签字</string>
 
     <string name="come_store">来源库位</string>
@@ -715,4 +733,16 @@
     <string name="miscellaneous_nocome_out">无来源杂发</string>
     <string name="miscellaneous_nocome_in">无来源杂收</string>
     <string name="scan_big_applynum">实收量大于送货量,请检查</string>
+    <string name="storecheck_type">盘点类型</string>
+    <string name="first_check">1.初盘</string>
+    <string name="second_check">2.复盘</string>
+    <string name="stockcheck_num">实盘量</string>
+
+    <string name="wait_min">等待分钟</string>
+    <string name="seq_no">序号</string>
+    <string name="defect_qty_nonull">不良数不能为空</string>
+    <string name="defect_nonull">缺点数不能为空</string>
+    <string name="hard_working">正在努力开发中...</string>
+    <string name="iqc_check_pad">IQC检验(平板)</string>
+    <string name="name_not_tiptop">非tiptop用户不可执行该操作</string>
 </resources>

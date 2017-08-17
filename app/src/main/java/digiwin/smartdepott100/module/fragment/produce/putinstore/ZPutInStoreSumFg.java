@@ -103,7 +103,7 @@ public class ZPutInStoreSumFg extends BaseFragment {
         zPutInStoreLogic = ZPutInStoreLogic.getInstance(pactivity, pactivity.module, pactivity.mTimestamp.toString());
         FullyLinearLayoutManager linearLayoutManager = new FullyLinearLayoutManager(activity);
         ryList.setLayoutManager(linearLayoutManager);
-        tv_head_post_order.setText(orderData.getStock_in_no());
+        tv_head_post_order.setText(orderData.getDoc_no());
         tv_head_date.setText(orderData.getCreate_date());
         tv_head_person.setText(orderData.getEmployee_name());
         tv_head_department.setText(orderData.getDepartment_name());
@@ -118,7 +118,7 @@ public class ZPutInStoreSumFg extends BaseFragment {
             adapter = new ZPutInStoreSumAdapter(activity, sumShowBeanList);
             ryList.setAdapter(adapter);
             ClickItemPutBean clickItemPutData = new ClickItemPutBean();
-            clickItemPutData.setStock_in_no(orderData.getStock_in_no());
+            clickItemPutData.setDoc_no(orderData.getDoc_no());
             showLoadingDialog();
             zPutInStoreLogic.getPutInStoreSum(clickItemPutData, new CommonLogic.GetZSumListener() {
                 @Override

@@ -323,6 +323,11 @@ public class SettingActivity extends BaseTitleActivity {
             @Override
             public void unBindByUse(String psw) {
                 AccoutBean info = LoginLogic.getUserInfo();
+                if (null!=info&&!info.getAccount().equals("tiptop"))
+                {
+                    showFailedDialog(getString(R.string.name_not_tiptop));
+                    return;
+                }
                 if (null != info && psw.equals(info.getPassword())) {
                     getDeviceInfo("2");
                 } else {
@@ -408,7 +413,7 @@ public class SettingActivity extends BaseTitleActivity {
         setBlueToothUI(open);
         changeTooth();
         updateEntStorage();
-        // getDeviceInfo("0");
+         getDeviceInfo("0");
         UpdateVer();
         //初始化打印机ip
         tvPrinterIp.setText(SharedPreferencesUtils.get(SettingActivity.this, SharePreferenceKey.PRINTER_IP, "").toString());

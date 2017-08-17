@@ -36,7 +36,7 @@
 
         </LinearLayout>
 
-        <View style="@style/act_line_style"/>
+        <View style="@style/line_in_pink_style"/>
 
         <LinearLayout
             style="@style/itemstyle"
@@ -56,7 +56,7 @@
                 android:layout_height="wrap_content"
                 style="@style/ser_text_ingreen" />
         </LinearLayout>
-        <View style="@style/act_line_style"/>
+        <View style="@style/line_in_pink_style"/>
         <LinearLayout
             style="@style/itemstyle"
             android:layout_width="match_parent"

@@ -208,6 +208,8 @@ public class LoginActivity extends BaseActivity {
 
     private final int HANDLERWHAT = 100;
 
+    private final String deviceNum="200";
+
     @Override
     protected int bindLayoutId() {
         return R.layout.activity_login;
@@ -310,6 +312,7 @@ public class LoginActivity extends BaseActivity {
         AddressContants.SITEFIRSTLOGIN = site;
         Map<String, String> map = new HashMap<>();
         map.put(AddressContants.HASHKEY, MD5Utils.md5Encode(etLoginLock.getText().toString()));
+        map.put("secret_key",MD5Utils.md5EncodeDeviceId(TelephonyUtils.getDeviceId(context)));
         showRocketLoadingDialog();
         logic.login(map, tvEntid.getText().toString(), new LoginLogic.LoginListener() {
             @Override

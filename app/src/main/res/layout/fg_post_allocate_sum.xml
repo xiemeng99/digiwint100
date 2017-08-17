@@ -56,7 +56,7 @@
                         style="@style/ser_text_ingreen" />
                 </LinearLayout>
 
-                <View style="@style/act_line_style"></View>
+                <View style="@style/line_in_pink_style"></View>
 
                 <LinearLayout
                     style="@style/itemstyle"
@@ -81,7 +81,7 @@
 
                 </LinearLayout>
 
-                <View style="@style/act_line_style"></View>
+                <View style="@style/line_in_pink_style"></View>
 
                 <LinearLayout
                     style="@style/itemstyle"

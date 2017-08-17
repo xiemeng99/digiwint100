@@ -1,0 +1,242 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white_ff"
+    android:orientation="vertical">
+
+    <include layout="@layout/activity_title_toolbar_bar"></include>
+
+    <LinearLayout
+        android:id="@+id/ll_test_input"
+        style="@style/itemstyle"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/layout_6dp"
+        android:layout_marginLeft="@dimen/layout_10dp"
+        android:layout_marginRight="@dimen/layout_10dp"
+        android:layout_marginTop="@dimen/layout_6dp"
+        android:background="@drawable/accordingmaterialtop_pink_sharp"
+        android:padding="@dimen/layout_5dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            style="@style/itemstyle">
+            <TextView
+                style="@style/app_text_ingreen"
+                android:layout_width="@dimen/layout_60dp"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:text="@string/supplier" />
+
+            <TextView
+                android:id="@+id/tv_supplier"
+                style="@style/ser_text_ingreen"
+                android:layout_width="@dimen/layout_0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center_vertical" />
+
+            <TextView
+                style="@style/app_text_ingreen"
+                android:layout_width="@dimen/layout_60dp"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:text="@string/item_no" />
+
+            <TextView
+                android:id="@+id/tv_item_no"
+                style="@style/ser_text_ingreen"
+                android:layout_width="@dimen/layout_0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center_vertical" />
+        </LinearLayout>
+
+        <View style="@style/line_in_pink_style" />
+
+        <LinearLayout
+            style="@style/itemstyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                style="@style/app_text_ingreen"
+                android:layout_width="@dimen/layout_60dp"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:text="@string/item_name" />
+
+            <TextView
+                android:id="@+id/tv_item_name"
+                style="@style/ser_text_ingreen"
+                android:layout_width="@dimen/layout_0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center_vertical" />
+
+            <TextView
+                style="@style/app_text_ingreen"
+                android:layout_width="@dimen/layout_60dp"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:text="@string/delivery_num" />
+
+            <TextView
+                android:id="@+id/tv_delivery_num"
+                style="@style/ser_text_ingreen"
+                android:layout_width="@dimen/layout_0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center_vertical" />
+        </LinearLayout>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/layout_0dp"
+        android:layout_weight="1"
+        android:background="@color/white"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/layout_10dp"
+            android:layout_marginRight="@dimen/layout_10dp"
+            android:background="@drawable/red_scandetail_bg"
+            android:orientation="vertical"
+            android:paddingBottom="@dimen/layout_6dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/form_head_back"
+                android:paddingBottom="@dimen/layout_10dp"
+                android:paddingTop="@dimen/layout_10dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="@dimen/layout_0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:singleLine="true"
+                    android:text="@string/lineSequence"
+                    android:gravity="center"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/textSize_14sp" />
+
+                <View style="@style/app_ve_line_style" />
+
+                <TextView
+                    android:layout_width="@dimen/layout_0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:singleLine="true"
+                    android:gravity="center"
+                    android:text="@string/check_item"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/textSize_14sp" />
+
+                <View style="@style/app_ve_line_style" />
+
+                <TextView
+                    android:layout_width="@dimen/layout_0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="3"
+                    android:singleLine="true"
+                    android:gravity="center"
+                    android:text="@string/check_item_instruction"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/textSize_14sp" />
+
+                <View style="@style/app_ve_line_style" />
+
+                <TextView
+                    android:layout_width="@dimen/layout_0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:singleLine="true"
+                    android:gravity="center"
+                    android:text="@string/allow_num"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/textSize_14sp" />
+
+                <View style="@style/app_ve_line_style" />
+
+                <TextView
+                    android:layout_width="@dimen/layout_0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:singleLine="true"
+                    android:gravity="center"
+                    android:text="@string/reject_num"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/textSize_14sp" />
+
+                <View style="@style/app_ve_line_style" />
+
+                <TextView
+                    android:layout_width="@dimen/layout_0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:singleLine="true"
+                    android:gravity="center"
+                    android:text="@string/sample_num"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/textSize_14sp" />
+
+                <View style="@style/app_ve_line_style" />
+
+                <TextView
+                    android:layout_width="@dimen/layout_0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:singleLine="true"
+                    android:gravity="center"
+                    android:text="@string/defect_num"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/textSize_14sp" />
+
+                <View style="@style/app_ve_line_style" />
+
+                <TextView
+                    android:layout_width="@dimen/layout_0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:singleLine="true"
+                    android:gravity="center"
+                    android:text="@string/bad_num"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/textSize_14sp" />
+
+                <View style="@style/app_ve_line_style" />
+
+                <TextView
+                    android:layout_width="@dimen/layout_0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:singleLine="true"
+                    android:gravity="center"
+                    android:text="@string/project_check"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/textSize_14sp" />
+            </LinearLayout>
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/ry_list"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:scrollbars="vertical" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white_ff">
+        <include layout="@layout/inclu_commit"></include>
+    </LinearLayout>
+
+</LinearLayout>

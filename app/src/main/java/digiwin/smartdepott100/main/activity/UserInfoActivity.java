@@ -5,7 +5,11 @@ import android.support.v7.widget.Toolbar;
 import android.view.Gravity;
 import android.widget.TextView;
 
+import org.litepal.crud.DataSupport;
+
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -19,6 +23,8 @@ import digiwin.smartdepott100.core.base.BaseTitleActivity;
 import digiwin.smartdepott100.login.activity.LoginActivity;
 import digiwin.smartdepott100.login.bean.AccoutBean;
 import digiwin.smartdepott100.login.loginlogic.LoginLogic;
+import digiwin.smartdepott100.main.bean.DeviceInfoBean;
+import digiwin.smartdepott100.main.logic.DeviceLogic;
 
 /**
  * 账号管理
@@ -61,16 +67,31 @@ public class UserInfoActivity extends BaseTitleActivity {
      */
     @BindView(R.id.tv_userInfo_exit)
     TextView tv_userInfo_exit;
+
     @OnClick(R.id.tv_userInfo_exit)
-    public void exit(){
+    public void exit() {
         AlertDialogUtils.showSettingExitDialog(context, new OnDialogClickListener() {
             @Override
             public void onCallback() {
+
+                Map<String, String> hashMap = new HashMap<>();
+                hashMap.put("statu", "1");
+                DeviceLogic.getInstance(context, module, mTimestamp.toString()).getDevice(hashMap, new DeviceLogic.DeviceListener() {
+                    @Override
+                    public void onSuccess(List<DeviceInfoBean> deviceInfoBeen) {
+
+                    }
+
+                    @Override
+                    public void onFailed(String msg) {
+                        showFailedDialog(msg);
+                    }
+                });
                 ActivityManagerUtils.startActivity(activity, LoginActivity.class);
                 List<Activity> activityLists = ActivityManagerUtils.getActivityLists();
-                for (Activity mActivity:activityLists){
-                    if(!mActivity.getClass().getSimpleName().equals("LoginActivity")){
-                        if(mActivity!=null &&!mActivity.isFinishing()){
+                for (Activity mActivity : activityLists) {
+                    if (!mActivity.getClass().getSimpleName().equals("LoginActivity")) {
+                        if (mActivity != null && !mActivity.isFinishing()) {
                             mActivity.finish();
                         }
                     }
@@ -112,15 +133,15 @@ public class UserInfoActivity extends BaseTitleActivity {
             tv_userInfo_no.setText(accoutBean.getEmployee_no());
             tv_userInfo_position.setText(accoutBean.getDepartment_name());
             // JPushManager.sendMessage(TelephonyUtils.getDeviceId(activity),"99999999999999999");
-        }catch (Exception e){
-            LogUtils.e(TAG,"doBusiness------Exception");
+        } catch (Exception e) {
+            LogUtils.e(TAG, "doBusiness------Exception");
         }
 
     }
 
     @Override
     public String moduleCode() {
-        module= ModuleCode.OTHER;
+        module = ModuleCode.OTHER;
         return module;
     }
 }

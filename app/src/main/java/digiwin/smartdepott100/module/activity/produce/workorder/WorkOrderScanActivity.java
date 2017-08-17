@@ -137,6 +137,7 @@ public class WorkOrderScanActivity extends BaseTitleActivity {
     LinearLayout llTray;
     @BindView(R.id.line_tray)
     View lineTray;
+
     @OnFocusChange(R.id.et_tray)
     void trayFocusChanage() {
         ModuleUtils.viewChange(llTray, views);
@@ -144,11 +145,11 @@ public class WorkOrderScanActivity extends BaseTitleActivity {
         ModuleUtils.tvChange(activity, tvTray, textViews);
     }
 
-    @BindViews({R.id.et_tray,R.id.et_scan_barocde, R.id.et_scan_locator, R.id.et_input_num})
+    @BindViews({R.id.et_tray, R.id.et_scan_barocde, R.id.et_scan_locator, R.id.et_input_num})
     List<EditText> editTexts;
-    @BindViews({R.id.ll_tray,R.id.ll_scan_barcode, R.id.ll_scan_locator, R.id.ll_input_num})
+    @BindViews({R.id.ll_tray, R.id.ll_scan_barcode, R.id.ll_scan_locator, R.id.ll_input_num})
     List<View> views;
-    @BindViews({R.id.tv_tray,R.id.tv_barcode, R.id.tv_locator, R.id.tv_number})
+    @BindViews({R.id.tv_tray, R.id.tv_barcode, R.id.tv_locator, R.id.tv_number})
     List<TextView> textViews;
 
     @BindView(R.id.cb_locatorlock)
@@ -213,53 +214,53 @@ public class WorkOrderScanActivity extends BaseTitleActivity {
     @OnClick(R.id.iv_title_setting)
     void showDialog() {
         final ListSumBean data = (ListSumBean) getIntent().getSerializableExtra("sumdata");
-        String match_num="0";
-            if(scan_sumqty.equals("0")){
-                match_num=data.getScan_sumqty();
-            }else {
-                match_num = scan_sumqty;
-            }
-            CustomDialog.Builder builder = new CustomDialog.Builder(context)
-                    .view(R.layout.dialog_workorder)
-                    .style(R.style.CustomDialog)
-                    .widthpx((int) (ViewUtils.getScreenWidth(context) * 0.95))
-                    .heightpx(ViewGroup.LayoutParams.WRAP_CONTENT)
-                    .addViewOnclick(R.id.close, new View.OnClickListener() {
-                        @Override
-                        public void onClick(View view) {
-                            if (dialog.isShowing()) {
-                                dialog.dismiss();
-                            }
-                        }
-                    });
-            final float numb1 = StringUtils.string2Float(data.getApply_qty());
-            final float numb2 = StringUtils.string2Float(data.getStock_qty());
-            final float numb3 = StringUtils.string2Float(match_num);
-            if (numb3 == 0) {
-                builder.setViewTextColor(R.id.tv_item_name, data.getLow_order_item_name(), context.getResources().getColor(R.color.Base_color)); //品名
-                builder.setViewTextColor(R.id.tv_item_format, data.getLow_order_item_spec(), context.getResources().getColor(R.color.Base_color));//规格
-                builder.setViewTextColor(R.id.tv_item_no, data.getLow_order_item_no(), context.getResources().getColor(R.color.Base_color));//料号
-                builder.setViewTextColor(R.id.tv_apply_number, data.getApply_qty(), context.getResources().getColor(R.color.Base_color)); //申请量
-                builder.setViewTextColor(R.id.tv_match_number, data.getStock_qty(), context.getResources().getColor(R.color.Base_color)); //库存量
-                builder.setViewTextColor(R.id.tv_locator_num, StringUtils.deleteZero(match_num), context.getResources().getColor(R.color.Base_color));//匹配量
-            } else if (numb1 > numb3) {
-                builder.setViewTextColor(R.id.tv_item_name, data.getLow_order_item_name(), context.getResources().getColor(R.color.textfous_yellow));
-                builder.setViewTextColor(R.id.tv_item_format, data.getLow_order_item_spec(), context.getResources().getColor(R.color.textfous_yellow));
-                builder.setViewTextColor(R.id.tv_item_no, data.getLow_order_item_no(), context.getResources().getColor(R.color.textfous_yellow));
-                builder.setViewTextColor(R.id.tv_apply_number, data.getApply_qty(), context.getResources().getColor(R.color.textfous_yellow));
-                builder.setViewTextColor(R.id.tv_match_number, data.getStock_qty(), context.getResources().getColor(R.color.textfous_yellow));
-                builder.setViewTextColor(R.id.tv_locator_num, StringUtils.deleteZero(match_num), context.getResources().getColor(R.color.textfous_yellow));
-            } else if (numb1 == numb3) {
-                builder.setViewTextColor(R.id.tv_item_name, data.getLow_order_item_name(), context.getResources().getColor(R.color.green1b));
-                builder.setViewTextColor(R.id.tv_item_format, data.getLow_order_item_spec(), context.getResources().getColor(R.color.green1b));
-                builder.setViewTextColor(R.id.tv_item_no, data.getLow_order_item_no(), context.getResources().getColor(R.color.green1b));
-                builder.setViewTextColor(R.id.tv_apply_number, data.getApply_qty(), context.getResources().getColor(R.color.green1b));
-                builder.setViewTextColor(R.id.tv_match_number, data.getStock_qty(), context.getResources().getColor(R.color.green1b));
-                builder.setViewTextColor(R.id.tv_locator_num, StringUtils.deleteZero(match_num), context.getResources().getColor(R.color.green1b));
-            }
-            dialog = builder.build();
-            dialog.show();
+        String match_num = "0";
+        if (scan_sumqty.equals("0")) {
+            match_num = data.getScan_sumqty();
+        } else {
+            match_num = scan_sumqty;
         }
+        CustomDialog.Builder builder = new CustomDialog.Builder(context)
+                .view(R.layout.dialog_workorder)
+                .style(R.style.CustomDialog)
+                .widthpx((int) (ViewUtils.getScreenWidth(context) * 0.95))
+                .heightpx(ViewGroup.LayoutParams.WRAP_CONTENT)
+                .addViewOnclick(R.id.close, new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        if (dialog.isShowing()) {
+                            dialog.dismiss();
+                        }
+                    }
+                });
+        final float numb1 = StringUtils.string2Float(data.getApply_qty());
+        final float numb2 = StringUtils.string2Float(data.getStock_qty());
+        final float numb3 = StringUtils.string2Float(match_num);
+        if (numb3 == 0) {
+            builder.setViewTextColor(R.id.tv_item_name, data.getLow_order_item_name(), context.getResources().getColor(R.color.Base_color)); //品名
+            builder.setViewTextColor(R.id.tv_item_format, data.getLow_order_item_spec(), context.getResources().getColor(R.color.Base_color));//规格
+            builder.setViewTextColor(R.id.tv_item_no, data.getLow_order_item_no(), context.getResources().getColor(R.color.Base_color));//料号
+            builder.setViewTextColor(R.id.tv_apply_number, data.getApply_qty(), context.getResources().getColor(R.color.Base_color)); //申请量
+            builder.setViewTextColor(R.id.tv_match_number, data.getStock_qty(), context.getResources().getColor(R.color.Base_color)); //库存量
+            builder.setViewTextColor(R.id.tv_locator_num, StringUtils.deleteZero(match_num), context.getResources().getColor(R.color.Base_color));//匹配量
+        } else if (numb1 > numb3) {
+            builder.setViewTextColor(R.id.tv_item_name, data.getLow_order_item_name(), context.getResources().getColor(R.color.textfous_yellow));
+            builder.setViewTextColor(R.id.tv_item_format, data.getLow_order_item_spec(), context.getResources().getColor(R.color.textfous_yellow));
+            builder.setViewTextColor(R.id.tv_item_no, data.getLow_order_item_no(), context.getResources().getColor(R.color.textfous_yellow));
+            builder.setViewTextColor(R.id.tv_apply_number, data.getApply_qty(), context.getResources().getColor(R.color.textfous_yellow));
+            builder.setViewTextColor(R.id.tv_match_number, data.getStock_qty(), context.getResources().getColor(R.color.textfous_yellow));
+            builder.setViewTextColor(R.id.tv_locator_num, StringUtils.deleteZero(match_num), context.getResources().getColor(R.color.textfous_yellow));
+        } else if (numb1 == numb3) {
+            builder.setViewTextColor(R.id.tv_item_name, data.getLow_order_item_name(), context.getResources().getColor(R.color.green1b));
+            builder.setViewTextColor(R.id.tv_item_format, data.getLow_order_item_spec(), context.getResources().getColor(R.color.green1b));
+            builder.setViewTextColor(R.id.tv_item_no, data.getLow_order_item_no(), context.getResources().getColor(R.color.green1b));
+            builder.setViewTextColor(R.id.tv_apply_number, data.getApply_qty(), context.getResources().getColor(R.color.green1b));
+            builder.setViewTextColor(R.id.tv_match_number, data.getStock_qty(), context.getResources().getColor(R.color.green1b));
+            builder.setViewTextColor(R.id.tv_locator_num, StringUtils.deleteZero(match_num), context.getResources().getColor(R.color.green1b));
+        }
+        dialog = builder.build();
+        dialog.show();
+    }
 
 
     @OnClick(R.id.save)
@@ -292,11 +293,7 @@ public class WorkOrderScanActivity extends BaseTitleActivity {
                 dismissLoadingDialog();
                 scan_sumqty = saveBackBean.getScan_sumqty();
                 tvScanedNumb.setText(scan_sumqty);
-                if (null != localFifoList) {
-                    if (localFifoList.size() > 0 && AddressContants.FIFOY.equals(saveBean.getFifo_check())) {
-                        getFifo();
-                    }
-                }
+                getFifo();
                 clearData(type);
             }
 
@@ -350,7 +347,7 @@ public class WorkOrderScanActivity extends BaseTitleActivity {
         }
     }
 
-    private Handler.Callback mCallback= new Handler.Callback() {
+    private Handler.Callback mCallback = new Handler.Callback() {
         @Override
         public boolean handleMessage(Message msg) {
             switch (msg.what) {
@@ -371,7 +368,7 @@ public class WorkOrderScanActivity extends BaseTitleActivity {
                             } else {
                                 etInputNum.requestFocus();
                             }
-                            if (CommonUtils.isAutoSave(saveBean)){
+                            if (CommonUtils.isAutoSave(saveBean)) {
                                 saveData();
                             }
                         }
@@ -395,7 +392,7 @@ public class WorkOrderScanActivity extends BaseTitleActivity {
                     HashMap<String, String> barcodeMap = new HashMap<>();
                     barcodeMap.put(AddressContants.BARCODE_NO, String.valueOf(msg.obj));
                     barcodeMap.put(AddressContants.DOC_NO, work_no);
-                    barcodeMap.put(AddressContants.STORAGE_SPACES_NO,saveBean.getStorage_spaces_out_no());
+                    barcodeMap.put(AddressContants.STORAGE_SPACES_NO, saveBean.getStorage_spaces_out_no());
                     etScanBarocde.setKeyListener(null);
                     commonLogic.scanBarcode(barcodeMap, new CommonLogic.ScanBarcodeListener() {
                         @Override
@@ -533,7 +530,7 @@ public class WorkOrderScanActivity extends BaseTitleActivity {
         saveBean.setFifo_check(barcodeBackBean.getFifo_check());
         saveBean.setItem_barcode_type(barcodeBackBean.getItem_barcode_type());
         etScanBarocde.requestFocus();
-        if (CommonUtils.isAutoSave(saveBean)){
+        if (CommonUtils.isAutoSave(saveBean)) {
             saveData();
         }
 
@@ -543,17 +540,17 @@ public class WorkOrderScanActivity extends BaseTitleActivity {
      * 初始化一些变量
      */
     private void initData() {
-        scan_sumqty="0";
+        scan_sumqty = "0";
         etScanBarocde.setText("");
         etScanLocator.setText("");
         barcodeFlag = false;
         locatorFlag = false;
         saveBean = new SaveBean();
         etScanLocator.requestFocus();
-        if (CommonUtils.isUseTray()){
+        if (CommonUtils.isUseTray()) {
             llTray.setVisibility(View.VISIBLE);
             lineTray.setVisibility(View.VISIBLE);
-        }else {
+        } else {
             llTray.setVisibility(View.GONE);
             lineTray.setVisibility(View.GONE);
         }

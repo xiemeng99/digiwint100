@@ -275,7 +275,7 @@ public class SaleOutletListActivity extends BaseTitleActivity {
         FilterBean filterBean = new FilterBean();
         filterBean.setWarehouse_no(LoginLogic.getWare());
         filterBean.setDoc_no(etGeneralNumber.getText().toString());
-        filterBean.setItem_name(tvItemName.getText().toString());
+        filterBean.setItem_name(etItemName.getText().toString());
         filterBean.setPagesize((String)SharedPreferencesUtils.get(activity, SharePreKey.PAGE_SETTING,"10"));
         filterBean.setCustomer_no(etCustom.getText().toString());
         filterBean.setDepartment_no(etDepartment.getText().toString());

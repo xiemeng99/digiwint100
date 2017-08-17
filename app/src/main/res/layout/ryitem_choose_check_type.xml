@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:background="@color/WHITE"
+    android:layout_marginTop="@dimen/layout_6dp"
+    android:layout_marginBottom="@dimen/layout_5dp"
+    android:layout_marginRight="@dimen/layout_3dp"
+    android:layout_marginLeft="@dimen/layout_3dp">
+
+    <TextView
+        android:id="@+id/tv_check_type"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@color/red50"
+        android:textSize="@dimen/textSize_15sp" />
+
+</LinearLayout>

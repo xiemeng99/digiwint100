@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/layout_5dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+        <TextView
+            android:id="@+id/tv_seq_no"
+            style="@style/app_text_inwhite"
+            android:layout_width="@dimen/layout_0dp"
+            android:layout_weight="1"
+            android:text="@string/seq_no"
+            android:gravity="center"
+            android:visibility="gone"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:id="@+id/tv_check_value"
+            style="@style/app_text_inwhite"
+            android:layout_width="@dimen/layout_0dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="@string/check_value"
+            android:layout_height="wrap_content" />
+        <RelativeLayout
+            android:layout_width="@dimen/layout_0dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:layout_height="wrap_content">
+            <CheckBox
+                android:id="@+id/cb_isOK"
+                android:layout_width="wrap_content"
+                android:gravity="center"
+                android:layout_height="@dimen/layout_25dp"
+                android:button="@drawable/checkvalue_checkbox" />
+        </RelativeLayout>
+        <View
+            android:layout_width="@dimen/layout_30dp"
+            android:layout_height="@dimen/layout_30dp" />
+    </LinearLayout>
+
+
+</LinearLayout>

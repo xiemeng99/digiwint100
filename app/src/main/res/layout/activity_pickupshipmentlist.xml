@@ -58,9 +58,10 @@
             </LinearLayout>
 
 
-            <View style="@style/fg_line_style" />
+            <View   android:visibility="gone" style="@style/fg_line_style" />
 
             <LinearLayout
+                android:visibility="gone"
                 android:id="@+id/ll_item_no"
                 style="@style/itemstyle"
                 android:layout_width="match_parent"

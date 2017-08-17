@@ -21,7 +21,7 @@ public interface ReqTypeName {
     /**
      * 解绑设备
      */
-    static  final  String GETAP="GetAp";
+    static  final  String GETAP="als.dev.ope.get";
     /**
      * 验证是否可以登录
      */
@@ -371,6 +371,37 @@ public interface ReqTypeName {
      * 扫描批次
      */
     static final String SCANPLOTNO = "als.b006.plot.get";
-
+    /**
+     * IQC获取扫描数据
+     */
+    static final String IQCINSPECTSCAN = "als.a009.list.get";
+    /**
+     * IQC获取扫描item数据
+     */
+    static final String IQCINSPECTSCANITEM = "als.a009.test.item.get";
+    /**
+     * IQC获取不良原因
+     */
+    static final String IQCINSPECTBADREASON = "als.a009.reason.get";
+    /**
+     * IQC新增/修改/删除不良原因
+     */
+    static final String IQCINSPECTUPDATEBADREASON = "als.a009.reason.save";
+    /**
+     * IQC首字符查询不良原因
+     */
+    static final String IQCSEARCHBADREASON = "als.a009.initial.reason.get";
+    /**
+     * IQC查询测量值
+     */
+    static final String IQCSEARCHCHECKVALUE = "als.a009.measure.get";
+    /**
+     * IQC查询测量值
+     */
+    static final String IQCUPDATECHECKVALUE = "als.a009.measure.save";
+    /**
+     * IQC提交
+     */
+    static final String IQCINSPECTCOMMIT = "als.a009.submit";
 
 }

@@ -235,8 +235,8 @@ public class SuitPickingHalfListAcitivity extends BaseTitleActivity {
         ryList.setAdapter(adapter);
         showLoadingDialog();
         FilterBean filterBean = new FilterBean();
-        filterBean.setWarehouse_in_no(LoginLogic.getWare());
-        filterBean.setIssuing_no(etPickingNo.getText().toString());
+        filterBean.setWarehouse_out_no(LoginLogic.getWare());
+        filterBean.setDoc_no(etPickingNo.getText().toString());
         filterBean.setDepartment_no(etDepartment.getText().toString());
         filterBean.setEmployee_no(etPerson.getText().toString());
         filterBean.setDate_begin(startDate);

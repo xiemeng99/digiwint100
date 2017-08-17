@@ -94,7 +94,7 @@ public class PostAllocateSumFg extends BaseFragment {
 //    private String doc_stus;
     @Override
     protected int bindLayoutId() {
-        return R.layout.activity_post_allocate_sum;
+        return R.layout.fg_post_allocate_sum;
     }
 
     @Override

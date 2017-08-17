@@ -3,6 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:gravity="top"
     android:paddingBottom="@dimen/layout_60dp">
 
     <android.support.v7.widget.RecyclerView

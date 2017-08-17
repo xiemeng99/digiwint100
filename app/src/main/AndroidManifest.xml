@@ -7,7 +7,6 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
-    <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
@@ -89,8 +88,7 @@
         <activity
             android:name=".module.activity.produce.distribute.DistributeScanActivity"
             android:configChanges="keyboardHidden|screenSize"
-            android:windowSoftInputMode="stateAlwaysHidden|adjustPan" >
-        </activity>
+            android:windowSoftInputMode="stateAlwaysHidden|adjustPan"></activity>
         <activity
             android:name=".module.activity.common.NoComeUnComActivity"
             android:windowSoftInputMode="stateAlwaysHidden|adjustPan" />
@@ -133,7 +131,7 @@
         <activity
             android:name=".module.activity.produce.materialreturn.MaterialReturnActivity"
             android:windowSoftInputMode="stateAlwaysHidden|adjustPan" />
-        <!-- 退料过账 -->
+        <!-- 盘点 -->
         <activity
             android:name=".module.activity.stock.storecheck.StockCheckListActivity"
             android:windowSoftInputMode="stateAlwaysHidden|adjustPan">
@@ -808,8 +806,8 @@
         </activity>
         <activity
             android:name=".module.activity.produce.putinstore.ZPutInStoreSecondActivity"
-            android:windowSoftInputMode="stateAlwaysHidden|adjustPan"
-            android:configChanges="screenSize|orientation|keyboardHidden"/>
+            android:configChanges="screenSize|orientation|keyboardHidden"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustPan" />
         <!-- 生产成套领料 -->
         <activity
             android:name=".module.activity.produce.suitpicking.SuitPickingListAcitivity"
@@ -846,6 +844,27 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
+        <!-- IQCt100检验列表 -->
+        <activity
+            android:name=".module.activity.purchase.iqcinspect.IQCInspectListActivity"
+            android:screenOrientation="landscape"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustPan">
+            <intent-filter>
+                <action android:name="android.intent.actiont100.smartdepot.IQCInspectListActivity" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <!-- IQCt100检验 -->
+        <activity
+            android:name=".module.activity.purchase.iqcinspect.IQCInspectItemActivity"
+            android:screenOrientation="landscape"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustPan"></activity>
+        <!-- IQCt100维护 -->
+        <activity
+            android:name=".module.activity.purchase.iqcinspect.IQCInspectActivity"
+            android:screenOrientation="landscape"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustPan"></activity>
         <activity
             android:name=".module.activity.purchase.iqc.IQCommitActivity"
             android:windowSoftInputMode="stateAlwaysHidden|adjustPan" />
@@ -903,15 +922,16 @@
 
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
-        </activity><activity
-        android:name=".module.activity.stock.miscellaneousissues.MiscellaneousNocomeOutActivity"
-        android:windowSoftInputMode="stateAlwaysHidden|adjustPan">
-        <intent-filter>
-            <action android:name="android.intent.actiont100.smartdepot.MiscellaneousNocomeOutActivity" />
+        </activity>
+        <activity
+            android:name=".module.activity.stock.miscellaneousissues.MiscellaneousNocomeOutActivity"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustPan">
+            <intent-filter>
+                <action android:name="android.intent.actiont100.smartdepot.MiscellaneousNocomeOutActivity" />
 
-            <category android:name="android.intent.category.DEFAULT" />
-        </intent-filter>
-    </activity>
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
 
         <!-- Required SDK 核心功能极光推送需要 -->
         <!-- 可配置android:process参数将PushService放在其他进程中 -->

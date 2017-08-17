@@ -55,7 +55,7 @@ tools:context="digiwin.smartdepott100.module.activity.produce.distribute.Distrib
                     />
             </LinearLayout>
 
-            <View style="@style/ry_line_style"/>
+            <View style="@style/line_in_pink_style"/>
 
             <LinearLayout
                 style="@style/ry_sum_itemstyle"
@@ -78,7 +78,7 @@ tools:context="digiwin.smartdepott100.module.activity.produce.distribute.Distrib
                     android:layout_weight="1"
                     style="@style/ser_text_ingreen" />
             </LinearLayout>
-            <View style="@style/ry_line_style"/>
+            <View style="@style/line_in_pink_style"/>
 
             <LinearLayout
                 style="@style/ry_sum_itemstyle"
@@ -96,7 +96,7 @@ tools:context="digiwin.smartdepott100.module.activity.produce.distribute.Distrib
                     android:id="@+id/tv_head_provider"
                     android:layout_width="@dimen/layout_0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="@dimen/layout_5dp"
+                    android:layout_marginLeft="@dimen/layout_3dp"
                     android:layout_weight="1"
                     style="@style/ser_text_ingreen"
                     />
