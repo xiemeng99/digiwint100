@@ -213,7 +213,7 @@
     <color name="gray_f0">#e4e4e4</color>
     <color name="Base_color_click">#168073</color>
     <color name="gray_c2">#c2c2c2</color>
-    <color name="outside_yellow">#ef8132</color>
+    <color name="outside_yellow">#ff6b00</color>
     <color name="red">#e50150</color>
 
     <color name="colorTransParent">#00000000</color><!--辅助色调-->
@@ -237,12 +237,13 @@
     <!--AndColor 2017-5-9-->
     <color name="colorPrimaryRed">#e50150</color>
     <color name="toolBar_color">#e50150</color>
-    <color name="textfous_yellow">#ef8132</color>
-    <color name="orangeYellow">#ef8132</color>
+    <color name="textfous_yellow">#ff6b00</color>
+    <color name="orangeYellow">#ff6b00</color>
+    <color name="light_orangeYellow">#ff6b00</color>
     <color name="red50">#e50150</color>
-    <color name="materialTop_color">#ffe4ed</color>
+    <color name="materialTop_color">#ffc9db</color>
     <color name="materialTitle_color">#5f0000</color>
-    <color name="materialText_color">#bd0000</color>
+    <color name="materialText_color">#9b0000</color>
     <color name="materialDivider_color">#ffdce8</color>
     <color name="tab_title_selected_color">#e50150</color>
     <color name="tab_title_unselected_color">#8c8c8c</color>
@@ -258,4 +259,6 @@
 
     <color name="login_color_t">#e50150</color>
     <color name="login_color_line">#c8c8c8</color>
+    <color name="line_in_pink">#fdb8cf</color>
+    <color name="line_in_pink_ve">#f8276f</color>
 </resources>

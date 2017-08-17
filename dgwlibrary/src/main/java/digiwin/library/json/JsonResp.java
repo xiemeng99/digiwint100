@@ -168,6 +168,9 @@ public class JsonResp {
             String std_data = payload.std_data;
             JSONObject std_dataObj = JSON.parseObject(std_data);
             t = std_dataObj.getJSONObject("parameter").getString(type);
+            if (null==t){
+                t="";
+            }
         } catch (Exception e) {
             LogUtils.e(TAG, "getParaString" + e);
         }
