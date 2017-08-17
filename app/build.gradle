@@ -5,7 +5,7 @@ def releaseTime() {
     return new Date().format("yyyy-MM-dd", TimeZone.getTimeZone("UTC"))
 }
 def name() {
-    return "智能物流"
+    return "T100智能物流"
 }
 
 android {
@@ -20,7 +20,7 @@ android {
         minSdkVersion 17
         targetSdkVersion 23
         versionCode 1
-        versionName "1.27"
+        versionName "1.11"
         resConfigs "en"
         multiDexEnabled true
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
@@ -78,7 +78,7 @@ dependencies {
     compile 'com.squareup.picasso:picasso:2.5.2'
 //     compile 'com.github.xiemeng99.digiwint100:dgwlibrary:1.2'
 //     compile 'com.github.xiemeng99.digiwint100:pulltorefreshlibrary:1.2'
-    //65525问题
+    //65535问题
     compile 'com.android.support:multidex:1.0.0'
     compile project(':dgwlibrary')
     compile project(':pulltorefreshlibrary')
