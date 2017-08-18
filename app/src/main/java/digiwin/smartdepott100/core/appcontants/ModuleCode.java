@@ -69,6 +69,10 @@ public interface ModuleCode {
      */
     public final String LINESEND="B002";
     /**
+     * FQC
+     */
+    public final String FQC="B002";
+    /**
      * 依工单发料
      */
     public final String WORKORDERCODE = "B003";

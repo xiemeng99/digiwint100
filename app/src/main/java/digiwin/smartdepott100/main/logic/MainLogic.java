@@ -141,6 +141,7 @@ public class MainLogic {
         ModuleBean zputInStoreft = new ModuleBean(R.string.put_in_store, R.mipmap.putaway, ModuleCode.PUTINSTORE, "android.intent.actiont100.smartdepot.ZPutInStoreActivity");
         ModuleBean finishedStorageActivity = new ModuleBean(R.string.finishedstorage, R.mipmap.finishedstorage, ModuleCode.FINISHEDSTORAGE, "android.intent.actiont100.smartdepot.FinishedStorageActivity");
         ModuleBean endproductAllot = new ModuleBean(R.string.endproduct_allot, R.mipmap.endproduct_allot, ModuleCode.ENDPRODUCTALLOT, "android.intent.actiont100.smartdepot.EndProductAllotActivity");
+        ModuleBean fqcCheck = new ModuleBean(R.string.fqc_check_pad, R.mipmap.fqc_check_pad, ModuleCode.FQC, "android.intent.actiont100.smartdepot.FQCInspectListActivity");
 
         produceItems.add(workorder);
         produceItems.add(accordingMaterialActivity);
@@ -154,6 +155,7 @@ public class MainLogic {
         produceItems.add(zputInStoreft);
 //        produceItems.add(finishedStorageActivity);
 //        produceItems.add(endproductAllot);
+        produceItems.add(fqcCheck);
 
 //        ModuleBean printLabelActivity = new ModuleBean(R.string.print_label_flow, R.mipmap.bar_code, ModuleCode.PRINTLABEL, "android.intent.actiont100.smartdepot.PrintLabelFlowActivity");
 //        ModuleBean printLabelFinishActivity = new ModuleBean(R.string.print_label_finish, R.mipmap.finished_product_print, ModuleCode.PRINTFINISHLABEL, "android.intent.actiont100.smartdepot.PrintLabelFinishActivity");

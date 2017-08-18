@@ -34,6 +34,7 @@ import digiwin.smartdepott100.module.fragment.purchase.iqcinspect.IQCDefectFg;
 
 /**
  * Created by maoheng on 2017/8/12.
+ * iqc 和fqc通用
  */
 
 public class IQCInspectActivity extends BaseTitleHActivity {
@@ -95,7 +96,9 @@ public class IQCInspectActivity extends BaseTitleHActivity {
 
     @Override
     protected void initNavigationTitle() {
-        mName.setText(R.string.iqc_change);
+        Bundle bundle = getIntent().getExtras();
+        String title = bundle.getString("title");
+        mName.setText(title);
         ivScan.setVisibility(View.VISIBLE);
         iv_title_setting.setVisibility(View.VISIBLE);
         iv_title_setting.setImageResource(R.mipmap.check_pic);
@@ -196,7 +199,9 @@ public class IQCInspectActivity extends BaseTitleHActivity {
 
     @Override
     public String moduleCode() {
-        module = ModuleCode.IQCINSPECT;
+        Bundle bundle = getIntent().getExtras();
+        String code = bundle.getString("code");
+        module = code;
         return module;
     }
 

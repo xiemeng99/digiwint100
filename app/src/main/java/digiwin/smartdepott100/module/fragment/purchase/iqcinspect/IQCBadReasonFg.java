@@ -1,14 +1,10 @@
 package digiwin.smartdepott100.module.fragment.purchase.iqcinspect;
 
 import android.graphics.Color;
-import android.os.Bundle;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageView;
 
 import com.yanzhenjie.recyclerview.swipe.Closeable;
@@ -21,18 +17,16 @@ import com.yanzhenjie.recyclerview.swipe.SwipeMenuRecyclerView;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
-import butterknife.Unbinder;
-import digiwin.library.utils.StringUtils;
 import digiwin.pulltorefreshlibrary.recyclerview.DividerItemDecoration;
 import digiwin.pulltorefreshlibrary.recyclerviewAdapter.BaseSwipeMenuAdapter;
 import digiwin.pulltorefreshlibrary.recyclerviewAdapter.OnItemClickListener;
 import digiwin.pulltorefreshlibrary.recyclerviewAdapter.RecyclerViewHolder;
 import digiwin.smartdepott100.R;
+import digiwin.smartdepott100.core.appcontants.AddressContants;
+import digiwin.smartdepott100.core.appcontants.ReqTypeName;
 import digiwin.smartdepott100.core.base.BaseFragment;
 import digiwin.smartdepott100.module.activity.purchase.iqcinspect.IQCBadReasonDialog;
 import digiwin.smartdepott100.module.activity.purchase.iqcinspect.IQCInspectActivity;
@@ -40,7 +34,7 @@ import digiwin.smartdepott100.module.activity.purchase.iqcinspect.IQCInspectItem
 import digiwin.smartdepott100.module.bean.purchase.BadReasonBean;
 import digiwin.smartdepott100.module.bean.purchase.BadReasonCommitBean;
 import digiwin.smartdepott100.module.bean.purchase.QCScanData;
-import digiwin.smartdepott100.module.logic.purchase.QCInspectLogic;
+import digiwin.smartdepott100.module.logic.purchase.IQCInspectLogic;
 
 /**
  * Created by maoheng on 2017/8/12.
@@ -65,7 +59,7 @@ public class IQCBadReasonFg extends BaseFragment {
 
     BaseSwipeMenuAdapter<BadReasonBean> adapter;
 
-    private QCInspectLogic logic;
+    private IQCInspectLogic logic;
 
     private IQCInspectActivity iActivity;
 
@@ -81,7 +75,7 @@ public class IQCBadReasonFg extends BaseFragment {
     @Override
     protected void doBusiness() {
         iActivity = (IQCInspectActivity) activity;
-        logic = QCInspectLogic.getInstance(iActivity, iActivity.module, iActivity.mTimestamp.toString());
+        logic = IQCInspectLogic.getInstance(iActivity, iActivity.module, iActivity.mTimestamp.toString());
         qcData = (QCScanData) iActivity.getIntent().getExtras().getSerializable(IQCInspectItemActivity.INTENTTAG);
         badReasonList = new ArrayList<>();
         upDateList();
@@ -95,7 +89,7 @@ public class IQCBadReasonFg extends BaseFragment {
         badReasonList.clear();
         showList();
         showLoadingDialog();
-        logic.getIQCBadReason(map, new QCInspectLogic.IQCGetBadReasonListener() {
+        logic.getIQCBadReason(map, new IQCInspectLogic.IQCGetBadReasonListener() {
             @Override
             public void onSuccess(List<BadReasonBean> datas) {
                 badReasonList.clear();
@@ -174,7 +168,7 @@ public class IQCBadReasonFg extends BaseFragment {
                 BadReasonCommitBean commitBean = new BadReasonCommitBean();
                 commitBean.setData(list);
                 showLoadingDialog();
-                logic.upDateIQCBadReason(commitBean, new QCInspectLogic.IQCUpDateBadReasonListener() {
+                logic.upDateIQCBadReason(commitBean, new IQCInspectLogic.IQCUpDateBadReasonListener() {
                     @Override
                     public void onSuccess(List<BadReasonBean> datas) {
                         dismissLoadingDialog();

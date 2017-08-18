@@ -844,7 +844,7 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
-        <!-- IQCt100检验列表 -->
+        <!-- IQCt100平板检验列表 -->
         <activity
             android:name=".module.activity.purchase.iqcinspect.IQCInspectListActivity"
             android:screenOrientation="landscape"
@@ -869,7 +869,21 @@
             android:name=".module.activity.purchase.iqc.IQCommitActivity"
             android:windowSoftInputMode="stateAlwaysHidden|adjustPan" />
         <!-- 原材料标签打印 -->
+        <activity
+            android:name=".module.activity.produce.fqcinspect.FQCInspectListActivity"
+            android:screenOrientation="landscape"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustPan">
+            <intent-filter>
+                <action android:name="android.intent.actiont100.smartdepot.FQCInspectListActivity" />
 
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <!-- IQCt100检验 -->
+        <activity
+            android:name=".module.activity.produce.fqcinspect.FQCInspectItemActivity"
+            android:screenOrientation="landscape"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustPan"></activity>
         <!--扫码收货供应商 -->
         <activity
             android:name="digiwin.smartdepott100.module.activity.purchase.purchasesupplier.PurhcaseSupplierListActivity"

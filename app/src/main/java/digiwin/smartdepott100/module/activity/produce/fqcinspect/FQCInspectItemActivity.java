@@ -1,4 +1,4 @@
-package digiwin.smartdepott100.module.activity.purchase.iqcinspect;
+package digiwin.smartdepott100.module.activity.produce.fqcinspect;
 
 import android.content.Context;
 import android.content.Intent;
@@ -31,15 +31,16 @@ import digiwin.smartdepott100.R;
 import digiwin.smartdepott100.core.appcontants.AddressContants;
 import digiwin.smartdepott100.core.appcontants.ModuleCode;
 import digiwin.smartdepott100.core.base.BaseTitleHActivity;
+import digiwin.smartdepott100.module.activity.purchase.iqcinspect.IQCInspectActivity;
 import digiwin.smartdepott100.module.bean.purchase.IQCCommitBean;
 import digiwin.smartdepott100.module.bean.purchase.QCScanData;
-import digiwin.smartdepott100.module.logic.purchase.IQCInspectLogic;
+import digiwin.smartdepott100.module.logic.produce.FQCInspectLogic;
 
 /**
  * Created by maoheng on 2017/8/11.
  */
 
-public class IQCInspectItemActivity extends BaseTitleHActivity {
+public class FQCInspectItemActivity extends BaseTitleHActivity {
 
     @BindView(R.id.toolbar_title)
     Toolbar toolbarTitle;
@@ -96,7 +97,7 @@ public class IQCInspectItemActivity extends BaseTitleHActivity {
         }
         commitBean.setData(itemList);
         showLoadingDialog();
-        logic.commitIQC(commitBean, new IQCInspectLogic.IQCCommitListener() {
+        logic.commitFQC(commitBean, new FQCInspectLogic.FQCCommitListener() {
             @Override
             public void onSuccess(String result) {
                 showCommitSuccessDialog(result);
@@ -112,30 +113,30 @@ public class IQCInspectItemActivity extends BaseTitleHActivity {
         });
     }
 
-    private IQCInspectLogic logic;
+    private FQCInspectLogic logic;
 
     @Override
     protected int bindLayoutId() {
-        return R.layout.activity_iqc_inspectitem;
+        return R.layout.activity_fqc_inspectitem;
     }
 
     private QCScanData scanData;
 
     private List<QCScanData> qcList;
 
-    private IQCInspectItemAdapter adapter;
+    private FQCInspectItemAdapter adapter;
 
     @Override
     protected void doBusiness() {
         Bundle extras = getIntent().getExtras();
-        scanData = (QCScanData) extras.getSerializable(IQCInspectListActivity.DATA);
+        scanData = (QCScanData) extras.getSerializable(FQCInspectListActivity.DATA);
         tvSupplier.setText(scanData.getSupplier_no() + "  " + scanData.getSupplier_name());
         tvItemNo.setText(scanData.getItem_no());
         tvItemName.setText(scanData.getItem_name());
         tvDeliveryNum.setText(scanData.getQty());
-        logic = IQCInspectLogic.getInstance(activity, module, mTimestamp.toString());
+        logic = FQCInspectLogic.getInstance(activity, module, mTimestamp.toString());
         qcList = new ArrayList<>();
-        adapter = new IQCInspectItemAdapter(activity, qcList);
+        adapter = new FQCInspectItemAdapter(activity, qcList);
         LinearLayoutManager manager = new LinearLayoutManager(activity);
         ryList.setLayoutManager(manager);
         ryList.setAdapter(adapter);
@@ -153,7 +154,7 @@ public class IQCInspectItemActivity extends BaseTitleHActivity {
                     showLoadingDialog();
                     HashMap<String, String> map = new HashMap<>();
                     map.put("qc_no", scanData.getQc_no());
-                    logic.getIQCInspectDatas(map, new IQCInspectLogic.IQCInspectListener() {
+                    logic.getFQCInspectDatas(map, new FQCInspectLogic.IQCInspectListener() {
                         @Override
                         public void onSuccess(List<QCScanData> datas) {
                             dismissLoadingDialog();
@@ -176,7 +177,7 @@ public class IQCInspectItemActivity extends BaseTitleHActivity {
                         public void onFailed(String error) {
                             dismissLoadingDialog();
                             qcList = new ArrayList<QCScanData>();
-                            adapter = new IQCInspectItemAdapter(activity, qcList);
+                            adapter = new FQCInspectItemAdapter(activity, qcList);
                             ryList.setAdapter(adapter);
                             showFailedDialog(error);
                         }
@@ -189,7 +190,7 @@ public class IQCInspectItemActivity extends BaseTitleHActivity {
 
     public static final String INTENTTAG = "initTag";
 
-    public static final String TITLE = "title";
+    private static final String TITLE = "title";
 
     private static final int REQUSETQODE = 1234;
 
@@ -197,7 +198,7 @@ public class IQCInspectItemActivity extends BaseTitleHActivity {
         Bundle bundle = new Bundle();
         bundle.putSerializable(INTENTTAG, qcData);
         bundle.putString("code", module);
-        bundle.putString(TITLE, getString(R.string.iqc_change));
+        bundle.putString(TITLE, getString(R.string.fqc_change));
         bundle.putString(AddressContants.MODULEID_INTENT, mTimestamp.toString());
         ActivityManagerUtils.startActivityBundleForResult(activity, IQCInspectActivity.class, bundle, REQUSETQODE);
     }
@@ -207,7 +208,7 @@ public class IQCInspectItemActivity extends BaseTitleHActivity {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == REQUSETQODE) {
             qcList = new ArrayList<QCScanData>();
-            adapter = new IQCInspectItemAdapter(activity, qcList);
+            adapter = new FQCInspectItemAdapter(activity, qcList);
             ryList.setAdapter(adapter);
             mHandler.removeMessages(GETLISTWHAT);
             mHandler.sendMessageDelayed(mHandler.obtainMessage(GETLISTWHAT), AddressContants.DELAYTIME);
@@ -219,12 +220,12 @@ public class IQCInspectItemActivity extends BaseTitleHActivity {
     @Override
     protected void initNavigationTitle() {
         super.initNavigationTitle();
-        mName.setText(R.string.iqc_check_pad);
+        mName.setText(R.string.fqc_check_pad);
     }
 
     @Override
     public String moduleCode() {
-        module = ModuleCode.IQCINSPECT;
+        module = ModuleCode.FQC;
         return module;
     }
 
@@ -240,15 +241,15 @@ public class IQCInspectItemActivity extends BaseTitleHActivity {
         mHandler = null;
     }
 
-    class IQCInspectItemAdapter extends BaseRecyclerAdapter<QCScanData> {
+    class FQCInspectItemAdapter extends BaseRecyclerAdapter<QCScanData> {
 
-        public IQCInspectItemAdapter(Context ctx, List<QCScanData> list) {
+        public FQCInspectItemAdapter(Context ctx, List<QCScanData> list) {
             super(ctx, list);
         }
 
         @Override
         protected int getItemLayout(int viewType) {
-            return R.layout.ryitem_iqcinspectitem;
+            return R.layout.ryitem_fqcinspectitem;
         }
 
         @Override

@@ -155,7 +155,26 @@ public class QCScanData implements Serializable{
      * 不良数（可维护）
      */
     private String defect_reason_qty;
-
+    /**
+     * fqc使用
+     * 工单号
+     */
+    private String wo_no;
+    /**
+     * fqc使用
+     * 完工单号
+     */
+    private String stock_in_no;
+    /**
+     * 部门编码
+     * fqc使用
+     */
+    private String department_no;
+    /**
+     *部门名称
+     * fqc使用
+     */
+    private String department_name;
     public String getInspection_item() {
         return inspection_item;
     }
@@ -450,5 +469,37 @@ public class QCScanData implements Serializable{
 
     public void setWait_min(String wait_min) {
         this.wait_min = wait_min;
+    }
+
+    public String getWo_no() {
+        return wo_no;
+    }
+
+    public void setWo_no(String wo_no) {
+        this.wo_no = wo_no;
+    }
+
+    public String getStock_in_no() {
+        return stock_in_no;
+    }
+
+    public void setStock_in_no(String stock_in_no) {
+        this.stock_in_no = stock_in_no;
+    }
+
+    public String getDepartment_no() {
+        return department_no;
+    }
+
+    public void setDepartment_no(String department_no) {
+        this.department_no = department_no;
+    }
+
+    public String getDepartment_name() {
+        return department_name;
+    }
+
+    public void setDepartment_name(String department_name) {
+        this.department_name = department_name;
     }
 }

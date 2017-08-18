@@ -5,7 +5,6 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
@@ -19,20 +18,16 @@ import java.util.List;
 import digiwin.library.dialog.CustomDialog;
 import digiwin.library.popupwindow.CustomPopWindow;
 import digiwin.library.utils.AlertDialogUtils;
-import digiwin.library.utils.DialogUtils;
 import digiwin.library.utils.LogUtils;
 import digiwin.library.utils.StringUtils;
 import digiwin.library.utils.ViewUtils;
 import digiwin.pulltorefreshlibrary.recyclerviewAdapter.OnItemClickListener;
 import digiwin.smartdepott100.R;
-import digiwin.smartdepott100.login.loginlogic.LoginLogic;
-import digiwin.smartdepott100.main.activity.settingdialog.StorageAdapter;
-import digiwin.smartdepott100.main.activity.settingdialog.StorageDialog;
 import digiwin.smartdepott100.module.adapter.purchase.BadReasonPopAdapter;
 import digiwin.smartdepott100.module.bean.purchase.BadReasonBean;
 import digiwin.smartdepott100.module.bean.purchase.BadReasonCommitBean;
 import digiwin.smartdepott100.module.bean.purchase.QCScanData;
-import digiwin.smartdepott100.module.logic.purchase.QCInspectLogic;
+import digiwin.smartdepott100.module.logic.purchase.IQCInspectLogic;
 
 /**
  * Created by maoheng on 2017/8/15.
@@ -57,7 +52,7 @@ public class IQCBadReasonDialog {
      *
      * @Author 毛衡
      */
-    public static void showBadResonDialog(final Activity context, final BadReasonBean badReasonBean, final QCInspectLogic logic, final QCScanData qcData) {
+    public static void showBadResonDialog(final Activity context, final BadReasonBean badReasonBean, final IQCInspectLogic logic, final QCScanData qcData) {
         try {
             if(null!=context){
                 if (dialog != null) {
@@ -154,7 +149,7 @@ public class IQCBadReasonDialog {
                         list.add(badReasonBean);
                         commitBean.setData(list);
                         AlertDialogUtils.showLoadingDialog(context);
-                        logic.upDateIQCBadReason(commitBean, new QCInspectLogic.IQCUpDateBadReasonListener() {
+                        logic.upDateIQCBadReason(commitBean, new IQCInspectLogic.IQCUpDateBadReasonListener() {
                             @Override
                             public void onSuccess(List<BadReasonBean> datas) {
                                 AlertDialogUtils.dismissDialog();
@@ -184,7 +179,7 @@ public class IQCBadReasonDialog {
      *
      * @Author 毛衡
      */
-    public static void showBadResonDialog(final Activity context, final QCInspectLogic logic, final QCScanData qcData) {
+    public static void showBadResonDialog(final Activity context, final IQCInspectLogic logic, final QCScanData qcData) {
         try {
             if(null!=context){
                 if (dialog != null) {
@@ -249,7 +244,7 @@ public class IQCBadReasonDialog {
                         if(!StringUtils.isBlank(editable.toString())){
                             HashMap<String,String> map = new HashMap<String, String>();
                             map.put("defect_reason_zm",editable.toString());
-                            logic.searchIQCBadReason(map, new QCInspectLogic.IQCSearchBadReasonListener() {
+                            logic.searchIQCBadReason(map, new IQCInspectLogic.IQCSearchBadReasonListener() {
                                 @Override
                                 public void onSuccess(List<BadReasonBean> datas) {
                                     badReasonBeanList.clear();
@@ -340,7 +335,7 @@ public class IQCBadReasonDialog {
                         list.add(badReasonBean);
                         commitBean.setData(list);
                         AlertDialogUtils.showLoadingDialog(context);
-                        logic.upDateIQCBadReason(commitBean, new QCInspectLogic.IQCUpDateBadReasonListener() {
+                        logic.upDateIQCBadReason(commitBean, new IQCInspectLogic.IQCUpDateBadReasonListener() {
                             @Override
                             public void onSuccess(List<BadReasonBean> datas) {
                                 AlertDialogUtils.dismissDialog();

@@ -128,7 +128,7 @@ public class SaleOutletSumFg extends BaseFragment {
         }
         showLoadingDialog();
         HashMap<String,String> map = new HashMap<>();
-        map.put(AddressContants.DOC_NO,mPutBean.getNotice_no());
+        map.put(AddressContants.DOC_NO,mPutBean.getDoc_no());
         map.put(AddressContants.WAREHOUSE_NO, LoginLogic.getWare());
         logic.getSOLSumData(map, new CommonLogic.GetZSumListener() {
             @Override

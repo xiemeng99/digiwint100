@@ -275,7 +275,7 @@ public class SaleOutletScanFg extends BaseFragment {
                     map.put(AddressContants.DOC_NO, String.valueOf(msg.obj));
                     map.put(AddressContants.WAREHOUSE_NO, ware);
                     ClickItemPutBean itemPutBean = new ClickItemPutBean();
-                    itemPutBean.setNotice_no(notice_no);
+                    itemPutBean.setDoc_no(notice_no);
                     itemPutBean.setWarehouse_no(ware);
                     itemPutBean.setCreate_date(date);
                     EventBus.getDefault().post(itemPutBean);

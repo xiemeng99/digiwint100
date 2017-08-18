@@ -1,11 +1,6 @@
 package digiwin.smartdepott100.module.activity.purchase.iqcinspect;
 
 import android.app.Activity;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
-import android.text.Editable;
-import android.text.TextWatcher;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
@@ -14,26 +9,19 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 import digiwin.library.dialog.CustomDialog;
-import digiwin.library.popupwindow.CustomPopWindow;
 import digiwin.library.utils.AlertDialogUtils;
-import digiwin.library.utils.DialogUtils;
 import digiwin.library.utils.LogUtils;
 import digiwin.library.utils.StringUtils;
 import digiwin.library.utils.ViewUtils;
-import digiwin.pulltorefreshlibrary.recyclerviewAdapter.OnItemClickListener;
 import digiwin.smartdepott100.R;
 import digiwin.smartdepott100.core.appcontants.AddressContants;
-import digiwin.smartdepott100.module.adapter.purchase.BadReasonPopAdapter;
-import digiwin.smartdepott100.module.bean.purchase.BadReasonBean;
-import digiwin.smartdepott100.module.bean.purchase.BadReasonCommitBean;
 import digiwin.smartdepott100.module.bean.purchase.CheckValueBean;
 import digiwin.smartdepott100.module.bean.purchase.CheckValueCommitBean;
 import digiwin.smartdepott100.module.bean.purchase.QCScanData;
-import digiwin.smartdepott100.module.logic.purchase.QCInspectLogic;
+import digiwin.smartdepott100.module.logic.purchase.IQCInspectLogic;
 
 /**
  * Created by maoheng on 2017/8/15.
@@ -59,7 +47,7 @@ public class IQCCheckValueDialog {
      *
      * @Author 毛衡
      */
-    public static void showBadResonDialog(final Activity context, final CheckValueBean checkValueBean, final QCInspectLogic logic, final QCScanData qcData) {
+    public static void showBadResonDialog(final Activity context, final CheckValueBean checkValueBean, final IQCInspectLogic logic, final QCScanData qcData) {
         try {
             if (null != context) {
                 if (dialog != null) {
@@ -150,7 +138,7 @@ public class IQCCheckValueDialog {
                         list.add(checkValueBean);
                         commitBean.setData(list);
                         AlertDialogUtils.showLoadingDialog(context);
-                        logic.updateIQCCheckValue(commitBean, new QCInspectLogic.IQCSearchCheckValueListener() {
+                        logic.updateIQCCheckValue(commitBean, new IQCInspectLogic.IQCSearchCheckValueListener() {
                             @Override
                             public void onSuccess(List<CheckValueBean> datas) {
                                 AlertDialogUtils.dismissDialog();
@@ -182,7 +170,7 @@ public class IQCCheckValueDialog {
      *
      * @Author 毛衡
      */
-    public static void showBadResonDialog(final Activity context, final QCInspectLogic logic, final QCScanData qcData,int order_seq) {
+    public static void showBadResonDialog(final Activity context, final IQCInspectLogic logic, final QCScanData qcData, int order_seq) {
 
         try {
             if (null != context) {
@@ -273,7 +261,7 @@ public class IQCCheckValueDialog {
                         list.add(checkValueBean);
                         commitBean.setData(list);
                         AlertDialogUtils.showLoadingDialog(context);
-                        logic.updateIQCCheckValue(commitBean, new QCInspectLogic.IQCSearchCheckValueListener() {
+                        logic.updateIQCCheckValue(commitBean, new IQCInspectLogic.IQCSearchCheckValueListener() {
                             @Override
                             public void onSuccess(List<CheckValueBean> datas) {
                                 AlertDialogUtils.dismissDialog();

@@ -1,4 +1,4 @@
-package digiwin.smartdepott100.module.activity.purchase.iqcinspect;
+package digiwin.smartdepott100.module.activity.produce.fqcinspect;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -36,15 +36,15 @@ import digiwin.smartdepott100.core.appcontants.AddressContants;
 import digiwin.smartdepott100.core.appcontants.ModuleCode;
 import digiwin.smartdepott100.core.base.BaseTitleHActivity;
 import digiwin.smartdepott100.core.modulecommon.ModuleUtils;
-import digiwin.smartdepott100.module.adapter.purchase.IQCInspectScanAdapter;
+import digiwin.smartdepott100.module.adapter.produce.FQCInspectScanAdapter;
 import digiwin.smartdepott100.module.bean.purchase.QCScanData;
-import digiwin.smartdepott100.module.logic.purchase.IQCInspectLogic;
+import digiwin.smartdepott100.module.logic.produce.FQCInspectLogic;
 
 /**
  * Created by lenovo on 2017/8/11.
  */
 
-public class IQCInspectListActivity extends BaseTitleHActivity {
+public class FQCInspectListActivity extends BaseTitleHActivity {
 
     @BindView(R.id.toolbar_title)
     Toolbar toolbarTitle;
@@ -171,7 +171,7 @@ public class IQCInspectListActivity extends BaseTitleHActivity {
     LinearLayout llSearchDialog;
     @BindView(R.id.activity_distribute)
     RelativeLayout activityDistribute;
-    private IQCInspectScanAdapter adapter;
+    private FQCInspectScanAdapter adapter;
 
     private List<QCScanData> qcList;
 
@@ -206,33 +206,33 @@ public class IQCInspectListActivity extends BaseTitleHActivity {
                 case GETLISTWHAT:
                     HashMap<String, String> map = new HashMap<>();
                     if(!StringUtils.isBlank(etDeliveryNoteNo.getText().toString().trim())){
-                        map.put("delivery_bill_no",etDeliveryNoteNo.getText().toString().trim());
+                        map.put(AddressContants.WO_NO,etDeliveryNoteNo.getText().toString().trim());
                     }
                     if(!StringUtils.isBlank(etPurchaseOrder.getText().toString().trim())){
-                        map.put("receipt_no",etPurchaseOrder.getText().toString().trim());
+                        map.put(AddressContants.STOCKINNO,etPurchaseOrder.getText().toString().trim());
                     }
                     if(!StringUtils.isBlank(etMaterialNumber.getText().toString().trim())){
                         map.put(AddressContants.BARCODE_NO,etMaterialNumber.getText().toString().trim());
                     }
                     if(!StringUtils.isBlank(etSupplier.getText().toString().trim())){
-                        map.put("supplier_no",etSupplier.getText().toString().trim());
+                        map.put(AddressContants.DEPARTMENTNO,etSupplier.getText().toString().trim());
                     }
                     if(!StringUtils.isBlank(etDate.getText().toString().trim())){
                         map.put(AddressContants.DATEBEGIN,startDate);
                         map.put(AddressContants.DATEEND,endDate);
                     }
                     qcList.clear();
-                    adapter = new IQCInspectScanAdapter(activity,qcList);
+                    adapter = new FQCInspectScanAdapter(activity,qcList);
                     ryList.setAdapter(adapter);
                     showLoadingDialog();
-                    logic.getIQCScanDatas(map, new IQCInspectLogic.GetScanListener() {
+                    logic.getFQCScanDatas(map, new FQCInspectLogic.GetScanListener() {
                         @Override
                         public void onSuccess(List<QCScanData> datas) {
                             llSearchDialog.setVisibility(View.GONE);
                             scrollview.setVisibility(View.VISIBLE);
                             qcList.clear();
                             qcList.addAll(datas);
-                            adapter = new IQCInspectScanAdapter(activity, qcList);
+                            adapter = new FQCInspectScanAdapter(activity, qcList);
                             ryList.setAdapter(adapter);
                             dismissLoadingDialog();
                             adapter.setOnItemClickListener(new OnItemClickListener() {
@@ -262,7 +262,7 @@ public class IQCInspectListActivity extends BaseTitleHActivity {
     private void itemClick(QCScanData qcScanData){
         Bundle bundle = new Bundle();
         bundle.putSerializable(DATA,qcScanData);
-        ActivityManagerUtils.startActivityBundleForResult(activity,IQCInspectItemActivity.class,bundle,REQUESTCODE);
+        ActivityManagerUtils.startActivityBundleForResult(activity,FQCInspectItemActivity.class,bundle,REQUESTCODE);
     }
 
     @Override
@@ -281,16 +281,16 @@ public class IQCInspectListActivity extends BaseTitleHActivity {
     @BindView(R.id.ry_list)
     RecyclerView ryList;
 
-    private IQCInspectLogic logic;
+    private FQCInspectLogic logic;
 
     @Override
     protected int bindLayoutId() {
-        return R.layout.activity_iqcinspect_list;
+        return R.layout.activity_fqcinspect_list;
     }
 
     @Override
     protected void initNavigationTitle() {
-        mName.setText(getString(R.string.iqc_check_pad)+getString(R.string.list));
+        mName.setText(getString(R.string.fqc_check_pad)+getString(R.string.list));
         ivScan.setVisibility(View.VISIBLE);
         iv_title_setting.setVisibility(View.VISIBLE);
         iv_title_setting.setImageResource(R.drawable.search);
@@ -303,9 +303,9 @@ public class IQCInspectListActivity extends BaseTitleHActivity {
 
     @Override
     protected void doBusiness() {
-        logic = IQCInspectLogic.getInstance(activity, module, mTimestamp.toString());
+        logic = FQCInspectLogic.getInstance(activity, module, mTimestamp.toString());
         qcList = new ArrayList<>();
-        adapter = new IQCInspectScanAdapter(activity, qcList);
+        adapter = new FQCInspectScanAdapter(activity, qcList);
         FullyLinearLayoutManager manager = new FullyLinearLayoutManager(activity);
         ryList.setLayoutManager(manager);
         ryList.setAdapter(adapter);
@@ -314,7 +314,7 @@ public class IQCInspectListActivity extends BaseTitleHActivity {
 
     @Override
     public String moduleCode() {
-        module = ModuleCode.IQCINSPECT;
+        module = ModuleCode.FQC;
         return module;
     }
 

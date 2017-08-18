@@ -1,10 +1,8 @@
 package digiwin.smartdepott100.module.fragment.purchase.iqcinspect;
 
 import android.graphics.Color;
-import android.os.Bundle;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
@@ -22,9 +20,7 @@ import java.util.HashMap;
 import java.util.List;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
-import butterknife.Unbinder;
 import digiwin.pulltorefreshlibrary.recyclerview.DividerItemDecoration;
 import digiwin.pulltorefreshlibrary.recyclerviewAdapter.BaseSwipeMenuAdapter;
 import digiwin.pulltorefreshlibrary.recyclerviewAdapter.OnItemClickListener;
@@ -32,16 +28,13 @@ import digiwin.pulltorefreshlibrary.recyclerviewAdapter.RecyclerViewHolder;
 import digiwin.smartdepott100.R;
 import digiwin.smartdepott100.core.appcontants.AddressContants;
 import digiwin.smartdepott100.core.base.BaseFragment;
-import digiwin.smartdepott100.module.activity.purchase.iqcinspect.IQCBadReasonDialog;
 import digiwin.smartdepott100.module.activity.purchase.iqcinspect.IQCCheckValueDialog;
 import digiwin.smartdepott100.module.activity.purchase.iqcinspect.IQCInspectActivity;
 import digiwin.smartdepott100.module.activity.purchase.iqcinspect.IQCInspectItemActivity;
 import digiwin.smartdepott100.module.bean.purchase.CheckValueBean;
-import digiwin.smartdepott100.module.bean.purchase.BadReasonCommitBean;
-import digiwin.smartdepott100.module.bean.purchase.CheckValueBean;
 import digiwin.smartdepott100.module.bean.purchase.CheckValueCommitBean;
 import digiwin.smartdepott100.module.bean.purchase.QCScanData;
-import digiwin.smartdepott100.module.logic.purchase.QCInspectLogic;
+import digiwin.smartdepott100.module.logic.purchase.IQCInspectLogic;
 
 /**
  * Created by maoheng on 2017/8/12.
@@ -66,7 +59,7 @@ public class IQCDefectFg extends BaseFragment {
 
     BaseSwipeMenuAdapter<CheckValueBean> adapter;
 
-    private QCInspectLogic logic;
+    private IQCInspectLogic logic;
 
     private IQCInspectActivity iActivity;
 
@@ -82,7 +75,7 @@ public class IQCDefectFg extends BaseFragment {
     @Override
     protected void doBusiness() {
         iActivity = (IQCInspectActivity) activity;
-        logic = QCInspectLogic.getInstance(iActivity, iActivity.module, iActivity.mTimestamp.toString());
+        logic = IQCInspectLogic.getInstance(iActivity, iActivity.module, iActivity.mTimestamp.toString());
         qcData = (QCScanData) iActivity.getIntent().getExtras().getSerializable(IQCInspectItemActivity.INTENTTAG);
         checkValueList = new ArrayList<>();
     }
@@ -95,7 +88,7 @@ public class IQCDefectFg extends BaseFragment {
         checkValueList.clear();
         showList();
         showLoadingDialog();
-        logic.searchIQCCheckValue(map, new QCInspectLogic.IQCSearchCheckValueListener() {
+        logic.searchIQCCheckValue(map, new IQCInspectLogic.IQCSearchCheckValueListener() {
             @Override
             public void onSuccess(List<CheckValueBean> datas) {
                 checkValueList.clear();
@@ -178,7 +171,7 @@ public class IQCDefectFg extends BaseFragment {
                 CheckValueCommitBean commitBean = new CheckValueCommitBean();
                 commitBean.setData(list);
                 showLoadingDialog();
-                logic.updateIQCCheckValue(commitBean, new QCInspectLogic.IQCSearchCheckValueListener() {
+                logic.updateIQCCheckValue(commitBean, new IQCInspectLogic.IQCSearchCheckValueListener() {
                     @Override
                     public void onSuccess(List<CheckValueBean> datas) {
                         dismissLoadingDialog();

@@ -744,5 +744,8 @@
     <string name="defect_nonull">缺点数不能为空</string>
     <string name="hard_working">正在努力开发中...</string>
     <string name="iqc_check_pad">IQC检验(平板)</string>
-    <string name="name_not_tiptop">非tiptop用户不可执行该操作</string>
+    <string name="fqc_check_pad">FQC检验(平板)</string>
+    <string name="name_not_tiptop">非管理员户不可执行该操作</string>
+    <string name="completing_no">完工单号</string>
+    <string name="fqc_change">FQC维护</string>
 </resources>

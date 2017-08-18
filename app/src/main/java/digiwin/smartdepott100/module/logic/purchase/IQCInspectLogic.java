@@ -10,6 +10,7 @@ import digiwin.library.json.JsonResp;
 import digiwin.library.utils.LogUtils;
 import digiwin.library.utils.ThreadPoolManager;
 import digiwin.smartdepott100.R;
+import digiwin.smartdepott100.core.appcontants.ModuleCode;
 import digiwin.smartdepott100.core.appcontants.ReqTypeName;
 import digiwin.smartdepott100.core.json.JsonReqForERP;
 import digiwin.smartdepott100.core.net.IRequestCallbackImp;
@@ -26,16 +27,16 @@ import digiwin.smartdepott100.module.logic.common.CommonLogic;
  * Created by lenovo on 2017/8/11.
  */
 
-public class QCInspectLogic extends CommonLogic {
+public class IQCInspectLogic extends CommonLogic {
 
-    protected QCInspectLogic(Context context, String module, String timestamp) {
+    protected IQCInspectLogic(Context context, String module, String timestamp) {
         super(context, module, timestamp);
     }
 
-    private static QCInspectLogic logic;
+    private static IQCInspectLogic logic;
 
-    public static QCInspectLogic getInstance(Context context, String module, String timestamp){
-        return logic = new QCInspectLogic(context, module, timestamp);
+    public static IQCInspectLogic getInstance(Context context, String module, String timestamp){
+        return logic = new IQCInspectLogic(context, module, timestamp);
     }
 
     /**
@@ -131,6 +132,7 @@ public class QCInspectLogic extends CommonLogic {
 
     /**
      * 获取IQC不良原因
+     * fqc通用
      */
     public interface IQCGetBadReasonListener{
 
@@ -141,13 +143,20 @@ public class QCInspectLogic extends CommonLogic {
 
     /**
      * 获取IQC不良原因
+     * fqc通用
      */
     public void getIQCBadReason(final Map<String,String> map, final IQCGetBadReasonListener listener) {
         ThreadPoolManager.getInstance().executeTask(new Runnable() {
             @Override
             public void run() {
                 try {
-                    String createJson = JsonReqForERP.mapCreateJson(mModule, ReqTypeName.IQCINSPECTBADREASON, mTimestamp, map);
+                    String reqName="";
+                    if (ModuleCode.FQC.equals(mModule)){
+                        reqName="als.b002.reason.get";
+                    }else{
+                        reqName="als.a009.reason.get";
+                    }
+                    String createJson = JsonReqForERP.mapCreateJson(mModule,reqName, mTimestamp, map);
                     OkhttpRequest.getInstance(mContext).post(createJson, new IRequestCallbackImp() {
                         @Override
                         public void onResponse(String string) {
@@ -176,6 +185,7 @@ public class QCInspectLogic extends CommonLogic {
 
     /**
      * 新增/删除IQC不良原因
+     * fqc通用
      */
     public interface IQCUpDateBadReasonListener{
 
@@ -186,13 +196,20 @@ public class QCInspectLogic extends CommonLogic {
 
     /**
      * 新增/删除IQC不良原因
+     * fqc通用
      */
     public void upDateIQCBadReason(final BadReasonCommitBean commitData, final IQCUpDateBadReasonListener listener) {
         ThreadPoolManager.getInstance().executeTask(new Runnable() {
             @Override
             public void run() {
                 try {
-                    String createJson = JsonReqForERP.dataCreateJson(mModule, ReqTypeName.IQCINSPECTUPDATEBADREASON, mTimestamp, commitData);
+                    String reqName="";
+                    if (ModuleCode.FQC.equals(mModule)){
+                        reqName="als.b002.reason.save";
+                    }else{
+                        reqName="als.a009.reason.save";
+                    }
+                    String createJson = JsonReqForERP.dataCreateJson(mModule, reqName, mTimestamp, commitData);
                     OkhttpRequest.getInstance(mContext).post(createJson, new IRequestCallbackImp() {
                         @Override
                         public void onResponse(String string) {
@@ -221,6 +238,7 @@ public class QCInspectLogic extends CommonLogic {
 
     /**
      * IQC不良原因首字母查询
+     * fqc通用
      */
     public interface IQCSearchBadReasonListener{
 
@@ -231,13 +249,20 @@ public class QCInspectLogic extends CommonLogic {
 
     /**
      * IQC不良原因首字母查询
+     * fqc通用
      */
     public void searchIQCBadReason(final HashMap<String,String> map, final IQCSearchBadReasonListener listener) {
         ThreadPoolManager.getInstance().executeTask(new Runnable() {
             @Override
             public void run() {
                 try {
-                    String createJson = JsonReqForERP.mapCreateJson(mModule, ReqTypeName.IQCSEARCHBADREASON, mTimestamp, map);
+                    String reqName="";
+                    if (ModuleCode.FQC.equals(mModule)){
+                        reqName="als.b002.initial.reason.get";
+                    }else{
+                        reqName="als.a009.initial.reason.get";
+                    }
+                    String createJson = JsonReqForERP.mapCreateJson(mModule, reqName, mTimestamp, map);
                     OkhttpRequest.getInstance(mContext).post(createJson, new IRequestCallbackImp() {
                         @Override
                         public void onResponse(String string) {
@@ -268,6 +293,7 @@ public class QCInspectLogic extends CommonLogic {
 
     /**
      * IQC测量值查询
+     * fqc通用
      */
     public interface IQCSearchCheckValueListener{
 
@@ -278,13 +304,20 @@ public class QCInspectLogic extends CommonLogic {
 
     /**
      * IQC测量值查询
+     * fqc通用
      */
     public void searchIQCCheckValue(final HashMap<String,String> map, final IQCSearchCheckValueListener listener) {
         ThreadPoolManager.getInstance().executeTask(new Runnable() {
             @Override
             public void run() {
                 try {
-                    String createJson = JsonReqForERP.mapCreateJson(mModule, ReqTypeName.IQCSEARCHCHECKVALUE, mTimestamp, map);
+                    String reqName="";
+                    if (ModuleCode.FQC.equals(mModule)){
+                        reqName="als.b002.measure.get";
+                    }else{
+                        reqName="als.a009.measure.get";
+                    }
+                    String createJson = JsonReqForERP.mapCreateJson(mModule,reqName, mTimestamp, map);
                     OkhttpRequest.getInstance(mContext).post(createJson, new IRequestCallbackImp() {
                         @Override
                         public void onResponse(String string) {
@@ -313,6 +346,7 @@ public class QCInspectLogic extends CommonLogic {
 
     /**
      * IQC测量值更新
+     * fqc通用
      */
     public interface IQCUpdateCheckValueListener{
 
@@ -323,13 +357,20 @@ public class QCInspectLogic extends CommonLogic {
 
     /**
      * IQC测量值更新
+     * fqc通用
      */
     public void updateIQCCheckValue(final CheckValueCommitBean commitBean, final IQCSearchCheckValueListener listener) {
         ThreadPoolManager.getInstance().executeTask(new Runnable() {
             @Override
             public void run() {
                 try {
-                    String createJson = JsonReqForERP.dataCreateJson(mModule, ReqTypeName.IQCUPDATECHECKVALUE, mTimestamp, commitBean);
+                    String reqName="";
+                    if (ModuleCode.FQC.equals(mModule)){
+                        reqName="als.b002.measure.save";
+                    }else{
+                        reqName="als.a009.measure.save";
+                    }
+                    String createJson = JsonReqForERP.dataCreateJson(mModule, reqName, mTimestamp, commitBean);
                     OkhttpRequest.getInstance(mContext).post(createJson, new IRequestCallbackImp() {
                         @Override
                         public void onResponse(String string) {
