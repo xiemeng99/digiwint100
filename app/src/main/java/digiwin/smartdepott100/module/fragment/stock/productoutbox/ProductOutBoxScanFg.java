@@ -37,11 +37,11 @@ import digiwin.smartdepott100.module.logic.common.CommonLogic;
  */
 public class ProductOutBoxScanFg extends BaseFragment {
 
-    @BindViews({R.id.et_pack_boxnumber, R.id.et_product_number})
+    @BindViews({R.id.et_pack_boxno, R.id.et_product_no})
     List<EditText> editTexts;
-    @BindViews({R.id.ll_pack_boxnumber, R.id.ll_product_number})
+    @BindViews({R.id.ll_pack_boxno, R.id.ll_product_no})
     List<View> views;
-    @BindViews({R.id.tv_pack_boxnumber, R.id.tv_product_number})
+    @BindViews({R.id.tv_pack_boxno, R.id.tv_product_no})
     List<TextView> textViews;
 
     /**
@@ -52,22 +52,22 @@ public class ProductOutBoxScanFg extends BaseFragment {
     /**
      * 包装箱号
      */
-    @BindView(R.id.tv_pack_boxnumber)
+    @BindView(R.id.tv_pack_boxno)
     TextView tvPackBoxNumber;
-    @BindView(R.id.et_pack_boxnumber)
+    @BindView(R.id.et_pack_boxno)
     EditText etPackBoxNumber;
     @BindView(R.id.cb_inlocatorlock)
     CheckBox cbInlocatorlock;
-    @BindView(R.id.ll_pack_boxnumber)
+    @BindView(R.id.ll_pack_boxno)
     LinearLayout llPackBoxNumber;
     /**
      * 产品条码
      */
-    @BindView(R.id.tv_product_number)
+    @BindView(R.id.tv_product_no)
     TextView tvProductBarcode;
-    @BindView(R.id.et_product_number)
+    @BindView(R.id.et_product_no)
     EditText etProductBarcode;
-    @BindView(R.id.ll_product_number)
+    @BindView(R.id.ll_product_no)
     LinearLayout llProductBarcode;
 
     @BindView(R.id.ll_zx_input)
@@ -78,14 +78,14 @@ public class ProductOutBoxScanFg extends BaseFragment {
     @BindView(R.id.includedetail)
     View includeDetail;
 
-    @OnFocusChange(R.id.et_pack_boxnumber)
+    @OnFocusChange(R.id.et_pack_boxno)
     void barcodeFocusChanage() {
         ModuleUtils.viewChange(llPackBoxNumber, views);
         ModuleUtils.etChange(activity, etPackBoxNumber, editTexts);
         ModuleUtils.tvChange(activity, tvPackBoxNumber, textViews);
     }
 
-    @OnFocusChange(R.id.et_product_number)
+    @OnFocusChange(R.id.et_product_no)
     void locatorFocusChanage() {
         ModuleUtils.viewChange(llProductBarcode, views);
         ModuleUtils.etChange(activity, etProductBarcode, editTexts);
@@ -101,7 +101,7 @@ public class ProductOutBoxScanFg extends BaseFragment {
         }
     }
 
-    @OnTextChanged(value = R.id.et_pack_boxnumber, callback = OnTextChanged.Callback.AFTER_TEXT_CHANGED)
+    @OnTextChanged(value = R.id.et_pack_boxno, callback = OnTextChanged.Callback.AFTER_TEXT_CHANGED)
     void barcodeChange(CharSequence s) {
         if (!StringUtils.isBlank(s.toString())) {
             mHandler.removeMessages(PACKBOXNUMBER);
@@ -109,7 +109,7 @@ public class ProductOutBoxScanFg extends BaseFragment {
         }
     }
 
-    @OnTextChanged(value = R.id.et_product_number, callback = OnTextChanged.Callback.AFTER_TEXT_CHANGED)
+    @OnTextChanged(value = R.id.et_product_no, callback = OnTextChanged.Callback.AFTER_TEXT_CHANGED)
     void locatorChange(CharSequence s) {
         if (!StringUtils.isBlank(s.toString())) {
             mHandler.removeMessages(PRODUCTBARCODE);

@@ -111,7 +111,7 @@ public class PurchaseStoreScanFg extends BaseFragment {
                             saveBean.setItem_barcode_type(barcodeBackBean.getItem_barcode_type());
                             saveBean.setScan_sumqty(barcodeBackBean.getScan_sumqty());
                             etInputNum.requestFocus();
-                            if (CommonUtils.isAutoSave(saveBean)){
+                            if (locatorFlag&&CommonUtils.isAutoSave(saveBean)){
                                 save();
                             }
                         }
@@ -143,7 +143,7 @@ public class PurchaseStoreScanFg extends BaseFragment {
                             saveBean.setStorage_spaces_out_no(locatorBackBean.getStorage_spaces_no());
                             saveBean.setWarehouse_out_no(locatorBackBean.getWarehouse_no());
                             etScanBarocde.requestFocus();
-                            if (CommonUtils.isAutoSave(saveBean)){
+                            if (barcodeFlag&&CommonUtils.isAutoSave(saveBean)){
                                 save();
                             }
                         }

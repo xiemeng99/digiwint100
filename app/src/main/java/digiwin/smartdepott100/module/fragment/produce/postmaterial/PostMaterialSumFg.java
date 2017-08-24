@@ -142,7 +142,7 @@ public class PostMaterialSumFg extends BaseFragment {
                 }
             });
 //            HashMap<String,String> map = new HashMap<>();
-//            commonLogic.getSum(map, new CommonLogic.GetSumListener() {
+//            productBinningLogic.getSum(map, new CommonLogic.GetSumListener() {
 //                @Override
 //                public void onSuccess(List<SumShowBean> list) {
 //                    dismissLoadingDialog();

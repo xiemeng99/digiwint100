@@ -35,7 +35,6 @@ import digiwin.pulltorefreshlibrary.recyclerviewAdapter.BaseRecyclerAdapter;
 import digiwin.smartdepott100.R;
 import digiwin.smartdepott100.core.appcontants.AddressContants;
 import digiwin.smartdepott100.core.base.BaseFragment;
-import digiwin.smartdepott100.core.coreutil.FiFoCheckUtils;
 import digiwin.smartdepott100.core.modulecommon.ModuleUtils;
 import digiwin.smartdepott100.login.bean.AccoutBean;
 import digiwin.smartdepott100.login.loginlogic.LoginLogic;
@@ -48,7 +47,6 @@ import digiwin.smartdepott100.module.bean.common.SaveBean;
 import digiwin.smartdepott100.module.bean.common.ScanBarcodeBackBean;
 import digiwin.smartdepott100.module.bean.common.ScanLocatorBackBean;
 import digiwin.smartdepott100.module.logic.common.CommonLogic;
-import digiwin.smartdepott100.module.logic.sale.saleoutlet.SaleOutLetLogic;
 
 
 /**
@@ -260,7 +258,7 @@ public class SaleOutletScanFg extends BaseFragment {
     /**
      * 出通单号
      */
-    String notice_no;
+    String doc_no;
     /**
      * 日期
      */
@@ -275,9 +273,8 @@ public class SaleOutletScanFg extends BaseFragment {
                     map.put(AddressContants.DOC_NO, String.valueOf(msg.obj));
                     map.put(AddressContants.WAREHOUSE_NO, ware);
                     ClickItemPutBean itemPutBean = new ClickItemPutBean();
-                    itemPutBean.setDoc_no(notice_no);
+                    itemPutBean.setDoc_no(doc_no);
                     itemPutBean.setWarehouse_no(ware);
-                    itemPutBean.setCreate_date(date);
                     EventBus.getDefault().post(itemPutBean);
                     logic.getFifoInfo(map, new SaleOutLetLogic.FIFOInfoGETListener() {
                         @Override
@@ -305,7 +302,7 @@ public class SaleOutletScanFg extends BaseFragment {
                     break;
                 case BARCODEWHAT:
                     HashMap<String, String> barcodeMap = new HashMap<>();
-                    barcodeMap.put(AddressContants.DOC_NO, notice_no);
+                    barcodeMap.put(AddressContants.DOC_NO, doc_no);
                     barcodeMap.put(AddressContants.WAREHOUSE_NO, ware);
                     barcodeMap.put(AddressContants.BARCODE_NO, String.valueOf(msg.obj));
                     barcodeMap.put(AddressContants.STORAGE_SPACES_NO,saveBean.getStorage_spaces_out_no());
@@ -321,11 +318,11 @@ public class SaleOutletScanFg extends BaseFragment {
                             saveBean.setBarcode_no(barcodeBackBean.getBarcode_no());
                             saveBean.setUnit_no(barcodeBackBean.getUnit_no());
                             saveBean.setLot_no(barcodeBackBean.getLot_no());
-                            saveBean.setDoc_no(notice_no);
+                            saveBean.setDoc_no(doc_no);
                             saveBean.setFifo_check(barcodeBackBean.getFifo_check());
                             saveBean.setItem_barcode_type(barcodeBackBean.getItem_barcode_type());
                             etInputNum.requestFocus();
-                            if (CommonUtils.isAutoSave(saveBean)){
+                            if (locatorFlag&&CommonUtils.isAutoSave(saveBean)){
                                 save();
                             }
                         }
@@ -356,7 +353,7 @@ public class SaleOutletScanFg extends BaseFragment {
                             saveBean.setWarehouse_out_no(locatorBackBean.getWarehouse_no());
                             saveBean.setAllow_negative_stock(locatorBackBean.getAllow_negative_stock());
                             etScanBarocde.requestFocus();
-                            if (CommonUtils.isAutoSave(saveBean)){
+                            if (barcodeFlag&&CommonUtils.isAutoSave(saveBean)){
                                 save();
                             }
                         }
@@ -406,10 +403,10 @@ public class SaleOutletScanFg extends BaseFragment {
     public void getFIFo() {
         try {
             FilterResultOrderBean filterBean = (FilterResultOrderBean) pactivity.getIntent().getSerializableExtra(pactivity.filterBean);
-            notice_no = filterBean.getDoc_no();
-            tvGeneralNumber.setText(notice_no);
+            doc_no = filterBean.getDoc_no();
+            tvGeneralNumber.setText(doc_no);
             date = filterBean.getCreate_date();
-            mHandler.sendMessage(mHandler.obtainMessage(FIFOWHAT, notice_no));
+            mHandler.sendMessage(mHandler.obtainMessage(FIFOWHAT, doc_no));
         } catch (Exception e) {
             LogUtils.e(TAG, "fifo获取" + e);
         }
@@ -437,12 +434,12 @@ public class SaleOutletScanFg extends BaseFragment {
      * 初始化一些变量
      */
     public void initData() {
-        saleFlag = false;
+        saleFlag = true;
         barcodeFlag = false;
         locatorFlag = false;
         saveBean = new SaveBean();
         fiFoList = new ArrayList<>();
-        notice_no = "";
+        doc_no = "";
         ware = "";
         date = "";
         logic = SaleOutLetLogic.getInstance(context, pactivity.module, pactivity.mTimestamp.toString());

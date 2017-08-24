@@ -15,6 +15,7 @@ public class SaveBackBean implements Serializable{
      */
     private String scan_sumqty;
 
+
     public String getScan_sumqty() {
         return scan_sumqty;
     }

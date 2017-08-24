@@ -47,7 +47,7 @@
                         />
                 </LinearLayout>
 
-                <View style="@style/act_line_style"></View>
+                <View style="@style/line_in_pink_style"></View>
 
                 <LinearLayout
                     style="@style/itemstyle"
@@ -72,7 +72,7 @@
                         />
                 </LinearLayout>
 
-                <View style="@style/act_line_style"></View>
+                <View style="@style/line_in_pink_style"></View>
 
                 <LinearLayout
                     style="@style/itemstyle"
@@ -124,7 +124,7 @@
                     </LinearLayout>
                 </LinearLayout>
 
-                <View style="@style/act_line_style"></View>
+                <View style="@style/line_in_pink_style"></View>
 
                 <LinearLayout
                     style="@style/itemstyle"

@@ -112,7 +112,7 @@ public class PurchaseInStoreSumFg extends BaseFragment {
         try {
             ClickItemPutBean clickItemPutData = new ClickItemPutBean();
             clickItemPutData.setDoc_no(orderData.getDoc_no());
-            clickItemPutData.setWarehouse_in_no(LoginLogic.getWare());
+            clickItemPutData.setWarehouse_no(LoginLogic.getWare());
             showLoadingDialog();
             commonLogic.getPISSumData(clickItemPutData, new PurchaseInStoreLogic.GetZSumListener() {
                 @Override

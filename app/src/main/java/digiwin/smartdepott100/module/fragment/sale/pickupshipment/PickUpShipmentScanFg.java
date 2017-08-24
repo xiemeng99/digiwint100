@@ -236,6 +236,7 @@ public class PickUpShipmentScanFg extends BaseFragment {
     }
 
     public void clear() {
+        upDateList();
         tvSweptVolume.setText(saveBean.getScan_sumqty());
         etInputNum.setText("");
         etScanBarocde.setText("");
@@ -272,7 +273,7 @@ public class PickUpShipmentScanFg extends BaseFragment {
                             saveBean.setWarehouse_out_no(locatorBackBean.getWarehouse_no());
                             saveBean.setAllow_negative_stock(locatorBackBean.getAllow_negative_stock());
                             etScanBarocde.requestFocus();
-                            if (CommonUtils.isAutoSave(saveBean)) {
+                            if (barcodeFlag&&CommonUtils.isAutoSave(saveBean)) {
                                 save();
                             }
                         }
@@ -369,7 +370,7 @@ public class PickUpShipmentScanFg extends BaseFragment {
         saveBean.setItem_barcode_type(barcodeBackBean.getItem_barcode_type());
         etInputNum.requestFocus();
         tvSweptVolume.setText(barcodeBackBean.getScan_sumqty());
-        if (CommonUtils.isAutoSave(saveBean)) {
+        if (locatorFlag&&CommonUtils.isAutoSave(saveBean)) {
             save();
         }
     }

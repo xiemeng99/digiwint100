@@ -56,7 +56,7 @@
                         android:layout_weight="3" />
                 </LinearLayout>
 
-                <View style="@style/act_line_style"></View>
+                <View style="@style/line_in_pink_style"></View>
 
                 <LinearLayout
                     style="@style/itemstyle"
@@ -80,7 +80,7 @@
                         android:layout_weight="1" />
                 </LinearLayout>
 
-                <View style="@style/act_line_style"></View>
+                <View style="@style/line_in_pink_style"></View>
 
                 <LinearLayout
                     style="@style/itemstyle"

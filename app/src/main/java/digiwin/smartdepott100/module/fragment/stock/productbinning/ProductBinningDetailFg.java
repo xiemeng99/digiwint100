@@ -25,6 +25,7 @@ import digiwin.smartdepott100.module.activity.stock.productbinning.ProductBinnin
 import digiwin.smartdepott100.module.adapter.stock.ProductBinningDetailAdapter;
 import digiwin.smartdepott100.module.bean.stock.ProductBinningBean;
 import digiwin.smartdepott100.module.logic.common.CommonLogic;
+import digiwin.smartdepott100.module.logic.stock.ProductBinningLogic;
 
 /**
  * @author 孙长权
@@ -46,7 +47,7 @@ public class ProductBinningDetailFg extends BaseFragment {
 
     public List<ProductBinningBean> mDetailShowBeen;
 
-    public CommonLogic commonLogic;
+    public ProductBinningLogic commonLogic;
     //包装箱号下面的线
     @BindView(R.id.line_group)
     View line;
@@ -89,7 +90,7 @@ public class ProductBinningDetailFg extends BaseFragment {
     protected void doBusiness() {
         pactivity = (ProductBinningActivity) activity;
         mDetailShowBeen = new ArrayList<>();
-        commonLogic = CommonLogic.getInstance(activity, pactivity.module, pactivity.mTimestamp.toString());
+        commonLogic = ProductBinningLogic.getInstance(activity, pactivity.module, pactivity.mTimestamp.toString());
         Map<Integer, Boolean> map = new HashMap<>();
         updateUI(map);
     }
@@ -102,7 +103,7 @@ public class ProductBinningDetailFg extends BaseFragment {
             tvPackNumber.setText(number);
             HashMap<String, String> map = new HashMap<>();
             map.put(AddressContants.PACKAGENO, number);
-            commonLogic.scanPackBoxNumber(map, new CommonLogic.ScanPackBoxNumberListener() {
+            commonLogic.scanProdut(map, new ProductBinningLogic.ScanPackBoxNumberListener() {
                 @Override
                 public void onSuccess(List<ProductBinningBean> productBinningBeans) {
                     HashMap<Integer, Boolean> map = new HashMap<>();
@@ -167,14 +168,15 @@ public class ProductBinningDetailFg extends BaseFragment {
      */
     private void deleteAndUpdate(final List<ProductBinningBean> list) {
         showLoadingDialog();
-        commonLogic.insertAndDelete(ObjectAndMapUtils.getListMap(list), new CommonLogic.InsertAndDeleteListener() {
+        commonLogic.delete(list, new ProductBinningLogic.InsertAndDeleteListener() {
             @Override
-            public void onSuccess(String show) {
+            public void onSuccess(ProductBinningBean show) {
                 dismissLoadingDialog();
                 mDetailShowBeen.removeAll(list);
                 Map<Integer, Boolean> map = new HashMap<>();
                 updateUI(map);
                 cbAll.setChecked(false);
+                pactivity.scanFg.upDateNum(show);
             }
 
             @Override

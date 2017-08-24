@@ -243,9 +243,6 @@ public class InBinningScanFg extends BaseFragment {
                             saveBean.setWarehouse_in_no(locatorBackBean.getWarehouse_no());
                             et_box_code.requestFocus();
                             show();
-                            if (CommonUtils.isAutoSave(saveBean)){
-                                save();
-                            }
                         }
 
                         @Override

@@ -28,23 +28,23 @@
                 android:layout_height="wrap_content">
 
                 <TextView
+                    style="@style/app_text_ingreen"
                     android:layout_width="@dimen/layout_70dp"
                     android:layout_height="wrap_content"
                     android:gravity="center_vertical"
-                    android:text="@string/order_number"
-                    style="@style/app_text_ingreen"  />
+                    android:text="@string/order_number" />
 
                 <TextView
                     android:id="@+id/tv_head_order"
+                    style="@style/ser_text_ingreen"
                     android:layout_width="@dimen/layout_0dp"
                     android:layout_height="match_parent"
                     android:layout_marginLeft="@dimen/layout_10dp"
-                    android:layout_weight="1"
-                    style="@style/ser_text_ingreen" />
+                    android:layout_weight="1" />
 
             </LinearLayout>
 
-            <View style="@style/act_line_style"></View>
+            <View style="@style/line_in_pink_style" />
 
             <LinearLayout
                 style="@style/itemstyle"
@@ -52,59 +52,58 @@
                 android:layout_height="wrap_content">
 
                 <TextView
+                    style="@style/app_text_ingreen"
                     android:layout_width="@dimen/layout_70dp"
                     android:layout_height="wrap_content"
                     android:gravity="center_vertical"
-                    android:text="@string/depart_supplier"
-                    style="@style/app_text_ingreen"  />
+                    android:text="@string/depart_supplier" />
 
                 <TextView
                     android:id="@+id/tv_depart_supplier"
+                    style="@style/ser_text_ingreen"
                     android:layout_width="@dimen/layout_0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="@dimen/layout_10dp"
-                    android:layout_weight="1"
-                    style="@style/ser_text_ingreen" />
+                    android:layout_weight="1" />
 
                 <TextView
+                    style="@style/app_text_ingreen"
                     android:layout_width="@dimen/layout_70dp"
                     android:layout_height="wrap_content"
                     android:gravity="center_vertical"
-                    android:text="@string/end_product"
-                    style="@style/app_text_ingreen" />
+                    android:text="@string/end_product" />
 
                 <TextView
                     android:id="@+id/tv_end_product"
+                    style="@style/ser_text_ingreen"
                     android:layout_width="@dimen/layout_0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="@dimen/layout_10dp"
-                    android:layout_weight="1"
-                    style="@style/ser_text_ingreen" />
+                    android:layout_weight="1" />
             </LinearLayout>
-
+            <View style="@style/line_in_pink_style"/>
             <LinearLayout
                 style="@style/itemstyle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
                 <TextView
+                    style="@style/app_text_ingreen"
                     android:layout_width="@dimen/layout_70dp"
                     android:layout_height="wrap_content"
                     android:gravity="center_vertical"
-                    android:text="@string/end_productname"
-                    style="@style/app_text_ingreen"  />
+                    android:text="@string/end_productname" />
 
                 <TextView
                     android:id="@+id/tv_end_productname"
+                    style="@style/ser_text_ingreen"
                     android:layout_width="@dimen/layout_0dp"
                     android:layout_height="match_parent"
                     android:layout_marginLeft="@dimen/layout_10dp"
-                    android:layout_weight="1"
-                    style="@style/ser_text_ingreen"/>
+                    android:layout_weight="1" />
 
             </LinearLayout>
 
-            <View style="@style/act_line_style"></View>
 
         </LinearLayout>
 

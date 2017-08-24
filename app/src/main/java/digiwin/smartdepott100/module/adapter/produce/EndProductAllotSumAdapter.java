@@ -1,7 +1,6 @@
 package digiwin.smartdepott100.module.adapter.produce;
 
 import android.content.Context;
-import android.opengl.Visibility;
 import android.view.View;
 
 import java.util.List;
@@ -66,7 +65,6 @@ public class EndProductAllotSumAdapter extends BaseRecyclerAdapter<ListSumBean> 
             holder.setTextColor(R.id.tv_stock_qty, mContext.getResources().getColor(R.color.red50));
             holder.setTextColor(R.id.tv_match_number, mContext.getResources().getColor(R.color.red50));
             holder.setTextColor(R.id.tv_line_store_qty, mContext.getResources().getColor(R.color.red50));
-            holder.getImageView(R.id.img_detail).setImageResource(R.mipmap.detail001);
         } else if (numb1 > numb2) {
             holder.setBackground(R.id.item_ll,R.drawable.yellow_scandetail_bg);
             holder.setTextColor(R.id.tv_item_name, mContext.getResources().getColor(R.color.orangeYellow));
@@ -77,7 +75,6 @@ public class EndProductAllotSumAdapter extends BaseRecyclerAdapter<ListSumBean> 
             holder.setTextColor(R.id.tv_stock_qty, mContext.getResources().getColor(R.color.orangeYellow));
             holder.setTextColor(R.id.tv_match_number, mContext.getResources().getColor(R.color.orangeYellow));
             holder.setTextColor(R.id.tv_line_store_qty, mContext.getResources().getColor(R.color.orangeYellow));
-            holder.getImageView(R.id.img_detail).setImageResource(R.mipmap.detail002);
         } else if (numb1 ==numb2) {
             holder.setBackground(R.id.item_ll,R.drawable.green_scandetail_bg);
             holder.setTextColor(R.id.tv_item_name, mContext.getResources().getColor(R.color.green1b));
@@ -88,7 +85,6 @@ public class EndProductAllotSumAdapter extends BaseRecyclerAdapter<ListSumBean> 
             holder.setTextColor(R.id.tv_stock_qty, mContext.getResources().getColor(R.color.green1b));
             holder.setTextColor(R.id.tv_match_number, mContext.getResources().getColor(R.color.green1b));
             holder.setTextColor(R.id.tv_line_store_qty, mContext.getResources().getColor(R.color.green1b));
-            holder.getImageView(R.id.img_detail).setImageResource(R.mipmap.detail003);
         }
     }
 }

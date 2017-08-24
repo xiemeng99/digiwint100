@@ -1,64 +1,73 @@
-package digiwin.smartdepott100.module.logic.produce;
+package digiwin.smartdepott100.module.logic.stock;
 
 import android.content.Context;
 
 import java.util.List;
 import java.util.Map;
 
-import digiwin.library.constant.SharePreKey;
 import digiwin.library.json.JsonResp;
 import digiwin.library.utils.LogUtils;
-import digiwin.library.utils.SharedPreferencesUtils;
 import digiwin.library.utils.ThreadPoolManager;
+import digiwin.library.xml.ParseXmlResp;
 import digiwin.smartdepott100.R;
 import digiwin.smartdepott100.core.appcontants.AddressContants;
 import digiwin.smartdepott100.core.appcontants.ReqTypeName;
 import digiwin.smartdepott100.core.json.JsonReqForERP;
 import digiwin.smartdepott100.core.net.IRequestCallbackImp;
 import digiwin.smartdepott100.core.net.OkhttpRequest;
-import digiwin.smartdepott100.module.bean.common.ClickItemPutBean;
-import digiwin.smartdepott100.module.bean.common.FifoCheckBean;
-import digiwin.smartdepott100.module.bean.common.FilterBean;
-import digiwin.smartdepott100.module.bean.common.FilterResultOrderBean;
+import digiwin.smartdepott100.core.xml.CreateParaXmlReqIm;
 import digiwin.smartdepott100.module.bean.common.ListSumBean;
+import digiwin.smartdepott100.module.bean.common.SaveBackBean;
+import digiwin.smartdepott100.module.bean.stock.ProductBinningBean;
 import digiwin.smartdepott100.module.logic.common.CommonLogic;
 
 /**
- * @author 唐孟宇
- * @des 退料补料
+ * @author xiemeng
+ * @des 产品装箱
+ * @date 2017/8/23
  */
+public class ProductBinningLogic extends CommonLogic {
+    public static ProductBinningLogic logic;
 
-public class WorkSupplementLogic extends CommonLogic {
-
-    public static WorkSupplementLogic logic;
-
-    protected WorkSupplementLogic(Context context, String module, String timestamp) {
+    private ProductBinningLogic(Context context, String module, String timestamp) {
         super(context, module, timestamp);
     }
 
-    public static WorkSupplementLogic getInstance(Context context, String module, String timestamp) {
+    public static ProductBinningLogic getInstance(Context context, String module, String timestamp) {
 
-        return logic = new WorkSupplementLogic(context, module, timestamp);
+        return logic = new ProductBinningLogic(context, module, timestamp);
     }
 
     /**
-     * 退料补料获取列表数据
+     * 扫描包装箱号
      */
-    public void getWSList(final FilterBean filterBean, final GetDataListListener listener) {
+    public interface ScanPackBoxNumberListener {
+        public void onSuccess(List<ProductBinningBean> productBinningBeans);
+
+        public void onFailed(String error);
+    }
+
+    /**
+     * 扫描箱码
+     */
+    public void scanProdut(final Map<String, String> map, final ScanPackBoxNumberListener listener) {
         ThreadPoolManager.getInstance().executeTask(new Runnable() {
             @Override
             public void run() {
                 try {
-                    filterBean.setPagesize((String) SharedPreferencesUtils.get(mContext, SharePreKey.PAGE_SETTING, AddressContants.PAGE_NUM));
-                    String createJson = JsonReqForERP.objCreateJson(mModule, "als.b023.list.get", mTimestamp, filterBean);
+                    String createJson = JsonReqForERP.mapCreateJson(mModule, "als.c016.list.get", mTimestamp, map);
                     OkhttpRequest.getInstance(mContext).post(createJson, new IRequestCallbackImp() {
                         @Override
                         public void onResponse(String string) {
                             String error = mContext.getString(R.string.unknow_error);
                             if (null != string) {
                                 if (ReqTypeName.SUCCCESSCODE.equals(JsonResp.getCode(string))) {
-                                    List<FilterResultOrderBean> showBeanList = JsonResp.getParaDatas(string, "list", FilterResultOrderBean.class);
-                                    listener.onSuccess(showBeanList);
+                                    List<ProductBinningBean> showBeanList = JsonResp.getParaDatas(string, "list_detail", ProductBinningBean.class);
+                                    if (showBeanList.size() > 0) {
+                                        listener.onSuccess(showBeanList);
+                                    } else {
+                                        error = mContext.getString(R.string.data_null);
+                                    }
                                     return;
                                 } else {
                                     error = JsonResp.getDescription(string);
@@ -69,97 +78,38 @@ public class WorkSupplementLogic extends CommonLogic {
                     });
                 } catch (Exception e) {
                     listener.onFailed(mContext.getString(R.string.unknow_error));
-                    LogUtils.e(TAG, "getPutInStoreList--->" + e);
+                    LogUtils.e(TAG, "getIqcList--->" + e);
                 }
             }
         }, null);
     }
 
+    /**
+     * 装箱保存
+     */
+    public interface SaveBinningListener {
+        public void onSuccess(ProductBinningBean backBean);
+
+        public void onFailed(String error);
+    }
 
     /**
-     * 退料补料获取汇总列表
+     * 保存
      */
-    public void getWSSum(final ClickItemPutBean clickItemPutBean, final GetZSumListener listener) {
+    public void saveBean(final ProductBinningBean saveBean, final SaveBinningListener listener) {
         ThreadPoolManager.getInstance().executeTask(new Runnable() {
             @Override
             public void run() {
                 try {
-                    String createJson = JsonReqForERP.objCreateJson(mModule, "als.b023.list.detail.get", mTimestamp, clickItemPutBean);
+                    String createJson = JsonReqForERP.objCreateJson(mModule, "als.c016.save", mTimestamp, saveBean);
                     OkhttpRequest.getInstance(mContext).post(createJson, new IRequestCallbackImp() {
                         @Override
                         public void onResponse(String string) {
                             String error = mContext.getString(R.string.unknow_error);
                             if (null != string) {
                                 if (ReqTypeName.SUCCCESSCODE.equals(JsonResp.getCode(string))) {
-                                    List<ListSumBean> showBeanList = JsonResp.getParaDatas(string, "list_detail", ListSumBean.class);
-                                    listener.onSuccess(showBeanList);
-                                    return;
-                                } else {
-                                    error = JsonResp.getDescription(string);
-                                }
-                            }
-                            listener.onFailed(error);
-                        }
-                    });
-                } catch (Exception e) {
-                    listener.onFailed(mContext.getString(R.string.unknow_error));
-                    LogUtils.e(TAG, "getPutInStoreSum--->" + e);
-                }
-            }
-        }, null);
-    }
-    /**
-     * 退料补料fifo
-     */
-    public void getWSFIFO(final Map<String,String> map, final PostMaterialFIFOListener listener) {
-        ThreadPoolManager.getInstance().executeTask(new Runnable() {
-            @Override
-            public void run() {
-                try {
-                    String createJson = JsonReqForERP.mapCreateJson(mModule, "als.b023.fifo.get", mTimestamp, map);
-                    OkhttpRequest.getInstance(mContext).post(createJson, new IRequestCallbackImp() {
-                        @Override
-                        public void onResponse(String string) {
-                            String error = mContext.getString(R.string.unknow_error);
-                            if (null != string) {
-                                if (ReqTypeName.SUCCCESSCODE.equals(JsonResp.getCode(string))) {
-                                    List<FifoCheckBean> showBeanList = JsonResp.getParaDatas(string,"list_fifo",FifoCheckBean.class);
-                                    listener.onSuccess(showBeanList);
-                                    return;
-                                } else {
-                                    error = JsonResp.getDescription(string);
-                                }
-                            }
-                            listener.onFailed(error);
-                        }
-                    });
-                } catch (Exception e) {
-                    listener.onFailed(mContext.getString(R.string.unknow_error));
-                    LogUtils.e(TAG, "getPutInStoreSum--->" + e);
-                }
-            }
-        }, null);
-    }
-
-
-    /**
-     * 提交
-     *
-     * @param map map可以直接为空
-     */
-    public void commit(final Map<String, String> map, final CommitListener listener) {
-        ThreadPoolManager.getInstance().executeTask(new Runnable() {
-            @Override
-            public void run() {
-                try {
-                    String createJson = JsonReqForERP.mapCreateJson(mModule, "als.b023.submit", mTimestamp, map);
-                    OkhttpRequest.getInstance(mContext).post(createJson, new IRequestCallbackImp() {
-                        @Override
-                        public void onResponse(String string) {
-                            String error = mContext.getString(R.string.unknow_error);
-                            if (null != string) {
-                                if (ReqTypeName.SUCCCESSCODE.equals(JsonResp.getCode(string))) {
-                                    listener.onSuccess(JsonResp.getParaString(string, AddressContants.DOC_NO));
+                                    ProductBinningBean productbinningbean = JsonResp.getParaData(string, ProductBinningBean.class);
+                                    listener.onSuccess(productbinningbean);
                                     return;
                                 } else {
                                     error = JsonResp.getDescription(string);
@@ -175,5 +125,48 @@ public class WorkSupplementLogic extends CommonLogic {
             }
         }, null);
     }
+
+
+    /**
+     * 产品装箱删除（出箱）
+     */
+    public interface InsertAndDeleteListener {
+        public void onSuccess(ProductBinningBean show);
+
+        public void onFailed(String error);
+    }
+    /**
+     * 产品装箱删除（出箱）
+     */
+    public void delete(final List<ProductBinningBean> list, final InsertAndDeleteListener listener) {
+        ThreadPoolManager.getInstance().executeTask(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    String createJson = JsonReqForERP.dataCreateJson(mModule, "als.c016.del", mTimestamp, list);
+                    OkhttpRequest.getInstance(mContext).post(createJson, new IRequestCallbackImp() {
+                        @Override
+                        public void onResponse(String string) {
+                            String error = mContext.getString(R.string.unknow_error);
+                            if (null != string) {
+                                if (ReqTypeName.SUCCCESSCODE.equals(JsonResp.getCode(string))) {
+                                    ProductBinningBean productbinningbean = JsonResp.getParaData(string, ProductBinningBean.class);
+                                    listener.onSuccess(productbinningbean);
+                                    return;
+                                } else {
+                                    error = JsonResp.getDescription(string);
+                                }
+                            }
+                            listener.onFailed(error);
+                        }
+                    });
+                } catch (Exception e) {
+                    listener.onFailed(mContext.getString(R.string.unknow_error));
+                    LogUtils.e(TAG, "getSum--->" + e);
+                }
+            }
+        }, null);
+    }
+
 
 }

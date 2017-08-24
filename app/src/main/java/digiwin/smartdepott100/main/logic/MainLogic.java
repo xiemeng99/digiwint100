@@ -111,7 +111,7 @@ public class MainLogic {
         ModuleBean iqcInspect = new ModuleBean(R.string.iqc_check_pad, R.mipmap.iqc_check_pad, ModuleCode.IQCINSPECT, "android.intent.actiont100.smartdepot.IQCInspectListActivity");
 
         purchaseItems.add(materialreceipt);
-//        purchaseItems.add(quickstorage);
+        purchaseItems.add(quickstorage);
         purchaseItems.add(purchaseGoodsScan);
         purchaseItems.add(purchasesupplier);
         purchaseItems.add(purchaseInStore);
@@ -147,22 +147,20 @@ public class MainLogic {
         produceItems.add(accordingMaterialActivity);
         produceItems.add(productionleaderlist);
         produceItems.add(suitpicking);
-//        produceItems.add(worksupplementlist);
+        produceItems.add(worksupplementlist);
         produceItems.add(materialReturning);
         produceItems.add(workorderreturnlistactivity);
-//        produceItems.add(driectStorage);
+        produceItems.add(driectStorage);
         produceItems.add(wipstorage);
         produceItems.add(zputInStoreft);
-//        produceItems.add(finishedStorageActivity);
-//        produceItems.add(endproductAllot);
+        produceItems.add(finishedStorageActivity);
+        produceItems.add(endproductAllot);
         produceItems.add(fqcCheck);
 
 //        ModuleBean printLabelActivity = new ModuleBean(R.string.print_label_flow, R.mipmap.bar_code, ModuleCode.PRINTLABEL, "android.intent.actiont100.smartdepot.PrintLabelFlowActivity");
 //        ModuleBean printLabelFinishActivity = new ModuleBean(R.string.print_label_finish, R.mipmap.finished_product_print, ModuleCode.PRINTFINISHLABEL, "android.intent.actiont100.smartdepot.PrintLabelFinishActivity");
 //        ModuleBean storetranslockactivity = new ModuleBean(R.string.store_trans_lock, R.mipmap.inventory_lock, ModuleCode.STORETRANSLOCK, "android.intent.actiont100.smartdepot.StoreTransLockActivity");
 //        ModuleBean storetransunlockactivity = new ModuleBean(R.string.store_trans_unlock, R.mipmap.inventory_deblocking, ModuleCode.STORETRANSUNLOCK, "android.intent.actiont100.smartdepot.StoreTransUnlockActivity");
-//        ModuleBean productbinning = new ModuleBean(R.string.product_binning, R.drawable.encasement, ModuleCode.PRODUCTBINNING, "android.intent.actiont100.smartdepot.ProductBinningActivity");
-//        ModuleBean productoutbox = new ModuleBean(R.string.product_outbox, R.mipmap.outbox, ModuleCode.PRODUCTOUTBOX, "android.intent.actiont100.smartdepot.ProductOutBoxActivity");
         ModuleBean storeallotactivity = new ModuleBean(R.string.nocome_allot, R.mipmap.nocome_alllot, ModuleCode.NOCOMESTOREALLOT, "android.intent.actiont100.smartdepot.StoreAllotActivity");
         ModuleBean miscellaneousoutactivity = new ModuleBean(R.string.miscellaneous_issues_out, R.mipmap.youyuanfaliao, ModuleCode.MISCELLANEOUSISSUESOUT, "android.intent.actiont100.smartdepot.MiscellaneousissuesOutListActivity");
         ModuleBean miscellaneousainctivity = new ModuleBean(R.string.miscellaneous_issues_in, R.mipmap.youyuanshouliao, ModuleCode.MISCELLANEOUSISSUESIN, "android.intent.actiont100.smartdepot.MiscellaneousissuesInListActivity");
@@ -173,17 +171,20 @@ public class MainLogic {
         ModuleBean stockcheck = new ModuleBean(R.string.store_check, R.mipmap.kucunpandian, ModuleCode.STORECHECK, "android.intent.actiont100.smartdepot.StockCheckListActivity");
         ModuleBean postallocateactivity = new ModuleBean(R.string.title_post_allocate, R.mipmap.allot_post, ModuleCode.POSTALLOCATE, "android.intent.actiont100.smartdepot.PostAllocateActivity");
         ModuleBean printLabelFillActivity = new ModuleBean(R.string.print_label, R.mipmap.finished_product_print, ModuleCode.LABLEPRINTING, "android.intent.actiont100.smartdepot.PrintLabelFillActivity");
+        ModuleBean productbinning = new ModuleBean(R.string.product_binning, R.mipmap.encasement, ModuleCode.PRODUCTBINNING, "android.intent.actiont100.smartdepot.ProductBinningActivity");
+        ModuleBean productoutbox = new ModuleBean(R.string.product_outbox, R.mipmap.outbox, ModuleCode.PRODUCTOUTBOX, "android.intent.actiont100.smartdepot.ProductOutBoxActivity");
         storageItems.add(storeallotactivity);
         storageItems.add(miscellaneousoutactivity);
         storageItems.add(miscellaneousainctivity);
         storageItems.add(miscellaneousNocomeoutactivity);
         storageItems.add(miscellaneousNocomeinctivity);
         storageItems.add(storeQueryActivity);
-//        storageItems.add(movestoreactivity);
+        storageItems.add(movestoreactivity);
         storageItems.add(stockcheck);
         storageItems.add(postallocateactivity);
         storageItems.add(printLabelFillActivity);
-
+        storageItems.add(productbinning);
+        storageItems.add(productoutbox);
 
 //        ModuleBean scanOutStoreActivity = new ModuleBean(R.string.scan_out_store, R.mipmap.scan_shipment, ModuleCode.SCANOUTSTORE, "android.intent.actiont100.smartdepot.ScanOutStoreListActivity");
 //        ModuleBean tranceProductActivity = new ModuleBean(R.string.trace_product_quality, R.mipmap.quality_retrospect, ModuleCode.TRANSPRODUCTQUALITY, "android.intent.actiont100.smartdepot.TraceProductActivity");

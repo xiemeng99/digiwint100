@@ -277,7 +277,7 @@ public class ProductionLeaderScanFg extends BaseFragment {
                             etBarcodeNo.requestFocus();
                             locatorShow = locatorBackBean.getShowing();
                             show();
-                            if (CommonUtils.isAutoSave(saveBean)){
+                            if (barcodeFlag&&CommonUtils.isAutoSave(saveBean)){
                                 save();
                             }
                         }
@@ -356,7 +356,7 @@ public class ProductionLeaderScanFg extends BaseFragment {
         saveBean.setItem_barcode_type(barcodeBackBean.getItem_barcode_type());
         show();
         etInputNum.requestFocus();
-        if (CommonUtils.isAutoSave(saveBean)){
+        if (locatorFlag&&CommonUtils.isAutoSave(saveBean)){
             save();
         }
     }

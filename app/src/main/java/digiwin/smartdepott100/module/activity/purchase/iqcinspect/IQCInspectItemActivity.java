@@ -20,6 +20,7 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.OnClick;
+import digiwin.library.dialog.OnDialogClickListener;
 import digiwin.library.dialog.OnDialogTwoListener;
 import digiwin.library.utils.ActivityManagerUtils;
 import digiwin.library.utils.StringUtils;
@@ -99,9 +100,13 @@ public class IQCInspectItemActivity extends BaseTitleHActivity {
         logic.commitIQC(commitBean, new IQCInspectLogic.IQCCommitListener() {
             @Override
             public void onSuccess(String result) {
-                showCommitSuccessDialog(result);
                 dismissLoadingDialog();
-                activity.finish();
+                showCommitSuccessDialog(result, new OnDialogClickListener() {
+                    @Override
+                    public void onCallback() {
+                        activity.finish();
+                    }
+                });
             }
 
             @Override

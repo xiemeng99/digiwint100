@@ -308,7 +308,7 @@ public class SuitPickingHalfScanFg extends BaseFragment {
                             saveBean.setFifo_check(barcodeBackBean.getFifo_check());
                             saveBean.setItem_barcode_type(barcodeBackBean.getItem_barcode_type());
                             etInputNum.requestFocus();
-                            if (CommonUtils.isAutoSave(saveBean)){
+                            if (locatorFlag&&CommonUtils.isAutoSave(saveBean)){
                                 save();
                             }
                         }
@@ -339,7 +339,7 @@ public class SuitPickingHalfScanFg extends BaseFragment {
                             saveBean.setWarehouse_out_no(locatorBackBean.getWarehouse_no());
                             saveBean.setAllow_negative_stock(locatorBackBean.getAllow_negative_stock());
                             etScanBarocde.requestFocus();
-                            if (CommonUtils.isAutoSave(saveBean)){
+                            if (barcodeFlag&&CommonUtils.isAutoSave(saveBean)){
                                 save();
                             }
                         }

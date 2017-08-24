@@ -72,7 +72,7 @@
     <string name="finishedstorage">依成品入库</string>
     <string name="un_complete">未完事项</string>
     <string name="barcode_no">条码</string>
-    <string name="box_number">箱内数量</string>
+    <string name="box_number">箱内件数</string>
     <string name="material_returning_number">退料单号</string>
     <string name="card_number">流转卡号</string>
     <string name="gongDan_no">工单单号</string>
@@ -372,7 +372,7 @@
     <string name="apply_date_">申请日期</string>
 
     <string name="movestore">条码移库</string>
-    <string name="pack_boxnumber">包装箱号</string>
+    <string name="pack_boxnumber">箱码</string>
     <string name="move_instore">移入储位</string>
     <string name="move_outstore">移出储位</string>
     <string name="move_outlocator">移出库位</string>
@@ -442,7 +442,7 @@
     <string name="title_sale_return">销售退货</string>
     <string name="product_binning">产品装箱</string>
     <string name="product_outbox">产品出箱</string>
-    <string name="product_number">产品条码</string>
+    <string name="product_number">内箱/物料码</string>
     <string name="return_order_no">退货单号</string>
     <string name="customer_no">客户编码</string>
     <string name="input_customer_no">请录入客户编码</string>
@@ -528,7 +528,7 @@
     <string name="printer_ip">打印机IP</string>
     <string name="total">总数</string>
     <string name="used">已使用</string>
-    <string name="chooseunbind">请选择解绑方式</string>
+    <string name="chooseunbind">解绑用户</string>
     <string name="please_input_ip">请输入打印机IP地址和端口</string>
     <string name="chooseunbind_use">按用户解绑</string>
     <string name="chooseunbind_device">按设备解绑</string>
@@ -547,7 +547,7 @@
     <string name="string">说明</string>
     <string name="bad_qty">不良原因数量</string>
     <string name="check_employee">检验人员</string>
-    <string name="print_psw">请输入登入密码</string>
+    <string name="print_psw">请输入要解绑的账号</string>
     <string name="print_ip">请输入ip地址和端口号</string>
     <string name="psw_error">密码错误</string>
     <string name="check_all">全选</string>

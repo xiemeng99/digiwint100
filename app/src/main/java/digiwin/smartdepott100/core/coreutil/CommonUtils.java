@@ -5,6 +5,7 @@ import digiwin.library.constant.SharePreKey;
 import digiwin.library.utils.SharedPreferencesUtils;
 import digiwin.smartdepott100.core.base.BaseApplication;
 import digiwin.smartdepott100.module.bean.common.SaveBean;
+import digiwin.smartdepott100.module.bean.stock.ProductBinningBean;
 
 /**
  * @author xiemeng
@@ -20,7 +21,20 @@ public class CommonUtils {
      */
     public static boolean isAutoSave(SaveBean saveBean){
         boolean isAutoSave=false;
-        BaseApplication instance = BaseApplication.getInstance();
+        if (null!=saveBean&&null!=saveBean.getItem_barcode_type()){
+            if ("3".equals(saveBean.getItem_barcode_type())
+                    ||"4".equals(saveBean.getItem_barcode_type())){
+                isAutoSave=true;
+            }
+        }
+        return  isAutoSave;
+    }
+    /**
+     * @param saveBean 保存对象
+     * @return true时可以自动保存
+     */
+    public static boolean isAutoSave(ProductBinningBean saveBean){
+        boolean isAutoSave=false;
         if (null!=saveBean&&null!=saveBean.getItem_barcode_type()){
             if ("3".equals(saveBean.getItem_barcode_type())
                     ||"4".equals(saveBean.getItem_barcode_type())){

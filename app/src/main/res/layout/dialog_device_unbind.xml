@@ -36,11 +36,23 @@
             android:background="@null"
             android:gravity="center"
             android:hint="@string/print_psw"
-            android:inputType="textPassword"
             android:singleLine="true"
             android:textColor="@color/black_32"
             android:textCursorDrawable="@drawable/et_cursor_yellow"
             android:textSize="@dimen/textSize_16sp" />
+
+        <!--<EditText-->
+        <!--android:id="@+id/et_psw"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:background="@null"-->
+        <!--android:gravity="center"-->
+        <!--android:hint="@string/print_psw"-->
+        <!--android:inputType="textPassword"-->
+        <!--android:singleLine="true"-->
+        <!--android:textColor="@color/black_32"-->
+        <!--android:textCursorDrawable="@drawable/et_cursor_yellow"-->
+        <!--android:textSize="@dimen/textSize_16sp" />-->
     </LinearLayout>
 
     <!-- 确认按钮 -->
@@ -54,9 +66,11 @@
         <RelativeLayout
             android:layout_width="@dimen/layout_0dp"
             android:layout_height="match_parent"
-            android:layout_weight="1">
+            android:layout_weight="1"
+            android:visibility="gone">
 
             <TextView
+
                 android:id="@+id/tv_unbinddevice"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -75,12 +89,12 @@
 
         <RelativeLayout
             android:layout_width="@dimen/layout_0dp"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:layout_weight="1">
 
             <TextView
                 android:id="@+id/tv_unbinduser"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
                 android:layout_marginLeft="@dimen/layout_10dp"

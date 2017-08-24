@@ -149,7 +149,6 @@ public class SettingActivity extends BaseTitleActivity {
     ToggleButton tbSpeechinput;
 
 
-
     /**
      * 蓝牙
      */
@@ -303,36 +302,31 @@ public class SettingActivity extends BaseTitleActivity {
             }
         });
     }
-
+    private final  String Administrator="tiptop";
     /**
      * 解绑
      */
     @OnClick(R.id.ll_device_unbind)
     void unBindDialog() {
+        AccoutBean info = LoginLogic.getUserInfo();
+        if (null != info && !info.getAccount().equals(Administrator)) {
+            return;
+        }
         DeviceDialog.showUnBindStatuDailog(this, new DeviceDialog.DeviceInfoListener() {
             @Override
             public void unBindByDevice(String psw) {
-                AccoutBean info = LoginLogic.getUserInfo();
-                if (null != info && psw.equals(info.getPassword())) {
-                    getDeviceInfo("1");
-                } else {
-                    showFailedDialog(getString(R.string.psw_error));
-                }
+//                AccoutBean info = LoginLogic.getUserInfo();
+//                if (null != info && psw.equals(info.getPassword())) {
+//                    getDeviceInfo("1");
+//                } else {
+//                    showFailedDialog(getString(R.string.psw_error));
+//                }
             }
 
             @Override
             public void unBindByUse(String psw) {
                 AccoutBean info = LoginLogic.getUserInfo();
-                if (null!=info&&!info.getAccount().equals("tiptop"))
-                {
-                    showFailedDialog(getString(R.string.name_not_tiptop));
-                    return;
-                }
-                if (null != info && psw.equals(info.getPassword())) {
-                    getDeviceInfo("2");
-                } else {
-                    showFailedDialog(getString(R.string.psw_error));
-                }
+                getDeviceInfo(psw,"2");
             }
         });
     }
@@ -413,7 +407,7 @@ public class SettingActivity extends BaseTitleActivity {
         setBlueToothUI(open);
         changeTooth();
         updateEntStorage();
-         getDeviceInfo("0");
+        getDeviceInfo(null,"0");
         UpdateVer();
         //初始化打印机ip
         tvPrinterIp.setText(SharedPreferencesUtils.get(SettingActivity.this, SharePreferenceKey.PRINTER_IP, "").toString());
@@ -684,8 +678,9 @@ public class SettingActivity extends BaseTitleActivity {
     /**
      * 获取设备信息
      */
-    private void getDeviceInfo(final String statu) {
+    private void getDeviceInfo(final String account, final String statu) {
         Map<String, String> hashMap = new HashMap<>();
+        hashMap.put("account", account);
         hashMap.put("statu", statu);
         DeviceLogic.getInstance(context, module, mTimestamp.toString()).getDevice(hashMap, new DeviceLogic.DeviceListener() {
             @Override
@@ -695,15 +690,19 @@ public class SettingActivity extends BaseTitleActivity {
                         tvDeviceinfo.setText(activity.getString(R.string.total) + deviceInfoBeen.get(0).getTotal()
                                 + activity.getString(R.string.used) + deviceInfoBeen.get(0).getUse());
                 } else {
-                    DataSupport.deleteAll(AccoutBean.class);
-                    ActivityManagerUtils.startActivity(activity, LoginActivity.class);
-                    List<Activity> activityLists = ActivityManagerUtils.getActivityLists();
-                    for (Activity mActivity : activityLists) {
-                        if (!mActivity.getClass().getSimpleName().equals("LoginActivity")) {
-                            if (mActivity != null && !mActivity.isFinishing()) {
-                                mActivity.finish();
+                    if (account.equals(Administrator)) {
+                        DataSupport.deleteAll(AccoutBean.class);
+                        ActivityManagerUtils.startActivity(activity, LoginActivity.class);
+                        List<Activity> activityLists = ActivityManagerUtils.getActivityLists();
+                        for (Activity mActivity : activityLists) {
+                            if (!mActivity.getClass().getSimpleName().equals("LoginActivity")) {
+                                if (mActivity != null && !mActivity.isFinishing()) {
+                                    mActivity.finish();
+                                }
                             }
                         }
+                    }else{
+                       getDeviceInfo(null,"0");
                     }
                 }
             }

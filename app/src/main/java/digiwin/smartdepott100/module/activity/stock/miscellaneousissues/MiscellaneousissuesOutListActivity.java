@@ -306,8 +306,8 @@ public class MiscellaneousissuesOutListActivity extends BaseTitleActivity {
             commonLogic.getMIIListData(map, new CommonLogic.GetDataListListener() {
                 @Override
                 public void onSuccess(List<FilterResultOrderBean> list) {
+                    dismissLoadingDialog();
                     if (null != list && list.size() > 0) {
-                        dismissLoadingDialog();
                         //查询成功隐藏筛选界面，展示清单信息
                         ll_search_dialog.setVisibility(View.GONE);
                         scrollview.setVisibility(View.VISIBLE);

@@ -293,8 +293,8 @@ public class MiscellaneousissuesInListActivity extends BaseTitleActivity {
             commonLogic.getMIIListData(filterBean, new CommonLogic.GetDataListListener() {
                 @Override
                 public void onSuccess(List<FilterResultOrderBean> list) {
+                    dismissLoadingDialog();
                     if (null != list && list.size() > 0) {
-                        dismissLoadingDialog();
                         sumShowBeanList = list;
                         showData();
                     }

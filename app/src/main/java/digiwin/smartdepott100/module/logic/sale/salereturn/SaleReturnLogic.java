@@ -65,8 +65,13 @@ public class SaleReturnLogic extends CommonLogic {
                             if (null != s) {
                                 if (ReqTypeName.SUCCCESSCODE.equals(JsonResp.getCode(s))) {
                                     List<FilterResultOrderBean> showBeanList = JsonResp.getParaDatas(s, "list", FilterResultOrderBean.class);
-                                    listener.onSuccess(showBeanList);
-                                    return;
+                                    if (showBeanList.size()>0){
+                                        listener.onSuccess(showBeanList);
+                                        return;
+                                    }
+                                    else {
+                                        error = mContext.getString(R.string.nodate);
+                                    }
                                 } else {
                                     error = JsonResp.getDescription(s);
                                 }

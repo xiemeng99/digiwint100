@@ -368,7 +368,7 @@ public class WorkOrderScanActivity extends BaseTitleActivity {
                             } else {
                                 etInputNum.requestFocus();
                             }
-                            if (CommonUtils.isAutoSave(saveBean)) {
+                            if (barcodeFlag&&CommonUtils.isAutoSave(saveBean)) {
                                 saveData();
                             }
                         }
@@ -490,7 +490,7 @@ public class WorkOrderScanActivity extends BaseTitleActivity {
         map.put(AddressContants.QTY, localData.getApply_qty());
         map.put(AddressContants.ITEM_NO, localData.getLow_order_item_no());
         map.put(AddressContants.WAREHOUSE_NO, LoginLogic.getWare());
-        map.put("lot_no", "");
+        map.put(AddressContants.UNIT_NO,localData.getUnit_no());
         mHandler.removeMessages(FIFOWHAT);
         mHandler.sendMessageDelayed(mHandler.obtainMessage(FIFOWHAT, map), AddressContants.DELAYTIME);
     }
@@ -530,7 +530,7 @@ public class WorkOrderScanActivity extends BaseTitleActivity {
         saveBean.setFifo_check(barcodeBackBean.getFifo_check());
         saveBean.setItem_barcode_type(barcodeBackBean.getItem_barcode_type());
         etScanBarocde.requestFocus();
-        if (CommonUtils.isAutoSave(saveBean)) {
+        if (locatorFlag&&CommonUtils.isAutoSave(saveBean)) {
             saveData();
         }
 

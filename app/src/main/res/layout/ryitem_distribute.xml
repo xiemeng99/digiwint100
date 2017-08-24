@@ -118,7 +118,7 @@
             android:layout_height="@dimen/layout_20dp"
             android:layout_gravity="center_vertical"
             android:layout_marginLeft="@dimen/layout_10dp"
-            android:src="@mipmap/suspension"
+            android:src="@mipmap/detail"
             android:visibility="invisible" />
     </LinearLayout>
 
@@ -174,7 +174,7 @@
             android:layout_gravity="center_vertical"
             android:layout_marginLeft="@dimen/layout_10dp"
             android:minHeight="@dimen/layout_0dp"
-            android:src="@mipmap/suspension" />
+            android:src="@mipmap/detail" />
 
     </LinearLayout>
 </LinearLayout>

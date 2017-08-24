@@ -6,6 +6,7 @@ import android.view.ViewGroup;
 
 import digiwin.library.dialog.CustomDialog;
 import digiwin.library.utils.LogUtils;
+import digiwin.library.utils.StringUtils;
 import digiwin.library.utils.ViewUtils;
 import digiwin.smartdepott100.R;
 
@@ -44,7 +45,9 @@ public class DeviceDialog {
                                 if (listener != null)
                                     dialog.dismiss();
                                 final String editText = builder.getViewText(R.id.et_psw);
-                                listener.unBindByDevice(editText);
+                                if (!StringUtils.isBlank(editText)){
+                                    listener.unBindByUse(editText);
+                                }
                             }
                         })
                         .addViewOnclick(R.id.tv_unbinduser, new View.OnClickListener() {
@@ -53,7 +56,10 @@ public class DeviceDialog {
                                 if (listener != null)
                                     dialog.dismiss();
                                 final String editText = builder.getViewText(R.id.et_psw);
-                                listener.unBindByUse(editText);
+                                if (!StringUtils.isBlank(editText)){
+                                    listener.unBindByUse(editText);
+                                }
+
                             }
                         }).cancelTouchout(true).backCancelTouchout(true)
                         .widthpx((int) (ViewUtils.getScreenWidth(context) * 0.8))

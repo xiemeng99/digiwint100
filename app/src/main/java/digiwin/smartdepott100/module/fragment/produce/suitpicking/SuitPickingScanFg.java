@@ -260,7 +260,6 @@ public class SuitPickingScanFg extends BaseFragment {
                     map.put(AddressContants.DOC_NO, String.valueOf(msg.obj));
                     map.put(AddressContants.WAREHOUSE_NO, ware);
                     ClickItemPutBean itemPutBean = new ClickItemPutBean();
-                    itemPutBean.setWarehouse_in_no(ware);
                     itemPutBean.setDoc_no(docNo);
                     EventBus.getDefault().post(itemPutBean);
                     suitPickingLogic.docNoFIFO(map, new CommonLogic.PostMaterialFIFOListener() {
@@ -309,7 +308,7 @@ public class SuitPickingScanFg extends BaseFragment {
                             saveBean.setFifo_check(barcodeBackBean.getFifo_check());
                             saveBean.setItem_barcode_type(barcodeBackBean.getItem_barcode_type());
                             etInputNum.requestFocus();
-                            if (CommonUtils.isAutoSave(saveBean)){
+                            if (locatorFlag&&CommonUtils.isAutoSave(saveBean)){
                                 save();
                             }
                         }
@@ -340,7 +339,7 @@ public class SuitPickingScanFg extends BaseFragment {
                             saveBean.setWarehouse_out_no(locatorBackBean.getWarehouse_no());
                             saveBean.setAllow_negative_stock(locatorBackBean.getAllow_negative_stock());
                             etScanBarocde.requestFocus();
-                            if (CommonUtils.isAutoSave(saveBean)){
+                            if (barcodeFlag&&CommonUtils.isAutoSave(saveBean)){
                                 save();
                             }
                         }

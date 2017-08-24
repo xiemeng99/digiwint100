@@ -218,7 +218,7 @@ public class ZPutInStoreScanFg extends BaseFragment {
         public boolean handleMessage(Message msg) {
             switch (msg.what) {
                 case BARCODEWHAT:
-                    HashMap<String, String> barcodeMap = new HashMap<>();
+                    final HashMap<String, String> barcodeMap = new HashMap<>();
                     barcodeMap.put(AddressContants.BARCODE_NO, String.valueOf(msg.obj));
                     barcodeMap.put(AddressContants.DOC_NO,orderBean.getDoc_no());
                     barcodeMap.put(AddressContants.WAREHOUSE_NO, LoginLogic.getWare());
@@ -243,7 +243,7 @@ public class ZPutInStoreScanFg extends BaseFragment {
                             saveBean.setScan_sumqty(barcodeBackBean.getScan_sumqty());
                             saveBean.setItem_barcode_type(barcodeBackBean.getItem_barcode_type());
                             etInputNum.requestFocus();
-                            if (CommonUtils.isAutoSave(saveBean)){
+                            if (locatorFlag&&CommonUtils.isAutoSave(saveBean)){
                                 save();
                             }
                         }
@@ -275,6 +275,9 @@ public class ZPutInStoreScanFg extends BaseFragment {
                             saveBean.setStorage_spaces_in_no(locatorBackBean.getStorage_spaces_no());
                             saveBean.setWarehouse_in_no(locatorBackBean.getWarehouse_no());
                             etBarcodeNo.requestFocus();
+                            if (barcodeNoFlag&&CommonUtils.isAutoSave(saveBean)){
+                                save();
+                            }
                         }
 
                         @Override

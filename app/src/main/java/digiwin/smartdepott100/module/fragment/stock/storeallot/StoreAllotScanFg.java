@@ -283,7 +283,7 @@ public class StoreAllotScanFg extends BaseFragment {
                             } else {
                                 etScanOutLocator.requestFocus();
                             }
-                            if (CommonUtils.isAutoSave(saveBean)){
+                            if (barcodeFlag&&outlocatorFlag&&CommonUtils.isAutoSave(saveBean)){
                                 save();
                             }
                         }
@@ -320,7 +320,7 @@ public class StoreAllotScanFg extends BaseFragment {
                                 pactivity.INOROUT = "";
                             }
                             etScanBarocde.requestFocus();
-                            if (CommonUtils.isAutoSave(saveBean)){
+                            if (inlocatorFlag&&barcodeFlag&&CommonUtils.isAutoSave(saveBean)){
                                 save();
                             }
                         }
@@ -358,7 +358,7 @@ public class StoreAllotScanFg extends BaseFragment {
                             saveBean.setLot_no(barcodeBackBean.getLot_no());
                             saveBean.setItem_barcode_type(barcodeBackBean.getItem_barcode_type());
                             etInputNum.requestFocus();
-                            if (CommonUtils.isAutoSave(saveBean)){
+                            if (inlocatorFlag&&outlocatorFlag&&CommonUtils.isAutoSave(saveBean)){
                                 save();
                             }
                         }

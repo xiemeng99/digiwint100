@@ -15,8 +15,9 @@ import digiwin.smartdepott100.R;
 import digiwin.smartdepott100.core.appcontants.ModuleCode;
 import digiwin.smartdepott100.core.base.BaseFirstModuldeActivity;
 import digiwin.smartdepott100.core.modulecommon.ModuleViewPagerAdapter;
-import digiwin.smartdepott100.module.fragment.stock.productbinning.ProductBinningDetailFg;
+import digiwin.smartdepott100.module.bean.stock.ProductBinningBean;
 import digiwin.smartdepott100.module.fragment.stock.productbinning.ProductBinningScanFg;
+import digiwin.smartdepott100.module.fragment.stock.productbinning.ProductBinningDetailFg;
 
 /**
  * @author 孙长权
@@ -59,7 +60,7 @@ public class ProductBinningActivity extends BaseFirstModuldeActivity {
     /**
      * 明细
      */
-    public  ProductBinningDetailFg detailFg;
+    public ProductBinningDetailFg detailFg;
 
     ModuleViewPagerAdapter adapter;
 
@@ -82,7 +83,7 @@ public class ProductBinningActivity extends BaseFirstModuldeActivity {
 
     @Override
     protected int bindLayoutId() {
-        return R.layout.activity_finished_storage;
+        return R.layout.activity_product_binning;
     }
 
     @Override
@@ -111,6 +112,7 @@ public class ProductBinningActivity extends BaseFirstModuldeActivity {
         //Tablayout和ViewPager关联起来
         tlTab.setupWithViewPager(mZXVp);
         select();
+        packBoxNumber="";
     }
 
     /**

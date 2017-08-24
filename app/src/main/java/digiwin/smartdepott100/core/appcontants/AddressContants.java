@@ -27,8 +27,8 @@ public class AddressContants {
     /**
      *  默认测试区地址
      */
-//    public static String TEST_ADDRESS = "http://172.16.100.7/wtopprd/ws/r/awsp920";
-    public static String TEST_ADDRESS = "http://172.16.100.7/wstopprd/ws/r/awsp920";
+    public static String TEST_ADDRESS = "http://172.31.75.143/wstopprd/ws/r/awsp920";//深圳主机
+//    public static String TEST_ADDRESS = "http://172.16.100.7/wstopprd/ws/r/awsp920";//南京主机
     /**
      * 测试区地址标记
      */
@@ -36,7 +36,8 @@ public class AddressContants {
     /**
      *  默认正式区地址http://180.167.0.43:8888/wtopprd/ws/r/awsp920
      */
-    public static String FORMAL_ADDRESS = "http://180.167.0.43:8888/wstopprd/ws/r/awsp920";
+    public static String FORMAL_ADDRESS = "http://172.31.75.143/wstopprd/ws/r/awsp920";//深圳主机
+//    public static String FORMAL_ADDRESS = "http://180.167.0.43:8888/wstopprd/ws/r/awsp920";//南京主机外网
     /**
      * 正式区地址标记
      */
@@ -390,6 +391,11 @@ public class AddressContants {
     public static String FURNACE_NO="furnace_no";
 
     public static final String STORAGE_SPACES_NO="storage_spaces_no";
+
+    /**
+     * 单位
+     */
+    public static final String UNIT_NO = "unit_no";
 
 
 }

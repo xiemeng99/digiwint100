@@ -149,6 +149,6 @@
             android:id="@+id/img_detail"
             android:layout_width="@dimen/layout_25dp"
             android:layout_height="@dimen/layout_25dp"
-            android:src="@mipmap/detail001" />
+            android:src="@mipmap/detail" />
     </LinearLayout>
 </LinearLayout>

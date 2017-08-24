@@ -207,7 +207,7 @@ public class MiscellaneousIssueScanFg extends BaseFragment {
     }
 
     @OnClick(R.id.save)
-    void Save() {
+    void save() {
         if (!barcodeFlag) {
             showFailedDialog(R.string.scan_barcode);
             return;
@@ -275,8 +275,8 @@ public class MiscellaneousIssueScanFg extends BaseFragment {
                             saveBean.setAvailable_in_qty(barcodeBackBean.getAvailable_in_qty());
                             saveBean.setItem_barcode_type(barcodeBackBean.getItem_barcode_type());
                             etInputNum.requestFocus();
-                            if (CommonUtils.isAutoSave(saveBean)){
-                                Save();
+                            if (locatorFlag&&CommonUtils.isAutoSave(saveBean)){
+                                save();
                             }
                         }
 
@@ -307,8 +307,8 @@ public class MiscellaneousIssueScanFg extends BaseFragment {
                             saveBean.setStorage_spaces_out_no(locatorBackBean.getStorage_spaces_no());
                             saveBean.setWarehouse_out_no(locatorBackBean.getWarehouse_no());
                             etScanBarocde.requestFocus();
-                            if (CommonUtils.isAutoSave(saveBean)){
-                                Save();
+                            if (barcodeFlag&&CommonUtils.isAutoSave(saveBean)){
+                                save();
                             }
                         }
 

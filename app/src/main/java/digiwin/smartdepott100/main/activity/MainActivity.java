@@ -17,10 +17,14 @@ import android.widget.TextView;
 import com.iflytek.cloud.util.UserWords;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import butterknife.BindView;
 import butterknife.OnClick;
+import digiwin.smartdepott100.main.bean.DeviceInfoBean;
+import digiwin.smartdepott100.main.logic.DeviceLogic;
 import digiwin.smartdepott100.main.logic.MainLogic;
 import digiwin.library.utils.StringUtils;
 import digiwin.smartdepott100.main.bean.VoiceWord;
@@ -308,6 +312,19 @@ public class MainActivity extends BaseTitleActivity {
                 ToastUtils.showToastByString(context, this.getResources().getString(R.string.app_exit));
                 exitTime = System.currentTimeMillis();
             } else {
+                Map<String, String> hashMap = new HashMap<>();
+                hashMap.put("statu", "1");
+                DeviceLogic.getInstance(context, module, mTimestamp.toString()).getDevice(hashMap, new DeviceLogic.DeviceListener() {
+                    @Override
+                    public void onSuccess(List<DeviceInfoBean> deviceInfoBeen) {
+
+                    }
+
+                    @Override
+                    public void onFailed(String msg) {
+                        showFailedDialog(msg);
+                    }
+                });
                 BaseApplication.getInstance().destroyReceiver();
                 ActivityManagerUtils.finishAllActivity();
                 System.exit(0);

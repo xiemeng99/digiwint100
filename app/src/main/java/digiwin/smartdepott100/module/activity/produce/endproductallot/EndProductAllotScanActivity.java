@@ -305,7 +305,7 @@ public class EndProductAllotScanActivity extends BaseTitleActivity {
                             }else{
                                 etScanBarocde.requestFocus();
                             }
-                            if (CommonUtils.isAutoSave(saveBean)){
+                            if (barcodeFlag&&CommonUtils.isAutoSave(saveBean)){
                                 saveData();
                             }
                         }
@@ -450,7 +450,7 @@ public class EndProductAllotScanActivity extends BaseTitleActivity {
         map.put(AddressContants.ITEM_NO,localData.getLow_order_item_no());
         map.put(AddressContants.WAREHOUSE_NO,LoginLogic.getWare());
         map.put(AddressContants.QTY,localData.getApply_qty());
-        map.put("lot_no","");
+        map.put(AddressContants.UNIT_NO,localData.getUnit_no());
         mHandler.sendMessageDelayed(mHandler.obtainMessage(FIFOWHAT, map), AddressContants.DELAYTIME);
     }
 
@@ -503,7 +503,7 @@ public class EndProductAllotScanActivity extends BaseTitleActivity {
         saveBean.setCustomer_no(barcodeBackBean.getCol1());
         saveBean.setItem_barcode_type(barcodeBackBean.getItem_barcode_type());
         etInputNum.requestFocus();
-        if (CommonUtils.isAutoSave(saveBean)){
+        if (locatorFlag&&CommonUtils.isAutoSave(saveBean)){
             saveData();
         }
     }

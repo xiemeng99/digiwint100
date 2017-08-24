@@ -300,7 +300,7 @@ public class SaleReturnActivity extends BaseTitleActivity {
         FilterBean filterBean = new FilterBean();
         try {
             //仓库
-            filterBean.setWarehouse_in_no(LoginLogic.getWare());
+            filterBean.setWarehouse_no(LoginLogic.getWare());
             //退料单号
             if (!StringUtils.isBlank(etReturnOrderNo.getText().toString())) {
                 filterBean.setDoc_no(etReturnOrderNo.getText().toString());
@@ -327,8 +327,8 @@ public class SaleReturnActivity extends BaseTitleActivity {
             logic.getSOLListData(filterBean, new SaleReturnLogic.GetSaleRetrunListDataListener() {
                 @Override
                 public void onSuccess(List<FilterResultOrderBean> list) {
+                    dismissLoadingDialog();
                     if (null != list && list.size() > 0) {
-                        dismissLoadingDialog();
                         //查询成功隐藏筛选界面，展示汇总信息
                         ll_search_dialog.setVisibility(View.GONE);
                         scrollview.setVisibility(View.VISIBLE);

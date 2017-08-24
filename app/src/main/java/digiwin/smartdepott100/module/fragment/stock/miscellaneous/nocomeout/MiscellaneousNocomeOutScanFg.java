@@ -77,7 +77,7 @@ public class MiscellaneousNocomeOutScanFg extends BaseFragment {
      * 条码
      */
     @BindView(R.id.et_scan_barocde)
-    EditText et_scan_barocde;
+    EditText etScanBarocde;
 
     /**
      * 库位
@@ -255,7 +255,7 @@ public class MiscellaneousNocomeOutScanFg extends BaseFragment {
     @OnFocusChange(R.id.et_scan_barocde)
     void barcodeFocusChanage() {
         ModuleUtils.viewChange(ll_scan_barcode, views);
-        ModuleUtils.etChange(activity, et_scan_barocde, editTexts);
+        ModuleUtils.etChange(activity, etScanBarocde, editTexts);
         ModuleUtils.tvChange(activity, tvBarcode, textViews);
     }
 
@@ -366,7 +366,7 @@ public class MiscellaneousNocomeOutScanFg extends BaseFragment {
                             cb_reason_code.setChecked(true);
                             if (cb_department.isChecked()){
                                 if(cb_locatorlock.isChecked()){
-                                    et_scan_barocde.requestFocus();
+                                    etScanBarocde.requestFocus();
                                 }else{
                                     et_scan_locator.requestFocus();
                                 }
@@ -402,7 +402,7 @@ public class MiscellaneousNocomeOutScanFg extends BaseFragment {
                             show();
                             cb_department.setChecked(true);
                             if(cb_locatorlock.isChecked()){
-                                et_scan_barocde.requestFocus();
+                                etScanBarocde.requestFocus();
                             }else{
                                 et_scan_locator.requestFocus();
                             }
@@ -444,7 +444,7 @@ public class MiscellaneousNocomeOutScanFg extends BaseFragment {
                             saveBean.setAvailable_in_qty("0");
                             et_input_num.requestFocus();
                             saveBean.setItem_barcode_type(barcodeBackBean.getItem_barcode_type());
-                            if (CommonUtils.isAutoSave(saveBean)){
+                            if (locatorFlag&&CommonUtils.isAutoSave(saveBean)){
                                 save();
                             }
                         }
@@ -455,7 +455,7 @@ public class MiscellaneousNocomeOutScanFg extends BaseFragment {
                             showFailedDialog(error, new OnDialogClickListener() {
                                 @Override
                                 public void onCallback() {
-                                    et_scan_barocde.setText("");
+                                    etScanBarocde.setText("");
                                 }
                             });
                         }
@@ -472,7 +472,10 @@ public class MiscellaneousNocomeOutScanFg extends BaseFragment {
                             show();
                             saveBean.setStorage_spaces_out_no(locatorBackBean.getStorage_spaces_no());
                             saveBean.setWarehouse_out_no(locatorBackBean.getWarehouse_no());
-                            et_scan_barocde.requestFocus();
+                            etScanBarocde.requestFocus();
+                            if (barcodeFlag&&CommonUtils.isAutoSave(saveBean)){
+                                save();
+                            }
                         }
 
                         @Override
@@ -521,7 +524,7 @@ public class MiscellaneousNocomeOutScanFg extends BaseFragment {
      */
     private void clear() {
         tv_scaned_num.setText(saveBean.getScan_sumqty());
-        et_scan_barocde.setText("");
+        etScanBarocde.setText("");
         et_input_num.setText("");
         barcodeFlag = false;
         if(!cb_reason_code.isChecked()){
@@ -551,7 +554,7 @@ public class MiscellaneousNocomeOutScanFg extends BaseFragment {
         tv_scaned_num.setText("");
         et_reason_code.setText("");
         et_department.setText("");
-        et_scan_barocde.setText("");
+        etScanBarocde.setText("");
         et_scan_locator.setText("");
         cb_department.setChecked(false);
         cb_reason_code.setChecked(false);
@@ -583,7 +586,7 @@ public class MiscellaneousNocomeOutScanFg extends BaseFragment {
                     if(!cb_locatorlock.isChecked()){
                         et_scan_locator.requestFocus();
                     }else{
-                        et_scan_barocde.requestFocus();
+                        etScanBarocde.requestFocus();
                     }
                 }
             }

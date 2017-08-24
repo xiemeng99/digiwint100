@@ -68,7 +68,6 @@ public class WorkOrderSumAdapter extends BaseRecyclerAdapter<ListSumBean>{
             holder.setTextColor(R.id.tv_locator_num, mContext.getResources().getColor(R.color.Base_color));
             holder.setTextColor(R.id.tv_apply_number, mContext.getResources().getColor(R.color.Base_color));
             holder.setTextColor(R.id.tv_match_number, mContext.getResources().getColor(R.color.Base_color));
-            holder.getImageView(R.id.img_detail).setBackgroundResource(R.mipmap.detail001);
 
         } else if (numb1 > numb3) {
             holder.setBackground(R.id.item_ll,R.drawable.yellow_scandetail_bg);
@@ -79,7 +78,6 @@ public class WorkOrderSumAdapter extends BaseRecyclerAdapter<ListSumBean>{
             holder.setTextColor(R.id.tv_item_format, mContext.getResources().getColor(R.color.textfous_yellow));
             holder.setTextColor(R.id.tv_apply_number,mContext.getResources().getColor( R.color.textfous_yellow));
             holder.setTextColor(R.id.tv_match_number,mContext.getResources().getColor( R.color.textfous_yellow));
-            holder.getImageView(R.id.img_detail).setBackgroundResource(R.mipmap.detail002);
         } else if (numb1 ==numb3) {
             holder.setBackground(R.id.item_ll,R.drawable.green_scandetail_bg);
             holder.setTextColor(R.id.tv_item_no,mContext.getResources().getColor( R.color.green1b));
@@ -89,7 +87,6 @@ public class WorkOrderSumAdapter extends BaseRecyclerAdapter<ListSumBean>{
             holder.setTextColor(R.id.tv_locator_num, mContext.getResources().getColor(R.color.green1b));
             holder.setTextColor(R.id.tv_apply_number,mContext.getResources().getColor( R.color.green1b));
             holder.setTextColor(R.id.tv_match_number,mContext.getResources().getColor( R.color.green1b));
-            holder.getImageView(R.id.img_detail).setBackgroundResource(R.mipmap.detail003);
         }
     }
 }

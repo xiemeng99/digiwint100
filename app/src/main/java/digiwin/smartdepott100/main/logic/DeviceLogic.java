@@ -8,6 +8,7 @@ import java.util.Map;
 
 import digiwin.library.json.JsonResp;
 import digiwin.library.utils.LogUtils;
+import digiwin.library.utils.StringUtils;
 import digiwin.smartdepott100.R;
 import digiwin.smartdepott100.core.appcontants.ReqTypeName;
 import digiwin.smartdepott100.core.json.JsonReqForERP;
@@ -69,7 +70,12 @@ public class DeviceLogic {
      */
     public void getDevice(Map<String, String> map, final DeviceListener listener) {
         try {
-            String createJson = JsonReqForERP.mapCreateJson(mModule, ReqTypeName.GETAP, mTimestamp, map);
+            String createJson;
+            if (!StringUtils.isBlank(map.get("account"))){
+                createJson= JsonReqForERP.createJsonForBind(mModule, ReqTypeName.GETAP, mTimestamp, map,map.get("account"));
+            }else{
+                createJson= JsonReqForERP.mapCreateJson(mModule, ReqTypeName.GETAP, mTimestamp, map);
+            }
             OkhttpRequest.getInstance(mContext).post(createJson, new IRequestCallbackImp() {
                 @Override
                 public void onResponse(String string) {

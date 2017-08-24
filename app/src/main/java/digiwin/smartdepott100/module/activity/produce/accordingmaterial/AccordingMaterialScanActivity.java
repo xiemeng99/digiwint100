@@ -310,7 +310,7 @@ public class AccordingMaterialScanActivity extends BaseTitleActivity {
                             } else {
                                 etScanBarocde.requestFocus();
                             }
-                            if (CommonUtils.isAutoSave(saveBean)){
+                            if (barcodeFlag&&CommonUtils.isAutoSave(saveBean)){
                                 saveData();
                             }
                         }
@@ -451,6 +451,7 @@ public class AccordingMaterialScanActivity extends BaseTitleActivity {
         map.put(AddressContants.ITEM_NO, localData.getLow_order_item_no());
         map.put(AddressContants.WAREHOUSE_NO, LoginLogic.getWare());
         map.put(AddressContants.QTY, tvUnderFeed.getText().toString());
+        map.put(AddressContants.UNIT_NO, localData.getUnit_no());
         mHandler.removeMessages(FIFOWHAT);
         mHandler.sendMessageDelayed(mHandler.obtainMessage(FIFOWHAT, map), AddressContants.DELAYTIME);
     }
@@ -510,7 +511,7 @@ public class AccordingMaterialScanActivity extends BaseTitleActivity {
         } else {
             etInputNum.requestFocus();
         }
-        if (CommonUtils.isAutoSave(saveBean)){
+        if (locatorFlag&&CommonUtils.isAutoSave(saveBean)){
             saveData();
         }
     }

@@ -124,7 +124,7 @@
                 android:textColor="@color/materialText_color" />
         </LinearLayout>
 
-        <View  style="@style/act_line_style"/>
+        <View  style="@style/line_in_pink_style"/>
         <LinearLayout
             style="@style/itemstyle"
             android:layout_width="match_parent"
@@ -166,7 +166,7 @@
                 android:gravity="center"
                 android:textColor="@color/materialText_color" />
         </LinearLayout>
-        <View  style="@style/act_line_style"/>
+        <View  style="@style/line_in_pink_style"/>
         <LinearLayout
             style="@style/itemstyle"
             android:layout_width="match_parent"

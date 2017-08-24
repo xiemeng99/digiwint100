@@ -78,13 +78,13 @@ public class AccordingMaterialSumAdapter extends BaseRecyclerAdapter<ListSumBean
             holder.setTextColor(R.id.tv_feeding_amount,mContext.getResources().getColor( R.color.outside_yellow));
         } else if (numb1 ==numb2) {
             holder.setBackground(R.id.item_ll,R.drawable.green_scandetail_bg);
-            holder.setTextColor(R.id.tv_item_no,mContext.getResources().getColor( R.color.Base_color));
-            holder.setTextColor(R.id.tv_unit,mContext.getResources().getColor( R.color.Base_color));
-            holder.setTextColor(R.id.tv_item_name,mContext.getResources().getColor( R.color.Base_color));
-            holder.setTextColor(R.id.tv_item_format, mContext.getResources().getColor(R.color.Base_color));
-            holder.setTextColor(R.id.tv_material_return,mContext.getResources().getColor( R.color.Base_color));
-            holder.setTextColor(R.id.tv_material_return_big, mContext.getResources().getColor(R.color.Base_color));
-            holder.setTextColor(R.id.tv_feeding_amount,mContext.getResources().getColor( R.color.Base_color));
+            holder.setTextColor(R.id.tv_item_no,mContext.getResources().getColor( R.color.green1b));
+            holder.setTextColor(R.id.tv_unit,mContext.getResources().getColor( R.color.green1b));
+            holder.setTextColor(R.id.tv_item_name,mContext.getResources().getColor( R.color.green1b));
+            holder.setTextColor(R.id.tv_item_format, mContext.getResources().getColor(R.color.green1b));
+            holder.setTextColor(R.id.tv_material_return,mContext.getResources().getColor( R.color.green1b));
+            holder.setTextColor(R.id.tv_material_return_big, mContext.getResources().getColor(R.color.green1b));
+            holder.setTextColor(R.id.tv_feeding_amount,mContext.getResources().getColor( R.color.green1b));
         }
     }
 }

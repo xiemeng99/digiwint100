@@ -276,8 +276,8 @@ public class DistributeScanActivity extends BaseTitleActivity {
                             saveBean.setUnit_no(barcodeBackBean.getUnit_no());
                             saveBean.setLot_no(barcodeBackBean.getLot_no());
                             saveBean.setItem_barcode_type(barcodeBackBean.getItem_barcode_type());
-                            if (CommonUtils.isAutoSave(saveBean)){
-                                Save();
+                            if (locatorFlag&&CommonUtils.isAutoSave(saveBean)){
+                                save();
                             }
                         }
 
@@ -322,8 +322,8 @@ public class DistributeScanActivity extends BaseTitleActivity {
                             }else {
                                 et_input_num.requestFocus();
                             }
-                            if (CommonUtils.isAutoSave(saveBean)){
-                                Save();
+                            if (barcodeFlag&&CommonUtils.isAutoSave(saveBean)){
+                                save();
                             }
                         }
 
@@ -415,7 +415,7 @@ public class DistributeScanActivity extends BaseTitleActivity {
     }
 
     @OnClick(R.id.save)
-    void Save() {
+    void save() {
         if (!barcodeFlag) {
             showFailedDialog(R.string.scan_barcode);
             return;

@@ -145,7 +145,7 @@ public class MoveStoreScanFg extends BaseFragment {
     @OnClick(R.id.save)
     void save() {
         if (!locatorFlag) {
-            showFailedDialog(R.string.scan_in_movelocator);
+            showFailedDialog(R.string.scan_out_movelocator);
             return;
         }
         if (!barcodeFlag) {
@@ -234,7 +234,7 @@ public class MoveStoreScanFg extends BaseFragment {
                             etInputNum.requestFocus();
                             barcodeShow = barcodeBackBean.getShowing();
                             show();
-                            if (CommonUtils.isAutoSave(saveBean)){
+                            if (locatorFlag&&CommonUtils.isAutoSave(saveBean)){
                                 save();
                             }
                         }
@@ -266,7 +266,7 @@ public class MoveStoreScanFg extends BaseFragment {
                             etScanBarocde.requestFocus();
                             locatorShow = locatorBackBean.getShowing();
                             show();
-                            if (CommonUtils.isAutoSave(saveBean)){
+                            if (barcodeFlag&&CommonUtils.isAutoSave(saveBean)){
                                 save();
                             }
                         }

@@ -322,7 +322,7 @@ public class AccordingMaterialScanNewActivity extends BaseTitleActivity {
                             }else{
                                 etScanBarocde.requestFocus();
                             }
-                            if (CommonUtils.isAutoSave(saveBean)){
+                            if (barcodeFlag&&CommonUtils.isAutoSave(saveBean)){
                                 saveData();
                             }
                         }
@@ -538,7 +538,7 @@ public class AccordingMaterialScanNewActivity extends BaseTitleActivity {
         }else{
             etInputNum.requestFocus();
         }
-        if (CommonUtils.isAutoSave(saveBean)){
+        if (locatorFlag&&CommonUtils.isAutoSave(saveBean)){
             saveData();
         }
     }

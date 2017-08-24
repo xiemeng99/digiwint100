@@ -36,11 +36,11 @@ public abstract class ProductBinningDetailAdapter extends BaseDetailRecyclerAdap
         //数量
         holder.setText(R.id.tv_number, StringUtils.deleteZero(item.getItem_qty()));
         //条码
-        holder.setText(R.id.tv_product_number, item.getBarcode_no());
+        holder.setText(R.id.tv_product_no, item.getBarcode_no());
         //品名
         holder.setText(R.id.tv_item_name,item.getItem_name());
         //料号
-        holder.setText(R.id.tv_item_no,item.getItem_no());
+      //  holder.setText(R.id.tv_item_no,item.getItem_no());
 
         CheckBox cb = (CheckBox) holder.getView(R.id.cb_ischoose);
         cb.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {

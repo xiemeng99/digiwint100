@@ -186,7 +186,7 @@ public class ScanOutStoreScanFg extends BaseFragment {
                             barcodeFlag = true;
                             saveBean.setWarehouse_out_no(productBinningBean.getWarehouse_no());
                             saveBean.setStorage_spaces_out_no(productBinningBean.getStorage_spaces_no());
-                            saveBean.setPackage_no(productBinningBean.package_no);
+                            saveBean.setPackage_no(productBinningBean.getPackage_no());
                             saveBean.setDoc_no(notice_no);
                             tvScanLocator.setText(productBinningBean.getStorage_spaces_no());
                         }

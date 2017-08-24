@@ -10,48 +10,69 @@ public class ProductBinningBean {
     /**
      * 装箱号
      */
-    public String package_no;
+    private String package_no;
     /**
-     *  箱内件数
+     * 箱内件数
      */
-    public String qty;
+    private String qty;
     /**
      * 项次
      */
-    public String seq;
+    private String seq;
     /**
      * 条码编号
      */
-    public String barcode_no;
+    private String barcode_no;
     /**
      * 料号
      */
-    public String item_no;
+    private String item_no;
     /**
      * 品名
      */
-    public String item_name;
+    private String item_name;
     /**
      * 规格
      */
-    public String item_spec;
+    private String item_spec;
     /**
      * 数量
      */
-    public String item_qty;
+    private String item_qty;
     /**
      * 标志（删除或插入）
      */
-    public String flag;
+    private String flag;
 
     /**
      * 仓库编号
      */
-    public String warehouse_no;
+    private String warehouse_no;
     /**
      * 库位编号
      */
-    public String storage_spaces_no;
+    private String storage_spaces_no;
+    /**
+     * 最大包装件数
+     */
+    private String max_package_qty;
+    /**
+     * 箱内件数
+     */
+    private String packages;
+    /**
+     * 包装毛重
+     */
+    private String package_gross_weight;
+    /**
+     * 包装净重
+     */
+    private String package_net_weight;
+
+    /**
+     * 条码类型
+     */
+    private String item_barcode_type;
 
     public String getWarehouse_no() {
         return warehouse_no;
@@ -139,5 +160,45 @@ public class ProductBinningBean {
 
     public void setItem_qty(String item_qty) {
         this.item_qty = item_qty;
+    }
+
+    public String getMax_package_qty() {
+        return max_package_qty;
+    }
+
+    public void setMax_package_qty(String max_package_qty) {
+        this.max_package_qty = max_package_qty;
+    }
+
+    public String getPackages() {
+        return packages;
+    }
+
+    public void setPackages(String packages) {
+        this.packages = packages;
+    }
+
+    public String getPackage_gross_weight() {
+        return package_gross_weight;
+    }
+
+    public void setPackage_gross_weight(String package_gross_weight) {
+        this.package_gross_weight = package_gross_weight;
+    }
+
+    public String getPackage_net_weight() {
+        return package_net_weight;
+    }
+
+    public void setPackage_net_weight(String package_net_weight) {
+        this.package_net_weight = package_net_weight;
+    }
+
+    public String getItem_barcode_type() {
+        return item_barcode_type;
+    }
+
+    public void setItem_barcode_type(String item_barcode_type) {
+        this.item_barcode_type = item_barcode_type;
     }
 }

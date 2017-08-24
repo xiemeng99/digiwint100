@@ -211,6 +211,32 @@ public class JsonReqForERP {
         }
         return req;
     }
+    /**
+     * 将parameter中数据组成hashmap方式传入
+     *解绑用户专用
+     * @param map         parameter中数据
+     * @param timestamp   时间戳
+     * @param serviceName 接口名
+     * @return
+     */
+    public static <T> String createJsonForBind(String module, String serviceName, String timestamp, Map<String, T> map,String account) {
+        String req = "";
+        try {
+            parameter = null;
+            Std_Data param = new Std_Data();
+            JSONObject object = (JSONObject) JSON.toJSON(param);
+            object.putAll(map);
+            object.remove("data");
+            Request main = new Request();
+            initheadForBind(main, module, serviceName, timestamp,account);
+            main.payload.std_data.parameter = object;
+            req = JSON.toJSONString(main);
+            LogUtils.i(TAG, "mapjson------>" + req);
+        } catch (Exception e) {
+            LogUtils.e(TAG, "mapCreateJson异常" + e);
+        }
+        return req;
+    }
 
     /**
      * parameter内数据传递
@@ -308,6 +334,19 @@ public class JsonReqForERP {
             main.host.acct = AddressContants.ACCTFIRSTLOGIN;
         }
     }
-
+    /**
+     *解绑用户专用
+     */
+    private static void initheadForBind(Request main, String module, String serviceName, String timestamp,String account) {
+        main.host.appmodule = module;
+        main.service.name = serviceName;
+        main.host.timestamp = timestamp;
+        AccoutBean userInfo = LoginLogic.getUserInfo();
+        if (null != userInfo && null != userInfo.getEnterprise_no() && null != userInfo.getSite_no()) {
+            main.datakey.EntId = userInfo.getEnterprise_no();
+            main.datakey.CompanyId = userInfo.getSite_no();
+        }
+        main.host.acct = account;
+    }
 
 }

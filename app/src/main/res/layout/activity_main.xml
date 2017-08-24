@@ -50,8 +50,8 @@
 
         <ImageView
             android:id="@+id/voice_guide"
-            android:layout_width="@dimen/layout_50dp"
-            android:layout_height="@dimen/layout_50dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_gravity="bottom|center_horizontal"
             android:layout_marginBottom="@dimen/layout_40dp"
             android:minHeight="@dimen/layout_0dp"

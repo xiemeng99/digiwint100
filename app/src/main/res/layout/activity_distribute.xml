@@ -273,7 +273,7 @@
 
                 <View
                     android:id="@+id/view1"
-                    style="@style/act_line_style"></View>
+                    style="@style/line_in_pink_style"></View>
 
                 <LinearLayout
                     style="@style/itemstyle"
