@@ -12,16 +12,17 @@
 
     <LinearLayout
         android:id="@+id/ll_search_dialog"
+        style="@style/itemstyle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
+        android:layout_below="@+id/toolbar_title"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="@dimen/digiwin_top"
         android:layout_marginLeft="@dimen/layout_10dp"
         android:layout_marginRight="@dimen/layout_10dp"
         android:background="@drawable/yellow_scandetail_bg"
-        style="@style/itemstyle"
-        android:visibility="visible"
-        android:layout_below="@+id/toolbar_title"
-        android:layout_centerHorizontal="true">
+        android:orientation="vertical"
+        android:visibility="visible">
 
         <LinearLayout
             android:id="@+id/ll_search_input"
@@ -39,55 +40,25 @@
 
                 <TextView
                     android:id="@+id/tv_order_number"
+                    style="@style/app_text_inwhite"
                     android:layout_width="@dimen/layout_70dp"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
-                    android:text="@string/order_number"
-                    style="@style/app_text_inwhite" />
+                    android:text="@string/order_number" />
 
                 <EditText
                     android:id="@+id/et_order_number"
                     android:layout_width="@dimen/layout_0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="@dimen/layout_10dp"
                     android:layout_weight="1"
                     android:background="@null"
-                    android:singleLine="true"
                     android:selectAllOnFocus="true"
+                    android:singleLine="true"
                     android:textColor="@color/black_32"
                     android:textCursorDrawable="@drawable/et_cursor_yellow"
                     android:textSize="@dimen/textSize_14sp" />
             </LinearLayout>
 
-
-            <View style="@style/fg_line_style" />
-            <LinearLayout
-                android:id="@+id/ll_item_no"
-                style="@style/itemstyle"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <TextView
-                    android:id="@+id/tv_item_no"
-                    android:layout_width="@dimen/layout_70dp"
-                    android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:text="@string/item_no"
-                    style="@style/app_text_inwhite"/>
-
-                <EditText
-                    android:id="@+id/et_item_no"
-                    android:layout_width="@dimen/layout_0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="@dimen/layout_10dp"
-                    android:layout_weight="1"
-                    android:background="@null"
-                    android:singleLine="true"
-                    android:selectAllOnFocus="true"
-                    android:textColor="@color/black_32"
-                    android:textCursorDrawable="@drawable/et_cursor_yellow"
-                    android:textSize="@dimen/textSize_14sp" />
-            </LinearLayout>
             <View style="@style/fg_line_style" />
 
             <LinearLayout
@@ -98,24 +69,53 @@
 
                 <TextView
                     android:id="@+id/tv_department"
+                    style="@style/app_text_inwhite"
                     android:layout_width="@dimen/layout_70dp"
                     android:layout_height="wrap_content"
-                    android:text="@string/department"
-                    style="@style/app_text_inwhite"/>
+                    android:text="@string/make_department" />
 
                 <EditText
                     android:id="@+id/et_department"
                     android:layout_width="@dimen/layout_0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="@dimen/layout_10dp"
                     android:layout_weight="1"
                     android:background="@null"
-                    android:singleLine="true"
                     android:selectAllOnFocus="true"
+                    android:singleLine="true"
                     android:textColor="@color/black_32"
                     android:textCursorDrawable="@drawable/et_cursor_yellow"
                     android:textSize="@dimen/textSize_14sp" />
             </LinearLayout>
+
+            <View style="@style/fg_line_style" />
+
+            <LinearLayout
+                android:id="@+id/ll_item_no"
+                style="@style/itemstyle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/tv_item_no"
+                    style="@style/app_text_inwhite"
+                    android:layout_width="@dimen/layout_70dp"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:text="@string/item_no" />
+
+                <EditText
+                    android:id="@+id/et_item_no"
+                    android:layout_width="@dimen/layout_0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@null"
+                    android:selectAllOnFocus="true"
+                    android:singleLine="true"
+                    android:textColor="@color/black_32"
+                    android:textCursorDrawable="@drawable/et_cursor_yellow"
+                    android:textSize="@dimen/textSize_14sp" />
+            </LinearLayout>
+
 
             <View style="@style/fg_line_style" />
 
@@ -125,13 +125,11 @@
             android:id="@+id/btn_search_sure"
             android:layout_width="match_parent"
             android:layout_height="@dimen/layout_40dp"
+            android:layout_margin="@dimen/layout_10dp"
+            android:background="@drawable/accordingmaterialtop_sharp"
             android:text="@string/label_sure"
             android:textColor="@color/WHITE"
-            android:textSize="@dimen/textSize_18sp"
-            android:layout_marginLeft="@dimen/layout_10dp"
-            android:layout_marginRight="@dimen/layout_10dp"
-            android:layout_marginBottom="@dimen/layout_15dp"
-            android:background="@drawable/accordingmaterialtop_sharp"/>
+            android:textSize="@dimen/textSize_18sp" />
 
     </LinearLayout>
 
@@ -139,13 +137,13 @@
         android:id="@+id/scrollview"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:visibility="gone"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="true"
         android:layout_below="@+id/toolbar_title"
         android:layout_marginTop="@dimen/layout_6dp"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentStart="true">
+        android:visibility="gone">
 
-        <include layout="@layout/ryitem_common"/>
+        <include layout="@layout/ryitem_common" />
 
     </ScrollView>
 </RelativeLayout>

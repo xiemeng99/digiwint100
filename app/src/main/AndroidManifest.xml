@@ -946,7 +946,9 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
-
+        <activity
+            android:name=".module.activity.produce.inbinning.InBinningDetailActivity"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustPan"/>
         <!-- Required SDK 核心功能极光推送需要 -->
         <!-- 可配置android:process参数将PushService放在其他进程中 -->
         <service

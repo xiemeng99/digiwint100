@@ -119,6 +119,13 @@ public class SaveBean {
     private String item_barcode_type;
 
 
+    private String barcode_qty;
+
+    /**
+     * 数量
+     */
+    public String req_qty;
+
     public String getStorage_spaces_no() {
         return storage_spaces_no;
     }
@@ -339,10 +346,7 @@ public class SaveBean {
     public void setWarehouse_storage(String warehouse_storage) {
         this.warehouse_storage = warehouse_storage;
     }
-    /**
-     * 数量
-     */
-    public String req_qty;
+
 
     public String getReq_qty() {
         return req_qty;
@@ -358,5 +362,13 @@ public class SaveBean {
 
     public void setItem_barcode_type(String item_barcode_type) {
         this.item_barcode_type = item_barcode_type;
+    }
+
+    public String getBarcode_qty() {
+        return barcode_qty;
+    }
+
+    public void setBarcode_qty(String barcode_qty) {
+        this.barcode_qty = barcode_qty;
     }
 }

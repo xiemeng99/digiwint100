@@ -5,8 +5,10 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -17,12 +19,17 @@ import digiwin.pulltorefreshlibrary.recyclerviewAdapter.OnItemClickListener;
 import digiwin.smartdepott100.R;
 import digiwin.smartdepott100.core.appcontants.AddressContants;
 import digiwin.smartdepott100.core.base.BaseFragment;
+import digiwin.smartdepott100.module.activity.common.CommonDetailActivity;
 import digiwin.smartdepott100.module.activity.produce.inbinning.InBinningActivity;
+import digiwin.smartdepott100.module.activity.produce.inbinning.InBinningDetailActivity;
 import digiwin.smartdepott100.module.activity.sale.scanout.ScanOutDetailActivity;
-import digiwin.smartdepott100.module.adapter.produce.InBinningListAdapter;
+import digiwin.smartdepott100.module.adapter.produce.InBinningSumAdapter;
+import digiwin.smartdepott100.module.bean.common.DetailShowBean;
+import digiwin.smartdepott100.module.bean.common.FilterBean;
 import digiwin.smartdepott100.module.bean.common.ListSumBean;
-import digiwin.smartdepott100.module.bean.produce.InBinningBean;
+import digiwin.smartdepott100.module.bean.common.SumShowBean;
 import digiwin.smartdepott100.module.logic.common.CommonLogic;
+import digiwin.smartdepott100.module.logic.produce.InBinningLogic;
 
 /**
  * @author 孙长权
@@ -31,7 +38,7 @@ import digiwin.smartdepott100.module.logic.common.CommonLogic;
  */
 public class InBinningSumFg extends BaseFragment {
 
-    InBinningListAdapter adapter;
+    InBinningSumAdapter adapter;
 
     @BindView(R.id.ry_list)
     RecyclerView ryList;
@@ -43,7 +50,7 @@ public class InBinningSumFg extends BaseFragment {
 
     InBinningActivity pactivity;
 
-    CommonLogic commonLogic;
+    InBinningLogic commonLogic;
 
     boolean upDateFlag;
     /**
@@ -62,24 +69,22 @@ public class InBinningSumFg extends BaseFragment {
         ryList.setLayoutManager(linearLayoutManager);
         upDateFlag = false;
         listSumBean = (ListSumBean) pactivity.getIntent().getExtras().getSerializable("data");
-        commonLogic = CommonLogic.getInstance(pactivity, pactivity.module, pactivity.mTimestamp.toString());
+        commonLogic = InBinningLogic.getInstance(pactivity, pactivity.module, pactivity.mTimestamp.toString());
     }
 
     public void upDateList() {
         try {
-            InBinningBean putBean = new InBinningBean();
-            putBean.setWo_no(listSumBean.getWo_no());
+            FilterBean putBean = new FilterBean();
+            putBean.setDoc_no(listSumBean.getDoc_no());
             putBean.setItem_no(listSumBean.getItem_no());
-            putBean.setDepartment_no(listSumBean.getDepartment_no());
-
             showLoadingDialog();
-            commonLogic.getOrderSumData(putBean, new CommonLogic.GetOrderSumListener() {
+            commonLogic.getInBinningList(putBean, new CommonLogic.GetZSumListener() {
                 @Override
                 public void onSuccess(List<ListSumBean> list) {
+                    dismissLoadingDialog();
                     if(list.size() > 0){
-                        dismissLoadingDialog();
                         upDateFlag = true;
-                        adapter = new InBinningListAdapter(activity,true,list);
+                        adapter = new InBinningSumAdapter(activity,list);
                         ryList.setAdapter(adapter);
                         sumBeanList = list;
                         adapter.setOnItemClickListener(new OnItemClickListener() {
@@ -113,10 +118,18 @@ public class InBinningSumFg extends BaseFragment {
      * 查看明细
      */
     public void getDetail(final ListSumBean orderSumData) {
-                Bundle bundle = new Bundle();
-                bundle.putString(AddressContants.ITEM_NO, orderSumData.getItem_no());
-                bundle.putString(AddressContants.MODULEID_INTENT, pactivity.mTimestamp.toString());
-                ActivityManagerUtils.startActivityBundleForResult(activity, ScanOutDetailActivity.class,bundle,pactivity.DETAILCODE);
+        final SumShowBean sumShowBean = new SumShowBean();
+        sumShowBean.setItem_name(listSumBean.getItem_name());
+        sumShowBean.setItem_no(listSumBean.getItem_no());
+        sumShowBean.setWo_no(listSumBean.getWo_no());
+        sumShowBean.setAvailable_in_qty(listSumBean.getApply_qty());
+        Bundle bundle = new Bundle();
+        bundle.putString(AddressContants.MODULEID_INTENT, pactivity.mTimestamp.toString());
+        bundle.putString(InBinningDetailActivity.MODULECODE, pactivity.module);
+        bundle.putSerializable(InBinningDetailActivity.ONESUM, sumShowBean);
+        ActivityManagerUtils.startActivityBundleForResult(activity, InBinningDetailActivity.class, bundle, pactivity.DETAILCODE);
+
+
     }
 
     private void sureCommit(){

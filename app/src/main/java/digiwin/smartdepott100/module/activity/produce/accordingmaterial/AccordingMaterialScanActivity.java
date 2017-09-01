@@ -502,7 +502,7 @@ public class AccordingMaterialScanActivity extends BaseTitleActivity {
         saveBean.setAvailable_in_qty(barcodeBackBean.getAvailable_in_qty());
         saveBean.setBarcode_no(barcodeBackBean.getBarcode_no());
         saveBean.setItem_no(barcodeBackBean.getItem_no());
-        saveBean.setUnit_no(barcodeBackBean.getUnit_no());
+        saveBean.setUnit_no(localData.getUnit_no());
         saveBean.setLot_no(barcodeBackBean.getLot_no());
         saveBean.setFifo_check(barcodeBackBean.getFifo_check());
         saveBean.setItem_barcode_type(barcodeBackBean.getItem_barcode_type());

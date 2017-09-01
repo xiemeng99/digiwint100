@@ -1,4 +1,4 @@
-package digiwin.smartdepott100.module.activity.common;
+package digiwin.smartdepott100.module.activity.produce.inbinning;
 
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -29,24 +29,22 @@ import digiwin.smartdepott100.core.appcontants.AddressContants;
 import digiwin.smartdepott100.core.appcontants.ModuleCode;
 import digiwin.smartdepott100.core.base.BaseTitleActivity;
 import digiwin.smartdepott100.module.adapter.common.CommonDetailAdapter;
+import digiwin.smartdepott100.module.adapter.produce.InBinningDetailAdapter;
 import digiwin.smartdepott100.module.adapter.produce.WipStorageDetailAdapter;
 import digiwin.smartdepott100.module.adapter.purchase.PurchaseGoodsDetailAdapter;
 import digiwin.smartdepott100.module.adapter.stock.storeallot.StoreAllotDetailAdapter;
 import digiwin.smartdepott100.module.bean.common.DeleteUpdateBean;
 import digiwin.smartdepott100.module.bean.common.DetailShowBean;
 import digiwin.smartdepott100.module.bean.common.SumShowBean;
-import digiwin.smartdepott100.module.logic.common.CommonLogic;
+import digiwin.smartdepott100.module.bean.produce.InBinningBean;
+import digiwin.smartdepott100.module.logic.produce.InBinningLogic;
 
 /**
- * @author ChangQuanSun
- * @des 通用明细 不同的明细样式使用不同adapter即可
- * @date 2017/2/24
+ * @des  装箱入库明细
+ * @date 2017/9/1
+ * @author xiemeng
  */
-public class CommonDetailActivity extends BaseTitleActivity {
-    /**
-     * 页面传输明细
-     */
-    public static final String DETAIL = "detail";
+public class InBinningDetailActivity extends BaseTitleActivity {
     /**
      * 页面传输头部数据
      */
@@ -91,10 +89,12 @@ public class CommonDetailActivity extends BaseTitleActivity {
         for (int i = 0; i < mDetailShowBeen.size(); i++) {
             map.put(i, checked);
         }
-        updateUI(map);
+        adapter.setMap(map);
+        ryList.setLayoutManager(new LinearLayoutManager(activity));
+        ryList.setAdapter(adapter);
     }
 
-    public CommonLogic commonLogic;
+    public InBinningLogic commonLogic;
 
     BaseDetailRecyclerAdapter adapter = null;
     public List<DetailShowBean> mDetailShowBeen;
@@ -120,98 +120,59 @@ public class CommonDetailActivity extends BaseTitleActivity {
 
     @Override
     protected int bindLayoutId() {
-        return R.layout.activity_common_detail;
+        return R.layout.activity_inbinning_detail;
     }
 
     @Override
     protected void doBusiness() {
         Bundle bundle = getIntent().getExtras();
-        mDetailShowBeen = (List<DetailShowBean>) bundle.getSerializable(DETAIL);
         sumBean = (SumShowBean) bundle.getSerializable(ONESUM);
-        commonLogic = CommonLogic.getInstance(activity, module, mTimestamp.toString());
-        if (null != sumBean) {
-            tvItemNo.setText(sumBean.getItem_no());
-        }
+        commonLogic = InBinningLogic.getInstance(activity, module, mTimestamp.toString());
+//        if (null != sumBean) {
+//            tvItemNo.setText(sumBean.getItem_no());
+//        }
+        mDetailShowBeen=new ArrayList<>();
+        adapter=new InBinningDetailAdapter(activity,mDetailShowBeen);
         Map<Integer, Boolean> map = new HashMap<>();
         updateUI(map);
-        updateNum();
+
     }
+
 
     /**
      * 更新界面
      * TODO:可能会存在不同的明细页面使用不同的adapter
      */
-    private void updateUI(Map<Integer, Boolean> map) {
-        switch (module) {
-            case ModuleCode.NOCOMESTOREALLOT:
-                adapter = new StoreAllotDetailAdapter(activity, mDetailShowBeen);
-                break;
-            case ModuleCode.PURCHASEGOODSSCAN:
-                adapter = new PurchaseGoodsDetailAdapter(activity, mDetailShowBeen);
-                break;
-            case ModuleCode.POSTALLOCATE:
-                adapter = new StoreAllotDetailAdapter(activity, mDetailShowBeen);
-                break;
-            case ModuleCode.COMPLETINGSTORE:
-                adapter = new WipStorageDetailAdapter(activity, mDetailShowBeen);
-                break;
-            default:
-                adapter = new CommonDetailAdapter(activity, mDetailShowBeen);
-                break;
-        }
+    private void updateUI(final Map<Integer, Boolean> map) {
+        Map<String, String> reqMap = new HashMap<>();
+        showLoadingDialog();
+        reqMap.put(AddressContants.ITEM_NO, sumBean.getItem_no());
+        commonLogic.getInBinningDetailData(reqMap, new InBinningLogic.GetInBinnigDetailDataListener() {
+            @Override
+            public void onSuccess(List<DetailShowBean> detailShowBeen) {
 
-        adapter.setMap(map);
-        ryList.setLayoutManager(new LinearLayoutManager(activity));
-        ryList.setAdapter(adapter);
+                dismissLoadingDialog();
+                mDetailShowBeen=detailShowBeen;
+                adapter=new InBinningDetailAdapter(activity,mDetailShowBeen);
+                adapter.setMap(map);
+                ryList.setLayoutManager(new LinearLayoutManager(activity));
+                ryList.setAdapter(adapter);
+            }
+
+            @Override
+            public void onFailed(String error) {
+                dismissLoadingDialog();
+                showCommitFailDialog(error);
+            }
+        });
     }
 
-    /**
-     * 修改...操作后重新setlistener
-     */
-    private void updateNum() {
-        try {
-            adapter.setListener(new UpdateNumListener<DetailShowBean>() {
-                @Override
-                public void update(final DetailShowBean item, int pos, RecyclerViewHolder holder) {
-                    AlertDialogUtils.showEditDialogAndCall(StringUtils.deleteZero(item.getBarcode_qty()), context, new OnDialogClickgetTextListener() {
-                        @Override
-                        public void onCallback(CustomDialog dialog, String text) {
-                            DeleteUpdateBean updateBean = new DeleteUpdateBean();
-                            updateBean.setAvailable_in_qty(sumBean.getAvailable_in_qty());
-                            updateBean.setBarcode_qty(text);
-                            updateBean.setScandetail_upd_type(AddressContants.UPDATETPYE);
-                            updateBean.setApp_reqseq(item.getApp_reqseq());
-                            List<DeleteUpdateBean> list = new ArrayList<>();
-                            list.add(updateBean);
-                            deleteAndUpdate(list, dialog);
-                        }
-                    });
-                }
-            });
-        } catch (Exception e) {
-            LogUtils.e(TAG, "updateNum---" + e);
-        }
-    }
 
     /**
      * 删除
      */
     private void toDelete(List<DetailShowBean> deletelist, String type) {
-        List<DeleteUpdateBean> list = new ArrayList<>();
-        try {
-            for (DetailShowBean detail : deletelist) {
-                DeleteUpdateBean deleteUpdateBean = new DeleteUpdateBean();
-                deleteUpdateBean.setApp_reqseq(detail.getApp_reqseq());
-                deleteUpdateBean.setScandetail_upd_type(type);
-                deleteUpdateBean.setBarcode_qty(detail.getBarcode_qty());
-                deleteUpdateBean.setAvailable_in_qty(sumBean.getAvailable_in_qty());
-                list.add(deleteUpdateBean);
-            }
-            deleteAndUpdate(list, null);
-        } catch (Exception e) {
-            LogUtils.e(TAG, "toDelete---" + e);
-        }
-
+            deleteAndUpdate(deletelist, null);
     }
 
     /**
@@ -219,18 +180,14 @@ public class CommonDetailActivity extends BaseTitleActivity {
      *
      * @param list
      */
-    private void deleteAndUpdate(List<DeleteUpdateBean> list, CustomDialog editdialog) {
+    private void deleteAndUpdate(List<DetailShowBean> list, CustomDialog editdialog) {
         showLoadingDialog();
-        commonLogic.upDateAndDelete(ObjectAndMapUtils.getListMap(list), new CommonLogic.UpdateAndDeleteListener() {
+        commonLogic.deleteInBinningDetailData(ObjectAndMapUtils.getListMap(list), new InBinningLogic.DeleteInBinningDetailDataListener() {
             @Override
-            public void onSuccess(List<DetailShowBean> detailShowBeen) {
+            public void onSuccess(String msg) {
                 dismissLoadingDialog();
-                AlertDialogUtils.dismissEditDialog();
-                mDetailShowBeen = detailShowBeen;
                 Map<Integer, Boolean> map = new HashMap<>();
                 updateUI(map);
-                updateNum();
-                cbAll.setChecked(false);
             }
 
             @Override

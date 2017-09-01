@@ -25,15 +25,17 @@ import digiwin.library.utils.WeakRefHandler;
 import digiwin.smartdepott100.R;
 import digiwin.smartdepott100.core.appcontants.AddressContants;
 import digiwin.smartdepott100.core.base.BaseFragment;
-import digiwin.smartdepott100.core.coreutil.CommonUtils;
 import digiwin.smartdepott100.core.modulecommon.ModuleUtils;
 import digiwin.smartdepott100.login.loginlogic.LoginLogic;
 import digiwin.smartdepott100.module.activity.produce.inbinning.InBinningActivity;
 import digiwin.smartdepott100.module.bean.common.ListSumBean;
+import digiwin.smartdepott100.module.bean.common.SaveBackBean;
 import digiwin.smartdepott100.module.bean.common.SaveBean;
 import digiwin.smartdepott100.module.bean.common.ScanLocatorBackBean;
 import digiwin.smartdepott100.module.bean.stock.ProductBinningBean;
 import digiwin.smartdepott100.module.logic.common.CommonLogic;
+import digiwin.smartdepott100.module.logic.produce.InBinningLogic;
+import digiwin.smartdepott100.module.logic.stock.ProductBinningLogic;
 
 
 /**
@@ -58,7 +60,7 @@ public class InBinningScanFg extends BaseFragment {
 
     ListSumBean listSumBean;
 
-    CommonLogic commonLogic;
+    InBinningLogic commonLogic;
     /**
      * 箱码扫描
      */
@@ -75,7 +77,7 @@ public class InBinningScanFg extends BaseFragment {
     TextView tvDetailShow;
 
     /**
-     *show布局
+     * show布局
      */
     @BindView(R.id.rl_zx_detail)
     RelativeLayout includeDetail;
@@ -93,7 +95,7 @@ public class InBinningScanFg extends BaseFragment {
     @BindView(R.id.tv_box_code)
     TextView tv_box_code;
     @BindView(R.id.et_box_code)
-    EditText et_box_code;
+    EditText etBoxCode;
     @BindView(R.id.ll_box_code)
     LinearLayout ll_box_code;
     /**
@@ -112,7 +114,7 @@ public class InBinningScanFg extends BaseFragment {
     @OnFocusChange(R.id.et_box_code)
     void barcodeFocusChanage() {
         ModuleUtils.viewChange(ll_box_code, views);
-        ModuleUtils.etChange(activity, et_box_code, editTexts);
+        ModuleUtils.etChange(activity, etBoxCode, editTexts);
         ModuleUtils.tvChange(activity, tv_box_code, textViews);
     }
 
@@ -158,7 +160,7 @@ public class InBinningScanFg extends BaseFragment {
             return;
         }
         showLoadingDialog();
-        commonLogic.scanBinningSave(saveBean, new CommonLogic.SaveBinningListener() {
+        commonLogic.scanBinningSave(saveBean, new InBinningLogic.SaveBinningListener() {
             @Override
             public void onSuccess() {
                 dismissLoadingDialog();
@@ -174,41 +176,50 @@ public class InBinningScanFg extends BaseFragment {
 
     }
 
+    String barcodeShow;
     /**
      * 库位展示
      */
     String locatorShow;
 
 
-    public void clear(){
-        et_box_code.setText("");
-        barcodeFlag=false;
+    public void clear() {
+        etBoxCode.setText("");
+        barcodeShow="";
+        barcodeFlag = false;
         if (!cbLocatorlock.isChecked()) {
-            locatorShow="";
-            locatorFlag=false;
+            locatorShow = "";
+            locatorFlag = false;
             etScanLocator.setText("");
             etScanLocator.requestFocus();
         }
         show();
     }
 
-    private Handler.Callback mCallback= new Handler.Callback() {
+    private Handler.Callback mCallback = new Handler.Callback() {
         @Override
         public boolean handleMessage(Message msg) {
-            switch (msg.what){
+            switch (msg.what) {
                 case BARCODEWHAT://扫描箱号
                     HashMap<String, String> barcodeMap = new HashMap<>();
                     barcodeMap.put(AddressContants.PACKAGE_NO, String.valueOf(msg.obj));
-                    barcodeMap.put(AddressContants.RECEIPT_NO, listSumBean.getReceipt_no());
+                    barcodeMap.put(AddressContants.DOC_NO, listSumBean.getDoc_no());
                     barcodeMap.put(AddressContants.ITEM_NO, listSumBean.getItem_no());
                     //保存箱条码和单号
-                    saveBean.setPackage_no(String.valueOf(msg.obj));
-                    saveBean.setDoc_no(listSumBean.getWo_no());
-
-                    commonLogic.scanPackBoxNumber(barcodeMap, new CommonLogic.ScanPackBoxNumberListener() {
+                    commonLogic.scanProdut(barcodeMap, new InBinningLogic.ScanPackBoxNumberListener() {
                         @Override
-                        public void onSuccess(List<ProductBinningBean> productBinningBeans) {
+                        public void onSuccess(ProductBinningBean productBinningBean) {
                             barcodeFlag = true;
+                            barcodeShow=productBinningBean.getShowing();
+                            saveBean.setPackage_no(productBinningBean.getPackage_no());
+                            saveBean.setDoc_no(listSumBean.getDoc_no());
+                            saveBean.setUnit_no(productBinningBean.getUnit_no());
+                            saveBean.setAvailable_in_qty(productBinningBean.getAvailable_in_qty());
+                            saveBean.setBarcode_no(productBinningBean.getBarcode_no());
+                            saveBean.setItem_no(productBinningBean.getItem_no());
+                            saveBean.setBarcode_qty(productBinningBean.getBarcode_qty());
+                            saveBean.setScan_sumqty(productBinningBean.getScan_sumqty());
+                            show();
                         }
 
                         @Override
@@ -217,8 +228,8 @@ public class InBinningScanFg extends BaseFragment {
                             showFailedDialog(error, new OnDialogClickListener() {
                                 @Override
                                 public void onCallback() {
-                                    et_box_code.setText("");
-                                    et_box_code.requestFocus();
+                                    etBoxCode.setText("");
+                                    etBoxCode.requestFocus();
                                 }
                             });
                         }
@@ -232,16 +243,16 @@ public class InBinningScanFg extends BaseFragment {
                         @Override
                         public void onSuccess(ScanLocatorBackBean locatorBackBean) {
                             //判断返回仓库是否与全局仓库一致
-                            if(!LoginLogic.getWare().equals(locatorBackBean.getWarehouse_no())){
+                            if (!LoginLogic.getWare().equals(locatorBackBean.getWarehouse_no())) {
                                 showFailedDialog(activity.getString(R.string.wareuse_error));
                                 return;
                             }
-                            locatorShow=locatorBackBean.getShowing();
+                            locatorShow = locatorBackBean.getShowing();
                             locatorFlag = true;
                             //入仓库，入仓位
                             saveBean.setStorage_spaces_in_no(locatorBackBean.getStorage_spaces_no());
                             saveBean.setWarehouse_in_no(locatorBackBean.getWarehouse_no());
-                            et_box_code.requestFocus();
+                            etBoxCode.requestFocus();
                             show();
                         }
 
@@ -264,6 +275,7 @@ public class InBinningScanFg extends BaseFragment {
     };
 
     private Handler mHandler = new WeakRefHandler(mCallback);
+
     @Override
     protected int bindLayoutId() {
         return R.layout.fg_in_binning_scan;
@@ -271,8 +283,9 @@ public class InBinningScanFg extends BaseFragment {
 
     @Override
     protected void doBusiness() {
+
         pactivity = (InBinningActivity) activity;
-        commonLogic = CommonLogic.getInstance(context, pactivity.module, pactivity.mTimestamp.toString());
+        commonLogic = InBinningLogic.getInstance(context, pactivity.module, pactivity.mTimestamp.toString());
         initData();
     }
 
@@ -280,15 +293,16 @@ public class InBinningScanFg extends BaseFragment {
      * 初始化一些变量
      */
     private void initData() {
-        et_box_code.setText("");
+        etBoxCode.setText("");
         etScanLocator.setText("");
         tvDetailShow.setText("");
 
         barcodeFlag = false;
         locatorFlag = false;
+        barcodeShow = "";
+        locatorShow = "";
         saveBean = new SaveBean();
         etScanLocator.requestFocus();
-
         listSumBean = (ListSumBean) getActivity().getIntent().getSerializableExtra("data");
     }
 
@@ -296,7 +310,7 @@ public class InBinningScanFg extends BaseFragment {
      * 公共区域展示
      */
     private void show() {
-        tvDetailShow.setText(StringUtils.lineChange(locatorShow));
+        tvDetailShow.setText(StringUtils.lineChange(locatorShow+"\\n" + barcodeShow));
         if (!StringUtils.isBlank(tvDetailShow.getText().toString())) {
             includeDetail.setVisibility(View.VISIBLE);
         } else {

@@ -126,7 +126,6 @@ public class MainLogic {
 //        ModuleBean putInStore = new ModuleBean(R.string.put_in_store, R.mipmap.putaway, ModuleCode.PUTINSTORE, "android.intent.actiont100.smartdepot.PutInStoreActivity");
 //        ModuleBean completingstore = new ModuleBean(R.string.title_completing_store, R.mipmap.complete_storage, ModuleCode.COMPLETINGSTORE, "android.intent.actiont100.smartdepot.CompletingStoreActivity");
 //        ModuleBean enchaseprint = new ModuleBean(R.string.enchaseprint, R.mipmap.enchaseprint, ModuleCode.ENCHASEPRINT, "android.intent.actiont100.smartdepot.EnchasePrintActivity");
-//        ModuleBean inbinninglist = new ModuleBean(R.string.title_in_binning, R.mipmap.inbox, ModuleCode.INBINNING, "android.intent.actiont100.smartdepot.InBinningListActivity");
 //        ModuleBean linesend = new ModuleBean(R.string.line_send, R.mipmap.xianbianfaliao, ModuleCode.LINESEND, "android.intent.actiont100.smartdepot.LineSendActivity");
         ModuleBean workorder = new ModuleBean(R.string.title_work_order, R.mipmap.work_order, ModuleCode.WORKORDERCODE, "android.intent.actiont100.smartdepot.WorkOrderActivity");
         ModuleBean accordingMaterialActivity = new ModuleBean(R.string.according_material, R.mipmap.accordingmaterial, ModuleCode.ACCORDINGMATERIALCODE, "android.intent.actiont100.smartdepot.AccordingMaterialActivity");
@@ -141,6 +140,7 @@ public class MainLogic {
         ModuleBean zputInStoreft = new ModuleBean(R.string.put_in_store, R.mipmap.putaway, ModuleCode.PUTINSTORE, "android.intent.actiont100.smartdepot.ZPutInStoreActivity");
         ModuleBean finishedStorageActivity = new ModuleBean(R.string.finishedstorage, R.mipmap.finishedstorage, ModuleCode.FINISHEDSTORAGE, "android.intent.actiont100.smartdepot.FinishedStorageActivity");
         ModuleBean endproductAllot = new ModuleBean(R.string.endproduct_allot, R.mipmap.endproduct_allot, ModuleCode.ENDPRODUCTALLOT, "android.intent.actiont100.smartdepot.EndProductAllotActivity");
+        ModuleBean inbinninglist = new ModuleBean(R.string.title_in_binning, R.mipmap.inbox, ModuleCode.INBINNING, "android.intent.actiont100.smartdepot.InBinningListActivity");
         ModuleBean fqcCheck = new ModuleBean(R.string.fqc_check_pad, R.mipmap.fqc_check_pad, ModuleCode.FQC, "android.intent.actiont100.smartdepot.FQCInspectListActivity");
 
         produceItems.add(workorder);
@@ -155,6 +155,7 @@ public class MainLogic {
         produceItems.add(zputInStoreft);
         produceItems.add(finishedStorageActivity);
         produceItems.add(endproductAllot);
+        produceItems.add(inbinninglist);
         produceItems.add(fqcCheck);
 
 //        ModuleBean printLabelActivity = new ModuleBean(R.string.print_label_flow, R.mipmap.bar_code, ModuleCode.PRINTLABEL, "android.intent.actiont100.smartdepot.PrintLabelFlowActivity");

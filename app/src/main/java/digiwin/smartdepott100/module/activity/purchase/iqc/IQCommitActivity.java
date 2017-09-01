@@ -14,6 +14,7 @@ import butterknife.BindView;
 import butterknife.OnClick;
 import digiwin.smartdepott100.R;
 import digiwin.smartdepott100.core.appcontants.ModuleCode;
+import digiwin.smartdepott100.core.base.BaseFirstModuldeActivity;
 import digiwin.smartdepott100.core.base.BaseTitleActivity;
 import digiwin.smartdepott100.module.adapter.purchase.IQCCommitAdapter;
 import digiwin.smartdepott100.module.bean.common.FilterResultOrderBean;
@@ -30,7 +31,7 @@ import digiwin.pulltorefreshlibrary.recyclerviewAdapter.BaseRecyclerAdapter;
  * @date 2017/5/30 09:57
  */
 
-public class IQCommitActivity extends BaseTitleActivity {
+public class IQCommitActivity extends BaseFirstModuldeActivity {
     @BindView(R.id.toolbar_title)
     Toolbar toolbarTitle;
     @BindView(R.id.tv_check_no)
@@ -160,4 +161,8 @@ public class IQCommitActivity extends BaseTitleActivity {
 
     }
 
+    @Override
+    public ExitMode exitOrDel() {
+        return ExitMode.EXITD;
+    }
 }

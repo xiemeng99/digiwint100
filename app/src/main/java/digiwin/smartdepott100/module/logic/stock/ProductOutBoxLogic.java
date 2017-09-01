@@ -9,34 +9,29 @@ import java.util.Map;
 import digiwin.library.json.JsonResp;
 import digiwin.library.utils.LogUtils;
 import digiwin.library.utils.ThreadPoolManager;
-import digiwin.library.xml.ParseXmlResp;
 import digiwin.smartdepott100.R;
-import digiwin.smartdepott100.core.appcontants.AddressContants;
 import digiwin.smartdepott100.core.appcontants.ReqTypeName;
 import digiwin.smartdepott100.core.json.JsonReqForERP;
 import digiwin.smartdepott100.core.net.IRequestCallbackImp;
 import digiwin.smartdepott100.core.net.OkhttpRequest;
-import digiwin.smartdepott100.core.xml.CreateParaXmlReqIm;
-import digiwin.smartdepott100.module.bean.common.ListSumBean;
-import digiwin.smartdepott100.module.bean.common.SaveBackBean;
 import digiwin.smartdepott100.module.bean.stock.ProductBinningBean;
 import digiwin.smartdepott100.module.logic.common.CommonLogic;
 
 /**
  * @author xiemeng
- * @des 产品装箱
+ * @des 产品出箱
  * @date 2017/8/23
  */
-public class ProductBinningLogic extends CommonLogic {
-    public static ProductBinningLogic logic;
+public class ProductOutBoxLogic extends CommonLogic {
+    public static ProductOutBoxLogic logic;
 
-    private ProductBinningLogic(Context context, String module, String timestamp) {
+    private ProductOutBoxLogic(Context context, String module, String timestamp) {
         super(context, module, timestamp);
     }
 
-    public static ProductBinningLogic getInstance(Context context, String module, String timestamp) {
+    public static ProductOutBoxLogic getInstance(Context context, String module, String timestamp) {
 
-        return logic = new ProductBinningLogic(context, module, timestamp);
+        return logic = new ProductOutBoxLogic(context, module, timestamp);
     }
 
     /**
@@ -102,7 +97,7 @@ public class ProductBinningLogic extends CommonLogic {
             @Override
             public void run() {
                 try {
-                    String createJson = JsonReqForERP.objCreateJson(mModule, "als.c016.save", mTimestamp, saveBean);
+                    String createJson = JsonReqForERP.objCreateJson(mModule, "als.c017.save", mTimestamp, saveBean);
                     OkhttpRequest.getInstance(mContext).post(createJson, new IRequestCallbackImp() {
                         @Override
                         public void onResponse(String string) {

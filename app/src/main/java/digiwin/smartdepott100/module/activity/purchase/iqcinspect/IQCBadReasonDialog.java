@@ -5,6 +5,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.text.method.TextKeyListener;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
@@ -80,6 +81,9 @@ public class IQCBadReasonDialog {
                 final TextView tv_defectrea = (TextView) builder.getView(R.id.tv_defectrea);
                 final EditText et_defectrea = (EditText) builder.getView(R.id.et_defectrea);
                 final View line_defectrea = builder.getView(R.id.line_defectrea);
+
+                final View imgDelete=  builder.getView(R.id.img_delete);
+                imgDelete.setVisibility(View.GONE);
                 preTextView = tv_defectrea;
                 preEditText = et_defectrea;
                 preView = line_defectrea;
@@ -167,6 +171,7 @@ public class IQCBadReasonDialog {
                         });
                     }
                 });
+
             }
         }catch (Exception e){
             e.printStackTrace();
@@ -205,6 +210,17 @@ public class IQCBadReasonDialog {
                 final TextView tv_defectrea = (TextView) dialogBuilder.getView(R.id.tv_defectrea);
                 final EditText et_defectrea = (EditText) dialogBuilder.getView(R.id.et_defectrea);
                 final View line_defectrea = dialogBuilder.getView(R.id.line_defectrea);
+                final View imgDelete=  dialogBuilder.getView(R.id.img_delete);
+                //缺点数量
+                final TextView tv_defect_num = (TextView) dialogBuilder.getView(R.id.tv_defect_num);
+                final EditText et_defect_num = (EditText) dialogBuilder.getView(R.id.et_defect_num);
+                final View line_defect_num = dialogBuilder.getView(R.id.line_defect_num);
+                et_defect_num.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+                    @Override
+                    public void onFocusChange(View view, boolean b) {
+                        viewChange(context,tv_defect_num,et_defect_num,line_defect_num);
+                    }
+                });
                 preTextView = tv_defectrea;
                 preEditText = et_defectrea;
                 preView = line_defectrea;
@@ -251,7 +267,7 @@ public class IQCBadReasonDialog {
                                     badReasonBeanList.addAll(datas);
                                     BadReasonPopAdapter adapter = new BadReasonPopAdapter(context,badReasonBeanList);
                                     ry_list.setAdapter(adapter);
-                                    et_defectrea.requestFocus();
+//                                    et_defectrea.requestFocus();
                                     adapter.setOnItemClickListener(new OnItemClickListener() {
                                         @Override
                                         public void onItemClick(View itemView, int position) {
@@ -260,6 +276,7 @@ public class IQCBadReasonDialog {
                                             badReasonBean.setDefect_reason(badReasonBeanList.get(position).getDefect_reason());
                                             badReasonBean.setDefect_reason_name(badReasonBeanList.get(position).getDefect_reason_name());
                                             customPopWindow.dissmiss();
+                                            et_defect_num.requestFocus();
                                         }
                                     });
                                 }
@@ -275,16 +292,15 @@ public class IQCBadReasonDialog {
                         }
                     }
                 });
-                //缺点数量
-                final TextView tv_defect_num = (TextView) dialogBuilder.getView(R.id.tv_defect_num);
-                final EditText et_defect_num = (EditText) dialogBuilder.getView(R.id.et_defect_num);
-                final View line_defect_num = dialogBuilder.getView(R.id.line_defect_num);
-                et_defect_num.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+                imgDelete.setOnClickListener(new View.OnClickListener() {
                     @Override
-                    public void onFocusChange(View view, boolean b) {
-                        viewChange(context,tv_defect_num,et_defect_num,line_defect_num);
+                    public void onClick(View v) {
+                        et_defectrea.setText("");
+                        et_defectrea.setKeyListener(new TextKeyListener(TextKeyListener.Capitalize.CHARACTERS, true));
+                        et_defectrea.requestFocus();
                     }
                 });
+
                 //不良数量
                 final TextView tv_bad_num = (TextView) dialogBuilder.getView(R.id.tv_bad_num);
                 final EditText et_bad_num = (EditText) dialogBuilder.getView(R.id.et_bad_num);

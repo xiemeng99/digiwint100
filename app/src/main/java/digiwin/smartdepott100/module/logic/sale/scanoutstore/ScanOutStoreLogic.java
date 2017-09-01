@@ -5,17 +5,22 @@ import android.content.Context;
 import java.util.List;
 import java.util.Map;
 
+import digiwin.library.json.JsonResp;
 import digiwin.library.utils.LogUtils;
 import digiwin.library.utils.ObjectAndMapUtils;
 import digiwin.library.utils.ThreadPoolManager;
 import digiwin.library.xml.ParseXmlResp;
 import digiwin.smartdepott100.R;
 import digiwin.smartdepott100.core.appcontants.ReqTypeName;
+import digiwin.smartdepott100.core.json.JsonReqForERP;
 import digiwin.smartdepott100.core.net.IRequestCallbackImp;
 import digiwin.smartdepott100.core.net.OkhttpRequest;
 import digiwin.smartdepott100.core.xml.CreateParaXmlReqIm;
+import digiwin.smartdepott100.module.bean.common.ListSumBean;
 import digiwin.smartdepott100.module.bean.common.SaveBean;
 import digiwin.smartdepott100.module.bean.sale.scanout.ScanOutDetailData;
+import digiwin.smartdepott100.module.logic.common.CommonLogic;
+import digiwin.smartdepott100.module.logic.produce.InBinningLogic;
 
 /**
  * @author maoheng
@@ -23,34 +28,17 @@ import digiwin.smartdepott100.module.bean.sale.scanout.ScanOutDetailData;
  * @date 2017/4/3
  */
 
-public class ScanOutStoreLogic {
-
-    private static final String TAG = "ScanOutStoreLogic";
-
-    private Context mContext;
-    /**
-     * 模组名
-     */
-    private String mModule = "";
-    /**
-     * 设备号+模组+时间
-     */
-    private String mTimestamp = "";
-
-    private static ScanOutStoreLogic logic;
+public class ScanOutStoreLogic extends CommonLogic {
+    public static ScanOutStoreLogic logic;
 
     private ScanOutStoreLogic(Context context, String module, String timestamp) {
-        mTimestamp = timestamp;
-        mContext = context.getApplicationContext();
-        mModule = module;
-
+        super(context, module, timestamp);
     }
 
     public static ScanOutStoreLogic getInstance(Context context, String module, String timestamp) {
 
         return logic = new ScanOutStoreLogic(context, module, timestamp);
     }
-
     /**
      * 保存
      */
@@ -118,23 +106,22 @@ public class ScanOutStoreLogic {
             @Override
             public void run() {
                 try {
-                    final String xml = CreateParaXmlReqIm.getInstance(map, mModule, ReqTypeName.SCANOUTDETAIL, mTimestamp).toXml();
-                    OkhttpRequest.getInstance(mContext).post(xml, new IRequestCallbackImp() {
+                    String createJson = JsonReqForERP.mapCreateJson(mModule, "als.package.scan.list.get", mTimestamp, map);
+                    OkhttpRequest.getInstance(mContext).post(createJson, new IRequestCallbackImp() {
                         @Override
                         public void onResponse(String string) {
-                            ParseXmlResp xmlResp = ParseXmlResp.fromXml(ReqTypeName.SCANOUTDETAIL, string);
                             String error = mContext.getString(R.string.unknow_error);
-                            if (null != xmlResp) {
-                                if (ReqTypeName.SUCCCESSCODE.equals(xmlResp.getCode())) {
-                                    List<ScanOutDetailData> masterDatas = xmlResp.getMasterDatas(ScanOutDetailData.class);
-                                    if (masterDatas.size() == 0) {
-                                        listener.onFailed(mContext.getResources().getString(R.string.data_null));
+                            if (null != string) {
+                                if (ReqTypeName.SUCCCESSCODE.equals(JsonResp.getCode(string))) {
+                                    List<ScanOutDetailData> showBeanList = JsonResp.getParaDatas(string, "list_detail", ScanOutDetailData.class);
+                                    if (showBeanList.size()>0) {
+                                        listener.onSuccess(showBeanList);
                                         return;
+                                    }else{
+                                        error=mContext.getString(R.string.data_null);
                                     }
-                                    listener.onSuccess(masterDatas);
-                                    return;
                                 } else {
-                                    error = xmlResp.getDescription();
+                                    error = JsonResp.getDescription(string);
                                 }
                             }
                             listener.onFailed(error);
@@ -149,7 +136,7 @@ public class ScanOutStoreLogic {
     }
 
     /**
-     * 点击删除明细
+     * 删除
      */
     public interface DeleteScanOutDetailDataListener {
 
@@ -159,25 +146,25 @@ public class ScanOutStoreLogic {
     }
 
     /**
-     * 点击获取明细
+     * 删除明细
      */
     public void deleteScanOutDetailData(final List<Map<String, String>> maps, final DeleteScanOutDetailDataListener listener) {
         ThreadPoolManager.getInstance().executeTask(new Runnable() {
             @Override
             public void run() {
                 try {
-                    final String xml = CreateParaXmlReqIm.getInstance(maps, mModule, ReqTypeName.DELETESCANOUTDETAIL, mTimestamp).toXml();
-                    OkhttpRequest.getInstance(mContext).post(xml, new IRequestCallbackImp() {
+                    String createJson = JsonReqForERP.objCreateJson(mModule, "als.pack.scan.list.del", mTimestamp, maps);
+                    OkhttpRequest.getInstance(mContext).post(createJson, new IRequestCallbackImp() {
                         @Override
                         public void onResponse(String string) {
-                            ParseXmlResp xmlResp = ParseXmlResp.fromXml(ReqTypeName.DELETESCANOUTDETAIL, string);
                             String error = mContext.getString(R.string.unknow_error);
-                            if (null != xmlResp) {
-                                if (ReqTypeName.SUCCCESSCODE.equals(xmlResp.getCode())) {
-                                    listener.onSuccess(xmlResp.getDescription());
+                            if (null != string) {
+                                if (ReqTypeName.SUCCCESSCODE.equals(JsonResp.getCode(string))) {
+                                    String str = JsonResp.getDescription(string);
+                                    listener.onSuccess(str);
                                     return;
                                 } else {
-                                    error = xmlResp.getDescription();
+                                    error = JsonResp.getDescription(string);
                                 }
                             }
                             listener.onFailed(error);
@@ -185,7 +172,7 @@ public class ScanOutStoreLogic {
                     });
                 } catch (Exception e) {
                     listener.onFailed(mContext.getString(R.string.unknow_error));
-                    LogUtils.e(TAG, "scan out save--->" + e);
+                    LogUtils.e(TAG, "deleteInBinningDetailData--->" + e);
                 }
             }
         }, null);

@@ -432,12 +432,10 @@ public class EndProductAllotScanActivity extends BaseTitleActivity {
             lineTray.setVisibility(View.GONE);
         }
         initData();
-        localData = new ListSumBean();
-        ListSumBean data = (ListSumBean) getIntent().getSerializableExtra("sumdata");
-        localData = data;
-        type = data.getItem_barcode_type();
+        localData= (ListSumBean) getIntent().getSerializableExtra("sumdata");
+        type = localData.getItem_barcode_type();
         if(type.equals(codetype)){
-            etScanBarocde.setText(data.getLow_order_item_no());
+            etScanBarocde.setText(localData.getLow_order_item_no());
         }
         commonLogic = CommonLogic.getInstance(context, module, mTimestamp.toString());
         FullyLinearLayoutManager fullyLinearLayoutManager = new FullyLinearLayoutManager(activity);
@@ -498,7 +496,7 @@ public class EndProductAllotScanActivity extends BaseTitleActivity {
         saveBean.setFifo_check(barcodeBackBean.getFifo_check());
         saveBean.setBarcode_no(barcodeBackBean.getBarcode_no());
         saveBean.setItem_no(barcodeBackBean.getItem_no());
-        saveBean.setUnit_no(barcodeBackBean.getUnit_no());
+        saveBean.setUnit_no(localData.getUnit_no());//抓取下阶料单位不取条码单位
         saveBean.setLot_no(barcodeBackBean.getLot_no());
         saveBean.setCustomer_no(barcodeBackBean.getCol1());
         saveBean.setItem_barcode_type(barcodeBackBean.getItem_barcode_type());

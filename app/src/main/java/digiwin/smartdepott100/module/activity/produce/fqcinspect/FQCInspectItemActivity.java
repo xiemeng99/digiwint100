@@ -30,6 +30,7 @@ import digiwin.pulltorefreshlibrary.recyclerviewAdapter.RecyclerViewHolder;
 import digiwin.smartdepott100.R;
 import digiwin.smartdepott100.core.appcontants.AddressContants;
 import digiwin.smartdepott100.core.appcontants.ModuleCode;
+import digiwin.smartdepott100.core.base.BaseFirstModuldeHActivity;
 import digiwin.smartdepott100.core.base.BaseTitleHActivity;
 import digiwin.smartdepott100.module.activity.purchase.iqcinspect.IQCInspectActivity;
 import digiwin.smartdepott100.module.bean.purchase.IQCCommitBean;
@@ -40,7 +41,7 @@ import digiwin.smartdepott100.module.logic.produce.FQCInspectLogic;
  * Created by maoheng on 2017/8/11.
  */
 
-public class FQCInspectItemActivity extends BaseTitleHActivity {
+public class FQCInspectItemActivity extends BaseFirstModuldeHActivity {
 
     @BindView(R.id.toolbar_title)
     Toolbar toolbarTitle;
@@ -239,6 +240,11 @@ public class FQCInspectItemActivity extends BaseTitleHActivity {
         super.onDestroy();
         mHandler.removeCallbacksAndMessages(null);
         mHandler = null;
+    }
+
+    @Override
+    public ExitMode exitOrDel() {
+        return ExitMode.EXITD;
     }
 
     class FQCInspectItemAdapter extends BaseRecyclerAdapter<QCScanData> {

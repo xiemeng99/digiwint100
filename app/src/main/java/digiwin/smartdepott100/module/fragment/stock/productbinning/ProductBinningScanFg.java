@@ -157,8 +157,12 @@ public class ProductBinningScanFg extends BaseFragment {
             showFailedDialog(R.string.input_num);
             return;
         }
-        showLoadingDialog();
         saveBean.setQty(etInputNum.getText().toString());
+        if (currentPackages>=maxPackages){
+            showFailedDialog(R.string.current_more_max);
+            return;
+        }
+        showLoadingDialog();
         commonLogic.saveBean(saveBean, new ProductBinningLogic.SaveBinningListener() {
             @Override
             public void onSuccess(ProductBinningBean backBean) {
@@ -205,6 +209,14 @@ public class ProductBinningScanFg extends BaseFragment {
     ProductBinningLogic commonLogic;
 
     private ProductBinningBean saveBean;
+    /**
+     * 当前笔数
+     */
+    private float currentPackages;
+    /**
+     * 最大笔数
+     */
+    private float maxPackages;
 
 
     private Handler.Callback mCallback = new Handler.Callback() {
@@ -213,7 +225,6 @@ public class ProductBinningScanFg extends BaseFragment {
             switch (msg.what) {
                 case PACKBOXWHAT://扫描包装箱号
                     final String barcodeNumber = msg.obj.toString().trim();
-                    //赋值，用于明细界面调接口得数据
                     HashMap<String, String> map = new HashMap<>();
                     map.put(AddressContants.PACKAGENO, barcodeNumber);
                     commonLogic.scanProdut(map, new ProductBinningLogic.ScanPackBoxNumberListener() {
@@ -244,7 +255,7 @@ public class ProductBinningScanFg extends BaseFragment {
                     final String barcodeno = msg.obj.toString().trim();
                     //赋值，用于明细界面调接口得数据
                     HashMap<String, String> map2 = new HashMap<>();
-                    map2.put(AddressContants.PACKAGENO, etPackBoxNumber.getText().toString());
+                    map2.put(AddressContants.DOC_NO, etPackBoxNumber.getText().toString());
                     map2.put(AddressContants.BARCODE_NO, barcodeno);
                     map2.put(AddressContants.WAREHOUSE_NO, LoginLogic.getWare());
                     commonLogic.scanBarcode(map2, new CommonLogic.ScanBarcodeListener() {
@@ -297,6 +308,8 @@ public class ProductBinningScanFg extends BaseFragment {
     }
 
     public void upDateNum(ProductBinningBean tempBean){
+        currentPackages=StringUtils.string2Float(tempBean.getPackages());
+        maxPackages=StringUtils.string2Float(tempBean.getMax_package_qty());
         tvBoxNumber.setText(StringUtils.deleteZero(tempBean.getPackages()) + "/" + StringUtils.deleteZero(tempBean.getMax_package_qty()));
         tvScanedNum.setText(StringUtils.deleteZero(tempBean.getQty()));
     }

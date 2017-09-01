@@ -36,7 +36,7 @@ public class AddressContants {
     /**
      *  默认正式区地址http://180.167.0.43:8888/wtopprd/ws/r/awsp920
      */
-    public static String FORMAL_ADDRESS = "http://172.31.75.143/wstopprd/ws/r/awsp920";//深圳主机
+    public static String FORMAL_ADDRESS = "http://218.17.27.132:8111/wstopprd/ws/r/awsp920";//深圳主机外网
 //    public static String FORMAL_ADDRESS = "http://180.167.0.43:8888/wstopprd/ws/r/awsp920";//南京主机外网
     /**
      * 正式区地址标记

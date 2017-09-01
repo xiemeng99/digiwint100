@@ -38,8 +38,6 @@ public class ProductOutBoxActivity extends BaseFirstModuldeActivity {
      */
     @BindView(R.id.module_vp)
     public ViewPager mZXVp;
-    @BindView(R.id.un_com)
-    ImageView unCom;
 
     /**
      * 包装箱号
@@ -82,7 +80,7 @@ public class ProductOutBoxActivity extends BaseFirstModuldeActivity {
 
     @Override
     protected int bindLayoutId() {
-        return R.layout.activity_finished_storage;
+        return R.layout.activity_product_outbox;
     }
 
     @Override

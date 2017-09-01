@@ -73,6 +73,18 @@ public class ProductBinningBean {
      * 条码类型
      */
     private String item_barcode_type;
+    /**
+     * 单位
+     */
+    private String unit_no;
+
+    private String showing;
+
+    private String available_in_qty;
+
+    private String barcode_qty;
+
+    private String scan_sumqty;
 
     public String getWarehouse_no() {
         return warehouse_no;
@@ -200,5 +212,45 @@ public class ProductBinningBean {
 
     public void setItem_barcode_type(String item_barcode_type) {
         this.item_barcode_type = item_barcode_type;
+    }
+
+    public String getUnit_no() {
+        return unit_no;
+    }
+
+    public void setUnit_no(String unit_no) {
+        this.unit_no = unit_no;
+    }
+
+    public String getShowing() {
+        return showing;
+    }
+
+    public void setShowing(String showing) {
+        this.showing = showing;
+    }
+
+    public String getAvailable_in_qty() {
+        return available_in_qty;
+    }
+
+    public void setAvailable_in_qty(String available_in_qty) {
+        this.available_in_qty = available_in_qty;
+    }
+
+    public String getBarcode_qty() {
+        return barcode_qty;
+    }
+
+    public void setBarcode_qty(String barcode_qty) {
+        this.barcode_qty = barcode_qty;
+    }
+
+    public String getScan_sumqty() {
+        return scan_sumqty;
+    }
+
+    public void setScan_sumqty(String scan_sumqty) {
+        this.scan_sumqty = scan_sumqty;
     }
 }

@@ -6,7 +6,6 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
@@ -26,10 +25,12 @@ import digiwin.smartdepott100.core.appcontants.AddressContants;
 import digiwin.smartdepott100.core.appcontants.ModuleCode;
 import digiwin.smartdepott100.core.base.BaseTitleActivity;
 import digiwin.smartdepott100.core.modulecommon.ModuleUtils;
+import digiwin.smartdepott100.login.loginlogic.LoginLogic;
 import digiwin.smartdepott100.module.adapter.produce.InBinningListAdapter;
+import digiwin.smartdepott100.module.bean.common.FilterBean;
 import digiwin.smartdepott100.module.bean.common.ListSumBean;
-import digiwin.smartdepott100.module.bean.produce.InBinningBean;
 import digiwin.smartdepott100.module.logic.common.CommonLogic;
+import digiwin.smartdepott100.module.logic.produce.InBinningLogic;
 
 /**
  * @author 孙长权
@@ -45,13 +46,13 @@ public class InBinningListActivity extends BaseTitleActivity {
     Toolbar toolbar;
 
     @BindView(R.id.ry_list)
-    RecyclerView ry_list;
+    RecyclerView ryList;
 
     /**
      * 筛选布局
      */
     @BindView(R.id.ll_search_dialog)
-    LinearLayout ll_search_dialog;
+    LinearLayout llSearchDialog;
     /**
      * 列表布局
      */
@@ -60,64 +61,64 @@ public class InBinningListActivity extends BaseTitleActivity {
 
     InBinningListAdapter adapter;
 
-    CommonLogic commonLogic;
+    InBinningLogic commonLogic;
 
-    @BindViews({R.id.ll_order_number,R.id.ll_item_no,R.id.ll_department})
+    @BindViews({R.id.ll_order_number, R.id.ll_item_no, R.id.ll_department})
     List<View> views;
-    @BindViews({R.id.tv_order_number,R.id.tv_item_no,R.id.tv_department})
+    @BindViews({R.id.tv_order_number, R.id.tv_item_no, R.id.tv_department})
     List<TextView> textViews;
-    @BindViews({R.id.et_order_number,R.id.et_item_no,R.id.et_department})
+    @BindViews({R.id.et_order_number, R.id.et_item_no, R.id.et_department})
     List<EditText> editTexts;
 
     /**
      * 工单号
      */
     @BindView(R.id.ll_order_number)
-    LinearLayout ll_order_number;
+    LinearLayout llOrderNumber;
     @BindView(R.id.tv_order_number)
-    TextView tv_order_number;
+    TextView tvOrderNumber;
     @BindView(R.id.et_order_number)
-    EditText et_order_number;
+    EditText etOrderNumber;
 
     @OnFocusChange(R.id.et_order_number)
-    void item_noFocusChanage() {
-        ModuleUtils.viewChange(ll_order_number, views);
-        ModuleUtils.tvChange(activity, tv_order_number, textViews);
-        ModuleUtils.etChange(activity, et_order_number, editTexts);
+    void itemNoFocusChanage() {
+        ModuleUtils.viewChange(llOrderNumber, views);
+        ModuleUtils.tvChange(activity, tvOrderNumber, textViews);
+        ModuleUtils.etChange(activity, etOrderNumber, editTexts);
     }
 
     /**
      * 料号
      */
     @BindView(R.id.ll_item_no)
-    LinearLayout ll_itemno;
+    LinearLayout llItemno;
     @BindView(R.id.tv_item_no)
-    TextView tv_itemno;
+    TextView tvItemno;
     @BindView(R.id.et_item_no)
-    EditText et_itemno;
+    EditText etItemno;
 
     @OnFocusChange(R.id.et_item_no)
     void customFocusChanage() {
-        ModuleUtils.viewChange(ll_itemno, views);
-        ModuleUtils.tvChange(activity, tv_itemno, textViews);
-        ModuleUtils.etChange(activity, et_itemno, editTexts);
+        ModuleUtils.viewChange(llItemno, views);
+        ModuleUtils.tvChange(activity, tvItemno, textViews);
+        ModuleUtils.etChange(activity, etItemno, editTexts);
     }
 
     /**
      * 部门
      */
     @BindView(R.id.ll_department)
-    LinearLayout ll_department;
+    LinearLayout llDepartment;
     @BindView(R.id.tv_department)
-    TextView tv_department;
+    TextView tvDepartment;
     @BindView(R.id.et_department)
-    EditText et_department;
+    EditText etDepartment;
 
     @OnFocusChange(R.id.et_department)
     void salesmanFocusChanage() {
-        ModuleUtils.viewChange(ll_department, views);
-        ModuleUtils.tvChange(activity, tv_department, textViews);
-        ModuleUtils.etChange(activity, et_department, editTexts);
+        ModuleUtils.viewChange(llDepartment, views);
+        ModuleUtils.tvChange(activity, tvDepartment, textViews);
+        ModuleUtils.etChange(activity, etDepartment, editTexts);
     }
 
     private final int SCANCODE = 1234;
@@ -126,56 +127,44 @@ public class InBinningListActivity extends BaseTitleActivity {
      */
     private List<ListSumBean> dataList;
 
-    @BindView(R.id.btn_search_sure)
-    Button btn_search_sure;
 
     @OnClick(R.id.btn_search_sure)
-    void search(){
+    void search() {
         //待办事项展示
-        InBinningBean FilterBean = new InBinningBean();
-        try {
-            showLoadingDialog();
+        FilterBean filterBean = new FilterBean();
+        showLoadingDialog();
 
-            if(!StringUtils.isBlank(et_order_number.getText().toString().trim())){
-                FilterBean.setWo_no(et_order_number.getText().toString().trim());
-            }
-
-            if(!StringUtils.isBlank(et_itemno.getText().toString().trim())){
-                FilterBean.setItem_no(et_itemno.getText().toString().trim());
-            }
-
-            if(!StringUtils.isBlank(et_department.getText().toString().trim())){
-                FilterBean.setDepartment_no(et_department.getText().toString().trim());
-            }
-
-        } catch (Exception e) {
-            e.printStackTrace();
+        if (!StringUtils.isBlank(etOrderNumber.getText().toString().trim())) {
+            filterBean.setDoc_no(etOrderNumber.getText().toString().trim());
         }
 
-        commonLogic.getOrderSumData(FilterBean, new CommonLogic.GetOrderSumListener() {
+        if (!StringUtils.isBlank(etItemno.getText().toString().trim())) {
+            filterBean.setItem_no(etItemno.getText().toString().trim());
+        }
+
+        if (!StringUtils.isBlank(etDepartment.getText().toString().trim())) {
+            filterBean.setDepartment_no(etDepartment.getText().toString().trim());
+        }
+        filterBean.setWarehouse_no(LoginLogic.getWare());
+        commonLogic.getInBinningList(filterBean, new CommonLogic.GetZSumListener() {
             @Override
             public void onSuccess(final List<ListSumBean> list) {
                 dismissLoadingDialog();
-                if(list.size() > 0){
-                    ll_search_dialog.setVisibility(View.GONE);
-                    scrollview.setVisibility(View.VISIBLE);
-                    dataList = list;
-                    adapter = new InBinningListAdapter(activity,false,dataList);
-                    ry_list.setAdapter(adapter);
-
-                    adapter.setOnItemClickListener(new OnItemClickListener() {
-                        @Override
-                        public void onItemClick(View itemView, int position) {
-                            Bundle bundle = new Bundle();
-                            ListSumBean data = list.get(position);
-                            bundle.putSerializable("data",data);
-                            bundle.putString(AddressContants.MODULEID_INTENT,activity.mTimestamp.toString());
-                            ActivityManagerUtils.startActivityBundleForResult(activity,InBinningActivity.class,bundle,SCANCODE);
-                        }
-                    });
-                }else{
-                    showFailedDialog(getResources().getString(R.string.nodate));
-                }
+                llSearchDialog.setVisibility(View.GONE);
+                scrollview.setVisibility(View.VISIBLE);
+                dataList = list;
+                adapter = new InBinningListAdapter(activity, false, dataList);
+                ryList.setAdapter(adapter);
+                adapter.setOnItemClickListener(new OnItemClickListener() {
+                    @Override
+                    public void onItemClick(View itemView, int position) {
+                        Bundle bundle = new Bundle();
+                        ListSumBean data = list.get(position);
+                        bundle.putSerializable("data", data);
+                        bundle.putString(AddressContants.MODULEID_INTENT, activity.mTimestamp.toString());
+                        ActivityManagerUtils.startActivityBundleForResult(activity, InBinningActivity.class, bundle, SCANCODE);
+                    }
+                });
             }
 
             @Override
@@ -186,27 +175,28 @@ public class InBinningListActivity extends BaseTitleActivity {
         });
     }
 
-    boolean isVis=true;
+    boolean isVis = true;
+
     /**
      * 弹出筛选对话框
      */
     @OnClick(R.id.iv_title_setting)
-    void SearchDialog(){
-        if (isVis){
-            ll_search_dialog.setVisibility(View.GONE);
+    void searchDialog() {
+        if (isVis) {
+            llSearchDialog.setVisibility(View.GONE);
             scrollview.setVisibility(View.VISIBLE);
-        }else{
-            ll_search_dialog.setVisibility(View.VISIBLE);
+        } else {
+            llSearchDialog.setVisibility(View.VISIBLE);
             scrollview.setVisibility(View.GONE);
         }
-        isVis=!isVis;
+        isVis = !isVis;
     }
 
     @Override
     protected void doBusiness() {
-        commonLogic =  CommonLogic.getInstance(activity,moduleCode(),mTimestamp.toString());
+        commonLogic = InBinningLogic.getInstance(activity, moduleCode(), mTimestamp.toString());
         LinearLayoutManager linearlayoutmanager = new LinearLayoutManager(activity);
-        ry_list.setLayoutManager(linearlayoutmanager);
+        ryList.setLayoutManager(linearlayoutmanager);
     }
 
     @Override
@@ -218,7 +208,7 @@ public class InBinningListActivity extends BaseTitleActivity {
     protected void initNavigationTitle() {
         super.initNavigationTitle();
         activity = this;
-        mName.setText(getString(R.string.title_in_binning)+getString(R.string.list));
+        mName.setText(getString(R.string.title_in_binning) + getString(R.string.list));
         iv_title_setting.setVisibility(View.VISIBLE);
         iv_title_setting.setImageResource(R.drawable.search);
     }
@@ -237,10 +227,10 @@ public class InBinningListActivity extends BaseTitleActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if(requestCode == SCANCODE){
+        if (requestCode == SCANCODE) {
             dataList.clear();
-            adapter = new InBinningListAdapter(activity,false,dataList);
-            ry_list.setAdapter(adapter);
+            adapter = new InBinningListAdapter(activity, false, dataList);
+            ryList.setAdapter(adapter);
             search();
         }
     }

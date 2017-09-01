@@ -222,7 +222,7 @@
     <string name="match_number">匹配量</string>
     <string name="material_follow_order">原料跟踪单号</string>
 
-    <string name="title_material_receipt">快速收货</string>
+    <string name="title_material_receipt">快速收货(供)</string>
     <string name="delivery_note">送货单</string>
     <string name="delivery_note_no">送货单号</string>
     <string name="delivery_quantity">送货量</string>
@@ -748,4 +748,6 @@
     <string name="name_not_tiptop">非管理员户不可执行该操作</string>
     <string name="completing_no">完工单号</string>
     <string name="fqc_change">FQC维护</string>
+    <string name="current_more_max">当前笔数已超最大笔数</string>
+    <string name="inbinning_detail">装箱入库明细</string>
 </resources>

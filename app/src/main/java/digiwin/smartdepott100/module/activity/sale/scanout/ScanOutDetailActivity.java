@@ -35,7 +35,7 @@ import digiwin.smartdepott100.module.logic.sale.scanoutstore.ScanOutStoreLogic;
  * @date 2017/4/5
  */
 
-public class ScanOutDetailActivity extends BaseTitleActivity{
+public class ScanOutDetailActivity extends BaseTitleActivity {
 
 
     private String itemNo;
@@ -44,7 +44,7 @@ public class ScanOutDetailActivity extends BaseTitleActivity{
 
     private String mode;
 
-    private LinkedHashMap<ScanOutDetailKeyBean,List<ScanOutDetailData>> dataMap;
+    private LinkedHashMap<ScanOutDetailKeyBean, List<ScanOutDetailData>> dataMap;
 
     private ScanOutDetailAdapter adapter;
 
@@ -55,17 +55,18 @@ public class ScanOutDetailActivity extends BaseTitleActivity{
     @BindView(R.id.tv_title_operation)
     TextView tvCheckAll;
 
-    private  boolean isChecked=false;
+    private boolean isChecked = false;
+
     @OnClick(R.id.tv_title_operation)
-    void checkAll(){
-        if(!isChecked){
-            adapter = new ScanOutDetailAdapter(dataMap,true);
+    void checkAll() {
+        if (!isChecked) {
+            adapter = new ScanOutDetailAdapter(dataMap, true);
             expandLv.setAdapter(adapter);
-        }else{
-            adapter = new ScanOutDetailAdapter(dataMap,false);
+        } else {
+            adapter = new ScanOutDetailAdapter(dataMap, false);
             expandLv.setAdapter(adapter);
         }
-        isChecked=!isChecked;
+        isChecked = !isChecked;
     }
 
     @BindView(R.id.expand_lv)
@@ -74,20 +75,20 @@ public class ScanOutDetailActivity extends BaseTitleActivity{
     Button delete;
 
     @OnClick(R.id.delete)
-    void delete(){
+    void delete() {
         showLoadingDialog();
         List<ScanOutDetailData> list = adapter.getCheckedList();
         List<String> cases = new ArrayList<>();
         for (int i = 0; i < list.size(); i++) {
-            if(!cases.contains(list.get(i).getPackage_no())){
+            if (!cases.contains(list.get(i).getPackage_no())) {
                 cases.add(list.get(i).getPackage_no());
             }
         }
         dataMap = adapter.getAllData();
-        List<Map<String,String>> maps = new ArrayList<>();
+        List<Map<String, String>> maps = new ArrayList<>();
         for (int i = 0; i < cases.size(); i++) {
-            Map<String,String> map = new HashMap<>();
-            map.put(AddressContants.PACKAGE_NO,cases.get(i));
+            Map<String, String> map = new HashMap<>();
+            map.put(AddressContants.PACKAGE_NO, cases.get(i));
             maps.add(map);
         }
         storeLogic.deleteScanOutDetailData(maps, new ScanOutStoreLogic.DeleteScanOutDetailDataListener() {
@@ -95,6 +96,7 @@ public class ScanOutDetailActivity extends BaseTitleActivity{
             public void onSuccess(String msg) {
                 dismissLoadingDialog();
                 showToast(msg);
+                getListData();
             }
 
             @Override
@@ -104,6 +106,7 @@ public class ScanOutDetailActivity extends BaseTitleActivity{
             }
         });
     }
+
     @Override
     protected Toolbar toolbar() {
         return toolbar;
@@ -123,7 +126,7 @@ public class ScanOutDetailActivity extends BaseTitleActivity{
     @Override
     protected void initNavigationTitle() {
         super.initNavigationTitle();
-        mName.setText(R.string.scan_out_store_detail);
+        mName.setText(R.string.inbinning_detail);
         ivScan.setVisibility(View.GONE);
         tvCheckAll.setText(R.string.check_all);
         tvCheckAll.setVisibility(View.VISIBLE);
@@ -131,19 +134,18 @@ public class ScanOutDetailActivity extends BaseTitleActivity{
 
     @Override
     protected void doBusiness() {
-        storeLogic = ScanOutStoreLogic.getInstance(activity,mode,mTimestamp.toString());
+        storeLogic = ScanOutStoreLogic.getInstance(activity, mode, mTimestamp.toString());
         itemNo = getIntent().getExtras().getString(AddressContants.ITEM_NO);
         dataMap = new LinkedHashMap<>();
-        adapter = new ScanOutDetailAdapter(dataMap,false);
+        adapter = new ScanOutDetailAdapter(dataMap, false);
         getListData();
     }
 
 
     private void getListData() {
         showLoadingDialog();
-        HashMap<String,String> map = new HashMap<>();
-        map.put(AddressContants.ITEM_NO,itemNo);
-        map.put(AddressContants.FLAG,"2");
+        HashMap<String, String> map = new HashMap<>();
+        map.put(AddressContants.ITEM_NO, itemNo);
         storeLogic.getScanOutDetailData(map, new ScanOutStoreLogic.GetScanOutDetailDataListener() {
             @Override
             public void onSuccess(List<ScanOutDetailData> datas) {
@@ -156,19 +158,20 @@ public class ScanOutDetailActivity extends BaseTitleActivity{
                         ScanOutDetailKeyBean keyBean = new ScanOutDetailKeyBean();
                         keyBean.setStorage_spaces_no(detailData.getStorage_spaces_no());
                         keyBean.setPackage_no(detailData.getPackage_no());
-                        List<ScanOutDetailData> detailDatas = new ArrayList<ScanOutDetailData>();
-                        for (int j = 0; j < datas.size(); j++) {
-                            if (keyBean.getPackage_no().equals(datas.get(j).getPackage_no()) &&
-                                    keyBean.getStorage_spaces_no().equals(datas.get(j).getStorage_spaces_no())) {
-                                detailDatas.add(datas.get(j));
-                            }
+                        if (dataMap.get(keyBean) == null) {
+                            ArrayList<ScanOutDetailData> tempList = new ArrayList<ScanOutDetailData>();
+                            tempList.add(detailData);
+                            dataMap.put(keyBean, tempList);
+                        } else {
+                            List<ScanOutDetailData> tempList = dataMap.get(keyBean);
+                            tempList.add(detailData);
+                            dataMap.put(keyBean, tempList);
                         }
-                        dataMap.put(keyBean, detailDatas);
                     }
                     adapter = new ScanOutDetailAdapter(dataMap, false);
                     expandLv.setAdapter(adapter);
                     expandLv.setGroupIndicator(null);
-                }else{
+                } else {
                     ll_group.setVisibility(View.GONE);
                 }
             }
@@ -221,20 +224,20 @@ public class ScanOutDetailActivity extends BaseTitleActivity{
             EditText et_num = (EditText) view.findViewById(R.id.et_num);
             LinearLayout ll_child = (LinearLayout) view.findViewById(R.id.ll_child);
             ScanOutDetailKeyBean keyBean = (ScanOutDetailKeyBean) getGroup(groupPosition);
-            if(childPosition == (dataMap.get(keyBean).size()-1)){
+            if (childPosition == (dataMap.get(keyBean).size() - 1)) {
                 ll_child.setBackgroundResource(R.drawable.expand_child_bottom);
-            }else {
+            } else {
                 ll_child.setBackgroundResource(R.drawable.expand_child_center);
             }
-            if(groupPosition == dataMap.size()-1){
-                if(childPosition == (dataMap.get(keyBean).size()-1)){
+            if (groupPosition == dataMap.size() - 1) {
+                if (childPosition == (dataMap.get(keyBean).size() - 1)) {
                     LinearLayout.LayoutParams ll = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-                    ll.setMargins(0,0,0,20);
+                    ll.setMargins(0, 0, 0, 20);
                     ll_child.setLayoutParams(ll);
                 }
             }
             et_num.setEnabled(false);
-            ScanOutDetailData child = (ScanOutDetailData) getChild(groupPosition,childPosition);
+            ScanOutDetailData child = (ScanOutDetailData) getChild(groupPosition, childPosition);
             tv_barcode.setText(child.getBarcode_no());
             et_num.setText(StringUtils.deleteZero(child.getItem_qty()));
             return view;
@@ -257,16 +260,16 @@ public class ScanOutDetailActivity extends BaseTitleActivity{
             ll_group.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    if(expandLv.isGroupExpanded(groupPosition)){
+                    if (expandLv.isGroupExpanded(groupPosition)) {
                         expandLv.collapseGroup(groupPosition);
-                    }else{
+                    } else {
                         expandLv.expandGroup(groupPosition);
                     }
                 }
             });
-            if (expandLv.isGroupExpanded(groupPosition)){
+            if (expandLv.isGroupExpanded(groupPosition)) {
                 ll_child_top.setVisibility(View.VISIBLE);
-            }else{
+            } else {
                 ll_child_top.setVisibility(View.GONE);
             }
             ScanOutDetailKeyBean group = (ScanOutDetailKeyBean) getGroup(groupPosition);

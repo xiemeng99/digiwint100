@@ -30,6 +30,7 @@ import digiwin.pulltorefreshlibrary.recyclerview.FullyLinearLayoutManager;
 import digiwin.smartdepott100.R;
 import digiwin.smartdepott100.core.appcontants.AddressContants;
 import digiwin.smartdepott100.core.appcontants.ModuleCode;
+import digiwin.smartdepott100.core.base.BaseFirstModuldeActivity;
 import digiwin.smartdepott100.core.base.BaseTitleActivity;
 import digiwin.smartdepott100.core.modulecommon.ModuleUtils;
 import digiwin.smartdepott100.login.loginlogic.LoginLogic;
@@ -48,7 +49,7 @@ import static android.R.attr.keyHeight;
  * @date 2017/3/8
  */
 
-public class MaterialReceiptActivity extends BaseTitleActivity implements
+public class MaterialReceiptActivity extends BaseFirstModuldeActivity implements
         View.OnLayoutChangeListener {
 
     private MaterialReceiptActivity activity;
@@ -301,5 +302,10 @@ public class MaterialReceiptActivity extends BaseTitleActivity implements
     protected void onDestroy() {
         super.onDestroy();
         mHandler.removeCallbacksAndMessages(null);
+    }
+
+    @Override
+    public ExitMode exitOrDel() {
+        return ExitMode.EXITD;
     }
 }

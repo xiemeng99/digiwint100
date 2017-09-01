@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:paddingLeft="@dimen/layout_10dp">
+
+    <CheckBox
+        android:id="@+id/cb_ischoose"
+        android:layout_width="@dimen/layout_30dp"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:button="@drawable/all_checkbox" />
+
+    <LinearLayout
+        android:id="@+id/llview"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@id/cb_ischoose"
+        android:orientation="vertical">
+
+        <LinearLayout
+            style="@style/itemstyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+            android:layout_width="@dimen/layout_40dp"
+            android:layout_height="wrap_content"
+            android:text="@string/case_no"
+            style="@style/app_text_inwhite"/>
+
+            <TextView
+                android:id="@+id/tv_barcode"
+                style="@style/ser_text_indetail"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+
+        <View style="@style/ry_line_style" />
+
+        <LinearLayout
+            style="@style/itemstyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                style="@style/app_text_inwhite"
+                android:layout_width="@dimen/layout_40dp"
+                android:layout_height="wrap_content"
+                android:text="@string/locator" />
+
+            <TextView
+                android:id="@+id/tv_locator"
+                style="@style/ser_text_indetail"
+                android:layout_width="@dimen/layout_0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="3" />
+
+            <TextView
+                android:id="@+id/textView2"
+                style="@style/app_text_inwhite"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/layout_10dp"
+                android:layout_marginRight="@dimen/layout_10dp"
+                android:text="@string/num" />
+
+            <TextView
+                android:id="@+id/tv_number"
+                android:layout_width="@dimen/layout_0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1.5"
+               style="@style/ser_num_indetail" />
+
+        </LinearLayout>
+    </LinearLayout>
+
+    <View
+        android:id="@+id/bottom_line"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/layout_0.5dp"
+        android:background="@color/gray_c2"
+        android:layout_below="@id/llview"/>
+
+</RelativeLayout>

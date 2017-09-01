@@ -1,6 +1,5 @@
 package digiwin.smartdepott100.core.base;
 
-import android.content.Context;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -15,14 +14,15 @@ import digiwin.smartdepott100.R;
 import digiwin.smartdepott100.core.appcontants.AddressContants;
 import digiwin.smartdepott100.module.logic.common.CommonLogic;
 
-import static digiwin.smartdepott100.core.base.BaseFirstModuldeActivity.ExitMode.EXITD;
+import static digiwin.smartdepott100.core.base.BaseFirstModuldeHActivity.ExitMode.EXITD;
+
 
 /**
  * @author xiemeng
  * @des 是否需要调用清空未保存数据时调用
  * @date 2017/3/9
  */
-public abstract class BaseFirstModuldeActivity extends BaseTitleActivity {
+public abstract class BaseFirstModuldeHActivity extends BaseTitleHActivity {
     private static CustomDialog mDialog;
     @Override
     public void onBackPressed() {

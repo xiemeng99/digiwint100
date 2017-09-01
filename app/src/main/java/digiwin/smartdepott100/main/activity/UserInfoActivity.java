@@ -74,19 +74,19 @@ public class UserInfoActivity extends BaseTitleActivity {
             @Override
             public void onCallback() {
 
-                Map<String, String> hashMap = new HashMap<>();
-                hashMap.put("statu", "1");
-                DeviceLogic.getInstance(context, module, mTimestamp.toString()).getDevice(hashMap, new DeviceLogic.DeviceListener() {
-                    @Override
-                    public void onSuccess(List<DeviceInfoBean> deviceInfoBeen) {
-
-                    }
-
-                    @Override
-                    public void onFailed(String msg) {
-                        showFailedDialog(msg);
-                    }
-                });
+//                Map<String, String> hashMap = new HashMap<>();
+//                hashMap.put("statu", "1");
+//                DeviceLogic.getInstance(context, module, mTimestamp.toString()).getDevice(hashMap, new DeviceLogic.DeviceListener() {
+//                    @Override
+//                    public void onSuccess(List<DeviceInfoBean> deviceInfoBeen) {
+//
+//                    }
+//
+//                    @Override
+//                    public void onFailed(String msg) {
+//                        showFailedDialog(msg);
+//                    }
+//                });
                 ActivityManagerUtils.startActivity(activity, LoginActivity.class);
                 List<Activity> activityLists = ActivityManagerUtils.getActivityLists();
                 for (Activity mActivity : activityLists) {

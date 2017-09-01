@@ -36,6 +36,12 @@ public class DetailShowBean implements Serializable{
      * 拨入库位，调拨使用
      */
     private String storage_spaces_in_no;
+    /**
+     * 箱号
+     */
+    private String package_no;
+
+    private String scan_sumqty;
 
     public String getApp_reqseq() {
         return app_reqseq;
@@ -91,5 +97,21 @@ public class DetailShowBean implements Serializable{
 
     public void setStorage_spaces_in_no(String storage_spaces_in_no) {
         this.storage_spaces_in_no = storage_spaces_in_no;
+    }
+
+    public String getPackage_no() {
+        return package_no;
+    }
+
+    public void setPackage_no(String package_no) {
+        this.package_no = package_no;
+    }
+
+    public String getScan_sumqty() {
+        return scan_sumqty;
+    }
+
+    public void setScan_sumqty(String scan_sumqty) {
+        this.scan_sumqty = scan_sumqty;
     }
 }

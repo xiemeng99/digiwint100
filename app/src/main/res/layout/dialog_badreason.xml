@@ -35,6 +35,11 @@
             android:textColor="@color/black_32"
             android:textCursorDrawable="@drawable/et_cursor_yellow"
             android:textSize="@dimen/textSize_14sp" />
+        <ImageView
+            android:id="@+id/img_delete"
+            android:layout_width="@dimen/layout_25dp"
+            android:layout_height="@dimen/layout_25dp"
+            android:src="@mipmap/badres_delete" />
     </LinearLayout>
 
     <View
