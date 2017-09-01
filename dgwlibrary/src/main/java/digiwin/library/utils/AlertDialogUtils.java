@@ -448,7 +448,7 @@ public class AlertDialogUtils {
     }
 
     /**
-     * 显示网络连接失败的dialog
+     * 显示失败的dialog
      */
     public static void showFailedDialog(Context context, final Object content) {
 
@@ -467,7 +467,7 @@ public class AlertDialogUtils {
                                 dialog.dismiss();
                             }
                         }).cancelTouchout(false);
-                ((TextView) builder.getView(R.id.tv_commit_success_content)).setMovementMethod(ScrollingMovementMethod.getInstance());
+                TextView mTv_text = (TextView) builder.getView(R.id.tv_commit_success_content);
                 if (content instanceof String) {
                     dialog = builder.setViewText(R.id.tv_commit_success_content, (String) content)
                             .build();
@@ -479,6 +479,10 @@ public class AlertDialogUtils {
                 } else {
                     LogUtils.e(TAG, "showFailedDialog-----content类型Error");
                 }
+                String s = mTv_text.getText().toString();
+                if (null!=s&&(s.contains("!")||s.contains("！"))){
+                    mTv_text.setTextColor(context.getResources().getColor(R.color.red50));
+                }
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -489,7 +493,7 @@ public class AlertDialogUtils {
     }
 
     /**
-     * 显示网络连接失败的dialog
+     * 显示失败的dialog
      */
     public static void showFailedDialog(Context context, final Object content, final OnDialogClickListener listener) {
 
@@ -511,7 +515,7 @@ public class AlertDialogUtils {
                                 dialog.dismiss();
                             }
                         }).cancelTouchout(false);
-                ((TextView) builder.getView(R.id.tv_commit_success_content)).setMovementMethod(ScrollingMovementMethod.getInstance());
+                TextView mTv_text = (TextView) builder.getView(R.id.tv_commit_success_content);
                 if (content instanceof String) {
                     dialog = builder.setViewText(R.id.tv_commit_success_content, (String) content)
                             .build();
@@ -522,6 +526,10 @@ public class AlertDialogUtils {
                     dialog.show();
                 } else {
                     LogUtils.e(TAG, "showFailedDialog-----content类型Error");
+                }
+                String s = mTv_text.getText().toString();
+                if (null!=s&&(s.contains("!")||s.contains("！"))){
+                    mTv_text.setTextColor(context.getResources().getColor(R.color.red50));
                 }
             }
         } catch (Exception e) {
