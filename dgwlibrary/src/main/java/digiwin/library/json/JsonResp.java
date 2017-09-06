@@ -102,6 +102,9 @@ public class JsonResp {
             Std_data std_data = getObject(payload.std_data, Std_data.class);
             Execution execution = getObject(std_data.execution, Execution.class);
             description = execution.description;
+            if (null!=description&&!description.endsWith("!")&&!description.endsWith("！")){
+                description=description+"!";
+            }
             LogUtils.i(TAG, "数据描述description：" + description);
         } catch (Exception e) {
             LogUtils.e(TAG, "获取返回码失败" + e);
