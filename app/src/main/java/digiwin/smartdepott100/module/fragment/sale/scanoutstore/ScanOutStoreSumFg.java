@@ -11,6 +11,7 @@ import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -18,6 +19,7 @@ import digiwin.library.dialog.OnDialogClickListener;
 import digiwin.library.dialog.OnDialogTwoListener;
 import digiwin.library.utils.ActivityManagerUtils;
 import digiwin.library.utils.LogUtils;
+import digiwin.library.utils.ObjectAndMapUtils;
 import digiwin.pulltorefreshlibrary.recyclerviewAdapter.OnItemClickListener;
 import digiwin.smartdepott100.R;
 import digiwin.smartdepott100.core.appcontants.AddressContants;
@@ -29,11 +31,12 @@ import digiwin.smartdepott100.module.adapter.sale.scanout.ScanOutStoreSumAdapter
 import digiwin.smartdepott100.module.bean.common.ClickItemPutBean;
 import digiwin.smartdepott100.module.bean.common.ListSumBean;
 import digiwin.smartdepott100.module.logic.common.CommonLogic;
+import digiwin.smartdepott100.module.logic.sale.scanout.ScanOutLogic;
 import digiwin.smartdepott100.module.logic.sale.scanoutstore.ScanOutStoreLogic;
 
 /**
  * @author maoheng
- * @des 扫码出货
+ * @des 装箱出货(扫码出货)
  * @date 2017/4/3
  */
 
@@ -68,7 +71,7 @@ public class ScanOutStoreSumFg extends BaseFragment {
             return;
         }showLoadingDialog();
         HashMap<String, String> map = new HashMap<>();
-        commonLogic.commit(map, new CommonLogic.CommitListener() {
+        commonLogic.commitSOData(map, new CommonLogic.CommitListener() {
             @Override
             public void onSuccess(String msg) {
                 dismissLoadingDialog();
@@ -93,9 +96,7 @@ public class ScanOutStoreSumFg extends BaseFragment {
 
     private ScanOutStoreActivity sActivity;
 
-    private CommonLogic commonLogic;
-
-    private ScanOutStoreLogic storeLogic;
+    private ScanOutLogic commonLogic;
 
     boolean upDateFlag;
 
@@ -106,7 +107,6 @@ public class ScanOutStoreSumFg extends BaseFragment {
      * 单头数据
      */
     ClickItemPutBean mPutBean;
-
 
     private String order;
 
@@ -129,8 +129,7 @@ public class ScanOutStoreSumFg extends BaseFragment {
     private void initData() {
         upDateFlag = false;
         Bundle extras = sActivity.getIntent().getExtras();
-        commonLogic = CommonLogic.getInstance(activity,sActivity.module,sActivity.mTimestamp.toString());
-        storeLogic = ScanOutStoreLogic.getInstance(activity,sActivity.module,sActivity.mTimestamp.toString());
+        commonLogic = ScanOutLogic.getInstance(activity,sActivity.module,sActivity.mTimestamp.toString());
         tvCustom.setText(extras.getString(AddressContants.CUSTOM));
         tvHeadDate.setText(extras.getString(AddressContants.DATE));
         order = extras.getString(AddressContants.DOC_NO);
@@ -147,7 +146,8 @@ public class ScanOutStoreSumFg extends BaseFragment {
             adapter = new ScanOutStoreSumAdapter(sActivity,list);
             ryList.setAdapter(adapter);
             showLoadingDialog();
-            commonLogic.getOrderSumData(mPutBean, new CommonLogic.GetOrderSumListener() {
+            Map<String,String> map = ObjectAndMapUtils.getValueMap(mPutBean);
+            commonLogic.getSOSumData(map, new CommonLogic.GetZSumListener() {
                 @Override
                 public void onSuccess(List<ListSumBean> datas) {
                     dismissLoadingDialog();

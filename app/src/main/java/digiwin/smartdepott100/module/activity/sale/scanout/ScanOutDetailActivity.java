@@ -27,6 +27,7 @@ import digiwin.smartdepott100.core.base.BaseTitleActivity;
 import digiwin.smartdepott100.module.adapter.ExpandAdapter;
 import digiwin.smartdepott100.module.bean.sale.scanout.ScanOutDetailData;
 import digiwin.smartdepott100.module.bean.sale.scanout.ScanOutDetailKeyBean;
+import digiwin.smartdepott100.module.logic.sale.scanout.ScanOutLogic;
 import digiwin.smartdepott100.module.logic.sale.scanoutstore.ScanOutStoreLogic;
 
 /**
@@ -37,10 +38,9 @@ import digiwin.smartdepott100.module.logic.sale.scanoutstore.ScanOutStoreLogic;
 
 public class ScanOutDetailActivity extends BaseTitleActivity {
 
-
     private String itemNo;
 
-    private ScanOutStoreLogic storeLogic;
+    private ScanOutLogic storeLogic;
 
     private String mode;
 
@@ -91,7 +91,9 @@ public class ScanOutDetailActivity extends BaseTitleActivity {
             map.put(AddressContants.PACKAGE_NO, cases.get(i));
             maps.add(map);
         }
-        storeLogic.deleteScanOutDetailData(maps, new ScanOutStoreLogic.DeleteScanOutDetailDataListener() {
+        HashMap<String, Object> hashMap = new HashMap<>();
+        hashMap.put("list",maps);
+        storeLogic.deleteScanOutDetailData(hashMap, new ScanOutLogic.DeleteScanOutDetailDataListener() {
             @Override
             public void onSuccess(String msg) {
                 dismissLoadingDialog();
@@ -134,7 +136,7 @@ public class ScanOutDetailActivity extends BaseTitleActivity {
 
     @Override
     protected void doBusiness() {
-        storeLogic = ScanOutStoreLogic.getInstance(activity, mode, mTimestamp.toString());
+        storeLogic = ScanOutLogic.getInstance(activity, mode, mTimestamp.toString());
         itemNo = getIntent().getExtras().getString(AddressContants.ITEM_NO);
         dataMap = new LinkedHashMap<>();
         adapter = new ScanOutDetailAdapter(dataMap, false);
@@ -146,7 +148,7 @@ public class ScanOutDetailActivity extends BaseTitleActivity {
         showLoadingDialog();
         HashMap<String, String> map = new HashMap<>();
         map.put(AddressContants.ITEM_NO, itemNo);
-        storeLogic.getScanOutDetailData(map, new ScanOutStoreLogic.GetScanOutDetailDataListener() {
+        storeLogic.getScanOutDetailData(map, new ScanOutLogic.GetScanOutDetailDataListener() {
             @Override
             public void onSuccess(List<ScanOutDetailData> datas) {
                 dismissLoadingDialog();
@@ -238,8 +240,8 @@ public class ScanOutDetailActivity extends BaseTitleActivity {
             }
             et_num.setEnabled(false);
             ScanOutDetailData child = (ScanOutDetailData) getChild(groupPosition, childPosition);
-            tv_barcode.setText(child.getBarcode_no());
-            et_num.setText(StringUtils.deleteZero(child.getItem_qty()));
+            tv_barcode.setText(child.getPackage_no());
+            et_num.setText(StringUtils.deleteZero(child.getScan_sumqty()));
             return view;
         }
 

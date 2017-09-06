@@ -33,6 +33,7 @@ import digiwin.smartdepott100.module.adapter.sale.scanout.ScanOutStoreListAdapte
 import digiwin.smartdepott100.module.bean.common.FilterBean;
 import digiwin.smartdepott100.module.bean.common.FilterResultOrderBean;
 import digiwin.smartdepott100.module.logic.common.CommonLogic;
+import digiwin.smartdepott100.module.logic.sale.scanout.ScanOutLogic;
 
 /**
  * @author maoheng
@@ -49,18 +50,18 @@ public class ScanOutStoreListActivity extends BaseTitleActivity {
      */
     int TOCOMMIT = 1001;
 
-    @BindView(R.id.tv_locator)
-    TextView tvLocator;
-    @BindView(R.id.et_locator)
-    EditText etLocator;
-    @OnFocusChange(R.id.et_locator)
-    void locatorOrderFocusChange() {
-        ModuleUtils.viewChange(llLocator, views);
-        ModuleUtils.etChange(activity, etLocator, editTexts);
-        ModuleUtils.tvChange(activity, tvLocator, textViews);
-    }
-    @BindView(R.id.ll_locator)
-    LinearLayout llLocator;
+//    @BindView(R.id.tv_locator)
+//    TextView tvLocator;
+//    @BindView(R.id.et_locator)
+//    EditText etLocator;
+//    @OnFocusChange(R.id.et_locator)
+//    void locatorOrderFocusChange() {
+//        ModuleUtils.viewChange(llLocator, views);
+//        ModuleUtils.etChange(activity, etLocator, editTexts);
+//        ModuleUtils.tvChange(activity, tvLocator, textViews);
+//    }
+//    @BindView(R.id.ll_locator)
+//    LinearLayout llLocator;
 
 
     @BindView(R.id.tv_shipping_order)
@@ -168,9 +169,6 @@ public class ScanOutStoreListActivity extends BaseTitleActivity {
     @BindView(R.id.ll_date)
     LinearLayout llDate;
 
-
-
-
     @BindViews({R.id.et_locator, R.id.et_shipping_order, R.id.et_item_no, R.id.et_custom, R.id.et_salesman, R.id.et_operating_department, R.id.et_date})
     List<EditText> editTexts;
     @BindViews({R.id.ll_locator, R.id.ll_shipping_order, R.id.ll_item_no, R.id.ll_custom, R.id.ll_salesman, R.id.ll_operating_department, R.id.ll_date})
@@ -178,14 +176,13 @@ public class ScanOutStoreListActivity extends BaseTitleActivity {
     @BindViews({R.id.tv_locator, R.id.tv_shipping_order, R.id.tv_item_no, R.id.tv_custom, R.id.tv_salesman, R.id.tv_operating_department, R.id.tv_date})
     List<TextView> textViews;
 
-
     @BindView(R.id.btn_search_sure)
     Button btnSearchSure;
     @OnClick(R.id.btn_search_sure)
     void searchSure(){
         searchData();
     }
-    private CommonLogic  commonLogic;
+    private ScanOutLogic commonLogic;
     private List<FilterResultOrderBean> list;
     private ScanOutStoreListAdapter adapter;
     private void searchData() {
@@ -193,7 +190,7 @@ public class ScanOutStoreListActivity extends BaseTitleActivity {
         showLoadingDialog();
         FilterBean bean = new FilterBean();
         bean.setWarehouse_out_no(LoginLogic.getWare());
-        bean.setWarehouse_storage(etLocator.getText().toString().trim());
+//        bean.setWarehouse_storage(etLocator.getText().toString().trim());
         bean.setDoc_no(etShippingOrder.getText().toString().trim());
         bean.setItem_no(etItemNo.getText().toString().trim());
         bean.setCustomer_no(etCustom.getText().toString().trim());
@@ -201,7 +198,7 @@ public class ScanOutStoreListActivity extends BaseTitleActivity {
         bean.setDepartment_no(etOperatingDepartment.getText().toString().trim());
         bean.setDate_begin(startDate);
         bean.setDate_end(endDate);
-        commonLogic.getOrderData(bean, new CommonLogic.GetOrderListener() {
+        commonLogic.getSOList(bean, new ScanOutLogic.GetScanOutListListener() {
             @Override
             public void onSuccess(List<FilterResultOrderBean> beanList) {
                 dismissLoadingDialog();
@@ -315,7 +312,7 @@ public class ScanOutStoreListActivity extends BaseTitleActivity {
         etDate.setKeyListener(null);
         activity = ScanOutStoreListActivity.this;
         list = new ArrayList<>();
-        commonLogic = CommonLogic.getInstance(activity,module,mTimestamp.toString());
+        commonLogic = ScanOutLogic.getInstance(activity,module,mTimestamp.toString());
     }
 
     @Override

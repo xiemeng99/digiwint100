@@ -247,6 +247,10 @@ public interface ReqTypeName {
      */
     static final String  GETPACKBOXNUMBER = "app.get.package.info";
     /**
+     * 扫描包装箱号
+     */
+    static final String  GETPACKAGENO = "als.package.no.get";
+    /**
      * 扫码出货保存
      */
     static final String  SCANOUTSAVE = "app.package.keep";

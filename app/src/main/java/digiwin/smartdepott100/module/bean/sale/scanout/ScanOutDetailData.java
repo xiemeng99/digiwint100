@@ -23,6 +23,18 @@ public class ScanOutDetailData {
      * 数量
      */
     private String item_qty;
+    /**
+     * 数量
+     */
+    private String scan_sumqty;
+
+    public String getScan_sumqty() {
+        return scan_sumqty;
+    }
+
+    public void setScan_sumqty(String scan_sumqty) {
+        this.scan_sumqty = scan_sumqty;
+    }
 
     public String getPackage_no() {
         return package_no;

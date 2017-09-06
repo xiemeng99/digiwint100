@@ -17,7 +17,7 @@
             style="@style/app_text_inwhite"
             android:layout_width="@dimen/layout_60dp"
             android:layout_height="wrap_content"
-            android:text="@string/shipping_order" />
+            android:text="@string/shipment_order_no" />
 
         <TextView
             android:id="@+id/tv_shipping_order"

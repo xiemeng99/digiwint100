@@ -85,7 +85,7 @@ public class CommonLogic {
 //    };
     private String[] inStores = {
             ModuleCode.STORECHECK,
-            ModuleCode.NOCOMESTOREALLOT,ModuleCode.POSTALLOCATE
+            ModuleCode.NOCOMESTOREALLOT,ModuleCode.POSTALLOCATE,ModuleCode.SALERETURN
     };
 
 
@@ -1027,6 +1027,15 @@ public class CommonLogic {
         public void onSuccess(List<ProductBinningBean> productBinningBeans);
 
         public void onFailed(String error);
+    }
+
+    /**
+     * 扫描包装箱号 T100
+     */
+    public interface ScanPackBoxNumberListener1 {
+         void onSuccess(ProductBinningBean productBinningBean);
+
+         void onFailed(String error);
     }
 
     /**

@@ -80,10 +80,41 @@
                         style="@style/ser_text_inwhite" />
                 </LinearLayout>
 
+                <View style="@style/fg_line_style" />
+
+                <LinearLayout
+                    android:id="@+id/ll_hasScan"
+                    style="@style/itemstyle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:id="@+id/tv_hasScan"
+                        style="@style/app_text_inwhite"
+                        android:layout_width="@dimen/layout_50dp"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:text="@string/scaned_numb" />
+
+                    <TextView
+                        android:id="@+id/tv_scan_hasScan"
+                        style="@style/ser_text_inwhite"
+                        android:layout_width="@dimen/layout_0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/layout_10dp"
+                        android:layout_weight="1" />
+
+                </LinearLayout>
 
             </LinearLayout>
 
-            <include  layout="@layout/ryitem_fifo_common" />
+            <include
+                android:visibility="gone"
+                layout="@layout/ryitem_fifo_common" />
+            <include
+                android:id="@+id/includedetail"
+                layout="@layout/show_playdetail_layout"
+                android:visibility="gone"></include>
         </LinearLayout>
     </ScrollView>
     <include layout="@layout/inclu_save"/>

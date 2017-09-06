@@ -21,6 +21,7 @@
         <LinearLayout
             android:id="@+id/ll_locator"
             style="@style/itemstyle"
+            android:visibility="gone"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
@@ -58,7 +59,7 @@
                 android:layout_width="@dimen/layout_70dp"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
-                android:text="@string/shipping_order"
+                android:text="@string/shipment_order_no"
                 style="@style/app_text_inwhite"/>
 
             <EditText

@@ -131,7 +131,7 @@ public class FQCInspectItemActivity extends BaseFirstModuldeHActivity {
     protected void doBusiness() {
         Bundle extras = getIntent().getExtras();
         scanData = (QCScanData) extras.getSerializable(FQCInspectListActivity.DATA);
-        tvSupplier.setText(scanData.getSupplier_no() + "  " + scanData.getSupplier_name());
+        tvSupplier.setText(scanData.getDepartment_no() + "  " + scanData.getDepartment_name());
         tvItemNo.setText(scanData.getItem_no());
         tvItemName.setText(scanData.getItem_name());
         tvDeliveryNum.setText(scanData.getQty());

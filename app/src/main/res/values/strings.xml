@@ -483,7 +483,7 @@
     <string name="scanout_scan">扫出扫描</string>
     <string name="sales_dealers">出货量</string>
 
-    <string name="scan_out_store">扫箱码出货</string>
+    <string name="scan_out_store">装箱出货</string>
     <string name="warehouse_error">返回库位与当前库位不一致</string>
     <string name="scan_out_store_detail">扫码出货明细</string>
     <string name="caseNo_barcode">箱码</string>
@@ -750,4 +750,5 @@
     <string name="fqc_change">FQC维护</string>
     <string name="current_more_max">当前笔数已超最大笔数</string>
     <string name="inbinning_detail">装箱入库明细</string>
+    <string name="shipment_order_no">出通单号</string>
 </resources>

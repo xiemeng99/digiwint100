@@ -29,9 +29,9 @@ public class ScanOutStoreSumAdapter extends BaseRecyclerAdapter<ListSumBean> {
 
     @Override
     protected void bindData(RecyclerViewHolder holder, int position, ListSumBean item) {
-        float numb1 = StringUtils.string2Float(item.getReq_qty());
+        float numb1 = StringUtils.string2Float(item.getApply_qty());
         float numb2 = StringUtils.string2Float(item.getStock_qty());
-        float numb3 = StringUtils.string2Float(item.getMatch_qty());
+        float numb3 = StringUtils.string2Float(item.getScan_sumqty());
         holder.setText(R.id.tv_item_name, item.getItem_name());
         holder.setText(R.id.tv_item_spec,item.getItem_spec());
         holder.setText(R.id.tv_item_no,item.getItem_no());

@@ -28,7 +28,7 @@ import digiwin.smartdepott100.module.fragment.sale.scanoutstore.ScanOutStoreSumF
 
 /**
  * @author maoheng
- * @des 扫码出货
+ * @des 装箱出货(扫码出货)
  * @date 2017/4/3
  */
 
@@ -78,18 +78,18 @@ public class ScanOutStoreActivity extends BaseFirstModuldeActivity{
      */
     public final int CLEAR = 1005;
 
-    /**
-     * 未完事项
-     */
-    @BindView(R.id.un_com)
-    ImageView unCom;
-    @OnClick(R.id.un_com)
-    void toUmcom(){
-        Bundle bundle = new Bundle();
-        bundle.putString(AddressContants.MODULEID_INTENT, mTimestamp.toString());
-        bundle.putString(HaveSourceUnComActivity.MODULECODE, module);
-        ActivityManagerUtils.startActivityForBundleData(activity, HaveSourceUnComActivity.class, bundle);
-    }
+//    /**
+//     * 未完事项
+//     */
+//    @BindView(R.id.un_com)
+//    ImageView unCom;
+//    @OnClick(R.id.un_com)
+//    void toUmcom(){
+//        Bundle bundle = new Bundle();
+//        bundle.putString(AddressContants.MODULEID_INTENT, mTimestamp.toString());
+//        bundle.putString(HaveSourceUnComActivity.MODULECODE, module);
+//        ActivityManagerUtils.startActivityForBundleData(activity, HaveSourceUnComActivity.class, bundle);
+//    }
 
     @Override
     protected Toolbar toolbar() {
@@ -106,7 +106,7 @@ public class ScanOutStoreActivity extends BaseFirstModuldeActivity{
     protected void initNavigationTitle() {
         super.initNavigationTitle();
         mName.setText(R.string.scan_out_store);
-        unCom.setVisibility(View.VISIBLE);
+//        unCom.setVisibility(View.VISIBLE);
     }
 
     @Override

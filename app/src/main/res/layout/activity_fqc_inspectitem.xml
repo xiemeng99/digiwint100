@@ -29,7 +29,7 @@
                 android:layout_width="@dimen/layout_60dp"
                 android:layout_height="wrap_content"
                 android:gravity="center_vertical"
-                android:text="@string/supplier" />
+                android:text="@string/department" />
 
             <TextView
                 android:id="@+id/tv_supplier"
