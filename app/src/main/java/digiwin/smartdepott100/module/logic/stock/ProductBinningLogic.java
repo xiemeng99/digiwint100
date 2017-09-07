@@ -145,7 +145,7 @@ public class ProductBinningLogic extends CommonLogic {
             public void run() {
                 try {
                     HashMap<String, Object> hashMap = new HashMap<>();
-                    hashMap.put("list",list);
+                    hashMap.put("data",list);
                     String createJson = JsonReqForERP.dataCreateJson(mModule, "als.package.del", mTimestamp, hashMap);
                     OkhttpRequest.getInstance(mContext).post(createJson, new IRequestCallbackImp() {
                         @Override

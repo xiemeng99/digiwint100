@@ -91,9 +91,7 @@ public class ScanOutDetailActivity extends BaseTitleActivity {
             map.put(AddressContants.PACKAGE_NO, cases.get(i));
             maps.add(map);
         }
-        HashMap<String, Object> hashMap = new HashMap<>();
-        hashMap.put("list",maps);
-        storeLogic.deleteScanOutDetailData(hashMap, new ScanOutLogic.DeleteScanOutDetailDataListener() {
+        storeLogic.deleteScanOutDetailData(maps, new ScanOutLogic.DeleteScanOutDetailDataListener() {
             @Override
             public void onSuccess(String msg) {
                 dismissLoadingDialog();

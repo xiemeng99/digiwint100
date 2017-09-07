@@ -502,7 +502,7 @@ public class CommonLogic {
             @Override
             public void run() {
                 HashMap<String, Object> map = new HashMap<>();
-                map.put("data", list);
+                map.put("list", list);
                 String createJson = JsonReqForERP.dataCreateJson(mModule, ReqTypeName.UPDATEDELETE, mTimestamp.toString(), map);
                 OkhttpRequest.getInstance(mContext).post(createJson, new IRequestCallbackImp() {
                     @Override

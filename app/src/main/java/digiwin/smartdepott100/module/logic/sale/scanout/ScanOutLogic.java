@@ -12,6 +12,7 @@ import digiwin.library.utils.LogUtils;
 import digiwin.library.utils.StringUtils;
 import digiwin.library.utils.ThreadPoolManager;
 import digiwin.smartdepott100.R;
+import digiwin.smartdepott100.core.appcontants.AddressContants;
 import digiwin.smartdepott100.core.appcontants.ReqTypeName;
 import digiwin.smartdepott100.core.json.JsonReqForERP;
 import digiwin.smartdepott100.core.net.IRequestCallbackImp;
@@ -56,7 +57,7 @@ public class ScanOutLogic extends CommonLogic {
 
     /**
      * 扫码出货获取列表数据
-     *
+     *使用d001
      * @param filterBean
      */
     public void getSOList(final FilterBean filterBean, final GetScanOutListListener listener) {
@@ -142,9 +143,9 @@ public class ScanOutLogic extends CommonLogic {
                             String error = mContext.getString(R.string.unknow_error);
                             if (null != string) {
                                 if (ReqTypeName.SUCCCESSCODE.equals(JsonResp.getCode(string))) {
-                                    String doc_no = JsonResp.getParaString(string, "doc_no");
+                                    String doc_no = JsonResp.getParaString(string, AddressContants.DOC_NO);
                                     if (null != doc_no) {
-                                        listener.onSuccess(JsonResp.getParaString(string, "doc_no"));
+                                        listener.onSuccess(JsonResp.getParaString(string,AddressContants.DOC_NO));
                                     }
                                     return;
                                 } else {
@@ -339,11 +340,13 @@ public class ScanOutLogic extends CommonLogic {
     /**
      * 点击删除明细
      */
-    public void deleteScanOutDetailData(final HashMap<String, Object> hashMap, final DeleteScanOutDetailDataListener listener) {
+    public void deleteScanOutDetailData(final List<Map<String,String>>  maps, final DeleteScanOutDetailDataListener listener) {
         ThreadPoolManager.getInstance().executeTask(new Runnable() {
             @Override
             public void run() {
                 try {
+                    HashMap<String, Object> hashMap = new HashMap<>();
+                    hashMap.put("data",maps);
                     String createJson = JsonReqForERP.dataCreateJson(mModule,"als.pack.scan.list.del",mTimestamp.toString(),hashMap);
                     OkhttpRequest.getInstance(mContext).post(createJson, new IRequestCallbackImp() {
                         @Override

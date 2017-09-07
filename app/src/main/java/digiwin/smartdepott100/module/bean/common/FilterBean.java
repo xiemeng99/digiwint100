@@ -4,6 +4,7 @@ import digiwin.library.constant.SharePreKey;
 import digiwin.library.utils.SharedPreferencesUtils;
 import digiwin.smartdepott100.core.appcontants.AddressContants;
 import digiwin.smartdepott100.core.base.BaseApplication;
+import digiwin.smartdepott100.login.loginlogic.LoginLogic;
 
 /**
  * @author 唐孟宇
@@ -14,6 +15,7 @@ public class FilterBean {
     public FilterBean(){
        BaseApplication instance = BaseApplication.getInstance();
         this.pagesize = (String) SharedPreferencesUtils.get(instance, SharePreKey.PAGE_SETTING, AddressContants.PAGE_NUM);
+        this.warehouse_no= LoginLogic.getWare();
     }
     /**
      * 每页笔数

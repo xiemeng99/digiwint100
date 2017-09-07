@@ -265,7 +265,7 @@ public class InBinningLogic extends CommonLogic {
                 try {
                     HashMap<String, Object> map = new HashMap<>();
                     map.put("data", maps);
-                    String createJson = JsonReqForERP.mapCreateJson(mModule, "als.pack.scan.list.del", mTimestamp, map);
+                    String createJson = JsonReqForERP.dataCreateJson(mModule, "als.pack.scan.list.del", mTimestamp, map);
                     OkhttpRequest.getInstance(mContext).post(createJson, new IRequestCallbackImp() {
                         @Override
                         public void onResponse(String string) {

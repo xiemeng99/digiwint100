@@ -189,8 +189,7 @@ public class ScanOutStoreListActivity extends BaseTitleActivity {
         updateUI();
         showLoadingDialog();
         FilterBean bean = new FilterBean();
-        bean.setWarehouse_out_no(LoginLogic.getWare());
-//        bean.setWarehouse_storage(etLocator.getText().toString().trim());
+        bean.setWarehouse_no(LoginLogic.getWare());
         bean.setDoc_no(etShippingOrder.getText().toString().trim());
         bean.setItem_no(etItemNo.getText().toString().trim());
         bean.setCustomer_no(etCustom.getText().toString().trim());
