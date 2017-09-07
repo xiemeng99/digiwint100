@@ -153,7 +153,8 @@ public class AlertDialogUtils {
                                 dialog.dismiss();
                             }
                         }).cancelTouchout(false);
-                ((TextView) builder.getView(R.id.tv_commit_success_content)).setMovementMethod(ScrollingMovementMethod.getInstance());
+                TextView mTv_text = (TextView) builder.getView(R.id.tv_commit_success_content);
+                mTv_text.setMovementMethod(ScrollingMovementMethod.getInstance());
                 if (content instanceof String) {
                     dialog = builder.setViewText(R.id.tv_commit_success_content, (String) content)
                             .build();
@@ -162,13 +163,17 @@ public class AlertDialogUtils {
                     dialog = builder.setViewText(R.id.tv_commit_success_content, (Integer) content)
                             .build();
                     dialog.show();
+                    String s = mTv_text.getText().toString();
+                    if (null!=s&&(s.contains("!")||s.contains("！"))){
+                        mTv_text.setTextColor(context.getResources().getColor(R.color.red50));
+                    }
                 } else {
                     LogUtils.e(TAG, "showCommitFailDialog-----content类型Error");
                 }
             }
         } catch (Exception e) {
             e.printStackTrace();
-            LogUtils.e(TAG, "showCommitFailDialog-----Error");
+            LogUtils.e(TAG, "showCommitFailDialog-----Error"+e);
         }
     }
 
@@ -192,7 +197,8 @@ public class AlertDialogUtils {
                                 dialog.dismiss();
                             }
                         }).cancelTouchout(false);
-                ((TextView) builder.getView(R.id.tv_commit_success_content)).setMovementMethod(ScrollingMovementMethod.getInstance());
+                TextView mTv_text = (TextView) builder.getView(R.id.tv_commit_success_content);
+                mTv_text.setMovementMethod(ScrollingMovementMethod.getInstance());
                 if (content instanceof String) {
                     dialog = builder.setViewText(R.id.tv_commit_success_content, (String) content)
                             .build();
@@ -201,13 +207,17 @@ public class AlertDialogUtils {
                     dialog = builder.setViewText(R.id.tv_commit_success_content, (Integer) content)
                             .build();
                     dialog.show();
+                    String s = mTv_text.getText().toString();
+                    if (null!=s&&(s.contains("!")||s.contains("！"))){
+                        mTv_text.setTextColor(context.getResources().getColor(R.color.red50));
+                    }
                 } else {
                     LogUtils.e(TAG, "showCommitFailDialogAndCall-----content类型Error");
                 }
             }
         } catch (Exception e) {
             e.printStackTrace();
-            LogUtils.e(TAG, "showCommitFailDialogAndCall-----Error");
+            LogUtils.e(TAG, "showCommitFailDialogAndCall-----Error"+e);
         }
     }
 
@@ -443,7 +453,7 @@ public class AlertDialogUtils {
             }
         } catch (Exception e) {
             e.printStackTrace();
-            LogUtils.e(TAG, "showNetWorkSuccessDialog-----Error");
+            LogUtils.e(TAG, "showNetWorkSuccessDialog-----Error"+e);
         }
     }
 
@@ -468,6 +478,7 @@ public class AlertDialogUtils {
                             }
                         }).cancelTouchout(false);
                 TextView mTv_text = (TextView) builder.getView(R.id.tv_commit_success_content);
+                mTv_text.setMovementMethod(ScrollingMovementMethod.getInstance());
                 if (content instanceof String) {
                     dialog = builder.setViewText(R.id.tv_commit_success_content, (String) content)
                             .build();
@@ -516,6 +527,7 @@ public class AlertDialogUtils {
                             }
                         }).cancelTouchout(false);
                 TextView mTv_text = (TextView) builder.getView(R.id.tv_commit_success_content);
+                mTv_text.setMovementMethod(ScrollingMovementMethod.getInstance());
                 if (content instanceof String) {
                     dialog = builder.setViewText(R.id.tv_commit_success_content, (String) content)
                             .build();
