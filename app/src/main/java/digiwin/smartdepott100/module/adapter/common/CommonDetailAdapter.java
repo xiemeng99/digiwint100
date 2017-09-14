@@ -36,6 +36,7 @@ public class CommonDetailAdapter extends BaseDetailRecyclerAdapter<DetailShowBea
     @Override
     protected void bindData(final RecyclerViewHolder holder, final int position, final DetailShowBean item) {
         holder.setText(R.id.tv_barcode, item.getBarcode_no());
+        holder.setText(R.id.tv_signcode, item.getSigncode()+"    "+item.getSigncode_instruction());
         holder.setText(R.id.tv_locator, item.getStorage_spaces_no());
         holder.setText(R.id.tv_number, StringUtils.deleteZero(item.getBarcode_qty()));
         holder.setClickListener(R.id.tv_number, new View.OnClickListener() {

@@ -26,10 +26,10 @@
             android:orientation="horizontal">
 
             <TextView
-            android:layout_width="@dimen/layout_40dp"
-            android:layout_height="wrap_content"
-            android:text="@string/barcode"
-            style="@style/app_text_inwhite"/>
+                style="@style/app_text_inwhite"
+                android:layout_width="@dimen/layout_60dp"
+                android:layout_height="wrap_content"
+                android:text="@string/barcode" />
 
             <TextView
                 android:id="@+id/tv_barcode"
@@ -48,7 +48,28 @@
 
             <TextView
                 style="@style/app_text_inwhite"
-                android:layout_width="@dimen/layout_40dp"
+                android:layout_width="@dimen/layout_60dp"
+                android:layout_height="wrap_content"
+                android:text="@string/signcode" />
+
+            <TextView
+                android:id="@+id/tv_signcode"
+                style="@style/ser_text_indetail"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+
+        <View style="@style/ry_line_style" />
+
+        <LinearLayout
+            style="@style/itemstyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                style="@style/app_text_inwhite"
+                android:layout_width="@dimen/layout_60dp"
                 android:layout_height="wrap_content"
                 android:text="@string/locator" />
 
@@ -70,10 +91,10 @@
 
             <TextView
                 android:id="@+id/tv_number"
+                style="@style/ser_num_indetail"
                 android:layout_width="@dimen/layout_0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="1.5"
-               style="@style/ser_num_indetail" />
+                android:layout_weight="1.5" />
 
         </LinearLayout>
     </LinearLayout>
@@ -82,7 +103,7 @@
         android:id="@+id/bottom_line"
         android:layout_width="match_parent"
         android:layout_height="@dimen/layout_0.5dp"
-        android:background="@color/gray_c2"
-        android:layout_below="@id/llview"/>
+        android:layout_below="@id/llview"
+        android:background="@color/gray_c2" />
 
 </RelativeLayout>

@@ -178,6 +178,7 @@ public class MiscellaneousIssueInSumFg extends BaseFragment {
         Map<String, String> map = new HashMap<>();
         showLoadingDialog();
         map.put(AddressContants.ITEM_NO, orderSumData.getItem_no());
+        map.put(AddressContants.SIGNCODE, orderSumData.getSigncode());
         final SumShowBean sumShowBean = new SumShowBean();
         sumShowBean.setItem_no(orderSumData.getItem_no());
         sumShowBean.setItem_name(orderSumData.getItem_name());

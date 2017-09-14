@@ -277,12 +277,16 @@ public interface ModuleCode {
      */
     public final String TCTSBOARD="F002";
     /**
-     *生产成套领料
+     * 生产成套领料
      */
     public final String SUITPICKING="B016";
     /**
-     *生产成套领料半成品
+     * 生产成套领料半成品
      */
     public final String SUITPICKINGHALF="B017";
+    /**
+     * 工单入库上架
+     */
+    public final String ORDERPUTAWAY="B017";
 
 }

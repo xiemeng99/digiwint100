@@ -131,6 +131,7 @@ public class MainLogic {
         ModuleBean accordingMaterialActivity = new ModuleBean(R.string.according_material, R.mipmap.accordingmaterial, ModuleCode.ACCORDINGMATERIALCODE, "android.intent.actiont100.smartdepot.AccordingMaterialActivity");
         ModuleBean productionleaderlist = new ModuleBean(R.string.title_production_leader, R.mipmap.production_receive, ModuleCode.PRODUCTIONLEADER, "android.intent.actiont100.smartdepot.ProductionLeaderListActivity");
         ModuleBean suitpicking = new ModuleBean(R.string.suitpicking, R.mipmap.lingliaoguozahng, ModuleCode.SUITPICKING, "android.intent.actiont100.smartdepot.SuitPickingListAcitivity");
+        ModuleBean orderputaway = new ModuleBean(R.string.order_putaway, R.mipmap.order_putaway, ModuleCode.ORDERPUTAWAY, "android.intent.actiont100.smartdepot.OrderPutawayListAcitivity");
         ModuleBean suitpickinghalf = new ModuleBean(R.string.suitpickinghalf, R.mipmap.lingliaoguozahng, ModuleCode.SUITPICKINGHALF, "android.intent.actiont100.smartdepot.SuitPickingHalfListAcitivity");
         ModuleBean worksupplementlist = new ModuleBean(R.string.title_worksupplement, R.mipmap.ordermaterial, ModuleCode.WORKSUPPLEMENT, "android.intent.actiont100.smartdepot.WorkSupplementListActivity");
         ModuleBean materialReturning = new ModuleBean(R.string.mataerial_returning, R.mipmap.return_of_material, ModuleCode.MATERIALRETURNING, "android.intent.actiont100.smartdepot.MaterialReturnListActivity");
@@ -147,6 +148,7 @@ public class MainLogic {
         produceItems.add(accordingMaterialActivity);
         produceItems.add(productionleaderlist);
         produceItems.add(suitpicking);
+        produceItems.add(orderputaway);
         produceItems.add(worksupplementlist);
         produceItems.add(materialReturning);
         produceItems.add(workorderreturnlistactivity);
@@ -190,7 +192,6 @@ public class MainLogic {
         ModuleBean scanOutStoreActivity = new ModuleBean(R.string.scan_out_store, R.mipmap.scan_shipment, ModuleCode.SCANOUTSTORE, "android.intent.actiont100.smartdepot.ScanOutStoreListActivity");
 //        ModuleBean tranceProductActivity = new ModuleBean(R.string.trace_product_quality, R.mipmap.quality_retrospect, ModuleCode.TRANSPRODUCTQUALITY, "android.intent.actiont100.smartdepot.TraceProductActivity");
 //        ModuleBean orderSaleActivity = new ModuleBean(R.string.ordersale, R.mipmap.ordersale, ModuleCode.ORDERSALE, "开发中");
-
         ModuleBean saleoutletactivity = new ModuleBean(R.string.saleoutlet, R.mipmap.saleoutlet, ModuleCode.SALEOUTLET, "android.intent.actiont100.smartdepot.SaleOutletListActivity");
         ModuleBean pickupshipment = new ModuleBean(R.string.title_pickupshipment, R.mipmap.pickup_shipment, ModuleCode.PICKUPSHIPMENT, "android.intent.actiont100.smartdepot.PickUpShipmentListActivity");
         ModuleBean saleReturnActivity = new ModuleBean(R.string.title_sale_return, R.mipmap.ntsale_return, ModuleCode.SALERETURN, "android.intent.actiont100.smartdepot.SaleReturnActivity");

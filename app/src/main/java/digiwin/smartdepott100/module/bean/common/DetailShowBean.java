@@ -41,6 +41,31 @@ public class DetailShowBean implements Serializable{
      */
     private String package_no;
 
+    /**
+     * 物料特征
+     */
+    private String signcode;
+    /**
+     * 物料特征说明
+     */
+    private String signcode_instruction;
+
+    public String getSigncode() {
+        return signcode;
+    }
+
+    public void setSigncode(String signcode) {
+        this.signcode = signcode;
+    }
+
+    public String getSigncode_instruction() {
+        return signcode_instruction;
+    }
+
+    public void setSigncode_instruction(String signcode_instruction) {
+        this.signcode_instruction = signcode_instruction;
+    }
+
     private String scan_sumqty;
 
     public String getApp_reqseq() {

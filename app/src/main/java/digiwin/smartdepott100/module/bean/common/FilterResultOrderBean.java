@@ -97,6 +97,19 @@ public class FilterResultOrderBean implements Serializable {
      */
     private String shipment_date;
 
+    /**
+     * 规格
+     */
+    private String item_spec;
+
+    public String getItem_spec() {
+        return item_spec;
+    }
+
+    public void setItem_spec(String item_spec) {
+        this.item_spec = item_spec;
+    }
+
     public String getShipment_date() {
         return shipment_date;
     }

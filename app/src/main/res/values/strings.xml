@@ -76,6 +76,7 @@
     <string name="material_returning_number">退料单号</string>
     <string name="card_number">流转卡号</string>
     <string name="gongDan_no">工单单号</string>
+    <string name="gongDan_date">工单日期</string>
     <string name="locator">储位</string>
     <string name="item_no">料号</string>
     <string name="item_name">品名</string>
@@ -107,6 +108,7 @@
     <string name="data">日期</string>
     <string name="person">人员</string>
     <string name="create_date">创建日期</string>
+    <string name="order_date">工单日期</string>
 
     <string name="nodate">无数据</string>
     <string name="unknow_error">程序出现异常</string>
@@ -159,6 +161,7 @@
     <string name="plant_not_null">营用中心不能为空</string>
 
     <string name="department">部门</string>
+    <string name="manufacture_department">制造部门</string>
 
     <string name="barcode_not_in_fifo">该条码或储位与FIFO建议不符</string>
     <string name="locator_not_in_fifo">该储位不在FIFO建议中</string>
@@ -240,6 +243,7 @@
     <string name="work_order_scan">依工单发料扫描</string>
     <string name="purchasemanger">采购管理</string>
     <string name="producemanager">生产管理</string>
+    <string name="produce_itemNo">生产品号</string>
     <string name="storagemanager">库存管理</string>
     <string name="salesmanager">销售管理</string>
     <string name="dailyworkmanager">报工管理</string>
@@ -751,4 +755,7 @@
     <string name="current_more_max">当前笔数已超最大笔数</string>
     <string name="inbinning_detail">装箱入库明细</string>
     <string name="shipment_order_no">出通单号</string>
+
+    <string name="order_putaway">工单入库上架</string>
+    <string name="signcode">物料特征</string>
 </resources>

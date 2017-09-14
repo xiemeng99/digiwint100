@@ -13,7 +13,75 @@
         android:orientation="horizontal">
 
         <TextView
-            android:id="@+id/tv_item_name_string"
+            style="@style/app_text_inwhite"
+            android:layout_width="@dimen/layout_60dp"
+            android:layout_height="wrap_content"
+            android:text="@string/gongDan_no" />
+
+        <TextView
+            android:id="@+id/tv_gongDan_no"
+            style="@style/ser_text_inwhite"
+            android:layout_width="@dimen/layout_0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            style="@style/app_text_inwhite"
+            android:layout_width="@dimen/layout_60dp"
+            android:layout_height="wrap_content"
+            android:text="@string/gongDan_date" />
+
+        <TextView
+            android:id="@+id/tv_gongDan_date"
+            style="@style/ser_text_inwhite"
+            android:layout_width="@dimen/layout_0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+
+    <View style="@style/ry_line_style" />
+
+    <LinearLayout
+        style="@style/ry_sum_itemstyle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            style="@style/app_text_inwhite"
+            android:layout_width="@dimen/layout_60dp"
+            android:layout_height="wrap_content"
+            android:text="@string/department" />
+
+        <TextView
+            android:id="@+id/tv_item_department"
+            style="@style/ser_text_inwhite"
+            android:layout_weight="1"
+            android:layout_width="@dimen/layout_0dp"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            style="@style/app_text_inwhite"
+            android:layout_width="@dimen/layout_60dp"
+            android:layout_height="wrap_content"
+            android:text="@string/produce_itemNo" />
+
+        <TextView
+            android:id="@+id/tv_produce_itemNo"
+            style="@style/ser_text_inwhite"
+            android:layout_weight="1"
+            android:layout_width="@dimen/layout_0dp"
+            android:layout_height="wrap_content" />
+
+    </LinearLayout>
+    <View style="@style/ry_line_style" />
+    <LinearLayout
+        style="@style/ry_sum_itemstyle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
             style="@style/app_text_inwhite"
             android:layout_width="@dimen/layout_60dp"
             android:layout_height="wrap_content"
@@ -21,21 +89,15 @@
 
         <TextView
             android:id="@+id/tv_item_name"
-            style="@style/ry_ser_text_inwhite"
+            style="@style/ser_text_inwhite"
             android:layout_width="@dimen/layout_0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1" />
-
-        <TextView
-            android:id="@+id/tv_unit"
-            style="@style/ry_ser_text_inwhite"
-            android:layout_width="wrap_content"
+            android:layout_weight="1"
             android:layout_height="wrap_content" />
+
 
     </LinearLayout>
 
     <View style="@style/ry_line_style" />
-
     <LinearLayout
         style="@style/ry_sum_itemstyle"
         android:layout_width="match_parent"
@@ -43,7 +105,6 @@
         android:orientation="horizontal">
 
         <TextView
-            android:id="@+id/tv_item_spec_string"
             style="@style/app_text_inwhite"
             android:layout_width="@dimen/layout_60dp"
             android:layout_height="wrap_content"
@@ -51,88 +112,12 @@
 
         <TextView
             android:id="@+id/tv_item_spec"
-            style="@style/ry_ser_text_inwhite"
-            android:layout_width="match_parent"
+            style="@style/ser_text_inwhite"
+            android:layout_width="@dimen/layout_0dp"
+            android:layout_weight="1"
             android:layout_height="wrap_content" />
-    </LinearLayout>
 
-    <View style="@style/ry_line_style" />
 
-    <LinearLayout
-        style="@style/ry_sum_itemstyle"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-
-        <TextView
-            android:id="@+id/tv_item_no_string"
-            style="@style/app_text_inwhite"
-            android:layout_width="@dimen/layout_60dp"
-            android:layout_height="wrap_content"
-            android:text="@string/item_no" />
-
-        <TextView
-            android:id="@+id/tv_item_no"
-            style="@style/ry_ser_text_inwhite"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-    </LinearLayout>
-
-    <View style="@style/ry_line_style" />
-
-    <RelativeLayout
-        style="@style/ry_sum_itemstyle"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-
-        <TextView
-            android:id="@+id/tv_need_num_string"
-            style="@style/app_text_inwhite"
-            android:layout_width="@dimen/layout_60dp"
-            android:layout_height="wrap_content"
-            android:text="@string/need_num" />
-
-        <TextView
-            android:id="@+id/tv_need_num"
-            style="@style/ry_ser_text_inwhite"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_toRightOf="@id/tv_need_num_string" />
-        <TextView
-            android:id="@+id/tv_act_send_num_string"
-            style="@style/app_text_inwhite"
-            android:layout_width="@dimen/layout_60dp"
-            android:layout_height="wrap_content"
-            android:layout_toLeftOf="@+id/tv_act_send_num"
-            android:text="@string/act_send_num" />
-        <TextView
-            android:id="@+id/tv_act_send_num"
-            style="@style/ry_ser_text_inwhite"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true" />
-    </RelativeLayout>
-
-    <View style="@style/ry_line_style" />
-
-    <LinearLayout
-        style="@style/ry_sum_itemstyle"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-
-        <TextView
-            style="@style/app_text_inwhite"
-            android:layout_width="@dimen/layout_60dp"
-            android:layout_height="wrap_content"
-            android:text="@string/locator_num_" />
-
-        <TextView
-            android:id="@+id/tv_locator_num"
-            style="@style/ry_ser_text_inwhite"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
     </LinearLayout>
 
 </LinearLayout>

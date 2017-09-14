@@ -834,6 +834,19 @@
         <activity
             android:name=".module.activity.produce.suitpickinghalf.SuitPickingHalfActivity"
             android:windowSoftInputMode="stateAlwaysHidden|adjustPan" />
+        <!-- 工单入库上架 -->
+        <activity
+            android:name=".module.activity.produce.orderputaway.OrderPutawayListAcitivity"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustPan">
+            <intent-filter>
+                <action android:name="android.intent.actiont100.smartdepot.OrderPutawayListAcitivity" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".module.activity.produce.orderputaway.OrderPutawayActivity"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustPan" />
         <!-- IQCt100检验 -->
         <activity
             android:name=".module.activity.purchase.iqc.IQCListActivity"

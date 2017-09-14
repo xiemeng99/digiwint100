@@ -396,6 +396,9 @@ public class AddressContants {
      * 单位
      */
     public static final String UNIT_NO = "unit_no";
-
+    /**
+     * 物料特征
+     */
+    public static String SIGNCODE = "signcode";
 
 }
