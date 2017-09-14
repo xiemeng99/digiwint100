@@ -163,13 +163,13 @@ public class AlertDialogUtils {
                     dialog = builder.setViewText(R.id.tv_commit_success_content, (Integer) content)
                             .build();
                     dialog.show();
-                    String s = mTv_text.getText().toString();
+                                   } else {
+                    LogUtils.e(TAG, "showCommitFailDialog-----content类型Error");
+                }
+				 String s = mTv_text.getText().toString();
                     if (null!=s&&(s.contains("!")||s.contains("！"))){
                         mTv_text.setTextColor(context.getResources().getColor(R.color.red50));
                     }
-                } else {
-                    LogUtils.e(TAG, "showCommitFailDialog-----content类型Error");
-                }
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -207,13 +207,14 @@ public class AlertDialogUtils {
                     dialog = builder.setViewText(R.id.tv_commit_success_content, (Integer) content)
                             .build();
                     dialog.show();
-                    String s = mTv_text.getText().toString();
-                    if (null!=s&&(s.contains("!")||s.contains("！"))){
-                        mTv_text.setTextColor(context.getResources().getColor(R.color.red50));
-                    }
+                   
                 } else {
                     LogUtils.e(TAG, "showCommitFailDialogAndCall-----content类型Error");
                 }
+				 String s = mTv_text.getText().toString();
+                    if (null!=s&&(s.contains("!")||s.contains("！"))){
+                        mTv_text.setTextColor(context.getResources().getColor(R.color.red50));
+                    }
             }
         } catch (Exception e) {
             e.printStackTrace();
