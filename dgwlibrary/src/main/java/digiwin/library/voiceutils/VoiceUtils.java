@@ -1,9 +1,6 @@
 package digiwin.library.voiceutils;
 
 import android.content.Context;
-import android.media.Ringtone;
-import android.media.RingtoneManager;
-import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.util.Log;
@@ -22,20 +19,11 @@ import com.iflytek.cloud.ui.RecognizerDialog;
 import com.iflytek.cloud.ui.RecognizerDialogListener;
 import com.iflytek.cloud.util.UserWords;
 
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
-import java.util.List;
 
 import digiwin.library.R;
-import digiwin.library.base.BaseAppActivity;
-import digiwin.library.constant.SharePreKey;
-import digiwin.library.constant.SystemConstant;
 import digiwin.library.utils.LogUtils;
-import digiwin.library.utils.SharedPreferencesUtils;
 import digiwin.library.utils.ToastUtils;
 
 /**

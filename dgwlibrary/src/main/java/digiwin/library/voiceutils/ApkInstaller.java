@@ -9,7 +9,7 @@ import android.net.Uri;
 
 import com.iflytek.cloud.SpeechUtility;
 
-import static digiwin.library.utils.AlertDialogUtils.dismissDialog;
+//import static digiwin.library.utils.AlertDialogUtils.dismissDialog;
 
 
 /**
@@ -23,7 +23,7 @@ public class ApkInstaller {
 	}
 
 	public void install(){
-		dismissDialog();
+//		dismissDialog();
 		Builder builder = new Builder(mActivity);
 		builder.setMessage("检测到您未安装语记！\n是否前往下载语记？");
 		builder.setTitle("下载提示");

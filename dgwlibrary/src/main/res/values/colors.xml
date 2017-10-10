@@ -142,8 +142,16 @@
     <color name="contact_btn_text_press">#ff2c84cf</color>
     <color name="reward_text">#ffe07120</color>
     <color name="dialog_button_text">#ff464646</color>
+
     <color name="group_1">#f82d73</color>
+    <color name="group_1_yellow">#ffa62e</color>
+    <color name="group_1_blue">#02afff</color>
+    <color name="group_1_green">#2eac9b</color>
     <color name="group_2">#e50150</color>
+    <color name="group_2_yellow">#f3981d</color>
+    <color name="group_2_blue">#009ce3</color>
+    <color name="group_2_green">#04a592</color>
+
     <color name="group_3">#ffabd255</color>
     <color name="group_4">#ffea7765</color>
     <color name="group_5">#ff9997e0</color>
@@ -177,16 +185,16 @@
     <color name="deepcolor">#faaa5f</color>
     <color name="shadowcolor">#333333</color>
     <color name="naming">#3a3a3a</color>
-    <color name="background">#272727</color>
+    <!--<color name="background">#272727</color>-->
     <color name="orange_yellow">#9b9ba0</color>
 
-    <drawable name="semi_black">#80000000</drawable>
+    <!--<drawable name="semi_black">#80000000</drawable>-->
 
     <color name="remote_connect_text">#FFe78018</color>
     <color name="remote_disconnect_text">#FF901821</color>
 
-    <drawable name="text_white">#ffffffff</drawable>
-    <drawable name="text_black">#ff000000</drawable>
+    <!--<drawable name="text_white">#ffffffff</drawable>-->
+    <!--<drawable name="text_black">#ff000000</drawable>-->
     
      <color name="color_ptz_blue">#ff0044aa</color>
     <color name="color_bg">#ff666666</color>
@@ -195,11 +203,30 @@
     <color name="right_bg">#696969</color>
     <color name="tab_item_text">#808080</color>
 
+    <color name="sumColor_1">#e50150</color><!-- 汇总数据颜色 -->
+    <color name="sumColor_2">#ff6b00</color>
+    <color name="sumColor_3">#86b81b</color>
+
+    <color name="sumColor_1_yellow">#e50150</color><!-- 汇总数据颜色 -->
+    <color name="sumColor_2_yellow">#ff6b00</color>
+    <color name="sumColor_3_yellow">#86b81b</color>
+
+    <color name="sumColor_1_blue">#e50150</color><!-- 汇总数据颜色 -->
+    <color name="sumColor_2_blue">#ff6b00</color>
+    <color name="sumColor_3_blue">#29a3ff</color>
+
+    <color name="sumColor_1_green">#e50150</color><!-- 汇总数据颜色 -->
+    <color name="sumColor_2_green">#ff6b00</color>
+    <color name="sumColor_3_green">#2b887d</color>
+
     <color name="connect_failed">#dd0802</color>
     <color name="colorPrimary">#2b887d</color><!--导航栏颜色-->
     <color name="colorPrimaryDark">#2b887d</color><!--状态栏颜色-->
 
     <color name="Base_color">#e50150</color><!--主色调-->
+    <color name="Base_yellow_color">#f3981d</color><!--主色调-->
+    <color name="Base_Blue_color">#29a3ff</color><!--主色调-->
+    <color name="Base_Green_color">#2b887d</color><!--主色调-->
     <color name="Assist_color">#ffc400 </color><!--辅助色调-->
     <color name="Text_color">#323232 </color><!--主字体颜色-->
     <color name="Login_line_color">#515252 </color>
@@ -236,14 +263,27 @@
 
     <!--AndColor 2017-5-9-->
     <color name="colorPrimaryRed">#e50150</color>
+    <color name="colorPrimaryYellow">#f3981d</color>
+    <color name="colorPrimaryBlue">#009ce3</color>
+    <color name="colorPrimaryGreen">#04a592</color>
     <color name="toolBar_color">#e50150</color>
     <color name="textfous_yellow">#ff6b00</color>
+    <color name="textfous_green">#86b81b</color>
     <color name="orangeYellow">#ff6b00</color>
     <color name="light_orangeYellow">#ff6b00</color>
     <color name="red50">#e50150</color>
     <color name="materialTop_color">#ffc9db</color>
+    <color name="materialTop_yellow_color">#ffbb61</color>
+    <color name="materialTop_blue_color">#6bbefc</color>
+    <color name="materialTop_green_color">#47cdbe</color>
     <color name="materialTitle_color">#5f0000</color>
+    <color name="materialTitle_color_yellow">#9b0000</color>
+    <color name="materialTitle_color_blue">#00355d</color>
+    <color name="materialTitle_color_green">#01342e</color>
     <color name="materialText_color">#9b0000</color>
+    <color name="materialText_color_yellow">#9b0000</color>
+    <color name="materialText_color_blue">#0063ac</color>
+    <color name="materialText_color_green">#1d5952</color>
     <color name="materialDivider_color">#ffdce8</color>
     <color name="tab_title_selected_color">#e50150</color>
     <color name="tab_title_unselected_color">#8c8c8c</color>
@@ -258,7 +298,11 @@
     <color name="line_gray_f0">#f0f0f0</color>
 
     <color name="login_color_t">#e50150</color>
+    <color name="login_color_t_yellow">#f3981d</color>
     <color name="login_color_line">#c8c8c8</color>
     <color name="line_in_pink">#fdb8cf</color>
+    <color name="line_in_yellow">#feb049</color>
+    <color name="line_in_blue">#52b4fe</color>
+    <color name="line_in_green">#36c6b6</color>
     <color name="line_in_pink_ve">#f8276f</color>
 </resources>

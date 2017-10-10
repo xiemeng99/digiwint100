@@ -15,41 +15,66 @@
  -->
 <merge xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
+
     <RelativeLayout
+        android:fitsSystemWindows="true"
         android:layout_width="fill_parent"
-        android:layout_height="fill_parent" >
-    <SurfaceView
-        android:id="@+id/preview_view"
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent" />
+        android:layout_height="fill_parent">
 
-    <digiwin.library.zxing.android.ViewfinderView
-        android:id="@+id/viewfinder_view"
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent" />
+        <SurfaceView
+            android:id="@+id/preview_view"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent" />
 
-    <TextView
-        android:id="@+id/status_view"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom|center_horizontal"
-        android:background="@color/transparent"
-        android:text="@string/msg_default_status"
-        android:textColor="@color/status_text" />
-    <include
-        android:id="@+id/include1"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        layout="@layout/zxing_title" />
-    <CheckBox
-        android:id="@+id/cb_flashlight"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:button="@drawable/flashlight"
-        android:layout_marginBottom="@dimen/layout_30dp"
-        />
-</RelativeLayout>
+        <digiwin.library.zxing.android.ViewfinderView
+            android:id="@+id/viewfinder_view"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent" />
+
+        <TextView
+            android:id="@+id/status_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|center_horizontal"
+            android:background="@color/transparent"
+            android:text="@string/msg_default_status"
+            android:textColor="@color/status_text" />
+
+        <RelativeLayout
+            android:id="@+id/zxing_toolbar"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:background="@drawable/title_bg">
+
+            <ImageView
+                android:id="@+id/iv_back"
+                android:layout_width="@dimen/layout_30dp"
+                android:layout_height="@dimen/welcome_text_margin"
+                android:paddingBottom="@dimen/layout_14dp"
+                android:paddingTop="@dimen/layout_14dp"
+                android:src="@drawable/white_back" />
+
+            <TextView
+                android:id="@+id/textview_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_toEndOf="@+id/iv_back"
+                android:gravity="center"
+                android:text="@string/barcodescan"
+                android:textColor="@color/white"
+                android:textSize="@dimen/textSize_16sp" />
+
+        </RelativeLayout>
+
+        <CheckBox
+            android:id="@+id/cb_flashlight"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="@dimen/layout_30dp"
+            android:button="@drawable/flashlight" />
+    </RelativeLayout>
 </merge>

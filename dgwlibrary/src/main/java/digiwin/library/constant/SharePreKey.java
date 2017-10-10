@@ -53,6 +53,8 @@ public interface SharePreKey {
     * 语音输入key值
     */
    static final String SPEECH_INPUT="speech_input";
-
-
+   /**
+    * 主题皮肤
+    */
+   static final String CURRENT_THEME="current_theme";
 }

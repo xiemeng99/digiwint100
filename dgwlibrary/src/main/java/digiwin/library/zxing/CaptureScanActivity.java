@@ -16,10 +16,13 @@
 
 package digiwin.library.zxing;
 
+import android.annotation.TargetApi;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.pm.ActivityInfo;
 import android.graphics.Bitmap;
+import android.graphics.Color;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.preference.PreferenceManager;
@@ -31,6 +34,7 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
+import android.widget.RelativeLayout;
 
 import com.google.zxing.BarcodeFormat;
 import com.google.zxing.DecodeHintType;
@@ -41,6 +45,8 @@ import java.util.Collection;
 import java.util.Map;
 
 import digiwin.library.R;
+import digiwin.library.constant.SharePreKey;
+import digiwin.library.utils.SharedPreferencesUtils;
 import digiwin.library.zxing.android.AmbientLightManager;
 import digiwin.library.zxing.android.BeepManager;
 import digiwin.library.zxing.android.CaptureActivityHandler;
@@ -77,6 +83,8 @@ public final class CaptureScanActivity extends Activity implements
     private BeepManager beepManager;
     private AmbientLightManager ambientLightManager;
 
+    private RelativeLayout zxing_toolbar;
+
     public ViewfinderView getViewfinderView() {
         return viewfinderView;
     }
@@ -95,6 +103,24 @@ public final class CaptureScanActivity extends Activity implements
 
         Window window = getWindow();
         window.addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
+        String currentTheme = (String) SharedPreferencesUtils.get(this, SharePreKey.CURRENT_THEME,"red");
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+            setTranslucentStatus(true);
+            SystemBarTintManager tintManager = new SystemBarTintManager(this);
+            tintManager.setStatusBarTintEnabled(true);
+//            requestWindowFeature(Window.FEATURE_NO_TITLE);
+//            getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+//                    WindowManager.LayoutParams.FLAG_FULLSCREEN);
+            if(currentTheme.equals("red")){
+                tintManager.setStatusBarTintResource(R.drawable.title_bg);//通知栏所需颜色
+            }else if(currentTheme.equals("yellow")){
+                tintManager.setStatusBarTintResource(R.drawable.title_bg_yellow);//通知栏所需颜色
+            }else if(currentTheme.equals("blue")){
+                tintManager.setStatusBarTintResource(R.drawable.title_bg_blue);//通知栏所需颜色
+            }else if(currentTheme.equals("green")){
+                tintManager.setStatusBarTintResource(R.drawable.title_bg_green);//通知栏所需颜色
+            }
+        }
         setContentView(R.layout.activity_capture);
         View mBack = findViewById(R.id.iv_back);
         mBack.setOnClickListener(new View.OnClickListener() {
@@ -118,11 +144,35 @@ public final class CaptureScanActivity extends Activity implements
         inactivityTimer = new InactivityTimer(this);
         beepManager = new BeepManager(this);
         ambientLightManager = new AmbientLightManager(this);
+        zxing_toolbar = (RelativeLayout) findViewById(R.id.zxing_toolbar);
+        if(currentTheme.equals("red")){
+            zxing_toolbar.setBackgroundResource(R.drawable.title_bg);
+        }else if(currentTheme.equals("yellow")){
+            zxing_toolbar.setBackgroundResource(R.drawable.title_bg_yellow);
+        }else if(currentTheme.equals("blue")){
+            zxing_toolbar.setBackgroundResource(R.drawable.title_bg_blue  );
+        }else if(currentTheme.equals("green")){
+            zxing_toolbar.setBackgroundResource(R.drawable.title_bg_green);
+        }
 
         PreferenceManager.setDefaultValues(this, R.xml.preferences, false);
 
 
     }
+
+    @TargetApi(19)
+    private void setTranslucentStatus(boolean on) {
+        Window win = getWindow();
+        WindowManager.LayoutParams winParams = win.getAttributes();
+        final int bits = WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS;
+        if (on) {
+            winParams.flags |= bits;
+        } else {
+            winParams.flags &= ~bits;
+        }
+        win.setAttributes(winParams);
+    }
+
 
     @Override
     protected void onResume() {
