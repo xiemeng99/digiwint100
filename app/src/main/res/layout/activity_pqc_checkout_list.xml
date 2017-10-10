@@ -144,7 +144,7 @@
                 android:id="@+id/iv_plan_date"
                 android:layout_width="@dimen/layout_30dp"
                 android:layout_height="@dimen/layout_20dp"
-                android:src="@drawable/time" />
+                android:src="?attr/time" />
 
         </LinearLayout>
 

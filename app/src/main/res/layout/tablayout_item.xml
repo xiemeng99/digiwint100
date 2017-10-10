@@ -17,7 +17,7 @@
         android:id="@+id/tablayout_im"
         android:layout_width="@dimen/layout_80dp"
         android:layout_height="@dimen/layout_2dp"
-        android:background="@color/tab_title_selected_color" />
+        android:background="?attr/Base_color" />
 <!--
     <ImageView
         android:id="@+id/tablayout_im"

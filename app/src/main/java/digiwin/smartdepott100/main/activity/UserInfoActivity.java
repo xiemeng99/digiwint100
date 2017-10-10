@@ -5,17 +5,13 @@ import android.support.v7.widget.Toolbar;
 import android.view.Gravity;
 import android.widget.TextView;
 
-import org.litepal.crud.DataSupport;
-
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import butterknife.BindView;
 import butterknife.OnClick;
 import digiwin.library.dialog.OnDialogClickListener;
 import digiwin.library.utils.ActivityManagerUtils;
-import digiwin.library.utils.AlertDialogUtils;
+import digiwin.smartdepott100.core.coreutil.AlertDialogUtils;
 import digiwin.library.utils.LogUtils;
 import digiwin.smartdepott100.R;
 import digiwin.smartdepott100.core.appcontants.ModuleCode;
@@ -23,8 +19,6 @@ import digiwin.smartdepott100.core.base.BaseTitleActivity;
 import digiwin.smartdepott100.login.activity.LoginActivity;
 import digiwin.smartdepott100.login.bean.AccoutBean;
 import digiwin.smartdepott100.login.loginlogic.LoginLogic;
-import digiwin.smartdepott100.main.bean.DeviceInfoBean;
-import digiwin.smartdepott100.main.logic.DeviceLogic;
 
 /**
  * 账号管理

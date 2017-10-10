@@ -203,9 +203,9 @@ public interface ModuleCode {
      */
     public final String SALEOUTLET="D001";
     /**
-     * 门店要货
+     * oqc
      */
-    public final String ORDERSALE = "D002";
+    public final String OQC = "D002";
     /**
      * 出货过账
      */

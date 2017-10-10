@@ -95,9 +95,6 @@ public class VersionsSettingDialog {
                             intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                             intent.setDataAndType(Uri.fromFile(file),"application/vnd.android.package-archive");
                             context.startActivity(intent);
-                            SharedPreferencesUtils.put(context, SharePreKey.TEST_ADDRESS,AddressContants.TEST_ADDRESS);
-                            SharedPreferencesUtils.put(context, SharePreKey.FORMAL_ADDRESS,AddressContants.FORMAL_ADDRESS);
-                            SharedPreferencesUtils.put(context, SharePreKey.CURRENT_ADDRESS,AddressContants.FORMAL_ADDRESS);
                         }
                         if(pro<=3&&pro>=1){
                             tv_download.setText(3+"%");

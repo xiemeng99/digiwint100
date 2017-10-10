@@ -1,12 +1,9 @@
 package digiwin.smartdepott100.module.fragment.purchase.purchasegoodsscan;
 
-import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.text.method.TextKeyListener;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
@@ -15,21 +12,17 @@ import android.widget.TextView;
 
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import butterknife.BindView;
 import butterknife.BindViews;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.OnFocusChange;
 import butterknife.OnTextChanged;
-import butterknife.Unbinder;
 import digiwin.library.dialog.OnDialogClickListener;
 import digiwin.library.utils.StringUtils;
 import digiwin.library.utils.WeakRefHandler;
 import digiwin.smartdepott100.R;
 import digiwin.smartdepott100.core.appcontants.AddressContants;
-import digiwin.smartdepott100.core.base.BaseFirstModuldeActivity;
 import digiwin.smartdepott100.core.base.BaseFragment;
 import digiwin.smartdepott100.core.coreutil.CommonUtils;
 import digiwin.smartdepott100.core.modulecommon.ModuleUtils;
@@ -221,6 +214,7 @@ public class PurchaseGoodsScanFg extends BaseFragment {
                             barcodeFlag = true;
                             show();
                             saveBean.setQty(barcodeBackBean.getBarcode_qty());
+                            saveBean.setProduct_no(barcodeBackBean.getProduct_no());
                             saveBean.setBarcode_no(barcodeBackBean.getBarcode_no());
                             saveBean.setItem_no(barcodeBackBean.getItem_no());
                             saveBean.setUnit_no(barcodeBackBean.getUnit_no());

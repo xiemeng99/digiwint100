@@ -5,6 +5,7 @@ import java.util.List;
 import digiwin.smartdepott100.main.bean.ModuleBean;
 
 import android.content.Context;
+import android.content.res.TypedArray;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.util.TypedValue;
@@ -127,7 +128,7 @@ public class MainLogic {
 //        ModuleBean completingstore = new ModuleBean(R.string.title_completing_store, R.mipmap.complete_storage, ModuleCode.COMPLETINGSTORE, "android.intent.actiont100.smartdepot.CompletingStoreActivity");
 //        ModuleBean enchaseprint = new ModuleBean(R.string.enchaseprint, R.mipmap.enchaseprint, ModuleCode.ENCHASEPRINT, "android.intent.actiont100.smartdepot.EnchasePrintActivity");
 //        ModuleBean linesend = new ModuleBean(R.string.line_send, R.mipmap.xianbianfaliao, ModuleCode.LINESEND, "android.intent.actiont100.smartdepot.LineSendActivity");
-        ModuleBean workorder = new ModuleBean(R.string.title_work_order, R.mipmap.work_order, ModuleCode.WORKORDERCODE, "android.intent.actiont100.smartdepot.WorkOrderActivity");
+        ModuleBean workorder = new ModuleBean(R.string.title_work_order, R.mipmap.work_order, ModuleCode.WORKORDERCODE, "android.intent.actiont100.smartdepot.WorkOrderActivity");//TODO 暂时没有加产品特征码
         ModuleBean accordingMaterialActivity = new ModuleBean(R.string.according_material, R.mipmap.accordingmaterial, ModuleCode.ACCORDINGMATERIALCODE, "android.intent.actiont100.smartdepot.AccordingMaterialActivity");
         ModuleBean productionleaderlist = new ModuleBean(R.string.title_production_leader, R.mipmap.production_receive, ModuleCode.PRODUCTIONLEADER, "android.intent.actiont100.smartdepot.ProductionLeaderListActivity");
         ModuleBean suitpicking = new ModuleBean(R.string.suitpicking, R.mipmap.lingliaoguozahng, ModuleCode.SUITPICKING, "android.intent.actiont100.smartdepot.SuitPickingListAcitivity");
@@ -157,7 +158,7 @@ public class MainLogic {
         produceItems.add(zputInStoreft);
         produceItems.add(finishedStorageActivity);
         produceItems.add(endproductAllot);
-        produceItems.add(inbinninglist);
+//        produceItems.add(inbinninglist);
         produceItems.add(fqcCheck);
 
 //        ModuleBean printLabelActivity = new ModuleBean(R.string.print_label_flow, R.mipmap.bar_code, ModuleCode.PRINTLABEL, "android.intent.actiont100.smartdepot.PrintLabelFlowActivity");
@@ -186,20 +187,23 @@ public class MainLogic {
         storageItems.add(stockcheck);
         storageItems.add(postallocateactivity);
         storageItems.add(printLabelFillActivity);
-        storageItems.add(productbinning);
-        storageItems.add(productoutbox);
+//        storageItems.add(productbinning);
+//        storageItems.add(productoutbox);
 
         ModuleBean scanOutStoreActivity = new ModuleBean(R.string.scan_out_store, R.mipmap.scan_shipment, ModuleCode.SCANOUTSTORE, "android.intent.actiont100.smartdepot.ScanOutStoreListActivity");
 //        ModuleBean tranceProductActivity = new ModuleBean(R.string.trace_product_quality, R.mipmap.quality_retrospect, ModuleCode.TRANSPRODUCTQUALITY, "android.intent.actiont100.smartdepot.TraceProductActivity");
-//        ModuleBean orderSaleActivity = new ModuleBean(R.string.ordersale, R.mipmap.ordersale, ModuleCode.ORDERSALE, "开发中");
+//        ModuleBean orderSaleActivity = new ModuleBean(R.string.ordersale, R.mipmap.ordersale, ModuleCode.OQC, "开发中");
         ModuleBean saleoutletactivity = new ModuleBean(R.string.saleoutlet, R.mipmap.saleoutlet, ModuleCode.SALEOUTLET, "android.intent.actiont100.smartdepot.SaleOutletListActivity");
         ModuleBean pickupshipment = new ModuleBean(R.string.title_pickupshipment, R.mipmap.pickup_shipment, ModuleCode.PICKUPSHIPMENT, "android.intent.actiont100.smartdepot.PickUpShipmentListActivity");
         ModuleBean saleReturnActivity = new ModuleBean(R.string.title_sale_return, R.mipmap.ntsale_return, ModuleCode.SALERETURN, "android.intent.actiont100.smartdepot.SaleReturnActivity");
+        ModuleBean oqc = new ModuleBean(R.string.oqc_check_pad, R.mipmap.ntsale_return, ModuleCode.OQC, "android.intent.actiont100.smartdepot.OQCListActivity");
 
-        salesItems.add(scanOutStoreActivity);
+
+//        salesItems.add(scanOutStoreActivity);
         salesItems.add(saleoutletactivity);
         salesItems.add(pickupshipment);
         salesItems.add(saleReturnActivity);
+        salesItems.add(oqc);
 
 
 //        ModuleBean palletreport = new ModuleBean(R.string.title_pallet_report, R.mipmap.pallet_report, ModuleCode.PROCESSREPORTING, "android.intent.actiont100.smartdepot.ProcessReportingActivity");
@@ -378,8 +382,11 @@ public class MainLogic {
 //        ImageView iv = (ImageView) view.findViewById(R.id.tablayout_im);
         View iv = (View) view.findViewById(R.id.tablayout_im);
         tv.setText(titles.get(i));
+        TypedArray a = context.obtainStyledAttributes(new int[] {
+                R.attr.Base_color
+        });
         if (i == tablayout.getSelectedTabPosition()) {
-            tv.setTextColor(context.getResources().getColor(R.color.tab_title_selected_color));
+            tv.setTextColor(a.getColor(0,context.getResources().getColor(R.color.Base_color)));
             tv.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16);
             iv.setVisibility(View.VISIBLE);
         } else {
@@ -428,8 +435,11 @@ public class MainLogic {
         tablayout.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
+                TypedArray a = context.obtainStyledAttributes(new int[] {
+                        R.attr.Base_color
+                });
                 ((TextView) tab.getCustomView().findViewById(R.id.tablayout_tv)).
-                        setTextColor(context.getResources().getColor(R.color.tab_title_selected_color));
+                        setTextColor(a.getColor(0,context.getResources().getColor(R.color.Base_color)));
                 ((TextView) tab.getCustomView().findViewById(R.id.tablayout_tv)).
                         setTextSize(TypedValue.COMPLEX_UNIT_SP, 16);
                 ((View) tab.getCustomView().findViewById(R.id.tablayout_im)).setVisibility(View.VISIBLE);

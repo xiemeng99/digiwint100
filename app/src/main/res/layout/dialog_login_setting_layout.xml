@@ -18,7 +18,7 @@
             android:id="@+id/setup_formal_rb"
             android:layout_width="@dimen/layout_16dp"
             android:layout_height="@dimen/layout_16dp"
-            android:button="@drawable/setup_radiobutton_bg"
+            android:button="?attr/setup_radiobutton_bg"
             android:checked="true"
             android:clickable="false"></RadioButton>
 
@@ -50,7 +50,7 @@
                 android:id="@+id/setup_formal_view"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/layout_0.5dp"
-                android:background="@color/red50"></View>
+                android:background="?attr/Base_color"></View>
         </LinearLayout>
     </LinearLayout>
 
@@ -67,9 +67,9 @@
             android:id="@+id/setup_test_rb"
             android:layout_width="@dimen/layout_16dp"
             android:layout_height="@dimen/layout_16dp"
-            android:button="@drawable/setup_radiobutton_bg"
+            android:button="?attr/setup_radiobutton_bg"
             android:clickable="false"
-            android:textColor="@color/Base_color"
+            android:textColor="?attr/Base_color"
             android:textSize="@dimen/textSize_16sp"></RadioButton>
 
         <TextView
@@ -100,7 +100,7 @@
                 android:id="@+id/setup_test_view"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/layout_0.5dp"
-                android:background="@color/red50"></View>
+                android:background="?attr/Base_color"></View>
         </LinearLayout>
 
 
@@ -182,6 +182,6 @@
         android:gravity="center"
         android:padding="@dimen/layout_10dp"
         android:text="@string/yes"
-        android:textColor="@color/red50"
+        android:textColor="?attr/Base_color"
         android:textSize="@dimen/textSize_16sp" />
 </LinearLayout>

@@ -222,6 +222,7 @@ public class FQCInspectItemActivity extends BaseFirstModuldeHActivity {
     protected void initNavigationTitle() {
         super.initNavigationTitle();
         mName.setText(R.string.fqc_check_pad);
+        toolbarTitle.setBackgroundResource(R.drawable.title_bg);
     }
 
     @Override

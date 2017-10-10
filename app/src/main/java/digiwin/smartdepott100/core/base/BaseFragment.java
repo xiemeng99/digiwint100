@@ -8,7 +8,6 @@ import android.view.ViewGroup;
 
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
-import digiwin.library.base.BaseAppFragment;
 
 /**
  * Created by qGod

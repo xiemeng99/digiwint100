@@ -17,7 +17,7 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.OnClick;
 import digiwin.library.dialog.OnDialogTwoListener;
-import digiwin.library.utils.AlertDialogUtils;
+import digiwin.smartdepott100.core.coreutil.AlertDialogUtils;
 import digiwin.library.utils.LogUtils;
 import digiwin.library.utils.StringUtils;
 import digiwin.library.utils.TelephonyUtils;

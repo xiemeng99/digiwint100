@@ -19,9 +19,10 @@
         android:layout_marginLeft="@dimen/layout_10dp"
         android:layout_marginRight="@dimen/layout_10dp"
         android:layout_marginTop="@dimen/layout_6dp"
-        android:background="@drawable/yellow_scandetail_bg"
+        android:background="@drawable/allscanedit_bg"
         android:orientation="vertical"
         android:visibility="visible">
+
         <LinearLayout
             android:id="@+id/ll_purchase_order"
             style="@style/search_scan_style"
@@ -51,81 +52,79 @@
 
         <View style="@style/ry_line_style" />
 
-            <LinearLayout
-                android:id="@+id/ll_provider"
-                style="@style/search_scan_style"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+        <LinearLayout
+            android:id="@+id/ll_provider"
+            style="@style/search_scan_style"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
-                <TextView
-                    android:id="@+id/tv_provider"
-                    android:layout_width="@dimen/layout_70dp"
-                    android:layout_height="wrap_content"
-                    android:text="@string/provider_code"
-                    android:textColor="@color/black_32"
-                    android:textSize="@dimen/textSize_14sp" />
+            <TextView
+                android:id="@+id/tv_provider"
+                android:layout_width="@dimen/layout_70dp"
+                android:layout_height="wrap_content"
+                android:text="@string/provider_code"
+                android:textColor="@color/black_32"
+                android:textSize="@dimen/textSize_14sp" />
 
-                <EditText
-                    android:id="@+id/et_provider"
-                    android:layout_width="@dimen/layout_0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="@dimen/layout_10dp"
-                    android:layout_weight="1"
-                    android:background="@null"
-                    android:singleLine="true"
-                    android:textColor="@color/black_32"
-                    android:textCursorDrawable="@drawable/et_cursor_yellow"
-                    android:textSize="@dimen/textSize_14sp" />
-            </LinearLayout>
+            <EditText
+                android:id="@+id/et_provider"
+                android:layout_width="@dimen/layout_0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/layout_10dp"
+                android:layout_weight="1"
+                android:background="@null"
+                android:singleLine="true"
+                android:textColor="@color/black_32"
+                android:textCursorDrawable="@drawable/et_cursor_yellow"
+                android:textSize="@dimen/textSize_14sp" />
+        </LinearLayout>
 
-            <View style="@style/ry_line_style" />
+        <View style="@style/ry_line_style" />
 
-            <LinearLayout
-                android:id="@+id/ll_date"
-                style="@style/search_scan_style"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+        <LinearLayout
+            android:id="@+id/ll_date"
+            style="@style/search_scan_style"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
-                <TextView
-                    android:id="@+id/tv_date"
-                    android:layout_width="@dimen/layout_70dp"
-                    android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:text="@string/data"
-                    android:textColor="@color/black_32"
-                    android:textSize="@dimen/textSize_14sp" />
+            <TextView
+                android:id="@+id/tv_date"
+                android:layout_width="@dimen/layout_70dp"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:text="@string/data"
+                android:textColor="@color/black_32"
+                android:textSize="@dimen/textSize_14sp" />
 
-                <EditText
-                    android:id="@+id/et_date"
-                    android:layout_width="@dimen/layout_0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="@dimen/layout_10dp"
-                    android:layout_weight="1"
-                    android:background="@null"
-                    android:singleLine="true"
-                    android:textColor="@color/black_32"
-                    android:textCursorDrawable="@drawable/et_cursor_yellow"
-                    android:textSize="@dimen/textSize_14sp" />
+            <EditText
+                android:id="@+id/et_date"
+                android:layout_width="@dimen/layout_0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/layout_10dp"
+                android:layout_weight="1"
+                android:background="@null"
+                android:singleLine="true"
+                android:textColor="@color/black_32"
+                android:textCursorDrawable="@drawable/et_cursor_yellow"
+                android:textSize="@dimen/textSize_14sp" />
 
-                <ImageView
-                    android:id="@+id/iv_date"
-                    android:layout_width="@dimen/layout_30dp"
-                    android:layout_height="@dimen/layout_20dp"
-                    android:src="@drawable/time" />
+            <ImageView
+                android:id="@+id/iv_date"
+                android:layout_width="@dimen/layout_30dp"
+                android:layout_height="@dimen/layout_20dp"
+                android:src="?attr/time" />
 
-            </LinearLayout>
+        </LinearLayout>
 
-            <View style="@style/ry_line_style" />
+        <View style="@style/ry_line_style" />
 
         <Button
             android:id="@+id/btn_search_sure"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/layout_40dp"
-            android:layout_marginTop="@dimen/layout_10dp"
-            android:layout_marginBottom="@dimen/layout_10dp"
+            android:layout_height="@dimen/layout_60dp"
             android:layout_marginLeft="@dimen/layout_10dp"
             android:layout_marginRight="@dimen/layout_10dp"
-            android:background="@drawable/accordingmaterialtop_sharp"
+            android:background="?attr/click_bg"
             android:text="@string/label_sure"
             android:textColor="@color/WHITE"
             android:textSize="@dimen/textSize_18sp" />

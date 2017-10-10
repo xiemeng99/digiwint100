@@ -7,6 +7,7 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.Gravity;
@@ -27,7 +28,6 @@ import java.util.Map;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-import digiwin.library.constant.SystemConstant;
 import digiwin.smartdepott100.R;
 import digiwin.smartdepott100.core.appcontants.AddressContants;
 import digiwin.smartdepott100.core.appcontants.ModuleCode;
@@ -46,6 +46,7 @@ import digiwin.smartdepott100.login.loginlogic.AppVersionLogic;
 import digiwin.smartdepott100.login.loginlogic.LoginLogic;
 import digiwin.smartdepott100.main.activity.settingdialog.DeviceDialog;
 import digiwin.smartdepott100.main.activity.settingdialog.PrinterIpDialog;
+import digiwin.smartdepott100.main.activity.settingdialog.SkinDilog;
 import digiwin.smartdepott100.main.activity.settingdialog.StorageDialog;
 import digiwin.smartdepott100.main.activity.versions.VersionsSettingDialog;
 import digiwin.smartdepott100.main.bean.DeviceInfoBean;
@@ -57,7 +58,7 @@ import digiwin.library.constant.SharePreKey;
 import digiwin.library.dialog.CustomDialog;
 import digiwin.library.dialog.OnDialogClickgetTextListener;
 import digiwin.library.utils.ActivityManagerUtils;
-import digiwin.library.utils.AlertDialogUtils;
+import digiwin.smartdepott100.core.coreutil.AlertDialogUtils;
 import digiwin.library.utils.LogUtils;
 import digiwin.library.utils.SharedPreferencesUtils;
 import digiwin.library.utils.StringUtils;
@@ -125,6 +126,14 @@ public class SettingActivity extends BaseTitleActivity {
      */
     @BindView(R.id.tv_voicerSetting)
     TextView tvVoicerSetting;
+
+    /**
+     * 主题换肤
+     */
+    @BindView(R.id.ll_change_theme)
+    LinearLayout llChangeTheme;
+    @BindView(R.id.tv_change_theme)
+    TextView tvChangeTheme;
 
     /**
      * 分页设置
@@ -253,6 +262,23 @@ public class SettingActivity extends BaseTitleActivity {
     }
 
     /**
+     * 主题换肤
+     */
+    @OnClick(R.id.ll_change_theme)
+    void clickChangeTheme() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            SkinDilog.showSkinDailog(activity, new SkinDilog.SkinListener() {
+                @Override
+                public void onResult(String result) {
+                    SharedPreferencesUtils.put(activity, SharePreKey.CURRENT_THEME, result);
+                    SkinDilog.dismissDialog();
+                    recreate();
+                }
+            });
+        }
+    }
+
+    /**
      * 显示发音人选择
      */
     @OnClick(R.id.ll_voicerSetting)
@@ -302,7 +328,9 @@ public class SettingActivity extends BaseTitleActivity {
             }
         });
     }
-    private final  String Administrator="tiptop";
+
+    private final String Administrator = "tiptop";
+
     /**
      * 解绑
      */
@@ -326,7 +354,7 @@ public class SettingActivity extends BaseTitleActivity {
             @Override
             public void unBindByUse(String psw) {
                 AccoutBean info = LoginLogic.getUserInfo();
-                getDeviceInfo(psw,"2");
+                getDeviceInfo(psw, "2");
             }
         });
     }
@@ -403,11 +431,12 @@ public class SettingActivity extends BaseTitleActivity {
         loginlogic = LoginLogic.getInstance(context, module, mTimestamp.toString());
         initVoicerVibrate();
         updateRepeat();
+        upDateTheme();
         updatePage();
         setBlueToothUI(open);
         changeTooth();
         updateEntStorage();
-        getDeviceInfo(null,"0");
+        getDeviceInfo(null, "0");
         UpdateVer();
         //初始化打印机ip
         tvPrinterIp.setText(SharedPreferencesUtils.get(SettingActivity.this, SharePreferenceKey.PRINTER_IP, "").toString());
@@ -420,6 +449,28 @@ public class SettingActivity extends BaseTitleActivity {
     private void updateRepeat() {
         String str = SharedPreferencesUtils.get(context, SharePreKey.REPEATTIME, AddressContants.REPEATTIME).toString();
         tvRepeaTime.setText(str);
+    }
+
+    /**
+     * 主题换肤
+     */
+    private void upDateTheme() {
+        String currentTheme = (String) SharedPreferencesUtils.get(activity, SharePreKey.CURRENT_THEME, "red");
+        switch (currentTheme) {
+            case "red":
+                tvChangeTheme.setText("中国红");
+                break;
+            case "yellow":
+                tvChangeTheme.setText("鲜果橙");
+                break;
+            case "blue":
+                tvChangeTheme.setText("雕钻蓝");
+                break;
+            case "green":
+                tvChangeTheme.setText("草木绿");
+                break;
+        }
+
     }
 
     /**
@@ -701,8 +752,8 @@ public class SettingActivity extends BaseTitleActivity {
                                 }
                             }
                         }
-                    }else{
-                       getDeviceInfo(null,"0");
+                    } else {
+                        getDeviceInfo(null, "0");
                     }
                 }
             }

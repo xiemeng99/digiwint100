@@ -2,7 +2,16 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white_ff">
+    android:background="?attr/login_bg">
+
+    <!--<TextView-->
+        <!--android:text="@string/login"-->
+        <!--android:textColor="@color/black32"-->
+        <!--android:textSize="@dimen/textSize_20sp"-->
+        <!--android:gravity="center"-->
+        <!--android:layout_marginTop="@dimen/layout_50dp"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content" />-->
 
     <!--<digiwin.pulltorefreshlibrary.recyclerview.RecyclerImageView-->
     <!--android:id="@+id/iv_login_bg"-->
@@ -12,13 +21,13 @@
     <!--android:layout_alignParentTop="true"-->
     <!--android:background="@drawable/login_bg"-->
     <!--android:scaleType="fitXY" />-->
-    <digiwin.smartdepott100.core.customview.CustomVideoView
-        android:id="@+id/videoview"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true" />
+    <!--<digiwin.smartdepott100.core.customview.CustomVideoView-->
+        <!--android:id="@+id/videoview"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="match_parent"-->
+        <!--android:layout_alignParentLeft="true"-->
+        <!--android:layout_alignParentStart="true"-->
+        <!--android:layout_alignParentTop="true" />-->
 
     <!--<ImageView-->
     <!--android:id="@+id/iv_digiwin_logo"-->
@@ -31,6 +40,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
+        android:paddingTop="@dimen/layout_120dp"
         android:orientation="vertical">
 
         <RelativeLayout
@@ -62,7 +72,7 @@
                     android:gravity="bottom"
                     android:imeOptions="actionNext"
                     android:singleLine="true"
-                    android:textColor="@color/login_color_t"
+                    android:textColor="@color/black"
                     android:textCursorDrawable="@drawable/et_cursor_color"
                     android:textSize="@dimen/textSize_14sp" />
             </RelativeLayout>
@@ -75,7 +85,7 @@
                 android:layout_marginLeft="@dimen/layout_25dp"
                 android:layout_marginRight="@dimen/layout_25dp"
                 android:layout_marginTop="@dimen/layout_5dp"
-                android:background="@color/login_color_t" />
+                android:background="@color/black" />
         </RelativeLayout>
 
         <RelativeLayout
@@ -93,8 +103,9 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
-                    android:layout_marginRight="@dimen/layout_50dp"
-                    android:button="@drawable/login_rp_checkbox_bg" />
+                    android:button="@drawable/login_rp_checkbox_bg"
+                    android:layout_marginRight="@dimen/layout_50dp"/>
+
                 <!--<ImageView-->
                 <!--android:id="@+id/iv_login_lock"-->
                 <!--android:layout_width="wrap_content"-->
@@ -112,7 +123,7 @@
                     android:background="@null"
                     android:focusableInTouchMode="true"
                     android:inputType="textPassword"
-                    android:textColor="@color/white_ff"
+                    android:textColor="@color/login_color_line"
                     android:textCursorDrawable="@drawable/et_cursor_color"
                     android:textSize="@dimen/textSize_14sp" />
             </RelativeLayout>
@@ -254,8 +265,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/layout_25dp"
             android:layout_marginRight="@dimen/layout_25dp"
-            android:layout_marginTop="@dimen/layout_20dp"
-            android:background="@mipmap/button"
+            android:background="?attr/click_bg"
             android:gravity="center"
             android:padding="@dimen/layout_5dp"
             android:text="@string/login_rightNow"
@@ -266,11 +276,9 @@
             android:id="@+id/tv_setup_systemSettings"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/layout_5dp"
-            android:layout_marginTop="@dimen/layout_20dp"
             android:gravity="center"
             android:text="@string/system_setting"
-            android:textColor="@color/login_color_t"
+            android:textColor="?attr/Base_color"
             android:textSize="@dimen/textSize_14sp" />
     </LinearLayout>
 

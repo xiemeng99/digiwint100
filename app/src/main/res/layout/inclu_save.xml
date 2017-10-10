@@ -7,7 +7,7 @@
     android:layout_marginLeft="@dimen/layout_10dp"
     android:layout_marginRight="@dimen/layout_10dp"
     android:gravity="center"
-    android:background="@mipmap/button"
+    android:background="?attr/click_bg"
     android:text="@string/save"
     android:textColor="@color/white"
     android:textSize="@dimen/textSize_16sp" />

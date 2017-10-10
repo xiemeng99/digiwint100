@@ -225,7 +225,7 @@
                     android:textSize="@dimen/textSize_14sp" />
                 <ImageView
                     android:id="@+id/lock_date"
-                    android:src="@drawable/time"
+                    android:src="?attr/time"
                     android:layout_width="wrap_content"
                     android:layout_height="@dimen/layout_20dp" />
             </LinearLayout>

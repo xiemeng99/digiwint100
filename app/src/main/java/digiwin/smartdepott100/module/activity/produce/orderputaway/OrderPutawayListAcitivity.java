@@ -19,7 +19,7 @@ import butterknife.BindView;
 import butterknife.BindViews;
 import butterknife.OnClick;
 import butterknife.OnFocusChange;
-import digiwin.library.datepicker.DatePickerUtils;
+import digiwin.smartdepott100.core.dialog.datepicker.DatePickerUtils;
 import digiwin.library.utils.ActivityManagerUtils;
 import digiwin.library.utils.LogUtils;
 import digiwin.pulltorefreshlibrary.recyclerviewAdapter.OnItemClickListener;
@@ -30,12 +30,10 @@ import digiwin.smartdepott100.core.modulecommon.ModuleUtils;
 import digiwin.smartdepott100.login.loginlogic.LoginLogic;
 import digiwin.smartdepott100.module.activity.produce.suitpicking.SuitPickingActivity;
 import digiwin.smartdepott100.module.adapter.produce.OrderPutawayListAdapter;
-import digiwin.smartdepott100.module.adapter.produce.SuitPickingListAdapter;
 import digiwin.smartdepott100.module.bean.common.FilterBean;
 import digiwin.smartdepott100.module.bean.common.FilterResultOrderBean;
 import digiwin.smartdepott100.module.logic.common.CommonLogic;
 import digiwin.smartdepott100.module.logic.produce.OrderPutawayLogic;
-import digiwin.smartdepott100.module.logic.produce.SuitPickingLogic;
 
 /**
  * @author maoheng

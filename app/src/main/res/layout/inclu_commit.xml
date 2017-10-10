@@ -6,7 +6,7 @@
     android:layout_alignParentBottom="true"
     android:layout_marginLeft="@dimen/layout_10dp"
     android:layout_marginRight="@dimen/layout_10dp"
-    android:background="@mipmap/button"
+    android:background="?attr/click_bg"
     android:gravity="center"
     android:text="@string/commit"
     android:textColor="@color/white"

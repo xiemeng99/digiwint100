@@ -182,7 +182,6 @@ public class WelcomeGuideActivity extends BaseActivity {
             }
             return tp;
         }
-
         @Override
         public int getCount() {
             return NUM_PAGES;

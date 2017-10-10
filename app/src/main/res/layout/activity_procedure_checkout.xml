@@ -88,7 +88,7 @@
                         android:id="@+id/cb_circulation_number"
                         android:layout_width="wrap_content"
                         android:layout_height="@dimen/layout_20dp"
-                        android:button="@drawable/lock_checkbox" />
+                        android:button="?attr/lock_checkbox" />
                 </LinearLayout>
 
                 <View style="@style/fg_line_style" />
@@ -121,7 +121,7 @@
                         android:id="@+id/cb_order_number"
                         android:layout_width="wrap_content"
                         android:layout_height="@dimen/layout_20dp"
-                        android:button="@drawable/lock_checkbox" />
+                        android:button="?attr/lock_checkbox" />
                 </LinearLayout>
 
                 <View style="@style/fg_line_style" />
@@ -210,7 +210,7 @@
                         android:id="@+id/cb_mould_no"
                         android:layout_width="wrap_content"
                         android:layout_height="@dimen/layout_20dp"
-                        android:button="@drawable/lock_checkbox" />
+                        android:button="?attr/lock_checkbox" />
                 </LinearLayout>
 
                 <View style="@style/fg_line_style" />
@@ -243,7 +243,7 @@
                         android:id="@+id/cb_knift_no"
                         android:layout_width="wrap_content"
                         android:layout_height="@dimen/layout_20dp"
-                        android:button="@drawable/lock_checkbox" />
+                        android:button="?attr/lock_checkbox" />
                 </LinearLayout>
 
                 <View style="@style/fg_line_style" />

@@ -10,7 +10,7 @@ import android.os.Looper;
 import java.io.IOException;
 import java.util.UUID;
 
-import digiwin.library.utils.AlertDialogUtils;
+import digiwin.smartdepott100.core.coreutil.AlertDialogUtils;
 import digiwin.library.utils.LogUtils;
 import digiwin.library.utils.StringUtils;
 import digiwin.library.utils.ThreadPoolManager;

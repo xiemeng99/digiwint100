@@ -20,175 +20,173 @@
         android:layout_marginLeft="@dimen/layout_10dp"
         android:layout_marginRight="@dimen/layout_10dp"
         android:layout_marginTop="@dimen/layout_6dp"
-        android:background="@drawable/yellow_scandetail_bg"
+        android:background="@drawable/allscanedit_bg"
         android:orientation="vertical"
         android:visibility="visible">
 
-            <LinearLayout
-                android:id="@+id/ll_material_returning_number"
-                style="@style/search_scan_style"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+        <LinearLayout
+            android:id="@+id/ll_material_returning_number"
+            style="@style/search_scan_style"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
-                <TextView
-                    android:id="@+id/tv_material_returning_number"
-                    android:layout_width="@dimen/layout_60dp"
-                    android:layout_height="wrap_content"
-                    android:text="@string/material_returning_number"
-                    style="@style/app_text_inwhite"/>
+            <TextView
+                android:id="@+id/tv_material_returning_number"
+                style="@style/app_text_inwhite"
+                android:layout_width="@dimen/layout_60dp"
+                android:layout_height="wrap_content"
+                android:text="@string/material_returning_number" />
 
-                <EditText
-                    android:id="@+id/et_material_returning_number"
-                    android:layout_width="@dimen/layout_0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="@dimen/layout_10dp"
-                    android:layout_weight="1"
-                    android:background="@null"
-                    android:selectAllOnFocus="true"
-                    android:singleLine="true"
-                    android:textColor="@color/black_32"
-                    android:textCursorDrawable="@drawable/et_cursor_yellow"
-                    android:textSize="@dimen/textSize_14sp" />
-            </LinearLayout>
-
-
-            <View style="@style/ry_line_style" />
-
-            <LinearLayout
-                android:id="@+id/ll_returning_item_no"
-                style="@style/search_scan_style"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <TextView
-                    android:id="@+id/tv_returning_item_no"
-                    android:layout_width="@dimen/layout_60dp"
-                    android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:text="@string/item_no"
-                    style="@style/app_text_inwhite" />
-
-                <EditText
-                    android:id="@+id/et_returning_item_no"
-                    android:layout_width="@dimen/layout_0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="@dimen/layout_10dp"
-                    android:layout_weight="1"
-                    android:background="@null"
-                    android:selectAllOnFocus="true"
-                    android:singleLine="true"
-                    android:textColor="@color/black_32"
-                    android:textCursorDrawable="@drawable/et_cursor_yellow"
-                    android:textSize="@dimen/textSize_14sp" />
-            </LinearLayout>
+            <EditText
+                android:id="@+id/et_material_returning_number"
+                android:layout_width="@dimen/layout_0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/layout_10dp"
+                android:layout_weight="1"
+                android:background="@null"
+                android:selectAllOnFocus="true"
+                android:singleLine="true"
+                android:textColor="@color/black_32"
+                android:textCursorDrawable="@drawable/et_cursor_yellow"
+                android:textSize="@dimen/textSize_14sp" />
+        </LinearLayout>
 
 
-            <View style="@style/ry_line_style" />
+        <View style="@style/ry_line_style" />
 
-            <LinearLayout
-                android:id="@+id/ll_applicant"
-                style="@style/search_scan_style"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+        <LinearLayout
+            android:id="@+id/ll_returning_item_no"
+            style="@style/search_scan_style"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
-                <TextView
-                    android:id="@+id/tv_applicant"
-                    android:layout_width="@dimen/layout_60dp"
-                    android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:text="@string/applicant"
-                    style="@style/app_text_inwhite"/>
+            <TextView
+                android:id="@+id/tv_returning_item_no"
+                style="@style/app_text_inwhite"
+                android:layout_width="@dimen/layout_60dp"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:text="@string/item_no" />
 
-                <EditText
-                    android:id="@+id/et_applicant"
-                    android:layout_width="@dimen/layout_0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="@dimen/layout_10dp"
-                    android:layout_weight="1"
-                    android:background="@null"
-                    android:selectAllOnFocus="true"
-                    android:singleLine="true"
-                    android:textColor="@color/black_32"
-                    android:textCursorDrawable="@drawable/et_cursor_yellow"
-                    android:textSize="@dimen/textSize_14sp" />
-            </LinearLayout>
+            <EditText
+                android:id="@+id/et_returning_item_no"
+                android:layout_width="@dimen/layout_0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/layout_10dp"
+                android:layout_weight="1"
+                android:background="@null"
+                android:selectAllOnFocus="true"
+                android:singleLine="true"
+                android:textColor="@color/black_32"
+                android:textCursorDrawable="@drawable/et_cursor_yellow"
+                android:textSize="@dimen/textSize_14sp" />
+        </LinearLayout>
 
-            <View style="@style/ry_line_style" />
 
-            <LinearLayout
-                android:id="@+id/ll_apply_branch"
-                style="@style/search_scan_style"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+        <View style="@style/ry_line_style" />
 
-                <TextView
-                    android:id="@+id/tv_apply_branch"
-                    android:layout_width="@dimen/layout_60dp"
-                    android:layout_height="wrap_content"
-                    android:text="@string/department"
-                    style="@style/app_text_inwhite"/>
+        <LinearLayout
+            android:id="@+id/ll_applicant"
+            style="@style/search_scan_style"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
-                <EditText
-                    android:id="@+id/et_apply_branch"
-                    android:layout_width="@dimen/layout_0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="@dimen/layout_10dp"
-                    android:layout_weight="1"
-                    android:background="@null"
-                    android:selectAllOnFocus="true"
-                    android:singleLine="true"
-                    android:textColor="@color/black_32"
-                    android:textCursorDrawable="@drawable/et_cursor_yellow"
-                    android:textSize="@dimen/textSize_14sp" />
-            </LinearLayout>
+            <TextView
+                android:id="@+id/tv_applicant"
+                style="@style/app_text_inwhite"
+                android:layout_width="@dimen/layout_60dp"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:text="@string/applicant" />
 
-            <View style="@style/ry_line_style" />
+            <EditText
+                android:id="@+id/et_applicant"
+                android:layout_width="@dimen/layout_0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/layout_10dp"
+                android:layout_weight="1"
+                android:background="@null"
+                android:selectAllOnFocus="true"
+                android:singleLine="true"
+                android:textColor="@color/black_32"
+                android:textCursorDrawable="@drawable/et_cursor_yellow"
+                android:textSize="@dimen/textSize_14sp" />
+        </LinearLayout>
 
-            <LinearLayout
-                android:id="@+id/ll_plan_date"
-                style="@style/search_scan_style"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+        <View style="@style/ry_line_style" />
 
-                <TextView
-                    android:id="@+id/tv_plan_date"
-                    android:layout_width="@dimen/layout_60dp"
-                    android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:text="@string/data"
-                    style="@style/app_text_inwhite"/>
+        <LinearLayout
+            android:id="@+id/ll_apply_branch"
+            style="@style/search_scan_style"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
-                <EditText
-                    android:id="@+id/et_plan_date"
-                    android:layout_width="@dimen/layout_0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="@dimen/layout_10dp"
-                    android:layout_weight="1"
-                    android:background="@null"
-                    android:singleLine="true"
-                    android:textColor="@color/black_32"
-                    android:textCursorDrawable="@drawable/et_cursor_yellow"
-                    android:textSize="@dimen/textSize_14sp" />
+            <TextView
+                android:id="@+id/tv_apply_branch"
+                style="@style/app_text_inwhite"
+                android:layout_width="@dimen/layout_60dp"
+                android:layout_height="wrap_content"
+                android:text="@string/department" />
 
-                <ImageView
-                    android:id="@+id/iv_plan_date"
-                    android:layout_width="@dimen/layout_30dp"
-                    android:layout_height="@dimen/layout_20dp"
-                    android:src="@drawable/time" />
+            <EditText
+                android:id="@+id/et_apply_branch"
+                android:layout_width="@dimen/layout_0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/layout_10dp"
+                android:layout_weight="1"
+                android:background="@null"
+                android:selectAllOnFocus="true"
+                android:singleLine="true"
+                android:textColor="@color/black_32"
+                android:textCursorDrawable="@drawable/et_cursor_yellow"
+                android:textSize="@dimen/textSize_14sp" />
+        </LinearLayout>
 
-            </LinearLayout>
+        <View style="@style/ry_line_style" />
+
+        <LinearLayout
+            android:id="@+id/ll_plan_date"
+            style="@style/search_scan_style"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/tv_plan_date"
+                style="@style/app_text_inwhite"
+                android:layout_width="@dimen/layout_60dp"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:text="@string/data" />
+
+            <EditText
+                android:id="@+id/et_plan_date"
+                android:layout_width="@dimen/layout_0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/layout_10dp"
+                android:layout_weight="1"
+                android:background="@null"
+                android:singleLine="true"
+                android:textColor="@color/black_32"
+                android:textCursorDrawable="@drawable/et_cursor_yellow"
+                android:textSize="@dimen/textSize_14sp" />
+
+            <ImageView
+                android:id="@+id/iv_plan_date"
+                android:layout_width="@dimen/layout_30dp"
+                android:layout_height="@dimen/layout_20dp"
+                android:src="?attr/time" />
+
+        </LinearLayout>
 
         <View style="@style/ry_line_style" />
 
         <Button
             android:id="@+id/btn_search_sure"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/layout_40dp"
-            android:layout_marginBottom="@dimen/layout_10dp"
-            android:layout_marginTop="@dimen/layout_10dp"
+            android:layout_height="@dimen/layout_60dp"
             android:layout_marginLeft="@dimen/layout_10dp"
             android:layout_marginRight="@dimen/layout_10dp"
-            android:background="@drawable/accordingmaterialtop_sharp"
+            android:background="?attr/click_bg"
             android:text="@string/label_sure"
             android:textColor="@color/WHITE"
             android:textSize="@dimen/textSize_18sp" />

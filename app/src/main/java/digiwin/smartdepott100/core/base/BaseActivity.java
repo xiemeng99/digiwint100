@@ -8,11 +8,13 @@ import android.support.annotation.NonNull;
 
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
-import digiwin.library.base.BaseAppActivity;
+import digiwin.library.constant.SharePreKey;
 import digiwin.library.utils.ActivityManagerUtils;
 import digiwin.library.utils.LogUtils;
+import digiwin.library.utils.SharedPreferencesUtils;
 import digiwin.library.utils.StringUtils;
 import digiwin.library.utils.TelephonyUtils;
+import digiwin.smartdepott100.R;
 import digiwin.smartdepott100.core.appcontants.AddressContants;
 import digiwin.smartdepott100.core.screenlistener.ScreenListener;
 

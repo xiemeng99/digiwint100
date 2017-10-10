@@ -16,27 +16,15 @@ import java.util.Set;
 import butterknife.BindView;
 import butterknife.OnClick;
 import digiwin.library.dialog.CustomDialog;
-import digiwin.library.dialog.OnDialogClickgetTextListener;
-import digiwin.library.utils.AlertDialogUtils;
-import digiwin.library.utils.LogUtils;
 import digiwin.library.utils.ObjectAndMapUtils;
-import digiwin.library.utils.StringUtils;
 import digiwin.pulltorefreshlibrary.recyclerviewAdapter.BaseDetailRecyclerAdapter;
-import digiwin.pulltorefreshlibrary.recyclerviewAdapter.RecyclerViewHolder;
-import digiwin.pulltorefreshlibrary.recyclerviewAdapter.UpdateNumListener;
 import digiwin.smartdepott100.R;
 import digiwin.smartdepott100.core.appcontants.AddressContants;
 import digiwin.smartdepott100.core.appcontants.ModuleCode;
 import digiwin.smartdepott100.core.base.BaseTitleActivity;
-import digiwin.smartdepott100.module.adapter.common.CommonDetailAdapter;
 import digiwin.smartdepott100.module.adapter.produce.InBinningDetailAdapter;
-import digiwin.smartdepott100.module.adapter.produce.WipStorageDetailAdapter;
-import digiwin.smartdepott100.module.adapter.purchase.PurchaseGoodsDetailAdapter;
-import digiwin.smartdepott100.module.adapter.stock.storeallot.StoreAllotDetailAdapter;
-import digiwin.smartdepott100.module.bean.common.DeleteUpdateBean;
 import digiwin.smartdepott100.module.bean.common.DetailShowBean;
 import digiwin.smartdepott100.module.bean.common.SumShowBean;
-import digiwin.smartdepott100.module.bean.produce.InBinningBean;
 import digiwin.smartdepott100.module.logic.produce.InBinningLogic;
 
 /**

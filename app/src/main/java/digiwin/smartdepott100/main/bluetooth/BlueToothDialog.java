@@ -12,7 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
-import digiwin.library.utils.AlertDialogUtils;
+import digiwin.smartdepott100.core.coreutil.AlertDialogUtils;
 import digiwin.library.utils.DialogUtils;
 import digiwin.library.utils.LogUtils;
 import digiwin.library.utils.ToastUtils;

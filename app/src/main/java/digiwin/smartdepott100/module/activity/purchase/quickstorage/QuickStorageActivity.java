@@ -1,6 +1,7 @@
 package digiwin.smartdepott100.module.activity.purchase.quickstorage;
 
 import android.content.Context;
+import android.content.res.TypedArray;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v7.widget.LinearLayoutManager;
@@ -335,43 +336,48 @@ public class QuickStorageActivity extends BaseFirstModuldeActivity {
             });
         }
 
+        @SuppressWarnings("ResourceType")
         public void numChange(float numb1, float numb2, RecyclerViewHolder holder) {
+
+            TypedArray a = mContext.obtainStyledAttributes(new int[]{R.attr.sumColor_1, R.attr.sumColor_2, R.attr.sumColor_3});
+
+
             if (numb2 == 0) {
                 holder.setBackground(R.id.item_ll, R.drawable.red_scandetail_bg);
-                holder.setTextColor(R.id.tv_item_seq, mContext.getResources().getColor(R.color.red));
-                holder.setTextColor(R.id.tv_item_name, mContext.getResources().getColor(R.color.red));
-                holder.setTextColor(R.id.tv_unit, mContext.getResources().getColor(R.color.red));
-                holder.setTextColor(R.id.tv_item_format, mContext.getResources().getColor(R.color.red));
-                holder.setTextColor(R.id.tv_item_no, mContext.getResources().getColor(R.color.red));
-                holder.setTextColor(R.id.tv_storage, mContext.getResources().getColor(R.color.red));
-                holder.setTextColor(R.id.tv_in_storage_number, mContext.getResources().getColor(R.color.red));
-                holder.setTextColor(R.id.tv_match_number, mContext.getResources().getColor(R.color.red));
+                holder.setTextColor(R.id.tv_item_seq, a.getColor(0,mContext.getResources().getColor(R.color.Base_color)));
+                holder.setTextColor(R.id.tv_item_name, a.getColor(0,mContext.getResources().getColor(R.color.Base_color)));
+                holder.setTextColor(R.id.tv_unit, a.getColor(0,mContext.getResources().getColor(R.color.Base_color)));
+                holder.setTextColor(R.id.tv_item_format, a.getColor(0,mContext.getResources().getColor(R.color.Base_color)));
+                holder.setTextColor(R.id.tv_item_no, a.getColor(0,mContext.getResources().getColor(R.color.Base_color)));
+                holder.setTextColor(R.id.tv_storage, a.getColor(0,mContext.getResources().getColor(R.color.Base_color)));
+                holder.setTextColor(R.id.tv_in_storage_number, a.getColor(0,mContext.getResources().getColor(R.color.Base_color)));
+                holder.setTextColor(R.id.tv_match_number, a.getColor(0,mContext.getResources().getColor(R.color.Base_color)));
 //                holder.setBackground(R.id.warehouse_img_ll, R.drawable.numchange_bg_red);
 //                holder.setBackground(R.id.match_num_ll, R.drawable.numchange_bg_red);
 
             } else if (numb1 > numb2) {
 
                 holder.setBackground(R.id.item_ll, R.drawable.yellow_scandetail_bg);
-                holder.setTextColor(R.id.tv_item_seq, mContext.getResources().getColor(R.color.outside_yellow));
-                holder.setTextColor(R.id.tv_item_name, mContext.getResources().getColor(R.color.outside_yellow));
-                holder.setTextColor(R.id.tv_unit, mContext.getResources().getColor(R.color.outside_yellow));
-                holder.setTextColor(R.id.tv_item_format, mContext.getResources().getColor(R.color.outside_yellow));
-                holder.setTextColor(R.id.tv_item_no, mContext.getResources().getColor(R.color.outside_yellow));
-                holder.setTextColor(R.id.tv_storage, mContext.getResources().getColor(R.color.outside_yellow));
-                holder.setTextColor(R.id.tv_in_storage_number, mContext.getResources().getColor(R.color.outside_yellow));
-                holder.setTextColor(R.id.tv_match_number, mContext.getResources().getColor(R.color.outside_yellow));
+                holder.setTextColor(R.id.tv_item_seq, a.getColor(1,mContext.getResources().getColor(R.color.outside_yellow)));
+                holder.setTextColor(R.id.tv_item_name, a.getColor(1,mContext.getResources().getColor(R.color.outside_yellow)));
+                holder.setTextColor(R.id.tv_unit, a.getColor(1,mContext.getResources().getColor(R.color.outside_yellow)));
+                holder.setTextColor(R.id.tv_item_format, a.getColor(1,mContext.getResources().getColor(R.color.outside_yellow)));
+                holder.setTextColor(R.id.tv_item_no, a.getColor(1,mContext.getResources().getColor(R.color.outside_yellow)));
+                holder.setTextColor(R.id.tv_storage, a.getColor(1,mContext.getResources().getColor(R.color.outside_yellow)));
+                holder.setTextColor(R.id.tv_in_storage_number, a.getColor(1,mContext.getResources().getColor(R.color.outside_yellow)));
+                holder.setTextColor(R.id.tv_match_number, a.getColor(1,mContext.getResources().getColor(R.color.outside_yellow)));
 //                holder.setBackground(R.id.warehouse_img_ll, R.drawable.numchange_bg_yellow);
 //                holder.setBackground(R.id.match_num_ll, R.drawable.numchange_bg_yellow);
             } else if (numb1 == numb2) {
                 holder.setBackground(R.id.item_ll, R.drawable.green_scandetail_bg);
-                holder.setTextColor(R.id.tv_item_seq, mContext.getResources().getColor(R.color.green1b));
-                holder.setTextColor(R.id.tv_item_name, mContext.getResources().getColor(R.color.green1b));
-                holder.setTextColor(R.id.tv_unit, mContext.getResources().getColor(R.color.green1b));
-                holder.setTextColor(R.id.tv_item_format, mContext.getResources().getColor(R.color.green1b));
-                holder.setTextColor(R.id.tv_item_no, mContext.getResources().getColor(R.color.green1b));
-                holder.setTextColor(R.id.tv_storage, mContext.getResources().getColor(R.color.green1b));
-                holder.setTextColor(R.id.tv_in_storage_number, mContext.getResources().getColor(R.color.green1b));
-                holder.setTextColor(R.id.tv_match_number, mContext.getResources().getColor(R.color.green1b));
+                holder.setTextColor(R.id.tv_item_seq, a.getColor(2,mContext.getResources().getColor(R.color.green1b)));
+                holder.setTextColor(R.id.tv_item_name, a.getColor(2,mContext.getResources().getColor(R.color.green1b)));
+                holder.setTextColor(R.id.tv_unit, a.getColor(2,mContext.getResources().getColor(R.color.green1b)));
+                holder.setTextColor(R.id.tv_item_format, a.getColor(2,mContext.getResources().getColor(R.color.green1b)));
+                holder.setTextColor(R.id.tv_item_no, a.getColor(2,mContext.getResources().getColor(R.color.green1b)));
+                holder.setTextColor(R.id.tv_storage, a.getColor(2,mContext.getResources().getColor(R.color.green1b)));
+                holder.setTextColor(R.id.tv_in_storage_number, a.getColor(2,mContext.getResources().getColor(R.color.green1b)));
+                holder.setTextColor(R.id.tv_match_number, a.getColor(2,mContext.getResources().getColor(R.color.green1b)));
 //                holder.setBackground(R.id.warehouse_img_ll, R.drawable.numchange_bg_green);
 //                holder.setBackground(R.id.match_num_ll, R.drawable.numchange_bg_green);
             }

@@ -1,6 +1,7 @@
 package digiwin.smartdepott100.core.modulecommon;
 
 import android.app.Activity;
+import android.content.res.TypedArray;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -38,7 +39,10 @@ public class ModuleUtils {
         for (int i = 0; i < list.size(); i++) {
             list.get(i).setTextColor(activity.getResources().getColor(R.color.black_32));
         }
-        tv.setTextColor(activity.getResources().getColor(R.color.textfous_yellow));
+        TypedArray a = activity.obtainStyledAttributes(new int[] {
+                R.attr.textfous
+        });
+        tv.setTextColor(a.getColor(0,activity.getResources().getColor(R.color.textfous_yellow)));
     }
 
     /**
@@ -51,7 +55,10 @@ public class ModuleUtils {
         for (int i = 0; i < list.size(); i++) {
             list.get(i).setTextColor(activity.getResources().getColor(R.color.black_32));
         }
-        et.setTextColor(activity.getResources().getColor(R.color.textfous_yellow));
+        TypedArray a = activity.obtainStyledAttributes(new int[] {
+                R.attr.textfous
+        });
+        et.setTextColor(a.getColor(0,activity.getResources().getColor(R.color.textfous_yellow)));
         et.setSelectAllOnFocus(true);
         et.selectAll();
     }

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <attr name="white_ff" format="color"/>
+    <attr name="Base_color" format="color"/>
+    <attr name="group_1" format="color"/>
+    <attr name="group_2" format="color"/>
+    <attr name="materialTop_color" format="color"/>
+    <attr name="line_in_pink" format="color"/>
+    <attr name="textfous" format="color"/>
+    <attr name="materialTitle_color" format="color"/>
+    <attr name="materialText_color" format="color"/>
+    <attr name="sumColor_1" format="color"/>
+    <attr name="sumColor_2" format="color"/>
+    <attr name="sumColor_3" format="color"/>
+
+    <attr name="click_bg" format="reference"/>
+    <attr name="login_edtid_on" format="reference"/>
+    <attr name="login_site_on" format="reference"/>
+    <attr name="voiceguide" format="reference"/>
+    <attr name="time" format="reference"/>
+    <attr name="setup_rb" format="reference"/>
+    <attr name="checkvalue_checkbox" format="reference"/>
+    <attr name="setup_radiobutton_bg" format="reference"/>
+    <attr name="login_rp_checkbox_bg" format="reference"/>
+    <attr name="togglebutton_bg" format="reference"/>
+    <attr name="text_click_bg" format="reference"/>
+    <attr name="lock_checkbox" format="reference"/>
+    <attr name="detail" format="reference"/>
+    <attr name="login_bg" format="reference"/>
+</resources>

@@ -68,6 +68,6 @@
         android:gravity="center"
         android:padding="@dimen/layout_10dp"
         android:text="@string/exit"
-        android:textColor="@color/red50"
+        android:textColor="?attr/Base_color"
         android:textSize="@dimen/textSize_16sp" />
 </LinearLayout>

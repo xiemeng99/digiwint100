@@ -79,6 +79,27 @@
             android:layout_height="wrap_content"
             style="@style/ry_ser_text_inwhite"  />
     </LinearLayout>
+    <View
+        style="@style/ry_line_style" />
+
+    <LinearLayout
+        style="@style/ry_sum_itemstyle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="@dimen/layout_60dp"
+            android:layout_height="wrap_content"
+            android:text="@string/product_code"
+            style="@style/app_text_inwhite"  />
+
+        <TextView
+            android:id="@+id/tv_product_code"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            style="@style/ry_ser_text_inwhite"  />
+    </LinearLayout>
 
     <View
         style="@style/ry_line_style" />

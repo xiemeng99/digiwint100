@@ -1,6 +1,7 @@
 package digiwin.smartdepott100.login.activity.entIdcom;
 
 import android.content.Context;
+import android.content.res.TypedArray;
 import android.graphics.Color;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -48,6 +49,7 @@ public class EntIdAdapter extends RecyclerView.Adapter<EntIdAdapter.OCViewHolder
         return new OCViewHolder(view);
     }
 
+    @SuppressWarnings("ResourceType")
     @Override
     public void onBindViewHolder(OCViewHolder holder, final int position) {
         holder.itemView.setOnClickListener(new View.OnClickListener() {
@@ -59,12 +61,13 @@ public class EntIdAdapter extends RecyclerView.Adapter<EntIdAdapter.OCViewHolder
                 }
             }
         });
+        TypedArray typedArray = context.obtainStyledAttributes(new int[]{R.attr.Base_color,R.attr.text_click_bg});
         if (position == 0){
             holder.tv_item_operatingCenter.setTextColor(Color.WHITE);
-            holder.itemView.setBackgroundColor(context.getResources().getColor(R.color.Base_color));
+            holder.itemView.setBackgroundColor(typedArray.getColor(0,context.getResources().getColor(R.color.Base_color)));
         }else {
             holder.tv_item_operatingCenter.setTextColor(context.getResources().getColor(R.color.black_32));
-            holder.itemView.setBackgroundResource(R.drawable.text_click_bg);
+            holder.itemView.setBackgroundDrawable(typedArray.getDrawable(1));
         }
         if(list.get(position)!=null){
             holder.tv_item_operatingCenter.setText(list.get(position).getEnterprise_show());

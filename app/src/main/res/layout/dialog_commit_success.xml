@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/framelayout"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginLeft="@dimen/layout_10dp"
+    android:layout_marginRight="@dimen/layout_10dp">
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/layout_114dp"
+        android:layout_gravity="center_horizontal"
+        android:src="@drawable/commit_success_person" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="140dp"
+        android:layout_marginTop="@dimen/layout_70dp"
+        android:background="@drawable/commit_success_background">
+
+        <ImageView
+            android:id="@+id/img_commit_success_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="@dimen/layout_3dp"
+            android:src="@drawable/commit_success_text" />
+
+        <TextView
+            android:id="@+id/tv_commit_success_content"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/img_commit_success_text"
+            android:layout_centerHorizontal="true"
+            android:layout_marginLeft="@dimen/layout_20dp"
+            android:layout_marginRight="@dimen/layout_20dp"
+            android:paddingTop="@dimen/layout_5dp"
+            android:scrollbars="vertical"
+            android:textColor="@color/WHITE"
+            android:textSize="@dimen/textSize_15sp" />
+
+        <Button
+            android:id="@+id/button_sure"
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="@dimen/layout_10dp"
+            android:layout_marginLeft="@dimen/layout_40dp"
+            android:layout_marginRight="@dimen/layout_40dp"
+            android:layout_marginTop="@dimen/layout_15dp"
+            android:background="@drawable/commit_success_dialog_background"
+            android:text="@string/label_sure"
+            android:textColor="@color/WHITE"
+            android:textSize="@dimen/textSize_16sp" />
+
+    </RelativeLayout>
+
+
+</FrameLayout>

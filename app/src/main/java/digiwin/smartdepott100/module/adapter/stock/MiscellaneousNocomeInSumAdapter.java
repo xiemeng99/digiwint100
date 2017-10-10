@@ -35,6 +35,7 @@ public class MiscellaneousNocomeInSumAdapter extends BaseRecyclerAdapter<ListSum
         holder.setText(R.id.tv_item_name,item.getItem_name());
         holder.setText(R.id.tv_item_model,item.getItem_spec());
         holder.setText(R.id.tv_item_danwei,item.getUnit_no());
+        holder.setText(R.id.tv_product_code,item.getProduct_no());
        // holder.setText(R.id.tv_stock_qty, StringUtils.deleteZero(item.getStock_qty()));
         holder.setText(R.id.tv_in_storage_number, StringUtils.deleteZero(item.getScan_sumqty()));
     }

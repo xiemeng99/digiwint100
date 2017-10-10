@@ -1,13 +1,19 @@
 package digiwin.smartdepott100.login.activity;
 
 
+import android.annotation.TargetApi;
+import android.content.res.TypedArray;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Color;
 import android.graphics.drawable.AnimationDrawable;
 import android.media.MediaPlayer;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
+import android.text.method.TextKeyListener;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -23,10 +29,12 @@ import java.util.List;
 import java.util.Map;
 
 import butterknife.BindView;
+import butterknife.OnCheckedChanged;
 import butterknife.OnClick;
 import butterknife.OnFocusChange;
 import digiwin.library.utils.ActivityManagerUtils;
-import digiwin.library.utils.AlertDialogUtils;
+import digiwin.library.zxing.SystemBarTintManager;
+import digiwin.smartdepott100.core.coreutil.AlertDialogUtils;
 import digiwin.library.utils.LogUtils;
 import digiwin.library.utils.StringUtils;
 import digiwin.library.utils.TelephonyUtils;
@@ -101,8 +109,8 @@ public class LoginActivity extends BaseActivity {
     ImageView ivEntid;
     @BindView(R.id.iv_site)
     ImageView ivSite;
-    @BindView(R.id.videoview)
-    CustomVideoView videoView;
+//    @BindView(R.id.videoview)
+//    CustomVideoView videoView;
 
     @OnClick(R.id.et_login_user)
     void loginUserColorChange() {
@@ -229,7 +237,15 @@ public class LoginActivity extends BaseActivity {
 
     @Override
     protected void doBusiness() {
-        initView();
+        //加载视频
+//        initView();
+//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+//            setTranslucentStatus(true);
+//            SystemBarTintManager tintManager = new SystemBarTintManager(this);
+//            tintManager.setStatusBarTintEnabled(true);
+//
+//            tintManager.setStatusBarTintResource(R.color.black);//通知栏所需颜色
+//        }
         PermissionUtils.verifyStoragePermissions(this);
         final WiFiPrintManager wiFiPrintManager = WiFiPrintManager.getManager();
         wiFiPrintManager.openWiFi("", 0, new WiFiPrintManager.OpenWiFiPrintListener() {
@@ -250,8 +266,20 @@ public class LoginActivity extends BaseActivity {
         getUserInfo();
         updateEntIdSite();
         getVersion();
-
     }
+
+//    @TargetApi(19)
+//    private void setTranslucentStatus(boolean on) {
+//        Window win = getWindow();
+//        WindowManager.LayoutParams winParams = win.getAttributes();
+//        final int bits = WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS;
+//        if (on) {
+//            winParams.flags |= bits;
+//        } else {
+//            winParams.flags &= ~bits;
+//        }
+//        win.setAttributes(winParams);
+//    }
     /**
      * 对话框点击更新界面集团据点updateEntIdSite
      */
@@ -530,6 +558,7 @@ public class LoginActivity extends BaseActivity {
      *
      * @param type 1用户 2密码 3集团  4据点
      */
+    @SuppressWarnings("ResourceType")
     private void changeColor(int type) {
         try {
             ivLoginUser.setImageResource(R.drawable.login_user_off);
@@ -540,30 +569,34 @@ public class LoginActivity extends BaseActivity {
             lineLoginLock.setBackgroundColor(getResources().getColor(R.color.login_color_line));
             lineEntid.setBackgroundColor(getResources().getColor(R.color.login_color_line));
             lineSite.setBackgroundColor(getResources().getColor(R.color.login_color_line));
-            etLoginUser.setTextColor(getResources().getColor(R.color.white_ff));
-            etLoginLock.setTextColor(getResources().getColor(R.color.white_ff));
-            tvEntid.setTextColor(getResources().getColor(R.color.white_ff));
-            tvSite.setTextColor(getResources().getColor(R.color.white_ff));
+            etLoginUser.setTextColor(getResources().getColor(R.color.login_color_line));
+            etLoginLock.setTextColor(getResources().getColor(R.color.login_color_line));
+            tvEntid.setTextColor(getResources().getColor(R.color.login_color_line));
+            tvSite.setTextColor(getResources().getColor(R.color.login_color_line));
+
+//            TypedArray a = obtainStyledAttributes(new int[] {R.attr.Base_color,R.attr.login_user_on,R.attr.login_edtid_on,R.attr.login_site_on});
+
             switch (type) {
                 case 1:
+//                    ivLoginUser.setImageDrawable(a.getDrawable(1));
                     ivLoginUser.setImageResource(R.drawable.login_user_on);
-                    lineLoginUser.setBackgroundColor(getResources().getColor(R.color.login_color_t));
-                    etLoginUser.setTextColor(getResources().getColor(R.color.login_color_t));
+                    lineLoginUser.setBackgroundColor(getResources().getColor(R.color.black));
+                    etLoginUser.setTextColor(getResources().getColor(R.color.black));
                     break;
                 case 2:
-                    //ivLoginLock.setImageResource(R.drawable.login_lock_on);
-                    lineLoginLock.setBackgroundColor(getResources().getColor(R.color.login_color_t));
-                    etLoginLock.setTextColor(getResources().getColor(R.color.login_color_t));
+//                    ivLoginLock.setImageResource(R.drawable.login_lock_on);
+                    lineLoginLock.setBackgroundColor(getResources().getColor(R.color.black));
+                    etLoginLock.setTextColor(getResources().getColor(R.color.black));
                     break;
                 case 3:
-                    ivEntid.setImageResource(R.drawable.login_entid_on);
-                    lineEntid.setBackgroundColor(getResources().getColor(R.color.login_color_t));
-                    tvEntid.setTextColor(getResources().getColor(R.color.login_color_t));
+//                    ivEntid.setImageDrawable(a.getDrawable(2));
+                    lineEntid.setBackgroundColor(getResources().getColor(R.color.black));
+                    tvEntid.setTextColor(getResources().getColor(R.color.black));
                     break;
                 case 4:
-                    ivSite.setImageResource(R.drawable.login_site_on);
-                    lineSite.setBackgroundColor(getResources().getColor(R.color.login_color_t));
-                    tvSite.setTextColor(getResources().getColor(R.color.login_color_t));
+//                    ivSite.setImageDrawable(a.getDrawable(3));
+                    lineSite.setBackgroundColor(getResources().getColor(R.color.black));
+                    tvSite.setTextColor(getResources().getColor(R.color.black));
                     break;
             }
         } catch (Exception e) {
@@ -573,47 +606,47 @@ public class LoginActivity extends BaseActivity {
 
     }
 
-
-    private void initView() {
-        //设置播放加载路径
-        videoView.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
-            @Override
-            public void onPrepared(MediaPlayer mp) {
-                mp.setVolume(0f,0f);
-                videoView.start();
-                mp.setOnInfoListener(new MediaPlayer.OnInfoListener() {
-                    @Override
-                    public boolean onInfo(MediaPlayer mp, int what, int extra) {
-                        if (what == MediaPlayer.MEDIA_INFO_VIDEO_RENDERING_START) {
-                            videoView.setBackgroundColor(Color.TRANSPARENT);
-                        }
-                        return true;
-                    }
-                });
-            }
-        });
-        videoView.setVideoURI(Uri.parse("android.resource://" + getPackageName() + "/" + R.raw.test1));
-        //循环播放
-        videoView.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
-            @Override
-            public void onCompletion(MediaPlayer mediaPlayer) {
-                videoView.start();
-            }
-        });
-
-    }
+//
+//    private void initView() {
+//        //设置播放加载路径
+//        videoView.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
+//            @Override
+//            public void onPrepared(MediaPlayer mp) {
+//                mp.setVolume(0f,0f);
+//                videoView.start();
+//                mp.setOnInfoListener(new MediaPlayer.OnInfoListener() {
+//                    @Override
+//                    public boolean onInfo(MediaPlayer mp, int what, int extra) {
+//                        if (what == MediaPlayer.MEDIA_INFO_VIDEO_RENDERING_START) {
+//                            videoView.setBackgroundColor(Color.TRANSPARENT);
+//                        }
+//                        return true;
+//                    }
+//                });
+//            }
+//        });
+//        videoView.setVideoURI(Uri.parse("android.resource://" + getPackageName() + "/" + R.raw.test1));
+//        //循环播放
+//        videoView.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+//            @Override
+//            public void onCompletion(MediaPlayer mediaPlayer) {
+//                videoView.start();
+//            }
+//        });
+//
+//    }
 
 //    返回重启加载
     @Override
     protected void onRestart() {
-        initView();
+//        initView();
         super.onRestart();
     }
 
     //防止锁屏或者切出的时候，音乐在播放
     @Override
     protected void onStop() {
-        videoView.stopPlayback();
+//        videoView.stopPlayback();
         super.onStop();
     }
 

@@ -495,6 +495,7 @@ public class EndProductAllotScanActivity extends BaseTitleActivity {
         barcodeFlag = true;
         saveBean.setFifo_check(barcodeBackBean.getFifo_check());
         saveBean.setBarcode_no(barcodeBackBean.getBarcode_no());
+        saveBean.setProduct_no(barcodeBackBean.getProduct_no());
         saveBean.setItem_no(barcodeBackBean.getItem_no());
         saveBean.setUnit_no(localData.getUnit_no());//抓取下阶料单位不取条码单位
         saveBean.setLot_no(barcodeBackBean.getLot_no());

@@ -12,9 +12,7 @@ import android.widget.ScrollView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import butterknife.BindView;
 import butterknife.BindViews;
@@ -24,7 +22,7 @@ import digiwin.library.constant.SharePreKey;
 import digiwin.library.utils.SharedPreferencesUtils;
 import digiwin.smartdepott100.login.loginlogic.LoginLogic;
 import digiwin.smartdepott100.module.logic.sale.salereturn.SaleReturnLogic;
-import digiwin.library.datepicker.DatePickerUtils;
+import digiwin.smartdepott100.core.dialog.datepicker.DatePickerUtils;
 import digiwin.library.utils.ActivityManagerUtils;
 import digiwin.library.utils.LogUtils;
 import digiwin.library.utils.StringUtils;
@@ -35,12 +33,9 @@ import digiwin.smartdepott100.core.appcontants.AddressContants;
 import digiwin.smartdepott100.core.appcontants.ModuleCode;
 import digiwin.smartdepott100.core.base.BaseTitleActivity;
 import digiwin.smartdepott100.core.modulecommon.ModuleUtils;
-import digiwin.smartdepott100.login.bean.AccoutBean;
 import digiwin.smartdepott100.module.adapter.sale.salereturn.SaleReturnAdapter;
 import digiwin.smartdepott100.module.bean.common.FilterBean;
 import digiwin.smartdepott100.module.bean.common.FilterResultOrderBean;
-
-import static digiwin.smartdepott100.login.loginlogic.LoginLogic.getUserInfo;
 
 /**
  * 销售退货

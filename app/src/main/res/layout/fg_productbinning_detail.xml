@@ -33,20 +33,20 @@
                     android:layout_width="@dimen/layout_30dp"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
-                    android:button="@drawable/all_checkbox" />
+                    android:button="?attr/checkvalue_checkbox" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/pack_boxnumber"
-                    android:textColor="@color/red50" />
+                    android:textColor="?attr/Base_color" />
 
                 <TextView
                     android:id="@+id/tv_item_no"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="@dimen/layout_10dp"
-                    android:textColor="@color/red50" />
+                    android:textColor="?attr/Base_color" />
 
             </LinearLayout>
 

@@ -53,13 +53,14 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom|center_horizontal"
-            android:layout_marginBottom="@dimen/layout_40dp"
+            android:layout_marginBottom="@dimen/layout_20dp"
             android:minHeight="@dimen/layout_0dp"
             android:minWidth="@dimen/layout_0dp"
-            android:src="@drawable/voiceguide" />
+            android:src="@drawable/voiceguide_yellow" />
 
         <LinearLayout
             android:id="@+id/ll_point"
+            android:visibility="gone"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom|center_horizontal"

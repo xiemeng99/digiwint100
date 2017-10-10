@@ -134,7 +134,7 @@ public abstract class BaseTitleActivity extends BaseActivity {
 
     @Override
     protected void initNavigationTitle() {
-        toolbar().setBackgroundResource(R.drawable.title_bg);
+//        toolbar().setBackgroundResource(R.drawable.title_bg);
         setSupportActionBar(toolbar());
         getSupportActionBar().setDisplayShowTitleEnabled(false);
         ivScan.setVisibility(View.VISIBLE);

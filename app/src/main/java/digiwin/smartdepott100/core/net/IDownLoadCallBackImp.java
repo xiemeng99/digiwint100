@@ -3,7 +3,7 @@ package digiwin.smartdepott100.core.net;
 import android.content.Context;
 
 import digiwin.library.net.IDownLoadCallBack;
-import digiwin.library.utils.AlertDialogUtils;
+import digiwin.smartdepott100.core.coreutil.AlertDialogUtils;
 import digiwin.library.utils.ToastUtils;
 import digiwin.smartdepott100.R;
 

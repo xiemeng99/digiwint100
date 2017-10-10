@@ -1,15 +1,4 @@
 <resources>
-    <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
-        <!-- Customize your theme here. -->
-        <item name="colorPrimary">@color/colorPrimaryRed</item>
-        <item name="colorPrimaryDark">@color/colorPrimaryRed</item>
-        <item name="colorAccent">@color/colorAccent</item>
-        <item name="windowNoTitle">true</item>
-        <item name="windowActionBar">false</item>
-        <item name="android:windowAnimationStyle">@style/activityAnimation</item>
-    </style>
-
 
     <style name="AppThemeTWO" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="android:windowNoTitle">true</item>
@@ -81,7 +70,7 @@
     <style name="line_in_pink_style">
         <item name="android:layout_height">@dimen/layout_0.5dp</item>
         <item name="android:layout_width">match_parent</item>
-        <item name="android:background">@color/line_in_pink</item>
+        <item name="android:background">?attr/line_in_pink</item>
     </style>
     <!--列表中线条样式2-->
     <style name="ry_line_style2">
@@ -104,7 +93,7 @@
         <item name="android:layout_marginBottom">@dimen/digiwin_top</item>
         <item name="android:paddingLeft">@dimen/layout_10dp</item>
         <item name="android:paddingRight">@dimen/layout_10dp</item>
-        <item name="android:background">@drawable/red_scandetail_bg</item>
+        <item name="android:background">@drawable/base_scandetail_bg</item>
     </style>
 
     <!-- 红色色列表边框-->
@@ -163,18 +152,18 @@
     <style name="app_ve_line_style">
         <item name="android:layout_height">match_parent</item>
         <item name="android:layout_width">@dimen/layout_0.5dp</item>
-        <item name="android:background">@color/line_in_pink_ve</item>
+        <item name="android:background">?attr/line_in_pink</item>
     </style>
     <!--粉色背景下本地文字样式-->
     <style name="app_text_ingreen">
         <item name="android:textSize">@dimen/digiwin_textsize</item>
-        <item name="android:textColor">@color/materialTitle_color</item>
+        <item name="android:textColor">?attr/materialTitle_color</item>
     </style>
 
     <!--粉色背景下服务器返回文字样式-->
     <style name="ser_text_ingreen">
         <item name="android:textSize">@dimen/digiwin_textsize</item>
-        <item name="android:textColor">@color/materialText_color</item>
+        <item name="android:textColor">?attr/materialText_color</item>
     </style>
 
     <!-- 粉色背景下服务器返回黄色字体样式 -->
@@ -192,7 +181,7 @@
     <!--白色背景下服务器返回文字样式-->
     <style name="ser_text_inwhite">
         <item name="android:textSize">@dimen/digiwin_textsize</item>
-        <item name="android:textColor">@color/red50</item>
+        <item name="android:textColor">?attr/Base_color</item>
     </style>
     <!--白色背景下服务器返回文字样式，当列表数据颜色随数量变化时使用-->
     <style name="ry_ser_text_inwhite">
@@ -234,7 +223,7 @@
     <style name="red_line_style">
         <item name="android:layout_height">@dimen/layout_0.5dp</item>
         <item name="android:layout_width">match_parent</item>
-        <item name="android:background">@color/red50</item>
+        <item name="android:background">?attr/Base_color</item>
         <item name="android:layout_marginLeft">@dimen/layout_9dp</item>
         <item name="android:layout_marginRight">@dimen/layout_7dp</item>
     </style>
@@ -259,5 +248,157 @@
         <item name="android:paddingLeft">@dimen/layout_5dp</item>
         <item name="android:paddingRight">@dimen/layout_5dp</item>
         <item name="android:background">@drawable/red_scandetail_bg</item>
+    </style>
+    <!-- 红色版. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- 通用 -->
+        <item name="colorPrimary">@color/colorPrimaryRed</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryRed</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="windowNoTitle">true</item>
+        <item name="windowActionBar">false</item>
+        <item name="android:windowAnimationStyle">@style/activityAnimation</item>
+        <item name="white_ff">@color/white_ff</item>
+        <!--颜色-->
+        <item name="Base_color">@color/Base_color</item>
+        <item name="group_1">@color/group_1</item>
+        <item name="group_2">@color/group_2</item>
+        <item name="materialTop_color">@color/materialTop_color</item>
+        <item name="line_in_pink">@color/line_in_pink</item>
+        <item name="textfous">@color/textfous_yellow</item>
+        <item name="materialTitle_color">@color/materialTitle_color</item>
+        <item name="materialText_color">@color/materialText_color</item>
+        <item name="sumColor_1">@color/sumColor_1</item>
+        <item name="sumColor_2">@color/sumColor_2</item>
+        <item name="sumColor_3">@color/sumColor_3</item>
+        <!--资源文件-->
+        <item name="click_bg">@mipmap/button</item>
+        <item name="login_edtid_on">@drawable/login_entid_on</item>
+        <item name="login_site_on">@drawable/login_site_on</item>
+        <item name="voiceguide">@drawable/voiceguide</item>
+        <item name="time">@drawable/time</item>
+        <item name="setup_rb">@drawable/setup_rb_true</item>
+        <item name="checkvalue_checkbox">@drawable/checkvalue_checkbox</item>
+        <item name="setup_radiobutton_bg">@drawable/setup_radiobutton_bg</item>
+        <item name="togglebutton_bg">@drawable/togglebutton_bg</item>
+        <item name="text_click_bg">@drawable/text_click_bg</item>
+        <item name="lock_checkbox">@drawable/lock_checkbox</item>
+        <item name="detail">@mipmap/detail_red</item>
+        <item name="login_bg">@mipmap/login_bg</item>
+    </style>
+
+    <!-- 黄色版. -->
+    <style name="AppYellowTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- 通用 -->
+        <item name="colorPrimary">@color/colorPrimaryYellow</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryYellow</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="windowNoTitle">true</item>
+        <item name="windowActionBar">false</item>
+        <item name="android:windowAnimationStyle">@style/activityAnimation</item>
+        <item name="white_ff">@color/white_ff</item>
+        <!--颜色-->
+        <item name="Base_color">@color/Base_yellow_color</item>
+        <item name="group_1">@color/group_1_yellow</item>
+        <item name="group_2">@color/group_2_yellow</item>
+        <item name="materialTop_color">@color/materialTop_yellow_color</item>
+        <item name="line_in_pink">@color/line_in_yellow</item>
+        <item name="textfous">@color/textfous_green</item>
+        <item name="materialTitle_color">@color/materialTitle_color_yellow</item>
+        <item name="materialText_color">@color/materialText_color_yellow</item>
+        <item name="sumColor_1">@color/sumColor_1_yellow</item>
+        <item name="sumColor_2">@color/sumColor_2_yellow</item>
+        <item name="sumColor_3">@color/sumColor_3_yellow</item>
+        <!--资源文件-->
+        <item name="click_bg">@mipmap/button_yellow</item>
+        <item name="login_edtid_on">@drawable/login_entid_on_yellow</item>
+        <item name="login_site_on">@drawable/login_site_on_yellow</item>
+        <item name="voiceguide">@drawable/voiceguide_yellow</item>
+        <item name="time">@drawable/time_yellow</item>
+        <item name="setup_rb">@drawable/setup_rb_true_yellow</item>
+        <item name="checkvalue_checkbox">@drawable/checkvalue_checkbox_yellow</item>
+        <item name="setup_radiobutton_bg">@drawable/setup_radiobutton_bg_yellow</item>
+        <item name="togglebutton_bg">@drawable/togglebutton_bg_yellow</item>
+        <item name="text_click_bg">@drawable/text_click_bg_yellow</item>
+        <item name="lock_checkbox">@drawable/lock_checkbox_yellow</item>
+        <item name="detail">@mipmap/detail_yellow</item>
+        <item name="login_bg">@mipmap/login_bg_yellow</item>
+    </style>
+
+    <!-- 蓝色版 -->
+    <style name="AppBlueTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- 通用 -->
+        <item name="colorPrimary">@color/colorPrimaryBlue</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryBlue</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="windowNoTitle">true</item>
+        <item name="windowActionBar">false</item>
+        <item name="android:windowAnimationStyle">@style/activityAnimation</item>
+        <item name="white_ff">@color/white_ff</item>
+        <!--颜色-->
+        <item name="Base_color">@color/Base_Blue_color</item>
+        <item name="group_1">@color/group_1_blue</item>
+        <item name="group_2">@color/group_2_blue</item>
+        <item name="materialTop_color">@color/materialTop_blue_color</item>
+        <item name="line_in_pink">@color/line_in_blue</item>
+        <item name="textfous">@color/textfous_yellow</item>
+        <item name="materialTitle_color">@color/materialTitle_color_blue</item>
+        <item name="materialText_color">@color/materialText_color_blue</item>
+        <item name="sumColor_1">@color/sumColor_1_blue</item>
+        <item name="sumColor_2">@color/sumColor_2_blue</item>
+        <item name="sumColor_3">@color/sumColor_3_blue</item>
+        <!--资源文件-->
+        <item name="click_bg">@mipmap/button_blue</item>
+        <item name="login_edtid_on">@drawable/login_entid_on_blue</item>
+        <item name="login_site_on">@drawable/login_site_on_blue</item>
+        <item name="voiceguide">@drawable/voiceguide_yellow</item>
+        <item name="time">@drawable/time_orange
+        </item>
+        <item name="setup_rb">@drawable/setup_rb_true_blue</item>
+        <item name="checkvalue_checkbox">@drawable/checkvalue_checkbox_blue</item>
+        <item name="setup_radiobutton_bg">@drawable/setup_radiobutton_bg_blue</item>
+        <item name="togglebutton_bg">@drawable/togglebutton_bg_blue</item>
+        <item name="text_click_bg">@drawable/text_click_bg_blue</item>
+        <item name="lock_checkbox">@drawable/lock_checkbox</item>
+        <item name="detail">@mipmap/detail_blue</item>
+        <item name="login_bg">@mipmap/login_bg_blue</item>
+    </style>
+
+    <!-- 绿色版 -->
+    <style name="AppGreenTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- 通用 -->
+        <item name="colorPrimary">@color/colorPrimaryGreen</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryGreen</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="windowNoTitle">true</item>
+        <item name="windowActionBar">false</item>
+        <item name="android:windowAnimationStyle">@style/activityAnimation</item>
+        <item name="white_ff">@color/white_ff</item>
+        <!--颜色-->
+        <item name="Base_color">@color/Base_Green_color</item>
+        <item name="group_1">@color/group_1_green</item>
+        <item name="group_2">@color/group_2_green</item>
+        <item name="materialTop_color">@color/materialTop_green_color</item>
+        <item name="line_in_pink">@color/line_in_green</item>
+        <item name="textfous">@color/textfous_yellow</item>
+        <item name="materialTitle_color">@color/materialTitle_color_green</item>
+        <item name="materialText_color">@color/materialText_color_green</item>
+        <item name="sumColor_1">@color/sumColor_1_green</item>
+        <item name="sumColor_2">@color/sumColor_2_green</item>
+        <item name="sumColor_3">@color/sumColor_3_green</item>
+        <!--资源文件-->
+        <item name="click_bg">@mipmap/button_green</item>
+        <item name="login_edtid_on">@drawable/login_entid_on_blue</item>
+        <item name="login_site_on">@drawable/login_site_on_blue</item>
+        <item name="voiceguide">@drawable/voiceguide_yellow</item>
+        <item name="time">@drawable/time_orange</item>
+        <item name="setup_rb">@drawable/setup_rb_true_green</item>
+        <item name="checkvalue_checkbox">@drawable/checkvalue_checkbox_green</item>
+        <item name="setup_radiobutton_bg">@drawable/setup_radiobutton_bg_green</item>
+        <item name="togglebutton_bg">@drawable/togglebutton_bg_green</item>
+        <item name="text_click_bg">@drawable/text_click_bg_green</item>
+        <item name="lock_checkbox">@drawable/lock_checkbox</item>
+        <item name="detail">@mipmap/detail_green</item>
+        <item name="login_bg">@mipmap/login_bg_green</item>
     </style>
 </resources>

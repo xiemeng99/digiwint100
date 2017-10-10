@@ -153,7 +153,11 @@ public class IQCInspectLogic extends CommonLogic {
                     String reqName="";
                     if (ModuleCode.FQC.equals(mModule)){
                         reqName="als.b002.reason.get";
-                    }else{
+                    }
+                    else if (ModuleCode.OQC.equals(mModule)){
+                        reqName="als.d002.reason.get";
+                    }
+                    else{
                         reqName="als.a009.reason.get";
                     }
                     String createJson = JsonReqForERP.mapCreateJson(mModule,reqName, mTimestamp, map);
@@ -206,6 +210,9 @@ public class IQCInspectLogic extends CommonLogic {
                     String reqName="";
                     if (ModuleCode.FQC.equals(mModule)){
                         reqName="als.b002.reason.save";
+                    }
+                    else if (ModuleCode.OQC.equals(mModule)){
+                        reqName="als.d002.reason.save";
                     }else{
                         reqName="als.a009.reason.save";
                     }
@@ -259,6 +266,9 @@ public class IQCInspectLogic extends CommonLogic {
                     String reqName="";
                     if (ModuleCode.FQC.equals(mModule)){
                         reqName="als.b002.initial.reason.get";
+                    }
+                    else if (ModuleCode.OQC.equals(mModule)){
+                        reqName="als.d002.initial.reason.get";
                     }else{
                         reqName="als.a009.initial.reason.get";
                     }
@@ -314,6 +324,9 @@ public class IQCInspectLogic extends CommonLogic {
                     String reqName="";
                     if (ModuleCode.FQC.equals(mModule)){
                         reqName="als.b002.measure.get";
+                    }
+                    else if (ModuleCode.OQC.equals(mModule)){
+                        reqName="als.d002.measure.get";
                     }else{
                         reqName="als.a009.measure.get";
                     }
@@ -367,6 +380,9 @@ public class IQCInspectLogic extends CommonLogic {
                     String reqName="";
                     if (ModuleCode.FQC.equals(mModule)){
                         reqName="als.b002.measure.save";
+                    }
+                    else if (ModuleCode.OQC.equals(mModule)){
+                        reqName="als.d002.measure.save";
                     }else{
                         reqName="als.a009.measure.save";
                     }

@@ -2,6 +2,7 @@
 package digiwin.smartdepott100.main.activity.settingdialog;
 
 import android.content.Context;
+import android.content.res.TypedArray;
 import android.graphics.Color;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -49,6 +50,7 @@ public class StorageAdapter extends RecyclerView.Adapter<StorageAdapter.SViewHol
         return new SViewHolder(view);
     }
 
+    @SuppressWarnings("ResourceType")
     @Override
     public void onBindViewHolder(SViewHolder holder, final int position) {
         holder.itemView.setOnClickListener(new View.OnClickListener() {
@@ -60,12 +62,13 @@ public class StorageAdapter extends RecyclerView.Adapter<StorageAdapter.SViewHol
                 }
             }
         });
+        TypedArray typedArray = context.obtainStyledAttributes(new int[]{R.attr.Base_color,R.attr.text_click_bg});
         if (position == 0){
             holder.tv_item_storage.setTextColor(Color.WHITE);
-            holder.itemView.setBackgroundColor(context.getResources().getColor(R.color.Base_color));
+            holder.itemView.setBackgroundColor(typedArray.getColor(0,context.getResources().getColor(R.color.Base_color)));
         }else {
             holder.tv_item_storage.setTextColor(context.getResources().getColor(R.color.black_32));
-            holder.itemView.setBackgroundResource(R.drawable.text_click_bg);
+            holder.itemView.setBackgroundDrawable(typedArray.getDrawable(1));
         }
         if(list.get(position)!=null){
             holder.tv_item_storage.setText(list.get(position));

@@ -55,7 +55,7 @@
 
                 <View
                     android:id="@+id/line_tray"
-                    style="@style/ry_line_style"
+                    style="@style/line_in_pink_style"
                     android:visibility="gone" />
                 <LinearLayout
                     android:id="@+id/ll_item_no"

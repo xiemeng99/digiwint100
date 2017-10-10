@@ -118,8 +118,21 @@ public class SaveBean {
      */
     private String item_barcode_type;
 
-
     private String barcode_qty;
+
+    public String getProduct_no() {
+        return product_no;
+    }
+
+    public void setProduct_no(String product_no) {
+        this.product_no = product_no;
+    }
+
+    /**
+     * 产品特征码
+
+     */
+    private String product_no;
 
     /**
      * 数量

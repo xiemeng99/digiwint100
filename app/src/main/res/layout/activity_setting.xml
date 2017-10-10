@@ -195,12 +195,48 @@
                     android:layout_width="@dimen/layout_35dp"
                     android:layout_height="@dimen/layout_20dp"
                     android:background="@android:color/transparent"
-                    android:button="@drawable/togglebutton_bg"
+                    android:button="?attr/togglebutton_bg"
                     android:checked="false"
                     android:layout_gravity="right|center_vertical"
                     android:text=""
                     android:textOff=""
                     android:textOn="" />
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/layout_0.5dp"
+                android:background="@color/gray_da"/>
+
+            <LinearLayout
+                android:id="@+id/ll_change_theme"
+                style="@style/SettingLinearLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="@dimen/layout_20dp"
+                    android:layout_height="@dimen/layout_20dp"
+                    android:src="@mipmap/pifu" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/layout_5dp"
+                    android:layout_weight="1"
+                    android:gravity="left"
+                    android:text="@string/change_theme"
+                    android:textColor="@color/black_32"
+                    android:textSize="@dimen/textSize_14sp" />
+
+                <TextView
+                    android:id="@+id/tv_change_theme"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/naming"
+                    android:textSize="@dimen/textSize_14sp" />
+
             </LinearLayout>
 
             <View
@@ -269,7 +305,7 @@
                     android:layout_width="@dimen/layout_35dp"
                     android:layout_height="@dimen/layout_20dp"
                     android:background="@android:color/transparent"
-                    android:button="@drawable/togglebutton_bg"
+                    android:button="?attr/togglebutton_bg"
                     android:checked="true"
                     android:layout_gravity="right|center_vertical"
                     android:text=""
@@ -391,7 +427,7 @@
                     android:layout_width="@dimen/layout_35dp"
                     android:layout_height="@dimen/layout_20dp"
                     android:background="@android:color/transparent"
-                    android:button="@drawable/togglebutton_bg"
+                    android:button="?attr/togglebutton_bg"
                     android:checked="true"
                     android:text=""
                     android:textOff=""
@@ -438,7 +474,7 @@
                     android:layout_width="@dimen/layout_35dp"
                     android:layout_height="@dimen/layout_20dp"
                     android:background="@android:color/transparent"
-                    android:button="@drawable/togglebutton_bg"
+                    android:button="?attr/togglebutton_bg"
                     android:text=""
                     android:textOff=""
                     android:textOn="" />
@@ -553,7 +589,7 @@
                     android:layout_alignParentRight="true"
                     android:layout_centerVertical="true"
                     android:layout_marginRight="@dimen/layout_10dp"
-                    android:textColor="@color/red50"
+                    android:textColor="?attr/Base_color"
                     android:textSize="@dimen/textSize_14sp" />
 
                 <TextView

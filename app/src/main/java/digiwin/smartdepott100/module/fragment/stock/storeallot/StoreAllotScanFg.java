@@ -353,6 +353,7 @@ public class StoreAllotScanFg extends BaseFragment {
                             show();
                             saveBean.setAvailable_in_qty("0");
                             saveBean.setBarcode_no(barcodeBackBean.getBarcode_no());
+                            saveBean.setProduct_no(barcodeBackBean.getProduct_no());
                             saveBean.setItem_no(barcodeBackBean.getItem_no());
                             saveBean.setUnit_no(barcodeBackBean.getUnit_no());
                             saveBean.setLot_no(barcodeBackBean.getLot_no());

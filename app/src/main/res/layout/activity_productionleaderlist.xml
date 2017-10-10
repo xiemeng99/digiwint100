@@ -16,10 +16,10 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/toolbar_title"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="@dimen/digiwin_top"
         android:layout_marginLeft="@dimen/layout_10dp"
         android:layout_marginRight="@dimen/layout_10dp"
-        android:background="@drawable/yellow_scandetail_bg"
+        android:layout_marginTop="@dimen/digiwin_top"
+        android:background="@drawable/allscanedit_bg"
         android:orientation="vertical"
         android:visibility="visible">
 
@@ -141,7 +141,7 @@
                 android:id="@+id/iv_plan_date"
                 android:layout_width="@dimen/layout_30dp"
                 android:layout_height="@dimen/layout_20dp"
-                android:src="@drawable/time" />
+                android:src="?attr/time" />
 
         </LinearLayout>
 
@@ -150,9 +150,10 @@
         <Button
             android:id="@+id/btn_search_sure"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/layout_40dp"
-            android:layout_margin="@dimen/layout_10dp"
-            android:background="@drawable/accordingmaterialtop_sharp"
+            android:layout_height="@dimen/layout_60dp"
+            android:layout_marginLeft="@dimen/layout_10dp"
+            android:layout_marginRight="@dimen/layout_10dp"
+            android:background="?attr/click_bg"
             android:text="@string/label_sure"
             android:textColor="@color/WHITE"
             android:textSize="@dimen/textSize_18sp" />

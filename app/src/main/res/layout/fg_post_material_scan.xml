@@ -59,7 +59,7 @@
                         android:id="@+id/cb_locatorlock"
                         android:layout_width="wrap_content"
                         android:layout_height="@dimen/layout_20dp"
-                        android:button="@drawable/lock_checkbox" />
+                        android:button="?attr/lock_checkbox" />
                 </LinearLayout>
 
                 <View style="@style/fg_line_style" />

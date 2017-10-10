@@ -226,6 +226,7 @@ public class IQCInspectItemActivity extends BaseFirstModuldeHActivity {
     protected void initNavigationTitle() {
         super.initNavigationTitle();
         mName.setText(R.string.iqc_check_pad);
+        toolbarTitle.setBackgroundResource(R.drawable.title_bg);
     }
 
     @Override

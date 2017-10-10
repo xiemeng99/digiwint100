@@ -18,7 +18,7 @@ import java.util.List;
 
 import digiwin.library.dialog.CustomDialog;
 import digiwin.library.popupwindow.CustomPopWindow;
-import digiwin.library.utils.AlertDialogUtils;
+import digiwin.smartdepott100.core.coreutil.AlertDialogUtils;
 import digiwin.library.utils.LogUtils;
 import digiwin.library.utils.StringUtils;
 import digiwin.library.utils.ViewUtils;
@@ -195,7 +195,7 @@ public class IQCBadReasonDialog {
 
                 //弹出Dialog
                 int width = (int) (ViewUtils.getScreenWidth(context) * 0.6);
-                int height =(int) (ViewUtils.getScreenHeight(context) * 0.7);
+                int height =WindowManager.LayoutParams.WRAP_CONTENT;
 
                 CustomDialog.Builder dialogBuilder = new CustomDialog.Builder(context)
                         .view(R.layout.dialog_badreason)

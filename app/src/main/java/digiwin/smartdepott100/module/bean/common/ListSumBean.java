@@ -289,6 +289,18 @@ public class ListSumBean implements Serializable {
      * 物料特征
      */
     private String signcode;
+    /**
+     * 物料特征
+     */
+    private String product_no;
+
+    public String getProduct_no() {
+        return product_no;
+    }
+
+    public void setProduct_no(String product_no) {
+        this.product_no = product_no;
+    }
 
     /**
      * 物料特征说明

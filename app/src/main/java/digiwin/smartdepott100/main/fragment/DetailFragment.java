@@ -63,10 +63,6 @@ public class DetailFragment extends BaseFragment {
             @Override
             public void onClick(View view, int position) {
                 try {
-                    if (beanLists.get(position).getId().equals(ModuleCode.ORDERSALE)){
-                        showToast("努力开发中...");
-                        return;
-                    }
                     String ware = LoginLogic.getWare();
                     if(!StringUtils.isBlank(ware) ||
                             beanLists.get(position).getId().equals(ModuleCode.PROCESSREPORTING)

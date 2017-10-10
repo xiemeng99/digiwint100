@@ -37,7 +37,7 @@
                 android:layout_width="wrap_content"
                 android:gravity="center"
                 android:layout_height="@dimen/layout_25dp"
-                android:button="@drawable/checkvalue_checkbox" />
+                android:button="?attr/checkvalue_checkbox" />
         </RelativeLayout>
         <View
             android:layout_width="@dimen/layout_30dp"

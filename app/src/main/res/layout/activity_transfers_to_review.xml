@@ -8,7 +8,9 @@
     <include layout="@layout/activity_title_toolbar_bar"></include>
 
 
-    <include layout="@layout/ryitem_common" android:visibility="gone"/>
+    <include
+        layout="@layout/ryitem_common"
+        android:visibility="gone" />
 
     <LinearLayout
         android:id="@+id/ll_search_input"
@@ -28,11 +30,11 @@
 
             <TextView
                 android:id="@+id/tv_transfers_list"
+                style="@style/app_text_inwhite"
                 android:layout_width="@dimen/layout_70dp"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
-                android:text="@string/transfers_list"
-                style="@style/app_text_inwhite"/>
+                android:text="@string/transfers_list" />
 
             <EditText
                 android:id="@+id/et_transfers_list"
@@ -57,11 +59,11 @@
 
             <TextView
                 android:id="@+id/tv_department"
+                style="@style/app_text_inwhite"
                 android:layout_width="@dimen/layout_70dp"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
-                android:text="@string/department"
-                style="@style/app_text_inwhite" />
+                android:text="@string/department" />
 
             <EditText
                 android:id="@+id/et_department"
@@ -86,11 +88,11 @@
 
             <TextView
                 android:id="@+id/tv_applicant"
+                style="@style/app_text_inwhite"
                 android:layout_width="@dimen/layout_70dp"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
-                android:text="@string/applicant"
-                style="@style/app_text_inwhite"/>
+                android:text="@string/applicant" />
 
             <EditText
                 android:id="@+id/et_applicant"
@@ -115,11 +117,11 @@
 
             <TextView
                 android:id="@+id/tv_in_warehouse"
+                style="@style/app_text_inwhite"
                 android:layout_width="@dimen/layout_70dp"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
-                android:text="@string/in_warehouse"
-                style="@style/app_text_inwhite"/>
+                android:text="@string/in_warehouse" />
 
             <EditText
                 android:id="@+id/et_in_warehouse"
@@ -144,11 +146,11 @@
 
             <TextView
                 android:id="@+id/tv_out_warehouse"
+                style="@style/app_text_inwhite"
                 android:layout_width="@dimen/layout_70dp"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
-                android:text="@string/out_warehouse"
-                style="@style/app_text_inwhite"/>
+                android:text="@string/out_warehouse" />
 
             <EditText
                 android:id="@+id/et_out_warehouse"
@@ -174,11 +176,11 @@
 
             <TextView
                 android:id="@+id/tv_date"
+                style="@style/app_text_inwhite"
                 android:layout_width="@dimen/layout_70dp"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
-                android:text="@string/data"
-                style="@style/app_text_inwhite" />
+                android:text="@string/data" />
 
             <EditText
                 android:id="@+id/et_date"
@@ -196,7 +198,7 @@
                 android:id="@+id/date"
                 android:layout_width="wrap_content"
                 android:layout_height="@dimen/layout_20dp"
-                android:src="@drawable/time" />
+                android:src="?attr/time" />
         </LinearLayout>
 
         <View style="@style/fg_line_style" />
@@ -209,11 +211,11 @@
 
             <TextView
                 android:id="@+id/tv_item_no"
+                style="@style/app_text_inwhite"
                 android:layout_width="@dimen/layout_70dp"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
-                android:text="@string/item_no"
-                style="@style/app_text_inwhite"/>
+                android:text="@string/item_no" />
 
             <EditText
                 android:id="@+id/et_item_no"
@@ -233,9 +235,10 @@
         <Button
             android:id="@+id/btn_search_sure"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/layout_40dp"
-            android:layout_margin="@dimen/layout_10dp"
-            android:background="@drawable/accordingmaterialtop_sharp"
+            android:layout_height="@dimen/layout_60dp"
+            android:layout_marginLeft="@dimen/layout_10dp"
+            android:layout_marginRight="@dimen/layout_10dp"
+            android:background="?attr/click_bg"
             android:text="@string/label_sure"
             android:textColor="@color/WHITE"
             android:textSize="@dimen/textSize_18sp" />

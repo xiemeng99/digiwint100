@@ -6,7 +6,7 @@ import java.io.Serializable;
  * Created by maoheng on 2017/8/11.
  */
 
-public class QCScanData implements Serializable{
+public class QCScanData implements Serializable {
     /**
      * 条目
      */
@@ -171,10 +171,30 @@ public class QCScanData implements Serializable{
      */
     private String department_no;
     /**
-     *部门名称
+     * 部门名称
      * fqc使用
      */
     private String department_name;
+
+    /**
+     * 来源单号
+     */
+    private String source_no;
+    /**
+     * 参考单号
+     */
+    private String refer_no;
+
+    /**
+     * #客户编码
+     */
+    private String customer_no;
+    /**
+     * #客户名称
+     */
+    private String customer_name;
+
+
     public String getInspection_item() {
         return inspection_item;
     }
@@ -501,5 +521,38 @@ public class QCScanData implements Serializable{
 
     public void setDepartment_name(String department_name) {
         this.department_name = department_name;
+    }
+
+    public String getSource_no() {
+        return source_no;
+    }
+
+    public void setSource_no(String source_no) {
+        this.source_no = source_no;
+    }
+
+    public String getRefer_no() {
+        return refer_no;
+    }
+
+    public void setRefer_no(String refer_no) {
+        this.refer_no = refer_no;
+    }
+
+
+    public String getCustomer_no() {
+        return customer_no;
+    }
+
+    public void setCustomer_no(String customer_no) {
+        this.customer_no = customer_no;
+    }
+
+    public String getCustomer_name() {
+        return customer_name;
+    }
+
+    public void setCustomer_name(String customer_name) {
+        this.customer_name = customer_name;
     }
 }

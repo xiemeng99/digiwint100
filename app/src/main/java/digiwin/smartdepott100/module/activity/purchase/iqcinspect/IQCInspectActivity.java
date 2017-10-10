@@ -1,5 +1,6 @@
 package digiwin.smartdepott100.module.activity.purchase.iqcinspect;
 
+import android.content.res.TypedArray;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
@@ -55,6 +56,28 @@ public class IQCInspectActivity extends BaseTitleHActivity {
     ViewPager moduleVp;
     @BindView(R.id.main_rg)
     RadioGroup mainRg;
+    @OnClick({ R.id.iqc_tab1, R.id.iqc_tab2 })
+    public void onRadioButtonClicked(RadioButton radioButton) {
+
+        boolean checked = radioButton.isChecked();
+
+        switch (radioButton.getId()) {
+            case R.id.iqc_tab1:
+                if (checked) {
+                    TypedArray typedArray = activity.obtainStyledAttributes(new int[]{R.attr.Base_color});
+                    iqcTab1.setTextColor(activity.getResources().getColor(R.color.white));
+                    iqcTab2.setTextColor(typedArray.getColor(0,activity.getResources().getColor(R.color.Base_color)));
+                }
+                break;
+            case R.id.iqc_tab2:
+                if (checked) {
+                    TypedArray typedArray = activity.obtainStyledAttributes(new int[]{R.attr.Base_color});
+                    iqcTab2.setTextColor(activity.getResources().getColor(R.color.white));
+                    iqcTab1.setTextColor(typedArray.getColor(0,activity.getResources().getColor(R.color.Base_color)));
+                }
+                break;
+        }
+    }
     @BindView(R.id.iqc_tab1)
     RadioButton iqcTab1;
     @BindView(R.id.iqc_tab2)
@@ -160,9 +183,15 @@ public class IQCInspectActivity extends BaseTitleHActivity {
                 switch (radioGroup.getCheckedRadioButtonId()){
                     case R.id.iqc_tab1:
                         moduleVp.setCurrentItem(0);
+                        TypedArray typedArray = activity.obtainStyledAttributes(new int[]{R.attr.Base_color});
+                        iqcTab1.setTextColor(activity.getResources().getColor(R.color.white));
+                        iqcTab2.setTextColor(typedArray.getColor(0,activity.getResources().getColor(R.color.Base_color)));
                         break;
                     case R.id.iqc_tab2:
                         moduleVp.setCurrentItem(1);
+                        TypedArray typedArray2 = activity.obtainStyledAttributes(new int[]{R.attr.Base_color});
+                        iqcTab2.setTextColor(activity.getResources().getColor(R.color.white));
+                        iqcTab1.setTextColor(typedArray2.getColor(0,activity.getResources().getColor(R.color.Base_color)));
                         break;
                     default:
                         break;

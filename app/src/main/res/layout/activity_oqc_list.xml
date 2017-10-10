@@ -1,0 +1,208 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_distribute"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical">
+
+    <include layout="@layout/activity_title_toolbar_bar" />
+
+    <LinearLayout
+        android:id="@+id/ll_search_dialog"
+        style="@style/itemstyle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/toolbar_title"
+        android:layout_centerHorizontal="true"
+        android:layout_marginLeft="@dimen/layout_10dp"
+        android:layout_marginRight="@dimen/layout_10dp"
+        android:layout_marginTop="@dimen/digiwin_top"
+        android:background="@drawable/allscanedit_bg"
+        android:orientation="vertical"
+        android:visibility="visible">
+
+        <LinearLayout
+            android:id="@+id/ll_delivery_note_no"
+            style="@style/search_scan_style"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/tv_delivery_note_no"
+                style="@style/app_text_inwhite"
+                android:layout_width="@dimen/layout_60dp"
+                android:layout_height="wrap_content"
+                android:text="@string/source_no" />
+
+            <EditText
+                android:id="@+id/et_delivery_note_no"
+                android:layout_width="@dimen/layout_0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/layout_3dp"
+                android:layout_weight="1"
+                android:background="@null"
+                android:selectAllOnFocus="true"
+                android:singleLine="true"
+                android:textColor="@color/black_32"
+                android:textCursorDrawable="@drawable/et_cursor_yellow"
+                android:textSize="@dimen/textSize_14sp" />
+        </LinearLayout>
+
+        <View style="@style/ry_line_style" />
+
+        <LinearLayout
+            android:id="@+id/ll_purchase_order"
+            style="@style/search_scan_style"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/tv_purchase_order"
+                style="@style/app_text_inwhite"
+                android:layout_width="@dimen/layout_60dp"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:text="@string/refer_no" />
+
+            <EditText
+                android:id="@+id/et_purchase_order"
+                android:layout_width="@dimen/layout_0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/layout_3dp"
+                android:layout_weight="1"
+                android:background="@null"
+                android:selectAllOnFocus="true"
+                android:singleLine="true"
+                android:textColor="@color/black_32"
+                android:textCursorDrawable="@drawable/et_cursor_yellow"
+                android:textSize="@dimen/textSize_14sp" />
+        </LinearLayout>
+
+        <View style="@style/ry_line_style" />
+
+        <LinearLayout
+            android:id="@+id/ll_material_number"
+            style="@style/search_scan_style"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/tv_material_number"
+                style="@style/app_text_inwhite"
+                android:layout_width="@dimen/layout_60dp"
+                android:layout_height="wrap_content"
+                android:text="@string/material_number" />
+
+            <EditText
+                android:id="@+id/et_material_number"
+                android:layout_width="@dimen/layout_0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/layout_3dp"
+                android:layout_weight="1"
+                android:background="@null"
+                android:selectAllOnFocus="true"
+                android:singleLine="true"
+                android:textColor="@color/black_32"
+                android:textCursorDrawable="@drawable/et_cursor_yellow"
+                android:textSize="@dimen/textSize_14sp" />
+        </LinearLayout>
+
+        <View style="@style/ry_line_style" />
+
+        <LinearLayout
+            android:id="@+id/ll_supplier"
+            style="@style/search_scan_style"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/tv_supplier"
+                style="@style/app_text_inwhite"
+                android:layout_width="@dimen/layout_60dp"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:text="@string/custom_no" />
+
+            <EditText
+                android:id="@+id/et_supplier"
+                android:layout_width="@dimen/layout_0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/layout_3dp"
+                android:layout_weight="1"
+                android:background="@null"
+                android:singleLine="true"
+                android:textColor="@color/black_32"
+                android:textCursorDrawable="@drawable/et_cursor_yellow"
+                android:textSize="@dimen/textSize_14sp" />
+
+        </LinearLayout>
+
+        <View style="@style/ry_line_style" />
+
+        <LinearLayout
+            android:id="@+id/ll_date"
+            style="@style/search_scan_style"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/tv_date"
+                style="@style/app_text_inwhite"
+                android:layout_width="@dimen/layout_60dp"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:text="@string/data" />
+
+            <EditText
+                android:id="@+id/et_date"
+                android:layout_width="@dimen/layout_0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/layout_3dp"
+                android:layout_weight="1"
+                android:background="@null"
+                android:singleLine="true"
+                android:textColor="@color/black_32"
+                android:textCursorDrawable="@drawable/et_cursor_yellow"
+                android:textSize="@dimen/textSize_14sp" />
+
+            <ImageView
+                android:id="@+id/iv_date"
+                android:layout_width="@dimen/layout_30dp"
+                android:layout_height="@dimen/layout_20dp"
+                android:src="?attr/time" />
+
+        </LinearLayout>
+
+
+        <View style="@style/ry_line_style" />
+
+        <Button             android:id="@+id/btn_search_sure"             android:layout_width="match_parent"             android:layout_height="@dimen/layout_60dp"             android:layout_margin="@dimen/layout_10dp"             android:background="?attr/click_bg"             android:text="@string/label_sure"             android:textColor="@color/WHITE"             android:textSize="@dimen/textSize_18sp" />
+
+    </LinearLayout>
+
+    <ScrollView
+        android:id="@+id/scrollview"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/toolbar_title"
+        android:paddingTop="@dimen/digiwin_top"
+        android:visibility="gone">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="top"
+            android:orientation="vertical">
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/ry_list"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+        </LinearLayout>
+
+    </ScrollView>
+</RelativeLayout>

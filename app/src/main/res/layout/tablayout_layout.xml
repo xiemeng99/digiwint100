@@ -11,11 +11,11 @@
         android:layout_height="@dimen/layout_40dp"
         android:background="@color/white"
         app:tabGravity="fill"
-        app:tabIndicatorColor="@color/tab_title_selected_color"
+        app:tabIndicatorColor="?attr/Base_color"
         app:tabMaxWidth="0dp"
         app:tabMode="fixed"
         app:tabTextColor="@color/black32"
-        app:tabSelectedTextColor="@color/tab_title_selected_color" />
+        app:tabSelectedTextColor="?attr/Base_color" />
 
     <View
         android:layout_width="match_parent"

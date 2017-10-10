@@ -12,7 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import digiwin.library.dialog.CustomDialog;
-import digiwin.library.utils.AlertDialogUtils;
+import digiwin.smartdepott100.core.coreutil.AlertDialogUtils;
 import digiwin.library.utils.LogUtils;
 import digiwin.library.utils.StringUtils;
 import digiwin.library.utils.ViewUtils;
@@ -64,7 +64,8 @@ public class IQCCheckValueDialog {
                         .widthpx(width)
                         .cancelTouchout(true)
                         .backCancelTouchout(true)
-                        .setViewText(R.id.et_seq_no, checkValueBean.getOrder_seq());
+                        .setViewText(R.id.et_seq_no, checkValueBean.getOrder_seq())
+                        .setViewText(R.id.et_check_value, checkValueBean.getMeasure_value());
                 dialog = builder.build();
                 dialog.show();
                 /**

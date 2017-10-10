@@ -96,10 +96,10 @@ public class ProductOutBoxActivity extends BaseFirstModuldeActivity {
         detailFg = new ProductOutBoxDetailFg();
         fragments = new ArrayList<>();
         fragments.add(scanFg);
-//        fragments.add(detailFg);
+        fragments.add(detailFg);
         titles = new ArrayList<>();
         titles.add(getResources().getString(R.string.ScanCode));
-//        titles.add(getResources().getString(R.string.scandetail));
+        titles.add(getResources().getString(R.string.scandetail));
         fragmentManager = getSupportFragmentManager();
         adapter = new ModuleViewPagerAdapter(fragmentManager, fragments, titles);
         mZXVp.setAdapter(adapter);

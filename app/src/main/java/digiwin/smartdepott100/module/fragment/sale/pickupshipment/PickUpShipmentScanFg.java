@@ -361,6 +361,7 @@ public class PickUpShipmentScanFg extends BaseFragment {
         etInputNum.setText(StringUtils.deleteZero(barcodeBackBean.getBarcode_qty()));
         barcodeFlag = true;
         saveBean.setAvailable_in_qty(barcodeBackBean.getAvailable_in_qty());
+        saveBean.setProduct_no(barcodeBackBean.getProduct_no());
         saveBean.setBarcode_no(barcodeBackBean.getBarcode_no());
         saveBean.setItem_no(barcodeBackBean.getItem_no());
         saveBean.setUnit_no(barcodeBackBean.getUnit_no());

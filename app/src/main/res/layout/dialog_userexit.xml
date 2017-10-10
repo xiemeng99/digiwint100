@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:gravity="right"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:id="@+id/rl_userInfo_exit"
+        android:layout_width="@dimen/layout_30dp"
+        android:layout_height="@dimen/layout_30dp"
+        android:layout_margin="@dimen/layout_5dp"
+        android:background="@drawable/userinfo_exit_clickbg">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:src="@mipmap/personset_close" />
+    </RelativeLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/layout_30dp"
+        android:layout_marginTop="@dimen/layout_10dp"
+        android:gravity="center"
+        android:text="@string/user_exit"
+        android:textSize="@dimen/textSize_18sp" />
+
+    <TextView
+        android:id="@+id/tv_userInfo_yes"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/layout_20dp"
+        android:layout_marginLeft="@dimen/layout_20dp"
+        android:layout_marginRight="@dimen/layout_20dp"
+        android:background="@drawable/setup_dialog_button_bg"
+        android:gravity="center"
+        android:padding="@dimen/layout_10dp"
+        android:text="@string/yes"
+        android:textColor="?attr/Base_color"
+        android:textSize="@dimen/textSize_14sp" />
+</LinearLayout>

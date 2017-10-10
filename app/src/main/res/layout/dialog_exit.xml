@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginLeft="@dimen/layout_50dp"
+    android:layout_marginRight="@dimen/layout_50dp"
+    android:background="@drawable/exit_dialog_background"
+    android:orientation="vertical">
+
+    <!-- 退出的背景图 -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/layout_30dp"
+        android:gravity="center">
+
+        <TextView
+            android:id="@+id/tv_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:textColor="@color/MAIN_BELOW"
+            android:textSize="@dimen/textSize_16sp" />
+    </LinearLayout>
+
+
+    <!-- 确认按钮 -->
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/layout_50dp"
+        android:layout_marginTop="@dimen/layout_30dp"
+        android:orientation="horizontal">
+        <RelativeLayout
+            android:layout_weight="1"
+            android:layout_width="@dimen/layout_0dp"
+            android:layout_height="match_parent">
+        <TextView
+            android:id="@+id/btn_cancel"
+            android:background="@drawable/gray_dialog_button_bg"
+            android:layout_width="match_parent"
+            android:layout_marginLeft="@dimen/layout_20dp"
+            android:layout_marginRight="@dimen/layout_20dp"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:paddingTop="@dimen/layout_5dp"
+            android:gravity="center"
+            android:paddingBottom="@dimen/layout_5dp"
+            android:paddingLeft="@dimen/layout_10dp"
+            android:paddingRight="@dimen/layout_10dp"
+            android:text="@string/label_cancel"
+            android:textColor="@color/graybb" />
+        </RelativeLayout>
+        <RelativeLayout
+            android:layout_weight="1"
+            android:layout_width="@dimen/layout_0dp"
+            android:layout_height="match_parent">
+        <TextView
+            android:id="@+id/btn_ok"
+            android:background="@drawable/sure_dialog_button_bg"
+            android:layout_width="match_parent"
+            android:layout_marginLeft="@dimen/layout_20dp"
+            android:layout_marginRight="@dimen/layout_20dp"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:paddingTop="@dimen/layout_5dp"
+            android:gravity="center"
+            android:paddingBottom="@dimen/layout_5dp"
+            android:paddingLeft="@dimen/layout_10dp"
+            android:paddingRight="@dimen/layout_10dp"
+            android:text="@string/label_sure"
+            android:textColor="?attr/Base_color" />
+        </RelativeLayout>
+    </LinearLayout>
+
+</LinearLayout>

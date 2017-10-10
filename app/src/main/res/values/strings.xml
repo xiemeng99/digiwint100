@@ -23,6 +23,7 @@
     <string name="voicer_female">女声</string>-->
     <!-- <string name="voicer_not">不提醒</string>-->
     <string name="page_setting">分页设置</string>
+    <string name="change_theme">主题换肤</string>
     <string name="vibrate">震动提醒</string>
     <string name="zero">0</string>
     <string name="open">开</string>
@@ -299,6 +300,7 @@
     <string name="day_has_passed">本日已转</string>
     <string name="person_name">人员名</string>
     <string name="login_error">登录失败</string>
+    <string name="login">登录</string>
     <string name="input_time">请手动输入工时</string>
     <string name="the_workers_scan">请扫描报工人</string>
 
@@ -758,4 +760,10 @@
 
     <string name="order_putaway">工单入库上架</string>
     <string name="signcode">物料特征</string>
+    <string name="product_code">特征码</string>
+    <string name="source_no">来源单号</string>
+    <string name="refer_no">参考单号</string>
+    <string name="having_date">产生日期</string>
+    <string name="oqc_check_pad">OQC检验(平板)</string>
+    <string name="oqc_change">OQC维护</string>
 </resources>

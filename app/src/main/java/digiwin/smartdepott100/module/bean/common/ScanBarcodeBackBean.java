@@ -81,6 +81,20 @@ public class ScanBarcodeBackBean {
     private String lot_date;
 
     private String scan_sumqty;
+
+    /**
+     * 产品特征码
+     */
+    private String product_no;
+
+    public String getProduct_no() {
+        return product_no;
+    }
+
+    public void setProduct_no(String product_no) {
+        this.product_no = product_no;
+    }
+
     /**
      * 目前依成品调拨使用--客户编号
      */

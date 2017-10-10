@@ -73,7 +73,7 @@
     <View
         android:layout_width="match_parent"
         android:layout_height="@dimen/layout_0.5dp"
-        android:background="@color/Base_color"/>
+        android:background="?attr/Base_color"/>
 
     <com.yanzhenjie.recyclerview.swipe.SwipeMenuRecyclerView
         android:id="@+id/rv_swipemenu"

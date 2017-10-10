@@ -269,6 +269,7 @@ public class MiscellaneousIssueInScanFg extends BaseFragment {
                             barcodeFlag = true;
                             show();
                             saveBean.setQty(barcodeBackBean.getBarcode_qty());
+                            saveBean.setProduct_no(barcodeBackBean.getProduct_no());
                             saveBean.setBarcode_no(barcodeBackBean.getBarcode_no());
                             saveBean.setItem_no(barcodeBackBean.getItem_no());
                             saveBean.setUnit_no(barcodeBackBean.getUnit_no());

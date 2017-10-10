@@ -90,7 +90,7 @@
             android:id="@+id/cb_isOK"
             android:layout_width="wrap_content"
             android:layout_height="@dimen/layout_25dp"
-            android:button="@drawable/checkvalue_checkbox" />
+            android:button="?attr/checkvalue_checkbox" />
     </LinearLayout>
 
     <View

@@ -213,6 +213,7 @@ public class StoreQueryActivity extends BaseTitleHActivity {
     protected void initNavigationTitle() {
         super.initNavigationTitle();
         mName.setText(R.string.store_query);
+        toolbarTitle.setBackgroundResource(R.drawable.title_bg);
         ivScan.setVisibility(View.VISIBLE);
         search.setVisibility(View.VISIBLE);
         search.setImageResource(R.drawable.search);

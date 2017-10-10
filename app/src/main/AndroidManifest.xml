@@ -881,7 +881,7 @@
         <activity
             android:name=".module.activity.purchase.iqc.IQCommitActivity"
             android:windowSoftInputMode="stateAlwaysHidden|adjustPan" />
-        <!-- 原材料标签打印 -->
+        <!-- fqc-->
         <activity
             android:name=".module.activity.produce.fqcinspect.FQCInspectListActivity"
             android:screenOrientation="landscape"
@@ -892,11 +892,27 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
-        <!-- IQCt100检验 -->
+        <!--fqCt100检验 -->
         <activity
             android:name=".module.activity.produce.fqcinspect.FQCInspectItemActivity"
             android:screenOrientation="landscape"
             android:windowSoftInputMode="stateAlwaysHidden|adjustPan"></activity>
+        <!-- fqc-->
+        <activity
+            android:name=".module.activity.sale.oqc.OQCListActivity"
+            android:screenOrientation="landscape"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustPan">
+            <intent-filter>
+                <action android:name="android.intent.actiont100.smartdepot.OQCListActivity" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <!--fqCt100检验 -->
+        <activity
+            android:name=".module.activity.sale.oqc.OQCItemActivity"
+            android:screenOrientation="landscape"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustPan"/>
         <!--扫码收货供应商 -->
         <activity
             android:name="digiwin.smartdepott100.module.activity.purchase.purchasesupplier.PurhcaseSupplierListActivity"

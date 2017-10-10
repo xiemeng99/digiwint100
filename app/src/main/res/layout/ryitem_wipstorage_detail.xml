@@ -10,7 +10,7 @@
         android:layout_width="@dimen/layout_30dp"
         android:layout_height="wrap_content"
         android:layout_centerVertical="true"
-        android:button="@drawable/all_checkbox" />
+        android:button="?attr/checkvalue_checkbox" />
 
     <LinearLayout
         android:id="@+id/llview"

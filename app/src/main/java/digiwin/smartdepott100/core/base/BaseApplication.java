@@ -11,7 +11,6 @@ import com.iflytek.cloud.SpeechConstant;
 import com.iflytek.cloud.SpeechUtility;
 import com.umeng.analytics.MobclickAgent;
 
-import digiwin.library.constant.SharePreKey;
 import digiwin.library.utils.LogUtils;
 import org.litepal.LitePalApplication;
 
@@ -20,8 +19,7 @@ import digiwin.library.cockroach.Cockroach;
 import digiwin.library.netstate.NetChangeObserver;
 import digiwin.library.netstate.NetStateReceiver;
 import digiwin.library.netstate.NetworkUtils;
-import digiwin.library.utils.AlertDialogUtils;
-import digiwin.library.voiceutils.VoiceUtils;
+import digiwin.smartdepott100.core.coreutil.AlertDialogUtils;
 import digiwin.smartdepott100.R;
 import digiwin.smartdepott100.core.jpush.NotificationClickEventReceiver;
 

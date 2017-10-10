@@ -49,7 +49,7 @@
 
                     <TextView
                         android:id="@+id/tv_head_miscellaneous_in_no"
-                        style="@style/ser_text_inwhite"
+                        style="@style/ser_text_ingreen"
                         android:layout_width="@dimen/layout_0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="@dimen/layout_3dp"

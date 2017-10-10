@@ -69,7 +69,7 @@
                 android:paddingRight="@dimen/layout_10dp"
                 android:paddingTop="@dimen/layout_5dp"
                 android:text="@string/label_sure"
-                android:textColor="@color/red50" />
+                android:textColor="?attr/Base_color" />
         </RelativeLayout>
 
     </LinearLayout>

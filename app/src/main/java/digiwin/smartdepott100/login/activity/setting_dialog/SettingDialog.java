@@ -3,9 +3,11 @@ package digiwin.smartdepott100.login.activity.setting_dialog;
 import android.app.Activity;
 import android.content.res.Configuration;
 import android.content.res.Resources;
+import android.content.res.TypedArray;
 import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
@@ -84,28 +86,31 @@ public class SettingDialog {
         String strTest = (String) SharedPreferencesUtils.get(context, SharePreKey.TEST_ADDRESS, AddressContants.TEST_ADDRESS);
         String strFormal = (String) SharedPreferencesUtils.get(context,SharePreKey.FORMAL_ADDRESS, AddressContants.FORMAL_ADDRESS);
 
-
         setup_formal_et.setText(strFormal);
         setup_test_et.setText(strTest);
+
+        final TypedArray a = context.obtainStyledAttributes(new int[] {
+                R.attr.Base_color
+        });
 
         if(AddressContants.TEST_FLAG.equals(currentFlag)){
             setup_formal_rb.setChecked(false);
             setup_test_rb.setChecked(true);
             setup_formal_et.setTextColor(context.getResources().getColor(R.color.black_32));
-            setup_test_et.setTextColor(context.getResources().getColor(R.color.Base_color));
+            setup_test_et.setTextColor(a.getColor(0,context.getResources().getColor(R.color.Base_color)));
             setup_formal_tv.setTextColor(context.getResources().getColor(R.color.black_32));
-            setup_test_tv.setTextColor(context.getResources().getColor(R.color.Base_color));
+            setup_test_tv.setTextColor(a.getColor(0,context.getResources().getColor(R.color.Base_color)));
             setup_formal_view.setBackgroundColor(context.getResources().getColor(R.color.gray_da));
-            setup_test_view.setBackgroundColor(context.getResources().getColor(R.color.Base_color));
+            setup_test_view.setBackgroundColor(a.getColor(0,context.getResources().getColor(R.color.Base_color)));
             setup_test_et.requestFocus();
         }else {
             setup_formal_rb.setChecked(true);
             setup_test_rb.setChecked(false);
-            setup_formal_et.setTextColor(context.getResources().getColor(R.color.Base_color));
+            setup_formal_et.setTextColor(a.getColor(0,context.getResources().getColor(R.color.Base_color)));
             setup_test_et.setTextColor(context.getResources().getColor(R.color.black_32));
-            setup_formal_tv.setTextColor(context.getResources().getColor(R.color.Base_color));
+            setup_formal_tv.setTextColor(a.getColor(0,context.getResources().getColor(R.color.Base_color)));
             setup_test_tv.setTextColor(context.getResources().getColor(R.color.black_32));
-            setup_formal_view.setBackgroundColor(context.getResources().getColor(R.color.Base_color));
+            setup_formal_view.setBackgroundColor(a.getColor(0,context.getResources().getColor(R.color.Base_color)));
             setup_test_view.setBackgroundColor(context.getResources().getColor(R.color.gray_da));
             setup_formal_et.requestFocus();
         }
@@ -160,13 +165,13 @@ public class SettingDialog {
         setup_formal_linear.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                setup_formal_et.setTextColor(context.getResources().getColor(R.color.Base_color));
+                setup_formal_et.setTextColor(a.getColor(0,context.getResources().getColor(R.color.Base_color)));
                 setup_test_et.setTextColor(context.getResources().getColor(R.color.black_32));
                 setup_formal_rb.setChecked(true);
                 setup_test_rb.setChecked(false);
-                setup_formal_tv.setTextColor(context.getResources().getColor(R.color.Base_color));
+                setup_formal_tv.setTextColor(a.getColor(0,context.getResources().getColor(R.color.Base_color)));
                 setup_test_tv.setTextColor(context.getResources().getColor(R.color.black_32));
-                setup_formal_view.setBackgroundColor(context.getResources().getColor(R.color.Base_color));
+                setup_formal_view.setBackgroundColor(a.getColor(0,context.getResources().getColor(R.color.Base_color)));
                 setup_test_view.setBackgroundColor(context.getResources().getColor(R.color.gray_da));
                 setup_formal_et.requestFocus();
             }
@@ -177,13 +182,13 @@ public class SettingDialog {
             @Override
             public void onClick(View view) {
                 setup_formal_et.setTextColor(context.getResources().getColor(R.color.black_32));
-                setup_test_et.setTextColor(context.getResources().getColor(R.color.Base_color));
+                setup_test_et.setTextColor(a.getColor(0,context.getResources().getColor(R.color.Base_color)));
                 setup_formal_rb.setChecked(false);
                 setup_test_rb.setChecked(true);
                 setup_formal_tv.setTextColor(context.getResources().getColor(R.color.black_32));
-                setup_test_tv.setTextColor(context.getResources().getColor(R.color.Base_color));
+                setup_test_tv.setTextColor(a.getColor(0,context.getResources().getColor(R.color.Base_color)));
                 setup_formal_view.setBackgroundColor(context.getResources().getColor(R.color.gray_da));
-                setup_test_view.setBackgroundColor(context.getResources().getColor(R.color.Base_color));
+                setup_test_view.setBackgroundColor(a.getColor(0,context.getResources().getColor(R.color.Base_color)));
                 setup_test_et.requestFocus();
             }
         });
@@ -193,23 +198,23 @@ public class SettingDialog {
             @Override
             public void onFocusChange(View view, boolean b) {
                 if(b){
-                    setup_formal_et.setTextColor(context.getResources().getColor(R.color.Base_color));
+                    setup_formal_et.setTextColor(a.getColor(0,context.getResources().getColor(R.color.Base_color)));
                     setup_test_et.setTextColor(context.getResources().getColor(R.color.black_32));
                     setup_formal_rb.setChecked(true);
                     setup_test_rb.setChecked(false);
-                    setup_formal_tv.setTextColor(context.getResources().getColor(R.color.Base_color));
+                    setup_formal_tv.setTextColor(a.getColor(0,context.getResources().getColor(R.color.Base_color)));
                     setup_test_tv.setTextColor(context.getResources().getColor(R.color.black_32));
-                    setup_formal_view.setBackgroundColor(context.getResources().getColor(R.color.Base_color));
+                    setup_formal_view.setBackgroundColor(a.getColor(0,context.getResources().getColor(R.color.Base_color)));
                     setup_test_view.setBackgroundColor(context.getResources().getColor(R.color.gray_da));
                 }else {
                     setup_formal_et.setTextColor(context.getResources().getColor(R.color.black_32));
-                    setup_test_et.setTextColor(context.getResources().getColor(R.color.Base_color));
+                    setup_test_et.setTextColor(a.getColor(0,context.getResources().getColor(R.color.Base_color)));
                     setup_formal_rb.setChecked(false);
                     setup_test_rb.setChecked(true);
                     setup_formal_tv.setTextColor(context.getResources().getColor(R.color.black_32));
-                    setup_test_tv.setTextColor(context.getResources().getColor(R.color.Base_color));
+                    setup_test_tv.setTextColor(a.getColor(0,context.getResources().getColor(R.color.Base_color)));
                     setup_formal_view.setBackgroundColor(context.getResources().getColor(R.color.gray_da));
-                    setup_test_view.setBackgroundColor(context.getResources().getColor(R.color.Base_color));
+                    setup_test_view.setBackgroundColor(a.getColor(0,context.getResources().getColor(R.color.Base_color)));
                 }
             }
         });
