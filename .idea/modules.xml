@@ -2,9 +2,9 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/DGWSmartDepotT100.iml" filepath="$PROJECT_DIR$/DGWSmartDepotT100.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
       <module fileurl="file://$PROJECT_DIR$/dgwlibrary/dgwlibrary.iml" filepath="$PROJECT_DIR$/dgwlibrary/dgwlibrary.iml" />
+      <module fileurl="file://$PROJECT_DIR$/digiwint100.iml" filepath="$PROJECT_DIR$/digiwint100.iml" />
       <module fileurl="file://$PROJECT_DIR$/pulltorefreshlibrary/pulltorefreshlibrary.iml" filepath="$PROJECT_DIR$/pulltorefreshlibrary/pulltorefreshlibrary.iml" />
     </modules>
   </component>
