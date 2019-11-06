@@ -30,7 +30,7 @@ dependencies {
     testCompile 'junit:junit:4.12'
     /*okhttp相关*/
     // 持久cookie需在project gradle中链接远程仓库
-    compile 'com.github.franmontiel:PersistentCookieJar:v0.9.3'
+    compile 'com.github.franmontiel:PersistentCookieJar:v1.0.1'
     compile 'com.zhy:okhttputils:2.6.2'
     compile 'com.squareup.okhttp3:okhttp:3.2.0'
     compile 'com.squareup.okio:okio:1.5.0'
